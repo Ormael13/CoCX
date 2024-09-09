@@ -123,6 +123,10 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 			outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
 			addButton(9, "Niamh", SceneLib.telAdre.niamh.bazaarNiamh);
 		}
+		if (flags[kFLAGS.JINX_LVL_UP] < 1) {
+			if (flags[kFLAGS.JINX_LVL_UP] > 0) addButton(10, "Minx", SceneLib.jinxFollower.bazaarEncounters);
+			else addButton(10, "???", SceneLib.jinxFollower.bazaarEncounters);
+		}
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }

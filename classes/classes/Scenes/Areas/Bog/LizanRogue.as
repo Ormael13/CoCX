@@ -46,7 +46,7 @@ public class LizanRogue extends Monster
 			}
 			else {
 				outputText("The lizan zips to the side and as you move to follow you feel something sharp cut across your body. He must have thrown something. ");
-				var damage:int = this.spe/3 + rand(60);
+				var damage:int = this.spe + rand(10);
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -57,7 +57,7 @@ public class LizanRogue extends Monster
 			}
 			else {
 				outputText("All you see is a flash of pink as the lizan’s long tongue hits your eyes. Some kind of chemical reaction causes your eyes to burn, you’ve been blinded!");
-				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 1 + rand(2), 0, 0, 0)
+				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 2 + rand(2), 0, 0, 0)
 			}
 		}
 		
@@ -98,19 +98,19 @@ public class LizanRogue extends Monster
 			this.skinDesc = "skin";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(140, 180, 120, 90);
-			initWisLibSensCor(80, 20, 10, 0);
+			initStrTouSpeInte(420, 540, 360, 270);
+			initWisLibSensCor(270, 60, 30, 0);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 38;
+			this.weaponAttack = 136;
 			this.armorName = "loincloth";
-			this.armorDef = 18;
-			this.armorMDef = 2;
-			this.bonusHP = 350;
-			this.bonusLust = 66;
+			this.armorDef = 200;
+			this.armorMDef = 80;
+			this.bonusHP = 750;
+			this.bonusLust = 146;
 			this.lust = 20;
 			this.lustVuln = .7;
-			this.level = 36;
+			this.level = 56;
 			this.gems = 70 + rand(80);
 			this.drop = new WeightedDrop().add(consumables.REPTLUM, 5)
 					.add(consumables.SMALL_EGGS, 2)

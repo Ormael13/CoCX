@@ -12,7 +12,22 @@ package classes.Scenes.NPCs
 		
 		public function ThflthkhNghaFollower() 
 		{}
+		/*
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
+		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
+		*/
 		//world ender tier beast/being that just want a hug ^^
 	}
 }

@@ -504,7 +504,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					"[C]—[D]     [E]     [F]—[G]",
 				],
 				{
-					'S': DUNGEON_RIVER_FLOOR_04_ROOM_01,
+					'S': DUNGEON_RIVER_FLOOR_05_ROOM_01,
 					'a': DUNGEON_RIVER_FLOOR_05_ROOM_02,
 					'b': DUNGEON_RIVER_FLOOR_05_ROOM_03,
 					'c': DUNGEON_RIVER_FLOOR_05_ROOM_04,
@@ -537,18 +537,18 @@ public class DungeonMaps extends DungeonAbstractContent
 					'F': DUNGEON_RIVER_FLOOR_05_ROOM_31,
 					'G': DUNGEON_RIVER_FLOOR_05_ROOM_32
 				}
-			),/*
+			),
 			new DungeonMap("River Dungeon, 6th floor", [
+					//"[b]—[c]",
+					//" |     ",
 					"[a]—   ",
-					" |     ",
-					"[b]—[c]",
 				],
 				{
 					'a': DUNGEON_RIVER_FLOOR_06_ROOM_01,
 					'b': DUNGEON_RIVER_FLOOR_06_ROOM_02,
 					'c': DUNGEON_RIVER_FLOOR_06_ROOM_03
 				}
-			),
+			),/*
 			new DungeonMap("River Dungeon, 7th floor", [
 					"[a]—   ",
 					" |     ",

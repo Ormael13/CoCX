@@ -84,7 +84,6 @@ use namespace CoC;
 			createStatusEffect(StatusEffects.AbilityCooldown1, 2, 0, 0, 0);
 		}
 		
-		
 		private function vegotR():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
 				removeStatusEffect(StatusEffects.Uber);

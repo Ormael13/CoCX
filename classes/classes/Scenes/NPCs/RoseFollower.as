@@ -11,9 +11,27 @@ package classes.Scenes.NPCs
 		
 		public function RoseFollower() 
 		{}
+		/*
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
-		//plant/animal hybrys with rose base for plant parts - beware of her thorn vines ;)
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
+		*/
+		//plant/animal hybryd with rose base for plant parts - beware of her thorn vines ;)
 	}
 }

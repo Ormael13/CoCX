@@ -23,7 +23,7 @@ use namespace CoC;
 		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
 		public var rogar:Rogar = new Rogar();
 
-		public const areaLevel:int = 13;
+		public const areaLevel:int = 30;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.swamp > 0;
 		}

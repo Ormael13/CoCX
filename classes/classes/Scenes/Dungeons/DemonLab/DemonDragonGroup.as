@@ -15,7 +15,7 @@ import classes.internals.WeightedDrop;
 
 /**
  * ...
- * @author ...
+ * @author Canadian Snas
  */
 public class DemonDragonGroup extends Monster {
 

@@ -11,9 +11,27 @@ package classes.Scenes.NPCs
 		
 		public function KaisaFollower() 
 		{}
+		/*
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
+		*/
 		//2 races mixed breed (abyssals?)
 	}
 }

@@ -43,6 +43,7 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
+import classes.Scenes.Dungeons.TwilightGrove.LadyRafflesia;
 import classes.Scenes.NPCs.ChiChi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
@@ -988,7 +989,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			//Modify armor rating based on melee weapons
-			if ((game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) {
+			if ((game.player.weapon.isWandType() || game.player.weaponOff.isWandType() || game.player.weapon.isStaffType() || game.player.weaponOff.isStaffType()) && game.player.hasPerk(PerkLib.StaffChanneling)) {
 				armorMod = 0;
 			} else {
 				var ar:int = game.player.weapon.effectPower(IELib.ArmorReduction);
@@ -1905,6 +1906,19 @@ import classes.Scenes.Combat.CombatAbilities;
 					outputText(" slow " + weaponVerb + ".\n");
 
 			}
+		}
+
+		/**
+		 * Series of monster immunity
+		 * Default return true (Defeatable)
+		 */
+
+		public function isHPDefeatable():Boolean{
+			return true;
+		}
+
+		public function isLustDefeatable():Boolean{
+			return true;
 		}
 
 		/**
@@ -3998,7 +4012,7 @@ import classes.Scenes.Combat.CombatAbilities;
 						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close. ");
 					}
 				}
-				if (this is Alraune || this is Marae) {
+				if (this is Alraune || this is LadyRafflesia || this is Marae) {
 					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal. ");
 					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you. ");
 					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you. ");
@@ -4432,6 +4446,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				}
 				else addStatusValue(StatusEffects.DefPDebuff,1,-1);
 			}
+			if (hasStatusEffect(StatusEffects.TimesBashed) && statusEffectv2(StatusEffects.TimesBashed) > 0) addStatusValue(StatusEffects.TimesBashed, 2, -1);
 		}
 
 		public function handleAwardItemText(itype:ItemType):ItemType
@@ -4641,4 +4656,4 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 		}
 	}
-}
+}

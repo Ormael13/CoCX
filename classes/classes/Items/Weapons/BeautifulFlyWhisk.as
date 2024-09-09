@@ -6,8 +6,8 @@ package classes.Items.Weapons
 import classes.Items.IELib;
 import classes.Items.Weapon;
 import classes.PerkLib;
-	import classes.EventParser;
-    import classes.TimeAwareInterface;
+import classes.EventParser;
+import classes.TimeAwareInterface;
 
 	public class BeautifulFlyWhisk extends Weapon implements TimeAwareInterface {
         //Implementation of TimeAwareInterface

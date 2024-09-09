@@ -35,7 +35,7 @@ public class Satyr extends Monster
 		private function satyrBate():void {
 			outputText("He glares at you, panting while his tongue hangs out and begins to masturbate.  You can nearly see his lewd thoughts reflected in his eyes, as beads of pre form on his massive cock and begin sliding down the erect shaft.");
 			//(small Libido based Lust increase, and increase lust)
-			player.takeLustDamage((player.lib/5)+4, true);
+			player.takeLustDamage((player.lib/2)+10, true);
 			lust += 5;
 		}
 		
@@ -82,7 +82,7 @@ public class Satyr extends Monster
 		private function bottleChug():void {
 			outputText("He whips a bottle of wine seemingly from nowhere and begins chugging it down, then lets out a bellowing belch towards you.  The smell is so horrible you cover your nose in disgust, yet you feel hot as you inhale some of the fetid scent.");
 			//(damage PC lust very slightly and raise the satyr's lust.)
-			player.takeLustDamage((player.lib/5), true);
+			player.takeLustDamage((player.lib/2), true);
 			lust += 5;
 		}
 		
@@ -99,7 +99,7 @@ public class Satyr extends Monster
 				outputText("You fall with a <b>THUD</b> and the Satyr doesn't even bother to undress you before he begins rubbing his massive cock on your body until he comes, soiling your [armor] and " + player.skinFurScales() + " with slimy, hot cum.  As it rubs into your body, you shiver with unwanted arousal.");
 				//large-ish sensitivity based lust increase if hit.)(This also relieves him of some of his lust, though not completely.)
 				lust -= 50;
-				player.takeLustDamage((player.effectiveSensitivity()/5+20), true);
+				player.takeLustDamage((player.effectiveSensitivity()/2+10), true);
 			}
 		}
 		
@@ -121,7 +121,6 @@ public class Satyr extends Monster
 		{
 			SceneLib.plains.satyrScene.defeatASatyr();
 		}
-
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
@@ -157,24 +156,25 @@ public class Satyr extends Monster
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3+rand(20);
 			this.faceType = Face.COW_MINOTAUR;
-			initStrTouSpeInte(75, 70, 110, 70);
-			initWisLibSensCor(60, 60, 35, 45);
+			initStrTouSpeInte(188, 175, 275, 175);
+			initWisLibSensCor(150, 180, 105, 60);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 0;
+			this.weaponAttack = 10;
 			this.armorName = "thick fur";
-			this.armorDef = 2;
-			this.armorMDef = 0;
-			this.bonusHP = 300;
-			this.bonusLust = 114;
+			this.armorDef = 40;
+			this.armorMDef = 10;
+			this.bonusHP = 600;
+			this.bonusLust = 319;
 			this.lust = 20;
 			this.lustVuln = 0.30;
-			this.level = 19;
+			this.level = 34;
 			this.gems = rand(30) + 30;
 			this.drop = new ChainedDrop()
 					.add(consumables.INCUBID,1/2)
 					.add(weapons.SFLUTTE,1/4);
-			this.tailType = Tail.COW;
+			this.tailType = Tail.GOAT;
+			if (player.hasStatusEffect(StatusEffects.TGRandomnMob)) this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

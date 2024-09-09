@@ -531,8 +531,8 @@ public class PerkLib
 				"Now you can assemble 4 horsema... monsters team.",
 				"You've chosen the 'Fourth Tamer of the Apocalypse' perk. Now you can assemble 4 horsema... monsters team.");
 		public static const WorkingTogether:PerkType = mk("Working Together", "Working Together",
-				"Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
-				"You've chosen the 'Working Together' perk. Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
+				"Cooperating between all your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
+				"You've chosen the 'Working Together' perk. Cooperating between all your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
 		public static const SixthSense:PerkType = mk("Sixth Sense", "Sixth Sense",
 				"You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.",
 				"You've chosen the 'Sixth Sense' perk. You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.");
@@ -578,6 +578,15 @@ public class PerkLib
 		public static const Cocytokinesis:PerkType = mk("Cocytokinesis", "Cocytokinesis",
 				"As psychic you have gained ability to manipulate or control black ice.",
 				"You've chosen the 'Cocytokinesis' perk. As psychic you have gained ability to manipulate or control black ice.");
+		public static const AbsoluteBash:PerkType = mk("Absolute Bash", "Absolute Bash",
+				"Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.",
+				"You've chosen the 'Absolute Bash' perk. Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.");
+		public static const BrutalOpening:PerkType = mk("Brutal Opening", "Brutal Opening",
+				"Triple all physical damage dealt for 1 turn following a shield bash.",
+				"You've chosen the 'Brutal Opening' perk. Triple all physical damage dealt for 1 turn following a shield bash.");
+		public static const LingeringOpening:PerkType = mk("Lingering Opening", "Lingering Opening",
+				"Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.",
+				"You've chosen the 'Lingering Opening' perk. Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -588,15 +597,6 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -1232,8 +1232,11 @@ public class PerkLib
 				"You got promoted to a doctor, allowing you to cure a wider variety of ailments. This knowledge allows you to heal yourself better, increasing health regen.",
 				"You've chosen the 'Doctor' perk, increasing HP gains by 20%.");
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
-				"Allows you to wield two weapons.",
-				"You've chosen the 'Dual Wield' perk, training the skill of using two weapons.");
+				"Allows you to wield two weapons. One in main hand and one in off hand.",
+				"You've chosen the 'Dual Wield' perk, training the skill of using two weapons. One in main hand and one in off hand.");
+		public static const QuadWield:PerkType = mk("Quad Wield", "Quad Wield",
+				"Allows you to wield four weapons.",
+				"You've chosen the 'Dual Wield' perk, training the skill of using four weapons.");
 		public static const DualWieldFirearms:PerkType = mk("Dual Wield (Firearms)", "Dual Wield (Firearms)",
 				"Allows you to wield two firearms (non 2H ones) more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
 				"You've chosen the 'Dual Wield (Firearms)' perk, training the skill of using two firearms (non 2H ones). (damage and accuracy penalties decreased by 20% and 10%)");
@@ -2621,8 +2624,8 @@ public class PerkLib
 				"Raises minimum lust by up to 15%.",
 				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 15%.").withBuffs({'minlustx':0.15});
 		public static const OffensiveStaffChanneling:PerkType = mk("Offensive Staff Channeling", "Offensive Staff Channeling",
-				"Allows you to cast split offensive spells without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (If you already can multicast spells, the perk will make your ability slightly stronger when using a staff.)",
-				"You've chosen the 'Offensive Staff Channeling' perk. Allows you to cast split offensive spells without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
+				"Allows you to cast split offensive spells without increased mana cost when using staff (3 parts at 70% power) or partial staff / wand (2 parts at 80% power) as focus. (If you already can multicast spells, the perk will make your ability slightly stronger when using a staff.)",
+				"You've chosen the 'Offensive Staff Channeling' perk. Allows you to cast split offensive spells without increased mana cost when using staff (3 parts at 70% power) or partial staff / wand (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
 		public static const OrthodoxDuelist:PerkType = mk("Orthodox duelist", "Orthodox duelist",
 				"Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.",
 				"You've chosen the 'Orthodox duelist' perk. Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.");
@@ -3131,8 +3134,8 @@ public class PerkLib
 				"Slows hunger rate by another 20%.",
 				"You've chosen the 'Survivalist 3' perk.  With this perk, your hunger rate is reduced second time by another 20%.");
 		public static const StaffChanneling:PerkType = mk("Staff Channeling", "Staff Channeling",
-				"Melee attacks with staffs would turn to ranged magic bolts. In addition to hitting enemy next to you they would enable hitting enemies out of your reach (for ex. flying enemies).",
-				"You've chosen the 'Staff Channeling' perk. Melee attacks with staffs would turn to ranged magic bolts. In addition to hitting an enemy next to you, they would enable hitting enemies out of your reach (for ex. flying enemies).");
+				"Melee attacks with staffs / wands would turn to ranged magic bolts. In addition to hitting enemy next to you they would enable hitting enemies out of your reach (for ex. flying enemies).",
+				"You've chosen the 'Staff Channeling' perk. Melee attacks with staffs / wands would turn to ranged magic bolts. In addition to hitting an enemy next to you, they would enable hitting enemies out of your reach (for ex. flying enemies).");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
 				"Enables additional item slots. (+50%)",
 				"You've chosen the 'Strong Back' perk, enabling additional item slots. (+50%)");
@@ -3895,7 +3898,7 @@ public class PerkLib
 		public static const ColdMastery:PerkType = mk("Cold Mastery", "Cold Mastery",
 				"You now have complete control over the ice element adding your own inner power to all cold based attacks.");
 		public static const CondensedPower:PerkType = mk("Condensed Power", "Condensed Power",
-				"While smaller than 6ft, add half of your inverted size modifier to your strength score.");
+				"While smaller than 6ft, gain a percentage bonus of your total strength score based on how small you are.");
 		public static const CorruptedKitsune:PerkType = mk("Corrupted Kitsune", "Corrupted Kitsune",
 				"The mystical energy of the kitsunes surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.",null,true);
 		public static const CorruptedNinetails:PerkType = mk("Corrupted Nine-tails", "Corrupted Nine-tails",
@@ -5168,7 +5171,7 @@ public class PerkLib
                     .requireStr(60)
                     .requirePerk(FuriousStrikes);
             GigantGrip.requireLevel(18)
-                    .requireAnyPerk(WeaponMastery, JobGunslinger)
+                    .requireAnyPerk(WeaponMastery, AmateurGunslinger)
                     .requireStr(100);
             HiddenMomentum.requireLevel(18)
                     .requirePerk(JobSwordsman)
@@ -5222,7 +5225,7 @@ public class PerkLib
             GigantGripSu.requireLevel(30)
                     .requireStr(140)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.playerHasFourArms();
+                        return player.hasFourArms();
                     }, "Four arms")
                     .requirePerk(GigantGripEx);
             HalfStepToSuperiorTranquilness.requireStr(180)
@@ -5327,7 +5330,7 @@ public class PerkLib
             Rage.requirePerk(FuelForTheFire)
                     .requireLevel(66);
             KingOfTheJungle.requirePerks(ToxineMaster, Medicine)
-                    .requireLevel(60);
+                    .requireLevel(66);
             WarCaster.requirePerk(SwiftCasting)
                     .requireLevel(66);
             HalfStepToEpicTranquilness.requireStr(360)
@@ -5654,11 +5657,15 @@ public class PerkLib
                     .requirePerk(HalfStepToEpicEndurance)
                     .requireLevel(72);
             //Tier 13 Toughness Perks
+            BrutalOpening.requirePerk(SecondWind)
+                    .requireLevel(78);
             HalfStepToLegendaryEndurance.requireTou(420)
                     .requireStr(280)
                     .requirePerk(EpicEndurance)
                     .requireLevel(78);
             //Tier 14 Toughness Perks
+            LingeringOpening.requirePerk(BrutalOpening)
+                    .requireLevel(84);
             LegendaryEndurance.requireTou(450)
                     .requireStr(300)
                     .requirePerk(HalfStepToLegendaryEndurance)
@@ -8273,6 +8280,8 @@ public class PerkLib
 			SubzeroLustfulFury.requireLevel(54)
 					.requirePerk(PrestigeJobBerserker)
                     .requireAnyPerk(ColderFury, ColderLust);
+            AbsoluteBash.requireLevel(54)
+                    .requirePerks(ShieldSlam, PrestigeJobSentinel);
             //Tier 10
             ChimericalBodySemiPeerlessStage.requirePerk(ChimericalBodySuperiorStage)
                     .requireLevel(60)

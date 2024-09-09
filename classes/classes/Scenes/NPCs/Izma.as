@@ -21,7 +21,7 @@ import classes.Scenes.SceneLib;
 			}
 			outputText("Izma rushes you with impressive speed, striking a few precise locations on your joints with her fingertips before leaping back.  It doesn't hurt, but you feel tired and sore. \"<i>Pressure points...</i>\" she laughs, seeing your confused expression.");
 			//(Fatigue damage)
-			EngineCore.fatigue(20+rand(20));
+			EngineCore.fatigue(50+rand(51));
 		}
 
 		private function IzmaSpecials2():void {
@@ -31,22 +31,21 @@ import classes.Scenes.SceneLib;
 				return;
 			}
 			var damage:Number = 0;
-			damage = Math.round(130 - rand(player.tou+player.armorDef));
+			damage = Math.round(str - player.armorDef);
 			if(damage < 0) damage = 0;
 			outputText("Izma ducks and jinks, working to close quarters, and clinches you. Unable to get your weapon into play, you can only ");
-			if(player.armorDef >= 10 || damage == 0) {
-				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 4-10% of health for the next three turns if successful)
+			if(damage == 0) outputText("laugh as her blades scape uselessly at your armor-clad back");
+			else {
 				outputText("writhe as she painfully drags the blades of her glove down your back");
 				if (!player.immuneToBleed()) player.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
 			}
-			else outputText("laugh as her blades scape uselessly at your armor-clad back");
 			outputText(" before breaking her embrace and leaping away. ");
 			player.takePhysDamage(damage, true);
 		}
 		private function IzmaSpecials3():void {
 			outputText("Rather than move to attack you, Izma grins at you and grabs her breasts, massaging them as she caresses her long penis with one knee. Her tail thrashes and thumps the sand heavily behind her as she simulates an orgasm, moaning loudly into the air. The whole display leaves you more aroused than before.");
 			//(lust gain)
-			player.takeLustDamage((20 + player.lib/5), true);
+			player.takeLustDamage((50 + player.lib/2), true);
 		}
 
 		private function IzmaAI():void {
@@ -78,7 +77,7 @@ import classes.Scenes.SceneLib;
 				else IzmaSpecials1();
 			}
 			if (choice == 3) {
-				if (player.armorDef >= 10 && rand(3) == 0) IzmaSpecials2();
+				if (rand(3) == 0) IzmaSpecials2();
 				else choice = 4;
 			}
 			if (choice == 4) IzmaSpecials3();
@@ -121,16 +120,16 @@ import classes.Scenes.SceneLib;
 			this.bodyColor = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;
-			initStrTouSpeInte(100, 110, 106, 74);
-			initWisLibSensCor(74, 75, 25, 40);
+			initStrTouSpeInte(200, 220, 212, 148);
+			initWisLibSensCor(148, 150, 50, 40);
 			this.weaponName = "clawed gauntlets";
 			this.weaponVerb="clawed punches";
 			this.weaponAttack = 45;
 			this.armorName = "bikini and grass skirt";
-			this.armorDef = 12;
-			this.armorMDef = 1;
-			this.bonusHP = 330;
-			this.bonusLust = 125;
+			this.armorDef = 60;
+			this.armorMDef = 5;
+			this.bonusHP = 660;
+			this.bonusLust = 225;
 			this.lust = 20;
 			this.lustVuln = .20;
 			this.level = 25;

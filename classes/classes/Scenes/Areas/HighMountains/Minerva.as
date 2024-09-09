@@ -313,13 +313,14 @@ public class Minerva extends Monster
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 1) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 3) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 5) this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 7) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 1) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 3) this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 5) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 7) this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);//lvl 105
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) this.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 9) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);

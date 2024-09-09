@@ -135,7 +135,7 @@ public class Achievements extends BaseContent
 			addAchievement("Decade", kACHIEVEMENTS.TIME_DECADE, "Get to day 3,650. (10 years)", "Get to day 3,650. (10 years | Okay, you can stop now.)", true);
 			addAchievement("Century", kACHIEVEMENTS.TIME_CENTURY, "Get to day 36,500. (100 years)", "Get to day 36,500. (100 years | It's time to stop playing. Go outside.)", true);
 
-			titleAchievementSection("Dungeons"); //26 achievements
+			titleAchievementSection("Dungeons"); //30 achievements
 			addAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER, "Clear any dungeon.");
 			addAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER, "Clear 2 dungeons.");
 			addAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, "Clear 4 dungeons.");
@@ -155,12 +155,15 @@ public class Achievements extends BaseContent
 			addAchievement("Buzz Off", kACHIEVEMENTS.DUNGEON_BUZZ_OFF, "Trick the hive guards into letting you pass witheout fighting.", "", true);
 			addAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON, "Fully clear the Hidden Cave.");
 			addAchievement("Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER, "Fully clear the Den of Desire.");
+			addAchievement("Weeding Out", kACHIEVEMENTS.DUNGEON_WEEDING_OUT, "Fully clear the Twilight Grove.");
 			addAchievement("Mirror Flower, Water Moon", kACHIEVEMENTS.DUNGEON_MIRROR_FLOWER_WATER_MOON, "Clear the River Dungeon.");
 			addAchievement("Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER, "Clear 1st floor of the River Dungeon.");
 			addAchievement("Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, "Clear 2nd floor of the River Dungeon.");
 			addAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, "Clear 3rd floor of the River Dungeon.");
 			addAchievement("Dungeon Seeker (4th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_4TH_LAYER, "Clear 4th floor of the River Dungeon.");
-			//addAchievement("Dungeon Seeker (5th layer)", kACHIEVEMENTS., "Clear 5th floor of the River Dungeon.");
+			addAchievement("Dungeon Seeker (5th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_5TH_LAYER, "Clear 5th floor of the River Dungeon.");
+			//addAchievement("Dungeon Seeker (6th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_6TH_LAYER, "Clear 6th floor of the River Dungeon.");
+			//addAchievement("Dungeon Seeker (7th layer)", kACHIEVEMENTS., "Clear 7th floor of the River Dungeon.");
 			addAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR, "Reach 50th room of Ebon Labyrinth. Clear the Ebon Labyrinth.");
 			addAchievement("Got lost?", kACHIEVEMENTS.DUNGEON_GOT_LOST, "Reach 100th room of Ebon Labyrinth.");
 			addAchievement("Hug the left wall", kACHIEVEMENTS.DUNGEON_HUG_THE_LEFT_WALL, "Reach 150th room of Ebon Labyrinth.");

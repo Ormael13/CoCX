@@ -2183,7 +2183,7 @@ public class Camp extends NPCAwareContent{
 		//addButtonDisabled(6, "Garden", "Local Committee of Alraunes took over this place for re-nationalization.");
 		if (SceneLib.garden.canAccessGarden()) addButton(6, "Garden", SceneLib.garden.accessGarden).hint("Manage your garden of medicinal plants.");
 		else addButtonDisabled(6, "Garden", "Req. to have Herb bag of any sort.");
-		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
+		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingrediants to craft poultice and battle medicines.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(!AdventurerGuild.playerInGuild, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
@@ -4463,7 +4463,7 @@ public class Camp extends NPCAwareContent{
 		// Row 5 - places/NPCs 16-20
 		bd.add("Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon)
 				.hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.")
-				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "Definetly not Elza winter palace ;)", null, "???");
+				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "Definitely not Elza winter palace ;)", null, "???");
 		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
 				.hint(flags[kFLAGS.GAR_NAME] == 0
 						? "Visit the ruined cathedral you've recently discovered."
@@ -4533,7 +4533,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] <= 0, "???", null, "???");
 		bd.add("Twilight Grove", SceneLib.dungeons.twilightgrove.enterDungeon)
 				.hint("Visit the twilight grove you've found in the deepwoods."
-						+ (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 1 ? "\n\nYou've defeated all corrupted alraunes." : "")
+						+ (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 3 ? "\n\nYou've defeated all corrupted alraunes." : "")
 						+ (SceneLib.dungeons.checkTwilightGroveClear() ? "\n\nCLEARED!" : ""))
 				.disableIf(flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] <= 0, "???", null, "???");
 		bd.add("EbonLabyrinth", SceneLib.dungeons.ebonlabyrinth.enterDungeon)
@@ -4647,6 +4647,8 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(0, "???", "Search the forest.");
 			addButtonDisabled(1, "???", "Search the mountains.");
 		}
+		if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) >= 4) addButton(2, "Demon lair", SceneLib.demonicLair.demonLairMainMenu).hint("Visit the Xuviel’s lair.");
+		else addButtonDisabled(2, "???", "Only for Xuviel’s 9th Wife.");
 
 		addButton(9, "Previous", placesToPage2);
 		addButton(14, "Back", playerMenu);

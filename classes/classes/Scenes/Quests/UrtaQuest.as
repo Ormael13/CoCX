@@ -1334,8 +1334,7 @@ private function urtaComboAttack():void {
         SceneLib.combat.enemyAIImpl();
     }
 	else {
-		if(monster.HP <= monster.minHP()) doNext(SceneLib.combat.endHpVictory);
-		else doNext(SceneLib.combat.endLustVictory);
+		SceneLib.combat.monsterDefeatCheck();
 	}
 }
 
@@ -1447,8 +1446,7 @@ private function urtaSidewinder():void {
         SceneLib.combat.enemyAIImpl();
     }
 	else {
-		if(monster.HP <= 0) doNext(SceneLib.combat.endHpVictory);
-		else doNext(SceneLib.combat.endLustVictory);
+		SceneLib.combat.monsterDefeatCheck();
 	}
 }
 
@@ -1537,8 +1535,7 @@ private function urtaVaultAttack():void {
 		combat.enemyAIImpl();
 	}
 	else {
-		if(monster.HP <= 0) doNext(SceneLib.combat.endHpVictory);
-		else doNext(SceneLib.combat.endLustVictory);
+		SceneLib.combat.monsterDefeatCheck();
 	}
 }
 

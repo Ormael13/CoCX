@@ -1,6 +1,6 @@
 /**
  * ...
- * @author CanadianSnas
+ * @author Canadian Snas
  */
 package classes.Scenes.Monsters
 {

@@ -22,6 +22,10 @@ public class Marae extends Monster
 				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		public function tentacleRape():void {
@@ -51,6 +55,14 @@ public class Marae extends Monster
 				outputText("but you fail and get hit instead! ");
 				var damage:int = (eBaseStrengthDamage() + rand(str));
 				damage = Math.round(damage);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);

@@ -244,9 +244,13 @@ public class DungeonEngine extends DungeonAbstractContent {
 			case DUNGEON_RIVER_FLOOR_05_ROOM_31: return riverdungeon.roomE31;
 			case DUNGEON_RIVER_FLOOR_05_ROOM_32: return riverdungeon.roomE32;
             //River Dungeon 6th floor
-			//case DUNGEON_RIVER_FLOOR_06_ROOM_01: return riverdungeon.roomF01;
+			case DUNGEON_RIVER_FLOOR_06_ROOM_01: return riverdungeon.roomF01;
 			//case DUNGEON_RIVER_FLOOR_06_ROOM_02: return riverdungeon.roomF02;
 			//case DUNGEON_RIVER_FLOOR_06_ROOM_03: return riverdungeon.roomF03;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_04: return riverdungeon.roomF04;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_05: return riverdungeon.roomF05;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_06: return riverdungeon.roomF06;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_07: return riverdungeon.roomF07;
             //Den of Desire
             case DUNGEON_DEN_OF_DESIRE_ENTRANCE:            return denofdesire.roomEntrance;
             case DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:     return denofdesire.roomGreatHallArea;
@@ -292,11 +296,11 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_LAB_PANIC_ROOM: 	return demonLab.Ballroom3;
 			//Twilight Grove
 			case DUNGEON_TWILIGHT_GROVE_1: return twilightgrove.room1TG;
-			//case DUNGEON_TWILIGHT_GROVE_2: return riverdungeon.roomE02;
-			//case DUNGEON_TWILIGHT_GROVE_3: return riverdungeon.roomE03;
-			//case DUNGEON_TWILIGHT_GROVE_4: return riverdungeon.roomE04;
-			//case DUNGEON_TWILIGHT_GROVE_5: return riverdungeon.roomE05;
-			//case DUNGEON_TWILIGHT_GROVE_6: return riverdungeon.roomE06;
+			case DUNGEON_TWILIGHT_GROVE_2: return twilightgrove.room2TG;
+			case DUNGEON_TWILIGHT_GROVE_3: return twilightgrove.room3TG;
+			case DUNGEON_TWILIGHT_GROVE_4: return twilightgrove.room4TG;
+			case DUNGEON_TWILIGHT_GROVE_5: return twilightgrove.room5TG;
+			case DUNGEON_TWILIGHT_GROVE_6: return twilightgrove.room6TG;
             //error
             default: throw new Error("Illegal dungeon location!")
         }
@@ -337,7 +341,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         return (flags[kFLAGS.TIFA_FOLLOWER] > 5);
     }
     public function checkTwilightGroveClear():Boolean {
-        return (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 1);
+        return (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 3);
     }
     public function checkRiverDungeon1stFloorClear():Boolean {
         return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1);//1 - pokonanie 1 golema, 2 pokonanie obu golemów
@@ -350,6 +354,9 @@ public class DungeonEngine extends DungeonAbstractContent {
     }
     public function checkRiverDungeon4thFloorClear():Boolean {
         return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10);//10 - otwarcie drzwi boss room-u, 11 - pokonanie bossa
+    }
+    public function checkRiverDungeon5thFloorClear():Boolean {
+        return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 12);//12 - otwarcie schodów na poziom, 13 - pokonanie bossa
     }
 
     //returns the room required for clearing

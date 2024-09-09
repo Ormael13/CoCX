@@ -402,16 +402,16 @@ public class AbstractSpell extends CombatAbility {
 	}
     
     public static function omnicasterDamageFactor_osc():Number {
-		if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
-			if (player.isPartiallyStaffTypeWeapon()) return 0.8;
+		if ((player.isStaffTypeWeapon() || player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
+			if (player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) return 0.8;
 			else return 0.7;
 		}
         else return 0.0;
     }
 	
 	public static function omnicasterRepeatCount_osc():int {
-		if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
-			if (player.isPartiallyStaffTypeWeapon()) return 2;
+		if ((player.isStaffTypeWeapon() || player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
+			if (player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) return 2;
 			else return 3;
 		}
         else return 1;
@@ -424,7 +424,7 @@ public class AbstractSpell extends CombatAbility {
     }
 	
 	public static function omnicasterDamageFactor():Number {
-        if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
+        if ((player.isStaffTypeWeapon() || player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
             if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer())
                 return omnicasterDamageFactor_gazer() * 1.2;
             else
@@ -440,7 +440,7 @@ public class AbstractSpell extends CombatAbility {
 	
 	public static function omnicasterRepeatCount():int {
         if (!player.hasPerk(PerkLib.Omnicaster) &&
-                !(player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling))
+                !(player.isStaffTypeWeapon() || player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling))
             return 1;
         return oscOverGazer() ? omnicasterRepeatCount_osc() : omnicasterRepeatCount_gazer();
 	}

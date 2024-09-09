@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Ormael
+ * @author Shigure
  */
 package classes.Scenes.NPCs 
 {
@@ -30,5 +30,70 @@ package classes.Scenes.NPCs
 		outputText("thanking her for her offer to help you and give you company as you return to camp.");
 		addButton(1, "Return to Camp", endEncounter);
 	}
+	/*
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}*/
 }
 }

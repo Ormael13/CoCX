@@ -1014,7 +1014,7 @@ public function defeatIsabella():void {
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2 && flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1) {
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ISABELLA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 1;
-		if (flags[kFLAGS.ISABELLA_LVL_UP] < 13 &&  flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= flags[kFLAGS.ISABELLA_LVL_UP] + 4) {
+		if (flags[kFLAGS.ISABELLA_LVL_UP] < 16 &&  flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= flags[kFLAGS.ISABELLA_LVL_UP] + 6) {
 			var vAdd:int = player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.ISABELLA_DEFEATS_COUNTER];
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, vAdd);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, vAdd, 0, 0);

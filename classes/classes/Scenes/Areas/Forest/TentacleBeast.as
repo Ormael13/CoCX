@@ -115,19 +115,35 @@ public class TentacleBeast extends Monster
 		{
 			trace("TentacleBeast Constructor!");
 			if (inDungeon) { //EL check
-                var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
-				this.short = "ancient tentacle beast";
-				this.long = "You see the titanic, shambling form of the tentacle beast before you.  Appearing as a massive shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
-				initStrTouSpeInte(292 + 31*mod, 320 + 40*mod, 150 + 10*mod, 120 + 5*mod);
-                initWisLibSensCor(100 + 5*mod, 270, 60 + 5*mod, 100);
-                this.weaponAttack = 50 + 10*mod;
-                this.armorDef = 90 + 45*mod;
-                this.armorMDef = 30 + 10*mod;
-                this.bonusHP = 4000 + 4000*mod;
-                this.bonusLust = 390 + 9*mod;
-                this.level = 60 + 5*mod;
-				this.gems = mod > 20 ? 0 : Math.floor((50 + rand(25)) * Math.exp(0.3*mod));
-				this.additionalXP = mod > 20 ? 0 : Math.floor(250 * Math.exp(0.3*mod));
+                if (player.hasStatusEffect(StatusEffects.TGRandomnMob)) {
+					this.short = "tentacle beast";
+					this.long = "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
+					initStrTouSpeInte(266, 212, 90, 90);
+					initWisLibSensCor(80, 220, 40, 100);
+					this.weaponAttack = 20;
+					this.armorDef = 45;
+					this.armorMDef = 5;
+					this.bonusHP = 1000;
+					this.bonusLust = 300;
+					this.level = 40;
+					this.gems = rand(30)+15;
+					this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
+				}
+				else {
+					var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
+					this.short = "ancient tentacle beast";
+					this.long = "You see the titanic, shambling form of the tentacle beast before you.  Appearing as a massive shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
+					initStrTouSpeInte(292 + 31*mod, 320 + 40*mod, 150 + 10*mod, 120 + 5*mod);
+					initWisLibSensCor(100 + 5*mod, 270, 60 + 5*mod, 100);
+					this.weaponAttack = 50 + 10*mod;
+					this.armorDef = 90 + 45*mod;
+					this.armorMDef = 30 + 10*mod;
+					this.bonusHP = 4000 + 4000*mod;
+					this.bonusLust = 390 + 9*mod;
+					this.level = 60 + 5*mod;
+					this.gems = mod > 20 ? 0 : Math.floor((50 + rand(25)) * Math.exp(0.3*mod));
+					this.additionalXP = mod > 20 ? 0 : Math.floor(250 * Math.exp(0.3*mod));
+				}
 			}
 			else {
 				this.short = "tentacle beast";

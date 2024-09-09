@@ -56,7 +56,7 @@ public class Weapon extends Equipable
 		}
 		
 		public function get verb():String {
-			if (type == WT_STAFF && game.player.hasPerk(PerkLib.StaffChanneling)) return 'shot';
+			if ((type == WT_STAFF || type == WT_WAND) && game.player.hasPerk(PerkLib.StaffChanneling)) return 'shot';
 			return _verb;
 		}
 		
@@ -191,7 +191,12 @@ public class Weapon extends Equipable
 		
 		public function get size():int { return _size; }
 		
-		public function isDual():Boolean { return _dual || (type == WT_FISTS || type == WT_GAUNTLET); }
+		public function isDual():Boolean { return _dual || type == WT_FISTS || type == WT_GAUNTLET; }
+		public function isDualWielded():Boolean { return !game.player.weapon.isNothing && !game.player.weaponOff.isNothing; }
+		public function isDualWieldedSmall():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_SMALL && game.player.weaponOff.size == WSZ_SMALL); }
+		public function isDualWieldedMedium():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_MEDIUM && game.player.weaponOff.size == WSZ_MEDIUM); }
+		public function isDualWieldedLarge():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_LARGE && game.player.weaponOff.size == WSZ_LARGE); }
+		public function isDualWieldedMassive():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_MASSIVE && game.player.weaponOff.size == WSZ_MASSIVE); }
 
 		public function isSmall():Boolean { return size == WSZ_SMALL; }
 		public function isMedium():Boolean { return size == WSZ_MEDIUM; }
@@ -254,60 +259,114 @@ public class Weapon extends Equipable
 			
 			var hasShield:Boolean = !game.player.shield.isNothing;
 			var hasOffHandWeapon:Boolean = !game.player.weaponOff.isNothing;
-			var noShieldAllowed:Boolean = false;
+			var hasMainHandWeapon:Boolean = !game.player.weapon.isNothing;
+			var noShieldOffHandAllowed:Boolean = false;
+			var noMainHandAllowed:Boolean = false;
 			
-			if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
-				// all dual req. DW
-				noShieldAllowed = true;
-				if (!game.player.hasPerk(PerkLib.DualWield)) {
+			if (slot == SLOT_WEAPON_MELEE_OFF && !game.player.hasPerk(PerkLib.DualWield)) {
+				if (doOutput) outputText(getItemText("dual_fail"));
+				return false;
+			}
+			else if (isLarge()) {
+				if (slot == SLOT_WEAPON_MELEE_OFF && !game.player.hasPerk(PerkLib.DualWield)) {
 					if (doOutput) outputText(getItemText("dual_fail"));
 					return false;
 				}
-			}
-			if (isLarge()) {
-				// large + shield req. GG
-				// dual large req. DW + GG
-				if (!game.player.hasPerk(PerkLib.GigantGrip)) {
-					noShieldAllowed = true;
-					if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
-						if (doOutput) outputText(getItemText("dual_fail"));
-						return false;
+				else if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
+					if (!game.player.hasPerk(PerkLib.QuadWield)) {
+						if (!game.player.hasFourArms()) {
+							if (doOutput) outputText(getItemText("dual_4afail"));
+							return false;
+						}
+						else {
+							if (doOutput) outputText(getItemText("dualmassive_fail"));
+							return false;
+						} 
 					}
 				}
-			} else if (isMassive()) {
-				// dual massive req. DW + (GGSu4a | AD4a | TG)
-				// massive + shield req. TG
-				// massive req. GG
-				if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
+				else if (!game.player.hasPerk(PerkLib.GigantGrip)) {
+					if (slot == SLOT_WEAPON_MELEE_OFF) noMainHandAllowed = true;
+					else noShieldOffHandAllowed = true;
+					//if (doOutput) outputText(getItemText("dual_fail"));
+					//return false;
+				}
+			}
+			else if (isMassive()) {
+				if (slot == SLOT_WEAPON_MELEE_OFF && !game.player.hasPerk(PerkLib.DualWield)) {
+					if (doOutput) outputText(getItemText("dual_fail"));
+					return false;
+				}
+				else if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
 					if (!game.player.hasPerk(PerkLib.TitanGrip)) {
-						if (game.player.hasPerk(PerkLib.GigantGripSu) || game.player.hasPerk(PerkLib.AntyDexterity)) {
+						if (!game.player.hasPerk(PerkLib.TitanGripSu)) {
 							if (!game.player.hasFourArms()) {
 								if (doOutput) outputText(getItemText("dualmasssive_4afail"));
 								return false;
 							}
-						} else {
+						}
+						else {
 							if (doOutput) outputText(getItemText("dualmassive_fail"));
 							return false;
 						}
 					}
-				} else if (!game.player.hasPerk(PerkLib.TitanGrip)) {
-					noShieldAllowed = true;
+				}
+				else if (!game.player.hasPerk(PerkLib.TitanGrip)) {
+					if (slot == SLOT_WEAPON_MELEE_OFF) noMainHandAllowed = true;
+					else noShieldOffHandAllowed = true;
 					if (!game.player.hasPerk(PerkLib.GigantGrip)) {
 						if (doOutput) outputText(getItemText("massive_fail"));
 						return false;
 					}
 				}
 			}
-			if (hasShield && noShieldAllowed) {
-				if (!game.player.shield.canUnequip(doOutput)) {
-					if (doOutput) {
+			if (slot == SLOT_WEAPON_MELEE && (hasShield || hasOffHandWeapon) && noShieldOffHandAllowed) {
+				if (!game.player.shield.canUnequip(doOutput) || !game.player.weaponOff.canUnequip(doOutput)) {
+					if (doOutput && !game.player.shield.canUnequip(doOutput)) {
 						outputText(getItemText("unshield_fail"));
 					}
-				} else if (doOutput) {
-					outputText(getItemText("unshield"));
-					SceneLib.inventory.unequipShield();
+					if (doOutput && !game.player.weaponOff.canUnequip(doOutput)) {
+						outputText(getItemText("unoffhand_fail"));
+					}
+				}
+				else if (doOutput) {
+					if (hasShield) {
+						outputText(getItemText("unshield"));
+						SceneLib.inventory.unequipShield();
+					}
+					if (hasOffHandWeapon) {
+						outputText(getItemText("unoffhand"));
+						SceneLib.inventory.unequipWeaponOff();
+					}
 				}
 				return false;
+			}
+			if (slot == SLOT_WEAPON_MELEE_OFF) {
+				if (hasMainHandWeapon && noMainHandAllowed) {
+					if (!game.player.weaponOff.canUnequip(doOutput)) {
+						if (doOutput) {
+							outputText(getItemText("unmainhand_fail"));
+						}
+					}
+					else if (doOutput) {
+						if (hasMainHandWeapon) {
+							outputText(getItemText("unmainhand"));
+							SceneLib.inventory.unequipWeapon();
+						}
+					}
+					return false;
+				}
+				if (hasShield) {
+					if (!game.player.shield.canUnequip(doOutput)) {
+						if (doOutput && !game.player.shield.canUnequip(doOutput)) {
+							outputText(getItemText("unshield_fail"));
+						}
+					}
+					else if (doOutput) {
+						outputText(getItemText("unshield"));
+						SceneLib.inventory.unequipShield();
+					}
+					return false;
+				}
 			}
 			if (game.player.hasPerk(PerkLib.Rigidity)) {
 				if (doOutput) outputText(getItemText("rigidity_fail"));
@@ -324,30 +383,49 @@ public class Weapon extends Equipable
 					SceneLib.inventory.unequipShield();
 				}
 			}
+			if (!game.player.weaponOff.isNothing) {
+				if (game.player.weapon.isLarge() && !game.player.hasPerk(PerkLib.GigantGrip)
+					|| game.player.weapon.isMassive() && !game.player.hasPerk(PerkLib.TitanGrip)){
+					SceneLib.inventory.unequipWeaponOff();
+				}
+			}
+			if (!game.player.weapon.isNothing) {
+				if (game.player.weaponOff.isLarge() && !game.player.hasPerk(PerkLib.GigantGrip)
+					|| game.player.weaponOff.isMassive() && !game.player.hasPerk(PerkLib.TitanGrip)){
+					SceneLib.inventory.unequipWeapon();
+				}
+			}
 			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && isSingleOrDualSmallToMassive()) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
-			
 			return super.beforeEquip(doOutput, slot);
 		}
 		
 		/**
 		 * Extra texts for weapons:
-		 * - "dual_fail": cannot equip dual weapons, no perk
-		 * - "dualmasssive_4afail": cannot wield dual massive, perk requires 4 arms
+		 * - "dual_fail": cannot equip main hand and off hand weapon at the same time, no perk
+		 * - "dual_4afail": cannot wield four weapons, perk requires 4 arms
+		 * - "dualmasssive_4afail": cannot wield four massive weapons, perk requires 4 arms
 		 * - "dualmasssive_fail": cannot wield dual massive, no perk
 		 * - "massive_fail": cannot equip massive wepon, no perk
 		 * - "unshield_fail": req. 2 hands but cannot unequip shield
+		 * - "unoffhand_fail": req. 2 hands but cannot unequip off hand
+		 * - "unmainhand_fail": req. 2 hands but cannot unequip main hand
 		 * - "unshield": req. 2 hands, unequipping shield
+		 * - "unoffhand": req. 2 hands, unequipping off hand
+		 * - "unmainhand": req. 2 hands, unequipping main hand
 		 */
 		override public function getItemText(textid:String):String {
 			switch (textid) {
 				case "legendary_fail":
 					var weaponType:String = _type;
 					if (weaponType == WT_MACE_HAMMER) weaponType = "Mace";
-					if (weaponType == WT_DUELING || weaponType == WT_EXOTIC) weaponType = "Weapon";
+					if (weaponType == WT_EXOTIC) weaponType = "Weapon";
+					if (weaponType == WT_DUELING) weaponType = "Sword";
 					return "You try to equip the legendary " + weaponType.toLowerCase() + ", but to your disappointment the item simply refuses to stay in your hands. It seems you still lack the right to wear this item.";
 				case "dual_fail":
-					return "You aren't skilled enough to handle this pair of weapons!  ";
+					return "You aren't skilled enough to handle pair of weapons!  ";
 				case "dualmasssive_4afail":
+					return "You lack second pair of arms and aren't skilled enough to handle both pairs of weapons!  "
+				case "dual_4afail":
 					return "You lack second pair of arms!  "
 				case "dualmassive_fail":
 					return "You aren't skilled enough to handle this pair of weapons with only two hands!  Unless you want to hurt yourself instead of your enemies when trying to use them...  "
@@ -355,10 +433,22 @@ public class Weapon extends Equipable
 					return "You aren't skilled enough in handling massive weapons, even when using both hands to use this weapon.  "
 				case "unshield_fail":
 					return "You currently cannot remove your [shield]."
+				case "unoffhand_fail":
+					return "You currently cannot remove your [weaponOff]."
+				case "unmainhand_fail":
+					return "You currently cannot remove your [weapon]."
 				case "unshield":
 					return "Because " +
-							(isDual() ? "those weapons require":"this weapon requires") +
+							(isDual() ? "those main hand weapons require":"this main hand weapon requires") +
 							" the use of two hands, you have unequipped your shield. ";
+				case "unoffhand":
+					return "Because " +
+							(isDual() ? "those main hand weapons require":"this main hand weapon requires") +
+							" the use of two hands, you have unequipped your off hand weapon. ";
+				case "unmainhand":
+					return "Because " +
+							(isDual() ? "those off hand weapons require":"this off hand weapon requires") +
+							" the use of two hands, you have unequipped your main hand weapon. ";
 			}
 			return super.getItemText(textid);
 		}

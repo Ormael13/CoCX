@@ -918,7 +918,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
 			}
 			outputText("\n\n");
-			if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 		if ((player.hasKeyItem("Missile launcher") >= 0 || player.hasKeyItem("Omni Missile") >= 0) && !alreadyUsedWeaponFunction) {
 			alreadyUsedWeaponFunction = true;
@@ -981,9 +981,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weapon.isSingleLarge() && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isDualLarge() && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weapon.isSingleMassive()) {
+		if (player.hasPerk(PerkLib.WeaponMastery) && (player.weapon.isSingleLarge() || player.weaponOff.isSingleLarge()) && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isSingleLarge() && player.weaponOff.isSingleLarge() && player.str >= 140) critChance += 10;
+		if (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isSingleMassive() || player.weaponOff.isSingleMassive())) {
 			if (player.str >= 100) critChance += 10;
 			if (player.str >= 140) critChance += 10;
 		}
@@ -996,7 +996,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.75 + buffMultiplier;
 		}
 		combat.checkForElementalEnchantmentAndDoDamage(damage);
-		if (player.hasPerk(PerkLib.TwinThunder) && player.isDualWieldMelee()) combat.checkForElementalEnchantmentAndDoDamage(damage);
+		if (player.hasPerk(PerkLib.TwinThunder) && player.weapon.isDualWielded()) combat.checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -1139,9 +1139,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weapon.isSingleLarge() && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isDualLarge() && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weapon.isSingleMassive()) {
+		if (player.hasPerk(PerkLib.WeaponMastery) && (player.weapon.isSingleLarge() || player.weaponOff.isSingleLarge()) && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isSingleLarge() && player.weaponOff.isSingleLarge() && player.str >= 140) critChance += 10;
+		if (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isSingleMassive() || player.weaponOff.isSingleMassive())) {
 			if (player.str >= 100) critChance += 10;
 			if (player.str >= 140) critChance += 10;
 		}
@@ -1394,11 +1394,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 						}
 					}
-					if (monster.lust >= monster.maxOverLust()) {
-						outputText("\n\n");
-						checkAchievementDamage(damage);
-						doNext(endLustVictory);
-					}
+					combat.monsterDefeatCheck();
 				}
 			}
 			else outputText("  You do not have enough venom to apply on [weapon]!");
@@ -1700,11 +1696,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isWeaponForWhirlwind()) damage *= 1.25;
 			else damage *= 0.75;
 		}
-		if (player.weapon.isDualMedium() || player.weapon.isDualLarge()) {
+		if (player.weapon.isDualLarge() || player.weaponOff.isDualLarge() || player.weapon.isDualMassive() || player.weaponOff.isDualMassive()) {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
 			else damage *= 1.25;
 		}
-		if (player.hasPerk(PerkLib.GiantsReach) && (player.weapon.isLarge() || (player.hasPerk(PerkLib.GigantGripEx) && player.weapon.isSingleMassive()) || (player.hasPerk(PerkLib.GigantGripSu) && player.weapon.isDualMassive()))) damage *= 1.25;
+		if (player.hasPerk(PerkLib.GiantsReach) && (player.weapon.isLarge() || (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isSingleMassive() || player.weaponOff.isSingleMassive())) || (player.hasPerk(PerkLib.GigantGripSu) && player.weapon.isSingleMassive() && player.weaponOff.isSingleMassive()))) damage *= 1.25;
 		if (player.hasStatusEffect(StatusEffects.Gallop)) {
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 4) damage *= 2;
 			else damage *= 1.5;
@@ -1714,8 +1710,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
-		if (player.isSwordTypeWeapon()) critChance += 10;
-		if (player.isDuelingTypeWeapon()) critChance += 20;
+		if (player.weapon.isSwordType() || player.weaponOff.isSwordType()) critChance += 10;
+		if (player.weapon.isDuelingType() || player.weaponOff.isDuelingType()) critChance += 20;
 		if (player.hasPerk(PerkLib.CycloneStage1)) critChance += 10;
 		if (player.hasPerk(PerkLib.CycloneStage2)) critChance += 15;
 		if (player.hasPerk(PerkLib.CycloneStage3)) critChance += 20;
@@ -1781,7 +1777,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Whipping)) damage *= 1.2;
 		//other bonuses
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.weapon.isDualMedium() || player.weapon.isDualLarge()) {
+		if (player.weapon.isDualSmall() || player.weaponOff.isDualSmall() || player.weapon.isDualMedium() || player.weaponOff.isDualMedium() || player.weapon.isDualLarge() || player.weaponOff.isDualLarge() || player.weapon.isDualMassive() || player.weaponOff.isDualMassive()) {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
 			else damage *= 1.25;
 		}
@@ -2203,8 +2199,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		statScreenRefresh();
-		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else enemyAI();
+		if(!combat.monsterDefeatCheck())
+			enemyAI();
 	}
 
 	public function milkBlast():void {
@@ -5088,11 +5084,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		}
+		enemyAI();
 	}
 
 	//Gore Attack - uses 25 fatigue!
@@ -5228,11 +5220,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		}
+		enemyAI();
 	}
 	//Upheaval Attack
 	public function upheavalAttack():void {
@@ -5349,11 +5337,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		}
+		enemyAI();
 	}
 //Player sting attack
 	public function playerStinger():void {
@@ -5456,8 +5440,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Kick back to main if no damage occured!
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else doNext(endLustVictory);
+		enemyAI();
 	}
 //Player tail spike attack
 
@@ -5542,8 +5525,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You drop on all fours, flinging your tail forward and shooting an envenomed spike at [themonster].");
 		tailspikedamage();
 		outputText("\n\n");
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else doNext(endLustVictory);
+		enemyAI();
 	}
 
 	//Player Omni tail spike attack
@@ -5583,8 +5565,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WeaponClawsSavageRend) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		if ((player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		outputText("\n\n");
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else doNext(endLustVictory);
+		enemyAI();
 	}
 
 
@@ -5810,8 +5791,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else enemyAI();
 		}
 		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			else doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 	}
 
@@ -6110,12 +6090,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (chance > 10) chance = 10;
 		doDamage(damage);
 		outputText("Your [shield] slams against [themonster], dealing <b>[font-damage]" + damage + "[/font]</b> damage! ");
+		if (player.hasPerk(PerkLib.BrutalOpening)) {
+			if (!monster.hasStatusEffect(StatusEffects.TimesBashed)) monster.createStatusEffect(StatusEffects.TimesBashed, 0, 2, 0, 0);
+			if (player.hasPerk(PerkLib.LingeringOpening)) monster.addStatusValue(StatusEffects.TimesBashed, 2, 2);
+		}
 		if (!monster.hasStatusEffect(StatusEffects.Stunned) && rand(chance) == 0) {
 			outputText("<b>Your impact also manages to stun [themonster]!</b> ");
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
-			if (!monster.hasStatusEffect(StatusEffects.TimesBashed)) monster.createStatusEffect(StatusEffects.TimesBashed, player.hasPerk(PerkLib.ShieldSlam) ? 0.5 : 1, 0, 0, 0);
-			else monster.addStatusValue(StatusEffects.TimesBashed, 1, player.hasPerk(PerkLib.ShieldSlam) ? 0.5 : 1);
+			var dismishing:Number = 1;
+			if (player.hasPerk(PerkLib.ShieldSlam)) dismishing *= 0.5;
+			if (player.hasPerk(PerkLib.AbsoluteBash)) dismishing *= 0.8;
+			if (!monster.hasStatusEffect(StatusEffects.TimesBashed)) monster.createStatusEffect(StatusEffects.TimesBashed, dismishing, 0, 0, 0);
+			else monster.addStatusValue(StatusEffects.TimesBashed, 1, dismishing);
 		}
 		checkAchievementDamage(damage);
 		if ((player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) && !monster.isImmuneToBleed()) {
@@ -6271,12 +6258,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			enemyAI();
 		}
-		if (monster.HP <= monster.minHP()) {
-			doNext(endHpVictory);
-			return;
-		}
-		if (monster.lust >= monster.maxOverLust()) {
-			doNext(endLustVictory);
+		if (combat.monsterDefeatCheck()) {
 			return;
 		}
 		player.createStatusEffect(StatusEffects.CooldownPinDown,8,0,0,0);
@@ -6483,10 +6465,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 			}
-			if (monster.lust >= monster.maxOverLust()) {
+			if (combat.monsterDefeatCheck()) {
 				outputText("\n\n");
 				flags[kFLAGS.ARROWS_SHOT]++;
-				doNext(endLustVictory);
 			}
 			outputText("\n");
 		}

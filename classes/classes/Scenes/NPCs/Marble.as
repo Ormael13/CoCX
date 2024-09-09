@@ -19,7 +19,7 @@ public class Marble extends Monster
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
-			damage = int((str + 20 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
+			damage = int((str + 20 + weaponAttack) - player.armorDef);
 			if(damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
@@ -40,7 +40,7 @@ public class Marble extends Monster
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
-			damage = int((str + 40 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
+			damage = int((str + 40 + weaponAttack) - player.armorDef);
 			damage /= 2;
 			if(damage <= 0) {
 				damage = 0;
@@ -85,10 +85,10 @@ public class Marble extends Monster
 			initWisLibSensCor(40, 125, 65, 40);
 			this.weaponName = "large hammer";
 			this.weaponVerb="hammer-blow";
-			this.weaponAttack = 78;
+			this.weaponAttack = 118;
 			this.armorName = "tough hide";
-			this.armorDef = 40;
-			this.armorMDef = 10;
+			this.armorDef = 80;
+			this.armorMDef = 20;
 			this.bonusLust = 218;
 			this.level = 28;
 			this.gems = rand(15) + 50;

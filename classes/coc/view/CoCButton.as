@@ -370,6 +370,21 @@ public class CoCButton extends Block {
 		this._callback = value;
 	}
 
+	/**
+	 * In case of needing to execute multiple callback when button press
+	 * e.g. during combat need to end player turn
+	 * use this instead of hardcoding everything
+	 * @param postCallback
+	 * @return
+	 */
+	public function and(postCallback:Function):void {
+		var oldCb:Function = this.callback;
+		this.callback = function():void {
+			oldCb();
+			postCallback();
+		}
+	}
+
 	public function get preCallback():Function {
 		return _preCallback;
 	}

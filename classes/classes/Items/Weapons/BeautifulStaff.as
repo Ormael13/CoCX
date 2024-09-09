@@ -68,7 +68,6 @@ import classes.TimeAwareInterface;
                 return _description;
         }
 		
-
 		override public function get description():String {
 			updateWizardsMult(); //To display *correct* values
 			return super.description;

@@ -1203,12 +1203,12 @@ use namespace CoC;
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			return !weapon.isDual() && weapon.size < ItemConstants.WSZ_LARGE  && weapon != game.weapons.DAISHO && !weapon.isStaffType();
+			return !weapon.isDualWielded() && weapon.size < ItemConstants.WSZ_LARGE  && weapon != game.weapons.DAISHO && !weapon.isStaffType();
 		}
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !weapon.isStaffType() && !weaponOff.isStaffType());
+			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weaponOff.isDualLarge() && !weaponOff.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !weaponOff.isDualMassive() && !weaponOff.isSingleMassive() && !weapon.isStaffType() && !weaponOff.isStaffType());
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
@@ -1238,7 +1238,7 @@ use namespace CoC;
 		//Free off-hand for spellcasting and etc.
 		public function isHavingFreeOffHand():Boolean
 		{
-			return !isShieldsForShieldBash() && shield != game.shields.BATTNET && shield != game.shields.Y_U_PAN;
+			return !isShieldsForShieldBash() && shield != game.shields.BATTNET && shield != game.shields.Y_U_PAN && weaponOff.isNothing;
 		}
 		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
 		{
@@ -1253,25 +1253,6 @@ use namespace CoC;
 		public function isGauntletWeapon():Boolean {
 			return (weapon.isGauntletType()) || (hasAetherTwinsTier1() || hasAetherTwinsTier2()) || (weapon == game.weapons.CATGLOV && flags[kFLAGS.FERAL_COMBAT_MODE] != 1);
 		}
-		//Sword-type weapons
-		public function isSwordTypeWeapon():Boolean {
-			return (weapon.isSwordType());
-		}
-		//Axe-type weapons
-		public function isAxeTypeWeapon():Boolean {
-			return (weapon.isAxeType());
-		}
-		//Mace/Hammer-type weapons
-		public function isMaceHammerTypeWeapon():Boolean {
-			return (weapon.isMaceHammerType());
-		}
-		public function isTetsubo():Boolean {
-			return (weapon.isTetsubo());
-		}
-		//Dueling sword-type weapons (rapier & katana)
-		public function isDuelingTypeWeapon():Boolean {
-			return (weapon.isDuelingType());
-		}
 		//Polearm-type
 		public function isPolearmTypeWeapon():Boolean {
 			return (weapon.isPolearmType());
@@ -1279,10 +1260,6 @@ use namespace CoC;
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
 			return (weapon.isSpearType());
-		}
-		//Scythe-type
-		public function isScytheTypeWeapon():Boolean {
-			return (weapon.isScytheType());
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
@@ -1296,10 +1273,6 @@ use namespace CoC;
 		public function isWhipTypeWeapon():Boolean {
 			return (weapon.isWhipType());
 		}
-		//Ribbon-type weapons
-		public function isRibbonTypeWeapon():Boolean {
-			return (weapon.isRibbonType());
-		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
 			return (weapon.isStaffPart()) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
@@ -1307,7 +1280,7 @@ use namespace CoC;
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
 		{
-			return weapon.isSingleSmall() || weapon.isDualSmall();
+			return weapon.isSingleSmall() || weapon.isDualSmall() || weaponOff.isSingleSmall() || weaponOff.isDualSmall();
 		}
 		public function haveWeaponForSneakAttackRange():Boolean
 		{
@@ -1382,12 +1355,12 @@ use namespace CoC;
 		}
 		public function usingSingleFlyingSword():Boolean
 		{
-			return weaponFlyingSwords.count == 1;//weapon.isDualMassive() ||  ||
+			return weaponFlyingSwords.count == 1;
 		}
 		//Hold with Both Hands checks
 		public function gaindHoldWithBothHandBonus():Boolean
 		{
-			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && (!isDualWieldMelee() || (playerHasFourArms() && (weapon.isDualSmall() || weapon.isDualMedium() || (weapon.isDualLarge() && hasPerk(PerkLib.GigantGripSu)))));
+			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && ((weapon.isSingleLarge() || weaponOff.isSingleLarge()) && !hasPerk(PerkLib.GigantGrip)) && ((weapon.isSingleMassive() || weaponOff.isSingleMassive()) && (!hasPerk(PerkLib.TitanGrip) || (hasFourArms() && !hasPerk(PerkLib.GigantGripSu))));
 		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
@@ -1405,10 +1378,6 @@ use namespace CoC;
 		public function playerIsBlinded():Boolean
 		{
 			return (hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.Snowstorms)) && !hasPerk(PerkLib.SixthSense);
-		}
-		public function playerHasFourArms():Boolean
-		{
-			return hasFourArms();
 		}
 		public function flameBladeActive():Boolean
 		{
@@ -1598,40 +1567,45 @@ use namespace CoC;
 			var attack:Number = 0;
 			if (offhand) attack += weaponOff.attack;
 			else attack += weapon.attack;
-			if (hasPerk(PerkLib.JobSwordsman) && (weapon.isSingleLarge() || hasAetherTwinsTier2())) {
-				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
-					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
-					else attack *= 1.5;
-				}
-				else attack *= 1.25;
+			var swordsmanBonus:Number = 1.25;
+			if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
+				if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) swordsmanBonus += 0.75;
+				else swordsmanBonus += 0.25;
 			}
-			if (hasPerk(PerkLib.WeaponGrandMastery) && weapon.isDualLarge() && str >= 140) {
-				attack *= 2;
+			if (hasPerk(PerkLib.JobSwordsman) && (weapon.isSingleLarge() || weaponOff.isSingleLarge() || hasAetherTwinsTier2())) {
+				if (offhand && weaponOff.isSingleLarge()) attack *= swordsmanBonus;
+				else attack *= swordsmanBonus;
 			}
-			if (hasPerk(PerkLib.GigantGripEx) && weapon.isMassive()) {
-				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
-					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
-					else attack *= 1.5;
-				}
-				else attack *= 1.25;
+			if (hasPerk(PerkLib.WeaponGrandMastery) && (weapon.isDualLarge() || weaponOff.isDualLarge()) && str >= 140) {
+				if (offhand && weaponOff.isDualLarge()) attack *= 2;
+				else attack *= 2;
 			}
-			if (hasPerk(PerkLib.HiddenMomentum) && (weapon.isSingleLarge() || hasAetherTwinsTier2() || (hasPerk(PerkLib.GigantGripEx) && weapon.isSingleMassive())) && str >= 75 && spe >= 50) {
-				attack += (((str + spe) - 100) * 0.2);
+			if (hasPerk(PerkLib.GigantGripEx) && (weapon.isMassive() || weaponOff.isMassive())) {
+				if (offhand && weaponOff.isMassive()) attack *= swordsmanBonus;
+				else attack *= swordsmanBonus;
+			}
+			if (hasPerk(PerkLib.HiddenMomentum) && (weapon.isSingleLarge() || weaponOff.isSingleLarge() || hasAetherTwinsTier2() || (hasPerk(PerkLib.GigantGripEx) && weapon.isSingleMassive()) || (hasPerk(PerkLib.GigantGripEx) && weaponOff.isSingleMassive())) && str >= 75 && spe >= 50) {
+				if (offhand && (weaponOff.isSingleLarge() || (hasPerk(PerkLib.GigantGripEx) && weaponOff.isSingleMassive()))) attack += (((str + spe) - 100) * 0.2);
+				else attack += (((str + spe) - 100) * 0.2);
 			}//30-70-110
-			if (hasPerk(PerkLib.HiddenDualMomentum) && weapon.isDualLarge() && str >= 150 && spe >= 100) {
-				attack += (((str + spe) - 200) * 0.2);
+			if (hasPerk(PerkLib.HiddenDualMomentum) && (weapon.isDualLarge() || weaponOff.isDualLarge()) && str >= 150 && spe >= 100) {
+				if (offhand && weaponOff.isMassive()) attack += (((str + spe) - 200) * 0.2);
+				else attack += (((str + spe) - 200) * 0.2);
 			}
-			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && weapon.isDualMassive() && str >= 150 && spe >= 100) {
-				attack += (((str + spe) - 200) * 0.2);
+			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && (weapon.isDualMassive() || weaponOff.isDualMassive()) && str >= 150 && spe >= 100) {
+				if (offhand && weaponOff.isDualMassive()) attack += (((str + spe) - 200) * 0.2);
+				else attack += (((str + spe) - 200) * 0.2);
 			}//20-60-100
-			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (weapon.isMedium() && !isFistOrFistWeapon())) {
-				attack += ((spe - 50) * 0.3);
+			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && ((weapon.isMedium() || weaponOff.isMedium()) && !isFistOrFistWeapon())) {
+				if (offhand && weaponOff.isMedium()) attack += ((spe - 50) * 0.3);
+				else attack += ((spe - 50) * 0.3);
 			}//45-105-165
 			if (weapon.isHybrid() && shieldName == "nothing"){
 				attack *= 1.5;
 			}
-			if (hasPerk(PerkLib.StarlightStrikes) && spe >= 60 && (weapon.isSingleSmall() || weapon.isDualSmall())) {
-				attack += ((spe - 50) * 0.2);
+			if (hasPerk(PerkLib.StarlightStrikes) && spe >= 60 && (weapon.isSingleSmall() || weapon.isDualSmall() || weaponOff.isSingleSmall() || weaponOff.isDualSmall())) {
+				if (offhand && (weaponOff.isSingleSmall() || weaponOff.isDualSmall())) attack += ((spe - 50) * 0.2);
+				else attack += ((spe - 50) * 0.2);
 			}
 			if (hasPerk(PerkLib.SteelImpact)) {
 				attack += ((tou - 50) * 0.3);
@@ -1665,7 +1639,7 @@ use namespace CoC;
 					attack += SceneLib.combat.unarmedAttack();
 				}
 			}
-			if (hasPerk(PerkLib.PrestigeJobTempest) && (isDualWieldMelee() || weapon == game.weapons.DAISHO)) {
+			if (hasPerk(PerkLib.PrestigeJobTempest) && (weapon.isDualWielded() || weapon == game.weapons.DAISHO)) {
 				attack += (5 * newGamePlusMod);
 			}
 			//Konstantine buff
@@ -1734,17 +1708,13 @@ use namespace CoC;
 			return attack;
 		}
 		//Is DualWield
-		public function isDualWieldMelee():Boolean
-        {
-        	return weapon.isDual();
-        }
-        public function isDualWieldRanged():Boolean
+		public function isDualWieldRanged():Boolean
         {
         	return weaponRangePerk == ItemConstants.WT_DUAL_FIREARMS || weaponRangePerk == ItemConstants.WT_DUAL_2H_FIREARMS;
         }
         public function isDualWield():Boolean
         {
-			return isDualWieldMelee() || isDualWieldRanged();
+			return weapon.isDualWielded() || isDualWieldRanged();
         }
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
@@ -5928,8 +5898,12 @@ use namespace CoC;
 				var strTS:Number = Math.round(0.01 * str * Math.round(effectiveTallness / 6));
 				statStore.replaceBuffObject({'str': strTS}, 'Titanic Strength', { text: 'Titanic Strength' });
 			}
-			if (effectiveTallness<108 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
-			if (effectiveTallness<=72 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round((132 - basetallness)/2))}, 'Condensed Power', { text: 'Condensed Power' });
+			if (effectiveTallness < 108 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (effectiveTallness <= 72 && hasPerk(PerkLib.CondensedPower)) {
+				if (statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
+				var strCP:Number = Math.round(0.01 * str * (132 - effectiveTallness));
+				statStore.replaceBuffObject({'str':strCP}, 'Condensed Power', { text: 'Condensed Power' });
+			}
 			if (effectiveTallness<=72 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * (132 - basetallness))}, 'Small Caster', { text: 'Small Caster' });
 			if ((effectiveTallness>72 || !hasPerk(PerkLib.CondensedPower)) && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
 			if ((effectiveTallness>72 || !hasPerk(PerkLib.SmallCaster)) && statStore.hasBuff('Small Caster')) statStore.removeBuffs('Small Caster');

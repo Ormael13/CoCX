@@ -73,6 +73,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const LCROSBW:WeaponRange = new WeaponRange("LCrosbw", "LCrossbow", "light crossbow", "a light crossbow", "shot", 5, 250, "This is a light crossbow. A most basic one that fires bolts at your enemies.", WT_CROSSBOW).withBuffs({'rangedaccuracy':+10}) as WeaponRange;
 		public const LEVHARP:LeviathanHarpoons = new LeviathanHarpoons();
 		public const M1CERBE:WeaponRange = new WeaponRange("M1Cerbe", "M1Cerberus", "M1 Cerberus", "a M1 Cerberus", "shot", 45, 930, "A rifle prized for its precision and versatility, the Cerberus shoots multiple bullet in salvo ensuring that if one shot land all the others do with minimal recoil.\n\nGoblin Mech Compatibile", WT_2H_FIREARM);
+		public const MBOMBER:MinoBomber = new MinoBomber();
 		public const O_JAVEL:WeaponRange = new WeaponRange("O.Javel", "OldJavelins", "old javelins", "an old javelins", "shot", 1, 50, "An old training javelin for ranged combat. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const RTKNIFE:WeaponRange = new WeaponRange("RTKnife", "R.ThrowingKnife", "ruby throwing knife", "a ruby throwing knife", "shot", 3, 300, "A small knife made of crimson metal and richly decorated with rubies and gold engravings that could be thrown. The magic within this crimson blade will flare up with magical flames when charged with magic. You can carry up to 15 on you and need to retrieve them after battles.", "Throwing");
 		public const SAGITTB:SagittariusBanefulGreatBow = new SagittariusBanefulGreatBow();

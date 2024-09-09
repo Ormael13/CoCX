@@ -3,6 +3,7 @@
  */
 package classes.Items
 {
+import classes.IMutations.BlackHeartMutation;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Items.Weapons.*;
 import classes.PerkLib;
@@ -146,7 +147,6 @@ public final class WeaponLib extends ItemConstants
 				WT_EXOTIC, WSZ_SMALL)
 				.withEffect(IELib.Bleed, 45) as Weapon;
 		public const B_STAFF:Weapon = new BeautifulStaff();
-		public const PARACEL:Weapon = new Paracelsus();
 		public const B_SWORD:Weapon = new Weapon(
 				"B.Sword", "B.Sword", "beautiful sword", "a beautiful shining sword", "slash", 17, 560,
 				"This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.",
@@ -176,12 +176,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.AttackBonus_Cor, 1/10)
 				.withEffect(IELib.ScaleAttack_Spe, 100) as Weapon;
 		public const BCLAWS:BlizzardClaws = new BlizzardClaws();
-		public const BFGAUNT:Weapon = new Weapon(
-				"BFGaunt", "B.F.Gauntlets", "big fucking gauntlets", "a big fucking gauntlets", "smash", 0, 1600,
-				"Big Fucking Gauntlets - the best solution for a tiny e-pen complex at this side of the Mareth!  This huge gauntlets signed by mysterious 'Vi' requires 150 strength to fully unleash it power.\nIncreases unarmed damage by 2x.\nIncreases stun chance by 40.",
-				WT_GAUNTLET, WSZ_LARGE)
-				.withEffect(IELib.Stun, 40)
-				.withTags(W_LGWRATH) as Weapon;
+		public const BFGAUNT:BigFuckingGauntlets = new BigFuckingGauntlets();
 		public const BFTHSWORD:Weapon = new Weapon("BFTHSword", "BFTHSword", "big fucking two-handed sword", "a big fucking two-handed sword", "slash", 100, 4000, "Big Fucking Two-Handed Sword - if the best solution for a tiny e-pen complex at this side of the Mareth not work take this one! This 2H 4 meters long sword requires 250 strength to fully unleash it power.", WT_SWORD, WSZ_MASSIVE)
 				.withTag(W_LGWRATH)
 				.withEffect(IELib.ScaleAttack_StrXL, 250) as Weapon;
@@ -198,10 +193,7 @@ public final class WeaponLib extends ItemConstants
 				.withTags(I_LEGENDARY, W_CORRUPT_TYPE)
 				.withEffect(IELib.AttackBonus_Cor, 3/5)
 				.withEffect(IELib.ScaleAttack_Spe, 100) as Weapon;
-		public const CATGLOV:Weapon = new Weapon(
-				"CatGlove", "CatGlove", "black cat glove", "a pair of black cat gloves", "punch", 0, 480,
-				"Not quite a weapon as much as they are black gloves with open fingers to let the tips out. These were made and custom enchanted for a cat girl adventurer. While worn by someone with cat pawed hands in feral stance, allow to perform two more claw attacks per turn. Feral Attack also counts as a light weapon for the purpose of sneak attacks.",
-				WT_GAUNTLET, WSZ_SMALL);
+		public const CATGLOV:BlackCatGlove = new BlackCatGlove();
 		public const CHAOSEA:Weapon = new Weapon(
 				"Chaosea", "Chaoseater", "Chaoseater", "a Chaoseater", "slash", 410, 65600,
 				"It's incredibly large blade with jagged edges on both sides along with the skulls engraved within the middle of the blade. Requires 500 strength to fully unleash it power.",
@@ -209,11 +201,7 @@ public final class WeaponLib extends ItemConstants
 				.withTags(W_MGWRATH, I_LEGENDARY, W_CORRUPT_TYPE)
 				.withEffect(IELib.AttackBonus_Cor, 1/2)
 				.withEffect(IELib.ScaleAttack_StrXL, 500) as Weapon;
-		public const CLAWS  :Weapon = new Weapon(
-				"Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,
-				"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.",
-				WT_GAUNTLET, WSZ_SMALL)
-				.withEffect(IELib.Bleed, 10) as Weapon;
+		public const CLAWS  :GauntletWithClaws = new GauntletWithClaws();
 		public const CLAYMOR:Weapon = findCommonDynamicWeapon("claymore");
 		//przerobić na high grade wrath weapon?
 		public const CNTWHIP:Weapon = new Weapon(
@@ -253,13 +241,13 @@ public final class WeaponLib extends ItemConstants
 				"Big Fucking Swords - the best solution for a tiny e-pen complex at this side of the Mareth!  This pair of 2H 2,5 meters long swords requires 150 strength to fully unleash their power.",
 				WT_SWORD,WSZ_LARGE,true)
 				.withTags(W_LGWRATH)
-				.withEffect(IELib.ScaleAttack_Str, 100) as Weapon;
+				.withEffect(IELib.ScaleAttack_Str, 150) as Weapon;
 		public const DBFTHSWO:Weapon = new Weapon(
 				"DBFTHSwo", "DBFTHSword", "dual big fucking two-handed swords", "a pair of big fucking two-handed swords", "slash", 100, 8000,
 				"Big Fucking Two-Handed Swords - if the best solution for a tiny e-pen complex at this side of the Mareth not work take this one! This pair of 2H 4 meters long swords requires 250 strength to fully unleash their power.",
 				WT_SWORD, WSZ_MASSIVE, true)
 				.withTags(W_LGWRATH)
-				.withEffect(IELib.ScaleAttack_StrXL, 100) as Weapon;
+				.withEffect(IELib.ScaleAttack_StrXL, 250) as Weapon;
 		public const DBFWHIP:Weapon = new Weapon(
 				"DBFWhip", "D.B.F.Whip", "dual big fucking whips", "a pair of big fucking whips", "whipping", 45, 2880,
 				"Big Fucking Whips - the best solution for master tiny e-pen complex at this side of the Mareth!  This pair of 2H 5 meters long whips requires 225 (strength+speed) to fully unleash it power.", WT_WHIP, WSZ_LARGE, true)
@@ -465,12 +453,16 @@ public final class WeaponLib extends ItemConstants
 				"A very sturdy and well-made spear\n",
 				WT_SPEAR, WSZ_MEDIUM)
 				.withEffect(IELib.ArmorPenetration, 45) as Weapon;
-		public const H_GAUNT:Weapon = new Weapon(
-				"H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400,
-				"These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.",
-				WT_GAUNTLET, WSZ_MEDIUM)
-				.withEffect(IELib.Bleed, 25) as Weapon;
+		public const H_GAUNT:HookedGauntlets = new HookedGauntlets();
 		public const HALBERD:Weapon = findCommonDynamicWeapon("halberd");
+		public const HATWINSCY:Weapon = new Weapon(
+				"HATWINSCY","H.A.TwinScythe","half of twin scythe","Half of Alvina Twin Scythe","slash",20,6000,
+				"One half of Alvina’s beloved twin weapons. This scythe was used to slay rival mages. The black flame which blaze along this cursed item’s blade burns the victim’s magic like fuel. Alvina rarely ever used this item to its full extent, only pulling it out as a trump card against her deadliest opponents when magic alone proved insufficient.",
+				WT_SCYTHE,WSZ_LARGE)
+				.withBuff('spellpower', +0.9)
+				.withTags(W_WHIRLWIND,W_STAFFPART, W_FIRE_TYPE)
+				.withEffect(IELib.Bleed,10)
+				.withEffect(IELib.AttackBonus_Cor, 1/20) as Weapon;
 		public const HELRAIS:Weapon = new Weapon(
 				"Helrais", "Hellraiser", "Hellraiser", "a Hellraiser", "slash", 80, 14400,
 				"An infamous weapon not from this world. Rumors has it that fiends from the void forged it. Many unscruppulous spellcaster used this unholy weapon through the ages.",
@@ -507,13 +499,7 @@ public final class WeaponLib extends ItemConstants
 				WT_SCYTHE, WSZ_SMALL)
 				.withBuffs({'teasedmg': 30})
 				.withTags(W_WHIPPING, W_THROWN) as Weapon;
-		public const KARMTOU:Weapon = new Weapon(
-				"KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400,
-				"A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.",
-				WT_GAUNTLET, WSZ_MEDIUM)
-				.withBuffs({ 'psoulskillpower': +1.5 })
-				.withTags(I_LEGENDARY, W_PURE_TYPE)
-				.withEffect(IELib.Stun, 50) as Weapon;
+		public const KARMTOU:KarmicTouch = new KarmicTouch();
 		public const KATANA :Weapon = findCommonDynamicWeapon("katana");
 		public const KIHAAXE:Weapon = new Weapon(
 				"KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,
@@ -524,11 +510,7 @@ public final class WeaponLib extends ItemConstants
 				"This massive axe once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  The axe is double-bladed and deadly-looking.",
 				WT_AXE,WSZ_LARGE)
 				.withEffect(IELib.ScaleAttack_Str, 60) as Weapon;
-		public const L_CLAWS:Weapon = new Weapon(
-				"L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,
-				"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.",
-				WT_GAUNTLET, WSZ_MEDIUM)
-				.withEffect(IELib.Bleed, 10) as Weapon;
+		public const L_CLAWS:LustyClaws = new LustyClaws();
 		public const L_DAGGR:Weapon = new Weapon(
 				"L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,240,
 				"A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.",
@@ -588,19 +570,8 @@ public final class WeaponLib extends ItemConstants
 				.withTags(I_LEGENDARY, W_PURE_TYPE)
 				.withEffect(IELib.ScaleAttack_Spe, 100)
 				.withEffect(IELib.AttackBonus_Cor, -2/5) as Weapon;
-		public const MASTGLO:Weapon = new Weapon(
-				"MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400,
-				"These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.",
-				WT_GAUNTLET, WSZ_MEDIUM)
-				.withBuffs({
-					'psoulskillpower': +0.4
-				}) as Weapon;
-		public const MCLAWS:Weapon = new Weapon(
-				"MClaws", "MoonlightClaws", "moonlight claws", "a pair of moonlight claws", "clawing punch", 25, 4000,
-				"This pair of claws is imbued with magic, which shall be unleashed as a wave of moonlight. The magic within this will grant greated boon when charged with magic.",
-				WT_GAUNTLET, WSZ_MEDIUM)
-				.withEffect(IELib.Bleed, 25)
-				.withEffect(IELib.ScaleAttack_Str, 50) as Weapon;
+		public const MASTGLO:MasterGloves = new MasterGloves();
+		public const MCLAWS:MoonlightClaws = new MoonlightClaws();
 		public const MGSWORD:Weapon = new Weapon(
 				"MGsword", "MoonlightGreatsword", "moonlight greatsword", "a moonlight greatsword", "cleaving sword-slash", 25, 3000,
 				"This two-handed sword is imbued with his magic, which shall be unleashed as a wave of moonlight. The magic within this will grant greated boon when charged with magic.",
@@ -641,6 +612,7 @@ public final class WeaponLib extends ItemConstants
 				.withTags(W_TETSUBO, W_WHIRLWIND, W_LGWRATH)
 				.withEffect(IELib.Stun, 10)
 				.withEffect(IELib.ScaleAttack_Str, 180) as Weapon;
+		public const PARACEL:Weapon = new Paracelsus();
 		public const PHALLUS:Weapon = new ThePhalluspear();
 		public const PHALUSS:Weapon = new ThePhalluspears();
 		//public const RCHEEP:Weapon = new ReaperCheep(); TODO: finish!
@@ -742,11 +714,7 @@ public final class WeaponLib extends ItemConstants
 				WT_SWORD, WSZ_MEDIUM)
 				.withBuff('spellpower', +0.5)
 				.withTags(W_STAFFPART) as Weapon;
-		public const S_GAUNT:Weapon = new Weapon(
-				"S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",0,200,
-				"Those metal gauntlets has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.",
-				WT_GAUNTLET, WSZ_MEDIUM)
-				.withEffect(IELib.Stun, 10) as Weapon;
+		public const S_GAUNT:SpikedGauntlet = new SpikedGauntlet();
 		public const S_RULER:Weapon = new Weapon(
 				"S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800,
 				"A greatword with a broken blade, still possessing the residual power of lightning. Also known as the 'Giantslayer', for bringing giants to their knees. Deals increased damage to large enemies.",
@@ -930,11 +898,7 @@ public final class WeaponLib extends ItemConstants
 				"V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240,
 				"A peculiar sword. The letter V is engraved into the blade perhaps its former owner name.",
 				WT_SWORD, WSZ_MEDIUM);
-		public const VENCLAW:Weapon = new Weapon(
-				"VenClaw","Venoclaw","Venoclaw","a Venoclaw","rend",0,400,
-				"This set of catclaw gloves was tempered using Etna's own venom and reinforced using some of her tail bone spikes, a proof of her eternal love to you. Its also enchanted to reinforce natural attacks.",
-				WT_GAUNTLET, WSZ_MEDIUM)
-				.withEffect(IELib.Bleed, 10) as Weapon;
+		public const VENCLAW:Venoclaw = new Venoclaw();
 		public const VGRAVEH:Weapon = new Weapon("VGraveh", "VolcanicGravehammer", "Volcanic Gravehammer", "a Volcanic Gravehammer", "smash", 160, 160, "The titanic greathammer you found in the ashlands. This weapon seems to have been hewn from perpetually molten bedrock from deep within a volcano. How it remains this way is unknown to you, but you wonder if it was enchanted to be as such, or if it's just a natural property of the materials it's been crafted from.", WT_MACE_HAMMER, WSZ_MASSIVE)
 				.withTag(W_LGWRATH)
 				.withEffect(IELib.ScaleAttack_StrXL, 800) as Weapon;
@@ -978,10 +942,7 @@ public final class WeaponLib extends ItemConstants
 				})
 				.withPerk(PerkLib.StrifeWarden)
 				.withEffect(IELib.ScaleAttack_Str, 100) as Weapon;
-		public const YAMARG :Weapon = new Weapon(
-				"YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 1600, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", WT_GAUNTLET, WSZ_MEDIUM)
-				.withBuffs({ 'psoulskillpower': +1.5 })
-				.withTags(I_LEGENDARY, W_CORRUPT_TYPE) as Weapon;
+		public const YAMARG :YamaRajaGrasp = new YamaRajaGrasp();
 		public const ZWNDER :Weapon = findCommonDynamicWeapon("zweihander");
 		//Spellcasting weapon
 		public const S_SWORD:Weapon = new Weapon(
@@ -1058,7 +1019,8 @@ public final class WeaponLib extends ItemConstants
 			[PHALLUS, PHALUSS],
 			[L_WHIP, DL_WHIP],
 			[B_SWORD, DBSWORD],
-			[EXCALIB, DEXCALI]
+			[EXCALIB, DEXCALI],
+			[HATWINSCY, ATWINSCY]
 		]
 	}
 }

@@ -18,13 +18,12 @@ public class Phouka extends Monster
 	{
 		protected function phoukaFightAttack():void
 		{
-			var damage:int;
+			var damage:int = Math.round((this.str + this.weaponAttack + 10) - player.armorDef);
 			//Only the bunny, goat and horse forms make physical attacks
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to his blindness!\n");
 			}
 			else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY) {
-				damage = Math.round((this.str + this.weaponAttack + 10) - rand(player.tou) - player.armorDef);
 				outputText("The bunny morph hops towards you.  At the last second he changes direction and throws a kick toward you with his powerful hind legs.");
 				if (player.getEvasionRoll())
 					outputText("\nThrowing yourself out of the way, you manage to avoid the kick.  The " + this.short + " hops out of reach and prepares for another attack.");
@@ -36,7 +35,6 @@ public class Phouka extends Monster
 				}
 			}
 			else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_GOAT) {
-				damage = Math.round((this.str + this.weaponAttack + 10) - rand(player.tou) - player.armorDef);
 				outputText("The goat morph races toward you, head down.");
 				if (player.getEvasionRoll())
 					outputText("\nThrowing yourself out of the way, you manage to keep from getting skewered.");
@@ -48,7 +46,6 @@ public class Phouka extends Monster
 				}
 			}
 			else { //HORSE
-				damage = Math.round((this.str + this.weaponAttack + 10) - rand(player.tou) - player.armorDef);
 				outputText("The stallion charges you, clearly intending to trample you under its hooves.");
 				if (player.getEvasionRoll() || (damage <= 0))
 					outputText("\nAs the stallion passes you twist in place and manage to stay clear of its legs.");
@@ -78,7 +75,7 @@ public class Phouka extends Monster
 				else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY)
 					outputText("He grabs you and rubs up against your body.  For a moment you are lost in the feeling of his soft black fur.  Then you feel his cock pressing against your ribs and shove him away.");
 				else outputText("You are hypnotized by the equine cock jabbing at the air.  Then the " + this.short + " charges past you and you can taste the musk in the air.");
-				player.takeLustDamage(15 + player.lib / 10 + player.cor / 5 + rand(10), true);
+				player.takeLustDamage(30 + player.lib / 5 + player.cor / 2 + rand(25), true);
 			}
 		}
 
@@ -188,18 +185,18 @@ public class Phouka extends Monster
 			}
 			this.long = "The " + this.short + " is hopping around near you, waiting for an opening.  He has the general appearance of a bunny with coal black fur.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				this.weaponAttack = 54;
-				this.armorDef = 160;
-				this.armorMDef = 160;
-				this.strStat.core.value = 130;
-				this.speStat.core.value = 210;
+				this.weaponAttack = 192;
+				this.armorDef = 260;
+				this.armorMDef = 260;
+				this.strStat.core.value = 180;
+				this.speStat.core.value = 420;
 			}
 			else {
-				this.weaponAttack = 43;
-				this.armorDef = 60;
-				this.armorMDef = 60;
-				this.strStat.core.value = 100;
-				this.speStat.core.value = 160;
+				this.weaponAttack = 190;
+				this.armorDef = 275;
+				this.armorMDef = 275;
+				this.strStat.core.value = 200;
+				this.speStat.core.value = 490;
 			}
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_BUNNY;
 		}
@@ -218,18 +215,18 @@ public class Phouka extends Monster
 			}
 			this.long = "The " + this.short + " is charging back and forth just out of reach, waiting for an opening.  He has the general appearance of a goat with coal black fur.  He has large glossy black horns and a large cock between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				this.weaponAttack = 62;
-				this.armorDef = 160;
-				this.armorMDef = 160;
-				this.strStat.core.value = 145;
-				this.speStat.core.value = 150;
+				this.weaponAttack = 192;
+				this.armorDef = 300;
+				this.armorMDef = 300;
+				this.strStat.core.value = 300;
+				this.speStat.core.value = 280;
 			}
 			else {
-				this.weaponAttack = 49;
-				this.armorDef = 60;
-				this.armorMDef = 60;
-				this.strStat.core.value = 110;
-				this.speStat.core.value = 120;
+				this.weaponAttack = 190;
+				this.armorDef = 315;
+				this.armorMDef = 315;
+				this.strStat.core.value = 350;
+				this.speStat.core.value = 340;
 			}
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_GOAT;
 		}
@@ -248,18 +245,18 @@ public class Phouka extends Monster
 			}
 			this.long = "The " + this.short + " is running in a wide circle around you, waiting for an opening.  He has the general appearance of a stallion with coal black fur.  A massive cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				this.weaponAttack = 80;
-				this.armorDef = 170;
-				this.armorMDef = 170;
-				this.strStat.core.value = 175;
-				this.speStat.core.value = 125;
+				this.weaponAttack = 129;
+				this.armorDef = 340;
+				this.armorMDef = 340;
+				this.strStat.core.value = 270;
+				this.speStat.core.value = 360;
 			}
 			else {
-				this.weaponAttack = 55;
-				this.armorDef = 80;
-				this.armorMDef = 80;
-				this.strStat.core.value = 130;
-				this.speStat.core.value = 100;
+				this.weaponAttack = 128;
+				this.armorDef = 350;
+				this.armorMDef = 350;
+				this.strStat.core.value = 310;
+				this.speStat.core.value = 450;
 			}
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_HORSE;
 		}
@@ -278,18 +275,18 @@ public class Phouka extends Monster
 			}
 			this.long = "The " + this.short + " is flying around near you, waiting for an opening.  He has the general appearance of a faerie, though he is slightly larger and his skin and wings are coal black.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				this.weaponAttack = 43;
-				this.armorDef = 180;
-				this.armorMDef = 180;
-				this.strStat.core.value = 120;
-				this.speStat.core.value = 170;
+				this.weaponAttack = 86;
+				this.armorDef = 360;
+				this.armorMDef = 360;
+				this.strStat.core.value = 240;
+				this.speStat.core.value = 340;
 			}
 			else {
-				this.weaponAttack = 34;
-				this.armorDef = 110;
-				this.armorMDef = 110;
-				this.strStat.core.value = 90;
-				this.speStat.core.value = 140;
+				this.weaponAttack = 85;
+				this.armorDef = 380;
+				this.armorMDef = 380;
+				this.strStat.core.value = 270;
+				this.speStat.core.value = 420;
 			}
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_FAERIE;
 		}
@@ -335,14 +332,14 @@ public class Phouka extends Monster
 			else {
 				this.short = phoukaName;
 				this.long = "The " + this.short + " is flying around near you, waiting for an opening.  He has the general appearance of a faerie, though he is slightly larger and his skin and wings are coal black.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
-				initStrTouSpeInte(90, 70, 140, 40);
-				initWisLibSensCor(40, 90, 35, 100);
-				this.weaponAttack = 34;
-				this.armorDef = 110;
-				this.armorMDef = 110;
-				this.bonusHP = 300;
-				this.bonusLust = 157;
-				this.level = 32;
+				initStrTouSpeInte(270, 210, 420, 120);
+				initWisLibSensCor(120, 270, 105, 100);
+				this.weaponAttack = 85;
+				this.armorDef = 380;
+				this.armorMDef = 380;
+				this.bonusHP = 1200;
+				this.bonusLust = 447;
+				this.level = 52;
 			}
 			this.a = "the ";
 			this.createCock(1, 0.5, CockTypesEnum.HUMAN);

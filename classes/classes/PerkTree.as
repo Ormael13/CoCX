@@ -161,7 +161,7 @@ public class PerkTree extends BaseContent {
 					if (PerkLib.isJob(perk)) continue;
 					entry = pdata[perk.id];
 					if (!entry) continue;
-					if (entry.jobTier > i) continue;
+					if (entry.jobTier > jobTier) continue;
 					if (entry.hasJob(job)) continue;
 					
 					entry.addJob(job, jobTier);

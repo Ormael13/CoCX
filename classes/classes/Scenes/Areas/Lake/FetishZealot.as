@@ -105,8 +105,8 @@ public class FetishZealot extends Monster
 			outputText("The "+this.short+" student looks at you a little shyly and sticks a pencil in his mouth while pushing a hand in front of his groin, trying to hide a rather obvious bulge.  The whole scene is rather cute, and you feel incredibly aroused afterwards.");
 		}
 		var mlt:Number = 20;
-		if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 2) mlt -= 10;
-		if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 4) mlt -= 15;
+		if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 2) mlt -= 15;
+		if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 4) mlt -= 10;
 		player.takeLustDamage((7+rand(player.lib/mlt+player.cor/mlt)), true);
 	}
 	//Special2: Lust transfer spell, it becomes more and
@@ -124,7 +124,7 @@ public class FetishZealot extends Monster
 				outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound");
 				if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?");
 				else outputText(".");
-				player.takeLustDamage((player.lib / 20 + 5), true);
+				player.takeLustDamage((player.lib / 10 + 10), true);
 			}
 			super.postAttack(damage);
 		}
@@ -177,14 +177,14 @@ public class FetishZealot extends Monster
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 4) {
 				this.short = "fetish inquisitor";
 				this.long = "The inquisitor is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
-				initStrTouSpeInte(75, 105, 80, 20);
-				initWisLibSensCor(20, 105, 110, 100);
-				this.weaponAttack = 24;
-				this.armorDef = 30;
-				this.armorMDef = 15;
-				this.bonusHP = 200;
-				this.bonusLust = 237;
-				this.level = 22;
+				initStrTouSpeInte(240, 345, 260, 60);
+				initWisLibSensCor(60, 315, 330, 100);
+				this.weaponAttack = 120;
+				this.armorDef = 300;
+				this.armorMDef = 150;
+				this.bonusHP = 2000;
+				this.bonusLust = 688;
+				this.level = 43;
 				this.gems = 30+rand(10);
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			}

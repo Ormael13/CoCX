@@ -2183,7 +2183,7 @@ public class TestMenu extends BaseContent
 	}
 
 	public function TestWeaponType():void {
-		outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isScytheTypeWeapon(),player.isDuelingTypeWeapon()].join());
+		outputText("Weapon types: "+[player.weapon.isStaffType(),player.weapon.isSwordType(),player.weapon.isAxeType(),player.weapon.isMaceHammerType(),player.weapon.isSpearType(),player.weapon.isScytheType(),player.weapon.isDuelingType()].join());
 	}
 
 	public function FightTheDummy():void {

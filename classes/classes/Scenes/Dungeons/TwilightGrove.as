@@ -12,6 +12,11 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Forest.TentacleBeast;
+import classes.Scenes.Areas.Plains.Satyr;
+import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Dungeons.TwilightGrove.*;
+import classes.StatusEffects;
 import classes.Races;
 import classes.CoC;
 
@@ -24,7 +29,10 @@ import classes.CoC;
 		public function enterDungeon():void {
 			inDungeon = true;
 			if ((player.cor >= 51 || player.isRaceCached(Races.ALRAUNE)) && flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] < 1) room1TGCorrupt();
-			else room1TGPure();
+			else {
+				if (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 1) room1TG();
+				else room1TGPure();
+			}
 		}
 		
 		public function exitDungeon():void {
@@ -34,21 +42,7 @@ import classes.CoC;
 			endEncounter();
 		}
 		
-		private function room1TGPure():void {
-			clearOutput();
-			dungeonLoc = DUNGEON_TWILIGHT_GROVE_1;
-			outputText("As you wander the woods, you stumble on a corrupt glade similar to those you have come across before except at its edge stands a large ornate gate made of entwined brambles. When you approach and touch the brambles out of curiosity, the plant moves on its own, slithering away to block the path from you. Clearly, you are unwelcome. Will you forcefully enter this eerie place or leave?");
-			if (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] < 1) flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] = 1;
-			menu();
-			//addButton(1, "Fight", room1Fight);
-			addButton(3, "Leave", room1TGPureLeave);
-		}//flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 0	outputText("");
-		private function room1TGPureLeave():void {
-			inDungeon = false;
-			clearOutput();
-			outputText("The malice in this area is almost palpable. You should come back when you’re better prepared.");
-			endEncounter();
-		}
+		//Corrupt Path
 		
 		private function room1TGCorrupt():void {
 			clearOutput();
@@ -388,21 +382,221 @@ import classes.CoC;
 			else return false;
 		}
 		
+		//Pure path
+		
+		public function meetTwilightGroveRandomnMob():void {
+			if ((rand(100) < player.statusEffectv1(StatusEffects.TGRandomnMob)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+				var reset:Number = 20;
+				reset -= player.statusEffectv1(StatusEffects.TGRandomnMob);
+				player.addStatusValue(StatusEffects.TGRandomnMob, 1, reset);
+				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+				var choice:Number = rand(3);
+				if (choice == 0) {
+					outputText("\n\nTentacle Beast suddenly appears from nearby passage and attacks!");
+					startCombat(new TentacleBeast(), true);
+				}
+				if (choice == 1) {
+					outputText("\n\nSatyr suddenly appears from nearby passage and attacks!");
+					startCombat(new Satyr(), true);
+				}
+				if (choice == 2) {
+					outputText("\n\nCorrupted Drider suddenly appears from nearby passage and attacks!");
+					startCombat(new CorruptedDrider(), true);
+				}
+				//doNext(playerMenu);
+			}
+			else player.addStatusValue(StatusEffects.TGRandomnMob, 1, 20);
+		}
+		
+		private function room1TGPure():void {
+			clearOutput();
+			dungeonLoc = DUNGEON_TWILIGHT_GROVE_1;
+			outputText("As you wander the woods, you stumble on a corrupt glade similar to those you have come across before except at its edge stands a large ornate gate made of entwined brambles. When you approach and touch the brambles out of curiosity, the plant moves on its own, slithering away to block the path from you. Clearly, you are unwelcome. Will you forcefully enter this eerie place or leave?");
+			if (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] < 1) flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] = 1;
+			menu();
+			addButton(1, "Force", room1Force);
+			addButton(3, "Leave", room1TGPureLeave);
+		}
+		private function room1TGPureLeave():void {
+			inDungeon = false;
+			clearOutput();
+			outputText("The malice in this area is almost palpable. You should come back when you’re better prepared.");
+			endEncounter();
+		}
+		public function room1Force():void {
+			clearOutput();
+			outputText("As you try to force your way in, the plant wall comes alive and furiously attacks you, trying to shred you with its thorns!\n\n");
+			outputText("<b>You are under attack by a Vampithorn bush!</b>");
+			flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] = 1;
+			startCombat(new VampithornBush(), true);
+		}
+		public function defeatVampithornBush():void {
+			clearOutput();
+			outputText("You manage to damage the angry plant enough to tear open a hole to slide through harmlessly. Beyond is what looks like an open grove.\n\n");
+			player.createStatusEffect(StatusEffects.TGRandomnMob, 20, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.TGStorage, 5, 5, 5, 1);
+			flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] = 2;
+			cleanupAfterCombat();
+		}
+		public function defeatedByVampithornBush():void {
+			clearOutput();
+			outputText("Too weak from blood loss you slowly slide down into unconsciousness. Sadly for you, you will never wake up again for the thirsty plant will suck your blood dry leaving you a lifeless husk on the forest ground. Eventually, your body will decompose into nutrients and the plant will use it as fertilizer for its twisted growth. What a terrible way to go.\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		
 		public function room1TG():void {
 			dungeonLoc = DUNGEON_TWILIGHT_GROVE_1;
 			clearOutput();
-			outputText("<b><u></u>Entrance</b>\n");
+			outputText("<b><u>Entrance</u></b>\n");
 			outputText("You stand at the entrance. The formerly sealed shut vegetal gate is breached and allows you to enter and leave at your leisure.");
-			//dungeons.setDungeonButtons(room2Center, null, null, null);
+			player.createStatusEffect(StatusEffects.TGRandomnMob, 20, 0, 0, 0);
+			dungeons.setDungeonButtons(room2TG, null, null, null);
 			addButton(11, "Leave", exitDungeon);
-			//outputText("\n\n");
-			//outputText("\"<i></i>\"\n\n");
-			//outputText("\"<i></i>\"\n\n");
-			//		outputText("\n\n");
-			//		outputText("\"<i></i>\"\n\n");
-			//		outputText("\"<i></i>\"\n\n");
 		}
 		
+		public function room2TG():void {
+			dungeonLoc = DUNGEON_TWILIGHT_GROVE_2;
+			clearOutput();
+			outputText("<b><u>Twilight Grove</u></b>\n");
+			meetTwilightGroveRandomnMob();
+			if (CoC.instance.inCombat) return;
+			outputText("Various corrupted plants cover this eerie part of the forest. You can spot an empty wine amphora which suggests the presence of satyrs.");
+			dungeons.setDungeonButtons(room3TG, room1TG, null, null);
+		}
+		
+		public function room3TG():void {
+			dungeonLoc = DUNGEON_TWILIGHT_GROVE_3;
+			clearOutput();
+			outputText("<b><u>Twilight Grove</u></b>\n");
+			if (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] == 2) {
+				outputText("As you enter this part of the grove a dark and somewhat enticing flute begins to play somewhere in your surroundings. You are clearly unwelcome and whoever is playing is filling your body with increasing dread. The plants around you suddenly grow at a massively increased rate until you are stuck in what looks to be a vegetal labyrinth and the worst part is you have no idea how to get out! This ought to be an illusion but it feels all too real, what with your gear having vanished save for your weapon leaving you stark naked. A deep sinister voice echoes around you.\n\n");
+				outputText("\"<i>How does it feel, intruder, to be lost in Pan's Labyrinth? I am the hunter… and you are the prey. No one can escape this dimension without my consent.</i>\"\n\n");
+				outputText("You turn around, noticing a satyr of oversized proportion standing behind you. His horns are longer than most of his kinsmen, not to mention the large bow he carries. However, his bow is not the thing you are afraid of. In his hand rests a small flute, likely the magical instrument he used earlier. He disappears into the labyrinth with an ominous laugh.\n\n");
+				outputText("\"<i>I will take my time driving you insane with years worth of constant terror and rape before presenting you before the mistress as a new fucktoy. Hear my tune and despair!</i>\"\n\n");
+				outputText("The music resumes and you feel your arousal rising. His instrument is clearly enchanted with some sort of compulsion magic. You need to prevent him from playing!\n\n");
+				startCombat(new ThePansLabyrinthSatyr(), true);
+			}
+			else outputText("This is the place where you met the satyr musician. The satyr’s body is still on the ground, a testimony of your victory over his mind games.");
+			if (CoC.instance.inCombat) return;
+			dungeons.setDungeonButtons(room4TG, room2TG, null, null);
+		}
+		public function defeatThePansLabyrinthSatyr():void {
+			clearOutput();
+			outputText("You hear the satyr scream in disbelief as your last attack breaks his enchanted instrument. The labyrinth fades as well as any illusion summoned by the infernal flute. The satyr stands before you, mad with rage.\n\n");
+			outputText("\"<i>How dare you break my precious flute, I will make you behave!!</i>\"\n\n");
+			outputText("He tries to draw his bow, however, you’ve had enough of this trickster and swiftly strike him in retaliation, killing him before he even has a chance to defend himself or enchant you again. Turns out the goat flutist was infinitely easier to defeat without his instrument. With the evil satyr dead you can continue on your exploration of the grove.\n\n");
+			flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] = 3;
+			cleanupAfterCombat();
+		}
+		public function defeatedByThePansLabyrinthSatyr():void {
+			clearOutput();
+			outputText("It has been years now since you became a part of this otherworldly labyrinth, one lunatic amongst many. Your life has fallen into a cycle of raping and getting raped daily by the many phantasms that populate your broken mind. Unable to discern reality from your delusion anymore, you go so far as to cum even without anything present in the real world to sex you up, your crazed mind alone giving you the delusion of sex. ");
+			outputText("When the satyr finally picks you up after all these years and brings you to his mistress, your first reflex is to drool like a panting dog looking for"+(player.gender == 0?" something to get you off":""+(player.hasCock()?" a pussy to fill with your [cock]":"")+(player.gender > 2?" and":"")+(player.hasVagina()?" a cock to fill your [pussy]":"")+"")+". ");
+			outputText("A wall of tentacles reaches for you and you happily jump into them to have your body played with as your body is further enhanced with corruptive fluids. Your days as a hero are now long over, and eventually, you become one of the grove’s many guardians, turning into something no better than a beast addicted to pleasure.\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		
+		public function room4TG():void {
+			dungeonLoc = DUNGEON_TWILIGHT_GROVE_4;
+			clearOutput();
+			outputText("<b><u>Twilight Grove</u></b>\n");
+			meetTwilightGroveRandomnMob();
+			if (CoC.instance.inCombat) return;
+			outputText("You can spot some demons lazily taking what could be a sunbath if not for the many tentacles fucking them in the distance. There seems to be a storage area full of items on your left.");
+			dungeons.setDungeonButtons(room5TG, room3TG, null, null);
+			
+		}
+		
+		public function room5TG():void {
+			dungeonLoc = DUNGEON_TWILIGHT_GROVE_5;
+			clearOutput();
+			outputText("<b><u>Twilight Grove</u></b>\n");
+			meetTwilightGroveRandomnMob();
+			if (CoC.instance.inCombat) return;
+			outputText("This is a storage area filled with many boxes full of what looks to be transformatives and less savory items. There also is wine and other alcoholic beverages in here, but you don’t think getting inebriated in the middle of an enemy lair is a bright idea.");
+			dungeons.setDungeonButtons(room6TG, room4TG, null, null);
+			if (player.statusEffectv1(StatusEffects.TGStorage) > 0) {
+				outputText("\n\nThere is an opened box with some item"+(player.statusEffectv1(StatusEffects.TGStorage) == 1 ? "":"s")+" inside.\n\n");
+				addButton(0, "Crate 1", takeGroPlus);
+			}
+			if (player.statusEffectv2(StatusEffects.TGStorage) > 0) {
+				outputText("\n\nThere is an opened box with some item"+(player.statusEffectv2(StatusEffects.TGStorage) == 1 ? "":"s")+" inside.\n\n");
+				addButton(1, "Crate 2", takeSuccubiMilk);
+			}
+			if (player.statusEffectv3(StatusEffects.TGStorage) > 0) {
+				outputText("\n\nThere is an opened box with some item"+(player.statusEffectv3(StatusEffects.TGStorage) == 1 ? "":"s")+" inside.\n\n");
+				addButton(2, "Crate 3", takeIncubiDraft);
+			}
+			if (player.statusEffectv4(StatusEffects.TGStorage) > 0) {
+				outputText("\n\nThere is an opened box with some item inside.\n\n");
+				addButton(3, "Crate 4", takeBroBrew);
+			}
+		}
+		private function takeGroPlus():void {
+			player.addStatusValue(StatusEffects.TGStorage, 1, -1);
+			inventory.takeItem(consumables.GROPLUS, room5TG);
+		}
+		private function takeSuccubiMilk():void {
+			player.addStatusValue(StatusEffects.TGStorage, 2, -1);
+			inventory.takeItem(consumables.SUCMILK, room5TG);
+		}
+		private function takeIncubiDraft():void {
+			player.addStatusValue(StatusEffects.TGStorage, 3, -1);
+			inventory.takeItem(consumables.INCUBID, room5TG);
+		}
+		private function takeBroBrew():void {
+			player.addStatusValue(StatusEffects.TGStorage, 4, -1);
+			inventory.takeItem(consumables.BROBREW, room5TG);
+		}
+		
+		public function room6TG():void {
+			dungeonLoc = DUNGEON_TWILIGHT_GROVE_6;
+			clearOutput();
+			outputText("<b><u>Twilight Grove</u></b>\n");
+			if (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] == 3) {
+				outputText("You walk towards what looks like a corrupted water pond with a small island at the center. On the island rests a black flower of massive size, towering above the entire grove and the sunbathing demons below, though right now you wonder if they are sunbathing or rather enjoying a good fuck from the weird tentacle vines pumping under their beach clothes. Strangely the demons seem to literally not give a single fuck about you standing there. A seductive and somewhat playful voice breaks the silence.\n\n");
+				outputText("\"<i>So you came all the way here and defeated all of my retainers, I am impressed by your skill.</i>\"\n\n");
+				outputText("The flower blossoms, revealing a dreamily beautiful woman with lavender skin, grass-like pink hair ornamented with real flowers and red eyes that clearly show her heavy corruption.\n\n");
+				outputText("\"<i>Since presentations are in order my name is Rafflesia, daughter of the goddess Marae. Wandering adventurer would you grace me with your name.</i>\"\n\n");
+				outputText("You proudly tell her your name and that you are a champion here to put an end to this garden of corruption.\n\n");
+				outputText("\"<i>Oh, courageous are you? I don’t mind adventurers every now and then, most of them end up eaten by the garden or fucked into becoming new residents, however, you sure made a mess out of my lovely paradise which is why… I desire you even more. You SHALL be mine.</i>\"\n\n");
+				outputText(""+(silly() ? "Well that's an obvious yandere flag whatever she has in line for you is going to be a thousand times worse then the classic fate of a harem protagonist. Wait, come to think of it, aren't you an harem protagonist? ":"")+"The plant woman starts laughing sinisterly and you back away ready to flee but all of the grove exits are suddenly shut, the area becoming covered with thick layers of impassable thorny vines blossoming with black orchids.\n\n");
+				if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("\"<i>I also heard how you helped show my mother Marae the path to carnal delight and endless pleasure. It has been so difficult for me to spread since she severed our ties. However, now that she is assisting me instead of being a nuisance, I can spread my roots and expand my power freely. I will gladly reward your dutiful help with an eternity at my service attending my garden.</i>\"\n\n");
+				outputText("A literal army of tentacle vines slowly snake toward you from the laughing plant woman. You will have to defeat her if only to hope escaping this place unchanged.\n\n");
+				startCombat(new LadyRafflesia(), true);
+			}
+			else outputText("Crystal clear water surrounds the small island where Lady Rafflesia used to grow. With its mistress gone, the grove seems to have recovered a semblance of dignity.");
+			if (CoC.instance.inCombat) return;
+			dungeons.setDungeonButtons(null, room5TG, null, null);
+		}
+		public function defeatLadyRafflesia():void {
+			clearOutput();
+			outputText("Rafflesia looks at you defeated and terrified as you prepare to end her.\n\n");
+			outputText("\"<i>Nooooo! Please, you don’t have to do this! All I ever wanted was to have children! Thousands of beautiful children that would cover the world with their seeds!</i>\"\n\n");
+			outputText("Sadly for her, you have seen enough of her insane pollination plan and decide to finish her off. With Rafflesia dead a semblance of redemption seems to befall this foul place as the waters of the pond slowly begin to filter out the corruption back to what likely was their former crystal clear outlook. As you prepare to leave, you find a stash of 5000 gems, likely the hoard of treasure this death trap amassed from defeated adventurers over the years.\n\n");
+			flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] = 4;
+			player.gems += 5000;
+			cleanupAfterCombat();
+		}
+		public function defeatedByLadyRafflesia():void {
+			clearOutput();
+			outputText("You fall over defeated and look at your opponent, awaiting your end.\n\n");
+			outputText("\"<i>Aw... poor thing! You look all messy and hurt now, but don't worry, for I will take good care of you. Just like my mother would have. Now feel the power of my motherly love.</i>\"\n\nYou try to crawl away but her vines swiftly bind your arms, mouth, and legs. You are too weak to struggle as Rafflesia forcefully pulls you toward her pitcher at the center of the pond. ");
+			outputText("She lifts her undercarriage revealing what looks like a vagina fit for engulfing things of human size. You plead for mercy and struggle screaming. \"<i>NOOoo!!! Not there!</i>\" But she ignores you and ends your scream by shoving you inch by inch into her massive green hole until nothing is left of you. You eventually lose consciousness briefly from exhaustion.\n\nYou wake up in a fetal position resting in what seems to be a small alcove. You can breathe somehow thanks to air flowing in and out of your prison and a sweet relaxing scent fills the room. ");
+			outputText("There isn't much space to move however and so you are stuck in this position which isn’t altogether uncomfortable. Truth be told you feel warm and at ease. Some kind of weird tubular tentacle is gently feeding you a sweet delicious syrup you mindlessly lap on. Your memories are fuzzy...Why are you here? How did you end up here? As you try to figure out the answer to these questions a girl’s voice you can’t recognize echoes through the walls of your fleshy prison.\n\n");
+			outputText("\"<i>My womb feels comfortable, doesn’t it? Just let go of any worries you might have and go to sleep my dear [name].</i>\"\n\nYou indeed are tired, so tired. You barely register as a "+(player.gender == 3 ? "pair of":"second")+" ");
+			outputText("tendril"+(player.gender == 3 ? "s":"")+" slither"+(player.gender == 3 ? "s":"")+" out of the space under you and gently slither to your privates. "+(player.hasCock()?"Warm welcoming flesh gently wraps around your hardened [cock] suckling and caressing your skin delightfully. ":"")+(player.hasVagina()?"One of the tendrils, like a kind parent, slowly parts your legs and enters your pussy folds, making you gasp in pleasure as warm sap slowly floods the insides of your cunt, probably going all the way to your ovaries. ":"")+"");
+			outputText("Your "+(player.hasCock()?"[cock] tingles as it slowly spurts cum, shrinking in size and even retracting inside your body until none of it is left, leaving only a hole that is now your pussy":"")+(player.gender == 3 ? "[cock] tingles as it slowly spurts cum, shrinking in size and even retracting inside your body and into your pussy until none of it is left, it even goes so far as to merge with your clitoris giving you a short orgasm":"")+".  Your pussy suddenly begins to change "+(player.gender == 2 ? "":"as well ")+"your clitoris increasing in length as ");
+			outputText("if feeding on the fluid your pleased vagina is constantly filled with. It keeps lengthening to a ridiculous size and you can even see it a fair meter long, squirming inside the tendril like a possessed snake as your pussy keeps gushing fluids again and again. Eventually, the confined space is so flooded, you worry you will be unable to breathe but the feeder tubes somehow keeps you well nourished with oxygen. You close your eyes happily dozing off to the sound of your gushing pussy.\n\n");
+			outputText("You wake up as you are forcefully expelled from your alcove by some unseen forces. You see light ahead of you and forge on, eventually reaching the exit and sliding out with a huge sploosh of greenish fluids. You take a breath for the first time in several days, taking the time to look around you, admiring your lilac arms covered with sensible vines and your lovely E cup breast as you caress the orchid in your vegetal hair. ");
+			outputText("You made a small mess on the grass, but you don’t care as your gaze focuses on the object of your adoration. Your mother, Lady Rafflesia is giving you a warm smile as you continue exploring the confines of your vegetal body. Your clit changes again and you giggle as a stamen mounted vine surges out of your juicy pussy coiling around your left leg like a snake. Your mother praises you.\n\n");
+			outputText("\"<i>You are so beautiful, my sweet daughter, mother is really happy for you. How about you put this stamen to good use and sow seeds across the grove for me.</i>\"\n\n");
+			outputText("It is your greatest pride to say \"<i>Yes mother.</i>\" as you move on to the first stamen or pistil you can find, mating again and again so as to grant your beloved mother the granddaughters she so deserves. After a few months, the grove is fully repaired and the resort is running better than ever. As your mom’s favored daughter, it is your greatest pride to receive visitors or fuck their brains silly to the garden.\n\n");
+			outputText("Several months later a human woman pretending to be a champion makes it to the garden and you gleefully defeat her for your mother. Once you’ve suitably broken her you resolve to use her as your favorite seedbed. Like mother like daughter.\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
 	}
-
 }

@@ -16,6 +16,7 @@ import classes.Races.GargoyleRace;
 import classes.Races.ImpRace;
 import classes.Scenes.*;
 import classes.Scenes.Camp.CampStatsAndResources;
+import classes.Scenes.Camp.Garden;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
@@ -45,6 +46,7 @@ public class SaveUpdater extends NPCAwareContent {
 			SceneLib.dungeons.checkRiverDungeon2ndFloorClear(),
 			SceneLib.dungeons.checkRiverDungeon3rdFloorClear(),
 			SceneLib.dungeons.checkRiverDungeon4thFloorClear(),
+			SceneLib.dungeons.checkRiverDungeon5thFloorClear(),
 			SceneLib.dungeons.checkDenOfDesireClear(),
 			SceneLib.dungeons.checkEbonLabyrinthClear(),
 		];
@@ -215,15 +217,15 @@ public class SaveUpdater extends NPCAwareContent {
 			["Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL, SceneLib.dungeons.checkPhoenixTowerClear()],
 			["Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER, SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.TIMES_ORGASMED] <= 0],
 			["Victory, Sweet like honey", kACHIEVEMENTS.DUNGEON_VICTORY_SWEET_LIKE_HONEY, SceneLib.dungeons.checkBeeHiveClear()],
-			//["Victory, Sweet like honey", kACHIEVEMENTS.DUNGEON_VICTORY_SWEET_LIKE_HONEY, SceneLib.dungeons.checkTwilightGroveClear()],
+			["Weeding Out", kACHIEVEMENTS.DUNGEON_WEEDING_OUT, SceneLib.dungeons.checkTwilightGroveClear()],
 			["Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON, SceneLib.dungeons.checkHiddenCaveHiddenStageClear()],
 			["Mirror Flower, Water Moon", kACHIEVEMENTS.DUNGEON_MIRROR_FLOWER_WATER_MOON, SceneLib.dungeons.checkRiverDungeon1stFloorClear()],
 			["Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER, SceneLib.dungeons.checkRiverDungeon1stFloorClear()],
 			["Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, SceneLib.dungeons.checkRiverDungeon2ndFloorClear()],
 			["Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, SceneLib.dungeons.checkRiverDungeon3rdFloorClear()],
 			["Dungeon Seeker (4th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_4TH_LAYER, SceneLib.dungeons.checkRiverDungeon4thFloorClear()],
+			["Dungeon Seeker (5th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_5TH_LAYER, SceneLib.dungeons.checkRiverDungeon5thFloorClear()],
 			["Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER, SceneLib.dungeons.checkDenOfDesireClear()],
-			//bee hive clear
 			["Delver", kACHIEVEMENTS.DUNGEON_DELVER, dungeonsCleared >= 1],
 			["Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER_APPRENTICE, dungeonsCleared >= 2],
 			["Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, dungeonsCleared >= 4],
@@ -664,6 +666,22 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
+	}
+	
+	public function toEquipIsToFirstDeequip():void {
+		if (!player.weapon.isNothing && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] != 2) {
+			outputText("\n\n");
+			inventory.takeItem(player.unequipWeapon(false,true), toEquipIsToFirstDeequip);
+		}
+		if (!player.weaponOff.isNothing) {
+			outputText("\n\n");
+			inventory.takeItem(player.unequipWeaponOff(false,true), toEquipIsToFirstDeequip);
+		}
+		if (!player.shield.isNothing && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] != 2) {
+			outputText("\n\n");
+			inventory.takeItem(player.unequipShield(false,true), toEquipIsToFirstDeequip);
+			return;
+		}
 	}
 
 	public function promptSaveUpdate():void {
@@ -1338,11 +1356,11 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-					if (player.weapon == weapons.AETHERD) player.unequipWeapon(false,true)
+					if (player.weapon == weapons.AETHERD) player.unequipWeapon(false, true);
 				}
 				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-					if (player.shield == shields.AETHERS) player.unequipShield(false,true)
+					if (player.shield == shields.AETHERS) player.unequipShield(false, true);
 				}
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
@@ -2377,19 +2395,19 @@ public class SaveUpdater extends NPCAwareContent {
 				// mountainsMid - handled by postLoadSaveObject()
 				SceneLib.exploration.counters.hills               = flags[kFLAGS.DISCOVERED_HILLS];
 				SceneLib.exploration.counters.mountainsLow        = flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN];
-				SceneLib.exploration.counters.highMountains       = flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN];
-				SceneLib.exploration.counters.plains              = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131];
-				SceneLib.exploration.counters.swamp               = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272];
-				SceneLib.exploration.counters.bog                 = flags[kFLAGS.BOG_EXPLORED];
+				SceneLib.exploration.counters.highMountains       = flags[kFLAGS.TAMED_01_NAME];
+				SceneLib.exploration.counters.plains              = flags[kFLAGS.TAMED_02_NAME];
+				SceneLib.exploration.counters.swamp               = flags[kFLAGS.TAMED_03_NAME];
+				SceneLib.exploration.counters.bog                 = flags[kFLAGS.TAMED_05_NAME];
 				SceneLib.exploration.counters.blightRidge         = flags[kFLAGS.TAMANI_BAD_ENDED];
-				SceneLib.exploration.counters.defiledRavine       = flags[kFLAGS.DISCOVERED_DEFILED_RAVINE];
-				SceneLib.exploration.counters.beach               = flags[kFLAGS.DISCOVERED_BEACH];
-				SceneLib.exploration.counters.ocean               = flags[kFLAGS.DISCOVERED_OCEAN];
+				SceneLib.exploration.counters.defiledRavine       = flags[kFLAGS.TAMED_08_NAME];
+				SceneLib.exploration.counters.beach               = flags[kFLAGS.TAMED_08_NAME];
+				SceneLib.exploration.counters.ocean               = flags[kFLAGS.TAMED_10_NAME];
 				SceneLib.exploration.counters.caves               = flags[kFLAGS.DISCOVERED_CAVES];
 				SceneLib.exploration.counters.tundra              = flags[kFLAGS.DISCOVERED_TUNDRA];
-				SceneLib.exploration.counters.glacialRiftOuter    = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059];
+				SceneLib.exploration.counters.glacialRiftOuter    = flags[kFLAGS.TAMED_06_NAME];
 				SceneLib.exploration.counters.ashlands            = flags[kFLAGS.DISCOVERED_ASHLANDS];
-				SceneLib.exploration.counters.volcanicCragOuter   = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060];
+				SceneLib.exploration.counters.volcanicCragOuter   = flags[kFLAGS.TAMED_07_NAME];
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.059) {
@@ -2446,10 +2464,10 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.070;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.080) {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059] = 0;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060] = 0;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131] = 0;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272] = 0;
+				if (flags[kFLAGS.TAMED_06_NAME] != 0) flags[kFLAGS.TAMED_06_NAME] = 0;
+				if (flags[kFLAGS.TAMED_07_NAME] != 0) flags[kFLAGS.TAMED_07_NAME] = 0;
+				if (flags[kFLAGS.TAMED_02_NAME] != 0) flags[kFLAGS.TAMED_02_NAME] = 0;
+				if (flags[kFLAGS.TAMED_03_NAME] != 0) flags[kFLAGS.TAMED_03_NAME] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.080;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.09) {
@@ -2705,13 +2723,17 @@ public class SaveUpdater extends NPCAwareContent {
 						if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
 					}
 				}
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.56) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.56;
+				outputText("\n\nTo equip is first to de-equip ^^");
+				toEquipIsToFirstDeequip();
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.57) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.57;
-			}
+				outputText("\n\nIt's PouLTice, not PoulTrice! ^^");
+				if (Garden.PotionsBagSlot01Potion == "Poultrice") Garden.PotionsBagSlot01Potion = "Poultice";
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.58) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.58;
 			}

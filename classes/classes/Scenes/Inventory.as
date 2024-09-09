@@ -129,7 +129,11 @@ use namespace CoC;
 			EngineCore.displayHeader("Inventory");
 			outputText("<b><u>Equipment:</u></b>\n");
 			outputText("<b>Weapon (Melee main hand):</b> "+mkLink(player.weapon.name, player.weapon.id)+" (Attack: " + player.weaponAttack + ")");
-			if (player.isGauntletWeapon()) outputText(" (Gauntlet-type weapon)");
+			if (player.isGauntletWeapon()) {
+				outputText(" (Gauntlet-type weapon)");
+				outputText("\n");
+				outputText("<b>Weapon (Melee off hand):</b> "+mkLink(player.weapon.name, player.weapon.id)+" (Attack: " + player.weaponAttack + ") (Gauntlet-type weapon)");
+			}
 			if (player.weapon.isSwordType()) outputText(" (Sword-type weapon)");
 			if (player.weapon.isAxeType()) outputText(" (Axe-type weapon)");
 			if (player.weapon.isMaceHammerType()) outputText(" (Mace/Hammer-type weapon)");
@@ -142,25 +146,28 @@ use namespace CoC;
 			if (player.weapon.isWhipType()) outputText(" (Whip-type weapon)");
 			if (player.weapon.isRibbonType()) outputText(" (Ribbon-type weapon)");
 			if (player.weapon.isExoticType()) outputText(" (Exotic-type weapon)");
-			outputText("\n");
-			if (player.isGauntletWeapon()) outputText("<b>Weapon (Melee off hand):</b> "+mkLink(player.weapon.name, player.weapon.id)+" (Attack: " + player.weaponAttack + ")");
-			else outputText("<b>Weapon (Melee off hand):</b> "+mkLink(player.weaponOff.name, player.weaponOff.id)+" (Attack: " + player.weaponOffhandAttack + ")");
-			if (player.weaponOff.isSwordType()) outputText(" (Sword-type weapon)");
-			if (player.weaponOff.isAxeType()) outputText(" (Axe-type weapon)");
-			if (player.weaponOff.isMaceHammerType()) outputText(" (Mace/Hammer-type weapon)");
-			if (player.weaponOff.isDuelingType()) outputText(" (Dueling Sword-type weapon)");
-			if (player.weaponOff.isSpearType()) outputText(" (Spear-type weapon)");
-			if (player.weaponOff.isScytheType()) outputText(" (Scythe-type weapon)");
-			if (player.weaponOff.isDaggerType()) outputText(" (Dagger-type weapon)");
-			if (player.weaponOff.isStaffType()) outputText(" (Staff-type weapon)");
-			if (player.weaponOff.isWandType()) outputText(" (Wand-type weapon)");
-			if (player.weaponOff.isWhipType()) outputText(" (Whip-type weapon)");
-			if (player.weaponOff.isRibbonType()) outputText(" (Ribbon-type weapon)");
-			if (player.weaponOff.isExoticType()) outputText(" (Exotic-type weapon)");
-			outputText("\n");
-			outputText("<b>Shield:</b> " + mkLink(player.shield.name, player.shield.id) + " (Block Rating: " + player.shieldBlock + ")");
-			if (player.shieldPerk == "Large") outputText(" (Large)");
-			if (player.shieldPerk == "Massive") outputText(" (Massive)");
+			if (!player.weaponOff.isNothing) {
+				outputText("\n");
+				outputText("<b>Weapon (Melee off hand):</b> "+mkLink(player.weaponOff.name, player.weaponOff.id)+" (Attack: " + player.weaponOffhandAttack + ")");
+				if (player.weaponOff.isSwordType()) outputText(" (Sword-type weapon)");
+				if (player.weaponOff.isAxeType()) outputText(" (Axe-type weapon)");
+				if (player.weaponOff.isMaceHammerType()) outputText(" (Mace/Hammer-type weapon)");
+				if (player.weaponOff.isDuelingType()) outputText(" (Dueling Sword-type weapon)");
+				if (player.weaponOff.isSpearType()) outputText(" (Spear-type weapon)");
+				if (player.weaponOff.isScytheType()) outputText(" (Scythe-type weapon)");
+				if (player.weaponOff.isDaggerType()) outputText(" (Dagger-type weapon)");
+				if (player.weaponOff.isStaffType()) outputText(" (Staff-type weapon)");
+				if (player.weaponOff.isWandType()) outputText(" (Wand-type weapon)");
+				if (player.weaponOff.isWhipType()) outputText(" (Whip-type weapon)");
+				if (player.weaponOff.isRibbonType()) outputText(" (Ribbon-type weapon)");
+				if (player.weaponOff.isExoticType()) outputText(" (Exotic-type weapon)");
+			}
+			else {
+				outputText("\n");
+				outputText("<b>Shield:</b> " + mkLink(player.shield.name, player.shield.id) + " (Block Rating: " + player.shieldBlock + ")");
+				if (player.shieldPerk == "Large") outputText(" (Large)");
+				if (player.shieldPerk == "Massive") outputText(" (Massive)");
+			}
 			outputText("\n");
 			outputText("<b>Weapon (Range):</b> " + mkLink(player.weaponRange.name, player.weaponRange.id) + " (Attack: " + player.weaponRangeAttack + ")");
 			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") outputText(" (Bow/Crosbow-type weapon)");

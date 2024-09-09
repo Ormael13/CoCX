@@ -95,7 +95,7 @@ import classes.internals.*;
 				outputText("The gnoll dances forward, then back, her whole body alive with sensual movement.  She catches the way you watch her and smirks, throwing in a hip-shake just for you.");
 				bonus += 6;
 			}
-			player.takeLustDamage((bonus + 10 + player.lib/20 + rand(player.cor/20)), true);
+			player.takeLustDamage((bonus + 10 + player.lib/10 + rand(player.cor/10)), true);
 			outputText("\n");
 		}
 
@@ -186,20 +186,20 @@ import classes.internals.*;
 			this.skin.growFur({color:"tawny"});
 			this.hairColor = "black";
 			this.hairLength = 22;
-			initStrTouSpeInte(90, 75, 75, 60);
-			initWisLibSensCor(60, 64, 25, 60);
+			initStrTouSpeInte(180, 150, 150, 120);
+			initWisLibSensCor(120, 128, 59, 60);
 			this.weaponName = "twisted club";
 			this.weaponVerb="smash";
-			this.weaponAttack = 11;
+			this.weaponAttack = 55;
 			this.weaponValue = 25;
 			this.armorName = "skin";
-			this.armorDef = 7;
-			this.armorMDef = 1;
-			this.bonusHP = 600;
-			this.bonusLust = 107;
+			this.armorDef = 70;
+			this.armorMDef = 10;
+			this.bonusHP = 1200;
+			this.bonusLust = 218;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.level = 18;
+			this.level = 31;
 			this.gems = 15 + rand(10);
 			this.drop = new ChainedDrop().
 					add(consumables.REDUCTO,1/5).

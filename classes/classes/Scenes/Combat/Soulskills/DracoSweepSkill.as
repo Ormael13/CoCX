@@ -69,8 +69,8 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 		}
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.isSwordTypeWeapon()) critChance += 10;
-		if (player.isDuelingTypeWeapon()) critChance += 20;
+		if (player.weapon.isSwordType() || player.weaponOff.isSwordType()) critChance += 10;
+		if (player.weapon.isDuelingType() || player.weaponOff.isDuelingType()) critChance += 20;
 		critChance += combat.combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {

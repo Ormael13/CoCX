@@ -64,16 +64,8 @@ import classes.VaginaClass;
 		private function addTalkShit():void
 		{
 			statScreenRefresh();
-			if (HP < 1)
-			{
-				doNext(SceneLib.combat.endHpVictory);
+			if (SceneLib.combat.monsterDefeatCheck())
 				return;
-			}
-			if (lust > maxLust())
-			{
-				doNext(SceneLib.combat.endLustVictory);
-				return;
-			}
 			if (player.HP <= player.minHP())
 			{
 				doNext(SceneLib.combat.endHpLoss);
