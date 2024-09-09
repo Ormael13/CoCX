@@ -1160,7 +1160,7 @@ public function victoryLactation69():void {
 //[VICTORY BUTTSEX]
 public function PCVictoryOnIsabellaButtsex():void {
 	var x:Number = player.cockThatFits(monster.analCapacity());
-	var y:Number = player.cockThatFits2(monster.analCapacity());
+	var y:Number = player.cockThatFits2(monster.vaginalCapacity());
 	clearOutput();
 	if (y < 0) sceneHunter.print("You could use another one!");
 	outputText("Milk, huh?  No, that won't do.  You tell the ");

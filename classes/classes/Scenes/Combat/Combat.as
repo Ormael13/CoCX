@@ -9,10 +9,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
-import classes.Items.EnchantmentLib;
 import classes.Items.IELib;
 import classes.Items.ItemConstants;
-import classes.Items.JewelryLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -32,7 +30,6 @@ import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
-import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
@@ -54,7 +51,6 @@ import classes.StatusEffectClass;
 import classes.StatusEffectType;
 import classes.StatusEffects;
 import classes.StatusEffects.VampireThirstEffect;
-import com.bit101.components.NumericStepper;
 
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
@@ -1176,8 +1172,8 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) {
-			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No Limiter", returnToNormalState).hint("Toggle off No Limiter.");
-			else bd = buttons.add("No Limiter", noLimiterState).hint("Toggle on No Limiter. (STR+++, ?Lib-?)");
+			if (player.statStore.hasBuff("NoLimiterState")) buttons.add("No Limiter", returnToNormalState).hint("Toggle off No Limiter.");
+			else buttons.add("No Limiter", noLimiterState).hint("Toggle on No Limiter. (STR+++, ?Lib-?)");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
             for each (var fusionAbility:CombatAbility in CombatAbilities.ALL_ELEMENTAL_FUSION_ATTACKS) {
@@ -1551,10 +1547,6 @@ public class Combat extends BaseContent {
     public function the1Phalluspear01():void {
        player.addStatusValue(StatusEffects.ThePhalluspear1, 1, 1);
        doNext(the1Phalluspear);
-    }
-
-    internal function teaseAttack():void {
-        CombatAbilities.Tease.perform();
     }
 
     public function stopChanneledSpecial():void {
@@ -3195,7 +3187,6 @@ public class Combat extends BaseContent {
         accRange += (arrowsAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
         if (player.weaponRange == weaponsrange.BOWGUID || player.vehicles == vehicles.HB_MECH) accRange = 100;
-        var weaponRangePerk:String = player.weaponRangePerk;
         var ammoWord:String = weaponRangeAmmo;
         if (rand(100) < accRange) {
             var damage:Number = 0;
@@ -5466,8 +5457,10 @@ public class Combat extends BaseContent {
                 case Face.ABYSSAL_SHARK:
                     // should also trigger shark_teeth and vampire
                     biteMultiplier += 2.0;
+                    break;
                 case Face.SHARK_TEETH:
                     biteMultiplier += 1.5;
+                    break;
                 case Face.VAMPIRE:
                     // Vampire dont have bitemultiplier bonus FeelsBadMan
                     if (!monster.isImmuneToBleed()){
@@ -5619,9 +5612,12 @@ public class Combat extends BaseContent {
                     break;
                 case Arms.FROSTWYRM:
                     // Why does frostwyrm has lower clawdamagemultipler value than insect
+                    outputText("You claw viciously at your opponent, tearing away at its body.");
                     ClawDamageMultiplier *= 2;
+                    break;
                 default:
                     outputText("You claw viciously at your opponent, tearing away at its body.");
+                    break;
             }
 
             var feralNotGargoyle:Boolean = true;
@@ -6754,7 +6750,7 @@ public class Combat extends BaseContent {
      * @param IsFeralCombat
      */
     public function meleeDamageAcc(IsFeralCombat:Boolean = false, offHand:Boolean = false):void {
-        var howManyHits:Number = 0;
+        var howManyHits:Number;
         var accMelee:Number = 0;
         var damage:Number = 0;
         if (offHand) accMelee += (meleeAccuracy(true) / 2);
@@ -7360,8 +7356,7 @@ public class Combat extends BaseContent {
 		monster.teased((monster.lustVuln * foxpunchlust), false);
 	}
 	public function canLayerSwordIntentAura():Boolean {
-		if (player.statStore.hasBuff("SwordIntentAura") && player.compatibileSwordImmortalWeapons()) return true;
-		else return false;
+		return player.statStore.hasBuff("SwordIntentAura") && player.compatibileSwordImmortalWeapons();
 	}
 	public function layerSwordIntentAuraOnThis(damage:Number):Number {
 		var swordintentaura:Number = 1.1;
@@ -8398,7 +8393,7 @@ public class Combat extends BaseContent {
             monster.mana -= 100;
             if (monster.mana <0) monster.mana = 0;
         }
-        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment) || player.weapon == weapons.T_HEART || (player.weaponOff == weapons.T_HEART && offHand) || player.weapon == weapons.DORSOUL || (player.weaponOff == weapons.DORSOUL && offHand) || 
+        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment) || player.weapon == weapons.T_HEART || (player.weaponOff == weapons.T_HEART && offHand) || player.weapon == weapons.DORSOUL || (player.weaponOff == weapons.DORSOUL && offHand) ||
 			player.weapon == weapons.LHSCYTH || (player.weaponOff == weapons.LHSCYTH && offHand) || player.weapon == weapons.ARMAGED || (player.weaponOff == weapons.ARMAGED && offHand)) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 			var restoreamount:Number = 0;
 			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
@@ -14365,16 +14360,24 @@ public function Straddle():void {
 }
 
     public function postStrandleExtraActionsCheck():void {
+        if (monster.HP <= monster.minHP()) {
+            doNext(endHpVictory);
+            return;
+        }
+        if (monster.lust >= monster.maxOverLust()) {
+            doNext(endLustVictory);
+            return;
+        }
         if (player.hasPerk(PerkLib.GreaterGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 1) {
             flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
-            combatMenu(false);
+            doNext(combatMenu, false);
         }
         else if (player.hasPerk(PerkLib.ImprovedGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 0) {
             flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 1;
-            combatMenu(false);
+            doNext(combatMenu, false);
         }
         else enemyAIImpl();
-}
+    }
 
 //private var straddleDamage:Number
 //private var randomcrit:Boolean;
