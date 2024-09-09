@@ -14307,13 +14307,21 @@ public function Straddle():void {
 }
 
 public function postStrandleExtraActionsCheck():void {
+    if (monster.HP <= monster.minHP()) {
+        doNext(endHpVictory);
+        return;
+    }
+    if (monster.lust >= monster.maxOverLust()) {
+        doNext(endLustVictory);
+        return;
+    }
 	if (player.hasPerk(PerkLib.GreaterGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 1) {
 		flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
-		combatMenu(false);
+		doNext(combatMenu, false);
 	}
 	else if (player.hasPerk(PerkLib.ImprovedGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 0) {
 		flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 1;
-		combatMenu(false);
+        doNext(combatMenu, false);
 	}
 	else enemyAIImpl();
 }
