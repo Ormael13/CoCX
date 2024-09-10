@@ -746,7 +746,7 @@
 		<cell rect="2165,222,80,85" name="clothe/IceQueenKimonoSleeves" dx="64" dy="78"/>
 		<cell rect="1181,216,80,105" name="clothe/vampireTop" dx="65" dy="63"/>
 		<cell rect="1263,216,80,105" name="clothe/merchantClothe" dx="65" dy="57"/>
-		<cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
+		<cell rect="935,325,80,104" name="clothLeftArm/goblinTechnomancerClotheArms" dx="64" dy="72"/>
 		<cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="79" dy="44"/>
 		<cell rect="1263,325,80,104" name="clothe/berserkerArmorTop" dx="64" dy="55"/>
 		<cell rect="1612,158,40,55" name="clothe/mageRobe" dx="84" dy="68"/>
@@ -2003,6 +2003,10 @@
 		<!-- - - - - - -
 		SETUP LOCAL VARS
 		- - - - - - - - -->
+
+		<!-- uncomment for quick debugging -->
+<!--		<set var="ArmorSprite">goblinTechnomancerClothe</set>-->
+<!--		<set var="BraSprite">goblinTechnomancerBra</set>-->
 
 		<set var="HideCrotch" value="false"/>
 		<!-- $taur add '_taur' prefix for layers and parts -->
@@ -6011,7 +6015,7 @@
 				<if test="showClothing">
 					<show part="clothe/goblinTechnomancerClothe"/>
 					<if test="showArmClothing">
-						<show part="clothe/goblinTechnomancerClotheArms"/>
+						<show part="clothLeftArm/goblinTechnomancerClotheArms"/>
 					<else/>
 						<hide part="clothe/goblinTechnomancerClothe"/>
 						<show part="clotheBehindBreast/goblinTechnomancerClothe"/>
