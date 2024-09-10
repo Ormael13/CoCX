@@ -115,7 +115,7 @@ public class CharViewContext extends ExecContext {
 			}
 			function shieldSprite():String {
 				if (player.shield.isNothing) return '';
-				if (player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN) return '';
+				if (player.shield == game.shields.AETHERS || player.shield == game.shields.BATTNET || player.shield == game.shields.MABRACE || player.shield == game.shields.SPI_FOC || player.shield == game.shields.Y_U_PAN) return '';
 				
 				// if (???) return 'medium_holy'
 				// if (???) return 'medium_unholy'
@@ -275,6 +275,7 @@ public class CharViewContext extends ExecContext {
 					SlimeCore: player.hasPerk(PerkLib.SlimeCore),
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					AzazelPhylactery: player.hasPerk(PerkLib.InnerPhylactery),
+					AkbalFire: player.hasPerk(PerkLib.FireLord),
 					showClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isAlraune() && !player.isSitStancing() && !player.isGargoyleStancing()),
 					showArmClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI, Arms.FROSTWYRM, Arms.JABBERWOCKY].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing()),
 					showLegClothing: showLegClothing(),
@@ -331,6 +332,7 @@ public class CharViewContext extends ExecContext {
 					Skin: Skin,
 					Tail: Tail,
 					Tongue: Tongue,
+					VaginaClass: VaginaClass,
 					Wings: Wings,
 //					StatusEffects: StatusEffects,
 

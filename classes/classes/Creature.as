@@ -3693,6 +3693,9 @@ public class Creature extends Utils
 		public function isFeatherCovered():Boolean { return skin.isFeatherCovered(); }
 		public function hasMostlyPlainSkin():Boolean { return skin.hasMostlyPlainSkin(); }
 		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
+		public function hasPartialCoatOfType(...coat_types:Array):Boolean {
+			return skin.hasPartialCoatOfType(coat_types);
+		}
 		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoatOfType(coat_type); }
 		public function hasAnyPartialCoat():Boolean { return skin.hasPartialCoat(); }
 		public function hasRubberSkin():Boolean { return skin.hasRubberSkin(); }
