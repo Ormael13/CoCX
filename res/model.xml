@@ -746,7 +746,7 @@
 		<cell rect="2165,222,80,85" name="clothe/IceQueenKimonoSleeves" dx="64" dy="78"/>
 		<cell rect="1181,216,80,105" name="clothe/vampireTop" dx="65" dy="63"/>
 		<cell rect="1263,216,80,105" name="clothe/merchantClothe" dx="65" dy="57"/>
-		<cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
+		<cell rect="935,325,80,104" name="clothLeftArm/goblinTechnomancerClotheArms" dx="64" dy="72"/>
 		<cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="79" dy="44"/>
 		<cell rect="1263,325,80,104" name="clothe/berserkerArmorTop" dx="64" dy="55"/>
 		<cell rect="1612,158,40,55" name="clothe/mageRobe" dx="84" dy="68"/>
@@ -763,6 +763,9 @@
 		<cell rect="2222,12,49,37" name="clothe/samuraiShirt" dx="80" dy="61"/>
 		<cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
 		<cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
+		<cell rect="793,158,40,54" name="clotheLegs/blueKimonoBottom" dx="85" dy="121"/>
+		<cell rect="835,158,40,54" name="clotheLegs/redKimonoBottom" dx="85" dy="121"/>
+		<cell rect="877,158,40,54" name="clotheLegs/purpleKimonoBottom" dx="85" dy="121"/>
 		<cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
 		<cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="64" dy="72"/>
 		<cell rect="1591,543,80,104" name="clotheLegs/goblinTechnomancerClotheBootsBaggy" dx="64" dy="72"/>
@@ -1675,7 +1678,9 @@
 		<cell rect="339,491,83,69" name="tail/panda" dx="95" dy="90"/>
 		<cell rect="tail/panda" name="tail/panda_taur" dx="141" dy="97"/>
 		<cell rect="170,561,83,139" name="tail_bg/bee_abdomen" dx="95" dy="40"/>
-		<cell rect="tail_bg/bee_abdomen" name="tail_bg/bee_taur" dx="136" dy="48"/>
+		<cell rect="tail_bg/bee_abdomen" name="tail_bg/bee_abdomen_taur" dx="136" dy="48"/>
+		<cell rect="255,561,83,139" name="tail_bg/spider" dx="95" dy="40"/>
+		<cell rect="tail_bg/spider" name="tail_bg/spider_taur" dx="136" dy="48"/>
 		<cell rect="675,561,83,139" name="tail_bg/mantis" dx="95" dy="40"/>
 		<cell rect="tail_bg/mantis" name="tail_bg/mantis_taur" dx="135" dy="50"/>
 		<cell rect="339,561,83,139" name="tail/weasel" dx="95" dy="40"/>
@@ -1743,11 +1748,15 @@
 		<cell rect="1,70,84,139" name="wings_bg/mantibig" dx="20" dy="20"/>
 		<cell rect="86,70,83,139" name="wings/mantibig" dx="105" dy="20"/>
 		<cell rect="1,490,83,139" name="wings_front/mantibig" dx="105" dy="20"/>
-		<cell rect="170,70,84,139" name="wings_bg/fairy" dx="20" dy="20"/>
-		<cell rect="255,70,83,139" name="wings/fairy" dx="105" dy="20"/>
+		<cell rect="1015,70,84,139" name="wings_bg/fairy" dx="20" dy="20"/>
+		<cell rect="1100,70,83,139" name="wings/fairy" dx="105" dy="20"/>
+		<cell rect="1015,210,84,139" name="wings_bg/fairy[2]" dx="20" dy="20"/>
+		<cell rect="1100,210,83,139" name="wings/fairy[2]" dx="105" dy="20"/>
 		<cell rect="255,490,83,139" name="wings_front/fairy" dx="105" dy="20"/>
-		<cell rect="339,70,84,139" name="wings_bg/feather_large" dx="20" dy="20"/>
-		<cell rect="424,70,83,139" name="wings/feather_large" dx="105" dy="20"/>
+		<cell rect="846,70,84,139" name="wings_bg/feather_large" dx="20" dy="20"/>
+		<cell rect="931,70,83,139" name="wings/feather_large" dx="105" dy="20"/>
+		<cell rect="846,210,84,139" name="wings_bg/feather_large[2]" dx="20" dy="20"/>
+		<cell rect="931,210,83,139" name="wings/feather_large[2]" dx="105" dy="20"/>
 		<cell rect="339,490,83,139" name="wings_front/feather_large" dx="105" dy="20"/>
 		<cell rect="1,210,84,139" name="wings_bg/scales" dx="20" dy="20"/>
 		<cell rect="86,210,83,139" name="wings/scales" dx="105" dy="20"/>
@@ -1756,8 +1765,12 @@
 		<cell rect="1,350,84,139" name="wings_bg/demon" dx="20" dy="20"/>
 		<cell rect="86,350,83,139" name="wings/demon" dx="105" dy="20"/>
 		<cell rect="86,490,83,139" name="wings_front/demon" dx="105" dy="20"/>
-		<cell rect="339,210,84,139" name="wings_bg/nightmare" dx="20" dy="20"/>
-		<cell rect="424,210,83,139" name="wings/nightmare" dx="105" dy="20"/>
+		<cell rect="1353,70,84,139" name="wings_bg/nightmare" dx="20" dy="20"/>
+		<cell rect="1353,210,84,139" name="wings_bg/nightmare[2]" dx="20" dy="20"/>
+		<cell rect="1353,350,84,139" name="wings_bg/nightmare[3]" dx="20" dy="20"/>
+		<cell rect="1438,70,83,139" name="wings/nightmare" dx="105" dy="20"/>
+		<cell rect="1438,210,83,139" name="wings/nightmare[2]" dx="105" dy="20"/>
+		<cell rect="1438,350,83,139" name="wings/nightmare[3]" dx="105" dy="20"/>
 		<cell rect="423,490,83,139" name="wings_front/nightmare" dx="105" dy="20"/>
 		<cell rect="1184,350,84,139" name="wings_bg/gargoyle" dx="20" dy="20"/>
 		<cell rect="1269,350,83,139" name="wings/gargoyle" dx="105" dy="20"/>
@@ -1923,7 +1936,10 @@
 			<frame t="framee duration in ms" dx="pixel offset right" dy="pixel offset down" i="replacement image"/>
 		</animation>
 
-		To apply animation, use <animate> tag in <logic> section
+		To apply animation, use <animate> tag in <logic> section.
+
+		If the replacement image contains '%' character, it will be replaced with full layer name.
+		e.g. <frame i="%[2]"/> applied as <animate layer="eyes/human"/> will use image "eyes/human[2]".
 		-->
 		<animation name="breath">
 			<frame t="1000"/>
@@ -1942,6 +1958,20 @@
 			<frame t="100" i="eyes/closed"/>
 			<frame t="14900"/>
 			<frame t="100" i="eyes/closed"/>
+		</animation>
+		<animation name="wings_slow_2f">
+			<frame t="1000"/>
+			<frame t="1000" i="%[2]"/>
+		</animation>
+		<animation name="wings_slow_3f">
+			<frame t="250"/>
+			<frame t="250" i="%[2]"/>
+			<frame t="250" i="%[3]"/>
+			<frame t="250" i="%[2]"/>
+		</animation>
+		<animation name="wings_fast_2f">
+			<frame t="500"/>
+			<frame t="500" i="%[2]"/>
 		</animation>
 	</animations>
 
@@ -1998,6 +2028,10 @@
 		<!-- - - - - - -
 		SETUP LOCAL VARS
 		- - - - - - - - -->
+
+		<!-- uncomment for quick debugging -->
+<!--		<set var="ArmorSprite">goblinTechnomancerClothe</set>-->
+<!--		<set var="BraSprite">goblinTechnomancerBra</set>-->
 
 		<set var="HideCrotch" value="false"/>
 		<!-- $taur add '_taur' prefix for layers and parts -->
@@ -2876,7 +2910,7 @@
 				<show part="neck/centipede"/>
 			</case>
 			<case values="RearBody.SNAIL_SHELL">
-				<show part="rearBody/snail"/>
+				<show part="rearbody/snail"/>
 			</case>
 			<case values="RearBody.TENTACLE_EYESTALKS">
 				<show part="backtentacles/gazer"/>
@@ -3043,11 +3077,9 @@
 					<switch>
 						<case test="hairLength lt 16">
 							<show part="hair/mindbreaker"/>
-							<show part="hair_bg/mindbreaker"/>
 						</case>
 						<default>
 							<show part="hair/mindbreaker"/>
-							<show part="hair_bg/mindbreaker"/>
 						</default>
 					</switch>
 				</case>
@@ -3055,11 +3087,9 @@
 					<switch>
 						<case test="hairLength lt 16">
 							<show part="hair/mindbreakerMale"/>
-							<show part="hair_bg/mindbreakerMale"/>
 						</case>
 						<default>
 							<show part="hair/mindbreakerMale"/>
-							<show part="hair_bg/mindbreakerMale"/>
 						</default>
 					</switch>
 				</case>
@@ -3305,7 +3335,7 @@
 		</if>
 
 		<switch value="faceType">
-			<case values="Face.HUMAN,Face.DEMON">
+			<case values="Face.HUMAN">
 				<show part="face/human"/>
 				<if test="cor &gt;=50">
 					<hide part="face/*"/>
@@ -3366,7 +3396,7 @@
 			<case values="Face.HORSE">
 				<show part="face/horse"/>
 			</case>
-			<case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.WEASEL,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.FOX_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE,Face.IMP">
+			<case values="Face.SALAMANDER_FANGS,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.WEASEL,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.FOX_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE">
 				<show part="face/human_fang"/>
 				<if test="eyes.type= Eyes.CENTIPEDE">
 					<hide part="face/human_fang"/>
@@ -3391,7 +3421,7 @@
 			<case values="Face.COW_MINOTAUR">
 				<show part="face/bovine"/>
 			</case>
-			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG,Face.ELF,Face.CHESHIRE,Face.INNOCENT">
+			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG,Face.ELF,Face.CHESHIRE,Face.INNOCENT,Face.DEMON">
 				<show part="face/fairySmile"/>
 			</case>
 			<case values="Face.GHOST">
@@ -3654,10 +3684,6 @@
 					</if>
 				</if>
 			</case>
-			<case values="Arms.CHITIN">
-				<show part="hands/chitin2"/>
-				<show part="hands_bg/chitin2"/>
-			</case>
 			<case values="Arms.SPIDER">
 				<show part="hands/chitin2"/>
 				<show part="hands_bg/chitin2"/>
@@ -3701,10 +3727,6 @@
 			<case values="Arms.PLANT,Arms.PLANT2">
 				<show part="hands/alraune"/>
 				<show part="hands_bg/alraune"/>
-			</case>
-			<case values="Arms.FINS">
-				<show part="hands/fins-orca"/>
-				<show part="hands_bg/fins-orca"/>
 			</case>
 			<case values="Arms.SHARK">
 				<show part="hands/fins-shark"/>
@@ -3806,6 +3828,8 @@
 					</if>
 				</if>
 			</case>
+
+			<!-- not implemented yet
 			<case values="Arms.KUMIHO">
 				<show part="hands/fur"/>
 				<show part="hands_bg/fur"/>
@@ -3840,10 +3864,10 @@
 						</switch>
 					</if>
 				</if>
-			</case>
+			</case>-->
 			<case values="Arms.DRACONIC">
-				<show part="hands/scale"/>
-				<show part="hands_bg/scale"/>
+				<show part="hands/scales"/>
+				<show part="hands_bg/scales"/>
 				<if test="PlayerHasViewableOutfit">
 					<if test="sleevelessList">
 						<if test="legCount==2">
@@ -4116,7 +4140,7 @@
 					</default>
 				</switch>
 			</case>
-			<case values="LowerBody.RED_PANDA, LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
+			<case values="LowerBody.RED_PANDA, LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
 				<switch>
 					<case test="legCount==4">
 						<hide part="legs/*"/>
@@ -4360,7 +4384,6 @@
 				<show part="torso/liliraune"/>
 				<show part="arms/liliraune"/>
 				<show part="arms_bg/liliraune"/>
-				<show part="face/liliraune"/>
 				<show part="ears/liliraune"/>
 				<show part="horns/LilirauneOrchid"/>
 				<show part="horns_bg/LilirauneOrchid"/>
@@ -4544,6 +4567,7 @@
 					</switch>
 				</if>
 			</case>
+			<!--not implemented yet
 			<case values="LowerBody.KUMIHO">
 				<show part="feet/fur"/>
 				<if test="legCount==4">
@@ -4581,7 +4605,7 @@
 						</case>
 					</switch>
 				</if>
-			</case>
+			</case>-->
 			<case values="LowerBody.GHOST_2">
 				<hide part="legs/*"/>
 				<show part="legs/ghost"/>
@@ -4634,9 +4658,12 @@
 			<case values="Wings.BEE_SMALL,Wings.BEE_LARGE">
 				<show part="wings/bee"/>
 			</case>
-			<case values="Wings.HARPY,Wings.FEATHERED,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN,Wings.FEATHERED_PHOENIX,Wings.FEATHERED_AVIAN,Wings.FEATHERED_LARGE,Wings.PUREDEVILFEATHER">
+			<case values="Wings.HARPY,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN,Wings.FEATHERED_PHOENIX,Wings.FEATHERED_AVIAN,Wings.FEATHERED_LARGE,Wings.PUREDEVILFEATHER">
 				<show part="wings/feather_large"/>
 				<show part="wings_bg/feather_large"/>
+				<!--<animate layer="wings/*" name="wings_slow_2f"/>
+				<animate layer="wings_bg/*" name="wings_slow_2f"/>
+				todo wings_front animations-->
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/feather_large"/>
 				</if>
@@ -4665,6 +4692,9 @@
 			<case values="Wings.NIGHTMARE">
 				<show part="wings/nightmare"/>
 				<show part="wings_bg/nightmare"/>
+				<!--<animate layer="wings/*" name="wings_slow_2f"/>
+				<animate layer="wings_bg/*" name="wings_slow_2f"/>
+				TODO wings_front animations-->
 				<if test="isTaur()">
 					<show part="wings_front/nightmare"/>
 				</if>
@@ -4680,7 +4710,7 @@
 				<show part="wings_bg/greatDragonLeft"/>
 				<show part="wings_bg/greatDragonRight"/>
 			</case>
-			<case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_SMALL,Wings.MANTIS_LARGE,Wings.MANTIS_LARGE2"><!--TODO -->
+			<case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_SMALL,Wings.MANTIS_LARGE,Wings.MANTIS_LARGE_2"><!--TODO -->
 				<show part="wings/bee"/>
 			</case>
 			<!--TODO Wings.PLANT, Wings.BAT_ARM, -->
@@ -4701,6 +4731,9 @@
 			<case values="Wings.FAIRY">
 				<show part="wings/fairy"/>
 				<show part="wings_bg/fairy"/>
+				<!--<animate layer="wings/*" name="wings_fast_2f"/>
+				<animate layer="wings_bg/*" name="wings_fast_2f"/>
+				todo wings_front animations -->
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/fairy"/>
 				</if>
@@ -4717,16 +4750,14 @@
 			<case values="Wings.DEVILFEATHER">
 				<show part="wings/devilfeather"/>
 				<show part="wings_bg/devilfeather"/>
-				<if test="playerHasLargeLowerBody">
-					<show part="wings_front/devilfeather"/>
-				</if>
 			</case>
 			<case values="Wings.ETHEREAL">
 				<show part="wings/ghost"/>
 			</case>
+			<!--not implemented yet
 			<case values="Wings.WRAITH">
 				<show part="wings/wraith"/>
-			</case>
+			</case>-->
 			<case values="Wings.THUNDEROUS_AURA">
 				<show part="aura/thunderaura"/>
 			</case>
@@ -4882,9 +4913,6 @@
 			</case>
 			<case values="Tail.BEAR">
 				<show part="tail/bear$taur"/>
-			</case>
-			<case values="Tail.PANDA">
-				<show part="tail/panda$taur"/>
 			</case>
 			<case values="Tail.KIRIN">
 				<show part="tail/kirin$taur"/>
@@ -5161,21 +5189,22 @@
 				<show part="arms_bg_pattern/Bstripe"/>
 				<show part="legs_pattern/Bstripe"/>
 			</case>
+			<!-- not implemented yet
 			<case values="Skin.PATTERN_DEMONIC_STRIPES">
 				<switch value="breastTier">
-						<case value="0"><!--FLAT-->
+						<case value="0">&lt;!&ndash;FLAT&ndash;&gt;
 							<show part="breasts_pattern/Bdemonic"/>
 						</case>
-						<case value="1"><!--A-B-->
+						<case value="1">&lt;!&ndash;A-B&ndash;&gt;
 							<show part="breasts_pattern/Bdemonic"/>
 						</case>
-						<case value="2"><!--C-->
+						<case value="2">&lt;!&ndash;C&ndash;&gt;
 							<show part="breasts_pattern/Bpdemonic"/>
 						</case>
-						<case value="3"><!--D-->
+						<case value="3">&lt;!&ndash;D&ndash;&gt;
 							<show part="breasts_pattern/Bpdemonic"/>
 						</case>
-						<case value="4"><!--E-->
+						<case value="4">&lt;!&ndash;E&ndash;&gt;
 							<show part="breasts_pattern/Bldemonic"/>
 						</case>
 						<default>
@@ -5186,7 +5215,8 @@
 				<show part="arms_pattern/Bdemonic"/>
 				<show part="arms_bg_pattern/Bdemonic"/>
 				<show part="legs_pattern/Bdemonic"/>
-			</case>
+			</case>-->
+
 			<case values="Skin.PATTERN_VENOMOUS_MARKINGS">
 				<show part="torso_pattern/Bvenom"/>
 				<show part="arms_pattern/Bvenom"/>
@@ -5231,7 +5261,7 @@
 						<switch value="arms.type">
 							<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE">
 								<switch value="lowerBody">
-									<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS">
+									<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
 										<hide part="arms_pattern/*"/>
 										<hide part="arms_bg_pattern/*"/>
 										<hide part="legs_pattern/*"/>
@@ -5254,17 +5284,6 @@
 							<case values="Arms.WOLF">
 								<switch value="lowerBody">
 									<case values="LowerBody.WOLF">
-										<hide part="arms_pattern/*"/>
-										<hide part="arms_bg_pattern/*"/>
-										<hide part="legs_pattern/*"/>
-									</case>
-									<default>
-									</default>
-								</switch>
-							</case>
-							<case values="Arms.DRAGON">
-								<switch value="lowerBody">
-									<case values="LowerBody.DRAGON">
 										<hide part="arms_pattern/*"/>
 										<hide part="arms_bg_pattern/*"/>
 										<hide part="legs_pattern/*"/>
@@ -5617,7 +5636,7 @@
 						<show part="clotheLegs/redKimonoBottom"/>
 					</if>
 					<if test="showArmClothing">
-						<show part="clothe/blackKimonoBottom"/>
+						<show part="clothe/redKimonoSleeves"/>
 					</if>
 				</if>
 			</if>
@@ -5642,10 +5661,10 @@
 				<if test="showClothing">
 					<show part="clothe/whiteKimonoTop"/>
 					<if test="(legCount!=4) and (showLegClothing)">
-						<show part="clotheLegs/whiteKimonoBottom"/>
+						<show part="clotheLegs/blueKimonoBottom"/>
 					</if>
 					<if test="showArmClothing">
-						<show part="clothe/whiteKimonoSleeves"/>
+						<show part="clothe/blueKimonoSleeves"/>
 					</if>
 				</if>
 			</if>
@@ -5656,7 +5675,7 @@
 				<if test="showClothing">
 					<show part="clothe/redKimonoTop"/>
 					<if test="(legCount!=4) and (showLegClothing)">
-						<show part="clotheLegs/blackKimonoBottom"/>
+						<show part="clotheLegs/redKimonoBottom"/>
 					</if>
 					<if test="showArmClothing">
 						<show part="clothe/redKimonoSleeves"/>
@@ -5670,7 +5689,7 @@
 				<if test="showClothing">
 					<show part="clothe/purpleKimonoTop"/>
 					<if test="(legCount!=4) and (showLegClothing)">
-						<show part="clotheLegs/blackKimonoBottom"/>
+						<show part="clotheLegs/purpleKimonoBottom"/>
 					</if>
 					<if test="showArmClothing">
 						<show part="clothe/purpleKimonoSleeves"/>
@@ -6030,7 +6049,7 @@
 				<if test="showClothing">
 					<show part="clothe/goblinTechnomancerClothe"/>
 					<if test="showArmClothing">
-						<show part="clothe/goblinTechnomancerClotheArms"/>
+						<show part="clothLeftArm/goblinTechnomancerClotheArms"/>
 					<else/>
 						<hide part="clothe/goblinTechnomancerClothe"/>
 						<show part="clotheBehindBreast/goblinTechnomancerClothe"/>
@@ -6038,7 +6057,7 @@
 					<if test="showLegClothing">
 						<show part="clotheLegs/goblinTechnomancerClotheBoots"/>
 					<else/>
-						<if test="lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
+						<if test="lowerBody == LowerBody.BUNNY or lowerBody == LowerBody.JABBERWOCKY">
 							<hide part="clotheLegs/goblinTechnomancerClotheBoots"/>
 							<show part="clotheLegs/goblinTechnomancerClotheBootsBaggy"/>
 						</if>
@@ -6089,7 +6108,7 @@
 					<if test="showLegClothing">
 						<show part="clotheLegs/cowgirlClothe"/>
 					<else/>
-						<if test="lowerbody == LowerBody.HOOFED or lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
+						<if test="lowerBody == LowerBody.HOOFED or lowerBody == LowerBody.BUNNY or lowerBody == LowerBody.JABBERWOCKY">
 							<show part="clotheLegs/cowgirlClothe"/>
 						</if>
 					</if>
@@ -6642,7 +6661,7 @@
 				<if test="showClothing">
 					<show part="clothe/LizBladeArmor"/>
 				<else/>
-					<if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
+					<if test="arms.type == Arms.DISPLACER"> <!--  or arms.type == Arms.KUMIHO -->
 						<show part="clothe/LizBladeArmor"/>
 					</if>
 				</if>
@@ -6847,7 +6866,7 @@
 					<hide part="hair/*"/>
 					<show part="hair/hairHoodFire"/>
 				</if>
-				<if test="hairType == Hair.RAIJU">
+				<if test="hairType == Hair.STORM">
 					<hide part="hair/*"/>
 					<show part="hair/feather"/>
 				</if>
@@ -7078,7 +7097,7 @@
 							<show part="bra_fg/elfDressBraMedium"/>
 						</case>
 						<case value="3"><!--D-->
-							<show part="bra_fg/ElfDressBraMedium"/>
+							<show part="bra_fg/elfDressBraMedium"/>
 						</case>
 						<case value="4"><!--E-->
 							<show part="bra_fg/elfDressBraLarge"/>
@@ -7304,7 +7323,7 @@
 						</if>
 					</if>
 				<else/>
-					<if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
+					<if test="arms.type == Arms.DISPLACER"> <!-- or arms.type == Arms.KUMIHO -->
 						<show part="clothe/berserkerArmorTop"/>
 						<show part="clothLeftArm/berserkerArmorArmsFeralQuadLeft"/>
 						<show part="clothRightArm/berserkerArmorArmsFeralQuadRight"/>
@@ -7723,7 +7742,7 @@
 					<show part="fullbodyBreast/Dundine"/>
 				</case>
 				<case value="4"><!--E-F-->
-					<show part="fullbodyBreast/Dlundine"/>
+					<show part="fullbodyBreast/Fundine"/>
 				</case>
 				<default>
 					<show part="fullbodyBreast/Fundine"/>
@@ -7849,7 +7868,7 @@
 		<if test="horns.type == Horns.SPELL_TAG">
 			<!-- Hide everything else -->
 			<hide part="*"/>
-			<if test="breatTier lte 0"><!--FLAT-->
+			<if test="breastTier lte 0"><!--FLAT-->
 				<show part="fullbody/malejiangshi"/>
 			<else/>
 				<show part="fullbody/femalejiangshi"/>

@@ -13,8 +13,6 @@ internal class CompositeLayer {
 	private var _dx:int;
 	private var _dy:int;
 	private var animation:LayerAnimation;
-	private var time:int;
-	private var frameIndex:int;
 
 	public function get width():int {
 		return src.width;
@@ -24,26 +22,21 @@ internal class CompositeLayer {
 	}
 	
 	public function get dx():int {
-		return _dx + (animation ? animation.dx(frameIndex) : 0);
+		return _dx + (animation ? animation.dx() : 0);
 	}
 	
 	public function get dy():int {
-		return _dy + (animation ? animation.dy(frameIndex) : 0);
+		return _dy + (animation ? animation.dy() : 0);
 	}
 	
 	public function advanceTime(dt:int, t2:int):Boolean {
 		if (animation) {
-			var fi0:int = frameIndex;
-			time += dt;
-			frameIndex = animation.advanceTime(time, frameIndex);
-//			trace("[time="+time+"] "+name+" "+fi0+"->"+frameIndex);
-			return fi0 != frameIndex;
+			return animation.advanceTime(dt,t2);
 		}
 		return false;
 	}
 	public function resetAnimation():void {
-		time = 0;
-		frameIndex = 0;
+		if (animation) animation.reset();
 	}
 
 	public function CompositeLayer(name:String, src:BitmapData, dx:int, dy:int) {
@@ -77,9 +70,9 @@ internal class CompositeLayer {
 //			animation.setKeyColors(keyColors);
 //		}
 	}
-	public function setAnimation(animation:LayerAnimation):void {
+	public function setAnimation(animation:AnimationDef, composite:CompositeImage):void {
 		if (!this.animation && !animation) return;
-		this.animation = animation;
+		this.animation = animation ? new LayerAnimation(animation, this, composite) : null;
 //		if (animation) {
 //			animation.setKeyColors(keyColors);
 //		}
@@ -88,8 +81,9 @@ internal class CompositeLayer {
 
 	public function draw():BitmapData {
 		if (dirty) doUpdate();
-		var image:CompositeLayer = animation ? animation.image(frameIndex) : null;
+		var image:CompositeLayer = animation ? animation.image() : null;
 		if (image && !image.animation) {
+			image.setKeyColors(keyColors);
 			return image.draw();
 		}
 		return dst;

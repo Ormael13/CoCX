@@ -37,7 +37,7 @@ public class CompositeImage {
 	public function getLayer(name:String):CompositeLayer {
 		return layers[name];
 	}
-	public function addAnimation(animation:LayerAnimation):void {
+	public function addAnimation(animation:AnimationDef):void {
 		this.animations[animation.name] = animation;
 	}
 	public function advanceTime(dt:int, t2:int):Boolean {
@@ -88,22 +88,22 @@ public class CompositeImage {
 			return;
 		}
 		if (!visibility[layerName]) return;
-		var animation:LayerAnimation = animations[animationName];
+		var animation:AnimationDef = animations[animationName];
 		if (animationName && !animation) {
 			trace("[WARN] <animate> called for non-existing animation "+animationName);
 			return;
 		}
-		layer.setAnimation(animation);
+		layer.setAnimation(animation, this);
 	}
 	public function setMultiAnimation(prefix:String, animationName:String):void {
-		var animation:LayerAnimation = animations[animationName];
+		var animation:AnimationDef = animations[animationName];
 		if (animationName && !animation) {
 			trace("[WARN] <animate> called for non-existing animation "+animationName);
 			return;
 		}
 		for (var key:String in visibility) {
 			if (key.indexOf(prefix)==0 && visibility[key]) {
-				layers[key].setAnimation(animation);
+				(layers[key] as CompositeLayer).setAnimation(animation, this);
 			}
 		}
 	}
@@ -115,7 +115,7 @@ public class CompositeImage {
 	public function hideAll():void {
 		for each (var layer:CompositeLayer in list) {
 			visibility[layer.name] = false;
-			layer.setAnimation(null);
+			layer.setAnimation(null, null);
 		}
 	}
 	public function draw(keyColors:Object):BitmapData {
