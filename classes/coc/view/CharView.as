@@ -185,14 +185,13 @@ public class CharView extends Sprite {
 			}
 		}
 		for each (item in xml.animations..animation) {
-			var animation:LayerAnimation = new LayerAnimation(item.@name.toString());
+			var animation:AnimationDef = new AnimationDef(item.@name.toString());
 			for each (var frame:XML in item..frame) {
 				var t:int = parseInt(frame.@t.toString());
 				var dx:int = parseInt(frame.@dx.toString() || "0");
 				var dy:int = parseInt(frame.@dy.toString() || "0");
 				var i:String = frame.@i.toString() || "";
-				var layer:CompositeLayer = composite.getLayer(i);
-				animation.addFrame(t, dx, dy, layer);
+				animation.addFrame(t, dx, dy, i);
 			}
 			composite.addAnimation(animation);
 		}

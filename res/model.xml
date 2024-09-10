@@ -1748,11 +1748,15 @@
 		<cell rect="1,70,84,139" name="wings_bg/mantibig" dx="20" dy="20"/>
 		<cell rect="86,70,83,139" name="wings/mantibig" dx="105" dy="20"/>
 		<cell rect="1,490,83,139" name="wings_front/mantibig" dx="105" dy="20"/>
-		<cell rect="170,70,84,139" name="wings_bg/fairy" dx="20" dy="20"/>
-		<cell rect="255,70,83,139" name="wings/fairy" dx="105" dy="20"/>
+		<cell rect="1015,70,84,139" name="wings_bg/fairy" dx="20" dy="20"/>
+		<cell rect="1100,70,83,139" name="wings/fairy" dx="105" dy="20"/>
+		<cell rect="1015,210,84,139" name="wings_bg/fairy[2]" dx="20" dy="20"/>
+		<cell rect="1100,210,83,139" name="wings/fairy[2]" dx="105" dy="20"/>
 		<cell rect="255,490,83,139" name="wings_front/fairy" dx="105" dy="20"/>
-		<cell rect="339,70,84,139" name="wings_bg/feather_large" dx="20" dy="20"/>
-		<cell rect="424,70,83,139" name="wings/feather_large" dx="105" dy="20"/>
+		<cell rect="846,70,84,139" name="wings_bg/feather_large" dx="20" dy="20"/>
+		<cell rect="931,70,83,139" name="wings/feather_large" dx="105" dy="20"/>
+		<cell rect="846,210,84,139" name="wings_bg/feather_large[2]" dx="20" dy="20"/>
+		<cell rect="931,210,83,139" name="wings/feather_large[2]" dx="105" dy="20"/>
 		<cell rect="339,490,83,139" name="wings_front/feather_large" dx="105" dy="20"/>
 		<cell rect="1,210,84,139" name="wings_bg/scales" dx="20" dy="20"/>
 		<cell rect="86,210,83,139" name="wings/scales" dx="105" dy="20"/>
@@ -1761,8 +1765,12 @@
 		<cell rect="1,350,84,139" name="wings_bg/demon" dx="20" dy="20"/>
 		<cell rect="86,350,83,139" name="wings/demon" dx="105" dy="20"/>
 		<cell rect="86,490,83,139" name="wings_front/demon" dx="105" dy="20"/>
-		<cell rect="339,210,84,139" name="wings_bg/nightmare" dx="20" dy="20"/>
-		<cell rect="424,210,83,139" name="wings/nightmare" dx="105" dy="20"/>
+		<cell rect="1353,70,84,139" name="wings_bg/nightmare" dx="20" dy="20"/>
+		<cell rect="1353,210,84,139" name="wings_bg/nightmare[2]" dx="20" dy="20"/>
+		<cell rect="1353,350,84,139" name="wings_bg/nightmare[3]" dx="20" dy="20"/>
+		<cell rect="1438,70,83,139" name="wings/nightmare" dx="105" dy="20"/>
+		<cell rect="1438,210,83,139" name="wings/nightmare[2]" dx="105" dy="20"/>
+		<cell rect="1438,350,83,139" name="wings/nightmare[3]" dx="105" dy="20"/>
 		<cell rect="423,490,83,139" name="wings_front/nightmare" dx="105" dy="20"/>
 		<cell rect="1184,350,84,139" name="wings_bg/gargoyle" dx="20" dy="20"/>
 		<cell rect="1269,350,83,139" name="wings/gargoyle" dx="105" dy="20"/>
@@ -1928,7 +1936,10 @@
 			<frame t="framee duration in ms" dx="pixel offset right" dy="pixel offset down" i="replacement image"/>
 		</animation>
 
-		To apply animation, use <animate> tag in <logic> section
+		To apply animation, use <animate> tag in <logic> section.
+
+		If the replacement image contains '%' character, it will be replaced with full layer name.
+		e.g. <frame i="%[2]"/> applied as <animate layer="eyes/human"/> will use image "eyes/human[2]".
 		-->
 		<animation name="breath">
 			<frame t="1000"/>
@@ -1947,6 +1958,20 @@
 			<frame t="100" i="eyes/closed"/>
 			<frame t="14900"/>
 			<frame t="100" i="eyes/closed"/>
+		</animation>
+		<animation name="wings_slow_2f">
+			<frame t="1000"/>
+			<frame t="1000" i="%[2]"/>
+		</animation>
+		<animation name="wings_slow_3f">
+			<frame t="250"/>
+			<frame t="250" i="%[2]"/>
+			<frame t="250" i="%[3]"/>
+			<frame t="250" i="%[2]"/>
+		</animation>
+		<animation name="wings_fast_2f">
+			<frame t="500"/>
+			<frame t="500" i="%[2]"/>
 		</animation>
 	</animations>
 
@@ -4636,6 +4661,9 @@
 			<case values="Wings.HARPY,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN,Wings.FEATHERED_PHOENIX,Wings.FEATHERED_AVIAN,Wings.FEATHERED_LARGE,Wings.PUREDEVILFEATHER">
 				<show part="wings/feather_large"/>
 				<show part="wings_bg/feather_large"/>
+				<!--<animate layer="wings/*" name="wings_slow_2f"/>
+				<animate layer="wings_bg/*" name="wings_slow_2f"/>
+				todo wings_front animations-->
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/feather_large"/>
 				</if>
@@ -4664,6 +4692,9 @@
 			<case values="Wings.NIGHTMARE">
 				<show part="wings/nightmare"/>
 				<show part="wings_bg/nightmare"/>
+				<!--<animate layer="wings/*" name="wings_slow_2f"/>
+				<animate layer="wings_bg/*" name="wings_slow_2f"/>
+				TODO wings_front animations-->
 				<if test="isTaur()">
 					<show part="wings_front/nightmare"/>
 				</if>
@@ -4700,6 +4731,9 @@
 			<case values="Wings.FAIRY">
 				<show part="wings/fairy"/>
 				<show part="wings_bg/fairy"/>
+				<!--<animate layer="wings/*" name="wings_fast_2f"/>
+				<animate layer="wings_bg/*" name="wings_fast_2f"/>
+				todo wings_front animations -->
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/fairy"/>
 				</if>
