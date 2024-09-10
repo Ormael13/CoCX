@@ -144,7 +144,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		{
 			if (flags[kFLAGS.LILY_LVL_UP] < 2) {
 				initStrTouSpeInte(70, 75, 110, 100);
-				initWisLibSensCor(100, 80, 50, 90);
+				initWisLibSensCor(100, 80, 50, 80);
 				this.weaponAttack = 3;
 				this.weaponRangeAttack = 30;
 				this.armorDef = 60;
@@ -156,7 +156,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (flags[kFLAGS.LILY_LVL_UP] >= 2 && flags[kFLAGS.LILY_LVL_UP] < 9) {
 				var mod:int = (flags[kFLAGS.LILY_LVL_UP] - 1);
 				initStrTouSpeInte(70 + 4*mod, 75 + 6*mod, 110 + 20*mod, 100 + 5*mod);
-				initWisLibSensCor(100 + 5*mod, 80 + 25*mod, 50 + 20*mod, 90);
+				initWisLibSensCor(100 + 5*mod, 80 + 25*mod, 50 + 20*mod, 80);
 				this.weaponAttack = 3 + 1*mod;
 				this.weaponRangeAttack = 30 + 5*mod;
 				this.armorDef = 60 + 10*mod;
@@ -167,7 +167,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 			if (flags[kFLAGS.LILY_LVL_UP] == 9) {
 				initStrTouSpeInte(102, 123, 270, 140);
-				initWisLibSensCor(140, 280, 210, 90);
+				initWisLibSensCor(140, 280, 210, 80);
 				this.weaponAttack = 11;
 				this.weaponRangeAttack = 70;
 				this.armorDef = 140;

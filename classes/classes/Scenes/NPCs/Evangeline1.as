@@ -366,7 +366,7 @@ public class Evangeline1 extends Monster
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
 				initStrTouSpeInte(46, 48, 68, 110);
-				initWisLibSensCor(20, 25, 35, 50);
+				initWisLibSensCor(20, 25, 35, 0);
 				this.weaponAttack = 10;
 				this.armorDef = 14;
 				this.armorMDef = 3;
@@ -378,7 +378,7 @@ public class Evangeline1 extends Monster
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
 				initStrTouSpeInte(82, 87, 105, 115);
-				initWisLibSensCor(25, 30, 45, 50);
+				initWisLibSensCor(25, 30, 45, 0);
 				this.weaponAttack = 12;
 				this.armorDef = 18;
 				this.armorMDef = 5;
@@ -403,7 +403,7 @@ public class Evangeline1 extends Monster
 				createBreastRow(Appearance.breastCupInverse("A"));
 				this.hips.type = Hips.RATING_BOYISH;
 				this.butt.type = Butt.RATING_BUTTLESS;
-				initWisLibSensCor(15, 10, 10, 50);
+				initWisLibSensCor(15, 10, 10, 0);
 				this.hairColor = "red";
 				this.hairLength = 6;
 				this.lustVuln = .85;

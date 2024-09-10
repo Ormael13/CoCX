@@ -19,7 +19,7 @@ use namespace CoC;
 		{
 			if (flags[kFLAGS.WAIZABI_LVL_UP] == 0) {
 				initStrTouSpeInte(20, 20, 20, 50);
-				initWisLibSensCor(50, 200, 100, 50);
+				initWisLibSensCor(50, 200, 100, 0);
 				this.weaponAttack = 5;
 				this.armorDef = 5;
 				this.armorMDef = 5;
@@ -30,7 +30,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.WAIZABI_LVL_UP] == 1) {
 				initStrTouSpeInte(30, 30, 30, 55);
-				initWisLibSensCor(55, 225, 125, 50);
+				initWisLibSensCor(55, 225, 125, 0);
 				this.weaponAttack = 15;
 				this.armorDef = 15;
 				this.armorMDef = 15;
@@ -41,7 +41,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.WAIZABI_LVL_UP] == 2) {
 				initStrTouSpeInte(40, 40, 40, 60);
-				initWisLibSensCor(60, 250, 150, 50);
+				initWisLibSensCor(60, 250, 150, 0);
 				this.weaponAttack = 25;
 				this.armorDef = 25;
 				this.armorMDef = 25;

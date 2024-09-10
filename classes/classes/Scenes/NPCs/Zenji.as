@@ -195,7 +195,7 @@ use namespace CoC;
 		{
 			if (flags[kFLAGS.ZENJI_PROGRESS] >= 1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)) {
 				initStrTouSpeInte(145, 140, 135, 125);
-				initWisLibSensCor(135, 20, 40, 0);
+				initWisLibSensCor(135, 20, 40, -100);
 				this.weaponAttack = 50;
 				this.armorDef = 50;
 				this.armorMDef = 200;
@@ -203,7 +203,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.ZENJI_PROGRESS] == -1 || flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
 				initStrTouSpeInte(145, 140, 135, 125);
-				initWisLibSensCor(135, 20, 40, 0);
+				initWisLibSensCor(135, 20, 40, -100);
 				this.weaponAttack = 50;
 				this.armorDef = 50;
 				this.armorMDef = 200;
@@ -236,7 +236,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 5) {
 				initStrTouSpeInte(145, 140, 135, 125);
-				initWisLibSensCor(135, 20, 40, 0);
+				initWisLibSensCor(135, 20, 40, -100);
 				this.weaponAttack = 50;
 				this.armorDef = 50;
 				this.armorMDef = 200;

@@ -82,7 +82,7 @@ package classes.Scenes.NPCs
 		{
 			if (flags[kFLAGS.LUNA_LVL_UP] == 0) {
 				initStrTouSpeInte(30, 100, 40, 50);
-				initWisLibSensCor(50, 80, 40, 75);
+				initWisLibSensCor(50, 80, 40, 50);
 				this.weaponAttack = 36;
 				this.armorDef = 200;
 				this.armorMDef = 5;
@@ -92,7 +92,7 @@ package classes.Scenes.NPCs
 			}
 			else if (flags[kFLAGS.LUNA_LVL_UP] == 15) {
 				initStrTouSpeInte(135, 400, 145, 80);
-				initWisLibSensCor(80, 230, 190, 75);
+				initWisLibSensCor(80, 230, 190, 50);
 				this.weaponAttack = 66;
 				this.armorDef = 350;
 				this.armorMDef = 20;
@@ -103,7 +103,7 @@ package classes.Scenes.NPCs
 			else {  //leave min and max levels to easily balance npc combat
 				var lvlMulti:Number = flags[kFLAGS.LUNA_LVL_UP];
 				initStrTouSpeInte(30 + 7*lvlMulti, 100 + 20*lvlMulti, 40 + 7*lvlMulti, 50 + 2*lvlMulti);
-				initWisLibSensCor(50 + 2*lvlMulti, 80 + 10*lvlMulti, 40+10*lvlMulti, 75);
+				initWisLibSensCor(50 + 2*lvlMulti, 80 + 10*lvlMulti, 40+10*lvlMulti, 50);
 				this.weaponAttack = 36 + 2*lvlMulti;
 				this.armorDef = 200 + 10*lvlMulti;
 				this.armorMDef = 5 + lvlMulti;

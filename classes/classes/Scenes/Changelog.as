@@ -235,7 +235,7 @@ public class Changelog extends BaseContent
 			outputText("-Staff Channeling and Offensive Staff Channeling perks would work with wands too in addition to staffs but at lower effectivness.\n");
 			outputText("-New range weapon (by Ormael): MinoBomber - buyable at Minx shop. Cost 250 spirit stones. Base atk is 1 and ammo clip size 20.\n");
 			outputText("-Minor fixes. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Various charviewer bugfixes. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

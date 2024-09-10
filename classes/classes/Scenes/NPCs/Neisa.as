@@ -35,7 +35,7 @@ import classes.Scenes.SceneLib;
 		{//  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.
 			if (flags[kFLAGS.NEISA_LVL_UP] == 1) {
 				initStrTouSpeInte(50, 80, 50, 44);
-				initWisLibSensCor(44, 52, 25, 50);
+				initWisLibSensCor(44, 52, 25, 0);
 				this.weaponAttack = 12;
 				this.armorDef = 0;
 				this.armorMDef = 0;
@@ -46,7 +46,7 @@ import classes.Scenes.SceneLib;
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 2 && flags[kFLAGS.NEISA_LVL_UP] < 9) {
 				var mod:int = (flags[kFLAGS.NEISA_LVL_UP] - 1);
 				initStrTouSpeInte(50 + 15*mod, 80 + 22*mod, 50 + 10*mod, 44 + 8*mod);
-				initWisLibSensCor(44 + 8*mod, 52 + 6*mod, 25 + 5*mod, 50);
+				initWisLibSensCor(44 + 8*mod, 52 + 6*mod, 25 + 5*mod, 0);
 				this.weaponAttack = 12 + 3*mod;
 				this.armorDef = 0 + 8*mod;
 				this.armorMDef = 0 + 2*mod;
@@ -56,7 +56,7 @@ import classes.Scenes.SceneLib;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 9) {
 				initStrTouSpeInte(170, 256, 130, 108);
-				initWisLibSensCor(108, 100, 65, 50);
+				initWisLibSensCor(108, 100, 65, 0);
 				this.weaponAttack = 36;
 				this.armorDef = 64;
 				this.armorMDef = 16;
@@ -66,7 +66,7 @@ import classes.Scenes.SceneLib;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 10) {
 				initStrTouSpeInte(185, 278, 140, 116);
-				initWisLibSensCor(116, 106, 70, 50);
+				initWisLibSensCor(116, 106, 70, 0);
 				this.weaponAttack = 39;
 				this.armorDef = 72;
 				this.armorMDef = 18;

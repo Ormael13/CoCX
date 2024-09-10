@@ -95,7 +95,7 @@ use namespace CoC;
 		{
 			if (flags[kFLAGS.TED_LVL_UP] < 1) {
 				initStrTouSpeInte(30, 50, 50, 30);
-				initWisLibSensCor(30, 20, 40, 50);
+				initWisLibSensCor(30, 20, 40, 0);
 				this.weaponAttack = 8;
 				this.armorDef = 5;
 				this.armorMDef = 50;
@@ -104,7 +104,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.TED_LVL_UP] == 1) {
 				initStrTouSpeInte(40, 70, 70, 40);
-				initWisLibSensCor(40, 25, 50, 50);
+				initWisLibSensCor(40, 25, 50, 0);
 				this.weaponAttack = 10;
 				this.armorDef = 10;
 				this.armorMDef = 55;
@@ -113,7 +113,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.TED_LVL_UP] == 2) {
 				initStrTouSpeInte(50, 90, 90, 50);
-				initWisLibSensCor(50, 30, 60, 50);
+				initWisLibSensCor(50, 30, 60, 0);
 				this.weaponAttack = 12;
 				this.armorDef = 15;
 				this.armorMDef = 60;
@@ -122,7 +122,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.TED_LVL_UP] == 3) {
 				initStrTouSpeInte(63, 115, 115, 62);
-				initWisLibSensCor(62, 35, 70, 50);
+				initWisLibSensCor(62, 35, 70, 0);
 				this.weaponAttack = 15;
 				this.armorDef = 21;
 				this.armorMDef = 66;

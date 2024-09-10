@@ -158,7 +158,7 @@ public class Marae extends Monster
 				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
 				initStrTouSpeInte(640, 640, 440, 390);
-				initWisLibSensCor(390, 150, 320, 0);
+				initWisLibSensCor(390, 150, 320, -100);
 				this.weaponName = "fists";
 				this.weaponVerb="wrathful punch";
 				this.armorDef = 3000;

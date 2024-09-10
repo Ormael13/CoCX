@@ -307,7 +307,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 1) {
 				initStrTouSpeInte(30, 50, 100, 80);
-				initWisLibSensCor(80, 30, 40, 10);
+				initWisLibSensCor(80, 30, 40, -80);
 				this.weaponAttack = 8;
 				this.weaponRangeAttack = 20;
 				this.armorDef = 5;
@@ -318,7 +318,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
 				initStrTouSpeInte(40, 65, 120, 100);
-				initWisLibSensCor(100, 30, 40, 10);
+				initWisLibSensCor(100, 30, 40, -80);
 				this.weaponAttack = 8;
 				this.weaponRangeAttack = 20;
 				this.armorDef = 5;
@@ -329,7 +329,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
 				initStrTouSpeInte(50, 80, 140, 120);
-				initWisLibSensCor(120, 30, 40, 10);
+				initWisLibSensCor(120, 30, 40, -80);
 				this.weaponAttack = 8;
 				this.weaponRangeAttack = 20;
 				this.armorDef = 5;
@@ -340,7 +340,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
 				initStrTouSpeInte(60, 95, 160, 140);
-				initWisLibSensCor(140, 30, 40, 10);
+				initWisLibSensCor(140, 30, 40, -80);
 				this.weaponAttack = 8;
 				this.weaponRangeAttack = 20;
 				this.armorDef = 5;
@@ -351,7 +351,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
 				initStrTouSpeInte(70, 110, 180, 150);
-				initWisLibSensCor(150, 30, 40, 10);
+				initWisLibSensCor(150, 30, 40, -80);
 				this.weaponAttack = 8;
 				this.weaponRangeAttack = 20;
 				this.armorDef = 5;
@@ -362,7 +362,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
 				initStrTouSpeInte(80, 130, 205, 150);
-				initWisLibSensCor(150, 30, 40, 10);
+				initWisLibSensCor(150, 30, 40, -80);
 				this.weaponAttack = 8;
 				this.weaponRangeAttack = 20;
 				this.armorDef = 5;
@@ -373,7 +373,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 7) {
 				initStrTouSpeInte(100, 150, 235, 150);
-				initWisLibSensCor(150, 50, 50, 10);
+				initWisLibSensCor(150, 50, 50, -80);
 				this.weaponAttack = 16;
 				this.weaponRangeAttack = 50;
 				this.armorDef = 16;
@@ -384,7 +384,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 8) {
 				initStrTouSpeInte(120, 170, 270, 160);
-				initWisLibSensCor(160, 70, 60, 10);
+				initWisLibSensCor(160, 70, 60, -80);
 				this.weaponAttack = 17;
 				this.weaponRangeAttack = 55;
 				this.armorDef = 18;
@@ -395,7 +395,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 9) {
 				initStrTouSpeInte(140, 190, 305, 170);
-				initWisLibSensCor(170, 90, 70, 10);
+				initWisLibSensCor(170, 90, 70, -80);
 				this.weaponAttack = 18;
 				this.weaponRangeAttack = 60;
 				this.armorDef = 20;
@@ -406,7 +406,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 10) {
 				initStrTouSpeInte(160, 210, 340, 180);
-				initWisLibSensCor(180, 110, 80, 10);
+				initWisLibSensCor(180, 110, 80, -80);
 				this.weaponAttack = 19;
 				this.weaponRangeAttack = 65;
 				this.armorDef = 22;
@@ -417,7 +417,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 11) {
 				initStrTouSpeInte(180, 230, 375, 190);
-				initWisLibSensCor(190, 130, 90, 10);
+				initWisLibSensCor(190, 130, 90, -80);
 				this.weaponAttack = 20;
 				this.weaponRangeAttack = 70;
 				this.armorDef = 24;
@@ -428,7 +428,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 12) {
 				initStrTouSpeInte(200, 250, 410, 200);
-				initWisLibSensCor(200, 150, 100, 10);
+				initWisLibSensCor(200, 150, 100, -80);
 				this.weaponAttack = 21;
 				this.weaponRangeAttack = 75;
 				this.armorDef = 26;
@@ -439,7 +439,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 13) {
 				initStrTouSpeInte(220, 270, 445, 210);
-				initWisLibSensCor(210, 170, 110, 10);
+				initWisLibSensCor(210, 170, 110, -80);
 				this.weaponAttack = 22;
 				this.weaponRangeAttack = 80;
 				this.armorDef = 28;
@@ -450,7 +450,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 14) {
 				initStrTouSpeInte(240, 290, 480, 220);
-				initWisLibSensCor(220, 190, 120, 10);
+				initWisLibSensCor(220, 190, 120, -80);
 				this.weaponAttack = 23;
 				this.weaponRangeAttack = 85;
 				this.armorDef = 30;
@@ -461,7 +461,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 15) {
 				initStrTouSpeInte(260, 310, 515, 230);
-				initWisLibSensCor(230, 210, 130, 10);
+				initWisLibSensCor(230, 210, 130, -80);
 				this.weaponAttack = 24;
 				this.weaponRangeAttack = 90;
 				this.armorDef = 45;
@@ -472,7 +472,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 16) {
 				initStrTouSpeInte(300, 350, 585, 250);
-				initWisLibSensCor(250, 250, 150, 10);
+				initWisLibSensCor(250, 250, 150, -80);
 				this.weaponAttack = 30;
 				this.weaponRangeAttack = 120;
 				this.armorDef = 50;
@@ -483,7 +483,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 17) {
 				initStrTouSpeInte(340, 390, 655, 270);
-				initWisLibSensCor(270, 290, 170, 10);
+				initWisLibSensCor(270, 290, 170, -80);
 				this.weaponAttack = 32;
 				this.weaponRangeAttack = 130;
 				this.armorDef = 55;

@@ -173,7 +173,7 @@ public class Asuka extends Monster
 		{
 			if (flags[kFLAGS.ASUKA_LVL_UP] < 1) {
 				initStrTouSpeInte(85, 85, 75, 90);
-				initWisLibSensCor(90, 75, 50, 50);
+				initWisLibSensCor(90, 75, 50, 0);
 				this.weaponAttack = 21;
 				this.armorDef = 25;
 				this.armorMDef = 5;
@@ -183,7 +183,7 @@ public class Asuka extends Monster
 			}/*
 			if (flags[kFLAGS.ASUKA_LVL_UP] == 1) {
 				initStrTouSpeInte(85, 85, 75, 90);
-				initWisLibSensCor(90, 75, 50, 50);
+				initWisLibSensCor(90, 75, 50, 0);
 				this.weaponAttack = 21;
 				this.armorDef = 25;
 				this.armorMDef = 5;
@@ -193,7 +193,7 @@ public class Asuka extends Monster
 			}
 			if (flags[kFLAGS.ASUKA_LVL_UP] == 2) {
 				initStrTouSpeInte(85, 85, 75, 90);
-				initWisLibSensCor(90, 75, 50, 50);
+				initWisLibSensCor(90, 75, 50, 0);
 				this.weaponAttack = 21;
 				this.armorDef = 25;
 				this.armorMDef = 5;
@@ -203,7 +203,7 @@ public class Asuka extends Monster
 			}
 			if (flags[kFLAGS.ASUKA_LVL_UP] == 3) {
 				initStrTouSpeInte(85, 85, 75, 90);
-				initWisLibSensCor(90, 75, 50, 50);
+				initWisLibSensCor(90, 75, 50, 0);
 				this.weaponAttack = 21;
 				this.armorDef = 25;
 				this.armorMDef = 5;
@@ -213,7 +213,7 @@ public class Asuka extends Monster
 			}
 			if (flags[kFLAGS.ASUKA_LVL_UP] == 4) {
 				initStrTouSpeInte(85, 85, 75, 90);
-				initWisLibSensCor(90, 75, 50, 50);
+				initWisLibSensCor(90, 75, 50, 0);
 				this.weaponAttack = 21;
 				this.armorDef = 25;
 				this.armorMDef = 5;

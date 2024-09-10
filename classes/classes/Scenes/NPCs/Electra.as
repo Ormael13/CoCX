@@ -211,7 +211,7 @@ use namespace CoC;
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				initStrTouSpeInte(140, 340, 300, 320);
-				initWisLibSensCor(320, 560, 400, 80);
+				initWisLibSensCor(320, 560, 400, 60);
 				this.weaponAttack = 36;
 				this.armorDef = 60;
 				this.armorMDef = 80;
@@ -223,7 +223,7 @@ use namespace CoC;
 			else {
 				if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) {
 					initStrTouSpeInte(60, 110, 100, 150);
-					initWisLibSensCor(150, 220, 160, 80);
+					initWisLibSensCor(150, 220, 160, 60);
 					this.weaponAttack = 12;
 					this.armorDef = 12;
 					this.armorMDef = 10;
@@ -233,7 +233,7 @@ use namespace CoC;
 				}
 				else if (flags[kFLAGS.ELECTRA_LVL_UP] == 12) {
 					initStrTouSpeInte(150, 365, 320, 260);
-					initWisLibSensCor(260, 550, 340, 80);
+					initWisLibSensCor(260, 550, 340, 60);
 					this.weaponAttack = 45;
 					this.armorDef = 78;
 					this.armorMDef = 120;
@@ -244,7 +244,7 @@ use namespace CoC;
 				else {	//leave min and max levels to easily balance npc combat
 					var electraLvl:Number = flags[kFLAGS.ELECTRA_LVL_UP]-1;
 					initStrTouSpeInte(60 + 10*electraLvl, 110 + 15*electraLvl, 100 + 20*electraLvl, 150 + 10*electraLvl);
-					initWisLibSensCor(150 + 10*electraLvl, 220 + 30*electraLvl, 160 + 20*electraLvl, 80);
+					initWisLibSensCor(150 + 10*electraLvl, 220 + 30*electraLvl, 160 + 20*electraLvl, 60);
 					this.weaponAttack = 12 + 3*electraLvl;
 					this.armorDef = 12 + 5*electraLvl;
 					this.armorMDef = 10 + 10*electraLvl;

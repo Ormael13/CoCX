@@ -54,7 +54,7 @@ import classes.internals.*;
 			this.hairLength = 39;
 			//if (flags[kFLAGS.RANGIKU_LVL_UP] < 1) {
 				initStrTouSpeInte(110, 120, 100, 200);
-				initWisLibSensCor(200, 250, 200, 50);
+				initWisLibSensCor(200, 250, 200, 0);
 				this.weaponName = "dual large axes";
 				this.weaponVerb="cleaves";
 				this.weaponAttack = 26;

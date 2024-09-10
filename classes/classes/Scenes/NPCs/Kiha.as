@@ -162,7 +162,7 @@ public class Kiha extends Monster
 		{
 			if (flags[kFLAGS.KIHA_LVL_UP] < 1) {
 				initStrTouSpeInte(85, 80, 85, 60);
-				initWisLibSensCor(60, 50, 45, 66);
+				initWisLibSensCor(60, 50, 45, 32);
 				this.weaponAttack = 28;
 				this.armorDef = 35;
 				this.armorMDef = 25;
@@ -172,7 +172,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 1) {
 				initStrTouSpeInte(110, 105, 110, 70);
-				initWisLibSensCor(70, 70, 55, 66);
+				initWisLibSensCor(70, 70, 55, 32);
 				this.weaponAttack = 38;
 				this.armorDef = 50;
 				this.armorMDef = 30;
@@ -182,7 +182,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 2) {
 				initStrTouSpeInte(135, 130, 135, 80);
-				initWisLibSensCor(80, 90, 65, 66);
+				initWisLibSensCor(80, 90, 65, 32);
 				this.weaponAttack = 48;
 				this.armorDef = 65;
 				this.armorMDef = 35;
@@ -192,7 +192,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 3) {
 				initStrTouSpeInte(160, 155, 160, 90);
-				initWisLibSensCor(90, 110, 75, 66);
+				initWisLibSensCor(90, 110, 75, 32);
 				this.weaponAttack = 58;
 				this.armorDef = 80;
 				this.armorMDef = 40;
@@ -202,7 +202,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 4) {
 				initStrTouSpeInte(185, 180, 185, 100);
-				initWisLibSensCor(100, 130, 85, 66);
+				initWisLibSensCor(100, 130, 85, 32);
 				this.weaponAttack = 68;
 				this.armorDef = 95;
 				this.armorMDef = 45;
@@ -212,7 +212,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 5) {
 				initStrTouSpeInte(210, 205, 210, 110);
-				initWisLibSensCor(110, 150, 95, 66);
+				initWisLibSensCor(110, 150, 95, 32);
 				this.weaponAttack = 78;
 				this.armorDef = 110;
 				this.armorMDef = 50;
@@ -222,7 +222,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 6) {
 				initStrTouSpeInte(235, 230, 235, 120);
-				initWisLibSensCor(120, 170, 105, 66);
+				initWisLibSensCor(120, 170, 105, 32);
 				this.weaponAttack = 88;
 				this.armorDef = 125;
 				this.armorMDef = 55;
@@ -232,7 +232,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 7) {
 				initStrTouSpeInte(260, 255, 260, 130);
-				initWisLibSensCor(130, 190, 115, 66);
+				initWisLibSensCor(130, 190, 115, 32);
 				this.weaponAttack = 98;
 				this.armorDef = 140;
 				this.armorMDef = 60;
@@ -242,7 +242,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 8) {
 				initStrTouSpeInte(285, 280, 285, 140);
-				initWisLibSensCor(140, 210, 125, 66);
+				initWisLibSensCor(140, 210, 125, 32);
 				this.weaponAttack = 108;
 				this.armorDef = 155;
 				this.armorMDef = 65;
@@ -252,7 +252,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 9) {
 				initStrTouSpeInte(310, 305, 310, 150);
-				initWisLibSensCor(150, 230, 135, 66);
+				initWisLibSensCor(150, 230, 135, 32);
 				this.weaponAttack = 118;
 				this.armorDef = 170;
 				this.armorMDef = 70;
@@ -262,7 +262,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 10) {
 				initStrTouSpeInte(335, 330, 335, 160);
-				initWisLibSensCor(160, 250, 145, 66);
+				initWisLibSensCor(160, 250, 145, 32);
 				this.weaponAttack = 128;
 				this.armorDef = 185;
 				this.armorMDef = 75;
@@ -272,7 +272,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 11) {
 				initStrTouSpeInte(360, 355, 360, 170);
-				initWisLibSensCor(170, 270, 155, 66);
+				initWisLibSensCor(170, 270, 155, 32);
 				this.weaponAttack = 138;
 				this.armorDef = 200;
 				this.armorMDef = 80;
@@ -282,7 +282,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 12) {
 				initStrTouSpeInte(385, 380, 385, 180);
-				initWisLibSensCor(180, 290, 165, 66);
+				initWisLibSensCor(180, 290, 165, 32);
 				this.weaponAttack = 148;
 				this.armorDef = 215;
 				this.armorMDef = 85;
@@ -292,7 +292,7 @@ public class Kiha extends Monster
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 13) {
 				initStrTouSpeInte(410, 405, 410, 190);
-				initWisLibSensCor(190, 310, 175, 66);
+				initWisLibSensCor(190, 310, 175, 32);
 				this.weaponAttack = 158;
 				this.armorDef = 230;
 				this.armorMDef = 90;

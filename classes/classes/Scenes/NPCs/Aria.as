@@ -45,10 +45,10 @@ import classes.internals.*;
 			//if (flags[kFLAGS.CEANI_LVL_UP] == 5) {
 				//this.level = 74;
 				//initStrTouSpeInte(340, 360, 260, 210);
-				//initWisLibSensCor(210, 210, 80, 50);
+				//initWisLibSensCor(210, 210, 80, 0);
 				this.level = 37;
 				initStrTouSpeInte(170, 180, 130, 105);
-				initWisLibSensCor(105, 105, 40, 50);
+				initWisLibSensCor(105, 105, 40, 0);
 				this.weaponAttack = 56;
 				this.armorDef = 15;
 				this.armorMDef = 15;
