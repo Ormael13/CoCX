@@ -49,26 +49,27 @@
 				dy CDATA #IMPLIED
 				i CDATA #IMPLIED
 				img CDATA #IMPLIED>
-		<!ELEMENT logic (show|switch|if|hide|set|animate)*>
+		<!ELEMENT logic (show|switch|if|hide|set|animate|offset)*>
 		<!ELEMENT switch (case|default)*>
 		<!ATTLIST switch
 				value CDATA #IMPLIED>
-		<!ELEMENT case (show|switch|if|hide|set|animate)*>
+		<!ELEMENT case (show|switch|if|hide|set|animate|offset)*>
 		<!ATTLIST case
 				test CDATA #IMPLIED
 				value CDATA #IMPLIED
 				values CDATA #IMPLIED>
 		<!ELEMENT show (#PCDATA)>
 		<!ATTLIST show
-				part CDATA #REQUIRED>
-		<!ELEMENT default (show|switch|if|hide|set|animate)*>
-		<!ELEMENT if (show|switch|if|hide|set|animate|else|elseif)*>
+				part CDATA #REQUIRED
+				animation CDATA #IMPLIED>
+		<!ELEMENT default (show|switch|if|hide|set|animate|offset)*>
+		<!ELEMENT if (show|switch|if|hide|set|animate|offset|else|elseif)*>
 		<!ATTLIST if
 				test CDATA #REQUIRED>
-		<!ELEMENT elseif (show|switch|if|hide|set|animate|else|elseif)*>
+		<!ELEMENT elseif (show|switch|if|hide|set|animate|offset|else|elseif)*>
 		<!ATTLIST elseif
 				test CDATA #REQUIRED>
-		<!ELEMENT else (show|switch|if|hide|set|animate)*>
+		<!ELEMENT else (show|switch|if|hide|set|animate|offset)*>
 		<!ELEMENT hide (#PCDATA)>
 		<!ATTLIST hide
 				part CDATA #REQUIRED>
@@ -78,8 +79,14 @@
 				value CDATA #IMPLIED>
 		<!ELEMENT animate (#PCDATA)>
 		<!ATTLIST animate
-				layer CDATA #REQUIRED
+				part CDATA #REQUIRED
 				name CDATA #REQUIRED>
+		<!ELEMENT offset (#PCDATA)>
+		<!ATTLIST offset
+				part CDATA #REQUIRED
+				dx CDATA #IMPLIED
+				dy CDATA #IMPLIED
+				layer CDATA #IMPLIED>
 		]>
 <!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
 	<model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
@@ -490,7 +497,7 @@
 		<cell rect="1251,150,49,59" name="hands_bg/fins-wereshark" dx="56" dy="64"/>
 		<cell rect="551,270,49,59" name="hands_bg/goo" dx="56" dy="64"/>
 		<cell rect="701,270,49,59" name="hands_bg/panda" dx="56" dy="64"/>
-		<cell rect="301,1064,49,59" name="hand_bg/kumiho" dx="56" dy="56"/>
+		<cell rect="301,1064,49,59" name="hands_bg/kumiho" dx="56" dy="56"/>
 		<cell rect="851,150,49,59" name="hands_bg/wraithleft" dx="63" dy="75"/>
 		<cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
 		<cell rect="1001,270,49,59" name="hands_bg/jabberwockyLeft" dx="62" dy="72"/>
@@ -1939,7 +1946,7 @@
 		To apply animation, use <animate> tag in <logic> section.
 
 		If the replacement image contains '%' character, it will be replaced with full layer name.
-		e.g. <frame i="%[2]"/> applied as <animate layer="eyes/human"/> will use image "eyes/human[2]".
+		e.g. <frame i="%[2]"/> applied as <animate part="eyes/human"/> will use image "eyes/human[2]".
 		-->
 		<animation name="breath">
 			<frame t="1000"/>
@@ -1980,7 +1987,7 @@
 
 		Syntax:
 
-		Type item = show | hide | if | switch | set
+		Type item = show | hide | offset | animate | if | switch | set
 
 		Element <set var="name">value</set> - set local variable
 			attribute [name] - variable name
@@ -1990,12 +1997,20 @@
 
 		Element <show part=""/> - show layer part
 			attribute [part] - key in spritesheet or spritemap. Use $var or ${var} to insert value of variable 'var'
+			optional attribute [animation] - animation to apply to the layer.
 
 		Element <hide part=""/> - hide layer part or whole layer
 			attribute [part] - full name or "layer/*" mask. Use $var or ${var} to insert value of variable 'var'
 
-		Element <animate layer="" name=""/> - animate a layer
-			attribute [layer] - layer to animate, or "layer/*" mask. Use $var or ${var} to insert value of variable 'var'
+		Element <offset part="" dx="" dy="" layer=""/> - shift layer part or whole layer
+			attribute [part] - full name or "layer/*" mask. Use $var or ${var} to insert value of variable 'var'
+			optional attribute [dx] - X offset in pixels
+			optional attribute [dy] - Y offset in pixels
+			optional attribute [layer] - new layer for this part
+			For example <offset part="eyes/*" layer="eyes_fg"/> will move all currently visble parts from "eyes" layer into "eyes_fg" layer.
+
+		Element <animate part="" name=""/> - animate a layer part or whole layer
+			attribute [layer] - layer part to animate, or "layer/*" mask. Use $var or ${var} to insert value of variable 'var'
 			attribute [name] - animation name, as defined in <animations> section.
 
 		Element <if test=""> item* </if>
@@ -2100,7 +2115,7 @@
 			<if test="WeaponDisplay == 0">
 				<!-- MELEE WEAPON -->
 				<if test="playerHasWeaponWings">
-
+					<set var="fireBuffType"></set>
 					<switch value="MeleeWeaponSprite">
 						<!-- Values from CharViewContext.meleeWeaponSprite -->
 
@@ -4661,8 +4676,8 @@
 			<case values="Wings.HARPY,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN,Wings.FEATHERED_PHOENIX,Wings.FEATHERED_AVIAN,Wings.FEATHERED_LARGE,Wings.PUREDEVILFEATHER">
 				<show part="wings/feather_large"/>
 				<show part="wings_bg/feather_large"/>
-				<!--<animate layer="wings/*" name="wings_slow_2f"/>
-				<animate layer="wings_bg/*" name="wings_slow_2f"/>
+				<!--<animate part="wings/*" name="wings_slow_2f"/>
+				<animate part="wings_bg/*" name="wings_slow_2f"/>
 				todo wings_front animations-->
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/feather_large"/>
@@ -4692,8 +4707,8 @@
 			<case values="Wings.NIGHTMARE">
 				<show part="wings/nightmare"/>
 				<show part="wings_bg/nightmare"/>
-				<!--<animate layer="wings/*" name="wings_slow_2f"/>
-				<animate layer="wings_bg/*" name="wings_slow_2f"/>
+				<!--<animate part="wings/*" name="wings_slow_2f"/>
+				<animate part="wings_bg/*" name="wings_slow_2f"/>
 				TODO wings_front animations-->
 				<if test="isTaur()">
 					<show part="wings_front/nightmare"/>
@@ -4731,8 +4746,8 @@
 			<case values="Wings.FAIRY">
 				<show part="wings/fairy"/>
 				<show part="wings_bg/fairy"/>
-				<!--<animate layer="wings/*" name="wings_fast_2f"/>
-				<animate layer="wings_bg/*" name="wings_fast_2f"/>
+				<!--<animate part="wings/*" name="wings_fast_2f"/>
+				<animate part="wings_bg/*" name="wings_fast_2f"/>
 				todo wings_front animations -->
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/fairy"/>
@@ -7384,42 +7399,42 @@
 		</if>
 
 		<!-- FULL BODY ANIMATIONS -->
-		<animate layer="eyes/*" name="eyes_blink"/>
+		<animate part="eyes/*" name="eyes_blink"/>
 
 		<if test="breastTier gt 0">
-			<animate layer="breasts/*" name="breath"/>
-			<animate layer="breasts_pattern/*" name="breath"/>
-			<animate layer="armorNeck/*" name="breath2"/>
-			<animate layer="overbreast/*" name="breath"/>
-			<animate layer="fullbodyBreast/*" name="breath"/>
-			<animate layer="bra/*" name="breath"/>
-			<animate layer="bra_fg/*" name="breath"/>
+			<animate part="breasts/*" name="breath"/>
+			<animate part="breasts_pattern/*" name="breath"/>
+			<animate part="armorNeck/*" name="breath2"/>
+			<animate part="overbreast/*" name="breath"/>
+			<animate part="fullbodyBreast/*" name="breath"/>
+			<animate part="bra/*" name="breath"/>
+			<animate part="bra_fg/*" name="breath"/>
 		</if>
 
 		<!-- arms moving with breathing - unsure, looks a bit off -->
-		<animate layer="armorLeftArm/*" name="breath2"/>
-		<animate layer="armorRightArm/*" name="breath2"/>
-		<animate layer="arms/*" name="breath2"/>
-		<animate layer="arms_bg/*" name="breath2"/>
-		<animate layer="arms_bg_pattern/*" name="breath2"/>
-		<animate layer="arms_fg/*" name="breath2"/>
-		<animate layer="arms_front/*" name="breath2"/>
-		<animate layer="arms_overlay/*" name="breath2"/>
-		<animate layer="arms_overlay_bg/*" name="breath2"/>
-		<animate layer="arms_pattern/*" name="breath2"/>
-		<animate layer="clothLeftArm/*" name="breath2"/>
-		<animate layer="clothRightArm/*" name="breath2"/>
-		<animate layer="glove_fg/*" name="breath2"/>
-		<animate layer="hands/*" name="breath2"/>
-		<animate layer="hands_bg/*" name="breath2"/>
-		<animate layer="hands_fg/*" name="breath2"/>
-		<animate layer="overhands/*" name="breath2"/>
-		<animate layer="overhands_bg/*" name="breath2"/>
-		<animate layer="shield/*" name="breath2"/>
-		<animate layer="weapon/*" name="breath2"/>
-		<animate layer="weaponBuff/*" name="breath2"/>
-		<animate layer="weaponBuff_bg/*" name="breath2"/>
-		<animate layer="weapon_bg/*" name="breath2"/>
+		<animate part="armorLeftArm/*" name="breath2"/>
+		<animate part="armorRightArm/*" name="breath2"/>
+		<animate part="arms/*" name="breath2"/>
+		<animate part="arms_bg/*" name="breath2"/>
+		<animate part="arms_bg_pattern/*" name="breath2"/>
+		<animate part="arms_fg/*" name="breath2"/>
+		<animate part="arms_front/*" name="breath2"/>
+		<animate part="arms_overlay/*" name="breath2"/>
+		<animate part="arms_overlay_bg/*" name="breath2"/>
+		<animate part="arms_pattern/*" name="breath2"/>
+		<animate part="clothLeftArm/*" name="breath2"/>
+		<animate part="clothRightArm/*" name="breath2"/>
+		<animate part="glove_fg/*" name="breath2"/>
+		<animate part="hands/*" name="breath2"/>
+		<animate part="hands_bg/*" name="breath2"/>
+		<animate part="hands_fg/*" name="breath2"/>
+		<animate part="overhands/*" name="breath2"/>
+		<animate part="overhands_bg/*" name="breath2"/>
+		<animate part="shield/*" name="breath2"/>
+		<animate part="weapon/*" name="breath2"/>
+		<animate part="weaponBuff/*" name="breath2"/>
+		<animate part="weaponBuff_bg/*" name="breath2"/>
+		<animate part="weapon_bg/*" name="breath2"/>
 
 		<!-- FULL BODY AREA -->
 		<if test="balls gt 0 and ballsz eq 'gigahuge'">

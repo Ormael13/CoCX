@@ -4,32 +4,48 @@
 package coc.view.charview {
 
 import coc.script.Eval;
-
 import coc.view.*;
 import coc.xlogic.Compiler;
 import coc.xlogic.Statement;
 
-public class CharViewCompiler extends Compiler{
+public class CharViewCompiler extends Compiler {
+	public static function nameHasVars(name:String):Boolean {
+		return name.indexOf('$')>=0;
+	}
+	public static function partIsPrefix(part:String):Boolean {
+		return !!part.match(/^[^\*]*\*$/);
+	}
+	public static function partPrefix(part:String):String {
+		return part.substring(0, part.length-1);
+	}
+	
 	private var charview:CharView;
+	
 	public function CharViewCompiler(charview:CharView) {
 		this.charview = charview;
 	}
-
+	
 	override protected function unknownTag(tag:String, x:XML):Statement {
 		var attrs:* = attrMap(x);
-		switch (tag){
+		switch (tag) {
 			case 'set':
 				if ('value' in attrs) {
 					return new SetVarStatement(attrs['var'], attrs['value']);
 				} else {
-					return new SetVarStatement(attrs['var'], '"'+Eval.escapeString(x.text().toString())+'"');
+					return new SetVarStatement(attrs['var'], '"' + Eval.escapeString(x.text().toString()) + '"');
 				}
 			case 'show':
-				return new LayerPart(charview.composite, attrs['part'], true);
+				return new ShowStatement(
+						charview.composite,
+						attrs['part'],
+						'animation' in attrs ? attrs['animatiton'] : null
+				);
 			case 'hide':
-				return new LayerPart(charview.composite, attrs['part'], false);
+				return new HideStatement(charview.composite, attrs['part']);
 			case 'animate':
-				return new AnimateStatement(attrs['layer'], attrs['name']);
+				return new AnimateStatement(charview.composite, attrs['part'] || attrs['layer'], attrs['name']);
+			case 'offset':
+				return new OffsetStatement(charview.composite, attrs['part'], attrs['dx'], attrs['dy'], attrs['layer']);
 		}
 		return super.unknownTag(tag, x);
 	}

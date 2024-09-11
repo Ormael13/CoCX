@@ -2,16 +2,25 @@
  * Coded by aimozg on 11.07.2017.
  */
 package coc.view {
+import coc.view.CompositeImage;
+
 import flash.display.BitmapData;
 
 internal class CompositeLayer {
+	private var _composite:CompositeImage;
+	private var _layer:String;
 	private var _name:String;
 	private var src:BitmapData;
 	private var dst:BitmapData;
 	private var keyColors:Object;// uint color24 -> uint color24
-	private var dirty:Boolean = true;
 	private var _dx:int;
 	private var _dy:int;
+	
+	public var visible:Boolean = false;
+	private var dirty:Boolean = true;
+	public var offsetx:int;
+	public var offsety:int;
+	public var currentLayer:String;
 	private var animation:LayerAnimation;
 
 	public function get width():int {
@@ -22,11 +31,15 @@ internal class CompositeLayer {
 	}
 	
 	public function get dx():int {
-		return _dx + (animation ? animation.dx() : 0);
+		return _dx + offsetx + (animation ? animation.dx() : 0);
 	}
 	
 	public function get dy():int {
-		return _dy + (animation ? animation.dy() : 0);
+		return _dy + offsety + (animation ? animation.dy() : 0);
+	}
+	
+	public function get composite():CompositeImage {
+		return _composite;
 	}
 	
 	public function advanceTime(dt:int, t2:int):Boolean {
@@ -39,16 +52,26 @@ internal class CompositeLayer {
 		if (animation) animation.reset();
 	}
 
-	public function CompositeLayer(name:String, src:BitmapData, dx:int, dy:int) {
-		this._name     = name;
+	public function CompositeLayer(composite:CompositeImage, layer:String,name:String, src:BitmapData, dx:int, dy:int) {
+		this._composite = composite;
+		this._layer     = layer;
+		this._name      = name;
 		this.src = src;
 		this._dx = dx;
 		this._dy = dy;
 		this.dst = new BitmapData(src.width, src.height,true,0);
 		this.keyColors = {};
+		this.reset();
 		this.dst.draw(src);
 	}
-
+	public function reset():void {
+		animation = null;
+		offsetx = 0;
+		offsety = 0;
+		visible = false;
+		currentLayer = _layer;
+		dirty = true;
+	}
 
 	public function get name():String {
 		return _name;
@@ -70,9 +93,9 @@ internal class CompositeLayer {
 //			animation.setKeyColors(keyColors);
 //		}
 	}
-	public function setAnimation(animation:AnimationDef, composite:CompositeImage):void {
+	public function setAnimation(animation:AnimationDef):void {
 		if (!this.animation && !animation) return;
-		this.animation = animation ? new LayerAnimation(animation, this, composite) : null;
+		this.animation = animation ? new LayerAnimation(animation, this) : null;
 //		if (animation) {
 //			animation.setKeyColors(keyColors);
 //		}
