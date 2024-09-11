@@ -141,7 +141,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
     private function emberCorruption(changes:Number = 0):Number {
         flags[kFLAGS.EMBER_COR] += changes;
         if (flags[kFLAGS.EMBER_COR] > 100) flags[kFLAGS.EMBER_COR] = 100;
-        else if (flags[kFLAGS.EMBER_COR] < 0) flags[kFLAGS.EMBER_COR] = 0;
+        else if (flags[kFLAGS.EMBER_COR] < -100) flags[kFLAGS.EMBER_COR] = -100;
         return flags[kFLAGS.EMBER_COR];
     }
 
@@ -400,7 +400,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //set flags
         player.createKeyItem("Dragon Egg", 0, 0, 0, 0);
         flags[kFLAGS.TOOK_EMBER_EGG] = 1;
-        flags[kFLAGS.EMBER_COR] = 50;
+        flags[kFLAGS.EMBER_COR] = 0;
         endEncounter();
     }
 

@@ -2733,9 +2733,14 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.57;
 				outputText("\n\nIt's PouLTice, not PoulTrice! ^^");
 				if (Garden.PotionsBagSlot01Potion == "Poultrice") Garden.PotionsBagSlot01Potion = "Poultice";
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.58) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.58;
+				outputText("\n\nEmber was bit too... corrupt to our liking so we adjusted her corruption to new standards ^^");
+				if (flags[kFLAGS.TOOK_EMBER_EGG] > 0) flags[kFLAGS.EMBER_COR] -= 50;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.59) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.59;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;

@@ -112,7 +112,7 @@ public function encounterAiko():void {
 		addButton(1, "No", aikoPeaceGreeting).hint("Don't want to fight this cute fox-girl.");
 	}
 	// Once off silly mode encounter
-	else if (flags[kFLAGS.AIKO_HOT_BLOOD] == 0 && flags[kFLAGS.AIKO_TIMES_MET]>3 && silly() && (flags[kFLAGS.AIKO_CORRUPTION] < 50 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) && rand(15)==0) {
+	else if (flags[kFLAGS.AIKO_HOT_BLOOD] == 0 && flags[kFLAGS.AIKO_TIMES_MET]>3 && silly() && (flags[kFLAGS.AIKO_CORRUPTION] < 0 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) && rand(15)==0) {
 		outputText("As you are walking a familiar-looking weed-choked trail in the deeper regions of the forest, you suddenly stop where you are, raising a hand to your ear. It’s faint, but you can hear the sounds of battle echoing through the trees.\n\n"
 		+"Readying your [weapon], you decide to investigate. The sound leads you to the clearing where the ancient tree stands, and you have to duck in order to avoid being hit by a scorching missile of blue flame as you emerge from the underbrush.\n\n"
 		+"Dominating the clearing is the largest tentacle beast you’ve ever seen! It must be ten times the size of the ones you’ve seen ambling about the woods, but thankfully it seems to be focused elsewhere. Aiko is locked in battle with the overgrown abomination, firing arrow after arrow into its leafy flesh, dodging between its fearsome tentacles and taking every opportunity to launch a flaming missile at it.\n\n"
@@ -224,7 +224,7 @@ public function encounterAiko():void {
 	}
 	else if (flags[kFLAGS.AIKO_BOSS_COMPLETE] ==0 && player.level >= 25 && flags[kFLAGS.AIKO_AFFECTION] > 90 && flags[kFLAGS.AIKO_TIMES_MET] > 3) {
 		if (flags[kFLAGS.AIKO_BOSS_INTRO] > 0) {
-			if (flags[kFLAGS.AIKO_CORRUPTION] < 50 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) {
+			if (flags[kFLAGS.AIKO_CORRUPTION] < 0 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) {
 				outputText("As you return to the Ancient Tree, you call out to Aiko. You spot her sitting at the base of the tree, with her arms around her knees. It looks like she hasn’t moved from that spot for quite some time, and the redness of her cheeks suggests she has been crying again. She looks up hopefully when you approach and asks, <i>\"[name], you’re back! Please tell me you’re ready to go now…\"</i>");
 				//[Go Now][Prepare]
 				menu();
@@ -241,7 +241,7 @@ public function encounterAiko():void {
 				addButton(2, "Prepare", yamataPrepare).hint("Go home and prepare, this will be a very tough fight!");
 			}
 		}
-		else if (flags[kFLAGS.AIKO_CORRUPTION] < 50 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) {
+		else if (flags[kFLAGS.AIKO_CORRUPTION] < 0 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) {
 			outputText("As you enter the familiar clearing looking for Aiko, you hear the faint sounds of sobbing. Curiously, you round the trunk of the tree to find Aiko slumped up against it on her knees, weeping uncontrollably into her sleeve. Taking her by the shoulders, you ask her what’s wrong, and she looks up at you with her teary, crystal blue eyes, wiping her face on her robes to try to make herself look more presentable.\n\n"
 			+"<i>\"[name], it’s... it’s my star sphere! I-I don’t know how s-she found it, b-but...\"</i>\n\n"
 			+"You grip her shoulders tightly and tell her to calm down and get a hold of herself, and she nods, drawing in a deep breath to try and control her blubbering enough to string together a coherent sentence.\n\n"
@@ -289,7 +289,7 @@ public function encounterAiko():void {
 		//encounters from 4th and on
 		outputText("You enter the clearing where the Ancient Tree stands, calling out for Aiko.\n\n");
 		var temp:int;
-		if (flags[kFLAGS.AIKO_CORRUPTION] < 50 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) {
+		if (flags[kFLAGS.AIKO_CORRUPTION] < 0 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) {
 			if (flags[kFLAGS.AIKO_AFFECTION] >= 50) {
 				temp = (flags[kFLAGS.AIKO_AFFECTION] >= 50? rand(3) : rand(2)+1);
 				if (temp == 0) //33% chance if affection > 50
@@ -301,7 +301,7 @@ public function encounterAiko():void {
 					outputText("The branches of the trees rustle a little, and suddenly she swings down, hanging from her knees off one of the lower boughs. Grinning widely, she releases her grip and gracefully flips to the ground… only to fail to stick the landing and slip onto her plump derriere with a yelp! She picks herself up and brushes herself off, trying to pretend like nothing happened, but you can’t help but chuckle a little.\n\n");
 				if (flags[kFLAGS.AIKO_AFFECTION] >= 75)
 					outputText("She gives you a quick hug and a peck on the cheek in greeting. ");
-				outputText((flags[kFLAGS.AIKO_CORRUPTION] <= 20 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0? "She then walks over to the great tree and casually leans against it, her arms behind her back as she smiles at you cutely. She’s every bit as peppy and effervescent as always." : (flags[kFLAGS.AIKO_CORRUPTION] <= 40 ? "She then walks up to the tree, seeming a bit less energetic than usual. The old spark in her eyes has gone dull, but in its place there is a glimmer of something… else. You wonder if you’re starting to rub off on her a little." : "She has an odd sway in her step, and something about her just seems… off. You’re beginning to suspect that hanging around you has started to seriously affect her personality."))
+				outputText((flags[kFLAGS.AIKO_CORRUPTION] <= -40 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0? "She then walks over to the great tree and casually leans against it, her arms behind her back as she smiles at you cutely. She’s every bit as peppy and effervescent as always." : (flags[kFLAGS.AIKO_CORRUPTION] <= -40 ? "She then walks up to the tree, seeming a bit less energetic than usual. The old spark in her eyes has gone dull, but in its place there is a glimmer of something… else. You wonder if you’re starting to rub off on her a little." : "She has an odd sway in her step, and something about her just seems… off. You’re beginning to suspect that hanging around you has started to seriously affect her personality."))
 				+"The whole clearing is bathed in a soft azure glow from the ethereal flames that dance through the branches.\n\n"
 				+"<i>\"Hi [name], what’s goin’ on?\"</i>");
 				//[Talk][Sex][Both][Spar][Fight]--[Leave]
@@ -314,7 +314,7 @@ public function encounterAiko():void {
 				addButton(9, "Corruption "+(flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] ==0?"off":"on"), toggleCorruption).hint(flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] == 0 ? "Aiko's corruption is disabled":"Aiko's corruption is enabled");
 				addButton(14, "Leave", leave).hint("Leave the clearing");
 			} else {
-				outputText("You have to duck when an arrow goes whizzing by your head, sticking into a tree behind you with a thud. Aiko marches out of the underbrush and pulls out another arrow, walking up to stand by the Ancient Tree. "+((flags[kFLAGS.AIKO_CORRUPTION] <= 20 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) ?"You can see that same spark of life and pride in her eyes as always." : (flags[kFLAGS.AIKO_CORRUPTION] <= 40 ? "The spark of pride and life is gone from her eyes, replaced with something colder. You have your suspicions that she has you to thank for that." : "She seems to have an unsettling sway in her gait, like she’s just a little off balance. There is a look in her eye that suggests her mind might be going slightly unhinged as well."))+" Ethereal blue flames dance around the clearing, casting everything in a pale, ghostly light.\n\n"
+				outputText("You have to duck when an arrow goes whizzing by your head, sticking into a tree behind you with a thud. Aiko marches out of the underbrush and pulls out another arrow, walking up to stand by the Ancient Tree. "+((flags[kFLAGS.AIKO_CORRUPTION] <= -40 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) ?"You can see that same spark of life and pride in her eyes as always." : (flags[kFLAGS.AIKO_CORRUPTION] <= -20 ? "The spark of pride and life is gone from her eyes, replaced with something colder. You have your suspicions that she has you to thank for that." : "She seems to have an unsettling sway in her gait, like she’s just a little off balance. There is a look in her eye that suggests her mind might be going slightly unhinged as well."))+" Ethereal blue flames dance around the clearing, casting everything in a pale, ghostly light.\n\n"
 				+"<i>\"That was a warning shot... What do you want?\"</i>");
 				//[Talk][Sex][Talk&Sex][Fight]--[Corruption]--[Leave]
 				menu();
@@ -703,8 +703,8 @@ private function aikoTalkE2():void {
 	+"<i>\"Okay,\"</i> she says cheerfully, taking care of the cleanup with a snap of her fingers. <i>\"Be sure to visit again soon!\"</i>"
 	+"You tell her you’ll certainly try, and wave to her as you set off.");
 	flags[kFLAGS.AIKO_AFFECTION] += 3;
-	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 5;
-	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 10;
+	if (flags[kFLAGS.AIKO_CORRUPTION]<-100) flags[kFLAGS.AIKO_CORRUPTION] = -100;
 	endEncounter();
 }
 
@@ -755,8 +755,8 @@ private function aikoApologySincere():void {
 	+"You tell her that’s fine; you can wait until she’s ready. Feeling as if your conscience grown a little lighter, you stroll off toward camp.");
 	player.dynStats("cor", -5);
 	flags[kFLAGS.AIKO_AFFECTION] = 50;
-	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 5;
-	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 10;
+	if (flags[kFLAGS.AIKO_CORRUPTION]<-100) flags[kFLAGS.AIKO_CORRUPTION] = -100;
 	endEncounter();
 }
 
@@ -766,7 +766,7 @@ private function aikoApologyTrick():void {
 	outputText("You smile as she offers her hand, still visibly a little apprehensive, but willing to give you the benefit of the doubt. Big mistake on her part. Your smile turns to an evil grin as you roughly grab her hand and yank her off balance, wrestling her to the ground.\n\n");
 	player.dynStats("cor", 5);
 	flags[kFLAGS.AIKO_AFFECTION] -= 8;
-	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] += 10;
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] += 20;
 	if (player.str > 35) {
 		outputText("She screams, struggling in vain against your superior physical strength as you beat her into submission, ripping her clothes off to claim your prize.\n\n"
 		+"<i>\"Y-you fucking "+player.mf("bastard","cunt")+"!\"</i> she is in tears now, her face covered with dirt and scratches from the way you tumbled around with her. <i>\"I knew I shouldn’t have trusted you!\"</i>\n\n"
@@ -845,8 +845,8 @@ private function aikoTalkE3():void {
 		+"Without another word, you make your way back to camp.");
 	}
 	flags[kFLAGS.AIKO_AFFECTION] += 3;
-	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 5;
-	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 10;
+	if (flags[kFLAGS.AIKO_CORRUPTION]<-100) flags[kFLAGS.AIKO_CORRUPTION] = -100;
 	endEncounter();
 }
 
@@ -879,8 +879,8 @@ private function aikoTalk():void {
 	}
 	flags[kFLAGS.AIKO_AFFECTION] += 3;
 	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] == 1)
-		flags[kFLAGS.AIKO_CORRUPTION] -= 5;
-	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
+		flags[kFLAGS.AIKO_CORRUPTION] -= 10;
+	if (flags[kFLAGS.AIKO_CORRUPTION]<-100) flags[kFLAGS.AIKO_CORRUPTION] = -100;
 	//[Giant Bees][Tentacle Beasts][Goblins][Akbal][Kitsune Culture][Aiko][Mansion Sisters][?Ayane?][Nine-Tails][Aiko's Family] [Archery]--[Leave]
 	menu();
 	addButton(0, "Giant Bees", talkBees).hint("Ask her about the Giant Bees in the forest");
@@ -1194,7 +1194,7 @@ public function aikoConsSex():void {
 		addButtonDisabled(5, "???", "You don't know her close enough for that.");
 	}
 	addButton(9, "Submit", submitToAiko).hint("Submit to Aiko and see what she does with you")
-		.disableIf(!flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] || flags[kFLAGS.AIKO_CORRUPTION] <= 50,
+		.disableIf(!flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] || flags[kFLAGS.AIKO_CORRUPTION] <= 0,
 			"She isn't corrupted enough (or corruption is disabled).");
 	addButton(14, "Leave", leave).hint("Leave the clearing without touching her.");
 }
@@ -1256,7 +1256,7 @@ public function sparWithAikoLose(aikoLust:int):void {
 private function aikoFight():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
-	if (flags[kFLAGS.AIKO_CORRUPTION] > 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
+	if (flags[kFLAGS.AIKO_CORRUPTION] > 0 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
 		outputText("You tell her that you’re going to fuck her whether she likes it or not, readying your [weapon]. She grins a wicked grin, seeming to be quite pleased with your enthusiasm, and shouts, <i>\"That’s what we like to hear! Come and fuckin’ get it, bitch!\"</i>")
 	} else {
 		outputText("Making up your mind, you lunge at her without warning, your [weapon] raised and ready to fight. She jumps back out of the way, narrowly dodging your sudden attack, and raises her bow to defend herself.");
@@ -1274,7 +1274,7 @@ public function pcWinsDomFight():void {
 	spriteSelect(SpriteDb.s_aiko);
 	if (player.hasStatusEffect(StatusEffects.DomFight))
 		player.removeStatusEffect(StatusEffects.DomFight);
-	if (flags[kFLAGS.AIKO_CORRUPTION] < 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
+	if (flags[kFLAGS.AIKO_CORRUPTION] < 0 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
 		outputText("Aiko stumbles and falls to the ground, panting hard. Though she puts up a good fight, in the end it seems her muscles are too weak to carry on, and she just stays slumped on the ground, looking up at you with a crazed fire in her eyes.\n\n"
 		+"<i>\"Eh...heh...haha... So you DO know how to show a girl a good time. Maybe you’re not such a "+ player.mf("limp-dicked choir boy","washed-up whore")+" after all.\"</i> she says, grinning sarcastically. <i>\"Well come on, or are you too much of a wuss to go through with it now that I’m on the ground?\"</i>\n\n"
 		+"Even though you know she’s just doing it to piss you off, her words have the desired effect, and you are suddenly struck with the urge to teach this passive-aggressive bitch a lesson. What will you do to her?");
@@ -1291,7 +1291,7 @@ public function pcLosesDomFight():void {
 	spriteSelect(SpriteDb.s_aiko);
 	if (player.hasStatusEffect(StatusEffects.DomFight))
 		player.removeStatusEffect(StatusEffects.DomFight);
-	if (flags[kFLAGS.AIKO_CORRUPTION] < 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
+	if (flags[kFLAGS.AIKO_CORRUPTION] < 0 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
 		var x:int = player.biggestCockIndex();
 		outputText("You fall to the ground, giving in to the crazed vixen’s power. Aiko approaches with a toothy grin and a glimmer of insanity in her eyes as she begins to disrobe, letting her clothes lay haphazardly where they drop. She plants a foot on your chest and pushes you back, giving you a smug little smirk as you collapse backward onto the ground.\n\n"
 		+"With a crack of her knuckles she begins to methodically tear your [armor] away from your form, leaving you nude and fully exposed to her wrath. Too weakened to resist her advances, you are forced to watch as she lowers herself down to straddle you, clawing her fingernails down your [chest]. The sensation is both painful and arousing, eliciting a small groan from your throat as her nails leave behind a series of deep, quickly-reddening scratches.\n\n"
@@ -1337,7 +1337,7 @@ public function aikoRapeSex():void {
  * Update Aiko's flags and the players corruption after rape.
  */
 private function postRapeUpdate(): void {
-	if (flags[kFLAGS.AIKO_CORRUPTION] >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0) {
+	if (flags[kFLAGS.AIKO_CORRUPTION] >= 0 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0) {
 		flags[kFLAGS.AIKO_AFFECTION] += 5;
 	} else {
 		flags[kFLAGS.AIKO_AFFECTION] -= 5;
@@ -1350,9 +1350,9 @@ private function postRapeUpdate(): void {
 		}
 	}
 	if ((player.cor > flags[kFLAGS.AIKO_CORRUPTION] || player.hasPerk(PerkLib.Sadist)) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) {
-		flags[kFLAGS.AIKO_CORRUPTION] += 12;
+		flags[kFLAGS.AIKO_CORRUPTION] += 24;
 	} else if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] == 1) {
-		flags[kFLAGS.AIKO_CORRUPTION] += 8;
+		flags[kFLAGS.AIKO_CORRUPTION] += 16;
 	}
 	if (flags[kFLAGS.AIKO_CORRUPTION] > 100) {
 		flags[kFLAGS.AIKO_CORRUPTION] = 100;
@@ -1365,11 +1365,11 @@ private function postRapeUpdate(): void {
 private function postSexUpdate(): void {
 	flags[kFLAGS.AIKO_AFFECTION] += 4;
 	if (player.cor >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
-		flags[kFLAGS.AIKO_CORRUPTION] += 4;
+		flags[kFLAGS.AIKO_CORRUPTION] += 8;
 	}
-	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0 && flags[kFLAGS.AIKO_CORRUPTION] >= 0 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
 		player.cor += 2;
-		flags[kFLAGS.AIKO_CORRUPTION] -= 2;
+		flags[kFLAGS.AIKO_CORRUPTION] -= 4;
 	}
 }
 
@@ -1533,10 +1533,10 @@ private function aikoSexMissionary():void {
 	flags[kFLAGS.AIKO_SEXED]++;
 	flags[kFLAGS.AIKO_AFFECTION] += 4;
 	if (player.cor >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
-		flags[kFLAGS.AIKO_CORRUPTION] += 4;
-	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
+		flags[kFLAGS.AIKO_CORRUPTION] += 8;
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 0 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
 		player.cor += 2;
-		flags[kFLAGS.AIKO_CORRUPTION] -= 2;
+		flags[kFLAGS.AIKO_CORRUPTION] -= 4;
 	}
 	if (player.hasStatusEffect(StatusEffects.Spar)) {
 		player.removeStatusEffect(StatusEffects.Spar);
@@ -1682,9 +1682,9 @@ private function aikoSexTailjob():void {
 	+"<i>\"Few people get to enjoy my tails like this... and you definitely seem to appreciate it, [name]... next time, I'll see to it that you even the odds...\"</i> She giggles as you pull her close for another kiss, earning a playful grin. Breaking it with a sigh, you tell her you have to return to your camp, but you promise next time you bathe her in pleasure.");
 	flags[kFLAGS.AIKO_SEXED]++;
 	flags[kFLAGS.AIKO_AFFECTION] += 4;
-	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 0 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
 		player.cor += 2;
-		flags[kFLAGS.AIKO_CORRUPTION] -= 2;
+		flags[kFLAGS.AIKO_CORRUPTION] -= 4;
 	}
 	player.sexReward("no", "Dick");
 	if (player.hasStatusEffect(StatusEffects.Spar)) {
@@ -1708,7 +1708,7 @@ private function aikoSexKitsuneTailjob():void {
 			+"Slowly, you tangle your bundle of tails with hers, rubbing against each of them in a slow, sensual, almost caressing manner. You turn your head to look at the other kitsune, only to find her slowly hunching over, and the back of her neck slowly getting redder. "
 			+"As your tails continue to get intimate with each other, you can start to feel a heat developing in your gut. It isn't quite the same feeling as going into "+((player.gender == 1)?"rut":(player.gender == 2)?"heat":" both heat and rut")+ ", but it certainly feels just as intense. Slowly, the sensation rises up your spine, until it takes complete and sudden hold of your slowly melting brain" + ((flags[kFLAGS.AIKO_FIRST_CHOICE] == 6)? ", and you understand why she reacted the way she did the first time":"")+ ".\n\n"
 			+"It takes over your thoughts rapidly, forcing you to think of nothing else but how good it feels, the way each individual strand of fur caresses the other, and you let your tongue hang out, too enraptured by the sensations to think about keeping it in your mouth. Behind you, Aiko had collapsed onto her side, curling up into a fetal position, her tails continuing to fluff-fight against your own set, while the occasional drip-drip-dripping sound could be heard from her mouth. Or was it her pussy? Doesn't matter, you think, as your own mouth starts drooling.\n\n"
-			+"As you continue to sway, you are suddenly met with the loss of feeling from your tails, but you are still too consumed by the effects to react in time to Aiko's sudden attack from behind, finally pushing you onto the floor. She smiles, her body exuding lust, "+ ((flags[kFLAGS.AIKO_CORRUPTION] >= 50)?"and bites you on the neck, slightly drawing blood":"and leans in to give you a smooch on the lips")+", while her and your tails rove around, searching for their lost partners. \n\n"
+			+"As you continue to sway, you are suddenly met with the loss of feeling from your tails, but you are still too consumed by the effects to react in time to Aiko's sudden attack from behind, finally pushing you onto the floor. She smiles, her body exuding lust, "+ ((flags[kFLAGS.AIKO_CORRUPTION] >= 0)?"and bites you on the neck, slightly drawing blood":"and leans in to give you a smooch on the lips")+", while her and your tails rove around, searching for their lost partners. \n\n"
 			+"Slowly, they resume their ministrations, "+((player.tailCount==9)?"the extra "+((flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)?"tail":"tails"):"")+" twirling around, gliding across her soft fur... wait, since when did your clothes get remo...ohhh that feels warm,  "
 			+((player.tailCount==9)?"as your extra "+ ((flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)?"tail":"tails"):"as one of your tails")+" suddenly finds her box, and plunges into her, elicting a shriek and then a long moan from your partner as your "+ ((flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)?"floof":"floofs")+" start to work their magic, spearing her open while only stretching her out just enough to contain it. \n\n"
 			+"Your lust addled mind continues to shut down, going to basic mode when you suddenly feel something around your "+ ((flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)?"tail":"tails")+", and are shocked to realise that you reached the entrance of her womb, lightly tickling the cervix, which causes stars to burst out of her eyes, and the ghostly flames surrounding the place to flare up, glowing immensely brighter than they were before. You are further spooked when the same flames start to envelop your tails, both cool to the touch while fanning your own flames even higher.\n\n"
@@ -1716,9 +1716,9 @@ private function aikoSexKitsuneTailjob():void {
 			+"Coming down from the high takes a while, and you both cuddle each other, arms and tails surround and covering you both like a makeshift blanket on the cool ground. When you wake up, " +((flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)?(player.tailCount >8)?"you see that she is still slightly out of it, and attribute your slightly better state to your extra tail.":"you see that she is stirring, woken up by your movements.":(player.tailCount >=8)?"you see that she is still out like a light, and attribute your slightly better state to your extra "+((player.tailCount==8)?"tail.":"tails."):"you see that she has woken up, though still exhausted from your tryst.")+" As you leave, she quietly whispers behind you <i>" + ((flags[kFLAGS.AIKO_FIRST_CHOICE] == 6 || flags[kFLAGS.AIKO_DONE_KITSUNETJ] == 1)? "":"My first time")+ "...that...was something...elszzzz </i> and promptly falls asleep once more, utterly drained from the excitement, tails limply splayed.");
 	flags[kFLAGS.AIKO_SEXED]++;
 	flags[kFLAGS.AIKO_AFFECTION] += 5;
-	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0 && flags[kFLAGS.AIKO_CORRUPTION] >= 0 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
 		player.cor += 3;
-		flags[kFLAGS.AIKO_CORRUPTION] -= 3;
+		flags[kFLAGS.AIKO_CORRUPTION] -= 6;
 	}
 	postSexUpdate();
 	flags[kFLAGS.AIKO_DONE_KITSUNETJ] = 1;
@@ -1818,7 +1818,7 @@ private function aikoWhipping():void {
 private function yamataTalk():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
-	if (flags[kFLAGS.AIKO_CORRUPTION] < 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] <= 0) {
+	if (flags[kFLAGS.AIKO_CORRUPTION] < 0 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] <= 0) {
 		outputText("You ask Aiko if there’s anything else she can tell you about her half-sister.\n\n"
 		+"She sniffs, looking up at you from her place on the ground, and nods a bit, standing up to face you. Brushing herself off, she composes herself and says, <i>\"We never really got along... I mean, it started as just general sibling stuff... but the day I was chosen to be the village guardian, I think that was just the last straw for her. We both had wanted the position our whole childhood, and when she was passed over...\"</i>\n\n"
 		+"Aiko snaps her fingers to emphasize her point, sighing sadly.\n\n"
@@ -1849,7 +1849,7 @@ private function yamataStart():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
 	outputText("You tell Aiko you’re ready to go, asking her to lead you to the village now. She seems to perk up when she hears this, and nods.\n\n");
-	if (flags[kFLAGS.AIKO_CORRUPTION] < 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] <= 0) {
+	if (flags[kFLAGS.AIKO_CORRUPTION] < 0 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] <= 0) {
 		outputText("<i>\"Okay, follow me,\"</i> she says, taking your hand gently and pulling you along. She takes you from the clearing, leading you down a barely-visible dirt path. After a short walk, you spot a large wooden arch of strange design, seemingly erected in the middle of nowhere. It obviously has been maintained by someone, as its bright red paint shows little signs of fading and discoloration, but looking around, you can’t see any other signs of a civilization.\n\n"
 		+"<i>\"Stand here,\"</i> Aiko says, walking up to stand in the arch. She reaches into her robes and pulls out a small paper talisman, placing it on the ground in the center, and stands back. With what seems to be a monumental effort, she summons up a small wisp of blue flame into her palm. Struggling with even the most rudimentary spells, it seems like her magic has been nearly depleted.\n\n"
 		+"As she touches the flame to the paper, the entire archway is suddenly filled with the mystical fire, forcing you to shield your eyes from the blinding light. When the flames subside, you can now see a quaint village beyond the arch! Curiously, you walk the perimeter of the arch, and surely enough, the village is only visible when you are looking through the archway itself.\n\n"
@@ -1877,7 +1877,7 @@ private function yamataIntro():void {
 	+"<i>\"Oh, my master knows all about you... We’ve been watching and waiting for the right time to strike... To think I get to exact my revenge on my dear, sweet sister, turn this fucked-up village into my personal playground, AND finally get you out of the way all in one fell swoop!\"</i> She raises her arms to the sky and begins to laugh hysterically, then finally snaps her attention back to you, licking her lips hungrily. <i>\"You’ve been a thorn in our side for so long... What exactly do you have against a little anarchy? Chaos is what makes the world go ‘round! We’re all just bits of cosmic dust on the face of a worthless star sphere of mud anyway, crashing around the heavens in a perpetual outward spiral until we finally go out in one glorious, cacophonous universal heat death! Why not enjoy the ride, AM I RIGHT?!\"</i>\n\n"
 	+"Wow. This bitch really is crazy. You have no idea what she’s going on about, but you do know that you have to get Aiko’s star sphere back, and the only way that’s going to happen is if you defeat this woman. You ready your [weapon], preparing to fight.\n\n"
 	+"<i>\"Mn... that’s good, I like when my prey has a little bit of fight in them. Muramasa!\"</i> she yells, holding her hand out to the side. A glowing circle adorned with runes appears in midair, and from it, she begins to draw a massive black blade that seems to be bathed in corrupted energy. The twisted weapon looks like something out of a nightmare, its straight edge curving forward into a sharp spike that looks like it could easily puncture even the most stout armors. <i>\"Scared yet? You should be...\"</i> she says, flipping the blade up onto her shoulder as a wall of corrupted fire begins to spread out from behind her, encircling the two of you and separating you from Aiko. It looks like you have no choice but to finish this fight!\n\n"
-	+"<i>\"[name]! "+(flags[kFLAGS.AIKO_CORRUPTION] < 50 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0?"I... I believe in you!" : "Kick that cocky bitch’s ass!" )+"\"</i>");
+	+"<i>\"[name]! "+(flags[kFLAGS.AIKO_CORRUPTION] < 0 || flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0?"I... I believe in you!" : "Kick that cocky bitch’s ass!" )+"\"</i>");
 	startCombat(new Yamata());
 }
 

@@ -72,7 +72,7 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("A"));
 				this.tallness = 72;
 				initStrTouSpeInte(60, 80, 40, 100);
-				initWisLibSensCor(100, 90, 50, 50);
+				initWisLibSensCor(100, 90, 50, 0);
 				this.weaponName = "spiked fists";
 				this.weaponVerb = "smash";
 				this.weaponAttack = 18;
@@ -89,7 +89,7 @@ package classes.Scenes.NPCs
 				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's twelve feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
 				this.tallness = 144;
 				initStrTouSpeInte(100, 120, 80, 100);
-				initWisLibSensCor(100, 100, 60, 50);
+				initWisLibSensCor(100, 100, 60, 0);
 				this.weaponAttack = 36;
 				this.armorDef = 100;
 				this.armorMDef = 100;
@@ -103,7 +103,7 @@ package classes.Scenes.NPCs
 				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's fourteen feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
 				this.tallness = 168;
 				initStrTouSpeInte(120, 140, 100, 100);
-				initWisLibSensCor(100, 110, 70, 50);
+				initWisLibSensCor(100, 110, 70, 0);
 				this.weaponAttack = 44;
 				this.armorDef = 125;
 				this.armorMDef = 125;
@@ -117,7 +117,7 @@ package classes.Scenes.NPCs
 				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's sixteen feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
 				this.tallness = 192;
 				initStrTouSpeInte(140, 160, 120, 100);
-				initWisLibSensCor(100, 120, 80, 50);
+				initWisLibSensCor(100, 120, 80, 0);
 				this.weaponAttack = 52;
 				this.armorDef = 150;
 				this.armorMDef = 150;

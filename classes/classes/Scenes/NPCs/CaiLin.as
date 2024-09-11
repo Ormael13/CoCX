@@ -196,7 +196,7 @@ public class CaiLin extends Monster
 				this.tallness = 5*12+10;
 				this.hairLength = 10;
 				initStrTouSpeInte(75, 100, 95, 50);
-				initWisLibSensCor(50, 30, 20, 40);
+				initWisLibSensCor(50, 30, 20, -20);
 				this.weaponAttack = 45;
 				this.armorDef = 40;
 				this.armorMDef = 30;
@@ -214,7 +214,7 @@ public class CaiLin extends Monster
 				this.tallness = 6*12;//potem z każdą zmianą dodawać jej 2 wzrostu tak aby ostatecznie osiągneła coś koło 6*12+10 (then with each change, add 2 units of growth so that eventually she reaches something around 6*12+10.)
 				this.hairLength = 12;
 				initStrTouSpeInte(90, 120, 110, 70);//lvl-up daje +15, +20, +15, +20
-				initWisLibSensCor(70, 45, 30, 40);//lvl-up daje +20, +15, +10, +0
+				initWisLibSensCor(70, 45, 30, -20);//lvl-up daje +20, +15, +10, +0
 				this.weaponAttack = 45;
 				this.armorDef = 40;
 				this.armorMDef = 30;
