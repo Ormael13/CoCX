@@ -43,7 +43,7 @@ public class GoblinBroodmother extends Goblin
 			this.hairColor = "purple";
 			this.hairLength = 4;
 			initStrTouSpeInte(100, 90, 80, 100);
-			initWisLibSensCor(100, 81, 43, 70);
+			initWisLibSensCor(100, 81, 43, 40);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
 			this.weaponAttack = 20;

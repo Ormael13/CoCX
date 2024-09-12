@@ -38,7 +38,7 @@ import classes.internals.*;
 			this.hairColor = "green";
 			this.hairLength = 16;
 			initStrTouSpeInte(91, 125, 110, 75);
-			initWisLibSensCor(75, 72, 55, 40);
+			initWisLibSensCor(75, 72, 55, -20);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
 			this.weaponAttack = 31;

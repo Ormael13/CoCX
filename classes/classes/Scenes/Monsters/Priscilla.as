@@ -153,7 +153,7 @@ public class Priscilla extends Goblin
 		{
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] < 1) {
 				initStrTouSpeInte(115, 95, 80, 120);
-				initWisLibSensCor(120, 65, 35, 45);
+				initWisLibSensCor(120, 65, 35, -10);
 				this.weaponAttack = 35;
 				this.armorDef = 48;
 				this.armorMDef = 18;
@@ -163,7 +163,7 @@ public class Priscilla extends Goblin
 			}
 			else if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) {
 				initStrTouSpeInte(335, 205, 278, 340);
-				initWisLibSensCor(340, 120, 90, 45);
+				initWisLibSensCor(340, 120, 90, -10);
 				this.weaponAttack = 90;
 				this.armorDef = 125;
 				this.armorMDef = 51;
@@ -174,7 +174,7 @@ public class Priscilla extends Goblin
 			else {	//leave min and max levels to easily balance npc combat
 				var lvlMulti:Number = flags[kFLAGS.PRISCILLA_LVL_UP];
 				initStrTouSpeInte(115 + 20*lvlMulti, 95 + 10*lvlMulti, 80 + 18*lvlMulti, 120 + 20*lvlMulti);
-				initWisLibSensCor(120 + 20*lvlMulti, 65 + 5*lvlMulti, 35 + 5*lvlMulti, 45);
+				initWisLibSensCor(120 + 20*lvlMulti, 65 + 5*lvlMulti, 35 + 5*lvlMulti, -10);
 				this.weaponAttack = 35 + 5*lvlMulti;
 				this.armorDef = 48 + 7*lvlMulti;
 				this.armorMDef = 18 + 3*lvlMulti;

@@ -143,7 +143,7 @@ public class LadyRafflesia extends Monster
 			this.bodyColor = "lavender";
 			this.hairColor = "pink";
 			initStrTouSpeInte(330, 390, 28, 170);
-			initWisLibSensCor(170, 330, 160, 0);
+			initWisLibSensCor(170, 330, 160, 100);
 			this.armorDef = 300;
 			this.armorMDef = 60;
 			this.bonusHP = 1000;

@@ -6076,6 +6076,7 @@ public final class Mutations extends MutationsHelper {
         var choice:int;
         var changes:Number = 0;
         var changeLimit:Number = 2;
+		var crit:Number = int(Math.random() * 20) / 10 + 2;
         var temp2:Number = 0;
         var temp3:Number = 0;
         if (rand(2) == 0) changeLimit++;
@@ -6193,6 +6194,79 @@ public final class Mutations extends MutationsHelper {
             }
             //Count that tits were shrunk
             if (temp3 > 0) changes++;
+        }
+        //Multiboobages
+        if (changes < changeLimit && player.breastRows.length > 0) {
+            //if bigger than A cup
+            if (player.breastRows[0].breastRating > 0 && player.vaginas.length > 0) {
+                //Catto only get 3 rows of tits! ORMAEL HAS SPOKEN
+                if (player.breastRows.length < 3 && rand(2) == 0 && changes < changeLimit) {
+                    //Store choice to the index of the newest row
+                    choice = player.breastRows.length - 1;
+                    //Breasts are too small to grow a new row, so they get bigger first
+                    //But ONLY if player has a vagina (dont want dudes weirded out)
+                    if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length-1) {
+                        outputText("[pg]Your [breasts] feel constrained and painful against your top as they grow larger by the moment, finally stopping as they reach ");
+                        player.breastRows[0].breastRating += 2;
+                        outputText(player.breastCup(0) + " size.  But it doesn't stop there, you feel a tightness beginning lower on your torso...");
+                        changes++;
+                    }
+                    //Had 1 row to start
+                    if (player.breastRows.length == 1) {
+                        //1 size below primary breast row!
+                        transformations.CopyBreastRow().applyEffect();
+                        dynStats("lus", 5, "scale", false);
+                        player.addCurse("sen", 6, 1);
+                        changes++;
+                    }
+                    //Many breast Rows - requires larger primary tits...
+                    if (player.breastRows.length > 1 && player.breastRows[0].breastRating > player.breastRows.length+1) {
+                        dynStats("lus", 5, "scale", false);
+                        player.addCurse("sen", 6, 1);
+                        //New row's size = the size of the row above -1
+                        transformations.CreateBreastRow(player.breastRows[choice].breastRating - 1).applyEffect();
+                        changes++;
+                    }
+                    //Extra sensitive if crit
+                    if (crit > 1) {
+                        if (crit > 2) {
+                            outputText("[pg]You heft your new chest experimentally, exploring the new flesh with tender touches.  Your eyes nearly roll back in your head from the intense feelings.");
+                            dynStats("lus", 15)
+                            player.addCurse("sen", 6, 1);
+                        } else {
+                            outputText("  You touch your new nipples with a mixture of awe and desire, the experience arousing beyond measure.  You squeal in delight, nearly orgasming, but in time finding the willpower to stop yourself.");
+                            dynStats("lus", 10, "scale", false);
+                            player.addCurse("sen", 3, 1);
+                        }
+                    }
+                }
+                //If already has max catto breasts!
+                else if (rand(2) == 0) {
+                    //Check for size mismatches, and move closer to spec!
+                    choice = player.breastRows.length;
+                    temp2 = 0;
+                    var evened:Boolean = false;
+                    //Check each row, and if the row above or below it is
+                    while (choice > 1 && temp2 == 0) {
+                        choice--;
+                        //Gimme a sec
+                        if (player.breastRows[choice].breastRating + 1 < player.breastRows[choice - 1].breastRating) {
+                            if (!evened) {
+                                evened = true;
+                                outputText("\n");
+                            }
+                            outputText("\nYour ");
+                            if (choice > 4) outputText("");
+                            else outputText(num2Text2(choice));
+                            outputText("row of " + breastDescript(choice) + " grows larger, as if jealous of the jiggling flesh above.");
+                            temp2 = (player.breastRows[choice - 1].breastRating) - player.breastRows[choice].breastRating - 1;
+                            if (temp2 > 5) temp2 = 5;
+                            if (temp2 < 1) temp2 = 1;
+                            player.breastRows[choice].breastRating += temp2;
+                        }
+                    }
+                }
+            }
         }
         //Cat dangly-doo.
         if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.ears.type == Ears.CAT || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {

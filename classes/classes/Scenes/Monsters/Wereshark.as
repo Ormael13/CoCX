@@ -51,7 +51,7 @@ import classes.internals.*;
 			this.hairColor = "silver";
 			this.hairLength = 10;
 			initStrTouSpeInte(295, 210, 210, 111);
-			initWisLibSensCor(111, 104, 35, 85);
+			initWisLibSensCor(111, 104, 35, 70);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
 			this.weaponAttack = 37;
