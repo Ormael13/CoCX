@@ -65,7 +65,7 @@ public class GolemsDummy extends AbstractGolem
 				this.imageName = "dummy golems";
 				this.long = "You're currently fighting dummy golems. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 				initStrTouSpeInte(100, 100, 50, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.tallness = 72;
 				this.level = 15;
 				this.bonusHP = 50;
@@ -80,7 +80,7 @@ public class GolemsDummy extends AbstractGolem
 				this.imageName = "improved dummy golems";
 				this.long = "You're currently fighting improved dummy golems. They're all around six and half feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 				initStrTouSpeInte(180, 180, 90, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.tallness = 78;
 				this.level = 24;
 				this.bonusHP = 100;
@@ -95,7 +95,7 @@ public class GolemsDummy extends AbstractGolem
 				this.imageName = "advanced dummy golems";
 				this.long = "You're currently fighting advanced dummy golems. They're all around seven feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 				initStrTouSpeInte(260, 260, 130, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.tallness = 84;
 				this.level = 33;
 				this.bonusHP = 150;
@@ -110,7 +110,7 @@ public class GolemsDummy extends AbstractGolem
 				this.imageName = "superior dummy golems";
 				this.long = "You're currently fighting superior dummy golems. They're all around seven feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 				initStrTouSpeInte(340, 340, 170, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.tallness = 84;
 				this.level = 42;
 				this.bonusHP = 200;

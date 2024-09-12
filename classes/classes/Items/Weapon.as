@@ -72,9 +72,11 @@ public class Weapon extends Equipable
 			var multiplier:Number = 100; // %
 			var bonus:Number = 0;
 			var playerCor:Number = player.cor;
-			if (player.hasPerk(PerkLib.MentalBastion) && player.cor < 50) playerCor = (100 - player.cor);
 			var playerPurity:Number = (100 - player.cor);
-			if (player.hasPerk(PerkLib.MentalBastion) && player.cor > 50) playerPurity = player.cor;
+			if (player.hasPerk(PerkLib.MentalBastion)) {
+				playerCor = 100;
+				playerPurity = 100;
+			}
 			// result = (attack + baseAttackBonuss) * scale * (multiplier/100) + bonus
 			
 			var stat:Number;

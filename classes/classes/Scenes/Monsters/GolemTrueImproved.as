@@ -76,7 +76,7 @@ package classes.Scenes.Monsters
 			this.imageName = "improved true golem";
 			this.long = "You're currently fighting improved true golem. It's seven and half feet tall without any sexual characteristics, it stone body lacking any cracks dummy ones possesed and using it bare stone fists to smash enemies.";
 			initStrTouSpeInte(200, 160, 120, 10);
-			initWisLibSensCor(10, 10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 0);
 			this.tallness = 90;
 			this.drop = NO_DROP;
 			this.level = 42;

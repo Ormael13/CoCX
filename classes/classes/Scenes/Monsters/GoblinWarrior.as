@@ -72,7 +72,7 @@ public class GoblinWarrior extends Goblin
 			this.hairColor = "red";
 			this.hairLength = 4;
 			initStrTouSpeInte(75, 60, 70, 72);
-			initWisLibSensCor(70, 45, 45, 60);
+			initWisLibSensCor(70, 45, 45, 20);
 			this.weaponName = "sword and shield";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 14;

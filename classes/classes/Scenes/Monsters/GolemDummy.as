@@ -58,7 +58,7 @@ package classes.Scenes.Monsters
 				this.imageName = "dummy golem";
 				this.long = "You're currently fighting the dummy golem. It's six feet tall, without any sexual characteristics. It has a stone body covered in cracks. It has no weapons, using its grey stone fists to smash enemies.";
 				initStrTouSpeInte(20, 20, 10, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.level = 6;
 				this.bonusHP = 50;
 				this.additionalXP = 50;
