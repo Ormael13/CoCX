@@ -182,7 +182,7 @@ public class Isabella extends Monster
 			var lvlMulti:Number = flags[kFLAGS.ISABELLA_LVL_UP];
 			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
 				initStrTouSpeInte(210, 265, 180, 128);
-				initWisLibSensCor(128, 128, 50, 40);
+				initWisLibSensCor(128, 128, 50, -20);
 				this.weaponAttack = 90;
 				this.armorDef = 160;
 				this.armorMDef = 40;
@@ -192,7 +192,7 @@ public class Isabella extends Monster
 			}
 			else if (flags[kFLAGS.ISABELLA_LVL_UP] <= 15) {	//leave min and max levels to easily balance npc combat
 				initStrTouSpeInte(210 + 40*lvlMulti, 265 + 50*lvlMulti, 180 + 30*lvlMulti, 128 + 18*lvlMulti);
-				initWisLibSensCor(128 + 18*lvlMulti, 128 + 10*lvlMulti, 50 + 5*lvlMulti, 40);
+				initWisLibSensCor(128 + 18*lvlMulti, 128 + 10*lvlMulti, 50 + 5*lvlMulti, -20);
 				this.weaponAttack = 90 + 15*lvlMulti;
 				this.armorDef = 160 + 80*lvlMulti;
 				this.armorMDef = 40 + 20*lvlMulti;
@@ -202,7 +202,7 @@ public class Isabella extends Monster
 			}
 			else if (flags[kFLAGS.ISABELLA_LVL_UP] == 16) {
 				initStrTouSpeInte(850, 1065, 660, 416);
-				initWisLibSensCor(416, 288, 130, 40);
+				initWisLibSensCor(416, 288, 130, -20);
 				this.weaponAttack = 330;
 				this.armorDef = 1420;
 				this.armorMDef = 360;

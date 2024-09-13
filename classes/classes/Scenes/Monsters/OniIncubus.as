@@ -95,7 +95,7 @@ import classes.internals.*;
 				this.imageName = "chonlao";
 				this.long = "If you thought Oni were immune to demonic corruption, Chon Lao the Ushi Oni is the proof that they are not. The man is easily 10 feet tall and just as strong, if not stronger than, Izumi. Massive horns dot his forehead, with 2 larger ones crowning the side like the head of a bull, and the massive 36 inches of man meat pulsing under his pants would scare the hell out of any normal woman. He glares at you, as if preparing to squash a bug.";
 				initStrTouSpeInte(385, 275, 205, 170);
-				initWisLibSensCor(170, 90, 55, 15);
+				initWisLibSensCor(170, 90, 55, 100);
 				this.weaponAttack = 80;
 				this.armorDef = 23;
 				this.armorMDef = 16;

@@ -58,7 +58,7 @@ import classes.Scenes.NPCs.*;
 		public function WerewolfHuntress()
 		{
 			initStrTouSpeInte(200, 165, 200, 50);
-			initWisLibSensCor(50, 100, 50, 75);
+			initWisLibSensCor(50, 100, 50, 50);
 			this.weaponAttack = 36 + 2;
 			this.armorDef = 200 + 10;
 			this.armorMDef = 5;

@@ -116,7 +116,7 @@ public class IgnisArenaSeer extends Monster
 			this.hairColor = "silver";
 			this.hairLength = 13 + rand(20);
 			initStrTouSpeInte(45, 75, 180, 160);
-			initWisLibSensCor(160, 70, 85, 45);
+			initWisLibSensCor(160, 70, 85, -10);
 			this.weaponName = "staff";
 			this.weaponVerb="smack";
 			this.weaponAttack = 8;

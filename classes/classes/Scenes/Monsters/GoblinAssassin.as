@@ -135,7 +135,7 @@ public class GoblinAssassin extends Monster
 			this.hairColor = "blue";
 			this.hairLength = 7;
 			initStrTouSpeInte(45, 45, 110, 95);
-			initWisLibSensCor(95, 64, 35, 60);
+			initWisLibSensCor(95, 64, 35, 20);
 			this.weaponName = "needles";
 			this.weaponVerb = "stabbing needles";
 			this.weaponAttack = 2;

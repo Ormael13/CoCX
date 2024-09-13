@@ -24,7 +24,7 @@ package classes.Scenes.Monsters
 			this.imageName = "proto golem";
 			this.long = "You're currently fighting a proto golem. It's six feet tall, without any sexual characteristics. It has a stone body that have many missing pieces, even it core is not yet fully protected. It has no weapons, using its grey stone fists to smash enemies.";
 			initStrTouSpeInte(10, 10, 5, 5);
-			initWisLibSensCor(5, 5, 5, 50);
+			initWisLibSensCor(5, 5, 5, 0);
 			this.tallness = 72;
 			this.drop = NO_DROP;
 			this.level = 6;

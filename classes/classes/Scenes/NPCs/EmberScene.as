@@ -141,7 +141,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
     private function emberCorruption(changes:Number = 0):Number {
         flags[kFLAGS.EMBER_COR] += changes;
         if (flags[kFLAGS.EMBER_COR] > 100) flags[kFLAGS.EMBER_COR] = 100;
-        else if (flags[kFLAGS.EMBER_COR] < 0) flags[kFLAGS.EMBER_COR] = 0;
+        else if (flags[kFLAGS.EMBER_COR] < -100) flags[kFLAGS.EMBER_COR] = -100;
         return flags[kFLAGS.EMBER_COR];
     }
 
@@ -400,7 +400,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //set flags
         player.createKeyItem("Dragon Egg", 0, 0, 0, 0);
         flags[kFLAGS.TOOK_EMBER_EGG] = 1;
-        flags[kFLAGS.EMBER_COR] = 50;
+        flags[kFLAGS.EMBER_COR] = 0;
         endEncounter();
     }
 
@@ -547,10 +547,10 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         clearOutput();
         if (purified) {
             player.consumeItem(consumables.P_DRAFT);
-            emberCorruption(-10);
+            emberCorruption(-20);
         } else {
             player.consumeItem(consumables.INCUBID);
-            emberCorruption(10);
+            emberCorruption(20);
         }
         outputText("Uncorking the vial, you drizzle the slimy off-white fluid onto the pointed cone of the egg.  It oozes slowly across the surface, then seeps through the shell, leaving not a drop of moisture.");
         if (flags[kFLAGS.EMBER_GENDER] == 3 || flags[kFLAGS.EMBER_GENDER] == 0) {
@@ -569,10 +569,10 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         clearOutput();
         if (purified) {
             player.consumeItem(consumables.P_S_MLK);
-            emberCorruption(-10);
+            emberCorruption(-20);
         } else {
             player.consumeItem(consumables.SUCMILK);
-            emberCorruption(10);
+            emberCorruption(20);
         }
         outputText("Popping the cap off of the milk bottle, you pour the contents onto the egg - the porous shell soaks up the milk as fast as you dump it, spilling not a drop.");
         //(If Unsexed or Herm:

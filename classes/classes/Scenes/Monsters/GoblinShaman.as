@@ -141,7 +141,7 @@ public class GoblinShaman extends Goblin
 			this.hairColor = "indigo";
 			this.hairLength = 4;
 			initStrTouSpeInte(79, 60, 80, 97);
-			initWisLibSensCor(97, 45, 45, 60);
+			initWisLibSensCor(97, 45, 45, 20);
 			this.weaponName = "wizard staff";
 			this.weaponVerb = "bludgeon";
 			this.weaponAttack = 16;

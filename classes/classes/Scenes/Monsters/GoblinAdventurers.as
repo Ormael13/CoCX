@@ -129,7 +129,7 @@ public class GoblinAdventurers extends Monster
 			this.hairColor = "blue";
 			this.hairLength = 7;
 			initStrTouSpeInte(60, 77, 125, 100);
-			initWisLibSensCor(100, 74, 35, 60);
+			initWisLibSensCor(100, 74, 35, 20);
 			this.weaponName = "needles";
 			this.weaponVerb = "stabbing needles";
 			this.weaponAttack = 2;

@@ -126,7 +126,7 @@ public class Sirius extends Naga
 			this.hairColor = "orange";
 			this.hairLength = 16;
 			initStrTouSpeInte(110, 90, 125, 92);
-			initWisLibSensCor(92, 45, 35, 40);
+			initWisLibSensCor(92, 45, 35, -20);
 			this.weaponName = "fangs";
 			this.weaponVerb="bite";
 			this.weaponAttack = 37;

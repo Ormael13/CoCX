@@ -76,7 +76,7 @@ package classes.Scenes.Monsters
 				this.imageName = "basic true golems";
 				this.long = "You're currently fighting basic true golems. They're all around seven feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 				initStrTouSpeInte(410, 400, 220, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.tallness = 84;
 				this.level = 51;
 				this.bonusHP = 400;
@@ -91,7 +91,7 @@ package classes.Scenes.Monsters
 				this.imageName = "improved true golems";
 				this.long = "You're currently fighting improved true golems. They're all around seven and half feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 				initStrTouSpeInte(490, 480, 260, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.tallness = 90;
 				this.level = 60;
 				this.bonusHP = 600;
@@ -107,7 +107,7 @@ package classes.Scenes.Monsters
 				this.long = "You're currently fighting advanced true golems. They're all around eight feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 				this.plural = true;
 				initStrTouSpeInte(570, 560, 300, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.tallness = 96;
 				this.level = 69;
 				this.bonusHP = 800;

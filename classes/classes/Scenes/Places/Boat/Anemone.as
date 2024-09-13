@@ -98,7 +98,7 @@ public class Anemone extends Monster
 			this.hairLength = 20;
 			this.hairType = Hair.ANEMONE;
 			initStrTouSpeInte(127, 90, 80, 60);
-			initWisLibSensCor(60, 69, 47, 50);
+			initWisLibSensCor(60, 69, 47, 0);
 			this.weaponName = "tendrils";
 			this.weaponVerb="tentacle";
 			this.weaponAttack = 24;

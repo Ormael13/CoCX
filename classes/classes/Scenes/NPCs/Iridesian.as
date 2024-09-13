@@ -271,7 +271,7 @@ import classes.internals.*;
 		public function Iridesian()
 		{
 			initStrTouSpeInte(32, 259, 97, 112);
-            initWisLibSensCor(270, 160, 103, 0);
+            initWisLibSensCor(270, 160, 103, -100);
             this.armorDef = 150;
             this.armorMDef = 150;
             this.bonusHP = 2000;
