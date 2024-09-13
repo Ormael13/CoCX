@@ -113,7 +113,7 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 			"ArianSonsNum": ArianSonsNum,
 			"ArianDaughtersNum": ArianDaughtersNum,
 			"ArianHermKidsNum": ArianHermKidsNum,
-			"ArianTotalKidsNum": ArianTotalKidsNum,
+			"ArianTotalKidsNum": ArianTotalKidsNum
 		}
 	}
 
@@ -4515,9 +4515,10 @@ public function ArianEggLaying():void {
 		outputText("She pushes (2-4) eggs out, before finally collapsing back into her chair. For a few minutes, she passes out, and you decide to move her to her bed.  \n\n");
 		outputText("Arian wakes back up as you’re tucking her in, and she sits bolt upright. “The eggs! Where are they?!” She demands, and you gently, but firmly, lay Arian back down, telling her that you’re bringing them over. But Arian needs to rest and recover.  \n\n");
         outputText("As you bring the eggs over, Arian visibly relaxes, and as you place the basket at the foot of Arian’s bed, she smiles, motioning for you to join her.  \n\n");
-        outputText("You sit beside Arian, and she nuzzles your hand. “Thank you for being here with me.” She sighs. “I’m pretty sure kid me would be properly horrified right now.” She says, chuckling.  \n\n");
-        outputText("You ask her, the childbirth, or the fact that she’s the mom, not the dad? 
-“Both.” She snorts. “I was so focused on my studies as a child, that even the idea of finding a mate, let alone starting a family, was almost…wrong to me.” She sighs happily. “Go on, my champion. Make Mareth a better place for them to grow in.”  \n\n");
+        outputText("You sit beside Arian, and she nuzzles your hand. “Thank you for being here with me.” She sighs. “I’m pretty sure kid me would be properly horrified right now.” She says, chuckling. \n\n");
+        outputText("You ask her, the childbirth, or the fact that she’s the mom, not the dad? \n\n");
+		 outputText(" She snorts “Both. I was so focused on my studies as a child, that even the idea of finding a mate, let alone starting a family, was almost wrong to me.” ");
+		outputText(" She sighs happily. “Go on, my champion. Make Mareth a better place for them to grow in.” ");
         outputText("You give Arian a quick hug, and a kiss on the cheek before leaving. \n\n");
 doNext(playerMenu);
 }
@@ -4530,9 +4531,7 @@ public function ArianHatching():void {
 		outputText("A much louder crack comes from the smallest egg, and as it tips over onto its side, you see a more slender nose poke out, catching a glimpse of yellow eye before they turn around. To your shock, their tail pokes out of the hole in the egg.  \n\n");
 		outputText("“Sometimes they need to be encouraged to leave the shell.” Arian says gently. “Why don’t you get them?”  \n\n");
 		outputText("You nod, taking the shell and cracking it along its length. The scrawnier baby looks up at you, eyes wide and trembling, until you pick them up in both hands, bringing them to your face. You give your newborn baby a smile, and slowly, they stop shaking, and open their mouth, spreading their arms and legs wide as they gurgle happily.  \n\n");
-        outputText("“A little boy and a girl.” Arian says softly. “She’s got a narrower snout, and softer scales.” 
-(If more) you hear the cracking of another egg, and you both wrap your respective babies in cloth. They close their eyes as you lay them down, and you turn back to the (one/two) remaining eggs, repeating the process with Arian until all (number) of your new brood are nestled in the crib.
- \n\n");
+        outputText(" A little boy and a girl.” Arian says softly. “She’s got a narrower snout, and softer scales.” (If more) you hear the cracking of another egg, and you both wrap your respective babies in cloth. They close their eyes as you lay them down, and you turn back to the (one/two) remaining eggs, repeating the process with Arian until all (number) of your new brood are nestled in the crib.");
 		outputText("As Arian coos over them, you give him/her a kiss on the snout, excusing yourself.  \n\n");
 doNext(playerMenu);
 }
