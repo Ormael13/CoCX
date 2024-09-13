@@ -101,7 +101,7 @@ public class LightningElemental extends Monster
 				this.long = "You're currently fighting lightning elemental. It's a four feet tall body of lightning shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(44, 64, 104, 220);
-				initWisLibSensCor(220, 20, 110, 50);
+				initWisLibSensCor(220, 20, 110, 0);
 				this.weaponAttack = 24;
 				this.armorDef = 24;
 				this.armorMDef = 130;
@@ -115,7 +115,7 @@ public class LightningElemental extends Monster
 				this.long = "You're currently fighting lightning elemental. It's a four foot, three inch tall body of lightning shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(50, 70, 110, 250);
-				initWisLibSensCor(250, 20, 130, 50);
+				initWisLibSensCor(250, 20, 130, 0);
 				this.weaponAttack = 28;
 				this.armorDef = 28;
 				this.armorMDef = 150;
@@ -129,7 +129,7 @@ public class LightningElemental extends Monster
 				this.long = "You're currently fighting lightning elemental. It's a four and half foot tall body of lightning shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(56, 76, 116, 280);
-				initWisLibSensCor(280, 20, 150, 50);
+				initWisLibSensCor(280, 20, 150, 0);
 				this.weaponAttack = 32;
 				this.armorDef = 32;
 				this.armorMDef = 170;
@@ -143,7 +143,7 @@ public class LightningElemental extends Monster
 				this.long = "You're currently fighting lightning elemental. It's four foot, nine inch tall body of lightning shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(62, 82, 122, 310);
-				initWisLibSensCor(310, 20, 170, 50);
+				initWisLibSensCor(310, 20, 170, 0);
 				this.weaponAttack = 36;
 				this.armorDef = 36;
 				this.armorMDef = 190;

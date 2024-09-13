@@ -121,7 +121,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting darkness elemental. It's a four feet tall body of darkness shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(44, 64, 104, 220);
-				initWisLibSensCor(220, 20, 110, 50);
+				initWisLibSensCor(220, 20, 110, 0);
 				this.weaponAttack = 24;
 				this.armorDef = 24;
 				this.armorMDef = 130;
@@ -135,7 +135,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting darkness elemental. It's a four foot, three inch tall body of darkness shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(50, 70, 110, 250);
-				initWisLibSensCor(250, 20, 130, 50);
+				initWisLibSensCor(250, 20, 130, 0);
 				this.weaponAttack = 28;
 				this.armorDef = 28;
 				this.armorMDef = 150;
@@ -149,7 +149,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting darkness elemental. It's a four and half foot tall body of darkness shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(56, 76, 116, 280);
-				initWisLibSensCor(280, 20, 150, 50);
+				initWisLibSensCor(280, 20, 150, 0);
 				this.weaponAttack = 32;
 				this.armorDef = 32;
 				this.armorMDef = 170;
@@ -163,7 +163,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting darkness elemental. It's four foot, nine inch tall body of darkness shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(62, 82, 122, 310);
-				initWisLibSensCor(310, 20, 170, 50);
+				initWisLibSensCor(310, 20, 170, 0);
 				this.weaponAttack = 36;
 				this.armorDef = 36;
 				this.armorMDef = 190;
@@ -177,7 +177,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting unique darkness elemental. It's a nine foot tall creature that looks exactly like you. Its body is wrapped in an darkness cloak, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 108;
 				initStrTouSpeInte(92, 120, 198, 460);
-				initWisLibSensCor(460, 30, 254, 50);
+				initWisLibSensCor(460, 30, 254, 0);
 				this.weaponAttack = 44;
 				this.armorDef = 50;
 				this.armorMDef = 250;

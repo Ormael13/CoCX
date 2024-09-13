@@ -140,7 +140,7 @@ use namespace CoC;
 			this.long = "";
 			this.tallness = 60;
 			initStrTouSpeInte(360, 600, 330, 180);
-			initWisLibSensCor(830, 7, 220, 0);
+			initWisLibSensCor(830, 7, 220, -100);
 			this.bonusHP = 10000;
 			this.bonusLust = 300;
 			this.bonusWrath = 1000;

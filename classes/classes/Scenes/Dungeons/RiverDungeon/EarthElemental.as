@@ -115,7 +115,7 @@ public class EarthElemental extends Monster
 				this.long = "You're currently fighting earth elemental. It's a four foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(20, 80, 80, 80);
-				initWisLibSensCor(80, 20, 40, 50);
+				initWisLibSensCor(80, 20, 40, 0);
 				this.weaponAttack = 10;
 				this.armorDef = 20;
 				this.armorMDef = 60;
@@ -129,7 +129,7 @@ public class EarthElemental extends Monster
 				this.long = "You're currently fighting earth elemental. It's a four foot, three inch tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(24, 84, 84, 100);
-				initWisLibSensCor(100, 20, 50, 50);
+				initWisLibSensCor(100, 20, 50, 0);
 				this.weaponAttack = 14;
 				this.armorDef = 30;
 				this.armorMDef = 70;
@@ -143,7 +143,7 @@ public class EarthElemental extends Monster
 				this.long = "You're currently fighting earth elemental. It's a four and a half foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(28, 88, 88, 120);
-				initWisLibSensCor(120, 20, 60, 50);
+				initWisLibSensCor(120, 20, 60, 0);
 				this.weaponAttack = 18;
 				this.armorDef = 40;
 				this.armorMDef = 80;
@@ -157,7 +157,7 @@ public class EarthElemental extends Monster
 				this.long = "You're currently fighting earth elemental. It's a four foot, nine inch tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(32, 92, 92, 140);
-				initWisLibSensCor(140, 20, 70, 50);
+				initWisLibSensCor(140, 20, 70, 0);
 				this.weaponAttack = 22;
 				this.armorDef = 50;
 				this.armorMDef = 90;
@@ -171,7 +171,7 @@ public class EarthElemental extends Monster
 				this.long = "You're currently fighting 'female' golem. It's a nine foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 108;
 				initStrTouSpeInte(48, 138, 138, 210);
-				initWisLibSensCor(210, 30, 110, 50);
+				initWisLibSensCor(210, 30, 110, 0);
 				this.weaponAttack = 34;
 				this.armorDef = 80;
 				this.armorMDef = 140;

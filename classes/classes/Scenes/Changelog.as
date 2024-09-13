@@ -142,7 +142,7 @@ public class Changelog extends BaseContent
 			outputText("-Equine Strength perk can be gained by Laquine PC.\n");
 			outputText("-New tier 0 misc lvl-up perk: (Basic) Job: Tinker. Req. 10+ wisdom and 10+ intelligence. Effect: Increase damage of consumable items / technologic weapons by 5%.\n");
 			outputText("-New tier 2 wisdom lvl-up perk: (Advanced) Job: Artificier. Req. Job: Tinker perk, free advanced job slot and 75+ wisdom. Effect: Increase damage of consumable items / technologic weapons by 15%.\n");
-			outputText("-Ayo Armor Proficiency perk have additional req. of Job: Artificer perk and it desc was slight changed to account for damage reduction depending on whenever armor is powered up or not (10% when unpowered and 20% when powered).\n");
+			outputText("-Ayo Armor Proficiency perk req. of Heavy Armor Proficiency was changed to Job: Artificer perk and it desc was slight changed to account for damage reduction depending on whenever armor is powered up or not (10% when unpowered and 20% when powered).\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Conduction Soulforce Charge. Req. Job: Artificier perk and 125+ wisdom. Effect: As long you have sufficient amount of soulforce, expend them to keep Ayo Armor active instead of using internal storage.\n");
 			outputText("-New tier 0 wisdom lvl-up perk: (Basic) Job: Tamer. Req. 10+ wisdom. Effect: Allow to tame 1 beast with feral level of intelligence.\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: (Basic) Job: Esper. Req. 10+ sensitivity. Effect: The same effects as perk Telekinesis (You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons.) (+1 exploration reveal)\n");
@@ -280,7 +280,7 @@ public class Changelog extends BaseContent
 			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant, ");
 			outputText("Abyssal Ink and Displacer Beast post fight scenes bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards recovering ");
 			outputText("hunger with demonic hunger perk, Atlach Nacha locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene, during Urta scenes game mix up Urta and PC when checking for sex scenes selection, Cure spell not removing Blind, ");
-			outputText("Whisker Fruit not giving multiple breast rows\n\n");
+			outputText("Whisker Fruit not giving multiple breast rows, some of status effects not cleaning up after bad end or combat end, scene with Ayane when PC visit shrine as already 9 tailed kitusne without star sphere not gaining star sphere during the scene\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

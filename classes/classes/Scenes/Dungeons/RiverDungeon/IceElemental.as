@@ -99,7 +99,7 @@ public class IceElemental extends Monster
 				this.long = "You're currently fighting ice elemental. It's a four feet tall body of ice shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(44, 74, 114, 210);
-				initWisLibSensCor(210, 20, 110, 50);
+				initWisLibSensCor(210, 20, 110, 0);
 				this.weaponAttack = 24;
 				this.armorDef = 24;
 				this.armorMDef = 200;
@@ -113,7 +113,7 @@ public class IceElemental extends Monster
 				this.long = "You're currently fighting ice elemental. It's a four foot, three inch tall body of ice shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(50, 80, 120, 240);
-				initWisLibSensCor(240, 20, 130, 50);
+				initWisLibSensCor(240, 20, 130, 0);
 				this.weaponAttack = 28;
 				this.armorDef = 28;
 				this.armorMDef = 240;
@@ -127,7 +127,7 @@ public class IceElemental extends Monster
 				this.long = "You're currently fighting ice elemental. It's a four and half foot tall body of ice shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(56, 86, 126, 270);
-				initWisLibSensCor(270, 20, 150, 50);
+				initWisLibSensCor(270, 20, 150, 0);
 				this.weaponAttack = 32;
 				this.armorDef = 32;
 				this.armorMDef = 280;
@@ -141,7 +141,7 @@ public class IceElemental extends Monster
 				this.long = "You're currently fighting ice elemental. It's four foot, nine inch tall body of ice shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(62, 92, 132, 300);
-				initWisLibSensCor(300, 20, 170, 50);
+				initWisLibSensCor(300, 20, 170, 0);
 				this.weaponAttack = 36;
 				this.armorDef = 36;
 				this.armorMDef = 320;

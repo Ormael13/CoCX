@@ -5507,7 +5507,7 @@ public class PerkLib
                     .requirePerk(HeavyArmorProficiency)
                     .requireLevel(18);
             AyoArmorProficiency.requireTou(100)
-					.requirePerks(HeavyArmorProficiency, JobArtificier)
+					.requirePerk(JobArtificier)
                     .requireLevel(18);
             HalfStepToAdvancedEndurance.requireTou(120)
                     .requireStr(80)

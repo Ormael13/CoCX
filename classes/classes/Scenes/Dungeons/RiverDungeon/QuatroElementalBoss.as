@@ -347,7 +347,7 @@ public class QuatroElementalBoss extends Monster
 			this.createBreastRow(0, 1);
 			initGenderless();
 			initStrTouSpeInte(48, 80, 140, 240);
-			initWisLibSensCor(240, 30, 110, 50);
+			initWisLibSensCor(240, 30, 110, 0);
 			this.weaponName = "fists";
 			this.weaponVerb = "smash";
 			this.weaponAttack = 20;

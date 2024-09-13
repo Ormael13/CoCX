@@ -54,7 +54,7 @@ public class GuardianGolems extends Monster
 			this.createBreastRow(0, 1);
 			initGenderless();
 			initStrTouSpeInte(20, 25, 20, 10);
-			initWisLibSensCor(10, 10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 0);
 			this.tallness = 72;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);

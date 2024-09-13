@@ -110,7 +110,7 @@ public class HarpyQueen extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(100, 90, 170, 100);
-			initWisLibSensCor(100, 80, 45, 50);
+			initWisLibSensCor(100, 80, 45, 0);
 			this.weaponName = "eldritch staff";
 			this.weaponVerb="thwack";
 			this.weaponAttack = 31;

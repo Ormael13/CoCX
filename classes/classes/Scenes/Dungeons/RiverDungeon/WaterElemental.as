@@ -121,7 +121,7 @@ public class WaterElemental extends Monster
 				this.long = "You're currently fighting water elemental. It's a four feet tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(20, 50, 90, 90);
-				initWisLibSensCor(90, 20, 40, 50);
+				initWisLibSensCor(90, 20, 40, 0);
 				this.weaponAttack = 10;
 				this.armorDef = 10;
 				this.armorMDef = 60;
@@ -135,7 +135,7 @@ public class WaterElemental extends Monster
 				this.long = "You're currently fighting water elemental. It's a four foot, three inch tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(24, 54, 94, 110);
-				initWisLibSensCor(110, 20, 50, 50);
+				initWisLibSensCor(110, 20, 50, 0);
 				this.weaponAttack = 12;
 				this.armorDef = 12;
 				this.armorMDef = 80;
@@ -149,7 +149,7 @@ public class WaterElemental extends Monster
 				this.long = "You're currently fighting water elemental. It's a four and half foot tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(28, 58, 98, 130);
-				initWisLibSensCor(130, 20, 60, 50);
+				initWisLibSensCor(130, 20, 60, 0);
 				this.weaponAttack = 14;
 				this.armorDef = 14;
 				this.armorMDef = 100;
@@ -163,7 +163,7 @@ public class WaterElemental extends Monster
 				this.long = "You're currently fighting water elemental. It's four foot, nine inch tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(32, 62, 102, 150);
-				initWisLibSensCor(150, 20, 70, 50);
+				initWisLibSensCor(150, 20, 70, 0);
 				this.weaponAttack = 16;
 				this.armorDef = 16;
 				this.armorMDef = 120;
@@ -177,7 +177,7 @@ public class WaterElemental extends Monster
 				this.long = "You're currently fighting 'male' undine. It's a nine foot tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 108;
 				initStrTouSpeInte(48, 94, 154, 230);
-				initWisLibSensCor(230, 30, 110, 50);
+				initWisLibSensCor(230, 30, 110, 0);
 				this.weaponAttack = 24;
 				this.armorDef = 24;
 				this.armorMDef = 180;
