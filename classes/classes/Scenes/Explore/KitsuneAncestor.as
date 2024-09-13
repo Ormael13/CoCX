@@ -187,7 +187,7 @@ import classes.internals.*;
 			this.hairColor = "grey";
 			this.hairLength = 31 + rand(10);
 			initStrTouSpeInte(95, 160, 420, 330);
-			initWisLibSensCor(330, 160, 190, 45);
+			initWisLibSensCor(330, 160, 190, -10);
 			this.weaponName = "worn down staff";
 			this.weaponVerb="smack";
 			this.weaponAttack = 8;

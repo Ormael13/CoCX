@@ -130,7 +130,7 @@ package classes.Scenes.Monsters
 			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 1) {
 				this.short = "low-rank archangeloid";
 				initStrTouSpeInte(10, 120, 60, 30);
-				initWisLibSensCor(160, 6, 50, 0);
+				initWisLibSensCor(160, 6, 50, -100);
 				this.level = 24;
 				this.bonusHP = 1000;
 				this.bonusLust = 80;
@@ -145,7 +145,7 @@ package classes.Scenes.Monsters
 			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 2)  {
 				this.short = "mid-rank archangeloid";
 				initStrTouSpeInte(12, 140, 70, 35);
-				initWisLibSensCor(180, 7, 60, 0);
+				initWisLibSensCor(180, 7, 60, -100);
 				this.level = 30;
 				this.bonusHP = 1200;
 				this.bonusLust = 97;

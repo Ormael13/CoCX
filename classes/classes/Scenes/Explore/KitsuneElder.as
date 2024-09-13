@@ -179,7 +179,7 @@ import classes.internals.*;
 			this.hairColor = "red";
 			this.hairLength = 13 + rand(15);
 			initStrTouSpeInte(55, 85, 210, 170);
-			initWisLibSensCor(170, 80, 95, 45);
+			initWisLibSensCor(170, 80, 95, -10);
 			this.weaponName = "staff";
 			this.weaponVerb="smack";
 			this.weaponAttack = 8;

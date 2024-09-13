@@ -61,7 +61,7 @@ import classes.internals.ChainedDrop;
 				this.hairColor = "dark green";
 			}
 			initStrTouSpeInte(540, 1240, 820, 560);
-			initWisLibSensCor(560, 720, 500, 50);
+			initWisLibSensCor(560, 720, 500, 0);
 			this.tallness = rand(11) + 110;
 			this.armorDef = 90;
 			this.armorMDef = 9;

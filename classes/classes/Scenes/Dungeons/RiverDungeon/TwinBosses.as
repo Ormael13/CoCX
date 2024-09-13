@@ -237,7 +237,7 @@ use namespace CoC;
 			this.horns.type = Horns.ONI_X2;
 			this.horns.count = 2;
 			initStrTouSpeInte(380, 450, 560, 420);
-			initWisLibSensCor(580, 560, 380, 80);
+			initWisLibSensCor(580, 560, 380, 60);
 			this.weaponAttack = 108;
 			this.weaponName = "Oni Tetsubo";
 			this.weaponVerb="smash";

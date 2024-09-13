@@ -77,7 +77,7 @@ public class RedOoze extends Monster
 				this.short = "red mist ooze";
 				this.long = "The red mist ooze has a normally featureless face with pair of purple glowing eyes that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the something looking like scylla lower body.  From it's back extend few gooey tendrils.  It unusual feature are glowing gently purple veins that covers it whole body.";
 				initStrTouSpeInte(220, 380, 280, 60);
-				initWisLibSensCor(100, 180, 176, 20);
+				initWisLibSensCor(100, 180, 176, -40);
 				this.weaponAttack = 40;
 				this.armorDef = 30;
 				this.armorMDef = 90;
@@ -91,7 +91,7 @@ public class RedOoze extends Monster
 				this.short = "red ooze";
 				this.long = "The red ooze has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the something looking like scylla lower body.  From it's back extend few gooey tendrils.";
 				initStrTouSpeInte(60, 100, 80, 20);
-				initWisLibSensCor(20, 160, 120, 20);
+				initWisLibSensCor(20, 160, 120, -40);
 				this.weaponAttack = 6;
 				this.armorDef = 6;
 				this.armorMDef = 18;

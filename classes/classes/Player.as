@@ -6200,9 +6200,26 @@ use namespace CoC;
 				}
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 			}
-			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
-			{
+			if (hasStatusEffect(StatusEffects.DriderIncubusVenom)) {
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
+			}
+			if (hasStatusEffect(StatusEffects.Terrorize)) {
+				removeStatusEffect(StatusEffects.Terrorize);
+			}
+			if (hasStatusEffect(StatusEffects.Straddle)) {
+				removeStatusEffect(StatusEffects.Straddle);
+			}
+			if (hasStatusEffect(StatusEffects.QueenBind)) {
+				removeStatusEffect(StatusEffects.QueenBind);
+			}
+			if (hasStatusEffect(StatusEffects.KitsuneTailTangle)) {
+				removeStatusEffect(StatusEffects.KitsuneTailTangle);
+			}
+			if (hasStatusEffect(StatusEffects.MinotaurEntangled)) {
+				removeStatusEffect(StatusEffects.MinotaurEntangled);
+			}
+			if (hasStatusEffect(StatusEffects.LadyRafflesiaGrab)) {
+				removeStatusEffect(StatusEffects.LadyRafflesiaGrab);
 			}
 			if(statusEffectv4(StatusEffects.CombatFollowerAlvina) > 0) addStatusValue(StatusEffects.CombatFollowerAlvina, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerAmily) > 0) addStatusValue(StatusEffects.CombatFollowerAmily, 4, -1);

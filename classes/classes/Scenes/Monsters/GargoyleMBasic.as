@@ -53,7 +53,7 @@ package classes.Scenes.Monsters
 			initGenderless();
 			this.tallness = 120;
 			initStrTouSpeInte(150, 120, 90, 10);
-			initWisLibSensCor(10, 10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 0);
 			this.tallness = 120;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1/4);

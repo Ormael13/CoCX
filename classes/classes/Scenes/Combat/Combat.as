@@ -691,7 +691,8 @@ public class Combat extends BaseContent {
 
     public function isPlayerBound():Boolean {
         var playerStatuses:Array = [
-            StatusEffects.HarpyBind,
+            //combat statuses
+			StatusEffects.HarpyBind,
             StatusEffects.GooBind,
             StatusEffects.TentacleBind,
             StatusEffects.NagaBind,
@@ -713,10 +714,11 @@ public class Combat extends BaseContent {
             StatusEffects.Tentagrappled,
             StatusEffects.SiegweirdGrapple,
             StatusEffects.MagnarPinned,
-            StatusEffects.Straddle,
             StatusEffects.DragonsNom,
             StatusEffects.Devoured,
+			//not combat statuses - req. adding to: public function clearStatuses(visibility:Boolean):void
             StatusEffects.Terrorize,
+            StatusEffects.Straddle,
             StatusEffects.QueenBind,
             StatusEffects.KitsuneTailTangle,
             StatusEffects.MinotaurEntangled,
