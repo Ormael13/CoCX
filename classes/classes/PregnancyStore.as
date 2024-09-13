@@ -41,8 +41,8 @@ public class PregnancyStore extends Object
 				case PREGNANCY_GOBLIN: return INCUBATION_GOBLIN;
 				case PREGNANCY_ZENJI: return INCUBATION_ZENJI;
 				case PREGNANCY_LOPPE: return INCUBATION_LOPPE;
-				case PREGNANCY_SIDONIE: return INCUBATION_SIDONIE;
-				case PREGNANCY_ARIAN: return INCUBATION_ARIAN;
+				//case PREGNANCY_SIDONIE: return INCUBATION_SIDONIE;
+				//case PREGNANCY_ARIAN: return INCUBATION_ARIAN;
 				default: return -1;
 			}
 		}

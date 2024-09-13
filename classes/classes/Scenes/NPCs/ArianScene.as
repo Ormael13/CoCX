@@ -114,7 +114,7 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 			"ArianDaughtersNum": ArianDaughtersNum,
 			"ArianHermKidsNum": ArianHermKidsNum,
 			"ArianTotalKidsNum": ArianTotalKidsNum,
-		};
+		}
 	}
 
 	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -4536,7 +4536,5 @@ public function ArianHatching():void {
 		outputText("As Arian coos over them, you give him/her a kiss on the snout, excusing yourself.  \n\n");
 doNext(playerMenu);
 }
-
-
 }
 }

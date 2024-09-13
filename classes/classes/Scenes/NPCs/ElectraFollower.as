@@ -33,7 +33,7 @@ public class ElectraFollower extends NPCAwareContent implements TimeAwareInterfa
 			"ElectraDaughtersNum": ElectraDaughtersNum,
 			"ElectraHermKidsNum": ElectraHermKidsNum,
 			"ElectraTotalKidsNum": ElectraTotalKidsNum,
-		};
+		}
 	}
 
 	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -424,7 +424,7 @@ public function ElectraSeXYesM():void {
 	outputText("\"<i>Good morning, I was wondering when you would wake up. Thank you so much for helping me get rid of that energy...It's hard to deal with sometimes.</i>\"");
 	outputText(" She slowly slides off your cock with a satisfied smile. ");
 	player.sexReward("vaginalFluids","Dick");
-	if (flags[kFLAGS.ELECTRA_AFFECTION] > 100) && flags[kFLAGS.ELECTRA_FOLLOWER] = 2 {
+	if (flags[kFLAGS.ELECTRA_AFFECTION] > 100) && (flags[kFLAGS.ELECTRA_FOLLOWER] = 2) {
 	ElectraPregChance();
 	}
 	afterYes();
@@ -573,7 +573,7 @@ private function ElectraPregChance():void {
 		var score:Number = Math.min(player.cumQ()/100,5);
 		score += player.virilityQ() * 200;
 		trace("Electra checking virility score " + score);
-		if((player.cumQ() > (score >= rand(100)) || player.hasPerk(PerkLib.PilgrimsBounty)) {
+		if((player.cumQ() > (score >= rand(100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 			preg = true;
 			trace("Electra is pregnant!");
 		}
