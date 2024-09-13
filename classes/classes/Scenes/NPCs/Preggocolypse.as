@@ -54,7 +54,7 @@ public function ArianPregChampCarries3():void {
 		outputText(" \n\n");
 doNext(playerMenu);
 }
-
+//[arian em] [arian ey] [arian eir]
 public function ArianCarriesChampBabies1():void {
 		clearOutput();
 		outputText("Arian approaches you, a slightly sheepish expression on her face. “Would you come with me, please?” You nod, and follow Arian into her tent. She sits down, motioning for you to join her. You see no reason to stay standing, and as Arian hands you a cup of tea, she looks down at the table, blushing slightly.  \n\n"); 
@@ -214,10 +214,6 @@ public function ElectraPregAnnouncement():void {
 		outputText("You find Electra waiting for you at the entrance to camp. She sees you, sparks flying from her claws as you approach.  \n\n");
 		outputText("“Good morning” She says meekly, rubbing her belly. You know what she’s about to say. “We’re going to have more children. I…Just wanted you to know that.” You give your Raiju lover a reassuring smile and a quick hug, and she wraps her arms around you, claws digging slightly into your [back].  \n\n");
         outputText("“Feel free to join me in the charging hut.” She says with a wink, before skipping back to her part of camp, whistling a happy tune. \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-        outputText(" \n\n");
-		outputText(" \n\n");
 		outputText(" \n\n");
 doNext(playerMenu);
 }
