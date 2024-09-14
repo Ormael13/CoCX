@@ -70,7 +70,7 @@ public class SandWitch extends Monster
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(55, 75, 65, 110);
-			initWisLibSensCor(100, 105, 80, 30);
+			initWisLibSensCor(100, 105, 80, -40);
 			this.weaponName = "kick";
 			this.weaponVerb="kick";
 			this.weaponAttack = 2;

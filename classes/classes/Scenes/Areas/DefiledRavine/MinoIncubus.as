@@ -127,7 +127,7 @@ use namespace CoC;
 			this.horns.type = Horns.COW_MINOTAUR;
 			this.horns.count = 6;
 			initStrTouSpeInte(200, 170, 135, 60);
-			initWisLibSensCor(60, 120 + this.ballSize * 2, 45 + this.ballSize * 2, 35);
+			initWisLibSensCor(60, 120 + this.ballSize * 2, 45 + this.ballSize * 2, 100);
 			this.weaponName = "dual axes";
 			this.weaponVerb = "cleave";
 			this.weaponAttack = 80;

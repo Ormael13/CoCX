@@ -85,7 +85,7 @@ public class Kraken extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(700, 400, 400, 250);
-			initWisLibSensCor(250, 300, 250, 50);
+			initWisLibSensCor(250, 300, 250, 0);
 			this.weaponName = "large tentacle";
 			this.weaponVerb="slash";
 			this.weaponAttack = 145;

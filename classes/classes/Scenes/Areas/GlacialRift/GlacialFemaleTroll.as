@@ -89,7 +89,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			initStrTouSpeInte(400, 382, 366, 358);
-			initWisLibSensCor(378, 294, 100, 15);
+			initWisLibSensCor(378, 294, 100, -70);
 			this.weaponAttack = 120;
 			this.armorDef = 150;
 			this.armorMDef = 600;

@@ -140,7 +140,7 @@ use namespace CoC;
 			this.hairColor = "black";
 			this.hairLength = 9;
 			initStrTouSpeInte(142, 121, 110, 74);
-			initWisLibSensCor(74, 100, 50, 30);
+			initWisLibSensCor(74, 100, 50, -40);
 			this.weaponName = "double axe";
 			this.weaponVerb= "double cleave";
 			this.weaponAttack = 30;
