@@ -20,7 +20,7 @@ public class Izumi extends Monster
 			var lvlMulti:Number = flags[kFLAGS.IZUMI_LVL_UP];
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				initStrTouSpeInte(660, 460, 340, 300);
-				initWisLibSensCor(300, 140, 90, 15);
+				initWisLibSensCor(300, 140, 90, -70);
 				this.weaponAttack = 140;
 				this.armorDef = 180;
 				this.armorMDef = 140;
@@ -32,7 +32,7 @@ public class Izumi extends Monster
 			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) {
 				initStrTouSpeInte(810, 570, 420, 390);
-				initWisLibSensCor(390, 150, 105, 15);
+				initWisLibSensCor(390, 150, 105, -70);
 				this.weaponAttack = 240;
 				this.armorDef = 360;
 				this.armorMDef = 280;
@@ -43,7 +43,7 @@ public class Izumi extends Monster
 			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 9) {	//leave min and max levels to easily balance npc combat
 				initStrTouSpeInte(810 + 55*lvlMulti, 570 + 50*lvlMulti, 420 + 45*lvlMulti, 390 + 30*lvlMulti);
-				initWisLibSensCor(390 + 30*lvlMulti, 150 + 30*lvlMulti, 105 + 15*lvlMulti, 15);
+				initWisLibSensCor(390 + 30*lvlMulti, 150 + 30*lvlMulti, 105 + 15*lvlMulti, -70);
 				this.weaponAttack = 240 + 30*lvlMulti;
 				this.armorDef = 360 + 40*lvlMulti;
 				this.armorMDef = 280 + 20*lvlMulti;
@@ -54,7 +54,7 @@ public class Izumi extends Monster
 			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] == 9) {
 				initStrTouSpeInte(1305, 1020, 825, 660);
-				initWisLibSensCor(660, 420, 240, 15);
+				initWisLibSensCor(660, 420, 240, -70);
 				this.weaponAttack = 510;
 				this.armorDef = 720;
 				this.armorMDef = 460;

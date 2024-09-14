@@ -161,7 +161,7 @@ public class GooGirl extends Monster
 			this.hairColor = tone;
 			this.hairLength = 12 + rand(10);
 			initStrTouSpeInte(52, 70, 50, 30);
-			initWisLibSensCor(30, 55, 45, 10);
+			initWisLibSensCor(30, 55, 45, -20);
 			this.weaponName = "hands";
 			this.weaponVerb="slap";
 			this.weaponAttack = 7;

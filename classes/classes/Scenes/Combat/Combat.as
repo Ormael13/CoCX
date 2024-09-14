@@ -9283,7 +9283,7 @@ public class Combat extends BaseContent {
 				player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 				player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 			}
-			if (!monster.hasStatusEffect(StatusEffects.BurnDoT) && rand(5) == 0) monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
+			if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 4 && !monster.hasStatusEffect(StatusEffects.BurnDoT) && rand(5) == 0) monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
 		}
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);

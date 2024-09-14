@@ -81,7 +81,7 @@ import classes.internals.*;
                     100 + 5*mod,
                     120 + 10*mod + this.ballSize * (3 + mod),
                     45 + 5*mod + this.ballSize * (3 + mod),
-                    35);
+                    -30);
                 this.weaponAttack = 100 + 27*mod;
                 this.armorDef = 75 + 25*mod;
                 this.armorMDef = 15 + 5*mod;
@@ -99,7 +99,7 @@ import classes.internals.*;
 			else {
 				this.short = "minotaur";
 				initStrTouSpeInte(hasAxe ? 210 : 180, 170, 135, 40);
-				initWisLibSensCor(40, 140 + this.ballSize * 2, 115 + this.ballSize * 2, 50);
+				initWisLibSensCor(40, 140 + this.ballSize * 2, 115 + this.ballSize * 2, 0);
 				this.weaponName = hasAxe?"axe":"fist";
 				this.weaponVerb = hasAxe?"cleave":"punch";
 				this.weaponAttack = hasAxe?75:60;
