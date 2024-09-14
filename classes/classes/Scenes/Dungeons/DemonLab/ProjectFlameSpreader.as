@@ -108,7 +108,7 @@ public class ProjectFlameSpreader extends Monster {
         this.hairLength = 16;
         this.level = 85;
         initStrTouSpeInte(700, 650, 750, 420);
-        initWisLibSensCor(150, 1200, 500, 60);
+        initWisLibSensCor(150, 1200, 500, 20);
         this.weaponName = "spear";
         this.weaponVerb = "stab";
         this.weaponAttack = 100;

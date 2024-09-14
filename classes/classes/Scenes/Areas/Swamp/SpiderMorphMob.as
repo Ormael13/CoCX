@@ -118,7 +118,7 @@ public class SpiderMorphMob extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(100, 80, 99, 99);
-			initWisLibSensCor(99, 35, 35, 20);
+			initWisLibSensCor(99, 35, 35, -60);
 			this.weaponName = "claws";
 			this.weaponVerb="claws";
 			this.weaponAttack = 34;

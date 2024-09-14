@@ -127,7 +127,7 @@ public class OmnibusOverseer extends Monster
 			this.hairColor = "purple";
 			this.hairLength = 42;
 			initStrTouSpeInte(100, 73, 49, 85);
-			initWisLibSensCor(85, 95, 70, 80);
+			initWisLibSensCor(85, 95, 70, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.weaponAttack = 15;

@@ -1691,7 +1691,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			this.wisStat.core.value = wis;
 			this.libStat.core.value = lib;
 			sensStat.redefine({base:sens});
-			this.cor = cor;
+			this.cor = cor + 100;
 			initedWisLibSensCor = true;
 		}
 
@@ -1712,6 +1712,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					error += "Ability condition is not a Function. ";
 				}
 			}
+			this.cor -= 100;
 			return error;
 		}
 

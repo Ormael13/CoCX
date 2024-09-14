@@ -149,7 +149,7 @@ public class UltimisFlamespreader extends Monster {
         this.hairColor = "black";
         this.hairLength = 16;
         initStrTouSpeInte(950, 1200, 1000, 420);
-        initWisLibSensCor(200, 1600, 500, 60);
+        initWisLibSensCor(200, 1600, 500, 20);
         this.weaponName = "tail";
         this.weaponVerb = "swipe";
         this.weaponAttack = 300;
