@@ -5,12 +5,14 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.SaveableBodyPart;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
-public class ElectraFollower extends NPCAwareContent implements TimeAwareInterface, SaveableState
-	{
+public class ElectraFollower extends NPCAwareContent implements SaveableState TimeAwareInterface
+{
 	public static var ElectraSonsNum:Number;
 	public static var ElectraDaughtersNum:Number;
 	public static var ElectraHermKidsNum:Number;
@@ -32,7 +34,7 @@ public class ElectraFollower extends NPCAwareContent implements TimeAwareInterfa
 			"ElectraSonsNum": ElectraSonsNum,
 			"ElectraDaughtersNum": ElectraDaughtersNum,
 			"ElectraHermKidsNum": ElectraHermKidsNum,
-			"ElectraTotalKidsNum": ElectraTotalKidsNum,
+			"ElectraTotalKidsNum": ElectraTotalKidsNum
 		}
 	}
 
@@ -80,7 +82,7 @@ public var pregnancy:PregnancyStore;
 	}
 
 	public function ElectraFollower() {
-		pregnancy = new PregnancyStore(PregnancyStore.INCUBATION_ELECTRA, 0, 0);
+		pregnancy = new PregnancyStore(PregnancyStore.INCUBATION_ELECTRA, 0, 0, 0);
 		pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 300, 250, 200, 150, 100);
 		EventParser.timeAwareClassAdd(this);
 		Saves.registerSaveableState(this);
@@ -424,7 +426,7 @@ public function ElectraSeXYesM():void {
 	outputText("\"<i>Good morning, I was wondering when you would wake up. Thank you so much for helping me get rid of that energy...It's hard to deal with sometimes.</i>\"");
 	outputText(" She slowly slides off your cock with a satisfied smile. ");
 	player.sexReward("vaginalFluids","Dick");
-	if (flags[kFLAGS.ELECTRA_AFFECTION] > 100) && (flags[kFLAGS.ELECTRA_FOLLOWER] = 2) {
+	if ((flags[kFLAGS.ELECTRA_AFFECTION] > 100) && (flags[kFLAGS.ELECTRA_FOLLOWER] == 2)) {
 	ElectraPregChance();
 	}
 	afterYes();
@@ -642,8 +644,7 @@ public function ElectraPregProgression1():void {
 		outputText("“And what about your children?” Ralthazul asks. “Who’s going to deal with their ‘needs’? He frowns.  \n\n");
         outputText("“...I suppose you’re right.” Electra says. “...I’ll go hunting tomorrow, scrounge up some gems. What do you need to…make the device?” \n\n");
 		outputText("Ralthazul thinks for a moment. “I need some metal scraps, rubber from those darkwood trees, the copper wiring you have on that imp, and…An imprint of something you need for…release.”  \n\n");
-		outputText("Electra looks confused at that. “An…Imprint?” 
-The old mouse looks slightly annoyed. “...In order for you to achieve…Results…With the device, you’ll want to have an…erm…Plug…That you know will work for you.” He looks over and sees you. “I’m assuming you’d have an easier time with an imprint from [Player]”.  \n\n");
+		outputText("Electra looks confused at that. “An…Imprint?” The old mouse looks slightly annoyed. “...In order for you to achieve…Results…With the device, you’ll want to have an…erm…Plug…That you know will work for you.” He looks over and sees you. “I’m assuming you’d have an easier time with an imprint from [Player]”.  \n\n");
 		outputText("Electra blinks, realising what he means by an imprint. “Oh.” \n\n");
         outputText("You decide to make yourself known, and come over, telling Electra that you were just checking up on her. She zaps her imp, getting a low groan, before giving you a fuzzy hug. You ask what she’s doing with Ralthazul, and the old alchemist gives you a slight smile.  \n\n");
 		outputText("“Oh, just doing a little problem-solving, my friend. With the…New Raijus on the way, the thought of how to deal with their…Emissions…Came up.” He looks at you. “I have an idea, but it requires a little…innovation, and input from you.” He holds out a container, filled with plaster. “If you would go somewhere private, and…Imprint?” As you take it and walk away, he turns his head. “It needs to be erect!” \n\n");
@@ -711,7 +712,7 @@ ElectraTotalKidsNum += 1;
 ElectraSonsNum += 1;
     break;
   case 1:
-    b // 25% chance
+ // 25% chance
 outputText("Electra calls out to you, “[Name]...It's a boy.” You smile to yourself, going back for a moment, kissing Electra on the forehead. Your son cries out, eyes wide, and stares at you, his spiky hair already filled with static. You ruffle his hair, getting a coo from both mother and baby. You spend a few minutes with Electra before excusing yourself. \n\n");
 ElectraTotalKidsNum += 1;
 ElectraDaughtersNum += 1;

@@ -5,6 +5,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Equipable;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
 // ARIAN_FOLLOWER:int = 933;
 // ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
@@ -90,8 +91,8 @@ Naga TF
 Corruption Path (Arian's body is drastically altered, but [Arian eir] personality only suffers minor alterations.)
 (Unlikely) Boon and Laika
 */
-	public class ArianScene extends NPCAwareContent implements TimeAwareInterface, SaveableState
-		{
+	public class ArianScene extends NPCAwareContent implements SaveableState TimeAwareInterface 
+	{
 	public static var ArianSonsNum:Number;
 	public static var ArianDaughtersNum:Number;
 	public static var ArianHermKidsNum:Number;
@@ -4534,6 +4535,8 @@ public function ArianHatching():void {
         outputText(" A little boy and a girl.” Arian says softly. “She’s got a narrower snout, and softer scales.” (If more) you hear the cracking of another egg, and you both wrap your respective babies in cloth. They close their eyes as you lay them down, and you turn back to the (one/two) remaining eggs, repeating the process with Arian until all (number) of your new brood are nestled in the crib.");
 		outputText("As Arian coos over them, you give him/her a kiss on the snout, excusing yourself.  \n\n");
 doNext(playerMenu);
+}
+}
 }
 }
 }
