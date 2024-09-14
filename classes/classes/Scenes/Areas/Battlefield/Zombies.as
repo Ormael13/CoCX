@@ -106,7 +106,7 @@ import classes.internals.*;
 			this.hairColor = "white";
 			this.hairLength = 4;
 			initStrTouSpeInte(288, 310, 32, 28);
-			initWisLibSensCor(28, 280, 280, 50);
+			initWisLibSensCor(28, 280, 280, 0);
 			this.weaponName = "glowing purple nails";
 			this.weaponVerb="claws";
 			this.weaponAttack = 30;

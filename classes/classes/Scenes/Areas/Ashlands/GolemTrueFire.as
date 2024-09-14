@@ -91,7 +91,7 @@ package classes.Scenes.Areas.Ashlands
 			this.long = "You're currently fighting true fire golem. It's over twenty four feet tall without any sexual characteristics, it body shaped like gigantic lizard, with bat-like wings, covered with dense layer of flames and using bare fists to smash enemies.";
 			//this.plural = true;
 			initStrTouSpeInte(315, 295, 175, 20);
-			initWisLibSensCor(20, 10, 10, 50);
+			initWisLibSensCor(20, 10, 10, 0);
 			this.lustVuln = 0.01;
 			this.tallness = 290;
 			this.drop = NO_DROP;

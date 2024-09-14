@@ -1713,6 +1713,8 @@ import classes.Scenes.Combat.CombatAbilities;
 				}
 			}
 			this.cor -= 100;
+			if (hasPerk(PerkLib.EnemyTrueDemon)) this.cor += (1 + rand(100));
+			if (hasPerk(PerkLib.EnemyTrueAngel)) this.cor -= (1 + rand(100));
 			return error;
 		}
 
@@ -4657,4 +4659,4 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 		}
 	}
-}
+}

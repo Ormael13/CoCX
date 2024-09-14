@@ -17164,22 +17164,36 @@ public function daoModifier(daoLevel:Number):Number {
 }
 
 public function purityScalingDA():Number {
-    var purityScalingDA:Number = 1;
-    if (monster.cor < 33) purityScalingDA *= 0.6;
-    else if (monster.cor < 50) purityScalingDA *= 1.2;
-    else if (monster.cor < 75) purityScalingDA *= 1.8;
-    else if (monster.cor < 90) purityScalingDA *= 2.4;
-    else purityScalingDA *= 3;
-    return purityScalingDA;
+	var purityScalingDA:Number = 1;
+	if (monster.cor < -100) purityScalingDA *= 0;
+	else if (monster.cor < -75) purityScalingDA *= 0.1;
+	else if (monster.cor < -50) purityScalingDA *= 0.3;
+	else if (monster.cor < -25) purityScalingDA *= 0.6;
+	else if (monster.cor < 0) purityScalingDA *= 1;
+	else if (monster.cor > 0 && monster.cor < 25) purityScalingDA *= 1.2;
+	else if (monster.cor < 50) purityScalingDA *= 1.6;
+	else if (monster.cor < 75) purityScalingDA *= 2.2;
+	//else if (monster.cor < 100) purityScalingDA *= 3;
+	//else if (monster.cor < 150) purityScalingDA *= 2.4;
+	//else if (monster.cor < 200) purityScalingDA *= 2.4;
+	else purityScalingDA *= 3;
+	return purityScalingDA;
 }
 public function corruptionScalingDA():Number {
 	var corruptionScalingDA:Number = 1;
-    if (monster.cor >= 66) corruptionScalingDA *= 0.6;
-    else if (monster.cor >= 50) corruptionScalingDA *= 1.2;
-    else if (monster.cor >= 25) corruptionScalingDA *= 1.8;
-    else if (monster.cor >= 10) corruptionScalingDA *= 2.4;
-    else corruptionScalingDA *= 3;
-    return corruptionScalingDA;
+	if (monster.cor >= 100) corruptionScalingDA *= 0;
+	else if (monster.cor >= 75) corruptionScalingDA *= 0.1;
+	else if (monster.cor >= 50) corruptionScalingDA *= 0.3;
+	else if (monster.cor >= 25) corruptionScalingDA *= 0.6;
+	else if (monster.cor > 0) corruptionScalingDA *= 1;
+	else if (monster.cor >= -25 && monster.cor < 0) corruptionScalingDA *= 1.2;
+	else if (monster.cor >= -50) corruptionScalingDA *= 1.6;
+	else if (monster.cor >= -75) corruptionScalingDA *= 2.2;
+	//else if (monster.cor >= -100) corruptionScalingDA *= 3;
+	//else if (monster.cor >= -150) corruptionScalingDA *= 3;
+	//else if (monster.cor >= -200) corruptionScalingDA *= 3;
+	else corruptionScalingDA *= 3;
+	return corruptionScalingDA;
 }
 /* Can provide a scaling or additive bonus to damage depending on usage. Uses player.cor in function to assign scaling.
 Uses Damage *= pcScalingBonusCorruption(player.cor); for scaling.

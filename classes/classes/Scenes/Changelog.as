@@ -240,7 +240,7 @@ public class Changelog extends BaseContent
 			outputText("-Human Parathyroid Glands IM effects changed: Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%/20%/30%. From tier 2 it have additional effect of: +1 to fatigue/soulforce/mana recovery multiplier when under 40%/50% max HP\n");
 			outputText("-New mutation perk: Human Thyroid Gland (Final Form). Req. Human Thyroid Gland (Evolved) and lvl 90+. Effects: Regenerates 8% of max HP/hour and 4% of max HP/round. Gain soulforce recovery equal to 2% of your total soulforce and mana recovery increased by 1% of max mana. Reduce soulskills soulforce cost by 10%.\n");
 			outputText("-New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Fatigue recovery increased and reduces the fatigue cost of physical specials by 40% and +2 to fatigue/soulforce/mana recovery multiplier when under 60% max HP. Reduce spells mana cost by 10%.\n");
-			outputText("-\n");
+			outputText("-All enemies corruption now starts at -100 and ends at 100 for any non true angel/demom enemy. They can go either above 100 (to 200) (demon) or below -100 (to -200) (angel). Effect or attacks that scale based on enemy corruption been adjusted too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
