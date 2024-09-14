@@ -172,7 +172,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			this.hairColor = "black";
 			this.hairLength = 22;
 			initStrTouSpeInte(180, 128, 220, 100);
-			initWisLibSensCor(100, 128, 90, 60);
+			initWisLibSensCor(100, 128, 90, 20);
 			this.weaponName = "teeth";
 			this.weaponVerb="bite";
 			this.weaponAttack = 25;

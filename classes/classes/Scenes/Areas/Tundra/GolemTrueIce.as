@@ -91,7 +91,7 @@ public class GolemTrueIce extends Monster
 			this.long = "You're currently fighting true ice golem. It's over twenty four feet tall without any sexual characteristics, it body shaped like gigantic gorilla, with bird-like wings, covered with thick ice and using huge fists to smash enemies.";
 			//this.plural = true;
 			initStrTouSpeInte(315, 295, 175, 20);
-			initWisLibSensCor(20, 10, 10, 50);
+			initWisLibSensCor(20, 10, 10, 0);
 			this.lustVuln = 0.01;
 			this.tallness = 290;
 			this.drop = NO_DROP;

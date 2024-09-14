@@ -95,7 +95,7 @@ public class GolemsTrueFire extends Monster
 			this.long = "You're currently fighting true fire golems. They're all around ten feet tall without any sexual characteristics, their body shaped like lizard, with bat-like wings, covered with dense layer of flames and using bare fists to smash enemies.";
 			this.plural = true;
 			initStrTouSpeInte(375, 335, 190, 20);
-			initWisLibSensCor(20, 10, 10, 50);
+			initWisLibSensCor(20, 10, 10, 0);
 			this.lustVuln = 0.01;
 			this.tallness = 120;
 			this.drop = NO_DROP;

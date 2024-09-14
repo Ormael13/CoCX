@@ -186,7 +186,7 @@ public class Combat extends BaseContent {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.IronMan)) costPercent -= 50;
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) costPercent -= 20;
-		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) costPercent -= 10;
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) costPercent -= (10 * player.perkv1(IMutationsLib.HumanParathyroidGlandIM));
         if (costPercent < 10) costPercent = 10;
         mod *= costPercent / 100;
         return mod;
@@ -12454,10 +12454,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasPerk(PerkLib.ImprovedLifeline)) maxNonPercentRegen += 4 * player.level * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GreaterLifeline)) maxNonPercentRegen += 6 * player.level * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.EpicLifeline)) maxNonPercentRegen += 8 * player.level * (1 + player.newGamePlusMod());
-		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 10 * player.level * (1 + player.newGamePlusMod());
-		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 10 * player.level * (1 + player.newGamePlusMod());
-		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 20 * player.level * (1 + player.newGamePlusMod());
-        if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen *= 2;
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen *= 2;
         return maxNonPercentRegen;
     }
 
@@ -12552,6 +12549,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 2) fatiguecombatrecovery += 1;
         if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) fatiguecombatrecovery += 1;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) fatiguecombatrecovery += 5;
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 10;
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 10;
 		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 10;
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
@@ -12593,6 +12592,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) multi += (0.4 * player.perkv1(IMutationsLib.TwinHeartIM));
         if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += (0.6 * player.perkv1(IMutationsLib.TwinHeartIM));
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 4 && player.racialScore(Races.HUMAN) > 17) multi += 2;
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17 && player.hp100 < (10 * (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) + 2))) multi += 1;
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) multi *= 2;
         return multi;
     }
@@ -12677,7 +12677,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
     public function soulforceRecoveryMultiplier():Number {
         var multi:Number = 1;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
-        multi += SceneLib.soulforce.sfRegenRacialMult();
+        if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17 && player.hp100 < (10 * (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) + 2))) multi += 1;
+		multi += SceneLib.soulforce.sfRegenRacialMult();
         return multi;
     }
 
@@ -12777,6 +12778,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.isRaceCached(Races.ALICORN,2)) multi += 0.1;
         if (player.isRaceCached(Races.KITSUNE, 2)) multi += 1.5;
         if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
+        if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17 && player.hp100 < (10 * (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) + 2))) multi += 1;
         return multi;
     }
 

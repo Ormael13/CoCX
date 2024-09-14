@@ -157,7 +157,7 @@ public class Satyr extends Monster
 			this.hairLength = 3+rand(20);
 			this.faceType = Face.COW_MINOTAUR;
 			initStrTouSpeInte(188, 175, 275, 175);
-			initWisLibSensCor(150, 180, 105, 60);
+			initWisLibSensCor(150, 180, 105, 20);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
 			this.weaponAttack = 10;

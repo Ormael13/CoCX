@@ -49,7 +49,7 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(200, 170, 289, 289);
-			initWisLibSensCor(289, 130, 100, 38);
+			initWisLibSensCor(289, 130, 100, -24);
 			this.weaponName = "dagger";
 			this.weaponVerb="stab";
 			this.weaponAttack = 67;

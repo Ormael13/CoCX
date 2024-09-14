@@ -114,7 +114,7 @@ package classes.Scenes.Areas.Plains
 			this.hairColor = "black";
 			this.hairLength = 22;
 			initStrTouSpeInte(390, 240, 240, 150);
-			initWisLibSensCor(60, 240, 240, 30);
+			initWisLibSensCor(60, 240, 240, 20);
 			this.weaponName = "twisted club";
 			this.weaponVerb="smash";
 			this.weaponAttack = 55;
