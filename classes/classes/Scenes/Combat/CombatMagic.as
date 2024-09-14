@@ -69,6 +69,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WarMageExpert)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.WarMageMaster)) costPercent -= 20;
 		if (player.hasPerk(PerkLib.HyperCasting)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 4 && player.racialScore(Races.HUMAN) > 17) costPercent -= 10;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
@@ -109,7 +111,6 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell();
 		//Addiditive mods
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;

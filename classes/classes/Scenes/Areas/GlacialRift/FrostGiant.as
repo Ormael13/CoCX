@@ -229,7 +229,7 @@ public class FrostGiant extends Monster
 			this.hairColor = "white";
 			this.hairLength = 8;
 			initStrTouSpeInte(560, 455, 360, 140);
-			initWisLibSensCor(140, 50, 75, 35);
+			initWisLibSensCor(140, 50, 75, -30);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
 			this.weaponAttack = 197;

@@ -92,7 +92,7 @@ public class Yeti extends Monster
 		{
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				initStrTouSpeInte(247, 305, 157, 135);
-				initWisLibSensCor(120, 100, 60, 45);
+				initWisLibSensCor(120, 100, 60, -10);
 				this.weaponAttack = 200;
 				this.armorDef = 300;
 				this.armorMDef = 100;
@@ -104,7 +104,7 @@ public class Yeti extends Monster
 			}
 			else {
 				initStrTouSpeInte(305, 360, 185, 90);
-				initWisLibSensCor(80, 50, 30, 45);
+				initWisLibSensCor(80, 50, 30, -10);
 				this.weaponAttack = 160;
 				this.armorDef = 240;
 				this.armorMDef = 80;

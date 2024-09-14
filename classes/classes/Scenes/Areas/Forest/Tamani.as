@@ -134,7 +134,7 @@ public class Tamani extends Goblin
 			this.hairColor = "pink and black";
 			this.hairLength = 16;
 			initStrTouSpeInte(37 + mod*14, 58 + mod*24, 55 + mod*18, 62 + mod*22);
-			initWisLibSensCor(60 + mod*40, 64 + mod*52, 65 + mod*60, 50);
+			initWisLibSensCor(60 + mod*40, 64 + mod*52, 65 + mod*60, 10);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
 			this.weaponAttack = 2 + mod*4;

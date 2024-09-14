@@ -172,7 +172,7 @@ public class Alraune extends Monster
 				this.hairColor = "dark green";
 			}
 			initStrTouSpeInte(30, 420, 30, 180);
-			initWisLibSensCor(180, 300, 150, 0);
+			initWisLibSensCor(180, 300, 150, 10);
 			this.armorDef = 300;
 			this.armorMDef = 60;
 			this.bonusHP = 1000;

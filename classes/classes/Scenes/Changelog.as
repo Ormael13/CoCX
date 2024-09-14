@@ -238,6 +238,8 @@ public class Changelog extends BaseContent
 			outputText("-Added {stuttername} parser tag. (aimozg) So all the npc's that would stutter can do it at any time ;)\n");
 			outputText("-Nekomata Ghostfire fire and darkness dmg parts are now calculated separetely. Hellfire special now is affected also by fire mastery bonus to damage.\n");
 			outputText("-Human Parathyroid Glands IM effects changed: Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%/20%/30%. From tier 2 it have additional effect of: +1 to fatigue/soulforce/mana recovery multiplier when under 40%/50% max HP\n");
+			outputText("-New mutation perk: Human Thyroid Gland (Final Form). Req. Human Thyroid Gland (Evolved) and lvl 90+. Effects: Regenerates 8% of max HP/hour and 4% of max HP/round. Gain soulforce recovery equal to 2% of your total soulforce and mana recovery increased by 1% of max mana. Reduce soulskills soulforce cost by 10%.\n");
+			outputText("-New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Fatigue recovery increased and reduces the fatigue cost of physical specials by 40% and +2 to fatigue/soulforce/mana recovery multiplier when under 60% max HP. Reduce spells mana cost by 10%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -255,8 +257,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

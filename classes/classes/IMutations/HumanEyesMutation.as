@@ -35,7 +35,7 @@ public class HumanEyesMutation extends IMutationPerkType
 				descS += "30 lvl's. 5% less penalty to acc per each next attack during multiattack.";
             }
             if (pTier == 4){
-				descS += "60 lvl's. 10% less penalty to acc per each next attack during multiattack. You could also see in darkness - Dar Vision.";
+				descS += "60 lvl's. 10% less penalty to acc per each next attack during multiattack. You could also see in darkness - Dark Vision.";
             }
             if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;

@@ -97,7 +97,7 @@ public class YukiOnna extends Monster
 			this.hairColor = "silver white";
 			this.hairLength = 25;
 			initStrTouSpeInte(135, 24, 240, 319);
-			initWisLibSensCor(265, 240, 115, 15);
+			initWisLibSensCor(265, 240, 115, -70);
 			this.weaponName = "Icy spear";
 			this.weaponVerb="pummel";
 			this.weaponAttack = 54;

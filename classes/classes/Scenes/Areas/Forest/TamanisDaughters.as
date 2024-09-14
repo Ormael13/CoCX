@@ -106,7 +106,7 @@ public class TamanisDaughters extends Goblin
 			this.hairColor = "pink";
 			this.hairLength = 16;
 			initStrTouSpeInte(55+mod1*8, 30+mod1*4, 45+mod1*6, 50+mod1*10);
-			initWisLibSensCor(50+mod1*10, 70+mod1*60, 70+mod1*20, 50);
+			initWisLibSensCor(50+mod1*10, 70+mod1*60, 70+mod1*20, 10);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
 			this.weaponAttack = 10 + mod1;
