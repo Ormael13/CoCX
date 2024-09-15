@@ -50,7 +50,7 @@ public class Cinderbloom extends Alraune
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				initStrTouSpeInte(36, 720, 36, 280);
-				initWisLibSensCor(280, 480, 200, 0);
+				initWisLibSensCor(280, 480, 200, 10);
 				this.armorDef = 600;
 				this.armorMDef = 125;
 				this.bonusHP = 1600;
@@ -64,7 +64,7 @@ public class Cinderbloom extends Alraune
 			}
 			else {
 				initStrTouSpeInte(10, 250, 10, 100);
-				initWisLibSensCor(100, 200, 50, 0);
+				initWisLibSensCor(100, 200, 50, 10);
 				this.armorDef = 90;
 				this.armorMDef = 9;
 				this.bonusHP = 200;

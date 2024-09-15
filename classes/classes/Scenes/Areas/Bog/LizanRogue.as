@@ -99,7 +99,7 @@ public class LizanRogue extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(420, 540, 360, 270);
-			initWisLibSensCor(270, 60, 30, 0);
+			initWisLibSensCor(270, 60, 30, -100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.weaponAttack = 136;

@@ -135,7 +135,7 @@ public class AirElemental extends Monster
 				this.long = "You're currently fighting air elemental. It's a four foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(20, 40, 120, 80);
-				initWisLibSensCor(80, 20, 40, 50);
+				initWisLibSensCor(80, 20, 40, 0);
 				this.weaponAttack = 10;
 				this.armorDef = 10;
 				this.armorMDef = 60;
@@ -149,7 +149,7 @@ public class AirElemental extends Monster
 				this.long = "You're currently fighting air elemental. It's a four foot, three inch tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(24, 44, 124, 100);
-				initWisLibSensCor(100, 20, 50, 50);
+				initWisLibSensCor(100, 20, 50, 0);
 				this.weaponAttack = 12;
 				this.armorDef = 12;
 				this.armorMDef = 70;
@@ -163,7 +163,7 @@ public class AirElemental extends Monster
 				this.long = "You're currently fighting air elemental. It's a four and a half foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(28, 48, 128, 120);
-				initWisLibSensCor(120, 20, 60, 50);
+				initWisLibSensCor(120, 20, 60, 0);
 				this.weaponAttack = 14;
 				this.armorDef = 14;
 				this.armorMDef = 80;
@@ -177,7 +177,7 @@ public class AirElemental extends Monster
 				this.long = "You're currently fighting air elemental. It's a four foot, nine inch tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(32, 52, 132, 140);
-				initWisLibSensCor(140, 20, 70, 50);
+				initWisLibSensCor(140, 20, 70, 0);
 				this.weaponAttack = 16;
 				this.armorDef = 16;
 				this.armorMDef = 90;
@@ -191,7 +191,7 @@ public class AirElemental extends Monster
 				this.long = "You're currently fighting 'male' sylph. It's a nine foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 108;
 				initStrTouSpeInte(48, 78, 198, 210);
-				initWisLibSensCor(210, 30, 110, 50);
+				initWisLibSensCor(210, 30, 110, 0);
 				this.weaponAttack = 20;
 				this.armorDef = 20;
 				this.armorMDef = 120;

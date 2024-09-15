@@ -58,7 +58,7 @@ package classes.Scenes.Camp
 			this.long = "You're currently facing the G class Heaven Tribulation: A gathering of jet black clouds that sends down a heavenly storm to test any soul cultivator dreaming to break to Soul Elder stage.";
 			this.plural = false;
 			initStrTouSpeInte(10, 300, 10, 10);
-			initWisLibSensCor(10, 10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 0);
 			this.lustVuln = 0.01;
 			this.tallness = 144;
 			this.createBreastRow(0, 1);

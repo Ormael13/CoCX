@@ -209,7 +209,7 @@ public class AngelLR extends AbstractAngel
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.short = "low-rank angel of mist";
 				initStrTouSpeInte(24, 340, 180, 80);
-				initWisLibSensCor(480, 4, 120, 0);
+				initWisLibSensCor(480, 4, 120, -100);
 				this.randomDropChance = 0.5;
 				this.randomDropParams = {
 					rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH
@@ -234,7 +234,7 @@ public class AngelLR extends AbstractAngel
 				if (rand(2) == 0) this.short = "Gabriel";
 				else this.short = "Uriel";
 				initStrTouSpeInte(6, 75, 35, 15);
-				initWisLibSensCor(100, 3, 25, 0);
+				initWisLibSensCor(100, 3, 25, -100);
 				this.randomDropChance = 0.5;
 				this.randomDropParams = {
 					rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH
@@ -256,7 +256,7 @@ public class AngelLR extends AbstractAngel
 			else {
 				this.short = "low-rank angel";
 				initStrTouSpeInte(7, 80, 40, 20);
-				initWisLibSensCor(120, 4, 30, 0);
+				initWisLibSensCor(120, 4, 30, -100);
 				this.randomDropChance = 0.2;
 				this.randomDropParams = {
 					rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH

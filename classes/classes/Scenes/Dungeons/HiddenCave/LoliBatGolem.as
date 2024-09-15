@@ -59,7 +59,7 @@ public class LoliBatGolem extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,100,0,0,0);
 			initStrTouSpeInte(30, 30, 50, 10);
-			initWisLibSensCor(10, 10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 0);
 			this.hips.type = Hips.RATING_SLENDER + 1;
 			this.butt.type = Butt.RATING_AVERAGE;
 			this.bodyColor = "light grey";

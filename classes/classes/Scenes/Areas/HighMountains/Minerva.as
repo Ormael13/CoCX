@@ -243,7 +243,7 @@ public class Minerva extends Monster
 			else {	//leave min and max levels to easily balance npc combat
 				var lvlMulti:Number = flags[kFLAGS.MINERVA_LVL_UP];
 				initStrTouSpeInte(324 + 46*lvlMulti, 400 + 50*lvlMulti, 500 + 50*lvlMulti, 315 + 40*lvlMulti);
-				initWisLibSensCor(300 + 40*lvlMulti, 286 + 33*lvlMulti, 235 + 30*lvlMulti, 45);
+				initWisLibSensCor(300 + 40*lvlMulti, 286 + 33*lvlMulti, 235 + 30*lvlMulti, -10);
 				this.weaponAttack = 420 + 40*lvlMulti;
 				this.armorDef = 660 + 60*lvlMulti;
 				this.armorMDef = 240 + 30*lvlMulti;
@@ -255,7 +255,7 @@ public class Minerva extends Monster
 			//corrupted minerva {
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) {
 				initStrTouSpeInte(this.str * 1.2, this.tou * 1.2, this.spe * 1.2, this.inte * 1.2);
-				initWisLibSensCor(this.wis * 1.2, this.lib * 1.2, this.sens * 1.2, 80);
+				initWisLibSensCor(this.wis * 1.2, this.lib * 1.2, this.sens * 1.2, 60);
 				this.weaponAttack *= 1.2;
 				this.armorDef *= 1.2;
 				this.armorMDef *= 1.2;

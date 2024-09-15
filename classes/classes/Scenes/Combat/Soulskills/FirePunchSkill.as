@@ -26,7 +26,7 @@ public class FirePunchSkill extends AbstractSoulSkill {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
 
-		if ((player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis))) {
+		if ((player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis))) {
 			return "You call upon the power of flame...and you begin to sweat. You aren't built for the heat, and your body knows it.";
 		}
 		if (!player.isFistOrFistWeapon()) {

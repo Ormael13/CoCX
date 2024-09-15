@@ -186,7 +186,7 @@ public class CumWitch extends Monster
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(90, 100, 80, 170);
-			initWisLibSensCor(150, 125, 90, 30);
+			initWisLibSensCor(150, 125, 90, -40);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
 			this.weaponAttack = 4;

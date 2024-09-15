@@ -420,7 +420,7 @@ public class Soulforce extends BaseContent
 			dao = rand(6);
 			switch(daoname){
 				case "Fire":
-					if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis) && !player.hasPerk(PerkLib.CovenantOfTheSpirits)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis) && !player.hasPerk(PerkLib.CovenantOfTheSpirits)) dao += 1 + rand(3);
 					break;
 				case "Ice":
 					if (player.hasAnyPerk(PerkLib.ColdAffinity, PerkLib.ColdMastery)) dao += 1 + rand(3);
@@ -429,7 +429,7 @@ public class Soulforce extends BaseContent
 					if (player.hasPerk(PerkLib.LightningAffinity)) dao += 1 + rand(3);
 					break;
 				case "Darkness":
-					if (player.hasPerk(PerkLib.DarknessAffinity)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.DarknessAffinity, PerkLib.FireShadowAffinity)) dao += 1 + rand(3);
 					break;
 				case "Poison":
 					if (player.hasPerk(PerkLib.PoisonAffinity)) dao += 1 + rand(3);

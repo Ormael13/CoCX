@@ -154,7 +154,7 @@ public class SandMother extends Monster
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(160, 200, 132, 160);
-			initWisLibSensCor(160, 150, 100, 30);
+			initWisLibSensCor(160, 150, 100, -40);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
 			this.weaponAttack = 12;

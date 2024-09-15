@@ -110,7 +110,7 @@ public class Anubis extends Monster
 			this.hairColor = "green";
 			this.hairLength = 16;
 			initStrTouSpeInte(63, 260, 150, 264);
-			initWisLibSensCor(319, 152, 143, 70);
+			initWisLibSensCor(319, 152, 143, 40);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
 			this.weaponAttack = 40;

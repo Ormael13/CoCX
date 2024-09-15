@@ -12,8 +12,8 @@ package classes.Scenes.Areas.Ashlands
 		public function backhand():void {
 			outputText("The golem visage twists into a grimace of irritation, and it flyby you swinging hand at you in a vicious backhand.");
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 			damage = Math.round(damage);
 			//Dodge
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
@@ -30,7 +30,7 @@ package classes.Scenes.Areas.Ashlands
 			
 			var damage:Number = 100 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 			damage = Math.round(damage);
 			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
 			else
@@ -91,7 +91,7 @@ package classes.Scenes.Areas.Ashlands
 			this.long = "You're currently fighting true fire golem. It's over twenty four feet tall without any sexual characteristics, it body shaped like gigantic lizard, with bat-like wings, covered with dense layer of flames and using bare fists to smash enemies.";
 			//this.plural = true;
 			initStrTouSpeInte(315, 295, 175, 20);
-			initWisLibSensCor(20, 10, 10, 50);
+			initWisLibSensCor(20, 10, 10, 0);
 			this.lustVuln = 0.01;
 			this.tallness = 290;
 			this.drop = NO_DROP;

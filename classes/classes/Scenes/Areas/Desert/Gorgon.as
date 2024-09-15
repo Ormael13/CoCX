@@ -149,7 +149,7 @@ public class Gorgon extends Monster
 			this.hairColor = "green";
 			this.hairLength = 16;
 			initStrTouSpeInte(311, 340, 319, 205);
-			initWisLibSensCor(205, 232, 210, 30);
+			initWisLibSensCor(205, 232, 210, -40);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
 			this.weaponAttack = 81;

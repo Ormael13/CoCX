@@ -84,7 +84,7 @@ public class CorruptBeeQueen extends Monster {
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
 			initStrTouSpeInte(70, 220, 110, 75);
-			initWisLibSensCor(75, 195, 155, 0);
+			initWisLibSensCor(75, 195, 155, 100);
 			this.weaponName = "chitin-plated fist";
 			this.weaponVerb="armored punch";
 			this.weaponAttack = 15;

@@ -98,7 +98,7 @@ public class Scylla extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(450, 250, 250, 150);
-			initWisLibSensCor(150, 200, 150, 50);
+			initWisLibSensCor(150, 200, 150, 0);
 			this.weaponName = "tentacle";
 			this.weaponVerb="slash";
 			this.weaponAttack = 86;

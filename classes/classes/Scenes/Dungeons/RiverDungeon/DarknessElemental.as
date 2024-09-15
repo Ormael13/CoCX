@@ -16,7 +16,7 @@ public class DarknessElemental extends Monster
 		public function baseElementalAttack():void {
 			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Blackened doppelganger":"The darkness elemental")+" envelops its fists within inky shadows before throwing a punch toward you.");
 			var damage:Number = inte + wis;
-			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 0.3;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 2);
 			damage = Math.round(damage);
@@ -33,7 +33,7 @@ public class DarknessElemental extends Monster
 		public function fluffyOfPunches():void {
 			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Blackened doppelganger":"The darkness elemental")+" wraps its fists in wicks of darkness before zeroing in for a flurry of punches.");
 			var damage:Number = inte + wis;
-			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 0.3;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 1.5);
 			damage = Math.round(damage);
@@ -53,8 +53,8 @@ public class DarknessElemental extends Monster
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
-				if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
-				if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
+				if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 0.3;
+				if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 3;
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
@@ -121,7 +121,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting darkness elemental. It's a four feet tall body of darkness shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(44, 64, 104, 220);
-				initWisLibSensCor(220, 20, 110, 50);
+				initWisLibSensCor(220, 20, 110, 0);
 				this.weaponAttack = 24;
 				this.armorDef = 24;
 				this.armorMDef = 130;
@@ -135,7 +135,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting darkness elemental. It's a four foot, three inch tall body of darkness shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(50, 70, 110, 250);
-				initWisLibSensCor(250, 20, 130, 50);
+				initWisLibSensCor(250, 20, 130, 0);
 				this.weaponAttack = 28;
 				this.armorDef = 28;
 				this.armorMDef = 150;
@@ -149,7 +149,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting darkness elemental. It's a four and half foot tall body of darkness shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(56, 76, 116, 280);
-				initWisLibSensCor(280, 20, 150, 50);
+				initWisLibSensCor(280, 20, 150, 0);
 				this.weaponAttack = 32;
 				this.armorDef = 32;
 				this.armorMDef = 170;
@@ -163,7 +163,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting darkness elemental. It's four foot, nine inch tall body of darkness shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(62, 82, 122, 310);
-				initWisLibSensCor(310, 20, 170, 50);
+				initWisLibSensCor(310, 20, 170, 0);
 				this.weaponAttack = 36;
 				this.armorDef = 36;
 				this.armorMDef = 190;
@@ -177,7 +177,7 @@ public class DarknessElemental extends Monster
 				this.long = "You're currently fighting unique darkness elemental. It's a nine foot tall creature that looks exactly like you. Its body is wrapped in an darkness cloak, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 108;
 				initStrTouSpeInte(92, 120, 198, 460);
-				initWisLibSensCor(460, 30, 254, 50);
+				initWisLibSensCor(460, 30, 254, 0);
 				this.weaponAttack = 44;
 				this.armorDef = 50;
 				this.armorMDef = 250;

@@ -83,7 +83,7 @@ public class Brigid extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(140, 110, 140, 50);
-			initWisLibSensCor(50, 70, 45, 50);
+			initWisLibSensCor(50, 70, 45, 0);
 			this.weaponName = "poker";
 			this.weaponVerb="burning stab";
 			this.weaponAttack = 34;

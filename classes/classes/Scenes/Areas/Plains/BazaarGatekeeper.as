@@ -153,7 +153,7 @@ import classes.internals.*;
 			this.hairColor = "black";
 			this.hairLength = 8;
 			initStrTouSpeInte(124, 150, 104, 70);
-			initWisLibSensCor(70, 15, 10, 55);
+			initWisLibSensCor(70, 15, 10, 75);
 			this.weaponName = "dual scimitars";
 			this.weaponVerb="slash";
 			this.weaponAttack = 28;

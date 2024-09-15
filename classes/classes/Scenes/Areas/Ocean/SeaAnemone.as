@@ -102,7 +102,7 @@ public class SeaAnemone extends Monster
 			this.hairLength = 20;
 			this.hairType = Hair.ANEMONE;
 			initStrTouSpeInte(200, 160, 127, 140);
-			initWisLibSensCor(140, 150, 70, 50);
+			initWisLibSensCor(140, 150, 70, 0);
 			this.weaponName = "tendrils";
 			this.weaponVerb="tentacle";
 			this.weaponAttack = 46;

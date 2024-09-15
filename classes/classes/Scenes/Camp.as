@@ -5271,10 +5271,11 @@ public function rebirthFromBadEnd():void {
 			} else {
 				if (player.negativeLevel > 0) {
 					mainView.setMenuButton(MainView.MENU_LEVEL, "Restore Lvl");
+					mainView.levelButton.toolTipText = "Level up to restore your lost levels.";
 				} else {
 					mainView.setMenuButton(MainView.MENU_LEVEL, "Level Up");
+					mainView.levelButton.toolTipText = getLevelUpStatsForButton();
 				}
-				mainView.levelButton.toolTipText = getLevelUpStatsForButton();
 				if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
 					CoC.instance.playerInfo.levelUpMenu();
 					return true; //True indicates that you should be routed to level-up.

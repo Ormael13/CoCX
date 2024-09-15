@@ -147,7 +147,7 @@ public class SandTrap extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(110, 30, 90, 55);
-			initWisLibSensCor(50, 83, 61, 50);
+			initWisLibSensCor(50, 83, 61, 0);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.weaponAttack = 20;

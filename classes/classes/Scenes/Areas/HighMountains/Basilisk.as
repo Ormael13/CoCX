@@ -124,7 +124,7 @@ import classes.internals.ChainedDrop;
 			this.hairColor = "none";
 			this.hairLength = 0;
 			initStrTouSpeInte(414, 501, 225, 390);
-			initWisLibSensCor(390, 200, 140, 60);
+			initWisLibSensCor(390, 200, 140, 20);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.weaponAttack = 290;

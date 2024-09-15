@@ -141,7 +141,7 @@ public class Phoenix extends Monster
 			this.hairColor = "red";
 			this.hairLength = 16;
 			initStrTouSpeInte(695, 664, 682, 484);
-			initWisLibSensCor(460, 600, 440, 45);
+			initWisLibSensCor(460, 600, 440, -10);
 			this.weaponName = "scimitar and shield";
 			this.weaponVerb="slash";
 			this.weaponAttack = 820;

@@ -94,7 +94,7 @@ import classes.internals.*;
 			this.lust = 10;
 			if (rand(2) == 0) {
 				initStrTouSpeInte(132, 165, 198, 420);
-				initWisLibSensCor(420, 1, 420, 50);
+				initWisLibSensCor(420, 1, 420, 0);
 				this.weaponAttack = 86;
 				this.armorMDef = 86;
 				this.bonusHP = 750;
@@ -103,7 +103,7 @@ import classes.internals.*;
 			}
 			else {
 				initStrTouSpeInte(126, 159, 189, 300);
-				initWisLibSensCor(300, 1, 300, 50);
+				initWisLibSensCor(300, 1, 300, 0);
 				this.weaponAttack = 72;
 				this.armorMDef = 72;
 				this.bonusHP = 500;

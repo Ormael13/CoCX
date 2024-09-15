@@ -26,7 +26,7 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
                 descS += ". Gain soulforce recovery equal to "+(pTier-2)+"% of your total soulforce and mana recovery increased by "+((pTier-2)*0.5)+"% of max mana";
             }
             if (pTier >= 4){
-                descS += "";
+                descS += ". Reduce soulskills soulforce cost by 10%";
             }
             if (descS != "")descS += ".";
             if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
@@ -82,7 +82,7 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
         //Mutations Buffs
         public function HumanThyroidGlandMutation() 
 		{
-			super(mName + " IM", mName, SLOT_THYROID, 3);
+			super(mName + " IM", mName, SLOT_THYROID, 4);
 		}
 		
 	}

@@ -257,7 +257,6 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		addButton(3, "Spar", charySpar);
 		/*addButton(4, "Music", charyMusic);
 		addButton(5, "Sex", charySex);*/
-		if (CharySeenSkulls) addButton(6, "Skulls", charyGiveSkulls);
 		addButton(14, "Leave", explorer.done);
 	}
 	
@@ -271,6 +270,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		addButton(3, "Demons", charyTalkDemons);
 		//addButton(4, "Towns", charyTalkTowns);
 		//if (CharyAffectionMeter > 79 && CharyLandShipQuestState == 2) addButton(5, "CampJoin", charyJoinCamp);
+		if (CharySeenSkulls) addButton(6, "Skulls", charyGiveSkulls);
 		addButton(14, "Back", charyBeachMeetings2);
 	}
 	public function charyTalkEyes():void {

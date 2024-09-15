@@ -136,7 +136,7 @@ public class Naga extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 16;
 			initStrTouSpeInte(114, 150, 165, 90);
-			initWisLibSensCor(90, 85, 85, 30);
+			initWisLibSensCor(90, 85, 85, -40);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
 			this.weaponAttack = 35;

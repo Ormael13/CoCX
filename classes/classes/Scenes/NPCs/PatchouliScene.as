@@ -290,7 +290,7 @@ public class PatchouliScene extends NPCAwareContent {
 				case 8:
 					outputText("you end up in a somewhat hot area. You can see lava rivers every now and then across the ashen land.\n\n");
 					outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
-					if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
+					if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.FireShadowAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
 					startCombat(new PhoenixPlatoon());
 					break;
 				default:

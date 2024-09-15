@@ -120,7 +120,7 @@ package classes.Scenes.Monsters
 			this.imageName = "angel";
 			this.long = "";
 			initStrTouSpeInte(7, 80, 40, 20);
-			initWisLibSensCor(160, 4, 30, 0);
+			initWisLibSensCor(160, 4, 30, -100);
 			this.tallness = 30;
 			this.drop = NO_DROP;
 			this.level = 18;

@@ -235,7 +235,7 @@ import classes.internals.*;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity, 25, 0, 0, 0);
 			initStrTouSpeInte(99, 230, 198, 221);
-			initWisLibSensCor(221, 400, 269, 80);
+			initWisLibSensCor(221, 400, 269, 60);
 			this.weaponAttack = 50;
 			this.armorDef = 80;
 			this.armorMDef = 45;

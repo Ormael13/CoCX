@@ -118,7 +118,7 @@ public class Vala extends Monster
 			this.hairColor = "purple";
 			this.hairLength = 22;
 			initStrTouSpeInte(77, 92, 95, 90);
-			initWisLibSensCor(90, 75, 55, 50);
+			initWisLibSensCor(90, 75, 55, -100);
 			this.weaponName = "fists";
 			this.weaponVerb="caresses";
 			this.weaponAttack = 1;

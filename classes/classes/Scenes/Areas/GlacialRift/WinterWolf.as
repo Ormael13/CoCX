@@ -104,7 +104,7 @@ public class WinterWolf extends Monster
 			this.hairColor = "glacial white";
 			this.hairLength = 8;
 			initStrTouSpeInte(400, 420, 375, 120);
-			initWisLibSensCor(100, 75, 150, 75);
+			initWisLibSensCor(100, 75, 150, 50);
 			this.weaponName = "paws";
 			this.weaponVerb="paw-slash";
 			this.weaponAttack = 274;

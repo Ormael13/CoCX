@@ -49,7 +49,7 @@ public class AlrauneMaiden extends Alraune
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				initStrTouSpeInte(34, 700, 34, 260);
-				initWisLibSensCor(260, 440, 180, 0);
+				initWisLibSensCor(260, 440, 180, 10);
 				this.armorDef = 575;
 				this.armorMDef = 115;
 				this.bonusHP = 1400;
@@ -68,7 +68,7 @@ public class AlrauneMaiden extends Alraune
 			}
 			else {
 				initStrTouSpeInte(15, 300, 15, 120);
-				initWisLibSensCor(120, 200, 75, 0);
+				initWisLibSensCor(120, 200, 75, 10);
 				this.armorDef = 100;
 				this.armorMDef = 20;
 				this.bonusHP = 500;

@@ -162,7 +162,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			this.hairColor = "white";
 			this.hairLength = 16;
 			initStrTouSpeInte(253, 191, 224, 342);
-			initWisLibSensCor(321, 306, 125, 95);
+			initWisLibSensCor(321, 306, 125, 90);
 			this.weaponName = "tentacles";
 			this.weaponVerb="slap";
 			this.weaponAttack = 35;

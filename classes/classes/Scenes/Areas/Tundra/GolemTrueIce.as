@@ -13,7 +13,7 @@ public class GolemTrueIce extends Monster
 			outputText("The golem visage twists into a grimace of irritation, and it flyby you swinging hand at you in a vicious backhand.");
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
 			damage = Math.round(damage);
 			//Dodge
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
@@ -30,7 +30,7 @@ public class GolemTrueIce extends Monster
 			
 			var damage:Number = 100 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
 			damage = Math.round(damage);
 			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
 			else
@@ -91,7 +91,7 @@ public class GolemTrueIce extends Monster
 			this.long = "You're currently fighting true ice golem. It's over twenty four feet tall without any sexual characteristics, it body shaped like gigantic gorilla, with bird-like wings, covered with thick ice and using huge fists to smash enemies.";
 			//this.plural = true;
 			initStrTouSpeInte(315, 295, 175, 20);
-			initWisLibSensCor(20, 10, 10, 50);
+			initWisLibSensCor(20, 10, 10, 0);
 			this.lustVuln = 0.01;
 			this.tallness = 290;
 			this.drop = NO_DROP;

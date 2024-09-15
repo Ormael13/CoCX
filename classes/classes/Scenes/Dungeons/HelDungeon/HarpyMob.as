@@ -99,7 +99,7 @@ public class HarpyMob extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(89, 107, 170, 52);
-			initWisLibSensCor(52, 86, 49, 50);
+			initWisLibSensCor(52, 86, 49, 0);
 			this.weaponName = "claw";
 			this.weaponVerb="claw";
 			this.weaponAttack = 39;
