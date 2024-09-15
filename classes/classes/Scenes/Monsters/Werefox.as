@@ -45,7 +45,7 @@ import classes.internals.*;
 		public function createElement():void {
 			var type:String = "";
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity))  type = "fire";
-			else if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) type = "ice";
+			else if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) type = "ice";
 			else if (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) type = "lightning";
 			else {
 				if (rand(2) == 0) type = "darkness";

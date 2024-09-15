@@ -3991,6 +3991,8 @@ public class PerkLib
 				"You can remains conscious and continue fighting even if your HP is below 0. You gonna loose 1% of max HP each round and would loose fight when negative HP reach 7% (or more if PC got other perks to stay undefeated below 0%) of max HP.");
 		public static const FireAffinity:PerkType = mk("Fire Affinity", "Fire Affinity",
 				"You have high resistance to fire effects, immunity to the burn condition, and mastery over fire abilities and magic. However, you are highly susceptible to ice.");
+		public static const FireShadowAffinity:PerkType = mk("Fire Shadow Affinity", "Fire Shadow Affinity",
+				"You have a natural affinity for both darkness and fire granting you increased damage and resistance to those element as well as gaining a weakness to ice and lightning.");
 		public static const FlawlessBody:PerkType = mk("Flawless Body", "Flawless Body",
 				"Your elven body with its flawless form and skin is so alluring it reinforces your ability to tease.");
 		public static const Flexibility:PerkType = mk("Flexibility", "Flexibility",

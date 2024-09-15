@@ -561,7 +561,7 @@ public class Combat extends BaseContent {
                     if (gemsLost > player.gems) gemsLost = player.gems;
                     if (monster is Etna) gemsLost = 0;
                     var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
-                    if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster is HellfireSnail && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)))) timePasses = 1;
+                    if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster is HellfireSnail && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)))) timePasses = 1;
                     player.gems -= gemsLost;
                     if (monster.perkv3(PerkLib.NoGemsLost) > 0) player.gems += monster.perkv3(PerkLib.NoGemsLost);
                 }
@@ -7588,7 +7588,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.8;
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.5;
-        if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) damage *= 2;
+        if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis)) damage *= 2;
         return damage;
     }
 
@@ -7597,7 +7597,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
-        if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) damage *= 2;
+        if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis)) damage *= 2;
         return damage;
     }
 
@@ -7686,7 +7686,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 1.2;
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.8;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.5;
-        if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 2;
+        if (player.hasAnyPerk(PerkLib.DarknessAffinity, PerkLib.FireShadowAffinity)) damage *= 2;
         return damage;
     }
 
@@ -7695,7 +7695,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 4;
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.25;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.4;
-        if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 2;
+        if (player.hasAnyPerk(PerkLib.DarknessAffinity, PerkLib.FireShadowAffinity)) damage *= 2;
         return damage;
     }
 
@@ -10327,7 +10327,7 @@ public class Combat extends BaseContent {
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
             }
         }
-		if (player.hasStatusEffect(StatusEffects.ConstantHeatConditions) && !player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
+		if (player.hasStatusEffect(StatusEffects.ConstantHeatConditions) && !player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.FireShadowAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
 		if (player.hasStatusEffect(StatusEffects.SubZeroConditions) && !player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();
         if (monster is Incels) (monster as Incels).DraftSupportCheck();
         if (player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
@@ -12333,7 +12333,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (flags[kFLAGS.HUNGER_ENABLED] <= 0 && !player.hasPerk(PerkLib.EndlessHunger) && player.hasPerk(PerkLib.AxillaryVenomGlands) && player.tailVenom < player.maxVenom()) maxPercentRegen -= 1;
 		//if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxPercentRegen += 15;
         if (player.armor == armors.NURSECL) maxPercentRegen += 0.5;
-		if (player.armor == armors.SFLAREQ && player.hasPerk(PerkLib.FireAffinity)) maxPercentRegen += 3;
+		if (player.armor == armors.SFLAREQ && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity))) maxPercentRegen += 3;
         if (player.armor == armors.BLIZZ_K) {
             if (!player.hasPerk(PerkLib.ColdAffinity)) maxPercentRegen -= 10;
             if (player.isRaceCached(Races.YUKIONNA)) maxPercentRegen += 5;
@@ -17173,10 +17173,11 @@ public function purityScalingDA():Number {
 	else if (monster.cor > 0 && monster.cor < 25) purityScalingDA *= 1.2;
 	else if (monster.cor < 50) purityScalingDA *= 1.6;
 	else if (monster.cor < 75) purityScalingDA *= 2.2;
-	//else if (monster.cor < 100) purityScalingDA *= 3;
-	//else if (monster.cor < 150) purityScalingDA *= 2.4;
-	//else if (monster.cor < 200) purityScalingDA *= 2.4;
-	else purityScalingDA *= 3;
+	else if (monster.cor < 100) purityScalingDA *= 3;
+	else if (monster.cor < 125) purityScalingDA *= 4;
+	else if (monster.cor < 150) purityScalingDA *= 5.5;
+	else if (monster.cor < 175) purityScalingDA *= 7.5;
+	else purityScalingDA *= 10;
 	return purityScalingDA;
 }
 public function corruptionScalingDA():Number {
@@ -17189,10 +17190,11 @@ public function corruptionScalingDA():Number {
 	else if (monster.cor >= -25 && monster.cor < 0) corruptionScalingDA *= 1.2;
 	else if (monster.cor >= -50) corruptionScalingDA *= 1.6;
 	else if (monster.cor >= -75) corruptionScalingDA *= 2.2;
-	//else if (monster.cor >= -100) corruptionScalingDA *= 3;
-	//else if (monster.cor >= -150) corruptionScalingDA *= 3;
-	//else if (monster.cor >= -200) corruptionScalingDA *= 3;
-	else corruptionScalingDA *= 3;
+	else if (monster.cor >= -100) corruptionScalingDA *= 3;
+	else if (monster.cor >= -125) corruptionScalingDA *= 4;
+	else if (monster.cor >= -150) corruptionScalingDA *= 5.5;
+	else if (monster.cor >= -175) corruptionScalingDA *= 7.5;
+	else corruptionScalingDA *= 10;
 	return corruptionScalingDA;
 }
 /* Can provide a scaling or additive bonus to damage depending on usage. Uses player.cor in function to assign scaling.

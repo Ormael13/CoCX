@@ -80,7 +80,7 @@ public class Ember extends Monster
 						outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing. ");
 						damage2 += 200 + (this.inte * 2) + rand(200);
 					}
-					if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity) || player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage2 *= 1.6;
+					if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity) || player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage2 *= 1.6;
 					if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
 					if (flags[kFLAGS.EMBER_LVL_UP] >= 8) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
 					if (flags[kFLAGS.EMBER_LVL_UP] >= 13) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));

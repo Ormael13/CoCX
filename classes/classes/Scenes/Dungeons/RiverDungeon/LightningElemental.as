@@ -17,7 +17,7 @@ public class LightningElemental extends Monster
 			outputText("Sparks of electricity wrap around "+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"the lightning elemental")+"'s fists before it hurts its fist toward you.");
 			var damage:Number = inte + wis;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 0.3;
-			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 3;
+			if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 2);
 			damage = Math.round(damage);
 			//Dodge
@@ -34,7 +34,7 @@ public class LightningElemental extends Monster
 			outputText("Electricity crackles around "+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"the lightning elemental")+"'s fists before it launches itself into a flurry of punches against you.");
 			var damage:Number = inte + wis;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 0.3;
-			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 3;
+			if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 1.5);
 			damage = Math.round(damage);
 			//Dodge

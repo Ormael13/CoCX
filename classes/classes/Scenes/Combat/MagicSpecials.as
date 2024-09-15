@@ -2843,10 +2843,10 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
-			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 1.25;
+			if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
 			damage *= magicAbilitiesGoBrrr();
@@ -7206,4 +7206,4 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 }
-}
+}

@@ -16,7 +16,7 @@ public class DarknessElemental extends Monster
 		public function baseElementalAttack():void {
 			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Blackened doppelganger":"The darkness elemental")+" envelops its fists within inky shadows before throwing a punch toward you.");
 			var damage:Number = inte + wis;
-			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 0.3;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 2);
 			damage = Math.round(damage);
@@ -33,7 +33,7 @@ public class DarknessElemental extends Monster
 		public function fluffyOfPunches():void {
 			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Blackened doppelganger":"The darkness elemental")+" wraps its fists in wicks of darkness before zeroing in for a flurry of punches.");
 			var damage:Number = inte + wis;
-			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 0.3;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 1.5);
 			damage = Math.round(damage);
@@ -53,8 +53,8 @@ public class DarknessElemental extends Monster
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
-				if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
-				if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
+				if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 0.3;
+				if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 3;
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));

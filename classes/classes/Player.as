@@ -1404,7 +1404,7 @@ use namespace CoC;
 		}
 		public function immuneToBurn():Boolean
 		{
-			return hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis);
+			return hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis);
 		}
 		public function immuneToAcid():Boolean
 		{
@@ -3542,7 +3542,7 @@ use namespace CoC;
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasAnyPerk(PerkLib.FromTheFrozenWaste, PerkLib.ColdAffinity, PerkLib.ColdMastery)) mult += 100;
-			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) mult -= 50;
+			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis)) mult -= 50;
 			if (hasPerk(PerkLib.VegetalAffinity)) mult += 50;
 			if (hasPerk(PerkLib.TrollResistance)) mult += 7.5;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
@@ -3601,7 +3601,7 @@ use namespace CoC;
 			if (necklaceName == "Blue Winter scarf" || necklaceName == "Green Winter scarf" || necklaceName == "Purple Winter scarf" || necklaceName == "Red Winter scarf" || necklaceName == "Yellow Winter scarf") mult -= 20;
 			if (hasAnyPerk(PerkLib.FromTheFrozenWaste, PerkLib.ColdAffinity, PerkLib.ColdMastery)) mult -= 50;
 			if (hasPerk(PerkLib.IcyFlesh)) mult -= 40;
-			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) mult += 100;
+			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis)) mult += 100;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_ice') && jewelry2.hasBuff('res_ice') && jewelry3.hasBuff('res_ice') && jewelry4.hasBuff('res_ice') && headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R && necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= 15;
@@ -3666,7 +3666,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) mult -= 10;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) mult -= 30;
 			if (hasPerk(PerkLib.AquaticAffinity) || hasPerk(PerkLib.AffinityUndine)) mult += 100;
-			if (hasPerk(PerkLib.DarknessAffinity)) mult += 100;
+			if (hasPerk(PerkLib.DarknessAffinity) || hasPerk(PerkLib.FireShadowAffinity)) mult += 100;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_lightning') && jewelry2.hasBuff('res_lightning') && jewelry3.hasBuff('res_lightning') && jewelry4.hasBuff('res_lightning') && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
@@ -3711,7 +3711,7 @@ use namespace CoC;
 			var mult:Number = damageMagicalPercent();
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
-			if (hasPerk(PerkLib.DarknessAffinity)) mult -= 50;
+			if (hasPerk(PerkLib.DarknessAffinity) || hasPerk(PerkLib.FireShadowAffinity)) mult -= 50;
 			if (hasPerk(PerkLib.LightningAffinity)) mult += 00;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= necklaceEffectMagnitude;
@@ -5270,8 +5270,8 @@ use namespace CoC;
 			return [StatusEffects.KnowsAcidRain, StatusEffects.KnowsAcidSpray, StatusEffects.KnowsAegis, StatusEffects.KnowsArcticGale, StatusEffects.KnowsArouse, StatusEffects.KnowsBalanceOfLife, StatusEffects.KnowsBlind, StatusEffects.KnowsBlink, StatusEffects.KnowsBlizzard, StatusEffects.KnowsBloodChains, StatusEffects.KnowsBloodExplosion, StatusEffects.KnowsBloodField,
 			StatusEffects.KnowsBloodMissiles, StatusEffects.KnowsBloodShield, StatusEffects.KnowsBloodWave, StatusEffects.KnowsBoneArmor, StatusEffects.KnowsBoneshatter, StatusEffects.KnowsBoneSpirit, StatusEffects.KnowsChainLighting, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsClearMind, StatusEffects.KnowsCorrosiveWave, StatusEffects.KnowsCure,
 			StatusEffects.KnowsConsumingDarkness, StatusEffects.KnowsCurseOfDesire, StatusEffects.KnowsCurseOfWeeping, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsDivineShield, StatusEffects.KnowsDuskWave, StatusEffects.KnowsExorcise, StatusEffects.KnowsEnergyDrain, StatusEffects.KnowsFireStorm, StatusEffects.KnowsHeal, StatusEffects.KnowsHydroAcid,
-			StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike, StatusEffects.KnowsLifeSiphon, StatusEffects.KnowsLifestealEnchantment, StatusEffects.KnowsLifetap, StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield, StatusEffects.KnowsMentalShield, StatusEffects.KnowsMight, StatusEffects.KnowsNosferatu, StatusEffects.KnowsRegenerate, StatusEffects.KnowsRestore,
-			StatusEffects.KnowsShatterstone, StatusEffects.KnowsStalagmite, StatusEffects.KnowsTearsOfDenial, StatusEffects.KnowsThunderstorm, StatusEffects.KnowsWaterBall, StatusEffects.KnowsWaterSphere, StatusEffects.KnowsWhitefire, StatusEffects.KnowsWindBlast, StatusEffects.KnowsWindBullet]
+			StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike, StatusEffects.KnowsLifeSiphon, StatusEffects.KnowsLifestealEnchantment, StatusEffects.KnowsLifetap, StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield, StatusEffects.KnowsMentalShield, StatusEffects.KnowsMeteorShower, StatusEffects.KnowsMight, StatusEffects.KnowsPolarMidnight,
+			StatusEffects.KnowsNosferatu, StatusEffects.KnowsRegenerate, StatusEffects.KnowsRestore, StatusEffects.KnowsShatterstone, StatusEffects.KnowsStalagmite, StatusEffects.KnowsTearsOfDenial, StatusEffects.KnowsThunderstorm, StatusEffects.KnowsWaterBall, StatusEffects.KnowsWaterSphere, StatusEffects.KnowsWhitefire, StatusEffects.KnowsWindBlast, StatusEffects.KnowsWindBullet]
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;

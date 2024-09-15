@@ -715,7 +715,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 		private function ConstantHeatConditions():void {
-			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,1,0,0,0);
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.FireShadowAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,1,0,0,0);
 		}
 		private function encountersRuletteE2():void {
 			if (encountersRulette()) {
@@ -793,7 +793,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 		private function ConstantHeatAndSubZeroConditions():void {
-			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,2,0,0,0);
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.FireShadowAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,2,0,0,0);
 			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,2,0,0,0);
 		}
 		private function encountersRuletteE2and3():void {
