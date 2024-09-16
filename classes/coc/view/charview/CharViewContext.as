@@ -47,13 +47,7 @@ public class CharViewContext extends ExecContext {
 			var weaponSubtype:String = (player.weapon is DynamicWeapon) ? (player.weapon as DynamicWeapon).subtypeId : "";
 			var armorSubtype:String = (player.armor is DynamicArmor) ? (player.armor as DynamicArmor).subtypeId : "";
 			var shieldSubtype:String = (player.shield is DynamicShield) ? (player.shield as DynamicShield).subtypeId : "";
-
-			function showLegClothing():Boolean {
-				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.JABBERWOCKY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2, LowerBody.WERESHARK].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
-			}
-			function showPanty():Boolean {
-				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2, LowerBody.WERESHARK].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
-			}
+			
 			function meleeWeaponSprite():String {
 				// Variants
 				if (player.weapon == game.weapons.U_STAFF) return 'staff_holy';
@@ -276,37 +270,32 @@ public class CharViewContext extends ExecContext {
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					AzazelPhylactery: player.hasPerk(PerkLib.InnerPhylactery),
 					AkbalFire: player.hasPerk(PerkLib.FireLord),
-					showClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isAlraune() && !player.isSitStancing() && !player.isGargoyleStancing()),
-					showArmClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI, Arms.FROSTWYRM, Arms.JABBERWOCKY].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing()),
-					showLegClothing: showLegClothing(),
-					showPanty: showPanty(),
-					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
-					PlayerHasBreastViewOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.armor == game.armors.CGUNSLI || player.armor == game.armors.GTECHC_,
-					PlayerHasABra: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingBra(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
 					PlayerIsSitStancing: player.isSitStancing(),
+					PlayerIsGargoyleStancing: player.isGargoyleStancing(),
 					PlayerIsInHumanForm: player.humanForm(),
-					playerHasWeaponBannedArms: [Arms.GAZER, Arms.YETI, Arms.DISPLACER, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 && !player.isStancing(),
-					playerHasWeaponWings: [Wings.VAMPIRE].indexOf(player.wings.type) == -1,
-					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.WERESHARK].indexOf(player.lowerBody) != -1,
-					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.WERESHARK].indexOf(player.lowerBody) != -1,
-					showDickDrippies: player.lust >= 0.8 * player.maxLust() && (player.lowerGarment.isNothing || !showPanty()) && (player.armor.isNothing || !showLegClothing()),
+					showDickDrippies: player.lust >= 0.8 * player.maxLust(),
 
 					//Detect Weapon Skins
 					MeleeWeaponSprite: meleeWeaponSprite(),
+					ShieldSprite: shieldSprite(), // incl. tome
+					RangedWeaponSprite: rangedWeaponSprite(),
+					ArmorSprite: armorSprite(),
+					BraSprite: braSprite(),
+					PantySprite: pantySprite(),
+					MiscAccSprites: miscAccSprites(),
+					NeckAccSprite: neckAccSprite(),
+					HeadAccSprite: headAccSprite(),
+					
 					PlayerHasADaggerTwin: player.hasAetherTwinsTierWeapon(),
 					PlayerHasAShieldTwin: player.hasAetherTwinsTierLeftShield(),
 					PlayerHasAnOffhandDaggerTwin: player.hasAetherTwinsTierLeftDagger(),
-
-					ShieldSprite: shieldSprite(), // incl. tome
-
-					RangedWeaponSprite: rangedWeaponSprite(),
-
 					PlayerHasADualWeapon: player.isDualWield(),
 					PlayerHasADualMeleeWeapon: player.weapon.isDualWielded(),
 					PlayerHasADualRangedWeapon: player.isDualWieldRanged(),
-
+					
+					ArmorHiddenFlag: game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN],
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 					BoobDisplay: game.flags[kFLAGS.BOOB_DISPLAY_FLAG],
 					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
@@ -333,21 +322,8 @@ public class CharViewContext extends ExecContext {
 					Tail: Tail,
 					Tongue: Tongue,
 					VaginaClass: VaginaClass,
-					Wings: Wings,
+					Wings: Wings
 //					StatusEffects: StatusEffects,
-
-					// Viewable Clothing lists
-					armStanceNonBannedList: player.armor == game.armors.SCANSC || player.armor == game.armors.ERA || player.armor == game.armors.FMDRESS || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
-					sleevelessList: player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
-					playerWearsAStanceBannedDress: player.armor == game.armors.BLIZZ_K || player.armor == game.armors.SPKIMO || player.armor == game.armors.WKIMONO || player.armor == game.armors.BKIMONO || player.armor == game.armors.RKIMONO || player.armor == game.armors.PKIMONO || player.armor == game.armors.BLKIMONO || player.armor == game.armors.KBDRESS || player.armor == game.armors.GTECHC_ || player.armor == game.armors.IBKIMO || player.armor == game.armors.TCKIMO || player.armor == game.armors.OEKIMO || player.armor == game.armors.OTKIMO,
-					playerWearsAStanceBannedArmor: armorSubtype == "fullplate" || player.armor == game.armors.CTPALAD || player.armor == game.armors.CTHPALA || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
-
-					ArmorSprite: armorSprite(),
-					BraSprite: braSprite(),
-					PantySprite: pantySprite(),
-					MiscAccSprites: miscAccSprites(),
-					NeckAccSprite: neckAccSprite(),
-					HeadAccSprite: headAccSprite()
 				}, {
 					// utilities
 					isLayerVisible: charview.composite.isVisible
