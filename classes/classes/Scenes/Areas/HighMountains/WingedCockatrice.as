@@ -13,7 +13,7 @@ public class WingedCockatrice extends Cockatrice
 		{
 			super();
 			initStrTouSpeInte(635, 720, 755, 306);
-			initWisLibSensCor(276, 415, 380, 20);
+			initWisLibSensCor(276, 415, 380, -40);
 			this.weaponAttack = 480;
 			this.armorDef = 1200;
 			this.armorMDef = 600;

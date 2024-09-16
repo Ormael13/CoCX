@@ -150,7 +150,7 @@ public class Goblin extends Monster
 			this.hairColor = "purple";
 			this.hairLength = 4;
 			initStrTouSpeInte(14, 17, 30, 38);
-			initWisLibSensCor(38, 45, 45, 60);
+			initWisLibSensCor(38, 45, 45, 20);
 			this.weaponName = "fists";
 			this.weaponVerb = "tiny punch";
 			this.weaponAttack = 1;

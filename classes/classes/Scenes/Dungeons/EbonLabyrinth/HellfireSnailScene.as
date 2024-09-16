@@ -12,7 +12,7 @@ public class HellfireSnailScene extends BaseContent {
 
     public function encounter():void {
         clearOutput();
-        if ((player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) && flags[kFLAGS.HELLFIRE_SNAIL_ENC] == 1) {
+        if ((player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) && flags[kFLAGS.HELLFIRE_SNAIL_ENC] == 1) {
             outputText("You turn the corner expecting to run into yet another monster out to badly hurt you but sigh in relief as you run into the fire snail girl instead.\n\n");
             outputText("\"<i>Hey it's you again. Having fun down there?</i>\"\n\n");
             outputText("Well you could say that, in a way, yes you are having fun down there.\n\n");

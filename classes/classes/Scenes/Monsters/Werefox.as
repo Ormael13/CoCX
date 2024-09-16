@@ -45,7 +45,7 @@ import classes.internals.*;
 		public function createElement():void {
 			var type:String = "";
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity))  type = "fire";
-			else if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) type = "ice";
+			else if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) type = "ice";
 			else if (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) type = "lightning";
 			else {
 				if (rand(2) == 0) type = "darkness";
@@ -101,7 +101,7 @@ import classes.internals.*;
 				this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
 				createBreastRow(Appearance.breastCupInverse("C"));
 				initStrTouSpeInte(110, 230, 211, 175);
-				initWisLibSensCor(280, 155, 172, 25);
+				initWisLibSensCor(280, 155, 172, -50);
 				this.hips.type = Hips.RATING_CURVY;
 				this.butt.type = Butt.RATING_AVERAGE + 1;
 				this.weaponAttack = 40;

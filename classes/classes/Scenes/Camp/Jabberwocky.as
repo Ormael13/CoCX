@@ -109,7 +109,7 @@ package classes.Scenes.Camp
 			this.ballSize = 1;
 			createBreastRow(0);
 			initStrTouSpeInte(160, 350, 180, 100);
-			initWisLibSensCor(100, 10, 50, 50);
+			initWisLibSensCor(100, 10, 50, 0);
 			this.tallness = 15*12;
 			this.bonusHP = 1000;
 			this.additionalXP = 500;

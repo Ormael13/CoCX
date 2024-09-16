@@ -121,7 +121,7 @@ public class Hel extends Monster
 				this.long = "You are fighting a (literally) smoking hot mist salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, purple veins covering all unprotected by scales parts fo the body, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her violet hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright purple eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 				this.hairColor = "violet";
 				initStrTouSpeInte(480, 440, 410, 240);
-				initWisLibSensCor(240, 280, 150, 30);
+				initWisLibSensCor(240, 280, 150, -60);
 				this.weaponAttack = 52;
 				this.armorDef = 176;
 				this.armorMDef = 24;
@@ -146,7 +146,7 @@ public class Hel extends Monster
 				this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 				this.hairColor = "red";
 				initStrTouSpeInte(90, 80, 75, 60);
-				initWisLibSensCor(60, 70, 25, 30);
+				initWisLibSensCor(60, 70, 25, -60);
 				this.weaponAttack = 26;
 				this.armorDef = 22;
 				this.armorMDef = 3;

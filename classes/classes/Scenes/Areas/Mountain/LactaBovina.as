@@ -84,7 +84,7 @@ import classes.internals.*;
 			this.horns.type = Horns.COW_MINOTAUR;
 			this.horns.count = 2;
 			initStrTouSpeInte(115, 140, 90, 100);
-			initWisLibSensCor(100, 250, 220, 40);
+			initWisLibSensCor(100, 250, 220, -20);
 			this.weaponName = "fists";
 			this.weaponVerb = "punch";
 			this.weaponAttack = 39;

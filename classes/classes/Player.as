@@ -1180,6 +1180,7 @@ use namespace CoC;
 		public function hasAetherTwinsTierS2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"; }
 		public function hasAetherTwinsTierLeftDagger():Boolean { return shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"; }
 		public function hasAetherTwinsTierLeftShield():Boolean { return shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"; }
+		public function hasAetherTwinsFormsNotAllowingDualWield():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"; }
 		//Some other checks
 		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
@@ -1403,7 +1404,7 @@ use namespace CoC;
 		}
 		public function immuneToBurn():Boolean
 		{
-			return hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis);
+			return hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis);
 		}
 		public function immuneToAcid():Boolean
 		{
@@ -3541,7 +3542,7 @@ use namespace CoC;
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasAnyPerk(PerkLib.FromTheFrozenWaste, PerkLib.ColdAffinity, PerkLib.ColdMastery)) mult += 100;
-			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) mult -= 50;
+			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis)) mult -= 50;
 			if (hasPerk(PerkLib.VegetalAffinity)) mult += 50;
 			if (hasPerk(PerkLib.TrollResistance)) mult += 7.5;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
@@ -3600,7 +3601,7 @@ use namespace CoC;
 			if (necklaceName == "Blue Winter scarf" || necklaceName == "Green Winter scarf" || necklaceName == "Purple Winter scarf" || necklaceName == "Red Winter scarf" || necklaceName == "Yellow Winter scarf") mult -= 20;
 			if (hasAnyPerk(PerkLib.FromTheFrozenWaste, PerkLib.ColdAffinity, PerkLib.ColdMastery)) mult -= 50;
 			if (hasPerk(PerkLib.IcyFlesh)) mult -= 40;
-			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) mult += 100;
+			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.FireShadowAffinity, PerkLib.AffinityIgnis)) mult += 100;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_ice') && jewelry2.hasBuff('res_ice') && jewelry3.hasBuff('res_ice') && jewelry4.hasBuff('res_ice') && headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R && necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= 15;
@@ -3665,7 +3666,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) mult -= 10;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) mult -= 30;
 			if (hasPerk(PerkLib.AquaticAffinity) || hasPerk(PerkLib.AffinityUndine)) mult += 100;
-			if (hasPerk(PerkLib.DarknessAffinity)) mult += 100;
+			if (hasPerk(PerkLib.DarknessAffinity) || hasPerk(PerkLib.FireShadowAffinity)) mult += 100;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_lightning') && jewelry2.hasBuff('res_lightning') && jewelry3.hasBuff('res_lightning') && jewelry4.hasBuff('res_lightning') && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
@@ -3710,7 +3711,7 @@ use namespace CoC;
 			var mult:Number = damageMagicalPercent();
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
-			if (hasPerk(PerkLib.DarknessAffinity)) mult -= 50;
+			if (hasPerk(PerkLib.DarknessAffinity) || hasPerk(PerkLib.FireShadowAffinity)) mult -= 50;
 			if (hasPerk(PerkLib.LightningAffinity)) mult += 00;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= necklaceEffectMagnitude;
@@ -4600,13 +4601,13 @@ use namespace CoC;
 			if (hasMutation(IMutationsLib.HumanMetabolismIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMetabolismIM);//3
 			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);//4
 			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//4
-			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);//3
+			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);//4
 			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//4
 			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//4
-			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//3
+			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//4
 			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//4
 			End("Player","racialScore");
-			return internalHumanCounter;
+			return internalHumanCounter;//54
 		}
 		public function howManyDifferentHumanIMYouGot():Number {
 			var hMDHIMYG:Number = 0;
@@ -5269,8 +5270,8 @@ use namespace CoC;
 			return [StatusEffects.KnowsAcidRain, StatusEffects.KnowsAcidSpray, StatusEffects.KnowsAegis, StatusEffects.KnowsArcticGale, StatusEffects.KnowsArouse, StatusEffects.KnowsBalanceOfLife, StatusEffects.KnowsBlind, StatusEffects.KnowsBlink, StatusEffects.KnowsBlizzard, StatusEffects.KnowsBloodChains, StatusEffects.KnowsBloodExplosion, StatusEffects.KnowsBloodField,
 			StatusEffects.KnowsBloodMissiles, StatusEffects.KnowsBloodShield, StatusEffects.KnowsBloodWave, StatusEffects.KnowsBoneArmor, StatusEffects.KnowsBoneshatter, StatusEffects.KnowsBoneSpirit, StatusEffects.KnowsChainLighting, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsClearMind, StatusEffects.KnowsCorrosiveWave, StatusEffects.KnowsCure,
 			StatusEffects.KnowsConsumingDarkness, StatusEffects.KnowsCurseOfDesire, StatusEffects.KnowsCurseOfWeeping, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsDivineShield, StatusEffects.KnowsDuskWave, StatusEffects.KnowsExorcise, StatusEffects.KnowsEnergyDrain, StatusEffects.KnowsFireStorm, StatusEffects.KnowsHeal, StatusEffects.KnowsHydroAcid,
-			StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike, StatusEffects.KnowsLifeSiphon, StatusEffects.KnowsLifestealEnchantment, StatusEffects.KnowsLifetap, StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield, StatusEffects.KnowsMentalShield, StatusEffects.KnowsMight, StatusEffects.KnowsNosferatu, StatusEffects.KnowsRegenerate, StatusEffects.KnowsRestore,
-			StatusEffects.KnowsShatterstone, StatusEffects.KnowsStalagmite, StatusEffects.KnowsTearsOfDenial, StatusEffects.KnowsThunderstorm, StatusEffects.KnowsWaterBall, StatusEffects.KnowsWaterSphere, StatusEffects.KnowsWhitefire, StatusEffects.KnowsWindBlast, StatusEffects.KnowsWindBullet]
+			StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike, StatusEffects.KnowsLifeSiphon, StatusEffects.KnowsLifestealEnchantment, StatusEffects.KnowsLifetap, StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield, StatusEffects.KnowsMentalShield, StatusEffects.KnowsMeteorShower, StatusEffects.KnowsMight, StatusEffects.KnowsPolarMidnight,
+			StatusEffects.KnowsNosferatu, StatusEffects.KnowsRegenerate, StatusEffects.KnowsRestore, StatusEffects.KnowsShatterstone, StatusEffects.KnowsStalagmite, StatusEffects.KnowsTearsOfDenial, StatusEffects.KnowsThunderstorm, StatusEffects.KnowsWaterBall, StatusEffects.KnowsWaterSphere, StatusEffects.KnowsWhitefire, StatusEffects.KnowsWindBlast, StatusEffects.KnowsWindBullet]
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;
@@ -6199,9 +6200,26 @@ use namespace CoC;
 				}
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 			}
-			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
-			{
+			if (hasStatusEffect(StatusEffects.DriderIncubusVenom)) {
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
+			}
+			if (hasStatusEffect(StatusEffects.Terrorize)) {
+				removeStatusEffect(StatusEffects.Terrorize);
+			}
+			if (hasStatusEffect(StatusEffects.Straddle)) {
+				removeStatusEffect(StatusEffects.Straddle);
+			}
+			if (hasStatusEffect(StatusEffects.QueenBind)) {
+				removeStatusEffect(StatusEffects.QueenBind);
+			}
+			if (hasStatusEffect(StatusEffects.KitsuneTailTangle)) {
+				removeStatusEffect(StatusEffects.KitsuneTailTangle);
+			}
+			if (hasStatusEffect(StatusEffects.MinotaurEntangled)) {
+				removeStatusEffect(StatusEffects.MinotaurEntangled);
+			}
+			if (hasStatusEffect(StatusEffects.LadyRafflesiaGrab)) {
+				removeStatusEffect(StatusEffects.LadyRafflesiaGrab);
 			}
 			if(statusEffectv4(StatusEffects.CombatFollowerAlvina) > 0) addStatusValue(StatusEffects.CombatFollowerAlvina, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerAmily) > 0) addStatusValue(StatusEffects.CombatFollowerAmily, 4, -1);

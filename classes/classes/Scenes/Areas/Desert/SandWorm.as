@@ -201,7 +201,7 @@ public class SandWorm extends Monster
 			this.hairLength = 15;
 			this.lowerBody = LowerBody.SANDWORM;
 			initStrTouSpeInte(450, 420, 190, 190);
-			initWisLibSensCor(150, 450, 245, 50);
+			initWisLibSensCor(150, 450, 245, 0);
 			this.weaponName = "body";
 			this.weaponVerb="slam";
 			this.weaponAttack = 300;

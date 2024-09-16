@@ -17,7 +17,7 @@ public class FireElemental extends Monster
 			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Ifrit":"Fire elemental")+" concentrates flames on its fist before launching a punch toward you.");
 			var damage:Number = inte + wis;
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 2);
 			damage = Math.round(damage);
 			//Dodge
@@ -34,7 +34,7 @@ public class FireElemental extends Monster
 			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Ifrit":"Fire elemental")+" concentrates embers from its fists before launching a flurry of punches.");
 			var damage:Number = inte + wis;
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 1.5);
 			damage = Math.round(damage);
 			//Dodge
@@ -56,7 +56,7 @@ public class FireElemental extends Monster
 			else {
 				var damage:Number = inte + wis;
 				if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
-				if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
+				if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
@@ -131,7 +131,7 @@ public class FireElemental extends Monster
 				this.long = "You're currently fighting fire elemental. It's a four foot tall body of flame, currently using its bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(20, 40, 80, 100);
-				initWisLibSensCor(100, 20, 40, 50);
+				initWisLibSensCor(100, 20, 40, 0);
 				this.weaponAttack = 10;
 				this.armorDef = 10;
 				this.armorMDef = 60;
@@ -145,7 +145,7 @@ public class FireElemental extends Monster
 				this.long = "You're currently fighting fire elemental. It's a four foot, three inch tall body of flame, currently using its bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(24, 44, 84, 120);
-				initWisLibSensCor(120, 20, 50, 50);
+				initWisLibSensCor(120, 20, 50, 0);
 				this.weaponAttack = 12;
 				this.armorDef = 12;
 				this.armorMDef = 70;
@@ -159,7 +159,7 @@ public class FireElemental extends Monster
 				this.long = "You're currently fighting fire elemental. It's a four and a half foot tall body of flame, currently using its bare fists to fight";
 				this.tallness = 54;
 				initStrTouSpeInte(28, 48, 88, 140);
-				initWisLibSensCor(140, 20, 60, 50);
+				initWisLibSensCor(140, 20, 60, 0);
 				this.weaponAttack = 14;
 				this.armorDef = 14;
 				this.armorMDef = 80;
@@ -173,7 +173,7 @@ public class FireElemental extends Monster
 				this.long = "You're currently fighting fire elemental. It's a four foot, nine inch tall body of flame, currently using its bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(32, 52, 92, 160);
-				initWisLibSensCor(160, 20, 70, 50);
+				initWisLibSensCor(160, 20, 70, 0);
 				this.weaponAttack = 16;
 				this.armorDef = 16;
 				this.armorMDef = 90;
@@ -187,7 +187,7 @@ public class FireElemental extends Monster
 				this.long = "You're currently fighting 'female' ifrit. It's a nine foot tall body of flame, currently using its bare fists to fight";
 				this.tallness = 108;
 				initStrTouSpeInte(48, 78, 139, 240);
-				initWisLibSensCor(240, 30, 110, 50);
+				initWisLibSensCor(240, 30, 110, 0);
 				this.weaponAttack = 20;
 				this.armorDef = 20;
 				this.armorMDef = 120;

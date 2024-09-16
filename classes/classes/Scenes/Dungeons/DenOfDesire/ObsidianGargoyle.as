@@ -134,7 +134,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 120;
 			initStrTouSpeInte(150, 120, 90, 10);
-			initWisLibSensCor(10, 10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 100);
 			this.drop = new ChainedDrop()
 					.add(useables.ELCRYST, 1);
 			this.level = 28;

@@ -109,7 +109,7 @@ public class BeeGirl extends Monster {
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
 			initStrTouSpeInte(50, 73, 50, 30);
-			initWisLibSensCor(30, 85, 75, 0);
+			initWisLibSensCor(30, 85, 75, -100);
 			this.weaponName = "chitin-plated fist";
 			this.weaponVerb="armored punch";
 			this.weaponAttack = 8;

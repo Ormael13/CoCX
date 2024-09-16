@@ -32,7 +32,7 @@ public class HumanVersatilityMutation extends IMutationPerkType
                 descS += ". Decrease needed exp to lvl up weapon/lifeskill masteries and have "+((pTier*2)-4)+"0% chance to gain "+pTier+"x more XP for Mastery";
             }
             if (pTier == 4){
-                descS += ". 50% chance to gain 2 levels instead of 1 when leveling weapon/lifeskill mastery.";
+                descS += ". 50% chance to gain 2 levels instead of 1 when leveling weapon/lifeskill mastery";
             }
             if (descS != "")descS += ".";
             if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";

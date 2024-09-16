@@ -173,7 +173,7 @@ public class Cockatrice extends Monster {
         this.hairColor = "blue";
         this.hairLength = 2;
         initStrTouSpeInte(615, 700, 735, 280);
-        initWisLibSensCor(260, 375, 345, 20);
+        initWisLibSensCor(260, 375, 345, -40);
         this.weaponName = "talons";
         this.weaponVerb = "claw";
         this.weaponAttack = 450;

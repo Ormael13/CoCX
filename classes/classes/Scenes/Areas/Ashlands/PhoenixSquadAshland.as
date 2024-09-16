@@ -103,7 +103,7 @@ import classes.internals.WeightedDrop;
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(253, 204, 225, 120);
-			initWisLibSensCor(110, 151, 103, 50);
+			initWisLibSensCor(110, 151, 103, 10);
 			this.weaponName = "spears";
 			this.weaponVerb="stab";
 			this.weaponAttack = 100;

@@ -73,7 +73,7 @@ package classes.Scenes.Monsters
 				if (flags[kFLAGS.AETHER_SINISTER_EVO] == 0.5) this.long = "You're currently fighting guardian of the first floor - Aether Golem. It's around six feet tall without any sexual characteristics, it stone body covered in cracks, some of them are filled with goo-like substance and wearing gauntlet on it left arm that it use to smash enemies.";
 				else this.long = "You're currently fighting guardian of the first floor - Aether Golem. It's around six feet tall without any sexual characteristics, it stone body covered in cracks, some of them are filled with goo-like substance and wearing gauntlet on it right arm that it use to smash enemies.";
 				initStrTouSpeInte(75, 75, 75, 30);
-				initWisLibSensCor(30, 10, 10, 50);
+				initWisLibSensCor(30, 10, 10, 0);
 				this.level = 9;
 				this.weaponAttack = 20;
 				this.armorDef = 50;
@@ -85,7 +85,7 @@ package classes.Scenes.Monsters
 				this.short = "improved dummy golem";
 				this.long = "You're currently fighting improved dummy golem. It's six and half feet tall without any sexual characteristics, it stone body covered in cracks and using it bare stone fists to smash enemies.";
 				initStrTouSpeInte(40, 40, 20, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.level = 12;
 				this.weaponAttack = 15;
 				this.armorDef = 15;

@@ -72,7 +72,7 @@ public class UnderwaterTigersharkGirl extends Monster
 			this.hairColor = "silver";
 			this.hairLength = 20;
 			initStrTouSpeInte(265, 170, 218, 114);
-			initWisLibSensCor(114, 130, 45, 40);
+			initWisLibSensCor(114, 130, 45, -20);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
 			this.weaponAttack = 74;

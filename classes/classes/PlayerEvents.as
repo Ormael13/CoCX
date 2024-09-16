@@ -1918,6 +1918,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\nHaving lost fluids, you no longer have enough body mass to produce extra tendril attacks.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
 				}
 			}
+			//Fire Shadow Affinity		player.isAnyRaceCached(Races.NEKOMATA, Races.HELLCAT, Races.FIRESNAILS, Races.KITSHOO, Races.CERBERUS)
+			needNext ||= player.gainOrLosePerk(PerkLib.FireShadowAffinity, player.isRaceCached(Races.NEKOMATA), "A sinister fire grows within you and your body begins casting terrifying shadows from it. You realise you can innately control both those shadows and the flame like they are part of your own body wich after a few minute of contemplation you realise they are.", "As your inner flames dims so does the supernatural shadows you cast.");
 			//Fire Affinity
 			needNext ||= player.gainOrLosePerk(PerkLib.FireAffinity, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.HELLCAT, Races.FIRESNAILS, Races.KITSHOO, Races.CERBERUS) || player.isRaceCached(Races.MOUSE, 2) || player.hasPerk(PerkLib.Cinderbloom), "You suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.", "You suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.");
 			//Lightning Affinity

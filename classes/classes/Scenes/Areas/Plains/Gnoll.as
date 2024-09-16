@@ -187,7 +187,7 @@ import classes.internals.*;
 			this.hairColor = "black";
 			this.hairLength = 22;
 			initStrTouSpeInte(180, 150, 150, 120);
-			initWisLibSensCor(120, 128, 59, 60);
+			initWisLibSensCor(120, 128, 59, 20);
 			this.weaponName = "twisted club";
 			this.weaponVerb="smash";
 			this.weaponAttack = 55;

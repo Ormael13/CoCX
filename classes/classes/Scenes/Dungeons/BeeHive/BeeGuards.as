@@ -78,7 +78,7 @@ import classes.internals.ChainedDrop;
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
 			initStrTouSpeInte(70, 220, 90, 35);
-			initWisLibSensCor(35, 170, 125, 0);
+			initWisLibSensCor(35, 170, 125, 50);
 			this.weaponName = "chitin-plated fist";
 			this.weaponVerb="armored punch";
 			this.weaponAttack = 15;

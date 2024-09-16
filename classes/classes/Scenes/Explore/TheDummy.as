@@ -40,7 +40,7 @@ import classes.VaginaClass;
 			this.hairColor = "grey";
 			this.hairLength = 31 + rand(10);
 			initStrTouSpeInte(15, 10000, 15, 15);
-			initWisLibSensCor(15, 10000, 15, 50);
+			initWisLibSensCor(15, 10000, 15, 0);
 			this.weaponName = "worn down staff";
 			this.weaponVerb="smack";
 			this.weaponAttack = 8;

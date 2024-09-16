@@ -62,7 +62,7 @@ public class Dryad extends Monster {
         this.hairColor = "dark brown";
         this.hairLength = 4;
         initStrTouSpeInte(95, 75, 70, 100);
-        initWisLibSensCor(70, 155, 135, 95);
+        initWisLibSensCor(70, 155, 135, 90);
         this.weaponName = "claws";
         this.weaponVerb = "slash";
         this.weaponAttack = 75;

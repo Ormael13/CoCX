@@ -2459,6 +2459,10 @@ public class KitsuneScene extends BaseContent
 				outputText("[name].... I don't know how I missed this before, but your ascent into becoming one of our divine status, feels off. Don't worry though, because we have had records of similar situations happening. But you must come with me <b>NOW</b>, so you can attain your proper status.");
 				outputText("\nAyane then turns back around, grabs your arm and pulls you towards the direction of the forest, and you go with her, the surroundings blending and melting, until you suddenly arrive at a shrine, with a golden statue. She points you to the front of the statue as she goes around, scavenging in a small room to the side of the shrine, her tails swaying about as she finally finds a spare fox jewel and plops it onto your hand.");
 				outputText("\nYou are about to ask her what was going on when the jewel glows brightly in your hand, before it morphs into a star sphere, and your head fills with all the arcane knowledge you didn't get from your unnatural transformation. As the lights dim, Akane walks up to you, and gives you a curtsy, before she smiles and rushes off.\n");
+				player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
+				dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
+				player.createPerk(PerkLib.StarSphereMastery, 1, 0, 0, 0);
+				player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
 				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] == 0) {
 					outputText("\nYou have also learnt where the kitsune shrine is!\n");
 					flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] = 1;

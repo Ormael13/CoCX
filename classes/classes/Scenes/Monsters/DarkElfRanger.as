@@ -48,7 +48,7 @@ public class DarkElfRanger extends DarkElfs
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(90, 130, 190, 100);
-			initWisLibSensCor(100, 70, 80, 90);
+			initWisLibSensCor(100, 70, 80, 80);
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
 			this.weaponAttack = 5;

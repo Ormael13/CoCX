@@ -56,7 +56,7 @@ import classes.Scenes.NPCs.*;
 		public function WerewolfFemale()
 		{
 			initStrTouSpeInte(51, 150, 77, 62);
-			initWisLibSensCor(62, 102, 70, 75);
+			initWisLibSensCor(62, 102, 70, 50);
 			this.weaponAttack = 76;
 			this.armorDef = 420;
 			this.armorMDef = 10;

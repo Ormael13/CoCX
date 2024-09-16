@@ -35,7 +35,7 @@ import classes.internals.*;
 			this.hairColor = "white";
 			this.hairLength = 3;
 			initStrTouSpeInte(55, 40, 10, 140);
-			initWisLibSensCor(140, 120, 1, 33);
+			initWisLibSensCor(140, 120, 1, -33);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
 			this.weaponAttack = 14;

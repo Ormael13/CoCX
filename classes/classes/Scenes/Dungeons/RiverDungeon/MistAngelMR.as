@@ -131,7 +131,7 @@ package classes.Scenes.Dungeons.RiverDungeon
 			this.imageName = "angel";
 			this.long = "";
 			initStrTouSpeInte(36, 400, 220, 120);
-			initWisLibSensCor(540, 6, 180, 0);
+			initWisLibSensCor(540, 6, 180, -100);
 			this.tallness = 30;
 			this.randomDropChance = 0.5;
 			this.randomDropParams = {

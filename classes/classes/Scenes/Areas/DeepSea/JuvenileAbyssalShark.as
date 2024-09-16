@@ -50,7 +50,7 @@ public class JuvenileAbyssalShark extends Monster
 		
 		public function createElement():void {
 			var type:String = "";
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) type = "ice";
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) type = "ice";
 			else {
 				if (rand(2) == 0) type = "darkness";
 				else type = "water";

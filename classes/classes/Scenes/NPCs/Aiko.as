@@ -115,7 +115,7 @@ import classes.internals.*;
 
 		// A Compromise since post dodging text will disappear after dodging rework
 		override protected function outputPlayerDodged(dodge:int):void{
-			if(game.flags[kFLAGS.AIKO_CORRUPTION] >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
+			if(game.flags[kFLAGS.AIKO_CORRUPTION] >= 0 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
 				switch(dodge) {
 					case 1:
 					case 2:
@@ -141,7 +141,7 @@ import classes.internals.*;
 		// Compromise to preserve parry text after parrying rework
 		override public function playerParry():Boolean{
 			var pResult:Boolean = super.playerParry();
-			if(pResult && game.flags[kFLAGS.AIKO_CORRUPTION] >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
+			if(pResult && game.flags[kFLAGS.AIKO_CORRUPTION] >= 0 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
 				outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as you parry her ferocious attacks with your [weapon].");
 			}
 			return pResult;
@@ -150,7 +150,7 @@ import classes.internals.*;
 		// Compromise to preserve blocking text after blocking rework
 		override public function playerBlock():Boolean{
 			var pResult:Boolean = super.playerBlock();
-			if(pResult && game.flags[kFLAGS.AIKO_CORRUPTION] >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
+			if(pResult && game.flags[kFLAGS.AIKO_CORRUPTION] >= 0 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
 				outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as you block her ferocious attacks with your [shield].");
 			}
 			return pResult
@@ -465,7 +465,7 @@ import classes.internals.*;
 		
 		override protected function handleFear():Boolean
 		{
-			if (game.flags[kFLAGS.AIKO_CORRUPTION] >= 50) {
+			if (game.flags[kFLAGS.AIKO_CORRUPTION] >= 0) {
 				removeStatusEffect(StatusEffects.Fear);
 				outputText("Aiko shudders in delight for a moment, then looks your way with a clear head.  <i>\"I love that! You should do it more often!\"</i>\n");
 				return true;
@@ -511,7 +511,7 @@ import classes.internals.*;
 			
 			//basic attack has 2x chance unless arcane archer active
 			var moves:Array = [];
-			if (game.flags[kFLAGS.AIKO_CORRUPTION] < 50 || game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) {
+			if (game.flags[kFLAGS.AIKO_CORRUPTION] < 0 || game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0) {
 				moves = [aikoBasic, aikoFoxfire, aikoFireArrow, aikoIllusion, aikoIllusionLust, aikoTease];
 				if (this.hasStatusEffect(StatusEffects.AikoArcaneArcher)) {
 					moves.push(splinterLightningArrow, lightArrowCage, iceArrow, arrowRain, arrowBarrage, kitsuneSealAttack);
@@ -573,7 +573,7 @@ import classes.internals.*;
 			this.a = "";
 			this.short = "Aiko";
 			this.imageName = "aiko";
-			if (game.flags[kFLAGS.AIKO_CORRUPTION] < 50 || game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0)
+			if (game.flags[kFLAGS.AIKO_CORRUPTION] < 0 || game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0)
 				this.long = "Aiko stands before you, a little over 5’4 tall. She has a head of short silver-blond hair that ends above her shoulders, parted by two large, furry fox ears. "+(flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0 ? "Eight":"Seven")+" luxurious fox tails sway behind her, the silky fur shimmering as they move. She wears a set of revealing blue and white robes, neatly pressed and hung off her features with care, her D-cup breasts bound by a cloth chest wrap that is just a little too tight. She sports a number of red \"tattoos\" adorning her face and body; the most prominent of which are the spiral-shaped patterns on her palms and buttocks, and a stylized lotus flower on her lower back.  She wields a longbow almost as tall as she is that she can summon and dismiss with a snap of her fingers, and stares you down with a determined fire in her glittering blue eyes.";
 			else
 				this.long = "Aiko stands before you, a little over 5’4 tall. She has a head of short, unkempt silver-blond hair that ends above her shoulders, parted by two large, furry fox ears. "+(flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0 ? "Eight":"Seven")+" fox tails sway behind her, their fur shaggy and matted down. She wears a set of ragged, bloodied robes that show a lot of skin, her D-cup breasts haphazardly bound by a set of bandages in dire need of changing, and you can smell sex and violence on her even from here. She sports a number of red \"tattoos\" adorning her face and body; the most prominent of which are the spiral-shaped patterns on her palms and buttocks, and a stylized lotus flower on her lower back. She is wielding an over-sized bill-hook hatchet that she can summon and dismiss with a snap of her fingers, and stares you down with a maniacal fire in her crazed blue eyes."

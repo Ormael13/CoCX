@@ -58,7 +58,7 @@ public class GreenSlime extends Monster
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.GOO;
 			initStrTouSpeInte(45, 60, 20, 5);
-			initWisLibSensCor(5, 50, 70, 20);
+			initWisLibSensCor(5, 50, 70, 40);
 			this.bodyColor = "green";
 			this.weaponName = "hands";
 			this.weaponVerb = "slap";

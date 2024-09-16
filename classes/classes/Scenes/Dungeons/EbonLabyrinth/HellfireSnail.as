@@ -70,7 +70,7 @@ use namespace CoC;
 		{
             var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 0;
             initStrTouSpeInte(100 + 20*mod, 300 + 50*mod, 80 + 30*mod, 150 + 30*mod);
-            initWisLibSensCor(150 + 30*mod, 260 + 50*mod, 200, 10);
+            initWisLibSensCor(150 + 30*mod, 260 + 50*mod, 200, -80);
             this.armorDef = 225 + 75*mod;
             this.armorMDef = 225 + 75*mod;
             this.bonusHP = 12500 + 10000*mod; //THICC

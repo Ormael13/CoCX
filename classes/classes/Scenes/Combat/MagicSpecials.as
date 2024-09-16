@@ -2843,10 +2843,10 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
-			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 1.25;
+			if (player.hasPerk(PerkLib.DarknessAffinity) || player.hasPerk(PerkLib.FireShadowAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
 			damage *= magicAbilitiesGoBrrr();
@@ -3084,7 +3084,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage *= spellModBlack();
 		lustDamage = combat.teases.teaseBaseLustDamage() * lustDamagePercent * monster.lustVuln;
 		if (player.armor == armors.SFLAREQ) fireDamage *= 3;
-		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
+		fireDamage = calcInfernoMod(Math.round(damage * combat.fireDamageBoostedByDao()) * (1 - lustDamagePercent), true);
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue) {
 			outputText("The fire courses over the stone behemoths skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -4492,6 +4492,8 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.darkRitualCheckDamage();
 		outputText("Holding out your palm, you conjure ghastly greenish flame that dances across your fingertips.  You launch it at [themonster] with a ferocious throw, and it bursts on impact, showering dazzling emerald sparks everywhere.  ");
 		var damage:Number = (scalingBonusWisdom() * 0.6) + (scalingBonusIntelligence() * 0.4);
+		var fireDamage:Number;
+		var darknessDamage:Number;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -4501,8 +4503,6 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = calcInfernoMod(damage, true);
-		damage = calcEclypseMod(damage, true);
 		//damage *= 1.25;
 		if (player.tailType == 8 && player.tailCount == 2) damage *= 0.5;
 		else damage *= 0.2;
@@ -4524,7 +4524,8 @@ public class MagicSpecials extends BaseCombatContent {
 		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.armor == armors.SFLAREQ) damage *= 3;
-		damage = Math.round(damage * (combat.fireDamageBoostedByDao() + combat.darknessDamageBoostedByDao() - 1));
+		fireDamage = calcInfernoMod(Math.round(damage * combat.fireDamageBoostedByDao()), true);
+		darknessDamage = calcEclypseMod(Math.round(damage * combat.darknessDamageBoostedByDao()), true);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -4549,8 +4550,8 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		doFireDamage(damage, true, true);
-		doDarknessDamage(damage, true, true);
+		doFireDamage(fireDamage, true, true);
+		doDarknessDamage(darknessDamage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -7205,4 +7206,4 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 }
-}
+}

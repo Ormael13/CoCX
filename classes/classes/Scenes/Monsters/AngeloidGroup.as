@@ -119,7 +119,7 @@ package classes.Scenes.Monsters
 			this.imageName = "angeloids";
 			this.long = "";
 			initStrTouSpeInte(10, 100, 45, 25);
-			initWisLibSensCor(180, 4, 30, 0);
+			initWisLibSensCor(180, 4, 30, -100);
 			this.tallness = 30;
 			this.randomDropChance = 0.2;
 			this.randomDropParams = {

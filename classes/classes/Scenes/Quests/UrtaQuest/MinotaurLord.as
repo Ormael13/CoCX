@@ -182,7 +182,7 @@ use namespace CoC;
 			this.hairLength = 3;
 			this.faceType = Face.COW_MINOTAUR;
 			initStrTouSpeInte(25, 190, 150, 50);
-			initWisLibSensCor(50, 170, 125, 85);
+			initWisLibSensCor(50, 170, 125, 70);
 			this.weaponName = "chain";
 			this.weaponVerb="chain-whip";
 			this.weaponAttack = 99;

@@ -111,7 +111,7 @@ public class Harpy extends Monster
 			this.hairColor = "blue";
 			this.hairLength = 16;
 			initStrTouSpeInte(390, 300, 510, 210);
-			initWisLibSensCor(240, 270, 120, 80);
+			initWisLibSensCor(240, 270, 120, 60);
 			this.weaponName = "talons";
 			this.weaponVerb="slashing talons";
 			this.weaponAttack = 225;

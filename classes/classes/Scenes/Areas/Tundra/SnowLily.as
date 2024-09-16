@@ -50,7 +50,7 @@ public class SnowLily extends Alraune
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA))  {
 				initStrTouSpeInte(38, 740, 38, 300);
-				initWisLibSensCor(300, 520, 220, 0);
+				initWisLibSensCor(300, 520, 220, 10);
 				this.armorDef = 625;
 				this.armorMDef = 135;
 				this.bonusHP = 1800;
@@ -64,7 +64,7 @@ public class SnowLily extends Alraune
 			}
 			else {
 				initStrTouSpeInte(10, 250, 10, 100);
-				initWisLibSensCor(100, 200, 50, 0);
+				initWisLibSensCor(100, 200, 50, 10);
 				this.armorDef = 90;
 				this.armorMDef = 9;
 				this.bonusHP = 200;

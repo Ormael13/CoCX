@@ -78,7 +78,7 @@ public class Behemoth extends Monster
 			this.lowerBody = LowerBody.CAT;
 			this.tailType = Tail.BEHEMOTH;
 			initStrTouSpeInte(280, 230, 200, 215);
-			initWisLibSensCor(200, 60, 31, 15);
+			initWisLibSensCor(200, 60, 31, -70);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.weaponAttack = 114;

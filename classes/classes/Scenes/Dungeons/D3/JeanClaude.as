@@ -145,7 +145,7 @@ import classes.Scenes.SceneLib;
 			this.lowerBody = LowerBody.LIZARD;
 			this.skinDesc = "green-purple mottled hide";
 			initStrTouSpeInte(200, 300, 210, 170);
-			initWisLibSensCor(170, 40, 100, 80);
+			initWisLibSensCor(170, 40, 100, 60);
 			this.faceType = Face.LIZARD;
 			this.weaponName = "cutlass";
 			this.weaponVerb = "slash";

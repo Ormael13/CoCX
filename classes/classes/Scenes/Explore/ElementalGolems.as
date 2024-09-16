@@ -282,7 +282,7 @@ public class ElementalGolems extends AbstractGargoyle
 				this.ass.analWetness = AssClass.WETNESS_DRY;
 				this.tallness = 120;
 				initStrTouSpeInte(140, 110, 90, 10);
-				initWisLibSensCor(10, 10, 10, 50);
+				initWisLibSensCor(10, 10, 10, 0);
 				this.level = 33;
 				this.bonusHP = 2000;
 				this.additionalXP = 500;
@@ -301,7 +301,7 @@ public class ElementalGolems extends AbstractGargoyle
 				this.createBreastRow(0, 1);
 				initGenderless();
 				initStrTouSpeInte(30, 40, 30, 20);
-				initWisLibSensCor(20, 10, 10, 50);
+				initWisLibSensCor(20, 10, 10, 0);
 				this.tallness = 72;
 				this.weaponName = "stone fists";
 				this.weaponVerb = "smash";

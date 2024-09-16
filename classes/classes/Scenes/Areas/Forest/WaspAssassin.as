@@ -40,7 +40,7 @@ import classes.Scenes.Areas.Forest.WaspGirl;
 			this.long = "An wasp assassin buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
 			createBreastRow(Appearance.breastCupInverse("E_BIG"));
 			initStrTouSpeInte(110, 188, 200, 100);
-			initWisLibSensCor(100, 129, 105, 0);
+			initWisLibSensCor(100, 129, 105, -100);
 			this.weaponAttack = 53;
 			this.armorDef = 49;
 			this.armorMDef = 26;

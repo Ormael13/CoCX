@@ -94,7 +94,7 @@ public class PhoenixSquad extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(183, 152, 143, 90);
-			initWisLibSensCor(90, 110, 53, 50);
+			initWisLibSensCor(90, 110, 53, 0);
 			this.weaponName = "spears";
 			this.weaponVerb="stab";
 			this.weaponAttack = 59;

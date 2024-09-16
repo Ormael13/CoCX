@@ -20,15 +20,18 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
             var descS:String = "";
 			var perkCent:int = 0;
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-			if (pTier >= 1) perkCent += 1;
 			if (pTier >= 2) perkCent += 1;
-			if (pTier >= 3) perkCent += 2;
+			if (pTier >= 4) perkCent += 1;
             if (pTier >= 1){
-                descS += "Increases health recovery by (" + (2 * perkCent) + "0 * level) out of combat and by (" + perkCent + "0 * level) in combat. (using defend option will double it)";
+                descS += "Fatigue recovery increased and reduces the fatigue cost of physical specials by "+pTier+"0%";
             }
-            if (pTier >= 3){
-                descS += " Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.";
+            if (pTier >= 2){
+                descS += " and +" + perkCent + " to fatigue/soulforce/mana recovery multiplier when under " + (pTier + 2) + "0% max HP";
             }
+            if (pTier >= 4){
+                descS += ". Reduce spells mana cost by 10%";
+            }
+            if (descS != "")descS += ".";
             if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
@@ -80,7 +83,7 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
 
         public function HumanParathyroidGlandMutation() 
 		{
-			super(mName + " IM", mName, SLOT_PARATHYROID, 3);
+			super(mName + " IM", mName, SLOT_PARATHYROID, 4);
         }
         
     }

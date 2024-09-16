@@ -186,7 +186,7 @@ public class VolcanicCrag extends BaseContent
 			explorer.prompt = "You explore the infernal volcanic crag.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
 				SceneLib.exploration.counters.volcanicCragOuter++;
-				if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
+				if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.FireShadowAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
 			}
 			explorer.leave.hint("Leave the infernal volcanic crag");
 			explorer.skillBasedReveal(areaLevel, timesExplored());
@@ -230,7 +230,7 @@ public class VolcanicCrag extends BaseContent
 		}
 
 		public function VolcanicCragConditions():void {
-			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,2,0,0,0);
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.FireShadowAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,2,0,0,0);
 		}
 
 		public function ConstantHeatConditionsTick():void {

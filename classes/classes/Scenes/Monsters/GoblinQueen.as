@@ -27,7 +27,7 @@ public class GoblinQueen extends Goblin
 			this.hairColor = "dark green";
 			this.hairLength = 4;
 			initStrTouSpeInte(85, 64, 70, 100);
-			initWisLibSensCor(100, 55, 35, 65);
+			initWisLibSensCor(100, 55, 35, 30);
 			this.weaponName = "sword";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 14;

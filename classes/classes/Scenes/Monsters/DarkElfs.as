@@ -105,7 +105,7 @@ public class DarkElfs extends Monster
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(120, 190, 260, 130);
-			initWisLibSensCor(130, 80, 90, 95);
+			initWisLibSensCor(130, 80, 90, 90);
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
 			this.weaponAttack = 5;
@@ -182,7 +182,7 @@ public class DarkElfs extends Monster
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 80, 140, 70);
-			initWisLibSensCor(70, 60, 70, 85);
+			initWisLibSensCor(70, 60, 70, 70);
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
 			this.weaponAttack = 5;

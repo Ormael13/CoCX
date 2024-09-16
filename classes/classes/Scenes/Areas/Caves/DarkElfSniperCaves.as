@@ -32,7 +32,7 @@ public class DarkElfSniperCaves extends DarkElfs
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(165, 250, 290, 160);
-			initWisLibSensCor(160, 90, 101, 95);
+			initWisLibSensCor(160, 90, 101, 90);
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
 			this.weaponAttack = 5;

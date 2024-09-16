@@ -230,7 +230,7 @@ public class Kitsune extends Monster
 			}
 			if (flags[kFLAGS.MET_KITSUNES] < 2) {
 				initStrTouSpeInte(130, 155, 325, 315);
-				initWisLibSensCor(325, 140, 150, 30);
+				initWisLibSensCor(325, 140, 150, -60);
 				this.weaponAttack = 16;
 				this.armorDef = 25;
 				this.armorMDef = 150;
@@ -241,7 +241,7 @@ public class Kitsune extends Monster
 			}
 			if (flags[kFLAGS.MET_KITSUNES] == 2) {
 				initStrTouSpeInte(160, 195, 360, 350);
-				initWisLibSensCor(365, 170, 180, 30);
+				initWisLibSensCor(365, 170, 180, -60);
 				this.weaponAttack = 20;
 				this.armorDef = 30;
 				this.armorMDef = 180;
@@ -252,7 +252,7 @@ public class Kitsune extends Monster
 			}
 			if (flags[kFLAGS.MET_KITSUNES] == 3) {
 				initStrTouSpeInte(190, 235, 395, 385);
-				initWisLibSensCor(405, 200, 210, 30);
+				initWisLibSensCor(405, 200, 210, -60);
 				this.weaponAttack = 24;
 				this.armorDef = 35;
 				this.armorMDef = 210;
@@ -263,7 +263,7 @@ public class Kitsune extends Monster
 			}
 			if (flags[kFLAGS.MET_KITSUNES] == 4) {
 				initStrTouSpeInte(220, 275, 430, 420);
-				initWisLibSensCor(445, 230, 240, 30);
+				initWisLibSensCor(445, 230, 240, -60);
 				this.weaponAttack = 28;
 				this.armorDef = 40;
 				this.armorMDef = 240;

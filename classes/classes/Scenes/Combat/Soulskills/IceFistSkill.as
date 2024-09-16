@@ -25,7 +25,7 @@ public class IceFistSkill extends AbstractSoulSkill {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
 
-		if ((player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) && (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity))) {
+		if ((player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) && (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity))) {
 			return "When you try to use this technique, you shudder in revulsion. Ice, that close to your body? You're a creature of fire!";
 		}
 		if (!player.isFistOrFistWeapon()) {

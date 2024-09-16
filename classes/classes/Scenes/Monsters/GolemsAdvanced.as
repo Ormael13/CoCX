@@ -75,7 +75,7 @@ package classes.Scenes.Monsters
 			this.imageName = "advanced golems";
 			this.long = "You're currently fighting advanced golems. They're all around eight feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 			initStrTouSpeInte(320, 250, 180, 10);
-			initWisLibSensCor(10, 10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 0);
 			this.tallness = 96;
 			this.drop = NO_DROP;
 			this.level = 51;

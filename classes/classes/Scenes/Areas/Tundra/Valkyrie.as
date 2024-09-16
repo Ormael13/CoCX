@@ -142,7 +142,7 @@ public class Valkyrie extends Monster
 			this.hairColor = "white";
 			this.hairLength = 12;
 			initStrTouSpeInte(185, 165, 140, 75);
-			initWisLibSensCor(75, 40, 50, 15);
+			initWisLibSensCor(75, 40, 50, -70);
 			this.weaponName = "spear and shield";
 			this.weaponVerb="lunge";
 			this.weaponAttack = 38;

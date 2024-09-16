@@ -133,7 +133,7 @@ use namespace CoC;
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(100, 150, 240, 170);
-			initWisLibSensCor(170, 170, 80, 80);
+			initWisLibSensCor(170, 170, 80, 60);
 			this.weaponAttack = 36;
 			this.weaponName = "claw";
 			this.weaponVerb="claw-slash";

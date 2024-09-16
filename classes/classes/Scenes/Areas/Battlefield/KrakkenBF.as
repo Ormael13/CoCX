@@ -33,7 +33,7 @@ public class KrakkenBF extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(150, 100, 50, 100);
-			initWisLibSensCor(50, 50, 50, 50);
+			initWisLibSensCor(50, 50, 50, 0);
 			this.weaponName = "tentacle";
 			this.weaponVerb="slash";
 			this.weaponAttack = 60;

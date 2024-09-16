@@ -169,7 +169,7 @@ public class SandWitchMob extends Monster
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(75, 114, 95, 110);
-			initWisLibSensCor(110, 55, 100, 30);
+			initWisLibSensCor(110, 55, 100, -40);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
 			this.weaponAttack = 5;

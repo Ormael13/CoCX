@@ -269,7 +269,7 @@ import classes.display.SpriteDb;
 			}
 			else {
 				initStrTouSpeInte(160 + mod0*20, 220 + mod0*15, 60 + mod0*10, 25 + mod0);
-				initWisLibSensCor(25 + mod0, 200 + mod0*50, 30 + mod0*10, 35);
+				initWisLibSensCor(25 + mod0, 200 + mod0*50, 30 + mod0*10, 25);
 				this.weaponAttack = 36 + mod0*20;
 				this.armorDef = 60 + mod0*7;
 				this.armorMDef = 20 + mod0*2;

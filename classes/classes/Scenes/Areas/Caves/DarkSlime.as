@@ -126,7 +126,7 @@ use namespace CoC;
 			if (inDungeon) { //EL check
                 var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
                 initStrTouSpeInte(160 + 7*mod, 200 + 18*mod, 100 + 10*mod, 150 + 5*mod);
-                initWisLibSensCor(150 + 5*mod, 250 + 24*mod, 200 + 20*mod, 10);
+                initWisLibSensCor(150 + 5*mod, 250 + 24*mod, 200 + 20*mod, 20);
                 this.weaponAttack = 35 + 2*mod;
                 this.armorDef = 20 + 5*mod;
                 this.armorMDef = 60 + 15*mod;
@@ -139,7 +139,7 @@ use namespace CoC;
 			}
 			else {
 				initStrTouSpeInte(154, 187, 92, 145);
-				initWisLibSensCor(145, 226, 182, 10);
+				initWisLibSensCor(145, 226, 182, 20);
 				this.weaponAttack = 35;
 				this.armorDef = 20;
 				this.armorMDef = 60;

@@ -38,7 +38,7 @@ import classes.internals.*;
 				this.lustVuln = .8;
 				//if (statusEffectv2(StatusEffects.SaiyanNumber1a) == 1) {
 					initStrTouSpeInte(100, 100, 100, 25);
-					initWisLibSensCor(25, 200, 100, 50);
+					initWisLibSensCor(25, 200, 100, 0);
 					this.weaponAttack = 50;
 					this.armorDef = 50;
 					this.armorMDef = 50;
