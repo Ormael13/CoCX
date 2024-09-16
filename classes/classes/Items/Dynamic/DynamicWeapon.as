@@ -407,7 +407,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			verb:      "smash",
 			desc:      "A huge war-hammer made almost entirely of steel that only the strongest warriors could use.  Getting hit with this might stun the victim.",
 			tags:      [W_WHIRLWIND],
-			type:      WT_DUELING,
+			type:      WT_MACE_HAMMER,
 			size:      WSZ_LARGE,
 			effects:   [
 				[IELib.Stun, 10],

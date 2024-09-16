@@ -353,9 +353,21 @@ import classes.Scenes.Combat.CombatAbility;
 			inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Clothes clear
-				player.setArmor(armors.C_CLOTH,false,true);
-				player.unequipWeapon(false,true)
-				player.unequipWeaponRange(false,true);
+				player.setArmor(armors.C_CLOTH, false, true);
+				player.unequipWeapon(false, true);
+				player.unequipWeaponOff(false, true);
+				player.unequipWeaponRange(false, true);
+				player.unequipShield(false, true);
+				player.unequipHeadJewelry(false, true);
+				player.unequipNecklace(false, true);
+				player.unequipJewelry1(false, true);
+				player.unequipJewelry2(false, true);
+				player.unequipJewelry3(false, true);
+				player.unequipJewelry4(false, true);
+				player.unequipVehicle(false, true);
+				player.unequipMiscJewelry1(false, true);
+				player.unequipMiscJewelry2(false, true);
+				player.unequipWeaponFlyingSwords(false, true);
 				//Clear camp slots
 				inventory.clearStorage();
 				inventory.clearGearStorage();
@@ -3738,6 +3750,7 @@ import classes.Scenes.Combat.CombatAbility;
 			Metamorph.resetMetamorph();
 			player.setArmor(armors.C_CLOTH, false, true);
 			player.unequipWeapon(false, true);
+			player.unequipWeaponOff(false, true);
 			player.unequipWeaponRange(false, true);
 			player.unequipShield(false, true);
 			player.unequipHeadJewelry(false, true);
