@@ -1641,8 +1641,8 @@
 		<cell rect="761,410,49,29" name="bra/chainMailBra0" dx="79" dy="68"/>
 		<cell rect="761,440,49,29" name="bra/chainMailBraB" dx="79" dy="68"/>
 		<cell rect="761,470,49,29" name="bra/chainMailBraD" dx="79" dy="68"/>
-		<cell rect="bra/chainMailBraF" name="bra/chainMailBraD"/>
-		<cell rect="bra/chainMailBraG" name="bra/chainMailBraD"/>
+		<cell rect="bra/chainMailBraD" name="bra/chainMailBraF"/>
+		<cell rect="bra/chainMailBraD" name="bra/chainMailBraG"/>
 		<cell rect="811,410,49,29" name="bra/dragonScaleBra0" dx="79" dy="68"/>
 		<cell rect="811,410,49,29" name="bra/dragonScaleBraB" dx="79" dy="68"/>
 		<cell rect="811,440,49,29" name="bra/dragonScaleBraD" dx="79" dy="68"/>
@@ -1652,9 +1652,9 @@
 		<cell rect="1011,410,49,29" name="bra/comfortableBraB" dx="79" dy="68"/>
 		<cell rect="1011,440,49,29" name="bra/comfortableBraD" dx="79" dy="68"/>
 		<cell rect="1011,470,49,29" name="bra/comfortableBraF" dx="79" dy="68"/>
-		<cell rect="1011,470,49,29" name="bra/comfortableBraG" dx="79" dy="68"/>
+		<cell rect="bra/comfortableBraF" name="bra/comfortableBraG"/>
 		<cell rect="1161,410,49,29" name="bra/cowBra0" dx="79" dy="68"/>
-		<cell rect="1161,410,49,29" name="bra/cowBraB" dx="79" dy="68"/>
+		<cell rect="bra/cowBra0" name="bra/cowBraB"/>
 		<cell rect="1161,440,49,29" name="bra/cowBraD" dx="79" dy="68"/>
 		<cell rect="1161,470,49,29" name="bra/cowBraF" dx="79" dy="68"/>
 		<cell rect="1161,530,49,29" name="bra/cowBraG" dx="80" dy="68"/>
