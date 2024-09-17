@@ -216,10 +216,11 @@ public function weeklyPopAdjustment():void {
 	//DoNext: (MouseTownWeeklyUpdate);
 }
 
+
 //After Pure Amily is a camp follower, and her kids have moved out, she approaches you. 
 public function amilyRebuild():void {
 	clearOutput();
-	outputText("Amily approaches you, and you can tell that the mouse-girl has something eating at her. <i>“Hey [name], I have...a request for you.</i>” The mouse girl fidgets nervously, then seems to put steel in her spine, squaring up. <i>“Our kids...Well, they need a big place to live, bigger than they could find. They need flattened land, and the best place they could find was...Well...The old village.</i>” Amily looks at you, trying to keep calm, but she’s obviously nervous. <i>“They’re grown, but they’re going to need help setting up. Will you come with me, just for a little while, and help them rebuild?</i>”\n\n"); 
+	outputText("As you approach Amily, you can tell that the mouse-girl has something eating at her. <i>“Hey [name], I have...a request for you.</i>” The mouse girl fidgets nervously, then seems to put steel in her spine, squaring up. <i>“Our kids...Well, they need a big place to live, bigger than they could find. They need flattened land, and the best place they could find was...Well...The old village.</i>” Amily looks at you, trying to keep calm, but she’s obviously nervous. <i>“They’re grown, but they’re going to need help setting up. Will you come with me, just for a little while, and help them rebuild?</i>”\n\n");
 	menu();
 	addButton(1, "Help", amilyRebuildInit);
 	addButton(2, "Delay", amilyRebuildNotNow);

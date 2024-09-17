@@ -1165,7 +1165,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		addButton(2, "Hang", BelisaHang);
 		addButton(3, "Shop", BelisaShop);
 		addButton(4, "Sex", BelisaSex);
-		if (BelisaHolyBands()) addButton(5, "Holy Bands", BelisaHolyBandsManagment).hint("Putting on ot taking of any of the Holy Bands you own. With little Belisa help ;)");
+		if (BelisaHolyBands()) addButton(5, "Holy Bands", BelisaHolyBandsManagment).hint("Putting on or taking off any of the Holy Bands you own. With Belisa's help ;)");
 		if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 		addButton(14, "Leave", camp.campLoversMenu);
 	}

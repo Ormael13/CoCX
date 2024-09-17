@@ -149,6 +149,8 @@ public class SceneLib {
 
     public static var electraScene:ElectraFollower = new ElectraFollower();
 
+    //public static var NadiaFollower:NadiaFollower = new NadiaFollower();
+
     public static var emberScene:EmberScene = new EmberScene();
 	
 	public static var erlkingScene:ErlKingScene = new ErlKingScene();

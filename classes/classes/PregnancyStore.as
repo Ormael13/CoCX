@@ -41,6 +41,8 @@ public class PregnancyStore extends Object
 				case PREGNANCY_GOBLIN: return INCUBATION_GOBLIN;
 				case PREGNANCY_ZENJI: return INCUBATION_ZENJI;
 				case PREGNANCY_LOPPE: return INCUBATION_LOPPE;
+				//case PREGNANCY_SIDONIE: return INCUBATION_SIDONIE;
+				//case PREGNANCY_ARIAN: return INCUBATION_ARIAN;
 				default: return -1;
 			}
 		}
@@ -94,6 +96,9 @@ public class PregnancyStore extends Object
 		public static const PREGNANCY_HARPY_EGGS:int        	=  45; //All Harpy eggs
 		public static const PREGNANCY_HARPY_HATCHING:int        =  46;
 		public static const PREGNANCY_LOPPE:int                 =  47;
+		public static const PREGNANCY_ELECTRA:int               =  48;
+		public static const PREGNANCY_LUNA:int					=  49;
+		public static const PREGNANCY_NADIA:int					=  50;
 
 		public static const INCUBATION_IMP:int                  = 432; //Time for standard imps. Imp lords, Ceraph, Lilium and the imp horde cause slightly faster pregnancies
 		public static const INCUBATION_MINOTAUR:int             = 432;
@@ -141,7 +146,11 @@ public class PregnancyStore extends Object
 		public static const INCUBATION_LILY:int					= 300;
 		public static const INCUBATION_TYRANTIA:int				= 300;*/
 		public static const INCUBATION_LOPPE:int				= 200;
-
+		public static const INCUBATION_ARIAN:int 				= 150;
+		public static const INCUBATION_SIDONIE:int 				= 250;
+		public static const INCUBATION_ELECTRA:int 				= 250;
+		public static const INCUBATION_LUNA:int					= 300;
+		public static const INCUBATION_NADIA:int				= 300;
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types
 		private static const PREG_NOTICE_MASK:int               = 0x7FFF0000; //Use upper half to store the latest stages of pregnancy the player has noticed

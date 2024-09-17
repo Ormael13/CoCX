@@ -192,7 +192,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li> Pyromania (Zenji the troll. Various typo revisions, editing and proofreading.)</li>");
 		outputText("<li> Lunaraia (Adaptations slot for internal mutation name idea)</li>");
 		outputText("<li> Apex (part of Michiko)</li>");
-		outputText("<li> Canadian Snas (Driders Sisters trio)</li>");
+		outputText("<li> Canadian Snas (Driders Sisters trio, Charybdis, the Demonic Lab Dungeon, Kiha Expansion/wedding, Pregnancies for Diva, Luna, Electra, Sidonie, Arian, Ms. Shigure, various text upgrades/edits, the Phalluspear)</li>");
 		outputText("<li> Lord Shadeogorath (Spriting stuff for chara viewer, Bestial Blademaster gear set)</li>");
 		outputText("<li> Ohaxer & Sylabt (Arigean TF stuff + npc)</li>");
 		outputText("<li> Dxasmodeus (Tentacles, Worms, Giacomo)</li>");
