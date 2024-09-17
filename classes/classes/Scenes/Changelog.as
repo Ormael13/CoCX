@@ -242,12 +242,12 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Fatigue recovery increased and reduces the fatigue cost of physical specials by 40% and +2 to fatigue/soulforce/mana recovery multiplier when under 60% max HP. Reduce spells mana cost by 10%.\n");
 			outputText("-All enemies corruption now starts at -100 and ends at 100 for any non true angel/demom enemy. They can go either above 100 (to 200) (demon) or below -100 (to -200) (angel). Effect or attacks that scale based on enemy corruption been adjusted too.\n");
 			outputText("-New event perk: Fire Shadow Affinity. Gained by been Nekomata. Effects: You have a natural affinity for both darkness and fire granting you increased damage and resistance to those element as well as gaining a weakness to ice and lightning.\n");
-			outputText("-Wisp Lieutenant and it follow up perks req. would take inbto account currently tamed monsters (even if pc would release them next hour).\n");
+			outputText("-Wisp Lieutenant and it follow up perks req. would take into account currently tamed monsters (even if pc would release them next hour).\n");
+			outputText("-Pregnancies for Luna, Electra, Arian and Nadia. (Canadian Snas)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// or Hellcat
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
