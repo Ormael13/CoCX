@@ -865,7 +865,7 @@ public class Combat extends BaseContent {
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 0 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = 0;
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 0 && flags[kFLAGS.FLYING_SWORD] == 1) flags[kFLAGS.FLYING_SWORD] = 0;
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 0 && flags[kFLAGS.MUMMY_ATTACK] == 1) flags[kFLAGS.MUMMY_ATTACK] = 0;
-		if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 0 && flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 0 && flags[kFLAGS.WILL_O_THE_WISP] < 2) flags[kFLAGS.WILL_O_THE_WISP] = 2;
 	}
 
     internal function buildOtherActions(buttons:ButtonDataList, backFunc:Function, aspectButtons:ButtonDataList = null):void {
@@ -1607,7 +1607,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] = 1;
         }
         attack();
-		if (!player.weaponOff.isNothing) {
+		if (player.weaponOff.type != ItemConstants.WT_FISTS) {
 			if (flags[kFLAGS.MULTIATTACK_STYLE_OFF] >= 0) {
 				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = Math.min(maxCurrentAttacksOff(), (flags[kFLAGS.MULTIATTACK_STYLE_OFF] || 0) + 1);
 				if (player.statusEffectv1(StatusEffects.CounterAction) > 0)

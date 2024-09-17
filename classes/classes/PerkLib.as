@@ -7735,7 +7735,7 @@ public class PerkLib
 					.requireWis(50)
 					.requireCustomFunction(function (player:Player):Boolean {
 					return player.playerMinionsCount() >= 3;
-					}, "3+ pets/minions");
+					}, "3+ pets/minions/tamed monsters");
             ShootTheLoadAndHitTheRoad.requireLevel(6)
                     .requirePerk(JobLeader)
 					.requireInt(60)
@@ -8087,7 +8087,7 @@ public class PerkLib
 					.requireWis(100)
 					.requireCustomFunction(function (player:Player):Boolean {
 					return player.playerMinionsCount() >= 6;
-					}, "6+ pets/minions");
+					}, "6+ pets/minions/tamed monsters");
             UtilitySkillsApprentice.requireLevel(24)
                     .requirePerk(UtilitySkillsBeginner)
 					.requireCustomFunction(function (player:Player):Boolean {
@@ -8267,7 +8267,7 @@ public class PerkLib
 					.requireWis(160)
 					.requireCustomFunction(function (player:Player):Boolean {
 					return player.playerMinionsCount() >= 10;
-					}, "10+ pets/minions");
+					}, "10+ pets/minions/tamed monsters");
 			LimitBreakerFlesh1stStage.requireLevel(54)
 					.requirePerk(LimitBreakerHeart1stStage);
 			ArcaneVenom.requireLevel(54)
@@ -8369,7 +8369,7 @@ public class PerkLib
 					.requireWis(210)
 					.requireCustomFunction(function (player:Player):Boolean {
 					return player.playerMinionsCount() >= 15;
-					}, "15+ pets/minions");
+					}, "15+ pets/minions/tamed monsters");
 			LimitBreakerHeart2ndStage.requireLevel(78)
 					.requirePerk(LimitBreakerBody2ndStage);
             //Tier 14

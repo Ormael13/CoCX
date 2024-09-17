@@ -749,7 +749,9 @@ public class Soulforce extends BaseContent
 		if (player.soulforce >= cost) {
 			outputText("Consuming a little of soulforce, you adjust your corruption.");
 			player.soulforce -= cost;
-			player.dynStats("cor", change);
+			player.cor += change;
+			if (player.cor > 100) player.cor = 100;
+			if (player.cor < 0) player.cor = 0;
 			statScreenRefresh();
 			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
 		}

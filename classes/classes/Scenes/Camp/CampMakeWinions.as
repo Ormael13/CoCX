@@ -31,6 +31,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) cTMC += 1;
 			if (player.hasStatusEffect(StatusEffects.TamedMonster02)) cTMC += 1;
 			if (player.hasStatusEffect(StatusEffects.TamedMonster03)) cTMC += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster04)) cTMC += 1;
 			return cTMC;
 		}
 		private function currentTamingCap():Number {
