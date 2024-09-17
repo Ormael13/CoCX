@@ -7,7 +7,7 @@ ARIAN SCENES
 */
 public function ArianPregChampCarries1():void {
 		clearOutput();
-		outputText("As you get back to camp, you see your wizard lover, Arian, standing by your (tent/cabin). You ask what brings him over, and he tilts his head.  \n\n"); 
+		outputText("As you get back to camp, you see your wizard lover, Arian, standing by your (tent/cabin). You ask what brings him over, and he tilts his head.  \n\n");
 		outputText("“I apologise for the intrusion…But something’s felt…a little off about you, ever since we…” He blushes, and you almost roll your eyes. Since you had sex last.  \n\n");
 		outputText("“Yes.” Arian steps forward. “I-if you wouldn’t mind, I want to…examine you.”  \n\n");
 		outputText("Giving your bashful lover a wink, you ask him if he didn’t get a thorough enough examination last time.  \n\n");
@@ -32,32 +32,32 @@ doNext(playerMenu);
 }
 public function ArianPregChampCarries2():void {
 		clearOutput();
-		outputText("You can feel a slight pressure in your stomach as you move around. Your belly feels slightly stiff. You put a hand on your stomach, and with a little experimental touching, you can pinpoint a small, hard section. Those…must be the eggs. You have a sudden urge to go see Arian. You shake yourself, getting back to your day.  \n\n"); 
+		outputText("You can feel a slight pressure in your stomach as you move around. Your belly feels slightly stiff. You put a hand on your stomach, and with a little experimental touching, you can pinpoint a small, hard section. Those…must be the eggs. You have a sudden urge to go see Arian. You shake yourself, getting back to your day.  \n\n");
 		outputText(" \n\n");
 doNext(playerMenu);
 }
 public function ArianPregChampCarries3():void {
 		clearOutput();
-		outputText("The eggs have grown to an uncomfortable size, and your stomach is bulging. Anyone with eyes can tell you’re pregnant, and you can feel the eggs shifting when you move quickly.  \n\n"); 
+		outputText("The eggs have grown to an uncomfortable size, and your stomach is bulging. Anyone with eyes can tell you’re pregnant, and you can feel the eggs shifting when you move quickly.  \n\n");
 		outputText("Arian walks out, catching you as you’re sitting by the fire. “Are you alright?” He asks, concerned. He sits beside you, offering you his hand. You take it, giving him a little smile. You tell Arian that you’re fine…You just needed to sit for a second.  \n\n");
-        outputText("He leans in, wrapping his tail gently around your waist. “Mind if I join you?” You just nod, and he beams. “I don’t know if…This helps at all…But you look really good right now.” He blushes, and you give the lizan mage a raised eyebrow.  \n\n"); 
+        outputText("He leans in, wrapping his tail gently around your waist. “Mind if I join you?” You just nod, and he beams. “I don’t know if…This helps at all…But you look really good right now.” He blushes, and you give the lizan mage a raised eyebrow.  \n\n");
 		outputText("“N-not that you don’t normally!” He says quickly. “I-it’s just…I see you like this…Knowing that you’ve got…our kids in there…” He looks down and away. “I suppose…Having more than a little bit of me inside you…Feels good.”  \n\n");
-        outputText("You playfully punch his shoulder, telling Arian that at least one of you is having fun with it. He laughs at that, looking into your eyes. “M-may I?” He motions at your pregnant belly, and you nod, leaning back slightly. He slowly, with awe in his eyes, rests his hand on your stomach. A thin glow radiates from his palm, and you gasp. The uncomfortable grinding feeling begins to fade, and once he’s done, you feel much better.  \n\n"); 
+        outputText("You playfully punch his shoulder, telling Arian that at least one of you is having fun with it. He laughs at that, looking into your eyes. “M-may I?” He motions at your pregnant belly, and you nod, leaning back slightly. He slowly, with awe in his eyes, rests his hand on your stomach. A thin glow radiates from his palm, and you gasp. The uncomfortable grinding feeling begins to fade, and once he’s done, you feel much better.  \n\n");
 		outputText("“It’s not uncommon for Lizan females to experience abdominal discomfort when carrying, especially later on in their development.” He gives you a kiss on the forehead. “All I did was move two of the eggs a little apart.” Arian stands, moving back to his tent. “Please wait here for a moment.” You feel much more comfortable, and don’t really feel like moving anyways.  \n\n");
-        outputText("Arian comes back a few minutes later, with a metal flask proudly held in one hand. He gives it to you. “Lizan villages often kept a supply of whitebud herbs around, for egg-bearing women. It helps with digestion, has many nutrients for growing eggs, and helps maintain the coating between eggs.” You nod, thanking him for the thought. “Some prefer eating them, but traditionally, it’s boiled into a tea.”  \n\n"); 
+        outputText("Arian comes back a few minutes later, with a metal flask proudly held in one hand. He gives it to you. “Lizan villages often kept a supply of whitebud herbs around, for egg-bearing women. It helps with digestion, has many nutrients for growing eggs, and helps maintain the coating between eggs.” You nod, thanking him for the thought. “Some prefer eating them, but traditionally, it’s boiled into a tea.”  \n\n");
 		outputText("You take a small sip, and…It’s not bad. A little bitter at first, but that quickly fades, replaced with a sour-sweet taste that reminds you of lemongrass. As you swallow, a fuzzy heat spreads through you. You almost feel a little lighter, the eggs not weighing as much on your womb. You smile, patting the side of the log for your lover to join you. Arian happily sits right beside you, and the two of you spend some time, just sitting by the fire, watching the world spin.  \n\n");
         outputText("“I love you.” He whispers, resting his cheek on your shoulder. The fatigue of the day seems to wash away, and you rest your head on his, gently leaning in. After another fifteen minutes of warm, affectionate silence, he speaks once more. “Mareth…Isn’t such a bad place…Once you find the right people to share it with.” \n\n");
-        outputText("You find yourself agreeing…But a few minutes later, you pull away, letting Arian know that the moment has passed. He looks disappointed, but lets go, standing with you. “So…You’re leaving again.” He seems to want to say more. Filled with affection, you take his hands in yours, bringing your lips to his. The kiss is gentle, not filled with fiery passion, but calm, stable love.  \n\n"); 
+        outputText("You find yourself agreeing…But a few minutes later, you pull away, letting Arian know that the moment has passed. He looks disappointed, but lets go, standing with you. “So…You’re leaving again.” He seems to want to say more. Filled with affection, you take his hands in yours, bringing your lips to his. The kiss is gentle, not filled with fiery passion, but calm, stable love.  \n\n");
 		outputText("You tell Arian that yes, you’re leaving. As you must…And you’ll return, as you always do. You tell Arian that even carrying his eggs, you can still destroy the demons…And now, you have even more reason to. To make sure they get the best chances you can give them. \n\n");
         outputText("“...If they inherit even a tiny fraction of your kindness and strength, they’ll be shining beacons for Mareth.” Arian seems comforted by your words. You bid farewell to Arian, turning with determination to the wilderness. Nothing on Mareth can stop you now! \n\n");
-        outputText(" \n\n"); 
+        outputText(" \n\n");
 		outputText(" \n\n");
 doNext(playerMenu);
 }
 //[arian em] [arian ey] [arian eir]
 public function ArianCarriesChampBabies1():void {
 		clearOutput();
-		outputText("Arian approaches you, a slightly sheepish expression on her face. “Would you come with me, please?” You nod, and follow Arian into her tent. She sits down, motioning for you to join her. You see no reason to stay standing, and as Arian hands you a cup of tea, she looks down at the table, blushing slightly.  \n\n"); 
+		outputText("Arian approaches you, a slightly sheepish expression on her face. “Would you come with me, please?” You nod, and follow Arian into her tent. She sits down, motioning for you to join her. You see no reason to stay standing, and as Arian hands you a cup of tea, she looks down at the table, blushing slightly.  \n\n");
 		outputText("“...So…I don’t know how much you know about Lizan anatomy…” She begins, tapping one foot. “But the last time we…Made love, it was a day where my eggs were…Available.” You blink, before clarifying. So Arian is…Pregnant? \n\n");
 		outputText("“Well…Yes.” She blushes, looking down and away. “Look…I’m concerned, that’s all. I wasn’t in the best shape before I met you, and even now, I’m not exactly a physical specimen.”  \n\n");
 		outputText("Teasingly, you tell Arian that you take exception to that. She’s beautiful, and how dare she degrade herself like that.  \n\n");
@@ -70,7 +70,7 @@ doNext(playerMenu);
 }
 public function ArianCarriesChampBabies2():void {
 		clearOutput();
-		outputText("As you get back into camp, you see Arian, holding her stomach and groaning slightly. Her stomach’s grown, but you wouldn’t immediately jump to ‘pregnant’ if you didn’t already know. You quickly make your way to her, and as she sees you, she smiles weakly.  \n\n"); 
+		outputText("As you get back into camp, you see Arian, holding her stomach and groaning slightly. Her stomach’s grown, but you wouldn’t immediately jump to ‘pregnant’ if you didn’t already know. You quickly make your way to her, and as she sees you, she smiles weakly.  \n\n");
 		outputText("“Hello…” She says, waving her free hand. “How are you?” You take her hand, saying that you’re fine…But you’re more worried about her.  \n\n");
 		outputText("“Oh, this?” Arian shakes her head. “J-just had a little discomfort, that’s all.” Her eyes brighten, and she gives you a pouty frown. “But, since you’re here…” You groan internally, and Arian continues. “Could you just…give me a belly rub?”  \n\n");
 		outputText("You almost sigh in relief. You agree, and Arian motions for you to sit beside her. You comply, and she happily plops herself in your lap, leaning back into you. “Thank you!” She says happily, guiding your hand to her stomach.  \n\n");
@@ -89,14 +89,14 @@ doNext(playerMenu);
 
 public function ArianCarriesChampBabies3():void {
 		clearOutput();
-		outputText("You see Arian, looking at her egg-filled belly with a small frown on her face. You ask what’s wrong, and she shakes her head. “I feel so…heavy. So bloated. I don’t do much physical activity, but this…Is so inconvenient. I just want them out of me.”  \n\n"); 
+		outputText("You see Arian, looking at her egg-filled belly with a small frown on her face. You ask what’s wrong, and she shakes her head. “I feel so…heavy. So bloated. I don’t do much physical activity, but this…Is so inconvenient. I just want them out of me.”  \n\n");
 		outputText("“No offence, but I really hope so.” You give Arian an encouraging smile, before heading back to what you were doing.  \n\n");
 doNext(playerMenu);
 }
 
 public function ArianPCLaysEggs():void {
 		clearOutput();
-		outputText("You feel your stomach lurch, your womb suddenly feeling twice as heavy as before. A thick, throbbing feeling starts in your [pussy], spreading through your pelvis. You double over, the strange feeling overwhelming.  \n\n"); 
+		outputText("You feel your stomach lurch, your womb suddenly feeling twice as heavy as before. A thick, throbbing feeling starts in your [pussy], spreading through your pelvis. You double over, the strange feeling overwhelming.  \n\n");
 		outputText("“[Player]!” You hear Arian’s voice, but he sounds like he’s so far…away…You feel dizzy, and Arian catches you as you begin to fall over. “-Ne secon-”... “-get my chair!” Suddenly, you see a bright light on your midsection, and you snap back to yourself. You’re being held up by Arian, who’s got a hand on your gravid belly, healing spell already working. “Can you make it to my tent?”  \n\n");
 		outputText("You nod, and Arian helps you hobble into his tent. Inside, you see an odd chair, with a hole in the middle, and a padded basket underneath.  \n\n");
 		outputText("“Okay, so you’re going to sit over here.” Arian helps you undress, and gets your [pussy] positioned over the hole.  \n\n");
@@ -115,7 +115,7 @@ doNext(playerMenu);
 
 public function ArianEggLaying():void {
 		clearOutput();
-		outputText("You hear a cry from Arian’s tent. Rushing over, you see her doubled over, just outside her tent. Seeing you, Arian blushes bright red, waving you over.  \n\n"); 
+		outputText("You hear a cry from Arian’s tent. Rushing over, you see her doubled over, just outside her tent. Seeing you, Arian blushes bright red, waving you over.  \n\n");
 		outputText("“J-just help me into my tent, please.” She says, with gritted teeth. “I’ll be fine once I’m inside.” You follow her instructions, helping her into her tent. You notice that an odd-looking chair sits along the back, and Arian points to it. “Over there.” As you get closer, you notice that there’s a hole in the middle of the chair, with a padded basket underneath. “Laying is annoying”, she says simply, through gritted teeth. “But I got that from Tel’Adre. Very handy.” You help her over to the chair, and she strips out of her robe and undergarments, giving them to you. You place them to one side, and Arian groans, sitting down, positioning her drooling cunt over the egg-hole.  \n\n");
 		outputText("Arian clutches her stomach with one hand, and you take her other hand, holding it tight. Arian gives you a worried smile, and you reassure her, putting a hand on Arian’s belly.  \n\n");
 		outputText("She gasps, trembling, closing her eyes as the tip of a pure-white egg crowns. Arian gasps, and it sinks slightly back in. You encourage your Lizan lover to push, and with a girly wail, Arian pushes the egg out. She’s gasping, pussy gaping, but you know she isn’t done yet. Taking Arian’s hand, you keep her steady. She looks at you, fear and pain in her eyes, but you act calm, your voice anchoring Arian.  \n\n");
@@ -124,7 +124,7 @@ public function ArianEggLaying():void {
 		outputText("Arian wakes back up as you’re tucking her in, and she sits bolt upright. “The eggs! Where are they?!” She demands, and you gently, but firmly, lay Arian back down, telling her that you’re bringing them over. But Arian needs to rest and recover.  \n\n");
         outputText("As you bring the eggs over, Arian visibly relaxes, and as you place the basket at the foot of Arian’s bed, she smiles, motioning for you to join her.  \n\n");
         outputText("You sit beside Arian, and she nuzzles your hand. “Thank you for being here with me.” She sighs. “I’m pretty sure kid me would be properly horrified right now.” She says, chuckling.  \n\n");
-        outputText("You ask her, the childbirth, or the fact that she’s the mom, not the dad? 
+        outputText("You ask her, the childbirth, or the fact that she’s the mom, not the dad?
 “Both.” She snorts. “I was so focused on my studies as a child, that even the idea of finding a mate, let alone starting a family, was almost…wrong to me.” She sighs happily. “Go on, my champion. Make Mareth a better place for them to grow in.”  \n\n");
         outputText("You give Arian a quick hug, and a kiss on the cheek before leaving. \n\n");
 doNext(playerMenu);
@@ -132,13 +132,13 @@ doNext(playerMenu);
 
 public function ArianHatching():void {
 		clearOutput();
-		outputText("You hear an excited yell from Arian’s tent, and s/he pokes his/her head out, motioning wildly. “[Player]! Come quick!” You rush over to Arian, and s/he pulls you into his/her tent.  \n\n"); 
+		outputText("You hear an excited yell from Arian’s tent, and s/he pokes his/her head out, motioning wildly. “[Player]! Come quick!” You rush over to Arian, and s/he pulls you into his/her tent.  \n\n");
 		outputText("You stand beside Arian, not knowing what to do, and s/he points at the incubation basket, where you hear a slight cracking sound. “They’re hatching!” Arian says, rather unnecessarily, grabbing your hand, hopping up and down with excitement.  \n\n");
 		outputText("Cracks form on the largest egg, and a piece comes flying off as a white-scaled little head pokes out, closing its eyes against the light. The little lizan makes a high-pitched chirping noise, and you see a clawed hand breach the shell, sending little pieces out. Arian steps forward, slowly, as the little one stretches out their spine, chirping as they break the egg wide open. Arian extends his/her hand, and they look up, sheer wonder in their slitted eyes as Arian picks them up, cradling them in his/her arms.  \n\n");
 		outputText("A much louder crack comes from the smallest egg, and as it tips over onto its side, you see a more slender nose poke out, catching a glimpse of yellow eye before they turn around. To your shock, their tail pokes out of the hole in the egg.  \n\n");
 		outputText("“Sometimes they need to be encouraged to leave the shell.” Arian says gently. “Why don’t you get them?”  \n\n");
 		outputText("You nod, taking the shell and cracking it along its length. The scrawnier baby looks up at you, eyes wide and trembling, until you pick them up in both hands, bringing them to your face. You give your newborn baby a smile, and slowly, they stop shaking, and open their mouth, spreading their arms and legs wide as they gurgle happily.  \n\n");
-        outputText("“A little boy and a girl.” Arian says softly. “She’s got a narrower snout, and softer scales.” 
+        outputText("“A little boy and a girl.” Arian says softly. “She’s got a narrower snout, and softer scales.”
 (If more) you hear the cracking of another egg, and you both wrap your respective babies in cloth. They close their eyes as you lay them down, and you turn back to the (one/two) remaining eggs, repeating the process with Arian until all (number) of your new brood are nestled in the crib.
  \n\n");
 		outputText("As Arian coos over them, you give him/her a kiss on the snout, excusing yourself.  \n\n");
@@ -153,9 +153,7 @@ doNext(playerMenu);
 public function NadiaPregAnnouncement():void {
 		clearOutput();
 		outputText("Your mare is waiting for you back at camp, with a smile on her face, nearly jumping from joy. Her eyes gleam as she sees you, and she nearly skips over, her J-cup breasts bouncing with each step. She breaks into a run, and you brace yourself as Nadia tackles you, Smothering you in her massive mammaries. \n\n"); 
-		outputText("“Oh, my stallion, you wonderful, wonderful lover!” She gives you a big smack on the lips. 
-You look at her, confused, then the penny drops. You bring a hand to her belly, and she nods, her horn glowing, and her eyes flashing with excitement. 
- \n\n");
+		outputText("“Oh, my stallion, you wonderful, wonderful lover!” She gives you a big smack on the lips. You look at her, confused, then the penny drops. You bring a hand to her belly, and she nods, her horn glowing, and her eyes flashing with excitement. \n\n");
 		outputText("“I’m pregnant”, she says simply, cheeks red, and a huge grin on her face. “You’re going to be a father, [Player].” She puts a hand on her stomach.  \n\n");
 		outputText("You congratulate Nadia, knowing that this has been what she wanted for a long time. She cuddles you for a minute or so, before letting you go. You excuse yourself, going about your day…but you can feel Nadia’s eyes on your back as you go about your work around camp.  \n\n");
 		outputText(" \n\n");
@@ -540,8 +538,6 @@ public function SidonieKnockedUpPC1():void {
 		outputText("You already know what this is, and who left it for you. The bowl is filled with oats and granola, with a sprinkling of sugar. Your stomach rumbles, and you begin eating. Your stomach stops grumbling, and you sigh with relief. You stretch and get ready for the day, before dropping the bowl back at Sidonie’s workstation. She looks up from a plank she’s sanding down, and gives you a smile.  \n\n");
 		outputText("“Wow. Ate the whole bowl, huh?” Sidonie gives you a wink, and you feel your cheeks heating up. “Oh, c’mon, that's the thanks I get for pre-emptively dealing with your morning problems?”  \n\n");
 		outputText("Morning problems she gave you…But fair enough. Sidonie walks over, giving you a big hug. “Aw…” You feel a slight burst of irritation, but Sidonie sighs. “Okay, okay. I’ll let you be.” She walks back over to her station. “Just don’t overdo it, okay?”  \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
 doNext(playerMenu);
 }
 
@@ -559,224 +555,15 @@ doNext(playerMenu);
 public function SidonieKnockedUpPC3():void {
 		clearOutput();
 		outputText("Your belly’s getting much larger, and whenever you’re around camp, you can feel Sidonie watching you, concerned. The baby inside you occasionally moves fitfully, usually in the afternoon. Your [Breasts] have started leaking milk, and you find yourself feeling more tired than usual. \n\n"); 
-		outputText("You decide to sit by the campfire, and Sidonie immediately stops working, coming over to sit beside you. “...Hey.” She awkwardly reaches out, bringing her hand to your belly. “C-can I?” You nod, and she places her hand on your pregnant bulge, a goofy smile on her face. You wince, feeling the baby move, and Sidonie gasps.  \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("You decide to sit by the campfire, and Sidonie immediately stops working, coming over to sit beside you. “...Hey.” She awkwardly reaches out, bringing her hand to your belly. “C-can I?” You nod, and she places her hand on your pregnant bulge, a goofy smile on her face. You wince, feeling the baby move, and Sidonie gasps. You give her a giggle, and she rolls her eyes. For a moment, the two of you just sit there, sharing a peaceful moment by the fire. Eventually, you excuse yourself, and Sidonie nods simply, unable to speak. \n\n");
 doNext(playerMenu);
 }
 //--------
 //Luna
 //--------
-public function LunaPregAnnouncement():void {
-		clearOutput();
-		outputText("As you head back into camp, you find that your maid, Luna, is sitting by your (bedroll/cabin), waiting for you with a very nervous expression on her face. She stands up as you approach, curtseying deeply, while looking down at the ground.  \n\n"); 
-		outputText("“[Master]...I hope your day was enjoyable.” She looks up a little, but still can’t seem to look you in the eyes. She almost seems…Guilty. You look around, but everything seems to be in order…and nobody seems to be missing, or angry.  \n\n");
-		outputText("“Please, [master], would you…sit? I have tea and a meal ready for you.” You don’t see any reason to deny Luna’s request, and she seems relieved. She brings you her usual tea, and the meal, if anything, is more delicious than usual…But Luna barely speaks at all, and as she picks up your plate, you notice that Luna’s hands are shaking, her face paler than usual. Something’s clearly bothering your maid.  \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-menu();
-addButton (1, "TakeHand", LunaPregTakeHand);
-addButton (2, "Wait", LunaPregWait);
-}
 
-public function LunaPregTakeHand():void {
-		clearOutput();
-		outputText("You take Luna’s hand in yours, with your off-hand taking the plate, lowering it to the improvised table. As you noticed, her hands are shaking heavily. She weakly tries to pull away, but you tighten your grip slightly.  \n\n"); 
-		outputText("You gently tell Luna to sit with you, and she meekly obeys, still not looking at you. For a few seconds, you sit with her, and you notice that it isn’t just her hands. Her knees are shaking, and while Luna’s always been meek while serving you, this is…more. Way more. You wrap your arms around Luna, pulling her into you. She stiffens, almost like a wild animal, and you pull back, not wanting to startle her further.  \n\n");
-		outputText("“...I j-just wanted to do so-something nice for my [master].” Luna bites her lip, clearly lying. She’s…Never directly lied to you before.  \n\n");
-		outputText("You gently ask Luna what’s wrong. Clearly, something’s bothering her. You tell her that good maids don’t lie to their [masters]. Her face pales even more at that, and you quickly take her hands in yours. You ask her what’s wrong. You’ve never seen her this scared before, not even when you first met.  \n\n");
-		outputText("“I…I’m not a good maid.” Luna stutters. “Yes, I cook, I clean, I…look after your needs…I’m good at that.” You agree, telling her that she’s done those jobs extremely well. She’s the best maid you could have asked for.  \n\n");
-		outputText("“But I’m NOT!” She wails, grabbing the hem of her dress. “I-I…Do it for…Selfish reasons. I want to be with my [master], in all things, to look after them…In every way. Ways that…Conflict with my duties as a maid.” Tears fall from her eyes, and she shivers. “I’ve imposed on you…For things that are improper, from a [master] to a maid. And for a time, I could…Justify that. It was a small amount of your time, and you agreed, most graciously, to…To satisfy my needs…” \n\n");
-        outputText("You tell Luna that you happily agreed. That you see her as more than just a maid, for the person underneath. You remind her that you wanted it, maybe not as much as her, but it was your choice, all the same. \n\n");
-		outputText("“But…Actions have consequences, [master]. And mine…” She brings a hand to her stomach. “Ours…Have had some.”  \n\n");
-		outputText("Oh.  \n\n");
-        outputText("“It’s…Improper.” Luna grits her teeth. You can see her eyes flash green. “For a maid to request such things of her [Master]”. She closes her eyes over more tears. “Let alone, to bear the [Master]’s…” She slowly begins to transform, ripping through her clothes, until a crying she-wolf sits on the log in front of you.  \n\n");
-menu();
-addButton (1, "Comfort", LunaPregComfort);
-addButton (1, "Dismiss", LunaPregDismiss);
-}
 
-public function LunaPregWait():void {
-		clearOutput();
-		outputText("You sit patiently as Luna cleans your plate, rinses your cup, watching her work. The work seems to comfort her slightly, but you can tell she’s slower than usual…almost as if she’s stalling, or savouring the moment. \n\n"); 
-		outputText("Eventually, she sits down across from you. Her breathing is uneven, but you give her a comforting smile. You ask her, gently, what’s going on. She’s not usually this proactive…and clearly there’s something bothering her.  \n\n");
-		outputText("“C-Can’t I do something…Nice for you, [Master]?”  \n\n");
-		outputText("You gently tell Luna that it wasn’t the meal or tea that clued you in, but her body language. In all the time Luna’s served you, she’s never been this nervous. The last time you saw her like this, was before you hired her.  \n\n");
-		outputText("“I should have known you’d clue in.” Luna says simply. “Of course, I can’t hide anything from my [Master]...And it’s wrong, improper, that I should even try to!” You begin to say something, but Luna isn’t done, speaking over you for once.  \n\n");
-		outputText("“And it’s not like this is my first time acting improper towards you…You, who accepted me before I even spent a day on the streets…Who accepted my urges, my curse…And here I am, demanding even more.” She begins to cry, and you wait patiently for her to compose herself. She dabs her eyes, sniffling. \n\n");
-        outputText("“You…Accepted me. All of me…And more.” She places her hands in front of her, creasing her skirt. “I…Don’t expect you to understand, not really. My training as a maid…It conflicts, so very much, with…My curse.” She looks at you with what you can only describe as ‘Puppy Eyes’. “Every time I see you, whenever I’m near you…I can’t…” She shudders, her eyes flashing green. “I…Want you, with everything I am…” She hugs herself. “...And I got what I wanted, but…” Her voice is small, but sharp. “...[Player], my urges, my needs…They had consequences. I don’t want to impose on you…” Luna closes her eyes over her tears. “But I’m pregnant, and it’s yours.” She looks at you, nervously, and you notice her clothes tightening around her.  \n\n");
-		outputText("Luna’s dress begins to rip, and within a few moments she’s naked but for some scraps of cloth, clinging to her werewolf form. Her eyes, looking up into yours, are soft and vulnerable, her tail still as a statue.  \n\n");
-		outputText(" \n\n");
-menu();
-addButton (1, "Comfort", LunaPregComfort);
-addButton (2, "Dismiss", LunaPregDismiss);
-}
 
-public function LunaPregComfort():void {
-		clearOutput();
-		outputText("You lean in, wrapping an arm around Luna, running your fingers through her fur. Gently, you tell Luna to look around at the camp around her, and tell you what she sees. Slowly, she begins to look around.  \n\n"); 
-		outputText("“I-I…See your [Cabin/Bedroll]...The river I wash laundry in…The campfire…”You nod. Gently, you ask Luna if your campsite has even a remote resemblance to the kind of manor a maid like her would usually serve in. Seemingly nervous about answering, Luna looks down. You reassure her, telling her that you want an honest answer.  \n\n");
-		outputText("“...No, [Master]. This place…While you make it worthwhile…Is nothing like a manor.” She seems to deflate, and you lean in, resting your head on her shoulder. You ask her, then why does she act like it is? \n\n");
-		outputText("“B-Because I’m your maid!” She stutters. “I’ve been a maid my whole life, and that’s not…Not changing…” Her voice trails off at that.  \n\n");
-		outputText("Almost laughing, you tell Luna that you’re living out in the middle of nowhere. The portal is the only reason you stayed here, your duty to your people still strong, despite everything. But, you tell Luna, things HAVE changed. You’ve changed, the world you live in is constantly changing...And while you don’t expect Luna to change for you, the way you think of her certainly has. She’s not just a maid to you, but a lover, protector…And now? Mother to your children.  \n\n");
-		outputText("You put a hand on her stomach, and she nods. “Yes…I will be.” She looks at you, tears in her eyes, but smiling slightly, her tail wagging gently behind her. “And…That’s okay with you?”  \n\n");
-        outputText("Instead of responding, you pull her in for a warm, fuzzy hug. Shaking like a leaf, Luna hugs you back, holding on like her life depended on it. Her claws make indents in your [skin], but you ignore it, holding the emotional mother-to-be as close to you as you can.  \n\n");
-		outputText("“...Thank you…[Player].” She looks you in the eyes, sheer adoration in her gaze. “...I love you.” You smile, saying that you like it when she uses your name. After everything, she deserves to be treated as an equal. \n\n");
-		outputText("“Oh, don’t get used to it, [Master]”, she says simply. “While…I am looking forward to having your children…I am still your loyal maid. That is where I want to be.” \n\n");
-		//(If you have other kids in camp)
-        outputText(" You nod, saying that if Luna wants to keep things that way between you, you’ll respect her wishes…But you express concern. You don’t want Luna’s kids…YOUR kids, thinking they’re any less than the others in camp. You remind Luna that your kids have half-siblings already.  \n\n");
-		outputText("“...I…Didn’t think of that.” Luna extracts herself from your embrace, crossing her legs and looking up, deep in thought. “You’re…Right, of course.” She sighs. “I suppose…We’ll have to deal with that…Together?”  \n\n");
-        //Split End
-        outputText("You smile, telling Luna that you’ll figure it out…Together.  \n\n");
-		outputText("Luna’s fur fades, and she shrinks slightly, returning to her human form, completely naked. While her shaking’s stopped, her eyes, as she looks at you, are like glass. She slowly, gently pulls your hand to her stomach, and she leans in, resting her head on your shoulder.  \n\n");
-		outputText("“S-so…You’re okay with this? With…Us?”  \n\n");
-        outputText("You don’t say a word, rubbing Luna’s pregnant belly. You lean in, smiling, and she puts an arm around you. You can tell she’s still nervous, and you chuckle, planting a chaste kiss on your naked maid’s forehead. \n\n");
-		outputText("Luna leans in, wrapping both her arms around you. Even in human form, she’s surprisingly strong. “...Mine.” She whispers, not even caring about her nudity. \n\n");
-doNext(playerMenu);
-}
-
-public function LunaPregDismiss():void {
-		clearOutput();
-		outputText("You frown slightly, agreeing with Luna. Her eyes widen, and she lets out a whimper. You stand, and she looks up at you, tears in her eyes, her fur flattening against her skin.  \n\n"); 
-		outputText("You tell Luna that she’s performed well as your maid…But that she’s overstepped, time and again. You bring up her sabotage of your campmates, her need for attention, and then her deception, not telling you about her curse, and the dangers she poses.  \n\n");
-		outputText("With each word, Luna seems to shrink, shaking like a leaf as you berate her.  \n\n");
-		outputText("Then you bring up her…needs. All but forcing them on you, like a demon would. She reels back, as if you slapped her. And then, when the consequences of her needs hits, demanding that you accept her for it, like every other transgression? \n\n");
-		outputText("“I…I…” Luna looks down at the ground, one hand on her stomach. “...I’m sorry, [master]. You’re right. I have imposed upon your goodwill…For too long.” She shudders, taking a single step away from you. “I’m assuming that this is goodbye?”  \n\n");
-		outputText("You nod, and she slumps, defeated. “...Truly, there is no safe place for those like me.” She leaves her things, running off into the woods. You hear the ripping of clothes as soon as she hits the treeline, a mournful howl fills the air, growing softer as Luna runs away. \n\n");
-        outputText("You don’t know where your former maid is going…But you have the distinct feeling that you’ll never see her again.  \n\n"); 
-		//Lia, if you want to put the suicide scene in, do it here, I'm not gonna. -Snas
-//remove Luna from the game
-doNext(playerMenu);
-}
-
-public function LunaPregProgression1():void {
-		clearOutput();
-		outputText("You notice that Luna’s belly has gotten slightly larger, and she occasionally rubs it, smiling slightly. When she notices you watching, Luna takes a single step towards you, her face lighting up, before suddenly returning to her usual expression. She seems to subconsciously be closer than usual when you’re in camp, and her eyes follow you with a mixture of longing and affection.  \n\n"); 
-doNext(playerMenu);
-}
-
-public function LunaPregProgression2():void {
-		clearOutput();
-		outputText("Luna’s stomach has grown considerably, and you notice that she’s moving around the camp a little slower than usual. When you ask her if she’s alright, her eyes widen a little, and she seems to make an extra effort to keep at her maidly duties. Her pregnant belly isn’t hidden anymore by her maid’s dress, and she blushes whenever anyone looks at it.  \n\n"); 
-doNext(playerMenu);
-}
-
-public function LunaPregProgression3():void {
-		clearOutput();
-		outputText("Luna’s not just clearly pregnant, she’s swollen. She frequently has to stop, much to her annoyance. She stays near your (Bedroll/Cabin) when not actively doing anything. You notice, if you remain in one spot in camp for any length of time, Luna seems to “Coincidentally” need to clean right next to you, often mere inches from your sides or back.  \n\n"); 
-		outputText("You stop to sit by the campfire, and as you expected, Luna ‘cleans’ her way over to you. She slowly puts a hand on your shoulder, and you shake your head at her silliness, gently pulling the pregnant maid down to sit beside you.  \n\n");
-		outputText("“I-I shouldn’t-” Luna begins, but you put a finger to her lips, telling her that you are ordering her to take a break. Now. Luna opens her mouth, trying to think of something to say, but you put your finger on her mouth again. Gently, you tell Luna that you won’t have her maidly duties putting your child at risk. She blinks, tears welling up in her eyes, but you hold her close before they can fall. She’s tense, and you can feel her squirm slightly, as if she’s stopping herself from pulling away. \n\n");
-		outputText("Slowly, Luna relaxes, her breathing slows. She rests her chin on your shoulder, wrapping her arms around you. She lets out a slight whimper, and a split second later, you can feel her stomach lurch. Luna’s grip tightens, almost painful, and you support her weight as she leans on you for support.  \n\n");
-		outputText("“...Ow.” She whimpers. “They’re…Lively…[Master].” You stay with Luna for a time, partially to make sure she gets some rest. After about fifteen minutes or so, you can hear her breathing slow, her grip on you loosens. Luna passes out in your arms. You take her legs in one arm, and carry your unconscious maid to her bed. \n\n");
-		outputText("As you lower her down, she stirs slightly, opening one eye, but you bring your lips to her forehead. You whisper that she needs to rest now, and that’s an order. Luna mutters, clearly not very happy with that, but she rolls onto her side, pouting as you tuck her in. Despite herself, her eyes close, and she curls up, falling back asleep. \n\n");
-        outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-doNext(playerMenu);
-}
-
-public function DivaPregAnnouncement():void {
-		clearOutput();
-		outputText("The moon shines bright on your camp. As you enter, you feel wind on your back. You turn…But there’s nothing there. You swore you felt something…Shrugging, you turn back around, heading towards your cabin, when you feel that same gust, but stronger. You spin, trying to catch the person you know is behind you, but by the time you turn around, they’re already gone.  \n\n"); 
-		outputText("Between the late hour, and the disappearing act, you’re pretty sure you know who’s messing with you, but you aren’t really in the mood for any shenanigans. You head into your (tent/cabin), and lie on your (bedroll/bed), waiting. The night around you darkens, and you feel your eyes closing… \n\n");
-		outputText("No. You force your eyes open, and you catch a glimpse of Diva, ever the drama queen, floating above you. Despite her usual dramatic nature, however, you notice that she has a serious look on her face, red eyes wide.  \n\n");
-		outputText("“My love, forgive mine intrusion…I must speak with you, urgently.”  \n\n");
-		outputText("Slightly annoyed, you sit up, and yawning, ask Diva to explain what she’s doing in your (tent/cabin). You ask her to stop hovering around your head, and sit with you.  \n\n");
-		outputText("“O-of course. Looking down upon thou…Tis inappropriate, here.” Diva sits in front of you, fidgeting nervously. You sigh, telling her to get on with it.  \n\n");
-        outputText("“...Dost thou remember…What mine motivation was, for our battle?” She asks, both hands gripping her dress. “When thou defeated me in combat, what mine utterance was?”  \n\n");
-		outputText("Blinking, you think back, recalling that Diva had mentioned something about “Knowing Love”, “being bitten by the great vampire”, blah blah. Like she wanted to whisk you away, marry you, have kids…Oh.  \n\n");
-		outputText("“...Thou hast loved me, [Player]. And in that love…Something wondrous has occurred.” Diva looks at you, her eyes wet with unshed tears. “While thou and me…Our relationship hast been so different from what I’d envisioned, one thing hast held true.” She takes your hands, looking deep into your eyes. “Thine seed hast taken root inside me, and the night will be less empty.” \n\n");
-        outputText("Diva seems…Happy. Very happy… \n\n");
-		outputText("A sudden image pops, unbidden, into your head. Diva, screaming her superiority into the night, surrounded by little copies of her, all parroting her cheesy lines and picking overly dramatic fights with random people. While the thought is funny, borderline hilarious, the aftermath of having more than one Diva running around?! Just the thought is giving you a headache.  \n\n");
-		outputText("You take Diva’s hands in yours, and promise that you’ll be there for her, and your children. Diva, giddy, begins floating again, forcing you to gently pull her back down to earth. Thankfully, she doesn’t understand WHY you’re supporting her. Hopefully you can help your little ones not be as delusional as their mother. \n\n");
-        //if you've done the lab dungeon
-        outputText("Not that you can blame her, really. Considering everything she went through…maybe you can give her more of her fairy-tale ending than you thought.  \n\n");
-        //split end
-		outputText("You pull Diva into a warm embrace, and you can feel a single droplet hit your back. Diva sniffles, and gives you a rib-creaking hug. After a few moments, she pulls back, having regained her composure.  \n\n");
-		outputText("“...My love…Thank you.” Diva drops her affected accent, her red eyes and rigid demeanour softening, a light behind her eyes appears, one you haven’t seen before. “Th…You don’t know how happy you hast…have made me.” She blinks. “I-I…” The light fades, her eyes returning to their usual flat red. “Thine love is a blessing in this dark heart of mine.” Her bearing returns to her usual regal facade. “I shall see you later tonight, I hope.” She leaves you to your devices, heading out of camp to hunt. \n\n");
-        outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-doNext(playerMenu);
-}
-
-public function DivaPregProgression1():void {
-		clearOutput();
-		outputText("Diva sits on top of her coffin, drinking a goblet full of blood. Unlike her usual dainty sipping, she opens her mouth, pouring the stuff down her throat. You notice that she seems…a little thirstier than usual. Apparently eating more during pregnancy extends to Diva as well. She sees you looking at her, and she raises one eyebrow.  \n\n"); 
-		outputText("“Hast thou not seen a woman with child sating herself before?” She asks, before turning her back and flying out of camp.  \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-doNext(playerMenu);
-}
-
-public function DivaPregProgression2():void {
-		clearOutput();
-		outputText("As you get back to camp, you find Diva pacing, muttering angrily to herself. “Fate plays cruel jokes. The one time thou seeketh [Player]’s company, thine searches in vain.” Her fangs are out, and despite the bloodstains on her fangs, she’s clearly hungry…Wait, was she looking to feed from you? You’ve heard of pregnant women having odd cravings, but this?! \n\n");
-        //if you don't have blood she'll drink
-		outputText("Wait…Did Diva forget that you don’t have blood that she’d drink? Such a weird situation…Poor woman.\n\n");
-menu();
-addButton (1, "SneakOut", DivaPregCravingsNope);
-addButton (2, "Feed", DivaPregCravingsAccept); //Only if you have blood Diva would drink
-}
-
-public function DivaPregCravingsNope():void {
-		clearOutput();
-		outputText("Nope. Whatever Diva’s going through right now, you have no intention of joining in on it. You sneak back out of camp for a few hours. By the time you return, Diva’s gone. You see that there’s a broken wine glass, thrown at the entrance to your (cabin/tent). You look around, hoping nobody’s seen it, before gently scraping the glass up and disposing of it.   \n\n"); 
-menu();
-addButton (1, " ", );
-}
-
-public function DivaPregCravingsAccept():void {
-		clearOutput();
-		outputText("You told Diva you’d support her through this…No sense backing out on your word now. You approach Diva, asking her what’s wrong.  \n\n"); 
-		outputText("“What’s…Wrong?” She tilts her head, throwing her hands into the air. “Thou hast the…the nerve? Thou art RESPONSIBLE!” She stalks toward you, and sighing, you let her approach. Her red eyes are angry, but as she reaches out, you wrap your arms around your delusional draculina, kissing her on the neck.  \n\n");
-		outputText("“Wh-what?” Diva flails, but you hold on tight. You put a hand on the back of your pregnant vampiress’s head, keeping her jaw gently pinned between your shoulder and head, and you whisper into her ear, stroking her hair. After a few moments, she calms down a little, and you ask again, what seems to be wrong.  \n\n");
-		outputText("“...Everything dost taste like ash in mine mouth”. Diva’s on the verge of tears. “None of the blood I sample appeal to mine taste, yet I hunger.” You feel her tremble. “I hunger…so very much.” \n\n");
-		outputText("You ask her what she’s tried, and she lists off a few species, then starts to cry again. “But when I think of thou, my fangs…They grow, my stomach growls…and I…I…” You hold her at arm’s length, and her lower lip wobbles, red eyes wide. “Tis you I crave, more than any other.” She looks down at her stomach. “Forgive me, my (lord/lady)…But…I must feed…For them.”  \n\n");
-		outputText("You sigh, telling Diva that you had seen her pacing. Now that you know the problem, you can help. You motion to your (cabin/tent), telling Diva to come on, she can join you inside \n\n");
-        outputText("“Art…Thou sure? Thine face danger every day…And I…Need much.” Now that she’s with you, Diva seems rather apprehensive, despite the clearly predatory glances she’s giving your neck. You remind Diva that you promised to be there for her. Besides, you wouldn’t mind some private time with her anyways.  \n\n");
-		outputText("This gets a genuine smile from Diva, who gives you an elegant curtsey. “Lead on, my (Lord/Lady).”  \n\n");
-		outputText("Inside your (tent/cabin), you begin to undress, and Diva sits on your (bedroll/bed), folding her cape and placing it beside your (bedroll/bed). She removes her broach and bow, letting her long blonde hair down. Noticing that you’re done, she puts a smooth, pale hand on your shoulder. “Would thou…assist me with mine dress?” You nod, and she turns her back to you. You gently untie the lacy threads holding Diva’s dress up, and let the garment slide to the floor with an oddly loud thump. Diva turns on one foot, takes your hand, and steps out of the discarded garment.  \n\n");
-		outputText("She looks (if less than 5’6) down (if 5’6) across (if taller) up into your eyes, fangs sticking over her bottom lips. There’s only the tiniest bump on her stomach, and she notices your attention, she covers her stomach with her arm, blushing and looking away. Her perfectly smooth, pale skin practically glows in the darkness, and you take her cheek in one palm, guiding her to look at you.  \n\n");
-        outputText("Without her fancy dress, constant noble-speech nattering, or display of her strength, Diva looks far more vulnerable than you’ve ever seen her. She’s practically drooling from the corner of her mouth, eyes drawn to your neck, but she’s forcing herself to look into your eyes.  \n\n");
-		outputText("You take her hand, the one she’s covering her stomach with, and gently pull it away. Spreading your fingers, you rest your hand on her belly, getting a shudder from your expectant lover.  \n\n");
-		outputText("“M-may I feed?” She asks, and you lean in, wrapping your other arm around her waist, her smooth, pale ass just below your hand. You kiss her on the forehead, telling her to go ahead.  \n\n");
-        outputText("Hesitantly, as if testing, she leans in, and you feel her teeth scrape your [skin]. Slowly, she sinks her teeth in, letting out an almost orgasmic moan as she does so. You feel her tongue lap at the wounds, heat spreading from the bites in waves. Diva closes her eyes, and you pull her in. With every pull of blood, every lap of her tongue, Diva lets out another moan.  \n\n");
-		outputText("You can feel her body draining of all tension, the curvy draculina practically melting into your arms as she greedily laps at your neck. Oddly, you don’t feel drained at all, or anything but an odd, relaxed heat…That has nothing to do with sex.  \n\n");
-		outputText("More and more of Diva’s weight rests upon you, until you’re practically carrying her. Finally, you decide to lower yourselves to the (bedroll/bed), holding her head and waist. Diva’s barely responsive, eyes closed and body slack as she continues to feed.  \n\n");
-        outputText("You shift, getting as comfortable as you can with Diva’s fangs still in your neck. You’re holding her breasts to yours, one of her legs draped over your [legs]. You feel her arms and wings wrap around you, and you sigh, finally starting to feel a little drained, but Diva’s heartbeat, the fluffy bat wings, and the delightfully sexy figure of Diva cuddling up to you like this more than make up for it.  \n\n");
-        outputText("“Mmm…” Diva moans, and you can feel her fangs leave your neck. She pulls her head back, and her eyes shine with emotion. She leans in, and your lips meet, her mouth surprisingly sweet. You run your hand through her hair, and Diva nuzzles your hand, shivering slightly in your arms.  \n\n");
-		outputText("“Thank you.” Diva says simply. The noble accent she usually puts on is gone again. “Thank you…for everything.”  \n\n");
-		outputText("Running a hand from her cheek, down the side of her neck, you tell Diva that she doesn’t need to thank you, and she puts a finger over your mouth. “Shh…” She slides up until she’s firmly in your lap, gently touching the place where she’d fed from you. “Just…Hold me close. Hold me until morning.”  \n\n");
-        outputText("Diva rests her head against your [chest], and you follow her lead as she entwines her legs with yours, lying down with you. Pulling the covers over you, her head resting on your shoulder, you just hold your expecting draculina close. \n\n");
-        outputText("Slowly, you let your eyes close, Diva’s shallow breathing the only sound in your ears. As you drift off, you hear a sleepy giggle, and Diva’s lips against your ear.  \n\n");
-		outputText("“Mine.” \n\n");
-		outputText("You wake to the sound of a crow’s caw. Opening your eyes, you can still feel the soft warmth of Diva next to you, head on your [chest] and one of her soft palms underneath your head. You can feel her stomach pressed against you, and as you shift yourself slightly, she opens one eye, rolling her head to look at your face. \n\n");
-        outputText("“Good morning.” Diva says simply, no trace of her usual aristocratic accent. “I hope you slept well.” \n\n");
-		outputText("You ask her if she’s still hungry, and she shakes her head. “No. You fed me plenty last night.” Diva smiles lazily, patting her stomach. “Your blood was what they needed, apparently.” You ask her about the rest of the night. Didn’t she need to hunt? You know she doesn’t do well in the day. \n\n");
-        outputText("“I’ll be fine.” Diva says slowly, lazily. She stretches one of her bat wings, throwing the blankets off you, but doesn’t move further, apparently not willing to roll over and stretch the other. “I can still somewhat function in the daylight.” She opens her eyes, realising that she’s completely nude, and in your bed. Eyes wide, she suddenly bolts up, looking for her dress. As she sees it, you take her hands, asking her what the problem is. Her wings unfurl, and she begins to breathe heavily, starting to shake. You let go, and Diva runs over to her discarded dress, slipping it over her head. As it settles, she slips her arms in, hugging herself tightly.  \n\n");
-		outputText("Standing, curious as to this…odd behavior, you get up and slowly move towards the clearly distressed Diva. Calmly, you ask her what’s wrong, and she looks at you, blinking twice. \n\n");
-        outputText("You groan, oddly stiff, but as Diva turns her back, you lace up the back of her dress. She seems…oddly nervous until her dress is completely laced up, and you hear a barely audible sigh of relief from Diva as she turns around to face you again. She draws herself up into her usual haughty stance, covering her mouth as she yawns. “Despite our…Relaxing evening, Mine vigour is still diminished.” She dons her cape, then gently leans against you. “Wouldst thou walk with me, so far as mine coffin?”  \n\n");
-		outputText("You nod, and exit your (tent/cabin) with Diva. The walk is slow, but as Diva opens her coffin, she looks back wistfully past you, at the rising sun.  \n\n");
-        outputText("“How beautiful the light…That mine body hast forsaken.” Her eyes come back to you, and she smiles. “And so art thou.” She closes the coffin, locking it from within.  \n\n");
-        outputText(" \n\n");
-		outputText(" \n\n");
-//set the time to the next day, at 7:00
-doNext(playerMenu);
-}
-
-public function DivaPregProgression3():void {
-		clearOutput();
-		outputText("Diva’s pregnancy is showing, only a little more than before. Some women don’t show pregnancy much, and Diva seems to be one of those…either that, or it’s the dress. Dive sees you looking, and she flies over, clearly happy to see you.  \n\n"); 
-		outputText("“My (Lord/Lady), how fortunate thou hast come!” Diva’s beaming from ear to ear. “Our child will come soon. I can…I can feel them kick.” She literally floats in a circle around you, hands clasped together. “I can hardly wait to hold our little one.” Diva kisses you on the top of your head, before floating away.  \n\n");
-		outputText("Huh…That was odd. \n\n");
-doNext(playerMenu);
-}
 
 
 

@@ -492,5 +492,100 @@ public class DivaScene extends XXCNPC {
         }
         cleanupAfterCombat();
     }
+
+
+
+    public function DivaPregAnnouncement():void {
+        clearOutput();
+        outputText("The moon shines bright on your camp. As you enter, you feel wind on your back. You turn…But there’s nothing there. You swore you felt something…Shrugging, you turn back around, heading towards your cabin, when you feel that same gust, but stronger. You spin, trying to catch the person you know is behind you, but by the time you turn around, they’re already gone.  \n\n");
+        outputText("Between the late hour, and the disappearing act, you’re pretty sure you know who’s messing with you, but you aren’t really in the mood for any shenanigans. You head into your (tent/cabin), and lie on your (bedroll/bed), waiting. The night around you darkens, and you feel your eyes closing… \n\n");
+        outputText("No. You force your eyes open, and you catch a glimpse of Diva, ever the drama queen, floating above you. Despite her usual dramatic nature, however, you notice that she has a serious look on her face, red eyes wide.  \n\n");
+        outputText("“My love, forgive mine intrusion…I must speak with you, urgently.”  \n\n");
+        outputText("Slightly annoyed, you sit up, and yawning, ask Diva to explain what she’s doing in your (tent/cabin). You ask her to stop hovering around your head, and sit with you.  \n\n");
+        outputText("“O-of course. Looking down upon thou…Tis inappropriate, here.” Diva sits in front of you, fidgeting nervously. You sigh, telling her to get on with it.  \n\n");
+        outputText("“...Dost thou remember…What mine motivation was, for our battle?” She asks, both hands gripping her dress. “When thou defeated me in combat, what mine utterance was?”  \n\n");
+        outputText("Blinking, you think back, recalling that Diva had mentioned something about “Knowing Love”, “being bitten by the great vampire”, blah blah. Like she wanted to whisk you away, marry you, have kids…Oh.  \n\n");
+        outputText("“...Thou hast loved me, [Player]. And in that love…Something wondrous has occurred.” Diva looks at you, her eyes wet with unshed tears. “While thou and me…Our relationship hast been so different from what I’d envisioned, one thing hast held true.” She takes your hands, looking deep into your eyes. “Thine seed hast taken root inside me, and the night will be less empty.” \n\n");
+        outputText("Diva seems…Happy. Very happy… \n\n");
+        outputText("A sudden image pops, unbidden, into your head. Diva, screaming her superiority into the night, surrounded by little copies of her, all parroting her cheesy lines and picking overly dramatic fights with random people. While the thought is funny, borderline hilarious, the aftermath of having more than one Diva running around?! Just the thought is giving you a headache.  \n\n");
+        outputText("You take Diva’s hands in yours, and promise that you’ll be there for her, and your children. Diva, giddy, begins floating again, forcing you to gently pull her back down to earth. Thankfully, she doesn’t understand WHY you’re supporting her. Hopefully you can help your little ones not be as delusional as their mother. \n\n");
+        //if you've done the lab dungeon
+        outputText("Not that you can blame her, really. Considering everything she went through…maybe you can give her more of her fairy-tale ending than you thought.  \n\n");
+        //split end
+        outputText("You pull Diva into a warm embrace, and you can feel a single droplet hit your back. Diva sniffles, and gives you a rib-creaking hug. After a few moments, she pulls back, having regained her composure.  \n\n");
+        outputText("“...My love…Thank you.” Diva drops her affected accent, her red eyes and rigid demeanour softening, a light behind her eyes appears, one you haven’t seen before. “Th…You don’t know how happy you hast…have made me.” She blinks. “I-I…” The light fades, her eyes returning to their usual flat red. “Thine love is a blessing in this dark heart of mine.” Her bearing returns to her usual regal facade. “I shall see you later tonight, I hope.” She leaves you to your devices, heading out of camp to hunt. \n\n");
+        doNext(playerMenu);
+    }
+
+    public function DivaPregProgression1():void {
+        clearOutput();
+        outputText("Diva sits on top of her coffin, drinking a goblet full of blood. Unlike her usual dainty sipping, she opens her mouth, pouring the stuff down her throat. You notice that she seems…a little thirstier than usual. Apparently eating more during pregnancy extends to Diva as well. She sees you looking at her, and she raises one eyebrow.  \n\n");
+        outputText("“Hast thou not seen a woman with child sating herself before?” She asks, before turning her back and flying out of camp.  \n\n");
+        doNext(playerMenu);
+    }
+
+    public function DivaPregProgression2():void {
+        clearOutput();
+        outputText("As you get back to camp, you find Diva pacing, muttering angrily to herself. “Fate plays cruel jokes. The one time thou seeketh [Player]’s company, thine searches in vain.” Her fangs are out, and despite the bloodstains on her fangs, she’s clearly hungry…Wait, was she looking to feed from you? You’ve heard of pregnant women having odd cravings, but this?! \n\n");
+        //if you don't have blood she'll drink
+        outputText("Wait…Did Diva forget that you don’t have blood that she’d drink? Such a weird situation…Poor woman.\n\n");
+        menu();
+        addButton (1, "SneakOut", DivaPregCravingsNope);
+        addButton (2, "Feed", DivaPregCravingsAccept); //Only if you have blood Diva would drink
+    }
+
+    public function DivaPregCravingsNope():void {
+        clearOutput();
+        outputText("Nope. Whatever Diva’s going through right now, you have no intention of joining in on it. You sneak back out of camp for a few hours. By the time you return, Diva’s gone. You see that there’s a broken wine glass, thrown at the entrance to your (cabin/tent). You look around, hoping nobody’s seen it, before gently scraping the glass up and disposing of it.   \n\n");
+        doNext(playerMenu);
+    }
+
+    public function DivaPregCravingsAccept():void {
+        clearOutput();
+        outputText("You told Diva you’d support her through this…No sense backing out on your word now. You approach Diva, asking her what’s wrong.  \n\n");
+        outputText("“What’s…Wrong?” She tilts her head, throwing her hands into the air. “Thou hast the…the nerve? Thou art RESPONSIBLE!” She stalks toward you, and sighing, you let her approach. Her red eyes are angry, but as she reaches out, you wrap your arms around your delusional draculina, kissing her on the neck.  \n\n");
+        outputText("“Wh-what?” Diva flails, but you hold on tight. You put a hand on the back of your pregnant vampiress’s head, keeping her jaw gently pinned between your shoulder and head, and you whisper into her ear, stroking her hair. After a few moments, she calms down a little, and you ask again, what seems to be wrong.  \n\n");
+        outputText("“...Everything dost taste like ash in mine mouth”. Diva’s on the verge of tears. “None of the blood I sample appeal to mine taste, yet I hunger.” You feel her tremble. “I hunger…so very much.” \n\n");
+        outputText("You ask her what she’s tried, and she lists off a few species, then starts to cry again. “But when I think of thou, my fangs…They grow, my stomach growls…and I…I…” You hold her at arm’s length, and her lower lip wobbles, red eyes wide. “Tis you I crave, more than any other.” She looks down at her stomach. “Forgive me, my (lord/lady)…But…I must feed…For them.”  \n\n");
+        outputText("You sigh, telling Diva that you had seen her pacing. Now that you know the problem, you can help. You motion to your (cabin/tent), telling Diva to come on, she can join you inside \n\n");
+        outputText("“Art…Thou sure? Thine face danger every day…And I…Need much.” Now that she’s with you, Diva seems rather apprehensive, despite the clearly predatory glances she’s giving your neck. You remind Diva that you promised to be there for her. Besides, you wouldn’t mind some private time with her anyways.  \n\n");
+        outputText("This gets a genuine smile from Diva, who gives you an elegant curtsey. “Lead on, my (Lord/Lady).”  \n\n");
+        outputText("Inside your (tent/cabin), you begin to undress, and Diva sits on your (bedroll/bed), folding her cape and placing it beside your (bedroll/bed). She removes her broach and bow, letting her long blonde hair down. Noticing that you’re done, she puts a smooth, pale hand on your shoulder. “Would thou…assist me with mine dress?” You nod, and she turns her back to you. You gently untie the lacy threads holding Diva’s dress up, and let the garment slide to the floor with an oddly loud thump. Diva turns on one foot, takes your hand, and steps out of the discarded garment.  \n\n");
+        outputText("She looks (if less than 5’6) down (if 5’6) across (if taller) up into your eyes, fangs sticking over her bottom lips. There’s only the tiniest bump on her stomach, and she notices your attention, she covers her stomach with her arm, blushing and looking away. Her perfectly smooth, pale skin practically glows in the darkness, and you take her cheek in one palm, guiding her to look at you.  \n\n");
+        outputText("Without her fancy dress, constant noble-speech nattering, or display of her strength, Diva looks far more vulnerable than you’ve ever seen her. She’s practically drooling from the corner of her mouth, eyes drawn to your neck, but she’s forcing herself to look into your eyes.  \n\n");
+        outputText("You take her hand, the one she’s covering her stomach with, and gently pull it away. Spreading your fingers, you rest your hand on her belly, getting a shudder from your expectant lover.  \n\n");
+        outputText("“M-may I feed?” She asks, and you lean in, wrapping your other arm around her waist, her smooth, pale ass just below your hand. You kiss her on the forehead, telling her to go ahead.  \n\n");
+        outputText("Hesitantly, as if testing, she leans in, and you feel her teeth scrape your [skin]. Slowly, she sinks her teeth in, letting out an almost orgasmic moan as she does so. You feel her tongue lap at the wounds, heat spreading from the bites in waves. Diva closes her eyes, and you pull her in. With every pull of blood, every lap of her tongue, Diva lets out another moan.  \n\n");
+        outputText("You can feel her body draining of all tension, the curvy draculina practically melting into your arms as she greedily laps at your neck. Oddly, you don’t feel drained at all, or anything but an odd, relaxed heat…That has nothing to do with sex.  \n\n");
+        outputText("More and more of Diva’s weight rests upon you, until you’re practically carrying her. Finally, you decide to lower yourselves to the (bedroll/bed), holding her head and waist. Diva’s barely responsive, eyes closed and body slack as she continues to feed.  \n\n");
+        outputText("You shift, getting as comfortable as you can with Diva’s fangs still in your neck. You’re holding her breasts to yours, one of her legs draped over your [legs]. You feel her arms and wings wrap around you, and you sigh, finally starting to feel a little drained, but Diva’s heartbeat, the fluffy bat wings, and the delightfully sexy figure of Diva cuddling up to you like this more than make up for it.  \n\n");
+        outputText("“Mmm…” Diva moans, and you can feel her fangs leave your neck. She pulls her head back, and her eyes shine with emotion. She leans in, and your lips meet, her mouth surprisingly sweet. You run your hand through her hair, and Diva nuzzles your hand, shivering slightly in your arms.  \n\n");
+        outputText("“Thank you.” Diva says simply. The noble accent she usually puts on is gone again. “Thank you…for everything.”  \n\n");
+        outputText("Running a hand from her cheek, down the side of her neck, you tell Diva that she doesn’t need to thank you, and she puts a finger over your mouth. “Shh…” She slides up until she’s firmly in your lap, gently touching the place where she’d fed from you. “Just…Hold me close. Hold me until morning.”  \n\n");
+        outputText("Diva rests her head against your [chest], and you follow her lead as she entwines her legs with yours, lying down with you. Pulling the covers over you, her head resting on your shoulder, you just hold your expecting draculina close. \n\n");
+        outputText("Slowly, you let your eyes close, Diva’s shallow breathing the only sound in your ears. As you drift off, you hear a sleepy giggle, and Diva’s lips against your ear.  \n\n");
+        outputText("“Mine.” \n\n");
+        outputText("You wake to the sound of a crow’s caw. Opening your eyes, you can still feel the soft warmth of Diva next to you, head on your [chest] and one of her soft palms underneath your head. You can feel her stomach pressed against you, and as you shift yourself slightly, she opens one eye, rolling her head to look at your face. \n\n");
+        outputText("“Good morning.” Diva says simply, no trace of her usual aristocratic accent. “I hope you slept well.” \n\n");
+        outputText("You ask her if she’s still hungry, and she shakes her head. “No. You fed me plenty last night.” Diva smiles lazily, patting her stomach. “Your blood was what they needed, apparently.” You ask her about the rest of the night. Didn’t she need to hunt? You know she doesn’t do well in the day. \n\n");
+        outputText("“I’ll be fine.” Diva says slowly, lazily. She stretches one of her bat wings, throwing the blankets off you, but doesn’t move further, apparently not willing to roll over and stretch the other. “I can still somewhat function in the daylight.” She opens her eyes, realising that she’s completely nude, and in your bed. Eyes wide, she suddenly bolts up, looking for her dress. As she sees it, you take her hands, asking her what the problem is. Her wings unfurl, and she begins to breathe heavily, starting to shake. You let go, and Diva runs over to her discarded dress, slipping it over her head. As it settles, she slips her arms in, hugging herself tightly.  \n\n");
+        outputText("Standing, curious as to this…odd behavior, you get up and slowly move towards the clearly distressed Diva. Calmly, you ask her what’s wrong, and she looks at you, blinking twice. \n\n");
+        outputText("You groan, oddly stiff, but as Diva turns her back, you lace up the back of her dress. She seems…oddly nervous until her dress is completely laced up, and you hear a barely audible sigh of relief from Diva as she turns around to face you again. She draws herself up into her usual haughty stance, covering her mouth as she yawns. “Despite our…Relaxing evening, Mine vigour is still diminished.” She dons her cape, then gently leans against you. “Wouldst thou walk with me, so far as mine coffin?”  \n\n");
+        outputText("You nod, and exit your (tent/cabin) with Diva. The walk is slow, but as Diva opens her coffin, she looks back wistfully past you, at the rising sun.  \n\n");
+        outputText("“How beautiful the light…That mine body hast forsaken.” Her eyes come back to you, and she smiles. “And so art thou.” She closes the coffin, locking it from within.  \n\n");
+        outputText(" \n\n");
+        outputText(" \n\n");
+//set the time to the next day, at 7:00
+        doNext(playerMenu);
+    }
+
+    public function DivaPregProgression3():void {
+        clearOutput();
+        outputText("Diva’s pregnancy is showing, only a little more than before. Some women don’t show pregnancy much, and Diva seems to be one of those…either that, or it’s the dress. Dive sees you looking, and she flies over, clearly happy to see you.  \n\n");
+        outputText("“My (Lord/Lady), how fortunate thou hast come!” Diva’s beaming from ear to ear. “Our child will come soon. I can…I can feel them kick.” She literally floats in a circle around you, hands clasped together. “I can hardly wait to hold our little one.” Diva kisses you on the top of your head, before floating away.  \n\n");
+        outputText("Huh…That was odd. \n\n");
+        doNext(playerMenu);
+    }
+
 }
 }

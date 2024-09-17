@@ -526,5 +526,179 @@ public class SidonieFollower extends NPCAwareContent
 			player.slimeFeed();
 			endEncounter();
 		}
+		public function SidoniePCKnockedUpAnnouncement1():void {
+			clearOutput();
+			outputText("You sit down by the firepit, a slight bit of nausea filling your stomach. As you gag, holding your stomach, you notice a bowl of oats in front of your face. Filled with a sudden hunger, you take a proffered spoon and dig in, your nausea fading with each bite. Only once you’re done do you look up, seeing Sidonie sitting next to you.  \n\n");
+			outputText("“Well…I guess that settles it then.” Sidonie says nervously. “...How are you feeling?” You thank her for the oats. For whatever reason, you really needed them.  \n\n");
+			outputText("“Common knowledge among us horse-morphs, [Player]. When…well…When a woman’s stomach’s acting up, a few days after some fun, give ‘em oats. If they look at you weird, it’s nothin’. If it helps…Well…There’ll be a new foal runnin’ around soon enough.”  \n\n");
+			outputText("Nervously, she twiddles her thumbs. “Uh…I’m not sure how you want to…do things going forward. Even with a foal in you, you’re way stronger than me, so it’s not like I can really protect you, but…”  \n\n");
+			outputText("You tell Sidonie that she’s rambling, and she winces, leaning back and resting her palms on the ground.  \n\n");
+			outputText("“Yeah…I am.” She sighs. “Look…I’ve never been a dad, not that I know of, and…I don’t really know how to process this.” She looks at you, concerned. “Are you…Okay? Like with me? Are WE okay?” \n\n");
+			menu();
+			addButton (1, "HellYeah", SidonieKnockedUpPCHellYeah);
+			addButton (2, "SureIG", SidonieKnockedUpPCMeh);
+			addButton (3, "NotReally", SidonieKnockedUpPCPouty);
+		}
+
+		public function SidoniePCKnockedUpAnnouncement2():void {
+			clearOutput();
+			outputText("As you get into camp, you begin to feel nauseous, your stomach rumbling with an intense feeling you’ve felt before. You gag, making it to the campfire, where Sidonie is waiting with a bowl of oats. She holds the bowl out to you, and you devour the oats as if you were starving. Your stomach settles, and Sidonie gives you a little smile, wrapping her arms around you.  \n\n");
+			outputText("“Hey…I thought this might help, and I was right…” She puts one hand on your cheek. “You’re having another kid.” You nod, and she tightens her grip slightly. “I got you, just like before.”  \n\n");
+			doNext(playerMenu);
+		}
+
+
+		public function SidonieKnockedUpPCHellYeah():void {
+			clearOutput();
+			outputText("You give Sidonie a randy grin, telling the horsey herm that you were expecting this to happen at some point. You expect Sidonie to take responsibility, and keep them around the camp for their own safety…But that you were well aware of the risks…and a part of you even wanted this. \n\n");
+			outputText("“Y-you wanted to have a family…With me?” Sidonie seems genuinely confused, and you tease her, asking if she thought poorly of herself or something.  \n\n");
+			outputText("“Well, no…But…I like you and all, but I’d be pretty pissed at getting knocked up. It sucks. Why do you think I prefer using this?” She taps her groin, where you know her monster horsecock is. “So…We’re fine.” She sighs in relief. “Well…If you’re okay bringing them into this fucked up world, I guess the least I can do is stand by you.” She takes a second, the reality hitting her. “I’m…Gonna be a daddy.” She looks at you, a dopey smile on her equine face. “I’m…Gonna be a daddy.”  \n\n");
+			outputText("You shake your head, chucking her shoulder playfully. You tell her that she’d better get ready, because once they’re out, she’ll need to be a father. \n\n");
+			outputText("Sidonie nods seriously, a little smile on her face. “Y-yeah, you’re right. I’ll start working on some stuff for them, right away.” She bolts over to her workbench, and you take your leave. \n\n");
+			outputText(" \n\n");
+			doNext(playerMenu);
+		}
+
+		public function SidonieKnockedUpPCMeh():void {
+			clearOutput();
+			outputText("You shrug. You weren’t expecting this…But now that it’s happening, you’re not opposed, but your duties as champion prevent you from staying around camp for a kid.  \n\n");
+			outputText("“Look…If that’s what you’re worried about, I got you.” Sidonie puts a hand on your shoulder. “I live here, remember?” She chuckles. “I grew up in my dad’s workshop. I know from experience that it’s possible to raise a kid in a woodshop, and do a damn good job of it.”  \n\n");
+			outputText("You give Sidonie a slight smile. If she’s willing to help raise them, and won’t interfere with your duties…Then why not? You lean in, and Sidonie puts a hand on your belly. While the baby isn’t showing yet, you can feel warmth coming from within…Or is that warmth from the horse-woman beside you? \n\n");
+			doNext(playerMenu);
+		}
+
+		public function SidonieKnockedUpPCPouty():void {
+			clearOutput();
+			outputText("You fold your arms across your chest, telling Sidonie that you’re not really happy about it. Becoming a mother wasn’t really your plan, and you didn’t really want the responsibility, either. You’ve got enough on your plate already, with everything going on. \n\n");
+			outputText("“...I get it.” Sidonie says simply. “Look…There’s a reason I only use my…Big friend here.” She taps her groin. “I don’t want to get knocked up, because it would mess with my work.” She sighs. “Look…I know your job’s important. Like, literally life and death.” She sighs. “Once they’re born, I’ll look after them here. They’ll grow up quick, like everything seems to, nowadays…And who knows? Having an extra pair of hands around could be useful.” \n\n");
+			outputText("You feel a bit better now, knowing that Sidonie will look after your kids.  \n\n");
+			doNext(playerMenu);
+		}
+
+//Sidonie Preg Progression
+	public function SidoniePCKnockedUp1():void {
+		clearOutput();
+		outputText("You wake up, stomach growling, and your vision slightly blurred. You feel nauseous, but before you can really think about it, you see a wooden bowl at the foot of your (bed/bedroll).  \n\n");
+		outputText("You already know what this is, and who left it for you. The bowl is filled with oats and granola, with a sprinkling of sugar. Your stomach rumbles, and you begin eating. Your stomach stops grumbling, and you sigh with relief. You stretch and get ready for the day, before dropping the bowl back at Sidonie’s workstation. She looks up from a plank she’s sanding down, and gives you a smile.  \n\n");
+		outputText("“Wow. Ate the whole bowl, huh?” Sidonie gives you a wink, and you feel your cheeks heating up. “Oh, c’mon, that's the thanks I get for pre-emptively dealing with your morning problems?”  \n\n");
+		outputText("Morning problems she gave you…But fair enough. Sidonie walks over, giving you a big hug. “Aw…” You feel a slight burst of irritation, but Sidonie sighs. “Okay, okay. I’ll let you be.” She walks back over to her station. “Just don’t overdo it, okay?”  \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		doNext(playerMenu);
+	}
+
+	public function SidoniePCKnockedUp2():void {
+		clearOutput();
+		outputText("Your stomach’s gotten visibly larger, and occasionally, you get a sudden, strong urge to go for a run. You see Sidonie looking your way, a smirk on her face. You turn, asking her if she’s happy with herself, and she grins, giving you a thumbs-up. “Hell yeah I am. That’s my kid in there.” You give her a glare, telling her that your eyes are up here. \n\n");
+		outputText("“Yeah, but our kid’s down there.” She gives your belly a goofy smile, and you decide to leave. “Hey, c’mon! I like to see my handiwork!” Sidonie giggles as you walk away. “I love you!” You turn your head back, making a face at Sidonie and flipping her off. This gets another howl of laughter from your horsey carpenter.  \n\n");
+		doNext(playerMenu);
+	}
+
+	public function SidoniePCKnockedUp3():void {
+		clearOutput();
+		outputText("Your belly’s getting much larger, and whenever you’re around camp, you can feel Sidonie watching you, concerned. The baby inside you occasionally moves fitfully, usually in the afternoon. Your [Breasts] have started leaking milk, and you find yourself feeling more tired than usual. \n\n");
+		outputText("You decide to sit by the campfire, and Sidonie immediately stops working, coming over to sit beside you. “...Hey.” She awkwardly reaches out, bringing her hand to your belly. “C-can I?” You nod, and she places her hand on your pregnant bulge, a goofy smile on her face. You wince, feeling the baby move, and Sidonie gasps.  \n\n");
+		outputText("“I-I just felt them move!” She says, eyes wide. You roll your eyes, saying that they’ve been moving a lot, the last little while. “O-oh…Yeah. I guess that isn’t as cool for you, huh?” Sidonie says, scratching her head. You give Sidonie a playful punch on the stomach, telling her that it isn’t too bad…Besides, the look on her face there was pretty funny. \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		doNext(playerMenu);
+	}
+
+	public function PCKnockedUpSidonieAnnouncement1():void {
+		clearOutput();
+		outputText("As you come back to camp, you see your camp carpenter, sitting next to your [Bedroll/Cabin] with a frown on her face. As she sees you, Sidonie stands, walking over to you. As she gets close, she pulls up her shirt, pointing down at her abs. \n\n");
+		outputText("“This is why I don’t usually catch, [Name]. You look down, and to your surprise, Sidonie’s belly is beginning to swell slightly. It’s barely noticeable unless directly pointed out, but Sidonie seems to be annoyed. \n\n");
+		outputText("“Well? What do you have to say for yourself?” Sidonie puts one hand on her hip, waiting for a response.  \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		menu();
+		addButton (1, "Congrats", PCKnockedUpSidonieCongrats);
+		addButton (2, "Sexy", PCKnockedUpSidonieSexy);
+		addButton (3, "WhyUMad", PCKnockedUpSidonieTroll);
+	}
+	public function PCKnockedUpSidonieAnnouncement2():void {
+		clearOutput();
+		outputText("You get into camp, to see your camp woodworker sitting by your (cabin/bedroll), a bowl of oats in her hand. You head over, sitting beside her, and she winces, patting her stomach.  \n\n");
+		outputText("“H-hey…” She seems a little embarrassed, but you wrap an arm around her shoulder. “Y-yeah, it’s what you think. I’m having another kid, and it’s yours.” She leans in. “Just…Hold me for a sec, would you?” You hold her for a few minutes, before she sighs, going back to her work and cracking her knuckles. “Thanks.” You see Sidonie swing her axe into one of the logs…Way harder than she needed to. Clearly Sidonie isn’t the happiest about being a mother again. \n\n");
+		doNext(playerMenu);
+	}
+
+
+	public function PCKnockedUpSidonieCongrats():void {
+		clearOutput();
+		outputText("You smile at Sidonie, congratulating her. She angrily steps toward you, hand outstretched, but you pull her into a warm embrace. This catches the horse-morph off guard, and you tell her that you’re happy.  \n\n");
+		outputText("“W-what?” Sidonie, flustered, doesn’t seem to know what to think, and you take advantage of the extra few seconds, asking her if the kid’s yours. “O-of course it is!” She says angrily. “Y-You’re the only one I…” She turns red, looking down and away from you. You ask her if you’re the only one who she’s slept with. She pulls free of your embrace, turning her back on you.  \n\n");
+		outputText("“Well, no.” Sidonie admits. “But usually I don’t let anyone…Inside, y’know?” She sighs. “I don’t really use my feminine side. So you’re the only one who was…there.” She turns back around, still embarrassed, but her anger seems to be mostly gone. \n\n");
+		outputText("You’re taken aback. So Sidonie would have been fine with knocking you up, but isn’t willing to put up with it herself? You ask her that, and she blinks twice. “Well, duh. I can’t exactly go to the woods and get what I need to do my job properly with a baby in me, yeah?”  \n\n");
+		outputText("You gently remind Sidonie that your job is…quite a bit more dangerous than hers. She opens her mouth, pointing at you angrily, but she can’t really argue, and only sputters a few times. “W-well…Yeah, okay. You got me there.” She grumbles. “You still got me pregnant, asshole.” You ask Sidonie why she agreed to let you fuck her there, if she was so opposed.  \n\n");
+		outputText("“Because I like you.” She folds her arms over her substantial chest, equine face still bright red, although you suspect it’s more embarrassment than anger, now. “Because I trust you, and…You wanted it. I…Thought it would be nice. And it was…Great.” You sit down, motioning for her to join you by the firepit.  \n\n");
+		outputText("“...But what am I going to do?” Sidonie whispers, talking more to herself than you. “Wasn’t planning on having kids, let alone being the mom.” She sits down beside you, and you pat her shoulder, reminding Sidonie that it isn’t a matter of what she’s going to do…But what we’re going to do. You remind Sidonie that she has time before she risks the baby with serious work, and that you’re here too. \n\n");
+		outputText("“...Yeah, I guess you’re right.” Sidonie says. “So, that means you’re taking responsibility?” You nod, telling Sidonie that you’d need to be worse than a demon to kick her out. \n\n");
+		outputText("She nods. “Yeah, you would be.” She sighs. “Well, if you’re going to be around…I guess it won’t be that bad.” She gives you a stern look. “But I’m not a broodmare. Not for you, or anyone.” You assure Sidonie that isn’t how you see her, and she nods. “Good. Now go on, I’ve got some prep that I need to do.”  \n\n");
+		outputText(" \n\n");
+		doNext(playerMenu);
+	}
+
+	public function PCKnockedUpSidonieSexy():void {
+		clearOutput();
+		outputText("Looking at Sidonie’s slight bump, you blurt out the first thought on your mind. You’d still hit that. \n\n");
+		outputText("“...What the fuck?” Sidonie’s anger seems to pop like a bubble, and she slaps her forehead. “Really? I come here, pissed that you knocked me up, and THAT’s what you say?” She laughs slightly, cheeks burning red. “Fucksake, you horny bitch.” She sighs, sitting down, her voice more tired than angry. “Get over here.”  \n\n");
+		outputText("You ask if she’s still mad, and she tosses her hands up into the air. “I mean…Not really? I’m just…I never saw myself as the motherly type, and it’s…Not something to take lightly.”  \n\n");
+		outputText("You sit beside her, asking if she’s stressed out. “Well…Yeah. Look, I like you and all, but I always saw us as ‘friends with benefits’, not really…a couple.” You tell her that doesn’t have to change, and she shoves your shoulder, just enough to push you a bit away from her.  \n\n");
+		outputText("“We’re going to have a kid. There’s going to be SOMEthing between us. I…don’t want our kid to think of themselves as…unwanted.”  \n\n");
+		outputText("You put a hand on Sidonie’s stomach, spreading your fingers wide. She closes her eyes, sighing. “What am I gonna tell my old man, [Player]? Half the reason he was cool with me coming back out here, was because I told him I was safe.”  \n\n");
+		outputText("You take a bit of offence to that. Sidonie IS safe, and you voice your objection. “I know that, you know that…But what is he gonna think? What do I tell him?”  \n\n");
+		outputText("You think for a moment, before suggesting that she tell him the truth. That you’re an outworlder champion, guarding a portal to your world. That you rescued her from gnolls, and that you and her have a casual relationship. That you have a camp guarded by powerful people, and that Sidonie’s built a life for herself here. \n\n");
+		outputText("“Well…I could do that…Or I could just stay out here until the kid’s born, then just show up.” She’s only half joking. “...Nah, you’re right. Dad deserves to know.” She wrings her hands. “So…We’re good?”  \n\n");
+		outputText("You smile, telling Sidonie that she was the one who was mad, not you. “Well…Yeah, but…This isn’t gonna be an issue with us, right?” You shake your head, and she closes her eyes, relieved.\n\n");
+		outputText("“Alright then. I’ve got work to do, and so do you…Just come visit from time to time, yeah?” Sidonie stands, heading back to her workshop. \n\n");
+		doNext(playerMenu);
+	}
+	public function PCKnockedUpSidonieTroll():void {
+		clearOutput();
+		outputText("You ask Sidonie what she’s mad about. This seems to make her even angrier. “What do you think I’m mad about?” She waves a hand in front of her eyes. “Are you blind or something?” One of her eyes twitches, and she puts a hand on her hip. “You knocked me up, you ass. There’s a reason I only use my cock, y’know!”  \n\n");
+		outputText("You ask her what the problem is. She knew the risks, right?  \n\n");
+		//(if player has Pussy)
+		outputText("And besides, it’s not like she has a problem with filling you with cum and risking having kids. “...I…Just…” Sidonie seems at a loss, and you ask her if it’s just that she’s the one who has to carry the kid. \n\n");
+		//(Else)
+		outputText("Besides, it’s not like she TOLD you to pull out or anything. If you recall, Sidonie was the one who wanted it in. \n\n");
+		outputText("“...I did?” Sidonie seems genuinely confused. “...Wait, that was after…Oh.” Her cheeks burn bright red, and she puts her head in her hands. “...I guess you were really that good, huh?” She sighs, shoulders slumping. “Look, I just…” \n\n");
+		//Split End
+		outputText("“I’m worried about things.” Sidonie admits. “I always thought of us as ‘friends with benefits’, not as something serious…But if we’re gonna have a kid…Especially if I’m the mom…I just want to know that…That you’ll be there to help, y’know? I don’t want my kid not having their dad around.”  \n\n");
+		outputText("You ask her if that really requires any changes between you two. You’ll still be around, as guarding the portal is your biggest priority.  \n\n");
+		outputText("“What the fuck am I gonna tell my old man, [Player]?” You suggest that she just tell him the truth, and that you’re pretty sure they’re as safe, if not safer, with you than in Tel’Adre. Sidonie groans at that. “Do I have to?” You snort, barely holding in your laughter at the look on her face.  \n\n");
+		outputText("You tell Sidonie that whatever happens, you’ve got her back…It’s a pretty nice back, too. \n\n");
+		outputText("“Oh, fuck you.” Sidonie playfully slaps the back of your head. “...Alright, I guess we’re rolling with it then.” She stands. “But I’ve got work to do now, since you’ve put me on a clock.”  \n\n");
+		outputText(" \n\n");
+		doNext(playerMenu);
+	}
+	public function SidonieKnockedUpPC1():void {
+		clearOutput();
+		outputText("You wake up, stomach growling, and your vision slightly blurred. You feel nauseous, but before you can really think about it, you see a wooden bowl at the foot of your (bed/bedroll).  \n\n");
+		outputText("You already know what this is, and who left it for you. The bowl is filled with oats and granola, with a sprinkling of sugar. Your stomach rumbles, and you begin eating. Your stomach stops grumbling, and you sigh with relief. You stretch and get ready for the day, before dropping the bowl back at Sidonie’s workstation. She looks up from a plank she’s sanding down, and gives you a smile.  \n\n");
+		outputText("“Wow. Ate the whole bowl, huh?” Sidonie gives you a wink, and you feel your cheeks heating up. “Oh, c’mon, that's the thanks I get for pre-emptively dealing with your morning problems?”  \n\n");
+		outputText("Morning problems she gave you…But fair enough. Sidonie walks over, giving you a big hug. “Aw…” You feel a slight burst of irritation, but Sidonie sighs. “Okay, okay. I’ll let you be.” She walks back over to her station. “Just don’t overdo it, okay?”  \n\n");
+		doNext(playerMenu);
+	}
+
+	public function SidonieKnockedUpPC2():void {
+		clearOutput();
+		outputText("Your stomach’s gotten visibly larger, and occasionally, you get a sudden, strong urge to go for a run. You see Sidonie looking your way, a smirk on her face. You turn, asking her if she’s happy with herself, and she grins, giving you a thumbs-up. “Hell yeah I am. That’s my kid in there.” You give her a glare, telling her that your eyes are up here. \n\n");
+		outputText("“Yeah, but our kid’s down there.” She gives your belly a goofy smile, and you decide to leave. “Hey, c’mon! I like to see my handiwork!” Sidonie giggles as you walk away. “I love you!” You turn your head back, making a face at Sidonie and flipping her off. This gets another howl of laughter from your horsey carpenter.  \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+		doNext(playerMenu);
+	}
+
+	public function SidonieKnockedUpPC3():void {
+		clearOutput();
+		outputText("Your belly’s getting much larger, and whenever you’re around camp, you can feel Sidonie watching you, concerned. The baby inside you occasionally moves fitfully, usually in the afternoon. Your [Breasts] have started leaking milk, and you find yourself feeling more tired than usual. \n\n");
+		outputText("You decide to sit by the campfire, and Sidonie immediately stops working, coming over to sit beside you. “...Hey.” She awkwardly reaches out, bringing her hand to your belly. “C-can I?” You nod, and she places her hand on your pregnant bulge, a goofy smile on her face. You wince, feeling the baby move, and Sidonie gasps. You give her a giggle, and she rolls her eyes. For a moment, the two of you just sit there, sharing a peaceful moment by the fire. Eventually, you excuse yourself, and Sidonie nods simply, unable to speak. \n\n");
+		doNext(playerMenu);
+	}
 	}
 }

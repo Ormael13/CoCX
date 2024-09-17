@@ -96,7 +96,7 @@ public function MouseTownWeeklyUpdate():void {
 	WeeklyWoodGain = (prosperityvar/2);
 	}
 
-	if MousetownPopulation = MouseTownPopCap {
+	if MousetownPopulation == MouseTownPopCap {
 		outputText("As you wake up and head outside, getting ready for the day, you see one of your mouse-morph children standing awkwardly next to Amily. As you meet their gaze, they walk over, looking you in the eyes. \n\n"); 
 		outputText("<i>\"Hey, "+ player.mf("father", "mother") +", I'm sorry to ask for your help again so soon, but the town's still growing, and we're going to need more houses soon. No pressure or anything, but we'd really appreciate your help.</i>\n\n");
 		}

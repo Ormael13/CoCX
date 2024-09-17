@@ -8,7 +8,7 @@
     <option name="appDescriptorForEmulator" value="Android" />
     <option name="clearAppDataOnEachLaunch" value="true" />
     <option name="debugTransport" value="USB" />
-    <option name="debuggerSdkRaw" value="FLEX" />
+    <option name="debuggerSdkRaw" value="4.6.0" />
     <option name="emulator" value="NexusOne" />
     <option name="emulatorAdlOptions" value="" />
     <option name="fastPackaging" value="true" />
@@ -18,7 +18,7 @@
     <option name="launcherParameters">
       <LauncherParameters>
         <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-        <option name="launcherType" value="Player" />
+        <option name="launcherType" value="OSDefault" />
         <option name="newPlayerInstance" value="false" />
         <option name="playerPath" value="D:/FLEX/runtimes/player/11.1/win/FlashPlayerDebugger.exe" />
       </LauncherParameters>

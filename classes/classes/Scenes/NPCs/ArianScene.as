@@ -91,7 +91,7 @@ Naga TF
 Corruption Path (Arian's body is drastically altered, but [Arian eir] personality only suffers minor alterations.)
 (Unlikely) Boon and Laika
 */
-	public class ArianScene extends NPCAwareContent implements SaveableState TimeAwareInterface 
+	public class ArianScene extends NPCAwareContent implements SaveableState, TimeAwareInterface
 	{
 	public static var ArianSonsNum:Number;
 	public static var ArianDaughtersNum:Number;
@@ -132,10 +132,26 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 	}
 		public function ArianScene()
 		{
-		pregnancy = new PregnancyStore(PregnancyStore.INCUBATION_ARIAN, 0, 0);
-		pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 300, 250, 200, 150, 100);
+		pregnancy = new PregnancyStore(PregnancyStore.INCUBATION_ARIAN, 0, 0, 0);
+		pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 140, 90, 50);
 		EventParser.timeAwareClassAdd(this);
 		Saves.registerSaveableState(this);
+		}
+		private function ArianPregChance():void {
+			//Get out if already pregged.
+			if (pregnancy.isPregnant) return;
+			var preg:Boolean = false;
+			//1% chance per 100mLs of cum, max 15%
+			var score:Number = Math.min(player.cumQ()/100,5);
+			score += player.virilityQ() * 200;
+			outputText("Electra checking virility score " + score);
+			if((player.cumQ() > (score >= rand(100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
+				preg = true;
+			}
+			if (preg) {
+				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ARIAN);
+				sceneHunter.print("\n<b>Arian is pregnant!</b>");
+			}
 		}
 		
 		public var pregnancy:PregnancyStore;
@@ -149,11 +165,30 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 				if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0) flags[kFLAGS.ARIAN_EGG_EVENT]++;
 				flags[kFLAGS.ARIAN_LESSONS] = 0;
 				flags[kFLAGS.ARIAN_TREATMENT] = 0;
+				pregnancy.pregnancyAdvance();
 			}
 			return false;
 		}
 
 		public function timeChangeLarge():Boolean {
+			if (pregnancy.isPregnant) {
+				switch (pregnancy.eventTriggered()) {
+					case 1: //
+						ArianCarriesChampBabies1();
+						return true;
+					case 2:
+						ArianCarriesChampBabies2();
+						return true;
+					case 3:
+						ArianCarriesChampBabies3();
+						return true;
+				}
+				return false;
+			}
+			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+				ArianEggLaying();
+				pregnancy.knockUpForce(); //Clear Pregnancy
+			}
 			return false;
 		}
 		//End of Interface Implementation
@@ -2077,6 +2112,7 @@ private function penetrateArian():void {
 
 	outputText("\n\nEventually, though, you announce that you should probably get going.  As nice as it is to stay here with [arian em], you have duties to attend to.  Arian smiles at you, and gives you a little peck on the lips.  \"<i>I understand, but come see me again soon, please.</i>\"  You promise [arian em] you will and extract yourself from the affectionate lizan's embrace.  You quickly find your clothes and get dressed, then leave.");
 	player.sexReward("vaginalFluids","Dick");
+	ArianPregChance();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2622,6 +2658,7 @@ private function doublePenetrateArian():void {
 		outputText(".");
 	}
 	player.sexReward("vaginalFluids","Dick");
+	ArianPregChance();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -4404,24 +4441,24 @@ private function arianAppearance():void {
 
 public function ArianPregChampCarries1():void {
 		clearOutput();
-		outputText("As you get back to camp, you see your wizard lover, Arian, standing by your (tent/cabin). You ask what brings [arian em] over, and he tilts his head.  \n\n"); 
-		outputText("“I apologise for the intrusion…But something’s felt…a little off about you, ever since we…” He blushes, and you almost roll your eyes. Since you had sex last.  \n\n");
-		outputText("“Yes.” Arian steps forward. “I-if you wouldn’t mind, I want to…examine you.”  \n\n");
+		outputText("As you get back to camp, you see your lizard-wizard lover, Arian, standing by your (tent/cabin). You ask what brings [arian em] over, and he tilts his head.  \n\n");
+		outputText("\"<i>I apologise for the intrusion…But something’s felt…a little off about you, ever since we…</i>\" He blushes, and you almost roll your eyes. Since you had sex last.  \n\n");
+		outputText("\"<i>Yes.</i>\" Arian steps forward. \"<i>I-if you wouldn’t mind, I want to…examine you.</i>\"  \n\n");
 		outputText("Giving your bashful lover a wink, you ask [arian em] if [arian ey] didn’t get a thorough enough examination last time.  \n\n");
-		outputText("“Not like that, [Player].” [arian ey] scratches his neck, tail twining around one of his legs. “I mean your mana’s flowing a little differently, in a way consistent with…” [arian ey] blushes. “Consistent with lizan pregnancy.”  \n\n");
-		outputText("A little surprised, you ask if [arian ey] can really tell so soon. [arian ey] nods. “Yes, but I need…contact to be sure.”  \n\n");
+		outputText("\"<i>Not like that, [Player].</i>\" [arian ey] scratches his neck, tail twining around one of his legs. \"<i>I mean your mana’s flowing a little differently, in a way consistent with…</i>\" [arian ey] blushes. \"<i>Consistent with lizan pregnancy.</i>\"  \n\n");
+		outputText("A little surprised, you ask if [arian ey] can really tell so soon. [arian ey] nods. \"<i>Yes, but I need…contact to be sure.</i>\"  \n\n");
         outputText("You decide to humour Arian, especially if [arian ey] can see so early. You bare your stomach, and he steps gingerly in, placing a scaly hand on you. Arian closes [arian em] eyes, and you can feel a little tingle as a pulse of mana flows through you.  \n\n");
 		outputText("Arian opens [arian em] eyes, and you can see a single tear well up in his left eye. You ask him what’s wrong, and he wraps [arian em] arms around you, squeezing shockingly tight for someone of [arian em] health. \n\n");
-		outputText("“You’re pregnant.” He says simply. “With my children.” [arian em] voice is thick, and as you pull your head back to look at him, he’s shaking slightly, a smile on his face, and joy in his eyes.  \n\n");
-        outputText("You ask him if he wants a family, and he closes his mouth, nodding once. “I…I came out here…because my job in Tel’adre was done.” He speaks slowly, with a trembling voice. “I know that you’re busy. That your mission is…Too important to stop, and too dangerous for me to come with you…” He plants his feet, giving you a stern look. “But by Marae, you’d better come back to me.”\n\n");
+		outputText("\"<i>You’re pregnant.</i>\" He says simply. \"<i>With my children.</i>\" [arian em] voice is thick, and as you pull your head back to look at him, he’s shaking slightly, a smile on his face, and joy in his eyes.  \n\n");
+        outputText("You ask him if he wants a family, and he closes his mouth, nodding once. \"<i>I…I came out here…because my job in Tel’adre was done.</i>\" He speaks slowly, with a trembling voice. \"<i>I know that you’re busy. That your mission is…Too important to stop, and too dangerous for me to come with you…</i>\" He plants his feet, giving you a stern look. \"<i>But by Marae, you’d better come back to me.</i>\"\n\n");
 		outputText("You almost laugh, a single tear now in your eye. You tell Arian that you’ll do your best.  \n\n");
-		outputText("“I’ll sic the girls on you.” Arian threatens, and the thought of Arian’s former apprentices coming out to the wilderness to fight you cracks you up. You snicker, and this gets Arian laughing. \n\n");
+		outputText("\"<i>I’ll sic the girls on you.</i>\" Arian threatens, and the thought of Arian’s former apprentices coming out to the wilderness to fight you cracks you up. You snicker, and this gets Arian laughing. \n\n");
         outputText("You and your lizan lover start howling with laughter, until [arian ey]’s wheezing, holding onto you to stay upright.  \n\n");
-		outputText("“Really though…” [arian ey] says, wiping a tear from his eye. “Promise me. No needless risks. I worry about you.”  \n\n");
+		outputText("\"<i>Really though…</i>\" [arian ey] says, wiping a tear from his eye. \"<i>Promise me. No needless risks. I worry about you.</i>\"  \n\n");
         outputText("You hold Arian close, and you can tell this is bothering [arian em]. You softly whisper into Arian’s ear, telling him that you’ll try, and that’s all you can promise. You tell [arian em] that you’re strong, able to handle most threats in this realm…But that nothing is a guarantee these days. Especially for those who oppose the demons. He steps back, shoulders slack. \n\n");
-		outputText("“I know.” Arian whispers. “Gods above, I know.” [arian em] sighs, giving you a wistful look. “Now I know how my apprentices felt.” You raise an eyebrow, and [arian em] scowls slightly. “I want to lock you in an ensorcelled room, where nothing can reach you. Where you’ll be safe and happy, and…” He blushes, looking down and away from you. “...Where we can raise our brood in peace.”  \n\n");
+		outputText("\"<i>I know.</i>\" Arian whispers. \"<i>Gods above, I know.</i>\" [arian em] sighs, giving you a wistful look. \"<i>Now I know how my apprentices felt.</i>\" You raise an eyebrow, and [arian em] scowls slightly. \"<i>I want to lock you in an ensorcelled room, where nothing can reach you. Where you’ll be safe and happy, and…</i>\" He blushes, looking down and away from you. \"<i>...Where we can raise our brood in peace.</i>\"  \n\n");
         outputText("You gently take his hands in yours, telling Arian that [arian em] knows personally how that feels from the other side. That while such an existence is safe…it’s not a life, not really. \n\n");
-		outputText("“I never said it wasn’t foolish, or a selfish desire.” Arian says. “I just…Fear for you, and our…” [arian em] whispers. “Our children.” \n\n");
+		outputText("\"<i>I never said it wasn’t foolish, or a selfish desire.</i>\" Arian says. \"<i>I just…Fear for you, and our…</i>\" [arian em] whispers. \"<i>Our children.</i>\" \n\n");
         outputText("You spend a few minutes with your worried lizan lover, comforting [arian ey], before you withdraw. You tell him that you have to go for now, and he nods once. \n\n");
 doNext(playerMenu);
 }
@@ -4434,73 +4471,72 @@ doNext(playerMenu);
 public function ArianPregChampCarries3():void {
 		clearOutput();
 		outputText("The eggs have grown to an uncomfortable size, and your stomach is bulging. Anyone with eyes can tell you’re pregnant, and you can feel the eggs shifting when you move quickly.  \n\n"); 
-		outputText("Arian walks out, catching you as you’re sitting by the fire. “Are you alright?” He asks, concerned. He sits beside you, offering you his hand. You take it, giving him a little smile. You tell Arian that you’re fine…You just needed to sit for a second.  \n\n");
-        outputText("He leans in, wrapping his tail gently around your waist. “Mind if I join you?” You just nod, and he beams. “I don’t know if…This helps at all…But you look really good right now.” He blushes, and you give the lizan mage a raised eyebrow.  \n\n"); 
-		outputText("“N-not that you don’t normally!” He says quickly. “I-it’s just…I see you like this…Knowing that you’ve got…our kids in there…” He looks down and away. “I suppose…Having more than a little bit of me inside you…Feels good.”  \n\n");
-        outputText("You playfully punch his shoulder, telling Arian that at least one of you is having fun with it. He laughs at that, looking into your eyes. “M-may I?” He motions at your pregnant belly, and you nod, leaning back slightly. He slowly, with awe in his eyes, rests his hand on your stomach. A thin glow radiates from his palm, and you gasp. The uncomfortable grinding feeling begins to fade, and once he’s done, you feel much better.  \n\n"); 
-		outputText("“It’s not uncommon for Lizan females to experience abdominal discomfort when carrying, especially later on in their development.” He gives you a kiss on the forehead. “All I did was move two of the eggs a little apart.” Arian stands, moving back to his tent. “Please wait here for a moment.” You feel much more comfortable, and don’t really feel like moving anyways.  \n\n");
-        outputText("Arian comes back a few minutes later, with a metal flask proudly held in one hand. He gives it to you. “Lizan villages often kept a supply of whitebud herbs around, for egg-bearing women. It helps with digestion, has many nutrients for growing eggs, and helps maintain the coating between eggs.” You nod, thanking him for the thought. “Some prefer eating them, but traditionally, it’s boiled into a tea.”  \n\n"); 
+		outputText("Arian walks out, catching you as you’re sitting by the fire. \"<i>Are you alright?</i>\" He asks, concerned. He sits beside you, offering you his hand. You take it, giving him a little smile. You tell Arian that you’re fine…You just needed to sit for a second.  \n\n");
+        outputText("He leans in, wrapping his tail gently around your waist. \"<i>Mind if I join you?</i>\" You just nod, and he beams. \"<i>I don’t know if…This helps at all…But you look really good right now.</i>\" He blushes, and you give the lizan mage a raised eyebrow.  \n\n"); 
+		outputText("\"<i>N-not that you don’t normally!</i>\" He says quickly. \"<i>I-it’s just…I see you like this…Knowing that you’ve got…our kids in there…</i>\" He looks down and away. \"<i>I suppose…Having more than a little bit of me inside you…Feels good.</i>\"  \n\n");
+        outputText("You playfully punch his shoulder, telling Arian that at least one of you is having fun with it. He laughs at that, looking into your eyes. \"<i>M-may I?</i>\" He motions at your pregnant belly, and you nod, leaning back slightly. He slowly, with awe in his eyes, rests his hand on your stomach. A thin glow radiates from his palm, and you gasp. The uncomfortable grinding feeling begins to fade, and once he’s done, you feel much better.  \n\n"); 
+		outputText("\"<i>It’s not uncommon for Lizan females to experience abdominal discomfort when carrying, especially later on in their development.</i>\" He gives you a kiss on the forehead. \"<i>All I did was move two of the eggs a little apart.</i>\" Arian stands, moving back to his tent. \"<i>Please wait here for a moment.</i>\" You feel much more comfortable, and don’t really feel like moving anyways.  \n\n");
+        outputText("Arian comes back a few minutes later, with a metal flask proudly held in one hand. He gives it to you. \"<i>Lizan villages often kept a supply of whitebud herbs around, for egg-bearing women. It helps with digestion, has many nutrients for growing eggs, and helps maintain the coating between eggs.</i>\" You nod, thanking him for the thought. \"<i>Some prefer eating them, but traditionally, it’s boiled into a tea.</i>\"  \n\n"); 
 		outputText("You take a small sip, and…It’s not bad. A little bitter at first, but that quickly fades, replaced with a sour-sweet taste that reminds you of lemongrass. As you swallow, a fuzzy heat spreads through you. You almost feel a little lighter, the eggs not weighing as much on your womb. You smile, patting the side of the log for your lover to join you. Arian happily sits right beside you, and the two of you spend some time, just sitting by the fire, watching the world spin.  \n\n");
-        outputText("“I love you.” He whispers, resting his cheek on your shoulder. The fatigue of the day seems to wash away, and you rest your head on his, gently leaning in. After another fifteen minutes of warm, affectionate silence, he speaks once more. “Mareth…Isn’t such a bad place…Once you find the right people to share it with.” \n\n");
-        outputText("You find yourself agreeing…But a few minutes later, you pull away, letting Arian know that the moment has passed. He looks disappointed, but lets go, standing with you. “So…You’re leaving again.” He seems to want to say more. Filled with affection, you take his hands in yours, bringing your lips to his. The kiss is gentle, not filled with fiery passion, but calm, stable love.  \n\n"); 
+        outputText("\"<i>I love you.</i>\" He whispers, resting his cheek on your shoulder. The fatigue of the day seems to wash away, and you rest your head on his, gently leaning in. After another fifteen minutes of warm, affectionate silence, he speaks once more. \"<i>Mareth…Isn’t such a bad place…Once you find the right people to share it with.</i>\" \n\n");
+        outputText("You find yourself agreeing…But a few minutes later, you pull away, letting Arian know that the moment has passed. He looks disappointed, but lets go, standing with you. \"<i>So…You’re leaving again.</i>\" He seems to want to say more. Filled with affection, you take his hands in yours, bringing your lips to his. The kiss is gentle, not filled with fiery passion, but calm, stable love.  \n\n"); 
 		outputText("You tell Arian that yes, you’re leaving. As you must…And you’ll return, as you always do. You tell Arian that even carrying his eggs, you can still destroy the demons…And now, you have even more reason to. To make sure they get the best chances you can give them. \n\n");
-        outputText("“...If they inherit even a tiny fraction of your kindness and strength, they’ll be shining beacons for Mareth.” Arian seems comforted by your words. You bid farewell to Arian, turning with determination to the wilderness. Nothing on Mareth can stop you now! \n\n");
+        outputText("\"<i>...If they inherit even a tiny fraction of your kindness and strength, they’ll be shining beacons for Mareth.</i>\" Arian seems comforted by your words. You bid farewell to Arian, turning with determination to the wilderness. Nothing on Mareth can stop you now! \n\n");
 doNext(playerMenu);
 }
 
 public function ArianCarriesChampBabies1():void {
 		clearOutput();
-		outputText("Arian approaches you, a slightly sheepish expression on her face. “Would you come with me, please?” You nod, and follow Arian into her tent. She sits down, motioning for you to join her. You see no reason to stay standing, and as Arian hands you a cup of tea, she looks down at the table, blushing slightly.  \n\n"); 
-		outputText("“...So…I don’t know how much you know about Lizan anatomy…” She begins, tapping one foot. “But the last time we…Made love, it was a day where my eggs were…Available.” You blink, before clarifying. So Arian is…Pregnant? \n\n");
-		outputText("“Well…Yes.” She blushes, looking down and away. “Look…I’m concerned, that’s all. I wasn’t in the best shape before I met you, and even now, I’m not exactly a physical specimen.”  \n\n");
+		outputText("Arian approaches you, a slightly sheepish expression on her face. \"<i>Would you come with me, please?</i>\" You nod, and follow Arian into her tent. She sits down, motioning for you to join her. You see no reason to stay standing, and as Arian hands you a cup of tea, she looks down at the table, blushing slightly.  \n\n"); 
+		outputText("\"<i>...So…I don’t know how much you know about Lizan anatomy…</i>\" She begins, tapping one foot. \"<i>But the last time we…Made love, it was a day where my eggs were…Available.</i>\" You blink, before clarifying. So Arian is…Pregnant? \n\n");
+		outputText("\"<i>Well…Yes.</i>\" She blushes, looking down and away. \"<i>Look…I’m concerned, that’s all. I wasn’t in the best shape before I met you, and even now, I’m not exactly a physical specimen.</i>\"  \n\n");
 		outputText("Teasingly, you tell Arian that you take exception to that. She’s beautiful, and how dare she degrade herself like that.  \n\n");
-		outputText("“You know what I mean by that, [Player]”, she says, a little annoyed. You hold out your hands to your Lizan lover, and she takes them. You notice that Arian’s hands are shaking.  \n\n");
-		outputText("You ask her if it has more to do with the fact that she was born male, and Arian sighs, nodding slowly. “I know the alchemist who made the potion quite well, and that she wouldn’t have given me a dud…but I still worry.” You give Arian a reassuring smile and tell her that, worse comes to worst, you try again. You bring a hand to Arian’s cheek, telling her that no matter what, she’s still going to be here, and so will you.  \n\n");
-        outputText("“Th-thank you.” Arian blushes at the attention, leaning in and resting her head against yours. “I’ll be fine now, if you need to go…Just promise to come back to me.” You promise, and she smiles, her hands no longer shaking. She lets go, and puts a hand to her stomach. “Well…I suppose I can’t really do much magic for the next few days.”  \n\n");
-		outputText("She lets go of your hands and stands, grabs a book from the back. “But thankfully, I did prepare myself for…This.” She sits down. “That’s all I needed to say, [Player]. Thank you for being there for me.” \n\n");
+		outputText("\"<i>You know what I mean by that, [Player]</i>\", she says, a little annoyed. You hold out your hands to your Lizan lover, and she takes them. You notice that Arian’s hands are shaking.  \n\n");
+		outputText("You ask her if it has more to do with the fact that she was born male, and Arian sighs, nodding slowly. \"<i>I know the alchemist who made the potion quite well, and that she wouldn’t have given me a dud…but I still worry.</i>\" You give Arian a reassuring smile and tell her that, worse comes to worst, you try again. You bring a hand to Arian’s cheek, telling her that no matter what, she’s still going to be here, and so will you.  \n\n");
+        outputText("\"<i>Th-thank you.</i>\" Arian blushes at the attention, leaning in and resting her head against yours. \"<i>I’ll be fine now, if you need to go…Just promise to come back to me.</i>\" You promise, and she smiles, her hands no longer shaking. She lets go, and puts a hand to her stomach. \"<i>Well…I suppose I can’t really do much magic for the next few days.</i>\"  \n\n");
+		outputText("She lets go of your hands and stands, grabs a book from the back. \"<i>But thankfully, I did prepare myself for…This.</i>\" She sits down. \"<i>That’s all I needed to say, [Player]. Thank you for being there for me.</i>\" \n\n");
 		outputText("You give your Lizan lover a kiss on the forehead, excusing yourself.  \n\n");
 doNext(playerMenu);
 }
 public function ArianCarriesChampBabies2():void {
 		clearOutput();
 		outputText("As you get back into camp, you see Arian, holding her stomach and groaning slightly. Her stomach’s grown, but you wouldn’t immediately jump to ‘pregnant’ if you didn’t already know. You quickly make your way to her, and as she sees you, she smiles weakly.  \n\n"); 
-		outputText("“Hello…” She says, waving her free hand. “How are you?” You take her hand, saying that you’re fine…But you’re more worried about her.  \n\n");
-		outputText("“Oh, this?” Arian shakes her head. “J-just had a little discomfort, that’s all.” Her eyes brighten, and she gives you a pouty frown. “But, since you’re here…” You groan internally, and Arian continues. “Could you just…give me a belly rub?”  \n\n");
-		outputText("You almost sigh in relief. You agree, and Arian motions for you to sit beside her. You comply, and she happily plops herself in your lap, leaning back into you. “Thank you!” She says happily, guiding your hand to her stomach.  \n\n");
-		outputText("You slide Arian’s robe aside, massaging the soft scales until you find a hard section. As soon as you touch there, she lets out a muffled grunt. “Don’t stop.” You massage around the hard spot, and with each rub, Arian leans back, resting more of her weight onto you. You find another hard area, and begin massaging with your other hand. Arian squirms, letting out a happy little squeal. \n\n");
-		outputText("Yesssss…Right there.” Arian wriggles, wrapping her tail around your waist, and as you massage, she seems to relax more and more, until she’s almost completely limp in your lap.  \n\n");
+		outputText("\"<i>Hello…</i>\" She says, waving her free hand. \"<i>How are you?</i>\" You take her hand, saying that you’re fine…But you’re more worried about her.  \n\n");
+		outputText("\"<i>Oh, this?</i>\" Arian shakes her head. \"<i>J-just had a little discomfort, that’s all.</i>\" Her eyes brighten, and she gives you a pouty frown. \"<i>But, since you’re here…</i>\" You groan internally, and Arian continues. \"<i>Could you just…give me a belly rub?</i>\"  \n\n");
+		outputText("You almost sigh in relief. You agree, and Arian motions for you to sit beside her. You comply, and she happily plops herself in your lap, leaning back into you. \"<i>Thank you!</i>\" She says happily, guiding your hand to her stomach.  \n\n");
+		outputText("You slide Arian’s robe aside, massaging the soft scales until you find a hard section. As soon as you touch there, she lets out a muffled grunt. \"<i>Don’t stop.</i>\" You massage around the hard spot, and with each rub, Arian leans back, resting more of her weight onto you. You find another hard area, and begin massaging with your other hand. Arian squirms, letting out a happy little squeal. \n\n");
+		outputText("Yesssss…Right there.</i>\" Arian wriggles, wrapping her tail around your waist, and as you massage, she seems to relax more and more, until she’s almost completely limp in your lap.  \n\n");
         outputText("You keep massaging her belly, until you feel her tail tighten slightly. She lets out a little giggle as you massage her belly button.  \n\n");
-		outputText("“mmm…You’ve got good hands, love.” Arian whispers. “But…can you go a little lower?” You lower your hands, away from the eggs you felt, beginning to massage. “Lower?”  \n\n");
+		outputText("\"<i>mmm…You’ve got good hands, love.</i>\" Arian whispers. \"<i>But…can you go a little lower?</i>\" You lower your hands, away from the eggs you felt, beginning to massage. \"<i>Lower?</i>\"  \n\n");
 		outputText("You have a sneaking suspicion what Arian wants, but you play along, only going a little lower. Arian repeats her request, until your fingers are less than an inch away from her love hole. \n\n");
-		outputText("Arian turns her head, looks you dead in the eyes, bites her lip over a laugh, and opens her mouth. “Low-” \n\n");
-		outputText("You flick her clit, running a finger along her lower lips. Arian flinches, blushing, but her eyes are sparkling. You stop, and she says, with a deadpan serious voice…”Right there.” \n\n");
+		outputText("Arian turns her head, looks you dead in the eyes, bites her lip over a laugh, and opens her mouth. \"<i>Low-</i>\" \n\n");
+		outputText("You flick her clit, running a finger along her lower lips. Arian flinches, blushing, but her eyes are sparkling. You stop, and she says, with a deadpan serious voice…</i>\"Right there.</i>\" \n\n");
         outputText("With one hand, you grab Arian’s breast, kneading the soft white scales as you sink three fingers into her pussy. Arian bites her lip, moaning slightly. You finger her at a moderate pace, reveling in her squirming on your lap. After a minute or so, Arian turns, still in your lap, facing you with a sheepish look on her face.  \n\n");
-		outputText("“Look, ever since I knew I was carrying, I’ve…Been thinking about you…more and more.” She explains. “I…I want you to fuck me now…Please.” \n\n");
-//Arian Sex menu here
-doNext(playerMenu);
+		outputText("\"<i>Look, ever since I knew I was carrying, I’ve…Been thinking about you…more and more.</i>\" She explains. \"<i>I…I want you to fuck me now…Please.</i>\" \n\n");
+doNext(arianSexMenu);
 }
 
 public function ArianCarriesChampBabies3():void {
 		clearOutput();
-		outputText("You see Arian, looking at her egg-filled belly with a small frown on her face. You ask what’s wrong, and she shakes her head. “I feel so…heavy. So bloated. I don’t do much physical activity, but this…Is so inconvenient. I just want them out of me.”  \n\n"); 
-		outputText("“No offence, but I really hope so.” You give Arian an encouraging smile, before heading back to what you were doing.  \n\n");
+		outputText("You see Arian, looking at her egg-filled belly with a small frown on her face. You ask what’s wrong, and she shakes her head. \"<i>I feel so…heavy. So bloated. I don’t do much physical activity, but this…Is so inconvenient. I just want them out of me.</i>\"  \n\n"); 
+		outputText("\"<i>No offence, but I really hope so.</i>\" You give Arian an encouraging smile, before heading back to what you were doing.  \n\n");
 doNext(playerMenu);
 }
 
 public function ArianPCLaysEggs():void {
 		clearOutput();
 		outputText("You feel your stomach lurch, your womb suddenly feeling twice as heavy as before. A thick, throbbing feeling starts in your [pussy], spreading through your pelvis. You double over, the strange feeling overwhelming.  \n\n"); 
-		outputText("“[Player]!” You hear Arian’s voice, but he sounds like he’s so far…away…You feel dizzy, and Arian catches you as you begin to fall over. “-Ne secon-”... “-get my chair!” Suddenly, you see a bright light on your midsection, and you snap back to yourself. You’re being held up by Arian, who’s got a hand on your gravid belly, healing spell already working. “Can you make it to my tent?”  \n\n");
+		outputText("\"<i>[Player]!</i>\" You hear Arian’s voice, but he sounds like he’s so far…away…You feel dizzy, and Arian catches you as you begin to fall over. \"<i>-Ne secon-</i>\"... \"<i>-get my chair!</i>\" Suddenly, you see a bright light on your midsection, and you snap back to yourself. You’re being held up by Arian, who’s got a hand on your gravid belly, healing spell already working. \"<i>Can you make it to my tent?</i>\"  \n\n");
 		outputText("You nod, and Arian helps you hobble into his tent. Inside, you see an odd chair, with a hole in the middle, and a padded basket underneath.  \n\n");
-		outputText("“Okay, so you’re going to sit over here.” Arian helps you undress, and gets your [pussy] positioned over the hole.  \n\n");
-		outputText("A contraction hits you, and you groan. Arian takes your hands in his, looking into your eyes. “Look at me, love.” He soothes, “Just look at me, and push. You’ve carried them for long enough.”  \n\n");
+		outputText("\"<i>Okay, so you’re going to sit over here.</i>\" Arian helps you undress, and gets your [pussy] positioned over the hole.  \n\n");
+		outputText("A contraction hits you, and you groan. Arian takes your hands in his, looking into your eyes. \"<i>Look at me, love.</i>\" He soothes, \"<i>Just look at me, and push. You’ve carried them for long enough.</i>\"  \n\n");
 		outputText("His soothing voice, coupled with your sudden need to push, to get those eggs out of you, fills your head. You feel yourself stretch painfully, your labia quivering as you feel hard shell pass through, and out. You hear the wet plop, and you feel lighter…but you know this isn’t over. \n\n");
-        outputText("“You’re doing great.” Arian soothes. “Breathe with me…In…Out…PUSH!”  \n\n");
+        outputText("\"<i>You’re doing great.</i>\" Arian soothes. \"<i>Breathe with me…In…Out…PUSH!</i>\"  \n\n");
 		outputText("You feel a scraping sensation against your nether lips and clit, gasping as the second exits your womb. (If three) followed by a third (if four) followed closely by two more eggs.  \n\n");
 		outputText("The last of the birthing fluid trickles out of your well-stretched fuckhole, and you feel your muscles relaxing, a wave of exhaustion hitting you harder than a minotaur’s axe. You feel your eyes closing… \n\n");
 		outputText("You wake up in Arian’s tent, swathed in silky sheets. The bed is extremely warm, and you feel so relaxed. \n\n");
-		outputText("Wait…The Eggs! You bolt upright, and Arian, sleeping overtop of the covers beside you, puts a hand over you. “It’s okay, it’s okay.” He soothes, pointing to the foot of the bed. “They’re right there.” Relief fills you, just as quickly as the panic before it, and you slump back into the bed. \n\n");
-        outputText("“There, there.” Arian says. “It’s okay.”  \n\n");
+		outputText("Wait…The Eggs! You bolt upright, and Arian, sleeping overtop of the covers beside you, puts a hand over you. \"<i>It’s okay, it’s okay.</i>\" He soothes, pointing to the foot of the bed. \"<i>They’re right there.</i>\" Relief fills you, just as quickly as the panic before it, and you slump back into the bed. \n\n");
+        outputText("\"<i>There, there.</i>\" Arian says. \"<i>It’s okay.</i>\"  \n\n");
 		outputText("You recover fairly quickly, and within an hour, you’re ready to head back out. Arian seems a little disappointed, but he gives you a hug, telling you not to worry, that he’ll look after the eggs until they hatch.  \n\n");
         //Add egg hatch timer
 doNext(playerMenu);
@@ -4509,34 +4545,34 @@ doNext(playerMenu);
 public function ArianEggLaying():void {
 		clearOutput();
 		outputText("You hear a cry from Arian’s tent. Rushing over, you see her doubled over, just outside her tent. Seeing you, Arian blushes bright red, waving you over.  \n\n"); 
-		outputText("“J-just help me into my tent, please.” She says, with gritted teeth. “I’ll be fine once I’m inside.” You follow her instructions, helping her into her tent. You notice that an odd-looking chair sits along the back, and Arian points to it. “Over there.” As you get closer, you notice that there’s a hole in the middle of the chair, with a padded basket underneath. “Laying is annoying”, she says simply, through gritted teeth. “But I got that from Tel’Adre. Very handy.” You help her over to the chair, and she strips out of her robe and undergarments, giving them to you. You place them to one side, and Arian groans, sitting down, positioning her drooling cunt over the egg-hole.  \n\n");
+		outputText("\"<i>J-just help me into my tent, please.</i>\" She says, with gritted teeth. \"<i>I’ll be fine once I’m inside.</i>\" You follow her instructions, helping her into her tent. You notice that an odd-looking chair sits along the back, and Arian points to it. \"<i>Over there.</i>\" As you get closer, you notice that there’s a hole in the middle of the chair, with a padded basket underneath. \"<i>Laying is annoying</i>\", she says simply, through gritted teeth. \"<i>But I got that from Tel’Adre. Very handy.</i>\" You help her over to the chair, and she strips out of her robe and undergarments, giving them to you. You place them to one side, and Arian groans, sitting down, positioning her drooling cunt over the egg-hole.  \n\n");
 		outputText("Arian clutches her stomach with one hand, and you take her other hand, holding it tight. Arian gives you a worried smile, and you reassure her, putting a hand on Arian’s belly.  \n\n");
 		outputText("She gasps, trembling, closing her eyes as the tip of a pure-white egg crowns. Arian gasps, and it sinks slightly back in. You encourage your Lizan lover to push, and with a girly wail, Arian pushes the egg out. She’s gasping, pussy gaping, but you know she isn’t done yet. Taking Arian’s hand, you keep her steady. She looks at you, fear and pain in her eyes, but you act calm, your voice anchoring Arian.  \n\n");
         //calculate between 2-4 eggs
 		outputText("She pushes (2-4) eggs out, before finally collapsing back into her chair. For a few minutes, she passes out, and you decide to move her to her bed.  \n\n");
-		outputText("Arian wakes back up as you’re tucking her in, and she sits bolt upright. “The eggs! Where are they?!” She demands, and you gently, but firmly, lay Arian back down, telling her that you’re bringing them over. But Arian needs to rest and recover.  \n\n");
+		outputText("Arian wakes back up as you’re tucking her in, and she sits bolt upright. \"<i>The eggs! Where are they?!</i>\" She demands, and you gently, but firmly, lay Arian back down, telling her that you’re bringing them over. But Arian needs to rest and recover.  \n\n");
         outputText("As you bring the eggs over, Arian visibly relaxes, and as you place the basket at the foot of Arian’s bed, she smiles, motioning for you to join her.  \n\n");
-        outputText("You sit beside Arian, and she nuzzles your hand. “Thank you for being here with me.” She sighs. “I’m pretty sure kid me would be properly horrified right now.” She says, chuckling. \n\n");
+        outputText("You sit beside Arian, and she nuzzles your hand. \"<i>Thank you for being here with me.</i>\" She sighs. \"<i>I’m pretty sure kid me would be properly horrified right now.</i>\" She says, chuckling. \n\n");
         outputText("You ask her, the childbirth, or the fact that she’s the mom, not the dad? \n\n");
-		 outputText(" She snorts “Both. I was so focused on my studies as a child, that even the idea of finding a mate, let alone starting a family, was almost wrong to me.” ");
-		outputText(" She sighs happily. “Go on, my champion. Make Mareth a better place for them to grow in.” ");
+		 outputText(" She snorts \"<i>Both. I was so focused on my studies as a child, that even the idea of finding a mate, let alone starting a family, was almost wrong to me.</i>\" ");
+		outputText(" She sighs happily. \"<i>Go on, my champion. Make Mareth a better place for them to grow in.</i>\" ");
         outputText("You give Arian a quick hug, and a kiss on the cheek before leaving. \n\n");
 doNext(playerMenu);
 }
 
 public function ArianHatching():void {
 		clearOutput();
-		outputText("You hear an excited yell from Arian’s tent, and s/he pokes his/her head out, motioning wildly. “[Player]! Come quick!” You rush over to Arian, and s/he pulls you into his/her tent.  \n\n"); 
-		outputText("You stand beside Arian, not knowing what to do, and s/he points at the incubation basket, where you hear a slight cracking sound. “They’re hatching!” Arian says, rather unnecessarily, grabbing your hand, hopping up and down with excitement.  \n\n");
+		outputText("You hear an excited yell from Arian’s tent, and s/he pokes his/her head out, motioning wildly. \"<i>[Player]! Come quick!</i>\" You rush over to Arian, and s/he pulls you into his/her tent.  \n\n"); 
+		outputText("You stand beside Arian, not knowing what to do, and s/he points at the incubation basket, where you hear a slight cracking sound. \"<i>They’re hatching!</i>\" Arian says, rather unnecessarily, grabbing your hand, hopping up and down with excitement.  \n\n");
 		outputText("Cracks form on the largest egg, and a piece comes flying off as a white-scaled little head pokes out, closing its eyes against the light. The little lizan makes a high-pitched chirping noise, and you see a clawed hand breach the shell, sending little pieces out. Arian steps forward, slowly, as the little one stretches out their spine, chirping as they break the egg wide open. Arian extends his/her hand, and they look up, sheer wonder in their slitted eyes as Arian picks them up, cradling them in his/her arms.  \n\n");
 		outputText("A much louder crack comes from the smallest egg, and as it tips over onto its side, you see a more slender nose poke out, catching a glimpse of yellow eye before they turn around. To your shock, their tail pokes out of the hole in the egg.  \n\n");
-		outputText("“Sometimes they need to be encouraged to leave the shell.” Arian says gently. “Why don’t you get them?”  \n\n");
+		outputText("\"<i>Sometimes they need to be encouraged to leave the shell.</i>\" Arian says gently. \"<i>Why don’t you get them?</i>\"  \n\n");
 		outputText("You nod, taking the shell and cracking it along its length. The scrawnier baby looks up at you, eyes wide and trembling, until you pick them up in both hands, bringing them to your face. You give your newborn baby a smile, and slowly, they stop shaking, and open their mouth, spreading their arms and legs wide as they gurgle happily.  \n\n");
-        outputText(" A little boy and a girl.” Arian says softly. “She’s got a narrower snout, and softer scales.” (If more) you hear the cracking of another egg, and you both wrap your respective babies in cloth. They close their eyes as you lay them down, and you turn back to the (one/two) remaining eggs, repeating the process with Arian until all (number) of your new brood are nestled in the crib.");
+        outputText(" A little boy and a girl.</i>\" Arian says softly. \"<i>She’s got a narrower snout, and softer scales.</i>\" (If more) you hear the cracking of another egg, and you both wrap your respective babies in cloth. They close their eyes as you lay them down, and you turn back to the (one/two) remaining eggs, repeating the process with Arian until all (number) of your new brood are nestled in the crib.");
 		outputText("As Arian coos over them, you give him/her a kiss on the snout, excusing yourself.  \n\n");
 doNext(playerMenu);
 }
-}
-}
+
+
 }
 }
