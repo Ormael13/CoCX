@@ -19,8 +19,8 @@ use namespace CoC;
 
 public class RuinedTownRebuilt extends BaseContent implements SaveableState
 {
-	public static var RebuildState: int; //0 for uninitiated, 1 for Waiting, 2 for denied, 3 for started
-	public static var ShouldraSeenTown:Boolean; //0 for unseen, 1 for seen, but not introduced, 2 for introductions and excorcized, 3 for accepted Shouldra, 4 for Guardian Spirit Shouldra.
+	public static var RebuildState:int; //0 for uninitiated, 1 for Waiting, 2 for denied, 3 for started
+	public static var ShouldraSeenTown:int; //0 for unseen, 1 for seen, but not introduced, 2 for introductions and excorcized, 3 for accepted Shouldra, 4 for Guardian Spirit Shouldra.
 	public static var HouseNumber:int; //The more houses, the more the town can grow
 	public static var Housecap:int; //How many houses the town can safely have. Equal to Wallnumber*2, not including the first 20 houses.
 	public static var YourHouse:Boolean; //whether or not the mouselets have built you a house
@@ -63,7 +63,7 @@ public class RuinedTownRebuilt extends BaseContent implements SaveableState
 	
 	public function resetState():void {
 		RebuildState = 0;
-		ShouldraSeenTown = false;
+		ShouldraSeenTown = 0;
 		HouseNumber = 0;
 		Housecap = 20;
 		YourHouse = false;
@@ -341,7 +341,7 @@ public function amilyBarTalk():void {
 		}
 		TelAdreSuppliesBought = false;
 		cheatTime (1);
-		doNext(EnterVillage);
+		doNext(enterVillage);
 	}
 
 	public function ScoutsVisitInit(): void {
@@ -369,7 +369,7 @@ public function amilyBarTalk():void {
 		outputText("Amily looks conflicted as they walk away. You get the feeling that she wants to have open communications with TelAdre.  \n\n");
 		TelAdreScouts = 2;
 		cheatTime (1/2);
-		doNext(EnterVillage);
+		doNext(enterVillage);
 	}
 
 	public function TelAdreOpen():void {
@@ -382,7 +382,7 @@ public function amilyBarTalk():void {
 		outputText("Amily nods, and the two wolf brothers wave back at the village and its guards. “Sorry for the misunderstanding.” With that, they run into the forest.  \n\n");
 		TelAdreScouts = 1;
 		cheatTime(1 / 2);
-		doNext(EnterVillage);
+		doNext(enterVillage);
 	}
 		public function MiceBuiltHouse4U():void {
 			clearOutput();
@@ -403,7 +403,7 @@ public function amilyBarTalk():void {
 			doNext(camp.returnToCampUseTwoHours);
 		}
 	//--------------Town Functions
-	public function EnterVillage():void {
+	public function enterVillage():void {
 		clearOutput();
 		Intown = true;
 		if ((TelAdreScouts) == 0) {
@@ -451,20 +451,20 @@ public function amilyBarTalk():void {
 		}
 
 		 */
-		if ((flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1) && (ShouldraSeenTown == 0))
+		if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraSeenTown == 0)
 		{
 			outputText ("A small shack sits on the outskirts of the village. Your mousey children avoid it for some reason. You strongly suspect that Shouldra is inside it.  ")
 		}
-		if ((flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1) && ((ShouldraSeenTown) == 1)) {
+		if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraSeenTown == 1) {
 			outputText ("Shouldra's shack sits on the outskirts of the village. Your mousey children play near it, but don't go inside. ")
 		}
-		if ((flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1) && ((ShouldraSeenTown) == 2)) {
+		if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraSeenTown == 2) {
 			outputText ("Shouldra's shack has been destroyed, and you feel a vague sense of malice coming from the ground on which it had stood. Incense burns around the site, as if to ward off evil. ")
 		}
-		if ((flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1) && ((ShouldraSeenTown) == 3)) {
+		if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraSeenTown == 3) {
 			outputText ("Shouldra's shack has been repaired, upgraded to a normal-looking house. As you watch, one of your mouse-children enters the home, and one of your sons leaves, cheeks flush and clothing tented. Clearly, Shouldra's getting some visitors regularly.")
 		}
-		if ((flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1) && ((ShouldraSeenTown) == 4)) {
+		if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != 1 && ShouldraSeenTown == 4) {
 			var choice0:Number = rand(4);
 			switch (choice0) {
 				case 0:
@@ -528,7 +528,7 @@ public function amilyBarTalk():void {
 		if(player.cor > 50) dynStats("cor", -1);
 		if(player.cor > 75) dynStats("cor", -1);
 		advanceMinutes(15);
-		inventory.takeItem(consumables.S_WATER, EnterVillage);
+		inventory.takeItem(consumables.S_WATER, enterVillage);
 	}
 
 	public function MouseTownVisit():void {
@@ -553,13 +553,13 @@ public function amilyBarTalk():void {
 	public function MouseTownJojo():void {
 		clearOutput();
 		outputText("Not Yet written \n\n");
-		doNext(EnterVillage);
+		doNext(enterVillage);
 	}
 
 	public function MouseTownJoy():void {
 		clearOutput();
 		outputText("Not, like, Yet written. Sorry Cuties~ \n\n");
-		doNext(EnterVillage);
+		doNext(enterVillage);
 	}
 
 	public function MouseTownAmily():void {
@@ -578,7 +578,7 @@ public function amilyBarTalk():void {
 	public function AmilyTownie():void {
 		outputText("Not, like, Yet written. Sorry Cuties~ \n\n");
 		menu();
-			addButton (1, "Back", EnterVillage);
+			addButton (1, "Back", enterVillage);
 
 	}
 	//---------SHOPS AND SERVICES-----------
@@ -608,7 +608,7 @@ public function amilyBarTalk():void {
 			if (prosperityvar >= 20) {
 				outputText(" \n\n");
 			}
-			if ((prosperityvar >= 30) && (ShouldraSeenTown = 4) && !ReapercheepBought) {
+			if (prosperityvar >= 30 && ShouldraSeenTown == 4 && !ReapercheepBought) {
 				outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily\'s head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That is my Daddy\'s finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i> \n\n");
 			}
 		}
@@ -681,7 +681,7 @@ public function amilyBarTalk():void {
 		outputText(" \n\n");
 		outputText(" \n\n");
 		menu();
-		addButton (1, "Back", EnterVillage);
+		addButton (1, "Back", enterVillage);
 	}
 	public function MouseTownBar():void {
 		clearOutput();
@@ -694,7 +694,7 @@ public function amilyBarTalk():void {
 	public function MouseTownDrink():void {
 		outputText("You nod, and your odd daughter skips off, coming back with a crude clay mug full of amber ale. Despite the town's recent revival, the ale is sweet, the work of a competent brewer. \n\n");
 //Make the PC slightly Drunk
-		doNext (EnterVillage);
+		doNext (enterVillage);
 	}
 
 
@@ -843,11 +843,12 @@ public function amilyBarTalk():void {
 		clearOutput();
 		outputText("The burly mouse-woman nods, calling to the building behind her. Quickly, several wagons are brought out, and a variety of mice begin to follow you. You lead them out past the gates, out into Mareth. You head out towards the forest, constantly looking out for demons. \n\n");
 		player.gems -= 100;
+		var wood:Number = 0;
 		var choice0:Number = rand(4);
 		switch (choice0) {
 			case 0:
 				outputText("While in the forest, you run into several tentacle beasts. You spend a few hours keeping your mouselets together, trying to prevent anyone from getting attacked. You don't lose anyone, but your kids have a hard time focusing on wood gathering.  \n\n");
-				var wood:Number = 10 * prosperityvar;
+				wood = 10 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 				if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
@@ -856,7 +857,7 @@ public function amilyBarTalk():void {
 				break;
 			case 1:
 				outputText("Your mouselets run afoul of a group of imps, forcing you to come to their defense. However, the imps flee quickly, and after the initial skirmesh, you and the kids can harvest in peace. However, as several imps escaped, you fill the wagons halfway and leave.\n\n");
-				var wood:Number = 15 * prosperityvar;
+				wood = 15 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 				if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
@@ -864,7 +865,7 @@ public function amilyBarTalk():void {
 				break;
 			case 2:
 				outputText("Scouting ahead, you manage to avoid a demon scouting party. You and your kids keep to a lighter area of the woods. While an imp sees you and your kids, you manage to bring it down before it can alert the rest of the demon patrol. You fill the wagons three-quarters of the way, but a squad of demons begin closing in on your kids, and you decide to avoid the risk. You cover your children as they flee, and the demons decide not to pursue. \n\n");
-				var wood:Number = 20 * prosperityvar;
+				wood = 20 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 				if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
@@ -872,7 +873,7 @@ public function amilyBarTalk():void {
 				break;
 			case 3:
 				outputText("To your surprise, you don't encounter any demons or beasts. You and your mouselets fill your wagons several times over.  \n\n");
-				var wood:Number = 25 * prosperityvar;
+				wood = 25 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 				if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
@@ -887,12 +888,13 @@ public function amilyBarTalk():void {
 		clearOutput();
 		outputText("The burly mouse-woman nods, calling to the building behind her. Quickly, several wagons are brought out, and a variety of mice begin to follow you. You lead them out past the gates, out into Mareth. You head out towards the desert, looking for old buildings and ruins. \n\n");
 		player.gems -= 200;
+		var nails:Number = 0;
 		var choice0:Number = rand(4);
 		switch (choice0) {
 			case 0:
 				outputText("You catch sight of a large set of buildings, but on your way there, several of your children vanish into the sands, shifting sands pulling them in towards androgynous people in the middle. You and your kin leap into action, leaping into the sandtrap's funnels en masse, forcing the egg-laying rapists to flee. Once you get everyone back up, your children are shaken, tired by the struggle. \n\n");
 				outputText("Your children, despite their fatigue, pull together and get to work. You pull nails from the buildings, until a small group of demons appear. You haven't gotten much, but the Quarry corps aren't fighters. You decide to get out of the desert before more demons show up. \n\n");
-				var nails:Number = 5 * prosperityvar;
+				nails = 5 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
 				else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
@@ -900,7 +902,7 @@ public function amilyBarTalk():void {
 				break;
 			case 1:
 				outputText("You come upon an old wooden structure, half-buried in the desert. You notice the telltale signs of the desert traps, and your children are easily able to avoid them. You begin to extract the nails from the structure, but are called away to deal with a few sand witches, who are eyeing your group. The women don't approach, but begin to giggle, making out with each other in full display. Several of your mice stop working altogether, and as several more sand witches appear, walking towards your group, you bring everyone in, heading back to town before the conniving cow-bitches can become even more of an annoyance. \n\n");
-				var nails:Number = 10 * prosperityvar;
+				nails = 10 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.	MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
 				else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
@@ -908,7 +910,7 @@ public function amilyBarTalk():void {
 				break;
 			case 2:
 				outputText("You run into a group of sand witches unleashing their magics on a group of demons. You take advantage of the chaos, heading past with your mouselets. Both groups are still fighting several hours later, when you finish. You and yours pack up and leave, the two groups still fighting.  \n\n");
-				var nails:Number = 15 * prosperityvar;
+				nails = 15 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.	MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
 				else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
@@ -916,7 +918,7 @@ public function amilyBarTalk():void {
 				break;
 			case 3:
 				outputText("While heading to some ruins, you run into some of Tel'Adre's outriders. They nod respectfully, and take a rest beside your mouse children as you work. You think you see a sand witch or two, but between Tel'Adre's guards and your own, they think better of it. \n\n");
-				var nails:Number = 20 * prosperityvar;
+				nails = 20 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.	MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
 				else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
@@ -932,10 +934,11 @@ public function amilyBarTalk():void {
 	public function DoStoneRun():void {
 		clearOutput();
 		player.gems -= 300;
+		var stone:Number = 0;
 		var choice0:Number = rand(4);
 		switch (choice0) {
 			case 0:
-				var stone:Number = 5 * prosperityvar;
+				stone = 5 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
 				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
@@ -943,7 +946,7 @@ public function amilyBarTalk():void {
 				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
 				break;
 			case 1:
-				var stone:Number = 10 * prosperityvar;
+				stone = 10 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
 				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
@@ -951,7 +954,7 @@ public function amilyBarTalk():void {
 				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
 				break;
 			case 2:
-				var stone:Number = 15 * prosperityvar;
+				stone = 15 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
 				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
@@ -959,7 +962,7 @@ public function amilyBarTalk():void {
 				outputText("You and your kids bring "+ stone +"Stone back from your expedition. \n\n");
 				break;
 			case 3:
-				var stone:Number = 20 * prosperityvar;
+				stone = 20 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
 				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
@@ -976,24 +979,25 @@ public function amilyBarTalk():void {
 	public function DoScrapRun():void {
 		clearOutput();
 		player.gems -= 400;
+		var metal:Number = 0;
 		var choice0:Number = rand(3);
 		switch (choice0) {
 			case 0:
-				var metal:Number = 5 * prosperityvar;
+				metal = 5 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += metal;
 				if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 400;
 				outputText("You and your kids bring "+ metal +"Metal back from your expedition. \n\n");
 				break;
 			case 1:
-				var metal:Number = 7 * prosperityvar;
+				metal = 7 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += metal;
 				if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 400;
 				outputText("You and your kids bring "+ metal +"Metal back from your expedition. \n\n");
 				break;
 			case 2:
-				var metal:Number = 10 * prosperityvar;
+				metal = 10 * prosperityvar;
 				flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += metal;
 				if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 1200;
 				else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 400;
@@ -1015,7 +1019,7 @@ public function amilyBarTalk():void {
 		if (SeenMMelee) {
 			outputText("As you approach, the cute little mouselet behind the wooden stall stands, her tail whipping around. Her eyes light up when she sees you, and she hops up and down on her little stool. “Hi again! Do you need a stabber?” She seems far too excited for her job. \n\n");
 		}
-		if ((prosperityvar >= 30) && (ShouldraSeenTown = 4) && !ReapercheepBought) {
+		if (prosperityvar >= 30 && ShouldraSeenTown == 4 && !ReapercheepBought) {
 			outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily's head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That's my Daddy's finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i> \n\n");
 		}
 
@@ -1114,14 +1118,14 @@ public function amilyBarTalk():void {
 	public function MaybeNot():void {
 		clearOutput();
 		outputText("<i>“Well, most of us are kinda busy keeping the village running</i>”. She laughs awkwardly. <i>“So...Dinner’s your best bet for that, unless you wanna join us in target practice\". \n\n");
-		doNext (EnterVillage);
+		doNext (enterVillage);
 	}
 
 	public function Ameliar():void {
 		clearOutput();
 		outputText("<i>“Oh, me?</i>” She blushes slightly, just like her mom. <i>“I’m Ameliar. I was in mom’s second litter.</i>” She shrugs. <i>“I wanted to take up a more safe option to defend our village,and so...I got this bow.</i>” You raise your eyebrows, and she puts a hand on your shoulder. <i>“No, not from that Centaur on the farm, don’t worry, (mom/dad). We know better than to go near that tainted beast.</i>”  \n\n");
 		outputText("<i>“Anyways, we need to get back to training. Please feel free to join us, but if you’re not, we need to focus.</i>” You excuse yourself, and walk back to the centre of town.  \n\n");
-		doNext(EnterVillage);
+		doNext(enterVillage);
 	}
 
 	public function TrainFieldMelee():void {
@@ -1130,7 +1134,7 @@ public function amilyBarTalk():void {
 		outputText("<i>“Good news, rats!</i>” He bellows. <i>“Our old "+ player.mf("man", "woman") +"has chosen to join our training for now!</i>” He glares at a few fidgety ones, clearly new to this. <i>“And you lot will not embarrass our village, or so help me I will have you running laps for the next day straight!</i>” he takes his spear, joining the middle of the mouseling formation. <i>“Come on, "+ player.mf("mom", "dad") +"! Show us what we inherited from you!</i>” He raises his voice. <i>“Shieldwall, March!</i>” \n\n");
 		outputText("You are now fighting your children's Shieldwall! \n\n");
 		outputText("Or...You would be, if they were coded in. For now, just enjoy the village \n\n");
-		doNext(EnterVillage);
+		doNext(enterVillage);
 //Fight The Rats!
 	}
 	public function EveningMeal():void {
@@ -1190,7 +1194,7 @@ public function amilyBarTalk():void {
 		if (!WellBuilt) {
 			addButton (7, "Well", BuildWell);
 		}
-		addButton (8, "back", EnterVillage);
+		addButton (8, "back", enterVillage);
 	}
 	public function BuildWell():void {
 		clearOutput();
@@ -1229,12 +1233,12 @@ public function amilyBarTalk():void {
 			MouseTownPopCap += 15;
 			Intown = false;
 			cheatTime(1);
-			doNext(EnterVillage);
+			doNext(enterVillage);
 		}
 		if ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] <= 100) || (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] <= 200) || (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] <= 100))
 		{
 			outputText("This house will take more resources to build than you currently have. ");
-			doNext(EnterVillage);
+			doNext(enterVillage);
 		}
 	}
 
@@ -1257,7 +1261,7 @@ public function amilyBarTalk():void {
 		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] < 50 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100)
 		{
 			outputText ("You don't have enough resources to build the wall. Gather some more and come back later.");
-			doNext(EnterVillage);
+			doNext(enterVillage);
 		}
 	}
 
@@ -1273,7 +1277,7 @@ public function amilyBarTalk():void {
 		}
 		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 70 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 150) {
 			outputText("You don't have enough resources to make a new shop. Try again later. \n\n");
-			doNext(EnterVillage);
+			doNext(enterVillage);
 		}
 	}
 
@@ -1291,7 +1295,7 @@ public function amilyBarTalk():void {
 			doNext(camp.returnToCampUseOneHour);
 		} else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] < 50 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 150 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 10) {
 			outputText("You don't have enough resources to make the training grounds. Gather more to build them. \n\n");
-			doNext(EnterVillage);
+			doNext(enterVillage);
 		}
 	}
 
@@ -1314,7 +1318,7 @@ public function amilyBarTalk():void {
 			}
 			else if ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] < 400) && (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 450) && (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 300)) {
 				outputText("The smithery will require more resources than you have to build. \n\n");
-				doNext(EnterVillage);
+				doNext(enterVillage);
 			}
 		}
 
@@ -1342,13 +1346,13 @@ public function amilyBarTalk():void {
 		clearOutput();
 		outputText("He sits up. <i>“Well, shit. I guess my vacation’s over.</i>” He gives you a sarcastic grin. <i>“Look, I’m glad to have been here. Your little town here...Well, if it can survive, who knows? Maybe the demons aren’t as unbeatable as we thought.</i>” He gives you a mock salute. <i>“You and yours are always welcome in Tel’adre, friend. Stay safe out here.</i>” \n\n");
 		(TelAdreScouts = 1);
-		doNext(EnterVillage);
+		doNext(enterVillage);
 	}
 
 	public function WolfmanDeny():void {
 		clearOutput();
 		outputText("He folds his arms behind his back, his visible paunch sloshing. <i>“Hey, no worries, mate. I’m perfectly happy sitting here until I kick the bucket. Just wake me up if the demons come, alright?</i>”  \n\n");
-		doNext(EnterVillage);
+		doNext(enterVillage);
 	}
 	//Shouldra recruiting/leaving there.
 	public function ShouldraRebuilt():void {
@@ -1359,7 +1363,7 @@ public function amilyBarTalk():void {
 			ShouldraSeenTown = 1;
 			menu();
 			addButton(1, "ComeWithMe", GhostFollowerGet);
-			addButton(2, "NoThx", EnterVillage);
+			addButton(2, "NoThx", enterVillage);
 			//addButton (3, "Talk", ShouldraTalk);
 		}
 		if ((ShouldraSeenTown == 1) && kFLAGS.SHOULDRA_FOLLOWER_STATE != 1) {
@@ -1367,7 +1371,7 @@ public function amilyBarTalk():void {
 			outputText("“Oh, hey champ. How’s it going?” Shouldra asks, floating in front of you. “Not gonna lie, I’ve been getting pretty bored. Being the 'spooky ghost' is getting old. Wanna do something?” \n\n");
 			menu();
 			addButton(1, "ComeWithMe", GhostFollowerGet);
-			addButton(2, "NoThx", EnterVillage);
+			addButton(2, "NoThx", enterVillage);
 			//addButton (3, "Talk", ShouldraTalk);
 			addButton(4, "Introduce", ShouldraDragOut);
 		}
@@ -1375,7 +1379,7 @@ public function amilyBarTalk():void {
 			outputText("Shouldra sees you coming towards her house, and stops toying with one of your children, phasing through the door and greeting you on her front porch. “Champ, I gotta say, while these little ones aren’t as good as you, they’re damn fine replacements.” She seems pleased to see you, however. “But…As cool as these little guys and gals are, I prefer the original.” \n\n");
 			menu();
 			addButton(1, "ComeWithMe", GhostFollowerGet);
-			addButton(2, "NoThx", EnterVillage);
+			addButton(2, "NoThx", enterVillage);
 			//addButton (3, "Talk", ShouldraTalk);
 		}
 		if ((ShouldraSeenTown == 4) && (kFLAGS.SHOULDRA_FOLLOWER_STATE != 1))
@@ -1385,7 +1389,7 @@ public function amilyBarTalk():void {
 			outputText("“Oh, I’ve been teaching them magic. Everything I know, really.” She chuckles, shrugging as she approaches. “They’ve been great students so far.” She folds her arms across her chest. “So, am I gonna need to take a sabbatical, champ? As great as these guys are, there’s a wide world of debauchery out there.” \n\n");
 			menu();
 			addButton(1, "ComeWithMe", GhostFollowerGet);
-			addButton(2, "NoThx", EnterVillage);
+			addButton(2, "NoThx", enterVillage);
 			//addButton (3, "Talk", ShouldraTalk);
 		}
 		if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == 1) {
@@ -1393,7 +1397,7 @@ public function amilyBarTalk():void {
 			outputText("You tell Shouldra that you want her to leave your body for a bit. She protests, letting several moans out and tweaking your groin, but she reluctantly agrees to leave your body, going back to her home.  \n\n");
 			outputText("“Hey, this isn’t goodbye forever, right champ?” Shouldra says. “I’ll be here, but you’re too much fun to let go!” That being said, she phases through her door. You leave the spectre to her own devices, heading back to your town. \n\n");
 			flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] = 0;
-			doNext(EnterVillage)
+			doNext(enterVillage)
 		}
 	}
 

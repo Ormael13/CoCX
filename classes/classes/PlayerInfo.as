@@ -1123,10 +1123,10 @@ public class PlayerInfo extends BaseContent {
 
 		if (SceneLib.chichiScene.pregnancy.isPregnant)
 			pregnancies += "<b>Chi Chi</b> \n";
-
-		//if (SceneLib.nadiaScene.pregnancy.isPregnant)	//TODO Nadia preggers
-		//	pregnancies += "<b>Nadia</b> \n";
-
+/*
+		if (SceneLib.nadiaScene.pregnancy.isPregnant)
+			pregnancies += "<b>Nadia</b> \n";
+*/
 		if (flags[kFLAGS.FEMOIT_EGGS] != 0)
 			pregnancies += "<b>Benoit</b> \n";
 		//if (SceneLib.holliScene)
@@ -1142,7 +1142,10 @@ public class PlayerInfo extends BaseContent {
 
 		if (SceneLib.etnaScene.pregnancy.isPregnant)
 			pregnancies += "<b>Etna</b> \n";
-
+/*
+		if (SceneLib.electraScene.pregnancy.isPregnant)
+			pregnancies += "<b>Electra</b> \n";
+*/
 		if (SceneLib.excelliaFollower.pregnancy.isPregnant)
 			pregnancies += "<b>Excellia</b> \n";
 
@@ -2828,4 +2831,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(superPerkBuyMenu, 6);
 	}
 }
-}
+}
