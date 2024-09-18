@@ -42,6 +42,7 @@ import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.EbonLabyrinth.Draculina;
 import classes.Stats.Buff;
+import classes.Scenes.Places.RuinedTownRebuilt;
 
 import coc.view.ButtonDataList;
 
@@ -54,6 +55,7 @@ public class TestMenu extends BaseContent
 		outputText("Collection of different cheats that can be used by the players.");
 		outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
 		var bd:ButtonDataList = new ButtonDataList();
+		//bd.add("RuinedTown", RuinedTownRebuilt.EnterVillage, "Test the Mousetown");
 		bd.add("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
 		bd.add("P/G/XP", PerksGemsEXP, "Adding/Removing perk points and adding gems/exp.");
 		bd.add("LvL/DLvL", LevelDeLevel, "Adding/Substracting levels.");
