@@ -794,7 +794,9 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 					outputText("You have encounterd a BUG and i not mean drider-bug but just... BUG. Report to Ormael/Aimozg this (not at all drider) BUG.");
 			}
 			player.gems -= cost;
-			outputText("Temp dialogue until Snas gets back to me. \n\" Thanks for the gems, [name]. Here's the band!\"");
+			outputText("Belisa nods, looking seriously down at you. “This might sting a bit. The band will take a second or so to acclimate to your energies.” As she says that, she flattens the band against your [skin]");
+			outputText("Electricity seems to shoot from the band to your body, for a brief moment, you grimace, forcing yourself to stay still. The unpleasant sensation fades, leaving you with one of Belisa’s bands stuck tight to your arm. The band seems to pulse with your heartbeat, flexing as you move. ");
+			outputText(" \"<i>“Sorry.”</i> Belisa winces. <i>“Was that more than a sting?”</i> You give the little Drider a nod, and she sighs. <i>“You should feel a pulsing in your arm. That’s natural, and means the band’s synched up with your energies.”</i> She blinks twice. <i>“The pulsing should go away in an hour or so. If it doesn’t, come back here, it’ll need to be removed.”</i>");
 			statScreenRefresh();
 			doNext(BelisaShop);
 		}
