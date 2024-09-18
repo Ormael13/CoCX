@@ -89,32 +89,6 @@ if Farmseen == true {
 			prosperityvar (5);
 		}
 }
-public function MouseTownWeeklyUpdate():void {
-	clearOutput();
-	WeeklyGemTax = (prosperityvar);
-	if logbuilt == true {
-	WeeklyWoodGain = (prosperityvar/2);
-	}
-
-	if MousetownPopulation == MouseTownPopCap {
-		outputText("As you wake up and head outside, getting ready for the day, you see one of your mouse-morph children standing awkwardly next to Amily. As you meet their gaze, they walk over, looking you in the eyes. \n\n"); 
-		outputText("<i>\"Hey, "+ player.mf("father", "mother") +", I'm sorry to ask for your help again so soon, but the town's still growing, and we're going to need more houses soon. No pressure or anything, but we'd really appreciate your help.</i>\n\n");
-		}
-		if WeeklyGemTax > 0{
-		outputText("He hands you a small sack, smiling. <i>\"We're grateful for all the help you've given us. We've been growing, so we decided to go around and collect some gems. Here's what we could spare this week.</i>\n\n");
-		//add gems to player's stash now
-		outputText("You've Gained" +WeeklyGemTax "Gems!\n\n");
-		}
-		if WeeklyWoodGain > 0 {
-		outputText(" You watch as several more of your children carry pieces of well-cut lumber into your camp. With a grin, your mousey son sees where your gaze is. <i>\" Since you've been using your own resources to help build our hometown, it only seems right that we give back.</i>\" \n\n"); 
-		//Add Wood to the player's stockpile
-		outputText("You've Gained" +WeeklyWoodGain "Wood!\n\n");
-		}
-		
-		outputText(" With that said, he scampers off, heading back towards the village. \n\n");
-		Intown = false;
-		DoNext:(returnToCamp);
-}
 
 public function EdrynBringsSupplies():void {
 		clearOutput();
@@ -835,7 +809,7 @@ doNext(camp.returnToCampUseOneHour);
 
 public function WolfMan():void {
 		clearOutput();
-		outputText("The wolfman sits up as you approach. <i>“Hey, [name]. You speak for the people here, yeah?</i>” you nod and say that you do. At that, he grins. <i>“Well, I’m an ambassador from Tel’adre. Basically, we want to trade freely, send patrols out here occasionally and not risk getting shot, y’know, pretty basic stuff. We’re prepared to offer entry to yours, so long as they’re not corrupt, goods and services, paid for, obviously, and asylum for your kids should the worst happen. You’ve got a decent setup here, but you’re big enough for the demons to take notice.</i>” He winces. <i>“And we all know what can happen when you get their attention</i>”. He leans back in his chair. <i>“It’s a win/win, if you ask me.</i>”\n\n"); 
+		outputText("The wolfman sits up as you approach. <i>“Hey, [name]. You speak for the people here, yeah?</i>” you nod and say that you do. At that, he grins. <i>“Well, I’m an ambassador from Tel’adre. Basically, we want to trade freely, send patrols out here occasionally and not risk getting shot, y’know, pretty basic stuff. We’re prepared to offer entry to yours, so long as they’re not corrupt, goods and services, paid for, obviously, and asylum for your kids should the worst happen. You’ve got a decent setup here, but you’re big enough for the demons to take notice.</i>” He winces. <i>“And we all know what can happen when you get their attention</i>”. He leans back in his chair. <i>“It’s a win/win, if you ask me.</i>”\n\n");
 menu();
 addButton (1, "Accept", WolfmanAccept);
 addButton (2, "Nope", WolfmanDeny);

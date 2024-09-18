@@ -2549,7 +2549,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilyMenu(true);
 		}
 
-		private function amilyMenu(output:Boolean = true) :void {
+		public function amilyMenu(output:Boolean = true) :void {
 			menu();
 			//Innocent
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
