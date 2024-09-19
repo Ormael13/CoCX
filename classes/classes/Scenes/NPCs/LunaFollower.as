@@ -74,7 +74,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 				LunaTotalKidsNum = o["LunaTotalKidsNum"]
 			} else resetState();
 		}
-		private var pregnancy:PregnancyStore;
+		public var pregnancy:PregnancyStore;
 
 		public function timeChange():Boolean {
 			pregnancy.pregnancyAdvance();

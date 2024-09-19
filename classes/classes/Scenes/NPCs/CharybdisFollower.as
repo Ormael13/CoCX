@@ -362,7 +362,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		addButton(1, "JamSesh", charyJamOut);
 		addButtonIfTrue(2, "Instruments", charyInstruments, "Req. 30%+ affection", CharyAffectionMeter >= 30);
 		addButtonIfTrue(3, "Vocals", charyVocalTraining, "Req. 50%+ affection (and have less then 20 trainings)", CharyAffectionMeter >= 50 && CharyVocalTrained < 20);
-		addButtonIfTrue(4, "Sail", charySail, "Req. 30%+ affection", CharyAffectionMeter >= 60);
+		addButtonIfTrue(4, "Sail", charySail, "Req. 60%+ affection", CharyAffectionMeter >= 60);
 		addButton(14, "Back", charyBeachMeetings2);
 	}
 
