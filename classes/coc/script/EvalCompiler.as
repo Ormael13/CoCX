@@ -40,6 +40,8 @@ public class EvalCompiler {
 	private static const OPCODE_MUL:int      = 213; // X * Y
 	private static const OPCODE_DIV:int      = 214; // X / Y
 	private static const OPCODE_MOD:int      = 215; // X % Y
+	private static const OPCODE_ISIN:int     = 216; // X isin Y
+	private static const OPCODE_NOTIN:int    = 217; // X notin Y
 	// Ternary operation
 	private static const OPCODE_IF:int       = 300; // X ? Y : Z
 	
@@ -52,64 +54,68 @@ public class EvalCompiler {
 	private static const LA_INT:RegExp = /^[+\-]?(0x)?\d+/;
 	private static const LA_SIMPLESTRING:RegExp = /^('[^'\\]*'|"[^"\\]*")/;
 	private static const LA_ID:RegExp = /^[a-zA-Z_$][a-zA-Z_$0-9]*/;
-	private static const LA_OPERATOR:RegExp = /^(>=?|<=?|!==?|={1,3}|\|\||&&|or|and|eq|neq?|[lg](te|t|e)|[-+*\/%])/;
+	private static const LA_OPERATOR:RegExp = /^(>=?|<=?|!==?|={1,3}|\|\||&&|or|and|isin|notin|eq|neq?|[lg](te|t|e)|[-+*\/%])/;
 	private static const OP_PRIORITIES:* = {
-		'||' : 10,
-		'or' : 10,
-		'&&' : 20,
-		'and': 20,
-		'>=' : 30,
-		'>'  : 30,
-		'<=' : 30,
-		'<'  : 30,
-		'!==': 30,
-		'!=' : 30,
-		'===': 30,
-		'==' : 30,
-		'='  : 30,
-		'lt' : 30,
-		'le' : 30,
-		'lte': 30,
-		'gt' : 30,
-		'ge' : 30,
-		'gte': 30,
-		'neq': 30,
-		'ne' : 30,
-		'eq' : 30,
-		'+'  : 40,
-		'-'  : 40,
-		'*'  : 50,
-		'/'  : 50,
-		'%'  : 50
+		'||':    10,
+		'or':    10,
+		'&&':    20,
+		'and':   20,
+		'isin':  30,
+		'notin': 30,
+		'>=':    30,
+		'>':     30,
+		'<=':    30,
+		'<':     30,
+		'!==':   30,
+		'!=':    30,
+		'===':   30,
+		'==':    30,
+		'=':     30,
+		'lt':    30,
+		'le':    30,
+		'lte':   30,
+		'gt':    30,
+		'ge':    30,
+		'gte':   30,
+		'neq':   30,
+		'ne':    30,
+		'eq':    30,
+		'+':     40,
+		'-':     40,
+		'*':     50,
+		'/':     50,
+		'%':     50
 	};
-	private static const OP_OPCODES:* = {
-		'||' : OPCODE_OR,
-		'or' : OPCODE_OR,
-		'&&' : OPCODE_AND,
-		'and': OPCODE_AND,
-		'>=' : OPCODE_GTE,
-		'>'  : OPCODE_GT,
-		'<=' : OPCODE_LTE,
-		'<'  : OPCODE_LT,
-		'!==': OPCODE_NEQUIV,
-		'!=' : OPCODE_NEQ,
-		'===': OPCODE_EQUIV,
-		'==' : OPCODE_EQ,
-		'='  : OPCODE_EQ,
-		'lt' : OPCODE_LT,
-		'le' : OPCODE_LTE,
-		'lte': OPCODE_LTE,
-		'gt' : OPCODE_GT,
-		'ge' : OPCODE_GTE,
-		'gte': OPCODE_GTE,
-		'neq': OPCODE_NEQ,
-		'ne' : OPCODE_NEQ,
-		'eq' : OPCODE_EQ,
-		'+'  : OPCODE_ADD,
-		'-'  : OPCODE_SUB,
-		'*'  : OPCODE_MUL,
-		'/'  : OPCODE_DIV,
-		'%'  : OPCODE_MOD
+	private static const OP_OPCODES:*    = {
+		'||':    OPCODE_OR,
+		'or':    OPCODE_OR,
+		'&&':    OPCODE_AND,
+		'and':   OPCODE_AND,
+		'isin':  OPCODE_ISIN,
+		'notin': OPCODE_NOTIN,
+		'>=':    OPCODE_GTE,
+		'>':     OPCODE_GT,
+		'<=':    OPCODE_LTE,
+		'<':     OPCODE_LT,
+		'!==':   OPCODE_NEQUIV,
+		'!=':    OPCODE_NEQ,
+		'===':   OPCODE_EQUIV,
+		'==':    OPCODE_EQ,
+		'=':     OPCODE_EQ,
+		'lt':    OPCODE_LT,
+		'le':    OPCODE_LTE,
+		'lte':   OPCODE_LTE,
+		'gt':    OPCODE_GT,
+		'ge':    OPCODE_GTE,
+		'gte':   OPCODE_GTE,
+		'neq':   OPCODE_NEQ,
+		'ne':    OPCODE_NEQ,
+		'eq':    OPCODE_EQ,
+		'+':     OPCODE_ADD,
+		'-':     OPCODE_SUB,
+		'*':     OPCODE_MUL,
+		'/':     OPCODE_DIV,
+		'%':     OPCODE_MOD
 	};
 
 	public static function execute(code:*, scopes:Array):* {
@@ -190,6 +196,10 @@ public class EvalCompiler {
 				return execute(code[1], scopes) / execute(code[2], scopes);
 			case OPCODE_MOD:
 				return execute(code[1], scopes) % execute(code[2], scopes);
+			case OPCODE_ISIN:
+				return execute(code[1], scopes).indexOf(execute(code[2], scopes)) >= 0;
+			case OPCODE_NOTIN:
+				return execute(code[1], scopes).indexOf(execute(code[2], scopes)) < 0;
 		}
 		throw new Error("Unknown Eval opcode "+String(opcode));
 	}

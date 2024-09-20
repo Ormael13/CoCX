@@ -9,8 +9,7 @@ public class LayerAnimation {
 	
 	public function LayerAnimation(
 			def:AnimationDef,
-			layer:CompositeLayer,
-			compositeImage: CompositeImage
+			layer:CompositeLayer
 	) {
 		this.animationDuration = def.animationDuration;
 //		trace("assigning to layer "+layer.name+" animation "+def.name);
@@ -22,7 +21,7 @@ public class LayerAnimation {
 				if (fname.indexOf('%') >= 0) {
 					fname = fname.replace('%', layer.name);
 				}
-				fimage = compositeImage.getLayer(fname);
+				fimage = layer.composite.getPart(fname);
 //				trace("frame "+i+" image "+fname+" found "+!!fimage);
 			}
 			this.frames.push(new AnimationFrame(fd[0],fd[1],fd[2],fd[3],fimage));

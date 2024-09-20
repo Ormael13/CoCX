@@ -174,15 +174,15 @@ public class CharView extends Sprite {
 		var item:XML;
 		var n:int   = 0;
 		file_total  = -1;
+		var layerNames:Array = [];
 		for each(item in xml.layers..layer) {
-			var lpfx:String = item.@name + "/";
-			for (var sname:String in sprites) {
-				if (sname.indexOf(lpfx) == 0) {
-					var sprite:CharViewSprite = sprites[sname];
-					composite.addLayer(sname, sprite.bmp,
-							sprite.dx - _originX, sprite.dy - _originY, false);
-				}
-			}
+			layerNames.unshift(""+item.@name + "/");
+		}
+		composite.addLayers(layerNames);
+		for (var sname:String in sprites) {
+			var sprite:CharViewSprite = sprites[sname];
+			composite.addPart(sname, sprite.bmp,
+					sprite.dx - _originX, sprite.dy - _originY);
 		}
 		for each (item in xml.animations..animation) {
 			var animation:AnimationDef = new AnimationDef(item.@name.toString());
@@ -217,8 +217,7 @@ public class CharView extends Sprite {
 
 
 		// Mark visible layers
-		composite.hideAll();
-		composite.resetAnimations();
+		composite.reset();
 		time = getTimer();
 		parts.execute(new CharViewContext(this,_character));
 		
@@ -267,7 +266,7 @@ public class CharView extends Sprite {
 				var dy:int               = cell.@dy;
 				if (rect) {
 					if (srect in srects) {
-						trace("[INFO] Duplicate <cell rect>: "+f+", "+srects[srect]);
+						trace("[WARN] Duplicate <cell rect>: "+f+", "+srects[srect]);
 					} else {
 						srects[srect] = f;
 					}

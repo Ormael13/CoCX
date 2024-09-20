@@ -86,6 +86,10 @@ public class Eval {
 			case '&&':
 			case 'and':
 				return x && y;
+			case 'isin':
+				return y.indexOf(x) >= 0;
+			case 'notin':
+				return y.indexOf(x) < 0;
 			default:
 				throw new Error("Unregistered operator " + op);
 		}
