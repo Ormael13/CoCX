@@ -368,9 +368,11 @@ public class CeraphScene extends NPCAwareContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_ceraph);
 			outputText("Ceraph wiggles out from between the bushes, holding a bondage harness and openly eyeing your body.  She suggestively says, \"<i>Well, aren't you just a cute little slave-to-be.  Are you ready to put yourself in your slave harness and join my harem?  I've got a few more piercings I think would look great on you.  Maybe I could give you an oral fixation and a foot fetish.  Wouldn't that be nice?  Or maybe I can just keep you tied up and parade you around Mareth.  You know I'll make sure you love every minute baby, just come put this on.</i>\"\n\n");
-
 			outputText("It shames you to admit it, but you desperately want to be naked and restrained, paraded around to tease and amuse Ceraph's enemies.  You know the desires were forced on you by her cursed piercings, but it doesn't make it any easier to deny the feelings they've brought out in you.  The sexy demon-dom would be happy to feed you foreign desires and stoke them into a burning blaze that would burn away your doubts and worries.  Do you give in and become her bondage slave?\n\n");
-			simpleChoices("Yes", agreeToBecomeCeraphsFuckpetBondageToyBitchSlut, "No", finalCeraphEncounterChoiceNo, "Fight", finalCeraphEncounterStartFight, "", null, "", null);
+			menu();
+			addButton(1, "Yes", agreeToBecomeCeraphsFuckpetBondageToyBitchSlut);
+			addButton(2, "No", finalCeraphEncounterChoiceNo);
+			addButton(3, "Fight", finalCeraphEncounterStartFight);
 		}
 
 //[no]
@@ -482,12 +484,9 @@ public class CeraphScene extends NPCAwareContent
 			outputText("The goblin motions for you to bend over, and you do.  She holds the earrings up on your ears, getting them aligned just right.  ");
 			if (player.earsPierced > 0) outputText("Miraculously, your old earrings just fall out.  ");
 			outputText("The earrings snap into place with a painful and definitive *click*, and dizziness hits you so hard that you nearly fall.  The goblin catches you, steadying you as you blink a few times and adjust to the sensation.\n\n");
-
 			outputText("When you feel steady again, you look up and see that the tiny goblin has transformed into a nude, hermaphroditic demon!  She grins knowingly and caresses your body.  You step back and she says, \"<i>Awww, don't look so shocked dear.  You just took your first step into becoming one of my pets!  I'm Ceraph, and we're going to be getting VERY familiar with each other.</i>\"\n\n");
 			outputText("Her forwardness brings a blush to your face and kindles a bonfire in your loins.  Somehow the thought of being nude in front of her is far more arousing than it ought to be.  You keep trying to banish the thought, but all you can think of is your nudity and how much hornier it's making you.\n\n");
-
 			outputText("Ceraph breaks your reverie with a chuckle, \"<i>Oh baby, I see you're starting to figure it out.  Let me break it down for you.  <b>Those earrings have given you a fetish for exhibitionism.</b>  Being exposed and humiliated makes you hornier than a dog in heat, and even if you found a way to remove them, it's too late – they've forever linked nudity and humiliation with desire and lust in your easy little mind.  Get used to it and I'll be back to introduce you to another fun little fetish.</i>\"\n\n");
-
 			outputText("The slutty demon walks away with a sexy sway, and you're too confused and turned on by your predicament to pursue her.  It looks like you'll have to do with a little extra arousal whenever you're exposed in public.\n\n");
 			player.earsPierced = 1;
 			player.earsPShort = "green gem-stone ear-studs";
@@ -502,7 +501,6 @@ public class CeraphScene extends NPCAwareContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_ceraph);
 			outputText("Ceraph saunters out of the bushes and gives you a disapproving look, \"<i>I tried this the easy way.  Now we're doing it the hard way.</i>\"\n\n");
-
 			outputText("She uncurls a whip that lights aflame and says, \"<i>Time for your spanking!</i>\"\n\n");
 			startCombat(new Ceraph());
 		}
@@ -553,7 +551,6 @@ public class CeraphScene extends NPCAwareContent
 				outputText("feminine moisture drools from between your lips and your " + clitDescript() + " turns into a hard button.");
 			}
 			else outputText("your body aches for release.");
-
 			outputText("\n\nWith an amused grin, Ceraph yanks down your gear and ");
 			//[dicks]
 			if (player.cockTotal() > 0) {
@@ -595,8 +592,6 @@ public class CeraphScene extends NPCAwareContent
 
 		public function encounterCeraph():void
 		{
-			//Just in case set up next button for 1 hr + camp
-			endEncounter();
 			//If havent met her
 			if (flags[kFLAGS.PC_MET_CERAPH] == 0) {
 				spriteSelect(SpriteDb.s_ceraph);
@@ -613,7 +608,6 @@ public class CeraphScene extends NPCAwareContent
 			if (flags[kFLAGS.PC_FETISH] == 1) {
 				clearOutput();
 				outputText("Though you spend an hour exploring, you don't find anything of note.");
-				return;
 			}
 			//fetished level 2
 			if (flags[kFLAGS.PC_FETISH] == 2) {
@@ -625,7 +619,10 @@ public class CeraphScene extends NPCAwareContent
 			if (flags[kFLAGS.PC_FETISH] == 3) {
 				spriteSelect(SpriteDb.s_ceraph);
 				finalEncounterLevelCeraphPiercingButtholeNipples();
+				return;
 			}
+			//Just in case set up next button for 1 hr + camp
+			endEncounter();
 		}
 
 		public function winChoices():void

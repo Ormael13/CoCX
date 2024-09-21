@@ -76,9 +76,6 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment for odd one mist beings.\n");
 			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
 			//outputText("-New Special names: Veseshe (elf), Veseshe (elf). Each of them will start with matching bloodline perk to match their ancestor race.\n");
-			outputText("-When exploring Deepwoods can find new dungeon - Twilight Grove. It's potentialy dangerous place for pure PC's but resort-like place for alraunes and/or corrupt PC's. When explored by pure PC it will be series of fights with enemeis between 35-39 lvl's and boss of lvl 42. In one of rooms there is few storage box with items that will restock each night. Also rendomized elite mobs will appear even after boss death.\n");
-			outputText("-Can explore and clear 5th floor of River Dungeon. It have monsters from lvl 58 to 70 and boss is lvl 73. Floor is divided into three subareas: first is normal, second is hot enough to have weaker effect found in Vulcanic Crag (constant fire dmg) and third is cold enough to have weaker effect found in Glacial Rift (constant ice damage). ");
-			outputText("There are also few rooms where two nearby subareas meets. In rooms where second and third area meets climate is much more harsh and player is affected by both constant fire and ice dmg that are much stronger then in second or third subarea.\n");
 			outputText("-New enemies: Mid rank Angel of Mist - lvl 58, Mist Bee Huntress - lvl 60, Mist Wasp Huntress - lvl 62, Mist Hornet Huntress - lvl 64, Mist Alraune Maiden - lvl 66, Mist Cinderbloom - lvl 68, Mist Snow Lily - lvl 70. Encounterable on 5th strata of River Dungeon. Proto Golem - lvl 6. Encounterable in general explore from lvl 6+. Kirin (added by NUZ/Shirane) - lvl 50. Encounterable in Plains. ");
 			outputText("Werefox (M) - lvl 33. Encounterable in Inner Desert at night. Elder Werefox (M) - lvl 61. Encounterable in Inner Desert at night (he temporaly came from deeper desert regions and req. lvl 43+ to encounter)\n");
 			outputText("-New bodyparts: Troll Arms, Troll lower body, Troll Tusks, Troll Ears, Troll Tail (from Troll Fig); Glacial Troll Arms, Glacial Troll lower body, Glacial Troll Tusks, Glacial Troll Ears, Glacial Troll Tail (from Icy Fig)\n");
@@ -128,7 +125,6 @@ public class Changelog extends BaseContent
 			outputText("-Minor fixes: Coal can randomly send you to heat OR rut, Low standard check for heckel, fixed helia corruption tolerance (Svalkash)\n");
 			outputText("-Each Dao of Element can now reach 12th layer. bonuses for reaching each of three new layers is 10% more resistance and 50% more damage.\n");
 			outputText("-Added option to back from boss room in Ebon Labyrinth if it contain Draculina boss. That choice will only appear if the PC does not meet all requirements to avoid an instant bad end and therefore not have any way to deal with her most annoying (by majority consensus) ability.\n");
-			outputText("-New magical soulskill: Sunrise. Req. buying manual from Qi shop for 100 spirit stones. Create miniature sun and throw it at enemy. Base cost: 400 soulforce.\n");
 			outputText("-During Draculina boss fight been able to use Sunrise soulskill or use foxflame pelt would help to counter her Darkness move (like spell Blind can do already).\n");
 			outputText("-Foxflame Pelt special effect minor change when having 9 cinder tails: cost of use or maintain is halved, speed boost is doubled, can fly (similar to using only SF and would cost SF and Mana per turn needed to sustain foxflame pelt).\n");
 			outputText("-Minor adjustion of soulskill damage calculations.\n");
@@ -226,9 +222,6 @@ public class Changelog extends BaseContent
 			outputText("-After having equipped Silver Cross Necklace PC would be periodicaly visiting Demon Lair place (when req. to get new visit PC would travel there on next Exploration). Each visit brings PC closer to become true demon. To stop vistiing PC must remove somehow Silver Cross Necklace (which been cursed item for no true demon PC would be quite difficult).\n");
 			outputText("-New Place: Demon Lair - Xuviel home where true succubus PC can visit. There are few possible interactions there: Talk, Sex, Font of corruption. Last option have two uses: either drink directly to get week long buff or use it to turn items into corrupted legendary items (all other req. like radiant shards or cost still apply (no discounts even for Xuviel 9th wife ;))).\n");
 			outputText("-Req. min level to find Celess Senior was removed.\n");
-			outputText("-New tier 9 misc lvl-up perk (by Liadri): Absolute Bash. Req. Prestige Job: Sentinel & Shield Slam perks. Effect: Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.\n");
-			outputText("-New tier 12 toughness lvl-up perk (by Liadri): Brutal Opening. Req. Second Wind perk. Effect: Triple all physical damage dealt for 1 turn following a shield bash.\n");
-			outputText("-New tier 13 toughness lvl-up perk (by Liadri): Lingering Opening. Req. Brutal Opening perk. Effect: Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.\n");
 			outputText("-Big charviewer code update and model.xml cleanup. (aimozg)\n");
 			outputText("-Golemancer npc in HXD will no longer req. PC to reach specific golemancer perks to unlock metal plates, energy cores or mechanisms sell options. Also metal plates can be now sold in even large amounts at once: x20 and x50\n");
 			outputText("-Refactor the monster defeat check and Kirin enemy addition. (NUZ/Shirane)\n");
@@ -246,7 +239,7 @@ public class Changelog extends BaseContent
 			outputText("-Wisp Lieutenant and it follow up perks req. would take into account currently tamed monsters (even if pc would release them next hour).\n");
 			outputText("-Pregnancies for Luna, Electra, Arian and Nadia. (Canadian Snas)\n");
 			outputText("-Charview updates. (aimozg)\n");
-			outputText("-\n");
+			outputText("-Phantom racial bonuses been increased (all the changes are added to previous values): Phantom/Poltergeist/Eldritch Poltergeist - +5%/+10%/+10% to Spe multi, +25%/+70%/+160% to Int multi, +10%/+45%/+110% to Wis multi, +40/+125/+280 to Sens.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -425,6 +418,8 @@ public class Changelog extends BaseContent
 		private function Changelog54():void {
 			clearOutput();
 			outputText("(Part 2/3) <b>Version 0.9a:</b>\n\n");
+			outputText("-New mutation perk: Fiendish Metabolism (Final Form). Req. Fiendish Metabolism (Evolved) and lvl 90+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 200%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
+			outputText("Gain immunity to all fluid negative effects and allow you to feed from sexual fluids. Satisfying your crave for sex also raises your spell power for an amount equivalent to the tease damage bonus granted by this mutation. Double all recovery from demonic hunger.\n");
 			outputText("-New mutation perk: Fiendish Ovaries (Final Form). Req. Fiendish Ovaries (Evolved) and lvl 90+. Effects: ncrease Fertility by 100%, all born children from your womb will either be born as imps or greatly corrupted, while pregnant with imps tease is 50% stronger. May benefit from pregomania when pregnant with imps.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Final Form). Req. Goblin Ovaries (Evolved) and lvl 90+. Effects: Increase fertility rating by 40, While pregnant increase total libido by 40%. Double the number of kids you birth. Increase physical damage done while pregnant by 50%. Lust damage against male opponents increased by 50%. Add your fertility score as a bonus to libido.\n");
 			outputText("-New mutation perk: Hydra Blood (Final Form). Req. Hydra Blood (Evolved) and lvl 90+. Effects: Improve existing Regeneration by 4% negated by fire damage and increase acid and poison effects by 100%. Your blood is ruinous and inflicts your fang venom when damaged. Bite attacks deals 50% more damage.\n");
@@ -499,6 +494,13 @@ public class Changelog extends BaseContent
 			outputText("-New P. Special: Gallop. Can be only used when having legs ending in hooves (not cloven hooves). Effects: Run at high speed across the battlefield evading melee combat but not ranged attack, does not disable P.Special but prevents the use of the regular melee attack action. While galloping all P.Special abilities are 50% stronger due to momentum. Galloping costs fatigue every round.\n");
 			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
 			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilizing it for a while. Does not work on living things or sentient constructs.\n");
+			outputText("-New magical soulskill: Sunrise. Req. buying manual from Qi shop for 100 spirit stones. Create miniature sun and throw it at enemy. Base cost: 400 soulforce.\n");
+			//new bodyparts line
+			//new enemies line
+			//descendant/bloodline perks line
+			outputText("-When exploring Deepwoods can find new dungeon - Twilight Grove. It's potentialy dangerous place for pure PC's but resort-like place for alraunes and/or corrupt PC's. When explored by pure PC it will be series of fights with enemeis between 35-39 lvl's and boss of lvl 42. In one of rooms there is few storage box with items that will restock each night. Also rendomized elite mobs will appear even after boss death.\n");
+			outputText("-Can explore and clear 5th floor of River Dungeon. It have monsters from lvl 58 to 70 and boss is lvl 73. Floor is divided into three subareas: first is normal, second is hot enough to have weaker effect found in Vulcanic Crag (constant fire dmg) and third is cold enough to have weaker effect found in Glacial Rift (constant ice damage). ");
+			outputText("There are also few rooms where two nearby subareas meets. In rooms where second and third area meets climate is much more harsh and player is affected by both constant fire and ice dmg that are much stronger then in second or third subarea.\n");
 			outputText("-Centaur race score calculations was slight changed and can have now additionaly 3rd / 4th tier of race bonuses - Elder Centaur / True Centaur: +100 / +140 Strength +80 / +100 Toughness +175 / +185 Speed +80 / +100 Libido +75 Sens +350 / +500 Hp\n");
 			outputText("-New tier for Goblin race bonuses - Goblin Broodmother (20+ pts): -60% to str multi, +120% spe multi, +200% int multi, +80% lib multi, +40 sens).\n");
 			outputText("-New tiers for Demon race score bonuses - Elder Succubus/Incubus & Arch Succubus/Incubus (29+ pts / 38+ pts): +100/+200 spe multi, +110/+250 int multi, +275/+320 lib multi, +50/+200 sens, +150%/+180% max mana multi, -50%/-55% max wrath multi, +150%/+180% max lust multi\n");
@@ -547,11 +549,14 @@ public class Changelog extends BaseContent
 			outputText("-New tier 4 libido lvl-up perk: Improved Grapple. Req. 150+ lib. Effect: Do two action per straddle or grappling turn. Increase straddle damage by 20%.\n");
 			outputText("-New tier 6 libido lvl-up perk: Corrupt the heart. Req. Corrupt the body perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -200%.\n");
 			outputText("-New tier 8 libido lvl-up perk: Greater Grapple. Req. Improved Grapple perk and 250+ lib. Effect: Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.\n");
+			outputText("-New tier 9 misc lvl-up perk: Absolute Bash. Req. Prestige Job: Sentinel & Shield Slam perks. Effect: Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.\n");
 			outputText("-New tier 10 libido lvl-up perk: Corrupt the mind. Req. Corrupt the heart perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -300%.\n");
 			outputText("-New tier 11 misc lvl-up perk: Human Supremacy (Peerless). Req. Human Supremacy (Superior) perk and 51+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)\n");
 			outputText("-New tier 12 speed lvl-up perk: Arrow Storm. Req. Cupid perk. Effect: After striking a target each shot has a chance to pierce through and do a U-Turn to pierce the target again.\n");
+			outputText("-New tier 12 toughness lvl-up perk: Brutal Opening. Req. Second Wind perk. Effect: Triple all physical damage dealt for 1 turn following a shield bash.\n");
 			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
 			outputText("-New tier 13 speed lvl-up perk: Phantom Arrow. Req. Arrow Storm perk. Effect: By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.\n");
+			outputText("-New tier 13 toughness lvl-up perk: Lingering Opening. Req. Brutal Opening perk. Effect: Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.\n");
 			outputText("-New Dark Ascension perk: Bottomless hunger. Raise max demonic energy capacity by 5% per rank. Max Rank: 20.\n");
 			outputText("-New Dark Ascension perk: The Dark Soul. You have acquired permanent power from the many souls you consumed in your previous timelines. Raise core stats cap by 10 per rank. Max Rank: 10.\n");
 			outputText("-New event perk: Nightshade. Gained by using Black Lily. Effects: Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.\n");
@@ -627,8 +632,6 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Drake Blood (Final Form). Req. Drake Blood (Evolved) and lvl 90+. Effects: Dragon strong vitality grants mana soulforce and health regeneration 4%. You take 15% less damage from magical attack. Magic Effect from you are 50% more powerful. Magic Ability are 100% Stronger.\n");
 			outputText("-New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: +100% to all Physical Ability damage. Gallop cost 40% less fatigue. Physical ability consumes 15% less fatigues. Physical ability that stuns do so for one extra round. Galloping gains +10% evasion. Double the momentum bonus from Galloping.\n");
 			outputText("-New mutation perk: Fiendish Balls (Final Form). Req. Fiendish Balls (Evolved) and lvl 90+. Effects: Increase Virility by 100%, Increase cum production by 100%, gain a bonus to tease against females based on your cum production up to 50%. All attacks involving your penis are 300% stronger.\n");
-			outputText("-New mutation perk: Fiendish Metabolism (Final Form). Req. Fiendish Metabolism (Evolved) and lvl 90+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 200%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
-			outputText("Gain immunity to all fluid negative effects and allow you to feed from sexual fluids. Satisfying your crave for sex also raises your spell power for an amount equivalent to the tease damage bonus granted by this mutation. Double all recovery from demonic hunger.\n");
 			menu();
 			addButton(0, "Next", Changelog52);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

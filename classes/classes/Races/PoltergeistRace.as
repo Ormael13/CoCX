@@ -82,9 +82,10 @@ public class PoltergeistRace extends Race{
 				.buffs({
 					"str.mult": -0.15,
 					"tou.mult": -0.15,
-					"spe.mult": +0.45,
-					"int.mult": +0.45,
-					"wis.mult": +0.30
+					"spe.mult": +0.50,
+					"int.mult": +0.70,
+					"wis.mult": +0.40,
+					"sens": +40
 				})
 				.end();
 		
@@ -92,9 +93,10 @@ public class PoltergeistRace extends Race{
 				.buffs({
 					"str.mult": -0.25,
 					"tou.mult": -0.25,
-					"spe.mult": +0.90,
-					"int.mult": +0.90,
-					"wis.mult": +0.45
+					"spe.mult": +1.00,
+					"int.mult": +1.60,
+					"wis.mult": +0.90,
+					"sens": +125
 				})
 				.end();
 		
@@ -102,9 +104,10 @@ public class PoltergeistRace extends Race{
 				.buffs({
 					"str.mult": -0.45,
 					"tou.mult": -0.45,
-					"spe.mult": +1.50,
-					"int.mult": +1.50,
-					"wis.mult": +0.60
+					"spe.mult": +1.60,
+					"int.mult": +3.10,
+					"wis.mult": +1.70,
+					"sens": +280
 				})
 				.end();
 	}
