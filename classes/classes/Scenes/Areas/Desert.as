@@ -279,7 +279,14 @@ use namespace CoC;
 					label : "Werefox (F)",
 					kind : 'monster',
 					day : false,
-					call  : SceneLib.werefoxScene.werefoxInnerDesertEncounter,
+					call  : SceneLib.werefoxScene.werefoxFemaleInnerDesertEncounter,
+					chance: 0.50
+				},{
+					name  : "werefoxMale",
+					label : "Werefox (M)",
+					kind : 'monster',
+					day : false,
+					call  : SceneLib.werefoxScene.werefoxMaleInnerDesertEncounter,
 					chance: 0.50
 				}, {
 					name: "mimic",
@@ -300,7 +307,15 @@ use namespace CoC;
 					kind : 'monster',
 					day : false,
 					when: fn.ifLevelMin(43),
-					call  : SceneLib.werefoxScene.werefoxOuterDeepDesertEncounter,
+					call  : SceneLib.werefoxScene.werefoxFemaleOuterDeepDesertEncounter,
+					chance: 0.50
+				}, {
+					name  : "werefoxEMale",
+					label : "E.Werefox (M)",
+					kind : 'monster',
+					day : false,
+					when: fn.ifLevelMin(43),
+					call  : SceneLib.werefoxScene.werefoxMaleOuterDeepDesertEncounter,
 					chance: 0.50
 				}, {
 					name: "gorgon",

@@ -31,12 +31,12 @@ import classes.internals.*;
 				if (hasPerk(PerkLib.SoulScholar)) mod1 += .6;
 				if (hasPerk(PerkLib.SoulGrandmaster)) mod1 += .6;
 			}
-			if (flags[kFLAGS.WEREFOX_EXTRAS] >= 2) mod1 += 1;
+			if (flags[kFLAGS.WEREFOX_EXTRAS] >= 3) mod1 += 1;
 			return mod1;
 		}
 		private function cost():Number {
 			var cost1:Number = 60;
-			if (flags[kFLAGS.WEREFOX_EXTRAS] >= 2) cost1 += 30;
+			if (flags[kFLAGS.WEREFOX_EXTRAS] >= 3) cost1 += 30;
 			return cost1;
 		}
 		
@@ -58,7 +58,7 @@ import classes.internals.*;
 				}
 			}
 			addSoulforce(-cost());
-			outputText("The "+this.short+" infuse a bit of soulforce into a finger, light blue energy covering the tip. She draw a simple rune in the air, the energy from her finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "+type+". She motion, sending the ball flying toward you.");
+			outputText("The "+this.short+" infuse a bit of soulforce into a finger, light blue energy covering the tip. [monster He] draw a simple rune in the air, the energy from [monster his] finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "+type+". [monster He] motion, sending the ball flying toward you.");
 			var ElementDmg:Number = eBaseWisdomDamage() * 1.5;
 			ElementDmg *= SoulskillMod();
 			ElementDmg = Math.round(ElementDmg);
@@ -92,50 +92,82 @@ import classes.internals.*;
 			SceneLib.werefoxScene.lostToWerefox();
 		}
 		
-		//flags[kFLAGS.WEREFOX_EXTRAS] >>> 1 - werefox, 2 - elder werefox, ?? 3 - ancient/ancestor werefox ??
+		//flags[kFLAGS.WEREFOX_EXTRAS] >>> 1 - female werefox, 2 - male werefox, 3 - elder female werefox, 4 - elder male werefox, ?? 5 - ancient/ancestor werefox ??
 		public function Werefox() 
 		{
-			if (flags[kFLAGS.WEREFOX_EXTRAS] == 1) {
+			if (flags[kFLAGS.WEREFOX_EXTRAS] == 1 || flags[kFLAGS.WEREFOX_EXTRAS] == 2) {
 				this.short = "werefox";
 				this.long = "Your opponent is a werefox. While halfway human in appearance its glowing green eyes, fennec ears, sharp fangs, three bushy tails and claw armed paws reminds you of its bestial nature.";
-				this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
-				createBreastRow(Appearance.breastCupInverse("C"));
-				initStrTouSpeInte(110, 230, 211, 175);
-				initWisLibSensCor(280, 155, 172, -50);
-				this.hips.type = Hips.RATING_CURVY;
-				this.butt.type = Butt.RATING_AVERAGE + 1;
+				if (flags[kFLAGS.WEREFOX_EXTRAS] == 1) {
+					this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
+					createBreastRow(Appearance.breastCupInverse("C"));
+					this.hips.type = Hips.RATING_CURVY;
+					this.butt.type = Butt.RATING_AVERAGE + 1;
+					initStrTouSpeInte(105, 225, 221, 175);
+					initWisLibSensCor(280, 155, 172, -50);
+					this.bonusLust = 360;
+				}
+				else {
+					this.createCock(13,2,CockTypesEnum.FOX);
+					this.balls = 2;
+					this.ballSize = 4;
+					this.cumMultiplier = 6;
+					this.hoursSinceCum = 400;
+					createBreastRow();
+					this.hips.type = Hips.RATING_BOYISH;
+					this.butt.type = Butt.RATING_BUTTLESS + 1;
+					initStrTouSpeInte(115, 235, 201, 170);
+					initWisLibSensCor(275, 155, 182, -50);
+					this.bonusLust = 370;
+				}
 				this.weaponAttack = 40;
 				this.armorDef = 30;
 				this.armorMDef = 450;
 				this.tailCount = 3;
 				this.bonusHP = 1500;
-				this.bonusLust = 360;
 				this.bonusSoulforce = 2000;
 				this.level = 33;
 				this.gems = rand(16) + 30;
+				this.tailCount = 3;
 				this.drop = new WeightedDrop().
 						add(consumables.BAGOCA2,1).
 						add(consumables.BAGOCA1,3).
 						add(consumables.DESERTB,6);
 			}
-			if (flags[kFLAGS.WEREFOX_EXTRAS] == 2) {
+			if (flags[kFLAGS.WEREFOX_EXTRAS] == 3 || flags[kFLAGS.WEREFOX_EXTRAS] == 4) {
 				this.short = "elder werefox";
 				this.long = "Your opponent is a elder werefox. While halfway human in appearance its glowing green eyes, fennec ears, sharp fangs, five bushy tails and claw armed paws reminds you of its bestial nature.";
-				this.createStatusEffect(StatusEffects.BonusVCapacity, 75, 0, 0, 0);
-				createBreastRow(Appearance.breastCupInverse("E"));
-				initStrTouSpeInte(231, 455, 411, 315);
-				initWisLibSensCor(500, 232, 272, 25);
-				this.hips.type = Hips.RATING_CURVY + 2;
-				this.butt.type = Butt.RATING_NOTICEABLE + 1;
+				if (flags[kFLAGS.WEREFOX_EXTRAS] == 3) {
+					this.createStatusEffect(StatusEffects.BonusVCapacity, 75, 0, 0, 0);
+					createBreastRow(Appearance.breastCupInverse("E"));
+					this.hips.type = Hips.RATING_CURVY + 2;
+					this.butt.type = Butt.RATING_NOTICEABLE + 1;
+					initStrTouSpeInte(226, 450, 421, 315);
+					initWisLibSensCor(500, 232, 272, -25);
+					this.bonusLust = 565;
+				}
+				else {
+					this.createCock(15,2.2,CockTypesEnum.FOX);
+					this.balls = 2;
+					this.ballSize = 4;
+					this.cumMultiplier = 6;
+					this.hoursSinceCum = 500;
+					createBreastRow();
+					this.hips.type = Hips.RATING_BOYISH + 1;
+					this.butt.type = Butt.RATING_TIGHT;
+					initStrTouSpeInte(236, 460, 401, 310);
+					initWisLibSensCor(495, 232, 282, -25);
+					this.bonusLust = 575;
+				}
 				this.weaponAttack = 60;
 				this.armorDef = 50;
 				this.armorMDef = 750;
 				this.tailCount = 5;
 				this.bonusHP = 3500;
-				this.bonusLust = 565;
 				this.bonusSoulforce = 5000;
 				this.level = 61;
 				this.gems = rand(24) + 45;
+				this.tailCount = 5;
 				this.drop = new WeightedDrop().
 						add(consumables.BAGOCA3,1).
 						add(consumables.BAGOCA2,3).
@@ -144,7 +176,7 @@ import classes.internals.*;
 			this.a = "the ";
 			//this.imageName = "werefox";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
+			if (flags[kFLAGS.WEREFOX_EXTRAS] == 1 || flags[kFLAGS.WEREFOX_EXTRAS] == 3) this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 6*12+2;
@@ -162,7 +194,7 @@ import classes.internals.*;
 			this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
-			if (flags[kFLAGS.WEREFOX_EXTRAS] >= 2) {
+			if (flags[kFLAGS.WEREFOX_EXTRAS] >= 3) {
 				this.createPerk(PerkLib.ImprovedSpirituality, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedSpirituality, 0, 0, 0, 0);
 				this.createPerk(PerkLib.AdvancedSpirituality, 0, 0, 0, 0);
@@ -170,8 +202,8 @@ import classes.internals.*;
 				this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.WEREFOX_EXTRAS] == 1) IMutationsLib.WhiteFacedOneBirthrightIM.acquireMutation(this, "none");
-			if (flags[kFLAGS.WEREFOX_EXTRAS] == 2) IMutationsLib.WhiteFacedOneBirthrightIM.acquireMutation(this, "none", 2);
+			if (flags[kFLAGS.WEREFOX_EXTRAS] == 1 || flags[kFLAGS.WEREFOX_EXTRAS] == 2) IMutationsLib.WhiteFacedOneBirthrightIM.acquireMutation(this, "none");
+			if (flags[kFLAGS.WEREFOX_EXTRAS] == 3 || flags[kFLAGS.WEREFOX_EXTRAS] == 4) IMutationsLib.WhiteFacedOneBirthrightIM.acquireMutation(this, "none", 2);
 			checkMonster();
 		}
 		
