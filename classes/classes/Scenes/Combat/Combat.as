@@ -7255,10 +7255,10 @@ public class Combat extends BaseContent {
 			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE_OFF] > 0) {
 				if (player.weapon.isLarge() || player.weapon.isMassive()) {
 					if (player.wrath - 5 >= 0) player.wrath -= 5;
-					else i = flags[kFLAGS.MULTIATTACK_STYLE_OFF] + 1;
+					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] + 1;
 				}
 				else {
-					if (player.fatigue + 5 > player.maxOverFatigue()) i = flags[kFLAGS.MULTIATTACK_STYLE_OFF] + 1;
+					if (player.fatigue + 5 > player.maxOverFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] + 1;
 					else fatigue(5);
 				}
 			}
