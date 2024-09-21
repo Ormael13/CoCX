@@ -1607,7 +1607,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] = 1;
         }
         attack();
-		if (player.weaponOff.type != ItemConstants.WT_FISTS) {
+		if (!player.weaponOff.isNothing) {
 			if (flags[kFLAGS.MULTIATTACK_STYLE_OFF] >= 0) {
 				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = Math.min(maxCurrentAttacksOff(), (flags[kFLAGS.MULTIATTACK_STYLE_OFF] || 0) + 1);
 				if (player.statusEffectv1(StatusEffects.CounterAction) > 0)
@@ -1622,8 +1622,8 @@ public class Combat extends BaseContent {
 						}
 					}
 				}
-				if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;
-				if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && (dualWeapon || player.weapon == weapons.DAISHO)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;
+				if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] *= 2;
+				if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && (dualWeapon || player.weapon == weapons.DAISHO)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] *= 2;
 			}
 			else {
 				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = 1;
@@ -3768,6 +3768,27 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
             }
         }
+		else if (player.weapon == weapons.PRURUMI) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doPhysicalDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.spe >= 150) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+			if (player.spe >= 225) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+			if (player.spe >= 300) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+		}
 		else if (player.isUnarmedCombat() || IsFeralCombat) {
 			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) damage += Math.round(damage * 0.1);
 			if (player.armor == armors.SFLAREQ) damage *= 1.2;
@@ -3887,27 +3908,6 @@ public class Combat extends BaseContent {
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 			doLightningDamage(Math.round(damage * 0.3), true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-		}
-		if (player.weapon == weapons.PRURUMI) {
-			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-			doPhysicalDamage(damage, true, true);
-			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
-			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-			if (player.spe >= 150) {
-				doPhysicalDamage(damage, true, true);
-				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
-				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-			}
-			if (player.spe >= 225) {
-				doPhysicalDamage(damage, true, true);
-				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
-				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-			}
-			if (player.spe >= 300) {
-				doPhysicalDamage(damage, true, true);
-				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
-				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-			}
 		}
 		if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
@@ -4159,11 +4159,11 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.Telekinesis) || player.hasPerk(PerkLib.JobEsper)){
 				if (player.hasPerk(PerkLib.Telekinesis) && player.hasPerk(PerkLib.JobEsper)) {
 					damage += player.inte * 2;
-					damage += scalingBonusIntelligence() * 0.4;
+					damage += scalingBonusIntelligence() * 0.8;
 				}
 				else {
 					damage += player.inte;
-					damage += scalingBonusIntelligence() * 0.8;
+					damage += scalingBonusIntelligence() * 0.4;
 				}
 			}
 			if (damage < 20) damage = 20;
@@ -5276,7 +5276,6 @@ public class Combat extends BaseContent {
     public function attack(followupAttacks:Boolean = true, offHandAttacks:Boolean = false):void {
         var IsFeralCombat:Boolean = false;
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
-
         // migrate kitsune's(and their retarded cousins that does not use extend Kitsune)/chaos chimera's Seal check
         // kitsune/yamata/chaos chimera/kitsuneancestor/kitsuneelder/aiko
         // migrate knife ears that uses StatusEffects.Seal2
@@ -5298,15 +5297,12 @@ public class Combat extends BaseContent {
                         outputText("Utilizing your skills as a bareknuckle brawler, you make two attacks!\n");
                     }
                 }
-                
                 // migrate alruine/sandtrap flavor text and trap level changes
                 monster.preAttack();
-
                 //Blind
                 if (player.playerIsBlinded()) {
                     outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
                 }
-
                 // Migrate basilisk blind check
                 // Gimmick now way easier to implement if any fucker want to use it kekvv
                 if(monster.midAttackSkip()){
@@ -5316,19 +5312,16 @@ public class Combat extends BaseContent {
                     // Migrate Incubus Scientist ShieldHits checks and ShieldsHitMelee()
                     if(monster.midAttackSeal()){
                         // rest of the attack here
-
                         if (player.HP <= player.minHP()) {
                             doNext(endHpLoss);
                             return;
                         }
-
                         // Check if player missed
                         // enemyAI() should still be called in the end
                         if (((player.playerIsBlinded() && rand(2) == 0)
                                 || (monster.getEvasionRoll(false, player.spe)
                                         && !monster.hasPerk(PerkLib.NoDodges)))
                                 && !monster.monsterIsStunned()) {
-
                             // Migrate akbal/shouldra/kitsune/default dodge text
                             monster.midDodge();
                             outputText("\n\n");
@@ -5339,7 +5332,6 @@ public class Combat extends BaseContent {
                             if(monster.postDodge()){
                                 // Almost there, probably
                                 if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
-
                                 //Natural weapon Full attack list
                                 if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
                                     IsFeralCombat = true;
@@ -5360,7 +5352,6 @@ public class Combat extends BaseContent {
                     combatRoundOver();
                     return;
                 }
-
             }
         }
 
@@ -6376,11 +6367,11 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Telekinesis) || player.hasPerk(PerkLib.JobEsper)){
                 if (player.hasPerk(PerkLib.Telekinesis) && player.hasPerk(PerkLib.JobEsper)) {
 					damage += player.inte * 2;
-					damage += scalingBonusIntelligence() * 0.4;
+					damage += scalingBonusIntelligence() * 0.8;
 				}
 				else {
 					damage += player.inte;
-					damage += scalingBonusIntelligence() * 0.8;
+					damage += scalingBonusIntelligence() * 0.4;
 				}
             }
             if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
@@ -6697,11 +6688,9 @@ public class Combat extends BaseContent {
         var critDamage:Number = calculateCritDamage();
         var hitCounter:int = 0;
         if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
-
         var boolSwiftCast:Boolean = player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || player.weaponOff == weapons.ATWINSCY || (player.weapon.isSingleLarge() && player.hasPerk(PerkLib.GigantGrip)) || (player.weapon.isSingleMassive() && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand();
         var boolLifeLeech:Boolean = player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon();
         var boolFistingIs300Bucks:Boolean = (player.isFistOrFistWeapon() && (player.shield.isNothing || (player.shield == shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dagger and Shield" && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dual Daggers")) || player.isFeralCombat());
-
 		if (offHand) howManyHits = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND];
 		else howManyHits = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND];
         for(var i:int = 1; i <= howManyHits; i++){
@@ -7242,7 +7231,7 @@ public class Combat extends BaseContent {
                 meleeMasteryGain(hitCounter, critCounter, offHand);
                 return;
             }
-			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE_MAIN] > 0) {
+			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE_MAIN] > 0 && !offHand) {
 				if (player.weapon.isLarge() || player.weapon.isMassive()) {
 					if (player.wrath - 5 >= 0) player.wrath -= 5;
 					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] + 1;
@@ -7252,7 +7241,7 @@ public class Combat extends BaseContent {
 					else fatigue(5);
 				}
 			}
-			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE_OFF] > 0) {
+			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE_OFF] > 0 && offHand) {
 				if (player.weapon.isLarge() || player.weapon.isMassive()) {
 					if (player.wrath - 5 >= 0) player.wrath -= 5;
 					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] + 1;
@@ -16070,6 +16059,10 @@ public function useCocytokinesis():void {
 }
 public function sharedKinesisMidpart(crit:Boolean):Number {
 	var damage:Number = scalingBonusSensitivity() * 2;
+	if (player.hasPerk(PerkLib.Telekinesis)) {
+		damage += player.inte * 0.5;
+		damage += scalingBonusIntelligence() * 0.2;
+	}
 	if (damage < 10) damage = 10;
 	//soulskill mod effect
 	//damage *= combat.soulskillMagicalMod();

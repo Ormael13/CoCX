@@ -11,7 +11,7 @@ public function joJoyCampMenu():void {
 		outputText("\"Oh, I consider myself *very* lucky\" Joy teases. Belisa gently slaps the monk on the shoulder. \n\n");
 		outputText("\"That's what I get for being nice to you!\" Belisa fires back, but you can tell it's just friendly teasing. You step closer, and the two turn their heads, Belisa waving at you happily.\n\n");
 		outputText("\"Hello!\" Belisa says happily. \"We were just discussing-\" Joy lunges, cheeks bright red, to put her hands over the Drider's mouth, but Belisa laughs, ducking. \"Never mind!\" Joy 'chases' Belisa away, but you can tell both ladies are laughing, Joy, a bit embarassed, Belisa, amused to no end.  \n\n");
-		outputText("\"Joy comes back, breathing slightly heavily, her cheeks red. \"Hello, "+[Player]+", what can I do for you?\" \n\n");
+		outputText("\"Joy comes back, breathing slightly heavily, her cheeks red. \"Hello, "+[player]+", what can I do for you?\" \n\n");
 		}
 		else if ((BelisaFollower.BelisaInCamp) == false) {
 		switch (rand(3)) {

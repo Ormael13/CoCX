@@ -91,12 +91,12 @@ public class Domsdomain extends DungeonAbstractContent implements TimeAwareInter
         outputText("You approach the demon’s former lab. The stairs have been polished, handrails added. Lamps have been placed periodically, pink flames burning inside heart-shaped, black steel cages. You’d never have known this place was once supposed to be a secret. You shake your head, making your way to the Former Lab’s secret entrance.  \n\n");
 		outputText("Several dozen demons are lined up outside, and a brawny zebra-morph stands guard. Apparently, the place has already become popular. He sees you, and as you near the entrance, he holds up his hand to the other demons.  \n\n");
 		if (WhosInCharge == 1 && model.time.hours >= 6 && model.time.hours < 18) {
-        outputText("“"+ player.mf("master", "mistress") +[Player]", welcome to the Dom's Domain. Please enjoy your stay, and be sure to give my regards to Mistress Ceraph.” A flat-chested succubus starts to protest, but he waves you through. As you enter, you hear the bouncer raise his voice. “"+ player.mf("master", "mistress") +[Player]" killed Lethice’s best, you half-baked mosquito, and was gracious enough to let us have this place! Mistress Ceraph was EXTREMELY clear on this-!”  \n\n");
+        outputText("“"+ player.mf("master", "mistress") +" [player], welcome to the Dom's Domain. Please enjoy your stay, and be sure to give my regards to Mistress Ceraph.” A flat-chested succubus starts to protest, but he waves you through. As you enter, you hear the bouncer raise his voice. “"+ player.mf("master", "mistress") +[player]" killed Lethice’s best, you half-baked mosquito, and was gracious enough to let us have this place! Mistress Ceraph was EXTREMELY clear on this-!”  \n\n");
 		outputText("You leave the zebra-morph to his argument. You’ve got better things to do.\n\n");
         }
         if (WhosInCharge == 2 && model.time.hours >= 6 && model.time.hours < 18) {
         outputText("A few dozen demons and various shady citizens of Mareth are lined up outside. A single bouncer watches the lot…but you can tell that this one bouncer is easily worth a dozen demons. He stands nearly fifteen feet tall, with the legs of a Drider, the head of a dragon, the arms of a displacer beast, and three tails, one salamander, one hydra, and one, oddly enough, vastly oversized fox tail, which he seems to be busy caressing with every hand he has, while occasionally waving someone through. As he sees you, however, he quickly lowers his hands, straightening up and giving you a low bow. \n\n");
-		outputText("“"+ player.mf("master", "mistress") +" [Player]. Welcome. Please enjoy your time here, and if there are any problems, feel free to call upon me and my colleagues to resolve such issues.” He opens the door for you, and you give the bouncer a pat on his furry tail as you pass. “Th-thank you”, he says, shuddering as he returns to his post. \n\n");
+		outputText("“"+ player.mf("master", "mistress") +" [player]. Welcome. Please enjoy your time here, and if there are any problems, feel free to call upon me and my colleagues to resolve such issues.” He opens the door for you, and you give the bouncer a pat on his furry tail as you pass. “Th-thank you”, he says, shuddering as he returns to his post. \n\n");
         }
         if (WhosInCharge == 3 && model.time.hours >= 6 && model.time.hours < 18) {
         outputText("A half-dozen demons mill around outside the Dom’s Domain, blocked from entry by two smaller, suit-clad demons with sleek black pistols on their hips. Several well-dressed imps, also armed with pistols, perch on the neighboring cliffs.  \n\n");
@@ -139,7 +139,7 @@ outputText("Several bat-like gargoyles stand between you and the door inside, wi
         clearOutput();
         if SeenEmerald = false {
         outputText("As you enter the section, a scantily clad omnibus greets you. She has four displacer arms, a pair of modest B cup breasts, and while her bikini bottom is cut open to reveal her cock and glistening pussy, her human-like cock is only 2 inches long. She has wide red eyes, shining with moisture, and her knees tremble.  \n\n"); 
-		outputText("“"+ player.mf("master", "mistress") +" [Player], I presume?” She bites her lip, shuddering slightly. “My name is Emerald, but please, call me Em. If you want anything in the restaurant, please talk to me.” A passing demon slaps her on the ass, and she winces.   \n\n");
+		outputText("“"+ player.mf("master", "mistress") +" [player], I presume?” She bites her lip, shuddering slightly. “My name is Emerald, but please, call me Em. If you want anything in the restaurant, please talk to me.” A passing demon slaps her on the ass, and she winces.   \n\n");
 		outputText("The bar is over there, and the two labs have been converted. One is the Merchant’s…Hng!” She turns around, giving you a clear view of her juicy ass…and the currently vibrating pink toy stuck into it. “I’ll be r-right there! Just give m-me a second!” She shudders. “...Quarter, and there’s a brewery to the west, over there. N-now, I need to go s-serve some drinks.” You notice, as she walks off, that the demon she’s walking over to has a remote in his hand, and that he’s pressing the button repeatedly. Apparently, this restaurant has more than one type of service. \n\n");    
         }
         else 
@@ -178,7 +178,7 @@ outputText("Several bat-like gargoyles stand between you and the door inside, wi
         outputText("Several cages float above the stage, a dozen more demons dancing within. Occasionally, the cages lower, and one of the demons on the ground pulls the dancer from the cage. The dancer and the demon then swiftly move to the East, where Project Nightwalker once was, going through the iron door. Almost as quickly, another demon steps into the cage, and it raises towards the ceiling as the demon within begins to dance.\n\n");
         if (SeenCeraph = false) {
             outputText("Ceraph stands, waving a hand. The music slows, fading out over a few seconds. Some of the demons mutter, but she leans down, another demon offering her a small device. \n\n");
-            outputText("“Demons and sinners!” She declares warmly. “My eyes do not deceive me. We have a very special guest here today!” She points to you, and the crowd parts. “"+ player.mf("master", "mistress") +" [Player] is here!” She pauses as some of the demons mutter, apparently not happy to see you. “Now, now, whores and gentledemons…While some of you may have had…some run-ins with our patron here, they’re the ones responsible for clearing out this lovely place for us. Give them a warm welcome!” She titters. “After all…We wouldn’t want any…unfortunate accidents to befall anyone, now would we?” \n\n");
+            outputText("“Demons and sinners!” She declares warmly. “My eyes do not deceive me. We have a very special guest here today!” She points to you, and the crowd parts. “"+ player.mf("master", "mistress") +" [player] is here!” She pauses as some of the demons mutter, apparently not happy to see you. “Now, now, whores and gentledemons…While some of you may have had…some run-ins with our patron here, they’re the ones responsible for clearing out this lovely place for us. Give them a warm welcome!” She titters. “After all…We wouldn’t want any…unfortunate accidents to befall anyone, now would we?” \n\n");
             outputText("This gets some applause, and none of the assembled demons seem willing to tangle with you…But Ceraph is clearly just using you and your strength to further her own agenda. How do you react?\n\n");
             menu();
         addButton (1, "Humiliate", CeraphHumiliateFirst);
@@ -354,7 +354,7 @@ addButton (1, " ", );
     public function DDullahanCheck():void {
         clearOutput();
         outputText("You walk towards the door, noticing the artwork on the door’s been changed. Instead of the spider motif, a curvy, pale woman is carved into the door, with her head floating in the air. As you near the door, it opens automatically, some kind of piston pushing it aside. A smaller incubus and an extremely brawny lacta bovine stand guard at the stairs leading downward. They both wear a collar, he seems to have his ear tagged, like a cow, and they both have weapons at their side. He wears a pair of daggers, and she has a massive tower shield on her back, and a greataxe in one hand. You’re not sure whether she’s sporting breasts, or pecs. The incubus is soft, almost pudgy-looking, and he steps forward as you approach.  \n\n");
-		outputText("“Welcome to the dainty Dullahan, [Master] [Player]. If there are any problems, please inform myself or my partner, and we’ll be sure to set things right.” That being said, they stand aside, leaving your path downstairs open.  \n\n");
+		outputText("“Welcome to the dainty Dullahan, [Master] [player]. If there are any problems, please inform myself or my partner, and we’ll be sure to set things right.” That being said, they stand aside, leaving your path downstairs open.  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
         if (SeenDDullahan == false) {
@@ -373,7 +373,7 @@ addButton (1, " ", );
 		outputText("Their eyes are all closed, and while they’re bound, they seem well-fed and taken care of. However, they all seem to have been changed. While they all seem to have the same structure as an imp or goblin, they seem to have been transformed into miniature versions of one of the races of Mareth. Six in total levitate, slowly rotating. Pig, Mouse, Fox, Minotaur, Goblin and Imp. You slowly reach out towards the closest. Are they…even still alive in there? \n\n");
 		outputText("“Hello?” You hear a soft voice come from behind you, and you turn, whipping around.  \n\n");
 		outputText("A small woman jumps back from you. “H-hey!” She protests. “Don’t touch them!” As you step away from the bound creatures, she walks in, putting herself between you and the creatures. \n\n");
-		outputText("“Rule one of the Dainty Dullahan: No touching the merchandise.” A woman with porcelain-white skin stands, pointing a finger at you. “And that…goes…” She seems to recognize you, and her pale blue eyes widen. “Wait…Are you…[Master] [Player]?” You nod, and her hands begin to shake. “I-I’m so sorry.” She immediately drops to her knees, prostrating herself before you. “I’m Meila, and I’m…Well, I am the Dainty Dullahan.” \n\n");
+		outputText("“Rule one of the Dainty Dullahan: No touching the merchandise.” A woman with porcelain-white skin stands, pointing a finger at you. “And that…goes…” She seems to recognize you, and her pale blue eyes widen. “Wait…Are you…[Master] [player]?” You nod, and her hands begin to shake. “I-I’m so sorry.” She immediately drops to her knees, prostrating herself before you. “I’m Meila, and I’m…Well, I am the Dainty Dullahan.” \n\n");
         outputText("Now that you’re getting a closer look at her, she is rather dainty. Meila stands 5’3, a thin, waifish woman who you could probably pick up with one hand. Her B-cup breasts are covered with a thin pink top, her pale, almost ghostlike midriff bare. She wears a dainty, frilly skirt that barely goes halfway down her thigh, and her legs are covered with thin black stockings. Her ebony, waist-length hair shimmers slightly, woven into a single braid going down her back.  \n\n");
 		outputText("“Please don’t tell Ceraph I was rude to you.” She begs. “I…Can’t deal with her being mad with me.” As her shoulders begin to shake, you hear a slight plop sound.  \n\n");
 		outputText("“No!” Meila wails, lunging forward as…Her head rolls toward you? Despite your shock, you move your [leg] into the runaway head’s path, stopping it before it gets away. She’s moving to grab her head, but you have some time to react. What do you do? \n\n");
@@ -388,7 +388,7 @@ addButton (2, "LetHerGrab", MeilaGrabsherHead);
 public function Meila1stFuckMenu():void {
 		clearOutput();
 		outputText("You scoop up the head, a mischievous grin on your face. Meila’s body reaches towards you, but stops in her tracks, and she whimpers pitifully as you turn her head to face you. Her face is cool to the touch. \n\n"); 
-		outputText("“What are you going to do to me, [master] [Player]?”  \n\n");
+		outputText("“What are you going to do to me, [master] [player]?”  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
@@ -449,7 +449,7 @@ public function DDullahan():void {
 		clearOutput();
 		outputText("As you descend into the Dainty Dullahan’s lounge, you see Meila’s body moving from table to table, occasionally taking an order. You see a demon come out from the back, a brand new \n\n"); 
 		outputText("(fox-tail swishing behind them) (Pig’s hoofs clattering on the floor) (Mousey jaw, their teeth chattering slightly) (Insert TFs here \n\n");
-		outputText("You hear a quick “Hello, [master] [Player], If you need anything, just step up to the counter.” Meila’s head sits in a bucket near the ceiling, overlooking the entire operation while her body works the counter. \n\n");
+		outputText("You hear a quick “Hello, [master] [player], If you need anything, just step up to the counter.” Meila’s head sits in a bucket near the ceiling, overlooking the entire operation while her body works the counter. \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
@@ -461,7 +461,7 @@ addButton (9, "Leave", Mainhall1);
 public function Meila():void {
 		clearOutput();
 		outputText("You step up to the counter, and you feel a chill on your back as Meila’s head floats over your shoulder, deftly reattaching to her neck.  \n\n"); 
-		outputText("“[Master] [Player], what brings you here?” She asks politely. “Here to get transformed? Help me with selection? Or did you just want to see more of me?” \n\n");
+		outputText("“[Master] [player], what brings you here?” She asks politely. “Here to get transformed? Help me with selection? Or did you just want to see more of me?” \n\n");
 		
 menu();
 addButton (1, "Stare", MeilaAppearance);

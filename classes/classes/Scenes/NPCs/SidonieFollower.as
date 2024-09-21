@@ -530,7 +530,7 @@ public class SidonieFollower extends NPCAwareContent
 			clearOutput();
 			outputText("You sit down by the firepit, a slight bit of nausea filling your stomach. As you gag, holding your stomach, you notice a bowl of oats in front of your face. Filled with a sudden hunger, you take a proffered spoon and dig in, your nausea fading with each bite. Only once you’re done do you look up, seeing Sidonie sitting next to you.  \n\n");
 			outputText("“Well…I guess that settles it then.” Sidonie says nervously. “...How are you feeling?” You thank her for the oats. For whatever reason, you really needed them.  \n\n");
-			outputText("“Common knowledge among us horse-morphs, [Player]. When…well…When a woman’s stomach’s acting up, a few days after some fun, give ‘em oats. If they look at you weird, it’s nothin’. If it helps…Well…There’ll be a new foal runnin’ around soon enough.”  \n\n");
+			outputText("“Common knowledge among us horse-morphs, [player]. When…well…When a woman’s stomach’s acting up, a few days after some fun, give ‘em oats. If they look at you weird, it’s nothin’. If it helps…Well…There’ll be a new foal runnin’ around soon enough.”  \n\n");
 			outputText("Nervously, she twiddles her thumbs. “Uh…I’m not sure how you want to…do things going forward. Even with a foal in you, you’re way stronger than me, so it’s not like I can really protect you, but…”  \n\n");
 			outputText("You tell Sidonie that she’s rambling, and she winces, leaning back and resting her palms on the ground.  \n\n");
 			outputText("“Yeah…I am.” She sighs. “Look…I’ve never been a dad, not that I know of, and…I don’t really know how to process this.” She looks at you, concerned. “Are you…Okay? Like with me? Are WE okay?” \n\n");
@@ -648,7 +648,7 @@ public class SidonieFollower extends NPCAwareContent
 		outputText("You ask if she’s still mad, and she tosses her hands up into the air. “I mean…Not really? I’m just…I never saw myself as the motherly type, and it’s…Not something to take lightly.”  \n\n");
 		outputText("You sit beside her, asking if she’s stressed out. “Well…Yeah. Look, I like you and all, but I always saw us as ‘friends with benefits’, not really…a couple.” You tell her that doesn’t have to change, and she shoves your shoulder, just enough to push you a bit away from her.  \n\n");
 		outputText("“We’re going to have a kid. There’s going to be SOMEthing between us. I…don’t want our kid to think of themselves as…unwanted.”  \n\n");
-		outputText("You put a hand on Sidonie’s stomach, spreading your fingers wide. She closes her eyes, sighing. “What am I gonna tell my old man, [Player]? Half the reason he was cool with me coming back out here, was because I told him I was safe.”  \n\n");
+		outputText("You put a hand on Sidonie’s stomach, spreading your fingers wide. She closes her eyes, sighing. “What am I gonna tell my old man, [player]? Half the reason he was cool with me coming back out here, was because I told him I was safe.”  \n\n");
 		outputText("You take a bit of offence to that. Sidonie IS safe, and you voice your objection. “I know that, you know that…But what is he gonna think? What do I tell him?”  \n\n");
 		outputText("You think for a moment, before suggesting that she tell him the truth. That you’re an outworlder champion, guarding a portal to your world. That you rescued her from gnolls, and that you and her have a casual relationship. That you have a camp guarded by powerful people, and that Sidonie’s built a life for herself here. \n\n");
 		outputText("“Well…I could do that…Or I could just stay out here until the kid’s born, then just show up.” She’s only half joking. “...Nah, you’re right. Dad deserves to know.” She wrings her hands. “So…We’re good?”  \n\n");
@@ -668,7 +668,7 @@ public class SidonieFollower extends NPCAwareContent
 		//Split End
 		outputText("“I’m worried about things.” Sidonie admits. “I always thought of us as ‘friends with benefits’, not as something serious…But if we’re gonna have a kid…Especially if I’m the mom…I just want to know that…That you’ll be there to help, y’know? I don’t want my kid not having their dad around.”  \n\n");
 		outputText("You ask her if that really requires any changes between you two. You’ll still be around, as guarding the portal is your biggest priority.  \n\n");
-		outputText("“What the fuck am I gonna tell my old man, [Player]?” You suggest that she just tell him the truth, and that you’re pretty sure they’re as safe, if not safer, with you than in Tel’Adre. Sidonie groans at that. “Do I have to?” You snort, barely holding in your laughter at the look on her face.  \n\n");
+		outputText("“What the fuck am I gonna tell my old man, [player]?” You suggest that she just tell him the truth, and that you’re pretty sure they’re as safe, if not safer, with you than in Tel’Adre. Sidonie groans at that. “Do I have to?” You snort, barely holding in your laughter at the look on her face.  \n\n");
 		outputText("You tell Sidonie that whatever happens, you’ve got her back…It’s a pretty nice back, too. \n\n");
 		outputText("“Oh, fuck you.” Sidonie playfully slaps the back of your head. “...Alright, I guess we’re rolling with it then.” She stands. “But I’ve got work to do now, since you’ve put me on a clock.”  \n\n");
 		outputText(" \n\n");

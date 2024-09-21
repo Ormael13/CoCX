@@ -505,7 +505,7 @@ public class DivaScene extends XXCNPC {
         outputText("“O-of course. Looking down upon thou…Tis inappropriate, here.” Diva sits in front of you, fidgeting nervously. You sigh, telling her to get on with it.  \n\n");
         outputText("“...Dost thou remember…What mine motivation was, for our battle?” She asks, both hands gripping her dress. “When thou defeated me in combat, what mine utterance was?”  \n\n");
         outputText("Blinking, you think back, recalling that Diva had mentioned something about “Knowing Love”, “being bitten by the great vampire”, blah blah. Like she wanted to whisk you away, marry you, have kids…Oh.  \n\n");
-        outputText("“...Thou hast loved me, [Player]. And in that love…Something wondrous has occurred.” Diva looks at you, her eyes wet with unshed tears. “While thou and me…Our relationship hast been so different from what I’d envisioned, one thing hast held true.” She takes your hands, looking deep into your eyes. “Thine seed hast taken root inside me, and the night will be less empty.” \n\n");
+        outputText("“...Thou hast loved me, [player]. And in that love…Something wondrous has occurred.” Diva looks at you, her eyes wet with unshed tears. “While thou and me…Our relationship hast been so different from what I’d envisioned, one thing hast held true.” She takes your hands, looking deep into your eyes. “Thine seed hast taken root inside me, and the night will be less empty.” \n\n");
         outputText("Diva seems…Happy. Very happy… \n\n");
         outputText("A sudden image pops, unbidden, into your head. Diva, screaming her superiority into the night, surrounded by little copies of her, all parroting her cheesy lines and picking overly dramatic fights with random people. While the thought is funny, borderline hilarious, the aftermath of having more than one Diva running around?! Just the thought is giving you a headache.  \n\n");
         outputText("You take Diva’s hands in yours, and promise that you’ll be there for her, and your children. Diva, giddy, begins floating again, forcing you to gently pull her back down to earth. Thankfully, she doesn’t understand WHY you’re supporting her. Hopefully you can help your little ones not be as delusional as their mother. \n\n");
@@ -526,7 +526,7 @@ public class DivaScene extends XXCNPC {
 
     public function DivaPregProgression2():void {
         clearOutput();
-        outputText("As you get back to camp, you find Diva pacing, muttering angrily to herself. “Fate plays cruel jokes. The one time thou seeketh [Player]’s company, thine searches in vain.” Her fangs are out, and despite the bloodstains on her fangs, she’s clearly hungry…Wait, was she looking to feed from you? You’ve heard of pregnant women having odd cravings, but this?! \n\n");
+        outputText("As you get back to camp, you find Diva pacing, muttering angrily to herself. “Fate plays cruel jokes. The one time thou seeketh [player]’s company, thine searches in vain.” Her fangs are out, and despite the bloodstains on her fangs, she’s clearly hungry…Wait, was she looking to feed from you? You’ve heard of pregnant women having odd cravings, but this?! \n\n");
         //if you don't have blood she'll drink
         outputText("Wait…Did Diva forget that you don’t have blood that she’d drink? Such a weird situation…Poor woman.\n\n");
         menu();

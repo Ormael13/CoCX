@@ -85,7 +85,7 @@ public class TempleOfTheDivine extends BaseContent {
 				if (havingOrUsingBSwordOrExcalibur()) addButton(3, "Put Sword", puttingBSwordOrExcaliburOnAltar);
 				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) addButton(3, "Take Sword", takingExcaliburFromAltar);
 				if (havingOrUsingBStaffOrParacelsus()) addButton(4, "Put Staff", puttingBStaffOrParacelsusOnAltar);
-				if (player.statusEffectv1(StatusEffects.TempleOfTheDivineTracker2) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) addButton(4, "Take Staff", takingParacelsusFromAltar);
+				if (player.statusEffectv1(StatusEffects.TempleOfTheDivineTracker2) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker2) == 3) addButton(4, "Take Staff", takingParacelsusFromAltar);
 			}
 			addButton(10, "Sapphire", sapphire.sapphiremenu).hint("Have a chat with the gargoyle.");
 			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(11, "[onyx name]", onyx.krystalonyxmenu).hint("Have a sex with [onyx name].");

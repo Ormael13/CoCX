@@ -7,8 +7,8 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class SatyrRace extends Race {
-    public static const SatyrHairColors:/*String*/Array = ["red", "mahogany", "brown"];
-    public static const SatyrFurColors:/*String*/Array = ["red", "mahogany", "brown"];
+    public static const SatyrHairColors:/*String*/Array = ["red", "mahogany", "brown", "auburn"];
+    public static const SatyrFurColors:/*String*/Array = ["red", "mahogany", "brown", "auburn"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",

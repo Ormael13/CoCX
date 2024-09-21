@@ -3183,8 +3183,6 @@ public class PerkLib
 				"Instead of being taught, now you teach others. Your skill allows you to increase max mana by 10%.",
 				"You've chosen the 'Teacher' perk, gaining +10% max Mana.")
 				.withBuffs({'maxmana_mult':+0.1});
-		public static const Telekinesis:PerkType = mk("Telekinesis", "Telekinesis",
-				"You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons and aquire additionnal attacks based on character level.");
 		public static const TemporalGolemsRestructuration:PerkType = mk("Temporal Golems Restructuration", "Temporal Golems Restructuration",
 				"Allows you to use option of send more than 5 temporary golems to attack in one turn. Adding the option to make 5 temporary golems at once and shorten a bit time to make 1 temporary golem. (+5 to max limit of stored temporary stone golems)",
 				"You've chosen the 'Temporal Golems Restructuration' perk, adding the option to make faster and more temporary golems at once and have the option to send more of them at once to attack. (+5 to max limit of stored temporary stone golems)");
@@ -4167,6 +4165,8 @@ public class PerkLib
 				"Double Speed when over 75% lust and gain immunity to defeat by lust but lose the ability to use magic other than racial spells.");
 		public static const SuperStrength:PerkType = mk("Super strength", "Super strength",
 				"Unarmed strike damage modifier from strength is doubled.");
+		public static const Telekinesis:PerkType = mk("Telekinesis", "Telekinesis",
+				"You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using various -kinesis specials, using thrown weapons and aquire additionnal attacks based on character level.");
 		public static const ThickSkin:PerkType = mk("Thick Skin", "Thick Skin",
 				"Toughens your dermis to provide 2 points of armor and 1 point of magic resistance.");
 		public static const TitanicSize:PerkType = mk("Titan size", "Titan size",
