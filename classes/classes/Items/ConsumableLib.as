@@ -263,16 +263,16 @@ public final class ConsumableLib extends AlchemyLib
 		public const XXXXMAN: Consumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);*/
 
 		//RARE ITEMS (Permanent effects, gives perks on consumption.)
-		public const BIMBOLQ:BimboLiqueur     = new BimboLiqueur();
-		public const BROBREW: Consumable = mk("BroBrew", "BroBrew", "a can of Bro Brew", 1000, "This aluminum can is labelled as 'Bro Brew'.  It even has a picture of a muscly, bare-chested man flexing on it.  A small label in the corner displays: \"Demon General's Warning: Bro Brew's effects are as potent (and irreversible) as they are refreshing.", m.broBrew);
-		public const HUMMUS2: Consumable = mk("Hummus2", "S.Hummus", "a blob of cheesy-looking super hummus", 6, "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.", m.superHummus);
-		public const P_PEARL:PurePearl = new PurePearl();
-		public const EZEKFRU: Consumable = mk("EzekFru", "EzekielFruit", "a magical fruit", 300,
+		public const BIMBOLQ:BimboLiqueur	= new BimboLiqueur();
+		public const BROBREW:Consumable		= mk("BroBrew", "BroBrew", "a can of Bro Brew", 1000, "This aluminum can is labelled as 'Bro Brew'.  It even has a picture of a muscly, bare-chested man flexing on it.  A small label in the corner displays: \"Demon General's Warning: Bro Brew's effects are as potent (and irreversible) as they are refreshing.", m.broBrew);
+		public const HUMMUS2:Consumable		= mk("Hummus2", "S.Hummus", "a blob of cheesy-looking super hummus", 6, "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.", m.superHummus);
+		public const P_PEARL:PurePearl		= new PurePearl();
+		public const EZEKFRU:Consumable		= mk("EzekFru", "EzekielFruit", "a magical fruit", 300,
 			"Evangeline gave you this fruit as means of showing her gratitude. Eating it will probably strengthen your body and mind.\n\n<b>Effect: all stats +10</b>", m.ezekielfruit);
 		public const E3PEARL:ElementalPearl = new ElementalPearl(3);
 		public const E5PEARL:ElementalPearl = new ElementalPearl(5);
 		public const E7PEARL:ElementalPearl = new ElementalPearl(7);
-		public const DEMONME: Consumable = mk("DemonMe", "DemonizeMe", "a bottle of Demonize Me", 300, "The oil-like dark blue substance within the bottle seems ordinary enough, as normal as unholy fluids can get.", m.demonizeme);
+		public const DEMONME:DemonizeMe		= new DemonizeMe();
 		
 		//NON-TRANSFORMATIVE ITEMS
 		public const AGILI_E: Consumable = mk("Agil.E.", "Agility E.", "an agility elixir", 6, "This greenish elixir is supposed to increase the user’s natural swiftness and agility.", m.agilityElixir);

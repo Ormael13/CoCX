@@ -249,6 +249,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and a Kraken. (+2 to Scylla/Kraken score)");
 		public static const BloodlineKraken:PerkType = mk("Bloodline: Kraken", "Bloodline: Kraken",
 				"Your Kraken bloodline appears strongly within you. (+2 to Scylla/Kraken score)", null, true);
+		public static const YukiOnnasDescendant:PerkType = mk("Yuki Onna's descendant", "Yuki Onna's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and an Yuki Onna. (+2 to Yuki Onna score)");
+		public static const BloodlineYukiOnna:PerkType = mk("Bloodline: Yuki Onna", "Bloodline: Yuki Onna",
+				"Your Yuki Onna bloodline appears strongly within you. (+2 to Yuki Onna score)", null, true);
 		public static const CommonHumansDescendant:PerkType = mk("Common human's descendant", "Common human's descendant",
 				"You are a descendant of your ancestor, who was the child of a common human. (+2 to human score)");
 		public static const CommonHumanBloodline:PerkType = mk("Bloodline: Common human", "Bloodline: Common human",
@@ -265,6 +269,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a primarch. (+10 to human score)");
 		public static const PrimarchBloodline:PerkType = mk("Bloodline: Primarch", "Bloodline: Primarch",
 				"Your Primarch bloodline appears strongly within you. (+10 to human score)", null, true);
+	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
+	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
+	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
 	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
 	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
 	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",

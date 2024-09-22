@@ -1720,7 +1720,7 @@ use namespace CoC;
 					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
 					menu();
 					addButton(1, "Fight", doFightSuccubus);
-					addButtonIfTrue(2, "Go Demon", goDemon, "You already got no soul!!!", !player.hasPerk(PerkLib.Soulless), "THIS WILL TURN YOU INTO TRUE DEMON!!! ARE YOU SURE ABOUT THAT???");
+					addButtonIfTrue(2, "Go Demon", goDemon, "You already got no soul!!! Or you're pernamently transformed!!!", (!player.hasPerk(PerkLib.Soulless) && !player.blockingBodyTransformations()), "THIS WILL TURN YOU INTO TRUE DEMON!!! ARE YOU SURE ABOUT THAT???");
 					addButton(3, "Hook Up", talkSuccubusYes);
 					return;
 				}

@@ -2245,7 +2245,6 @@ public class Combat extends BaseContent {
             }
         }
         outputText("\n");
-
         //Chainsword weapon procs
         if (monster.canMonsterBleed() && (player.isUsingMechMeleeWeapons())) {
             if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
@@ -2260,7 +2259,6 @@ public class Combat extends BaseContent {
             if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
             else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
         }
-
         //Gain weapon experience when using goblin weapons
         if (player.isUsingMechMeleeWeapons()) {
             var hitCounter:int = (player.vehicles == vehicles.HB_MECH || weapon == "saw blades")? 2: 1;
@@ -5338,9 +5336,9 @@ public class Combat extends BaseContent {
                                     resolveFeralCombatAdditionnalAttacks();
                                 }
                                 // Do all other attacks
-                                meleeDamageAcc(IsFeralCombat);
-								if (offHandAttacks) meleeDamageAcc(IsFeralCombat, true);
-                                if (player.hasPerk(PerkLib.LightningClaw)){
+                                if (offHandAttacks) meleeDamageAcc(IsFeralCombat, true);
+                                else meleeDamageAcc(IsFeralCombat);
+								if (player.hasPerk(PerkLib.LightningClaw)){
                                     outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
                                 }
                             }

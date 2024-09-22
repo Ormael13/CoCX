@@ -200,7 +200,7 @@ public class DemonLair extends BaseContent
 			outputText("He lifts a glass of wine to you and this only angers you more. How dare he mock you, you’re going to make him pay for that! The moment the necklace's control weakens you’re going to give him nightmares for weeks. It’s only as your rage reaches its peak that you finally realize. The pull of the necklace is gone! Perhaps it’s time for revenge but then again if he defeats you he might fix your necklace and you may never get such a chance to strike back at him again. ");
 			outputText("Heck the necklace weakening now might just be a trick from him in order for you to let your guard down and do something foolish. Do you use this opportunity to flee or attack him?\n\n");
 			menu();
-			addButton(1, "Assault", questProgressScenes11);
+			addButtonIfTrue(1, "Assault", questProgressScenes11, "You're pernamently transformed!!!", !player.blockingBodyTransformations());
 			addButton(3, "Run", questProgressScenes10);
 		}
 		public function questProgressScenes10():void {

@@ -1329,7 +1329,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			function hermF():void {
 				//Bad End-Cerulean Succubus Futa/herm
 				//[Conditions: Corruption >50. Drink 10 Cerulean potions over the course of 20 Days. (Other stipulations as required that prevent interference with other events-to be determined)]
-				if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10 && player.cor > 50 && !player.hasPerk(PerkLib.Soulless)) {
+				if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10 && player.cor > 50 && !player.hasPerk(PerkLib.Soulless) && !player.blockingBodyTransformations()) {
 					outputText("\nAs the Succubus mounts you, an uncontrollable urge takes over your mind and body. Without any thought, you quickly thrust one of her nipples in your mouth and begin suckling wildly like a newborn child. The Succubus cries in shock and pleasure as you begin feeding from her and quickly begins her ritualistic milking of your dong. The warm milk passes into your mouth and down your throat, where it settles peacefully in your stomach. The sensation of fulfillment from her tits is only eclipsed by the massive load of semen you feel cramping your prostate.");
 					//[ (Herm-Dickgirl variant only)
 					if(player.hasBalls()) outputText("  Even your nuts are unbearably sore.");

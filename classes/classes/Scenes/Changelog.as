@@ -117,7 +117,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perks: Drake Bones/Heart/Lungs - they have same amount of tiers and effects as Draconic Bones/Heart/Lungs. Req. to get them are the same too. In cases when internal mutation wasn't accesable to race without changing partialy into different dragon-like race checks was fixed.\n");
 			outputText("-When needed in race scores IM checks for Draconic IM's was replaced by checks for Drake IM checks.\n");
 			outputText("-Yggdrasil dragon breath changed from poison breath to poisonous sap breath (deal poison+water+earth) damage.\n");
-			outputText("-Added Descendant and Bloodline perks for Human (4 stages), Werefox races.\n");//, Werewolf, Wereshark
+			outputText("-Added Descendant and Bloodline perks for Human (4 stages), Werefox, Scylla/Kraken, Yuki Onna races.\n");//, Werewolf, Wereshark
 			outputText("-Steel Storm would affect all dual gauntlet/claw type weapons too. Equipping gauntlet/claw type weapons will not req. Dual Wield perk.\n");
 			outputText("-Lethice Staff spellpower bonus doubled.\n");
 			outputText("-Finishing Alvina/Siegweird storyline (up to gain spell reward) would each grants 5 ascension perk points and will be under quest section of calculation.\n");
@@ -201,7 +201,6 @@ public class Changelog extends BaseContent
 			outputText("-3 new achievments. (1 shadow one)\n");
 			outputText("-Aquatic Affinity can be gained additional if pc lower body is that of scylla / kraken OR pc is having any arigean parasite.\n");
 			outputText("-Minerva and Izumi base level was increased and accordly their max lvl they can gain by leveling increased too to each reaching within 120-130 lvl range.\n");
-			outputText("-Added Descendant and Bloodline perks for Scylla/Kraken races.\n");
 			outputText("-Fixed Benoit not feminizing and Possess not resetting crab grapple (Svalkash)\n");
 			outputText("-New event perk: Dracoforce. Gained by having 30+ in any more then half dragon race score. Effects: Increase your total Strength and Toughness by 50%. Would add +1 to race score for those races.\n");
 			outputText("-Off hand Equipment slot added. It's mutal exclusive with shield slot and can't have item in both offhand and shield slots. Dual Wield perk desc changed to account for adding this slot.\n");
@@ -242,6 +241,7 @@ public class Changelog extends BaseContent
 			outputText("-Phantom racial bonuses been increased (all the changes are added to previous values): Phantom/Poltergeist/Eldritch Poltergeist - +5%/+10%/+10% to Spe multi, +25%/+70%/+160% to Int multi, +10%/+45%/+110% to Wis multi, +40/+125/+280 to Sens.\n");
 			outputText("-Telekinesis perk would now add minor scaling based on intelligence to all -kinesis specials for Psychic job.\n");
 			outputText("-Added 'auburn' color to satyr hair and fur colors pool.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
