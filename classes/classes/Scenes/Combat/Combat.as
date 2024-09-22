@@ -16056,7 +16056,19 @@ public function useCocytokinesis():void {
 	sharedKinesisEnding(damage, crit);
 }
 public function sharedKinesisMidpart(crit:Boolean):Number {
-	var damage:Number = scalingBonusSensitivity() * 2;
+	var damage:Number = scalingBonusSensitivity() * 3;
+	if (player.hasPerk(PerkLib.ImprovedKineses)) {
+		damage += scalingBonusIntelligence() * 0.2;
+		damage += scalingBonusWisdom() * 0.2;
+	}
+	if (player.hasPerk(PerkLib.AdvancedKineses)) {
+		damage += player.inte * 0.5;
+		damage += scalingBonusIntelligence() * 0.3;
+		damage += player.wis * 0.5;
+		damage += scalingBonusWisdom() * 0.3;
+		damage += player.sens * 1.5;
+		damage += scalingBonusSensitivity() * 7;
+	}
 	if (player.hasPerk(PerkLib.Telekinesis)) {
 		damage += player.inte * 0.5;
 		damage += scalingBonusIntelligence() * 0.2;
@@ -16065,6 +16077,11 @@ public function sharedKinesisMidpart(crit:Boolean):Number {
 	//soulskill mod effect
 	//damage *= combat.soulskillMagicalMod();
 	//other bonuses
+	if (player.hasPerk(PerkLib.WideAreaKineses) && monster.plural) {
+		if (player.hasPerk(PerkLib.QuasiDomainKineses) && monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 25;
+		else damage *= 5;
+	}
+	if (player.hasPerk(PerkLib.QuasiDomainKineses)) damage *= 2;
 	if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
 	if (crit) damage *= 1.75;
 	return damage;

@@ -165,20 +165,9 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 sensitivity lvl-up perk: Psychic Barrier. Req. Sixth Sense perk and 50+ sensitivity. Effect: You learn to create an invisible barrier, using your psychokinesis that boost phys/magic resistance by 10% and giving very minor (1%) boost to toughness.\n");
 			outputText("-New tier 3 sensitivity lvl-up perk: Psychic Bolt. Req. Psychic Barrier perk and 75+ sensitivity. Effect: Enable use of Psychic Bolt. (scaless off Sensitivity and deal psychic type of dmg)\n");
 			outputText("-New tier 4 sensitivity lvl-up perk: Telekinetic Grapple. Req. Psychic Bolt perk and 100+ sensitivity. Effect: Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).\n");
-			outputText("-New tier 2 sensitivity lvl-up perk: (Advanced) Job: Psychic. Req. Job: Esper perk, free advanced job slot and 50+ sensitivity. Effect: You've trained in using your mental powers offensively in combat. Perk effect include passive psionic energy aura (deal psychic dmg naturaly ^^).\n");
 			outputText("-New damage type: Psychic - some of PC abilities or perks will not affect them (like dmg increase from missing HP during berserk state or debuffs affectiong enemy body (necrotic root, adic dot)). Enemies like mindbreaker also had some of their attacks type changed to psychic.\n");
 			outputText("-Fantasize command was scaling too well from base tease damage so now it would be scaling off PC max lust bar (base lust taken will be now 5% of max lust bar). Would make loosing from lust by using that option less likely when using lust/tease focused build.\n");
-			outputText("-New tier 2 sensitivity lvl-up perk: Pyrokinesis. Req. Job: Psychic perk and 60+ sensitivity. Effect: As psychic you have gained ability to manipulate or control fire.\n");
-			outputText("-New tier 2 sensitivity lvl-up perk: Hydrokinesis. Req. Job: Psychic perk and 60+ sensitivity. Effect: As psychic you have gained ability to manipulate or control water.\n");
-			outputText("-New tier 3 sensitivity lvl-up perk: Cryokinesis. Req. Job: Psychic perk and 85+ sensitivity. Effect: As psychic you have gained ability to manipulate or control ice.\n");
-			outputText("-New tier 3 sensitivity lvl-up perk: Geokinesis. Req. Job: Psychic perk and 85+ sensitivity. Effect: As psychic you have gained ability to manipulate or control earth.\n");
-			outputText("-New tier 4 sensitivity lvl-up perk: Electrokinesis. Req. Job: Psychic perk and 110+ sensitivity. Effect: As psychic you have gained ability to manipulate or control lightning.\n");
-			outputText("-New tier 4 sensitivity lvl-up perk: Aerokinesis. Req. Job: Psychic perk and 110+ sensitivity. Effect: As psychic you have gained ability to manipulate or control air/wind.\n");
-			outputText("-New tier 5 sensitivity lvl-up perk: Umbrakinesis. Req. Job: Psychic perk and 135+ sensitivity. Effect: As psychic you have gained ability to manipulate or control darkness.\n");
-			outputText("-New tier 5 sensitivity lvl-up perk: Acidokinesis. Req. Job: Psychic perk and 135+ sensitivity. Effect: As psychic you have gained ability to manipulate or control acid.\n");
 			outputText("-Drider-Weave Sheer Robe was given Revealing tag. Chicke Harpy tooltip/hint was updated to point to correct mountains part.\n");
-			outputText("-New tier 6 sensitivity lvl-up perk: Ionikinesis. Req. Pyrokinesis, Electrokinesis perks and 160+ sensitivity. Effect: As psychic you have gained ability to manipulate or control plasma.\n");
-			outputText("-New tier 6 sensitivity lvl-up perk: Cocytokinesis. Req. Cryokinesis, Umbrakinesis perks and 160+ sensitivity. Effect: As psychic you have gained ability to manipulate or control black ice.\n");
 			outputText("-New damage type: Black Ice - it's mix of ice and darkness dmg and would be displayed as dealing two types of dmg.\n");
 			outputText("-Added option to disable Ceraph and Tamani like few other npc's.\n");
 			outputText("-Ported from Revamp / UEE mod option to kill Tamani. Req. to beat her enough times she would level up once (this req. to have training option for npc's turned on). There was a few minot tweaks on what her satchel have inside or increased exp reward for killing/banishing her for good.\n");
@@ -241,6 +230,10 @@ public class Changelog extends BaseContent
 			outputText("-Phantom racial bonuses been increased (all the changes are added to previous values): Phantom/Poltergeist/Eldritch Poltergeist - +5%/+10%/+10% to Spe multi, +25%/+70%/+160% to Int multi, +10%/+45%/+110% to Wis multi, +40/+125/+280 to Sens.\n");
 			outputText("-Telekinesis perk would now add minor scaling based on intelligence to all -kinesis specials for Psychic job.\n");
 			outputText("-Added 'auburn' color to satyr hair and fur colors pool.\n");
+			outputText("-New tier 3 sensitivity lvl-up perk: Improved Kineses. Req. one of perks: Pyrokinesis, Hydrokinesis, Cryokinesis, Geokinesis, Electrokinesis, Aerokinesis, Umbrakinesis, Acidokinesis, Ionikinesis, Cocytokinesis and 75+ sensitivity. Effect: All of your kinesis type specials damage have added minor inteligence/wisdom scaling.\n");
+			outputText("-New tier 4 sensitivity lvl-up perk: Wide Area Kineses. Req. Improved Kineses perk and 100+ sensitivity. Effect: All of your kinesis type specials would be treated as AoE attacks against any group of enemies.\n");
+			outputText("-New tier 5 sensitivity lvl-up perk: Advanced Kineses. Req. Wide Area Kineses perk and 125+ sensitivity. Effect: All of your kinesis type specials damage have improved scaling from sensitivity, wisdom and intelligence.\n");
+			outputText("-New tier 6 sensitivity lvl-up perk: Quasi Domain Kineses. Req. Advanced Kineses perk and 150+ sensitivity. Effect: All of your kinesis type specials would deal higher damage against single and group enemies. The larger group the higher bonus damage. (2x/10x/50x)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -255,13 +248,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New tier ? sensitivity lvl-up perk: ???. Req. ?Quasi Domain Kineses? perk and 175+ sensitivity. Effect: add wis to sens
+			outputText("-\n");//New tier ? sensitivity lvl-up perk: ???. Req. ?Quasi Domain Kineses? perk and 175+ sensitivity. Effect: add int to sens
+			outputText("-\n");//New tier ? sensitivity lvl-up perk: Domain Kineses. Req.  perk and ???+ sensitivity. Effect: ??? aura effects like psychic aura dealing specific elemetal damage ^^ ???
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
 			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
@@ -352,8 +341,20 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -381,6 +382,12 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -537,17 +544,29 @@ public class Changelog extends BaseContent
 			outputText("-New tier 0 misc lvl-up perk: Job: Feral Champion. Req. Job: Beast Warrior perk, free advanced job slot, 25+ in tou/spe. Effect: A wild animal in both name and behavior the feral champion focus on mastering natural weapon such as tooth and claws and delivering deadly status effect. A specialization used best when fighting naked.\n");
 			outputText("-New tier 1 misc lvl-up perk: Atavism. Req. Job: Feral Champion perk. Effect: Unlocks the ability to temporarily turn into a feral beast of pure instinct while in battle. Could end it before combat end but will get 6 turn cooldown before been to turn into feral beast again. ");
 			outputText("(Drops intelligence to 1, silence self (no spellcasting), increase critical rate by 35%, increase Strength and Speed modifier by 100% (of core+trained stat value) and raise dodge by 10% while fighting with feral combat. It obviously lock you into feral combat for the duration too.)\n");
+			outputText("-New tier 2 sensitivity lvl-up perk: (Advanced) Job: Psychic. Req. Job: Esper perk, free advanced job slot and 50+ sensitivity. Effect: You've trained in using your mental powers offensively in combat. Perk effect include passive psionic energy aura (deal psychic dmg naturaly ^^).\n");
+			outputText("-New tier 2 sensitivity lvl-up perk: Pyrokinesis. Req. Job: Psychic perk and 60+ sensitivity. Effect: As psychic you have gained ability to manipulate or control fire.\n");
+			outputText("-New tier 2 sensitivity lvl-up perk: Hydrokinesis. Req. Job: Psychic perk and 60+ sensitivity. Effect: As psychic you have gained ability to manipulate or control water.\n");
 			outputText("-New tier 2 misc lvl-up perk: Wound focus. Req. Job: Feral Champion perk and at least one bleeding ability. Effect: Any bleeding you cause gains a 20% periodic damage increase.\n");
 			outputText("-New tier 2 corruption lvl-up perk: Improved Arousing Aura. Req. Arousing Aura perk and 35+ corruption. Effect: Double the effect from arousing aura.\n");
 			outputText("-New tier 3 misc lvl-up perk: Natural recovery. Req. Tough Hide perk and 60+ tou. Effect: Gain 2% health regeneration so long as you are wearing no armor (or armor with Revealing tag), shield or melee weapon.\n");
 			outputText("-New tier 3 misc lvl-up perk: Deep wounds. Req. Wound focus perk and 50+ str. Effect: Natural claw attacks have a 20% chance to cause bleeding for 6 rounds.\n");
 			outputText("-New tier 3 misc lvl-up perk: Mageslaying beast. Req. Tough Hide perk and 60+ tou. Effect: Gain spell resistance based on core speed so long as you are naked up to 40%.\n");
 			outputText("-New tier 3 libido lvl-up perk: Corrupt the body. Req. Job: Eromancer perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -100%.\n");
+			outputText("-New tier 3 sensitivity lvl-up perk: Cryokinesis. Req. Job: Psychic perk and 85+ sensitivity. Effect: As psychic you have gained ability to manipulate or control ice.\n");
+			outputText("-New tier 3 sensitivity lvl-up perk: Geokinesis. Req. Job: Psychic perk and 85+ sensitivity. Effect: As psychic you have gained ability to manipulate or control earth.\n");
 			outputText("-New tier 3 corruption lvl-up perk: Devouring Aura. Req. Improved Arousing Aura perk and 50+ corruption. Effect: Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Dual Wield (2H Firearms). Req. Dual Wield (Firearms) and Amateur Gunslinger perks; 50+ wis, 40+ int and 30+ spe. Effect: Allows you to wield two firearms (2H ones) more effectively. (damage and accuracy penalties decreased by 40% and 20%)\n");
+			outputText("-New tier 4 sensitivity lvl-up perk: Electrokinesis. Req. Job: Psychic perk and 110+ sensitivity. Effect: As psychic you have gained ability to manipulate or control lightning.\n");
+			outputText("-New tier 4 sensitivity lvl-up perk: Aerokinesis. Req. Job: Psychic perk and 110+ sensitivity. Effect: As psychic you have gained ability to manipulate or control air/wind.\n");
 			outputText("-New tier 4 corruption lvl-up perk: Damnation Aura. Req. Devouring Aura perk and 60+ corruption. Effect: Double the effect of Devouring Aura.\n");
 			outputText("-New tier 4 libido lvl-up perk: Improved Grapple. Req. 150+ lib. Effect: Do two action per straddle or grappling turn. Increase straddle damage by 20%.\n");
+			outputText("-New tier 5 sensitivity lvl-up perk: Umbrakinesis. Req. Job: Psychic perk and 135+ sensitivity. Effect: As psychic you have gained ability to manipulate or control darkness.\n");
+			outputText("-New tier 5 sensitivity lvl-up perk: Acidokinesis. Req. Job: Psychic perk and 135+ sensitivity. Effect: As psychic you have gained ability to manipulate or control acid.\n");
 			outputText("-New tier 6 libido lvl-up perk: Corrupt the heart. Req. Corrupt the body perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -200%.\n");
+			outputText("-New tier 6 sensitivity lvl-up perk: Ionikinesis. Req. Pyrokinesis, Electrokinesis perks and 160+ sensitivity. Effect: As psychic you have gained ability to manipulate or control plasma.\n");
+			outputText("-New tier 6 sensitivity lvl-up perk: Cocytokinesis. Req. Cryokinesis, Umbrakinesis perks and 160+ sensitivity. Effect: As psychic you have gained ability to manipulate or control black ice.\n");
+			//tier 7
 			outputText("-New tier 8 libido lvl-up perk: Greater Grapple. Req. Improved Grapple perk and 250+ lib. Effect: Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.\n");
 			outputText("-New tier 9 misc lvl-up perk: Absolute Bash. Req. Prestige Job: Sentinel & Shield Slam perks. Effect: Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.\n");
 			outputText("-New tier 10 libido lvl-up perk: Corrupt the mind. Req. Corrupt the heart perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -300%.\n");

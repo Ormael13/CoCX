@@ -595,6 +595,18 @@ public class PerkLib
 		public static const LingeringOpening:PerkType = mk("Lingering Opening", "Lingering Opening",
 				"Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.",
 				"You've chosen the 'Lingering Opening' perk. Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.");
+		public static const ImprovedKineses:PerkType = mk("Improved Kineses", "Improved Kineses",
+				"All of your kinesis type specials damage have added minor inteligence/wisdom scaling.",
+				"You've chosen the 'Improved Kineses' perk. All of your kinesis type specials damage have added minor inteligence/wisdom scaling.");
+		public static const WideAreaKineses:PerkType = mk("Wide Area Kineses", "Wide Area Kineses",
+				"All of your kinesis type specials would be treated as AoE attacks against any group of enemies.",
+				"You've chosen the 'Wide Area Kineses' perk. All of your kinesis type specials would be treated as AoE attacks against any group of enemies.");
+		public static const AdvancedKineses:PerkType = mk("Advanced Kineses", "Advanced Kineses",
+				"All of your kinesis type specials damage have improved scaling from sensitivity, wisdom and intelligence.",
+				"You've chosen the 'Advanced Kineses' perk. All of your kinesis type specials damage have improved scaling from sensitivity, wisdom and intelligence.");
+		public static const QuasiDomainKineses:PerkType = mk("Quasi Domain Kineses", "Quasi Domain Kineses",
+				"All of your kinesis type specials would deal higher damage against single and group enemies. The larger group the higher bonus damage. (2x/10x/50x)",
+				"You've chosen the 'Quasi Domain Kineses' perk. All of your kinesis type specials would deal higher damage against single and group enemies. The larger group the higher bonus damage. (2x/10x/50x)");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -605,21 +617,9 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
-		public static const :PerkType = mk("", "",
+		public static const DomainKineses:PerkType = mk("Domain Kineses", "Domain Kineses",
 				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
+				"You've chosen the 'Domain Kineses' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7387,6 +7387,9 @@ public class PerkLib
             Geokinesis.requireSen(85)
                     .requirePerk(JobPsychic)
                     .requireLevel(18);
+            ImprovedKineses.requireSen(75)
+                    .requireAnyPerk(Pyrokinesis, Hydrokinesis, Cryokinesis, Geokinesis, Electrokinesis, Aerokinesis, Umbrakinesis, Acidokinesis, Ionikinesis, Cocytokinesis)
+                    .requireLevel(18);
             EyesOfTheHunterMaster.requireSen(100)
                     .requirePerk(EyesOfTheHunterExpert)
                     .requireLevel(18);
@@ -7400,6 +7403,9 @@ public class PerkLib
             TelekineticGrapple.requireSen(100)
                     .requirePerk(PsychicBolt)
                     .requireLevel(24);
+            WideAreaKineses.requireSen(100)
+                    .requirePerk(ImprovedKineses)
+                    .requireLevel(24);
             EyesOfTheHunterGrandMaster.requireSen(125)
                     .requirePerk(EyesOfTheHunterMaster)
                     .requireLevel(24);
@@ -7409,6 +7415,9 @@ public class PerkLib
                     .requireLevel(30);
             Acidokinesis.requireSen(135)
                     .requirePerk(JobPsychic)
+                    .requireLevel(30);
+            AdvancedKineses.requireSen(125)
+                    .requirePerk(WideAreaKineses)
                     .requireLevel(30);
             EyesOfTheHunterEx.requireSen(25)
                     .requirePerk(EyesOfTheHunterNovice)
@@ -7422,6 +7431,9 @@ public class PerkLib
                     .requireLevel(36);
             Cocytokinesis.requireSen(160)
                     .requirePerks(Cryokinesis, Umbrakinesis)
+                    .requireLevel(36);
+            QuasiDomainKineses.requireSen(150)
+                    .requirePerk(AdvancedKineses)
                     .requireLevel(36);
 			EpicSensitivity.requireSen(10)
                     .requireLevel(36);
