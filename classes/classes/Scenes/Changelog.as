@@ -14,7 +14,7 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog55();//new: lvl-up perk, rare asc perk, event perk, items perk, super perk, enemy perk, internal mutation, key item, item, consumable, usable, p.special, m.special, spell, soulskill, bodypart
+			Changelog55();//new: lvl-up perk, rare asc perk, event perk, items perk, super perk, enemy perk, internal mutation, key item, item, consumable, usable, p.special, m.special, spell, soulskill, bodypart, enemies
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
 		private function Changelog58():void {
@@ -39,6 +39,25 @@ public class Changelog extends BaseContent
 			clearOutput();
 			outputText("(Part 3/3) <b>Version 0.9a:</b>\n\n");
 			//0 of 11 pages
+			outputText("-Tamani could level up (up to lvl 98). After first level up she would gain Elite type which would be upgraded to Champion type and then to Boss type.\n");
+			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night. Herbalism and Dummy camp options can also be used at night by night races.\n");
+			outputText("-Female mindbreaker been reeducated causing their corruption increase by 40 pts. Re: Convert option was moved to different button in super perks menu to avoid misclicks due to same position as Previous button.\n");
+			outputText("-Glacial trolls could gain Cold Affnity perk.\n");
+			outputText("-Zenji now have hp and lust variants for defeats pre-camp and for camp sparring, in case combat would change his perspective on PC wining by lust have only 50% chance to change that perspective. Also when fighting to the death would have full lust resistance and no effect to lower that resistance would work on him.\n");
+			outputText("-Phouka Drink scene when pc toughness is between 30 and 70 bug fixed. Also scene will now check for core toughness value not total.\n");
+			outputText("-Having sex when equipped with Sagittarius Baneful Great Bow proc the Sagittarius Focus bonus until next night. Effect: PC adds 50% of his libido to wisdom and intelligence until next night.\n");
+			outputText("-Pilgrim's Bounty perk effect changed from having cum volume calculated as been always at max lust to give 100% chance to make npc's pregnant after sex with pc. In some cases when npc only get fertile post some event/quest it will only trigger when the npc is fertile (no kids with urta, marble or hel right of the bat).\n");
+			outputText("-Job: Gunslinger perk would now add low stat scaling from wis, int, spe instead of doubling the damage. Church of the gun, Alchemical cartridge and Saint of Zariman perks stat scaling improved.\n");
+			outputText("-Amateur Gunslinger, Expert Gunslinger and Master Gunslinger perks effects changed from simply from granting extra firearm attack per turn to: Increase damage (+100%/+100%/+100%) base. (+5%/+10%/+15% firearms attacks multiplier bonus). Amateur Gunslinger would also increase accuracy of firearms attacks by 10%. ");
+			outputText("Expert Gunslinger decrease dmg penalty from using non 2H dual firearms by 30%, Master Gunslinger decrease dmg penalty from using 2H dual firearms by 50%.\n");
+			outputText("-All gunslinger perks was adjusted to req. wis, int and spe instead of ocassional req. tou instead one of those three stats. That is to match stats from which firearms dmg scaling.\n");
+			outputText("-Explosive cartridge perk increase dmg done to large enemies or group of enemies (+100% > +200%). Named Bullet deal much more dmg to bosses (+50% > +200%).\n");
+			outputText("-Golemancer in HXD could sell metal pieces/plates to PC golemancer that can buy energy cores from her. She even gives 3 options of how many metal pieces/plates to buy at once - 1x, 5x, 10x.\n");
+			outputText("-Elemental Fusion forms stats bonuses (+armor/m.res for some fusions) been doubled to more fit temporal perm tf state.\n");
+			outputText("-Costs of combine or seperate flying swords was adjusted to be more related to their cost.\n");
+			outputText("-Added option to remove cursed items to healer horse in JttE inn. She would charge pc for those services the same as Arian (500 gems).\n");
+			outputText("-Imps Tome gradual TF effect will trigger even at night but not longer each hour. Instead it will be at least 6 hours between each gradual tf scene triggered by tome.\n");
+			outputText("-When using sneak attack and having equipped any flying sword(s) for melee sneak attack and any of Moonlight flying sword(s) for range sneak attack they would be part of the attack too. Moonlight flying sword(s) would also increase dmg multiplier of sneak attack by 1.\n");
 			outputText("-Zenji + Arian scene when visting Arian proc chance lowered (15% > 10%) and won't trigger more then once each 4-5 days. Grayda related camp events can happen only once a day.\n");
 			outputText("-Ovaries and Testicles internal mutations would require to have either vagina or cock to give benefits.\n");
 			outputText("-Human Supremacy (Improved) and (Superior) perks increase human score by 1 more point.\n");
@@ -234,7 +253,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 4 sensitivity lvl-up perk: Wide Area Kineses. Req. Improved Kineses perk and 100+ sensitivity. Effect: All of your kinesis type specials would be treated as AoE attacks against any group of enemies.\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Advanced Kineses. Req. Wide Area Kineses perk and 125+ sensitivity. Effect: All of your kinesis type specials damage have improved scaling from sensitivity, wisdom and intelligence.\n");
 			outputText("-New tier 6 sensitivity lvl-up perk: Quasi Domain Kineses. Req. Advanced Kineses perk and 150+ sensitivity. Effect: All of your kinesis type specials would deal higher damage against single and group enemies. The larger group the higher bonus damage. (2x/10x/50x)\n");
-			outputText("-\n");
+			outputText("-Entangle special have added effect: Enemies flying using wings would temporaly be grounded.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -252,26 +271,26 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New tier ? sensitivity lvl-up perk: ???. Req. ?Quasi Domain Kineses? perk and 175+ sensitivity. Effect: add int to sens
 			outputText("-\n");//New tier ? sensitivity lvl-up perk: Domain Kineses. Req.  perk and ???+ sensitivity. Effect: ??? aura effects like psychic aura dealing specific elemetal damage ^^ ???
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
-			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
 			outputText("-\n");
-			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
-			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
-			outputText("-\n");//New tier 2 wisdom lvl-up perk: They Fight, They Protect. Req. Three times a tame perk and 80+ wisdom. Effect: meat shield option ^^
-			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
-			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
+			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
+			outputText("-\n");//New tier 2 wisdom lvl-up perk: They Fight, They Protect. Req. Three times a tame perk and 80+ wisdom. Effect: meat shield option ^^
+			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
+			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
+			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to 3rd floor ");
 			outputText("teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
@@ -347,8 +366,20 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -407,6 +438,12 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");*/
 			outputText("\n\n\n");
 			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
@@ -425,6 +462,13 @@ public class Changelog extends BaseContent
 		private function Changelog54():void {
 			clearOutput();
 			outputText("(Part 2/3) <b>Version 0.9a:</b>\n\n");
+			outputText("-New mutation perk: Scylla Ink Glands (Evolved). Req. Scylla Ink Glands (Primitive) and lvl 60+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
+			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 2x larger.\n");
+			outputText("-New mutation perk: Blazing Heart (Final Form). Req. Blazing Heart (Evolved) and lvl 90+. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 100%. Heat and Rut also grants you a bonus equal to 20% of the libido bonus to strength. ");
+			outputText("Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take lust damage as a recoil. Fire active and passive abilities have a 20% chance to apply the burning status effect if they do not already.\n");
+			outputText("-New mutation perk: Drake Blood (Final Form). Req. Drake Blood (Evolved) and lvl 90+. Effects: Dragon strong vitality grants mana soulforce and health regeneration 4%. You take 15% less damage from magical attack. Magic Effect from you are 50% more powerful. Magic Ability are 100% Stronger.\n");
+			outputText("-New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: +100% to all Physical Ability damage. Gallop cost 40% less fatigue. Physical ability consumes 15% less fatigues. Physical ability that stuns do so for one extra round. Galloping gains +10% evasion. Double the momentum bonus from Galloping.\n");
+			outputText("-New mutation perk: Fiendish Balls (Final Form). Req. Fiendish Balls (Evolved) and lvl 90+. Effects: Increase Virility by 100%, Increase cum production by 100%, gain a bonus to tease against females based on your cum production up to 50%. All attacks involving your penis are 300% stronger.\n");
 			outputText("-New mutation perk: Fiendish Metabolism (Final Form). Req. Fiendish Metabolism (Evolved) and lvl 90+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 200%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
 			outputText("Gain immunity to all fluid negative effects and allow you to feed from sexual fluids. Satisfying your crave for sex also raises your spell power for an amount equivalent to the tease damage bonus granted by this mutation. Double all recovery from demonic hunger.\n");
 			outputText("-New mutation perk: Fiendish Ovaries (Final Form). Req. Fiendish Ovaries (Evolved) and lvl 90+. Effects: ncrease Fertility by 100%, all born children from your womb will either be born as imps or greatly corrupted, while pregnant with imps tease is 50% stronger. May benefit from pregomania when pregnant with imps.\n");
@@ -515,25 +559,6 @@ public class Changelog extends BaseContent
 			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Feral Champion. Natural arsenal effect increased from +50% to +100%. Feral Armor req. for tou stat lowered from 60 to 50.\n");
 			outputText("-Venomous Adipose Tissue & Venomous Diet perks have additional req. of having perk Job: Feral Champion.\n");
 			outputText("-Tamani daughters & Minotaur Sons can now level-up (their lvl depends on how many of them are and seperate lvl up counter so the max level isn't clearly defines but would be at least around 100/105 lvl). Like Tamani daughters now Minotaur sons would slowly die out when there is too many of them + added their count on children page right below Tamani daughters.\n");
-			outputText("-Tamani could level up (up to lvl 98). After first level up she would gain Elite type which would be upgraded to Champion type and then to Boss type.\n");
-			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night. Herbalism and Dummy camp options can also be used at night by night races.\n");
-			outputText("-Female mindbreaker been reeducated causing their corruption increase by 40 pts. Re: Convert option was moved to different button in super perks menu to avoid misclicks due to same position as Previous button.\n");
-			outputText("-Glacial trolls could gain Cold Affnity perk.\n");
-			outputText("-Zenji now have hp and lust variants for defeats pre-camp and for camp sparring, in case combat would change his perspective on PC wining by lust have only 50% chance to change that perspective. Also when fighting to the death would have full lust resistance and no effect to lower that resistance would work on him.\n");
-			outputText("-Phouka Drink scene when pc toughness is between 30 and 70 bug fixed. Also scene will now check for core toughness value not total.\n");
-			outputText("-Having sex when equipped with Sagittarius Baneful Great Bow proc the Sagittarius Focus bonus until next night. Effect: PC adds 50% of his libido to wisdom and intelligence until next night.\n");
-			outputText("-Pilgrim's Bounty perk effect changed from having cum volume calculated as been always at max lust to give 100% chance to make npc's pregnant after sex with pc. In some cases when npc only get fertile post some event/quest it will only trigger when the npc is fertile (no kids with urta, marble or hel right of the bat).\n");
-			outputText("-Job: Gunslinger perk would now add low stat scaling from wis, int, spe instead of doubling the damage. Church of the gun, Alchemical cartridge and Saint of Zariman perks stat scaling improved.\n");
-			outputText("-Amateur Gunslinger, Expert Gunslinger and Master Gunslinger perks effects changed from simply from granting extra firearm attack per turn to: Increase damage (+100%/+100%/+100%) base. (+5%/+10%/+15% firearms attacks multiplier bonus). Amateur Gunslinger would also increase accuracy of firearms attacks by 10%. ");
-			outputText("Expert Gunslinger decrease dmg penalty from using non 2H dual firearms by 30%, Master Gunslinger decrease dmg penalty from using 2H dual firearms by 50%.\n");
-			outputText("-All gunslinger perks was adjusted to req. wis, int and spe instead of ocassional req. tou instead one of those three stats. That is to match stats from which firearms dmg scaling.\n");
-			outputText("-Explosive cartridge perk increase dmg done to large enemies or group of enemies (+100% > +200%). Named Bullet deal much more dmg to bosses (+50% > +200%).\n");
-			outputText("-Golemancer in HXD could sell metal pieces/plates to PC golemancer that can buy energy cores from her. She even gives 3 options of how many metal pieces/plates to buy at once - 1x, 5x, 10x.\n");
-			outputText("-Elemental Fusion forms stats bonuses (+armor/m.res for some fusions) been doubled to more fit temporal perm tf state.\n");
-			outputText("-Costs of combine or seperate flying swords was adjusted to be more related to their cost.\n");
-			outputText("-Added option to remove cursed items to healer horse in JttE inn. She would charge pc for those services the same as Arian (500 gems).\n");
-			outputText("-Imps Tome gradual TF effect will trigger even at night but not longer each hour. Instead it will be at least 6 hours between each gradual tf scene triggered by tome.\n");
-			outputText("-When using sneak attack and having equipped any flying sword(s) for melee sneak attack and any of Moonlight flying sword(s) for range sneak attack they would be part of the attack too. Moonlight flying sword(s) would also increase dmg multiplier of sneak attack by 1.\n");
 			menu();
 			addButton(0, "Next", Changelog53);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -644,13 +669,6 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Mighty Legs (Evolved). Req. Mighty Legs (Primitive) and lvl 60+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 15 and grapple effect by 60%. Kick is 100% stronger. Kick stun lasts 1 round longer.\n");
 			outputText("-New mutation perk: Mighty Lower Half (Evolved). Req. Mighty Lower Half (Primitive) and lvl 60+. Effects: Tentacle and tail attack deals 75% more damage. Increase unarmed strike damage by 15 and grapple effect by 60%. Grapple damage gains 100% more bonus from your strength. Racial physical ability stun lasts 1 round longer.\n");
 			outputText("-New mutation perk: Poison Gland (Evolved). Req. Poison Gland (Primitive) and lvl 60+. Effects: Double the efficiency of poison damage, applied poisons now has a 75% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 2% toughness damage per round.\n");
-			outputText("-New mutation perk: Scylla Ink Glands (Evolved). Req. Scylla Ink Glands (Primitive) and lvl 60+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
-			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 2x larger.\n");
-			outputText("-New mutation perk: Blazing Heart (Final Form). Req. Blazing Heart (Evolved) and lvl 90+. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 100%. Heat and Rut also grants you a bonus equal to 20% of the libido bonus to strength. ");
-			outputText("Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take lust damage as a recoil. Fire active and passive abilities have a 20% chance to apply the burning status effect if they do not already.\n");
-			outputText("-New mutation perk: Drake Blood (Final Form). Req. Drake Blood (Evolved) and lvl 90+. Effects: Dragon strong vitality grants mana soulforce and health regeneration 4%. You take 15% less damage from magical attack. Magic Effect from you are 50% more powerful. Magic Ability are 100% Stronger.\n");
-			outputText("-New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: +100% to all Physical Ability damage. Gallop cost 40% less fatigue. Physical ability consumes 15% less fatigues. Physical ability that stuns do so for one extra round. Galloping gains +10% evasion. Double the momentum bonus from Galloping.\n");
-			outputText("-New mutation perk: Fiendish Balls (Final Form). Req. Fiendish Balls (Evolved) and lvl 90+. Effects: Increase Virility by 100%, Increase cum production by 100%, gain a bonus to tease against females based on your cum production up to 50%. All attacks involving your penis are 300% stronger.\n");
 			menu();
 			addButton(0, "Next", Changelog52);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

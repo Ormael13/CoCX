@@ -692,7 +692,7 @@ public class PlayerInfo extends BaseContent {
 		// Begin Kill Counters Stats
 		var killCountStats:String = "";
 
-		killCountStats += "<b>Thiefs:</b> " + flags[kFLAGS.THIEFS_KILLED] + "\n";
+		killCountStats += "<b>Thieves:</b> " + flags[kFLAGS.THIEFS_KILLED] + "\n";
 		killCountStats += "<b>Goblins:</b> " + flags[kFLAGS.GOBLINS_KILLED] + "\n";
 		killCountStats += "<b>Hellhounds:</b> " + flags[kFLAGS.HELLHOUNDS_KILLED] + "\n";
 		killCountStats += "<b>Imps:</b> " + flags[kFLAGS.IMPS_KILLED] + "\n";

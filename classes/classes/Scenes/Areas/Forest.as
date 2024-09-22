@@ -171,7 +171,7 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Tamani_Daughters",
-						label : "Tamain Daughters",
+						label : "Tamani Daughters",
 						kind  : 'npc',
 						unique: true,
 						night : false,

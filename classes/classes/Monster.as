@@ -1111,14 +1111,14 @@ import classes.Scenes.Combat.CombatAbilities;
 
 		override public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
 			var evasionReason:String;
-
 			if (canAutoHit()) return null;
-
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) dodgeArray.push([25, EVASION_HURRICANE_DANCE]);
-
 			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
-
 			return evasionReason;
+		}
+		
+		override public function isFlying():Boolean {
+			return hasStatusEffect(StatusEffects.Flying) && !hasStatusEffect(StatusEffects.EntangledByNet);
 		}
 
 		public function canMonsterBleed():Boolean
@@ -2301,7 +2301,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		protected function handleConstricted():Boolean
 		{
 			interruptAbility();
-			if (hasStatusEffect(StatusEffects.Entangled)) {
+			if (hasStatusEffect(StatusEffects.Entangled) || hasStatusEffect(StatusEffects.EntangledByNet) || hasStatusEffect(StatusEffects.EntangledBySpell)) {
 				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 				return false;
 			}

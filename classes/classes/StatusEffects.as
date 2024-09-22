@@ -1013,6 +1013,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EnemyLoweredDamageH:StatusEffectType       = mkCombat("Enemy Lowered Damage (H)");
 		public static const EnergyDrain:StatusEffectType               = mkCombat("Energy Drain");
 		public static const Entangled:StatusEffectType       	       = mkCombat("Entangled");
+		public static const EntangledByNet:StatusEffectType       	   = mkCombat("EntangledByNet");
 		public static const EntangledBySpell:StatusEffectType          = mkCombat("EntangledBySpell");
 		public static const EverywhereAndNowhere:StatusEffectType      = mkCombat("Everywhere and nowhere");
 		public static const Exorcism:StatusEffectType                  = mkCombat("Exorcism");

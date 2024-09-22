@@ -3154,7 +3154,7 @@ public class PerkLib
 				"Enables additional item slots. (+150%)",
 				"You've chosen the 'Strong Back 3: Strong Hardest' perk, enabling additional item slots. (+150%)");
 		public static const SwiftCasting:PerkType = mk("Swift casting", "Swift casting",
-				"When attacking with melee using a one handed weapon with no shield equipped, pc can Chose the an available spell in combat options to cast during the round. It will be used at the end of the full attack.",
+				"When attacking with melee using a one handed weapon with no shield equipped, PC could choose one of all available tier 1 spells in combat options to cast during the round. It will be used at the end of the full attack.",
 				"You've chosen the 'Swift casting' perk, allowing you to cast one of simple spells after melee attack.");
 		public static const Tactician:PerkType = mk("Tactician", "Tactician",
 				"[if(player.inte>=50)" +

@@ -11239,6 +11239,11 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             player.addStatusValue(StatusEffects.TrollRegenerationDisabled, 1, -1);
             if (player.statusEffectv1(StatusEffects.TrollRegenerationDisabled) <= 0) player.removeStatusEffect(StatusEffects.TrollRegenerationDisabled);
         }
+		//Entagled by Net
+		if (monster.hasStatusEffect(StatusEffects.EntangledByNet)) {
+			player.addStatusValue(StatusEffects.EntangledByNet, 1, -1);
+            if (player.statusEffectv1(StatusEffects.EntangledByNet) <= 0) player.removeStatusEffect(StatusEffects.EntangledByNet);
+		}
         //Giant boulder
         if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
             outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might be crushed!</b>\n\n");

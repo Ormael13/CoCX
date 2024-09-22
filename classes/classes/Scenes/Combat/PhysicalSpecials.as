@@ -762,7 +762,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.shieldName == "Battle Net") {
-				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. (cooldown of 5 rounds before it can be used again)");
+				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. Enemies flying using wings would temporaly be grounded. (cooldown of 5 rounds before it can be used again)");
 				if (player.hasStatusEffect(StatusEffects.CooldownNet)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
 				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -6128,8 +6128,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("You skillfully toss your net at [themonster] restraining [monster his] movement.");
 		player.createStatusEffect(StatusEffects.CooldownNet,5,0,0,0);
-		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
-		else monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) {
+			monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
+			monster.createStatusEffect(StatusEffects.EntangledByNet,4,0,0,0);
+		}
+		else {
+			monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+			monster.createStatusEffect(StatusEffects.EntangledByNet,3,0,0,0);
+		}
 		enemyAI();
 	}
 
