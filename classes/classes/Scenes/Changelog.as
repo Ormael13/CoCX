@@ -253,7 +253,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 4 sensitivity lvl-up perk: Wide Area Kineses. Req. Improved Kineses perk and 100+ sensitivity. Effect: All of your kinesis type specials would be treated as AoE attacks against any group of enemies.\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Advanced Kineses. Req. Wide Area Kineses perk and 125+ sensitivity. Effect: All of your kinesis type specials damage have improved scaling from sensitivity, wisdom and intelligence.\n");
 			outputText("-New tier 6 sensitivity lvl-up perk: Quasi Domain Kineses. Req. Advanced Kineses perk and 150+ sensitivity. Effect: All of your kinesis type specials would deal higher damage against single and group enemies. The larger group the higher bonus damage. (2x/10x/50x)\n");
-			outputText("-Entangle special have added effect: Enemies flying using wings would temporaly be grounded.\n");
+			outputText("-Entangle special (using shield slot item - Battle Net) have added effect: Enemies flying using wings would temporaly be grounded.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -300,8 +300,9 @@ public class Changelog extends BaseContent
 			outputText("perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant, Abyssal Ink and Displacer Beast post fight scenes ");
 			outputText("bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards recovering hunger with demonic hunger perk, Atlach Nacha ");
 			outputText("locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene, during Urta scenes game mix up Urta and PC when checking for sex scenes selection, Cure spell not removing Blind, Whisker Fruit not giving multiple breast rows, some of status effects not cleaning up ");
-			outputText("after bad end or combat end, scene with Ayane when PC visit shrine as already 9 tailed kitusne without star sphere not gaining star sphere during the scene, Meteor Shower and Polar Midnight not recognized as spells for Channeling perk req., Healer npc in JttE never having her cure/heal options going off cooldown, Vixen&Cream with Urta unclosed tag");
-			outputText("\n\n");
+			outputText("after bad end or combat end, scene with Ayane when PC visit shrine as already 9 tailed kitusne without star sphere not gaining star sphere during the scene, Meteor Shower and Polar Midnight not recognized as spells for Channeling perk req., Healer npc in JttE never having her cure/heal options going off cooldown, Vixen&Cream with Urta unclosed tag, Straddle Tease variant for ");
+			outputText("Harpies not checking if enemy ");
+			outputText("have cock\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

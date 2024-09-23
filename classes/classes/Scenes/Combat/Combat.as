@@ -428,7 +428,7 @@ public class Combat extends BaseContent {
     }
     public function maxCurrentAttacksOff():int {
         if (player.weaponOff.isStaffType() || player.weaponOff.isWandType()) return 1;
-        else return player.calculateMultiAttacks();
+        else return player.calculateMultiAttacks(true, true);
     }
 
     public function maxBowAttacks():int {
@@ -6689,9 +6689,13 @@ public class Combat extends BaseContent {
         var boolSwiftCast:Boolean = player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || player.weaponOff == weapons.ATWINSCY || (player.weapon.isSingleLarge() && player.hasPerk(PerkLib.GigantGrip)) || (player.weapon.isSingleMassive() && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand();
         var boolLifeLeech:Boolean = player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon();
         var boolFistingIs300Bucks:Boolean = (player.isFistOrFistWeapon() && (player.shield.isNothing || (player.shield == shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dagger and Shield" && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dual Daggers")) || player.isFeralCombat());
+		//outputText("HIT : " + flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] + " times\n");
+		//outputText("HIT : " + flags[kFLAGS.MULTIATTACK_STYLE_OFF] + " times\n");
 		if (offHand) howManyHits = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND];
 		else howManyHits = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND];
-        for(var i:int = 1; i <= howManyHits; i++){
+        //outputText("HIT : " + flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] + " times\n");
+        //outputText("HIT : " + flags[kFLAGS.MULTIATTACK_STYLE_MAIN] + " times\n");
+		for(var i:int = 1; i <= howManyHits; i++){
             damage = 0;
             if (rand(100) < accMelee) { // Attack hits... do stuff
                 //  get the raw damage value here
@@ -14253,11 +14257,13 @@ public function Straddle():void {
             return;
         }
         if (player.hasPerk(PerkLib.GreaterGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 1) {
-            flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
+            outputText("As your opponent is still distracted from your recent tease you take the opportunity to deliver another attack.");
+			flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
             doNext(combatMenu, false);
         }
         else if (player.hasPerk(PerkLib.ImprovedGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 0) {
-            flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 1;
+            outputText("As your opponent is still distracted from your recent tease you take the opportunity to deliver another attack.");
+			flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 1;
             doNext(combatMenu, false);
         }
         else enemyAIImpl();
@@ -14267,7 +14273,19 @@ public function Straddle():void {
 //private var randomcrit:Boolean;
 public function StraddleTease():void {
     clearOutput();
-    var straddleDamage:Number = combat.teases.teaseBaseLustDamage();
+    StraddleTeaseRe();
+    if (player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
+        player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
+        if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
+            monster.removeStatusEffect(StatusEffects.Straddle);
+            player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
+            outputText("Your opponent finally manages to struggle free of your grapple!\n\n");
+        }
+    }
+	postStrandleExtraActionsCheck();
+}
+private function StraddleTeaseRe():void {
+	var straddleDamage:Number = combat.teases.teaseBaseLustDamage();
     if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3 && player.tail.type == Tail.MANTICORE_PUSSYTAIL) straddleDamage *= 2;
 	if (player.hasPerk(PerkLib.ImprovedGrapple)) {
 		if (player.hasPerk(PerkLib.GreaterGrapple)) straddleDamage *= 1.4;
@@ -14317,7 +14335,7 @@ public function StraddleTease():void {
     if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) teaseFunctionList.push(randomTeaseAnemone);
     if (player.hasPerk(PerkLib.ElectrifiedDesire)) teaseFunctionList.push(randomTeaseRaiju);
     if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) teaseFunctionList.push(randomTeaseJabberwocky);
-    if (player.isAnyRace(Races.HarpylikeRaces)) teaseFunctionList.push(randomTeaseHarpy);
+    if (player.isAnyRace(Races.HarpylikeRaces) && monster.hasCock()) teaseFunctionList.push(randomTeaseHarpy);
     if (player.isRaceCached(Races.KITSUNE)) teaseFunctionList.push(randomTeaseKitsune);
     if (player.perkv1(IMutationsLib.BlackHeartIM) > 0) teaseFunctionList.push(randomTeaseLustStrike);
     var chosenTease:Function = randomChoice(teaseFunctionList);
@@ -14346,15 +14364,6 @@ public function StraddleTease():void {
         outputText("You moan in relief as you drink your victim's lifeforce, feeding off [monster his] pleasure. ");
         player.EnergyDependentRestore();
     }
-    if (player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
-        player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
-        if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
-            monster.removeStatusEffect(StatusEffects.Straddle);
-            player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
-            outputText("Your opponent finally manages to struggle free of your grapple!\n\n");
-        }
-    }
-	postStrandleExtraActionsCheck();
 }
 
 public function randomTeaseKiss(straddleDamage:Number, randomcrit:Boolean):void {
