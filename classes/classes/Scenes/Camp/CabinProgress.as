@@ -98,6 +98,7 @@ import classes.Scenes.SceneLib;
 
 		public function canGatherWoods():Boolean {
 			return (player.weapon == weapons.L__AXE || player.weapon == weapons.DL_AXE_ || player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2
+			|| player.weaponOff == weapons.L__AXE || player.weaponOff == weapons.DL_AXE_ || player.weaponOff == weapons.MACGRSW || player.weaponOff == weapons.TMACGRSW || player.weaponOff == weapons.RIPPER1 || player.weaponOff == weapons.TRIPPER1 || player.weaponOff == weapons.RIPPER2 || player.weaponOff == weapons.TRIPPER2
 			|| player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.isInGoblinMech()) && CampStatsAndResources.WoodResc < SceneLib.campUpgrades.checkMaterialsCapWood() && player.statusEffectv1(StatusEffects.ResourceNode1) < 5;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
@@ -116,7 +117,7 @@ import classes.Scenes.SceneLib;
 				endEncounter();
 				return;
 			}
-			if (player.hasItem(weapons.L__AXE) || player.weapon == weapons.DL_AXE_ || player.weaponName == "large axe") {
+			if (player.hasItem(weapons.L__AXE) || player.weapon == weapons.DL_AXE_ || player.weaponOff == weapons.L__AXE || player.weaponOff == weapons.DL_AXE_) {
 				outputText("You are carrying a large axe with you.");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
@@ -132,12 +133,13 @@ import classes.Scenes.SceneLib;
 				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n");
 				addButton(2, "Punch Tree", punchTreeMinecraftStyle);
 			}
-			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
-				if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
+			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2
+			|| player.weaponOff == weapons.MACGRSW || player.weaponOff == weapons.TMACGRSW || player.weaponOff == weapons.RIPPER1 || player.weaponOff == weapons.TRIPPER1 || player.weaponOff == weapons.RIPPER2 || player.weaponOff == weapons.TRIPPER2) {
+				if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2 || player.weaponOff == weapons.RIPPER2 || player.weaponOff == weapons.TRIPPER2) {
 					outputText("You are carrying a Ripper 2.0 with you.\n");
 					addButton(3, "Ripper 2.0", cutTreeMechTIMBER);
 				}
-				else if (player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1) {
+				else if (player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1 || player.weaponOff == weapons.RIPPER1 || player.weaponOff == weapons.TRIPPER1) {
 					outputText("You are carrying a Ripper 1.0 with you.\n");
 					addButton(3, "Ripper 1.0", cutTreeMechTIMBER);
 				}

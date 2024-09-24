@@ -741,7 +741,7 @@ public function carpentryShopInside():void {
 	addButton(7, "Sell Stones", carpentryShopSellStone);
 	addButton(10, "Toolbox", carpentryShopBuySet);
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) addButton(11, "Nails Box", carpentryShopBuySet2);
-	//if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) addButton(12, "Stone Building", carpentryShopBuySet3);
+	//if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 5) addButton(12, "Stone Building", carpentryShopBuySet3);
 	addButton(14, "Leave", telAdreMenu);
 }
 //Buy nails

@@ -365,7 +365,7 @@ public class Phouka extends Monster
 			this.lust = 30;
 			this.lustVuln = .5;
 			this.gems = 0;
-			if (ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_STARTED || ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_ITEM_GATHERED) {
+			if ((ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_STARTED || ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_ITEM_GATHERED) && !player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.drop = new WeightedDrop().add(consumables.BLACK_D, 2)
 					.add(consumables.RIZZART, 2)
 					.add(consumables.GROPLUS, 2)

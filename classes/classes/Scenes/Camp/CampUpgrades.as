@@ -26,14 +26,15 @@ public class CampUpgrades extends BaseContent {
     02 - Nails box bought
     03 - Wood storage built
     04 - Stone storage built
-    05 - Stone constructions guide bought
-    ?06 - expanding Wood storage?
-    ?07 - expanding Stones storage?
-    ?08 - expanding Nails storage?
-    ?09 - Sand storage built?
-    ?10 - water cystern or req. dam be high enough expanded to provide water in unlimited amount as if needed?
-    ?11 - Concrete storage built (unless building won't be req. so much of it to need another storage ^^ or just make one storage that will increase slightly both sand and concrete store space)?
-    ?(12 - Possible special materials storage/and or addidtional building guide for specific structures (fireproof dweeling that even with stones and concrete isn't enough?))?
+	05 - Nails storage built
+    06 - Stone constructions guide bought
+    ?07 - expanding Wood storage?
+    ?08 - expanding Stones storage?
+    ?09 - expanding Nails storage?
+    ?10 - Sand storage built?
+    ?11 - water cystern or req. dam be high enough expanded to provide water in unlimited amount as if needed?
+    ?12 - Concrete storage built (unless building won't be req. so much of it to need another storage ^^ or just make one storage that will increase slightly both sand and concrete store space)?
+    ?(13 - Possible special materials storage/and or addidtional building guide for specific structures (fireproof dweeling that even with stones and concrete isn't enough?))?
 	?xx- metal plates storage, mechanisms, energy core storages?
 
     flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY]:
@@ -101,7 +102,7 @@ public class CampUpgrades extends BaseContent {
     flags[kFLAGS.CAMP_UPGRADES_]:
     1 -
 
-    flagi na przyszłościowe surowce coby nie zapomnieć iż je już wpisałem do kodu w kFLAGS
+    flagi na przyszłościowe surowce co by nie zapomnieć iż je już wpisałem do kodu w kFLAGS
     CAMP_CABIN_SAND_RESOURCES
     CAMP_CABIN_CONCRETE_RESOURCES
     */
@@ -109,6 +110,7 @@ public class CampUpgrades extends BaseContent {
         menu();
         if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) addButton(0, "Wood Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more wood at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
         if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) addButton(0, "Stone Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more stones at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
+        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 4) addButton(0, "Nails Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more nails at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) addButton(1, "1st Warehouse", warehousegranary).hint("Build 1st part of the Warehouse to expand your storage space. (Req. "+usedFatigue(250, true)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) addButton(1, "Granary", warehousegranary).hint("Build Granary to expand your food space. (Req. "+usedFatigue(250, true)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) addButton(1, "2nd Warehouse", warehousegranary).hint("Build 2nd part of the Warehouse to expand your storage space. (Req. "+usedFatigue(250, true)+" fatigue)");
@@ -144,6 +146,7 @@ public class CampUpgrades extends BaseContent {
 	public function checkMaterialsCapNails():Number {
 		var cMC1:Number = 250;
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) cMC1 += 750;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 5) cMC1 += 4000;
 		return cMC1;
 	}
 	public function checkMaterialsCapWood():Number {
@@ -255,6 +258,7 @@ public class CampUpgrades extends BaseContent {
             if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) neednailsbox();
             else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) startWoodStorage();
             else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) startStoneStorage();
+            else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 4) startNailsStorage();
         } else {
             outputText("You are too exhausted to work on expanding your materials' storage!");
             doNext(playerMenu);
@@ -262,7 +266,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function neednailsbox():void {
-        outputText("When you opening book from your toolbox on the page describing how to build properly storage for wood you realize amount of nails that will be needed is much more than your toolbox can keep.  Damn if you would like to build this structure you would spend much of the time on walking to the carpenter shop in Tel'Adre to buy missing nails unless... there is some way to be able to store more than 200 nails.  With thoughts that maybe carpenter shopkeeper will help with this issue, you put back book.");
+        outputText("When you opening book from your toolbox on the page describing how to build properly storage for wood you realize amount of nails that will be needed is much more than your toolbox can keep.  Damn if you would like to build this structure you would spend much of the time on walking to the carpenter shop in Tel'Adre to buy missing nails unless... there is some way to be able to store more than 250 nails.  With thoughts that maybe carpenter shopkeeper will help with this issue, you put back book.");
         doNext(playerMenu);
     }
 
@@ -309,6 +313,30 @@ public class CampUpgrades extends BaseContent {
         outputText("\n\nYou take the wood, saw it and then cut into planks. Like before you put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. Rest of the stones fill the space inside due to need in future support weight of stones stored above. After that prelast part of building is to put all most of remaining wood planks on prepared base and nail them in place. Final thing to do is use remain wood and nails to make protective barrier around the whole storage.");
         buildWithHelpers(150, true);
         outputText("\n\nNow you can safely store a larger amount of stones!");
+        flushOutputTextToGUI();
+    }
+
+    public function startNailsStorage():void {
+        outputText("Do you start work on building nails storage? (Cost: 50 nails, 100 wood and 50 stones.)\n");
+        checkMaterials();
+        if (CampStatsAndResources.NailsResc >= 50 && CampStatsAndResources.WoodResc >= 100 && CampStatsAndResources.StonesResc >= 50) {
+            doYesNo(doNailsStorageWork, noThanks);
+        } else {
+            errorNotEnough();
+            doNext(playerMenu);
+        }
+    }
+
+    private function doNailsStorageWork():void {
+        CampStatsAndResources.NailsResc -= 50;
+        CampStatsAndResources.WoodResc -= 100;
+        CampStatsAndResources.StonesResc -= 50;
+        clearOutput();
+        outputText("You pull out \"Carpenter's Guide\" and flip pages until you come across instructions on how to build storage for nails. You spend few minutes looking at the instructions.");
+        flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
+        outputText("\n\nYou take the wood, saw it and then cut into planks. You put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. After that last part of building is to put all rest wood planks on prepared base and nail them in place.");
+        buildWithHelpers(150, true);
+        outputText("\n\nNow you can safely store a larger amount of nails!");
         flushOutputTextToGUI();
     }
 

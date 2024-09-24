@@ -806,8 +806,8 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside, but inside, the floors are still bare earth.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of [camp].\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("Halfway between the portal and the edge of your [camp] is a place where you will store piles of wood or stones for construction. ");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("Halfway between the portal and the edge of your [camp]  rests a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("Halfway between the portal and the edge of your [camp]  rests a long and wide wood platform with protective barriers at the edges. Inside it, you can safely store large amounts of wood and stone. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("Halfway between the portal and the edge of your [camp] rests a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("Halfway between the portal and the edge of your [camp] rests a long and wide wood platform with protective barriers at the edges. Inside it, you can safely store large amounts of wood"+(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 5?", nails":"")+" and stones. ");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's a warehouse located in the east section of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's a warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n");
@@ -5202,6 +5202,7 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePointsPredictionCampStructures += 11;
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 2) performancePointsPredictionCampStructures += 2;
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 4) performancePointsPredictionCampStructures += 2;
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 1) performancePointsPredictionCampStructures += 2;
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 3) performancePointsPredictionCampStructures += 2;
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePointsPredictionCampStructures += 2;
