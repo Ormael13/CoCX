@@ -193,7 +193,8 @@ public class Weapon extends Equipable
 		
 		public function get size():int { return _size; }
 		
-		public function isDual():Boolean { return _dual || type == WT_FISTS || type == WT_GAUNTLET; }
+		public function isDual():Boolean { return _dual; }
+		public function isDualUnarmed():Boolean { return type == WT_FISTS || type == WT_GAUNTLET; }
 		public function isDualWielded():Boolean { return !game.player.weapon.isNothing && !game.player.weaponOff.isNothing; }
 		public function isDualWieldedSmall():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_SMALL && game.player.weaponOff.size == WSZ_SMALL); }
 		public function isDualWieldedMedium():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_MEDIUM && game.player.weaponOff.size == WSZ_MEDIUM); }
@@ -274,7 +275,7 @@ public class Weapon extends Equipable
 					if (doOutput) outputText(getItemText("dual_fail"));
 					return false;
 				}
-				else if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
+				else if (isDual() && !isDualUnarmed()) {
 					if (!game.player.hasPerk(PerkLib.QuadWield)) {
 						if (!game.player.hasFourArms()) {
 							if (doOutput) outputText(getItemText("dual_4afail"));
@@ -298,7 +299,7 @@ public class Weapon extends Equipable
 					if (doOutput) outputText(getItemText("dual_fail"));
 					return false;
 				}
-				else if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
+				else if (isDual() && !isDualUnarmed()) {
 					if (!game.player.hasPerk(PerkLib.TitanGrip)) {
 						if (!game.player.hasPerk(PerkLib.TitanGripSu)) {
 							if (!game.player.hasFourArms()) {

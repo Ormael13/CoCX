@@ -1583,11 +1583,11 @@ public class Combat extends BaseContent {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = 1;
         }
         var dualWeapon:Boolean = false;
-        if (player.weapon.isDualWielded() || !player.hasAetherTwinsFormsNotAllowingDualWield()) {
+        if (player.weapon.isDual()) {
             dualWeapon = true;
         }
         if (flags[kFLAGS.MULTIATTACK_STYLE_MAIN] >= 0) {
-            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] = Math.min(maxCurrentAttacksMain(), (flags[kFLAGS.MULTIATTACK_STYLE_MAIN] || 0) + 1);
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] = Math.min(maxCurrentAttacksMain(), (flags[kFLAGS.MULTIATTACK_STYLE_MAIN] || 0) + 1);
             if (player.statusEffectv1(StatusEffects.CounterAction) > 0)
                 flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] += player.statusEffectv1(StatusEffects.CounterAction);
             if (player.weapon.isLarge() || player.weapon.isMassive()) {
@@ -1600,9 +1600,9 @@ public class Combat extends BaseContent {
                     }
                 }
             }
-            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;
+            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;// - coś źle z dualWeapon dające podwojenie
             if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && (dualWeapon || player.weapon == weapons.DAISHO)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;
-        }
+        /**/}
         else {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] = 1;
         }
@@ -1624,7 +1624,7 @@ public class Combat extends BaseContent {
 				}
 				if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] *= 2;
 				if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && (dualWeapon || player.weapon == weapons.DAISHO)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] *= 2;
-			}
+			/**/}
 			else {
 				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = 1;
 			}
@@ -3658,8 +3658,8 @@ public class Combat extends BaseContent {
         }
     }
 
-	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true, crit:Boolean = false, IsFeralCombat:Boolean = false, INeedOnlyOneFistOrKick:Number = 0):void{
-		if (isFireTypeWeapon() && !isPlasmaTypeWeapon()) {
+	public function checkForElementalEnchantmentAndDoDamageMain(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true, crit:Boolean = false, IsFeralCombat:Boolean = false, INeedOnlyOneFistOrKick:Number = 0):void{
+		if (isFireTypeWeaponMain() && !isPlasmaTypeWeaponMain()) {
 			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.2;
 			if (player.weapon == weapons.VGRAVEH) damage *= 1.25;
 			damage = Math.round(damage * fireDamageBoostedByDao());
@@ -3673,7 +3673,7 @@ public class Combat extends BaseContent {
 			}
 			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
         }
-        else if (isIceTypeWeapon()) {
+        else if (isIceTypeWeaponMain()) {
 			if (player.weapon == weapons.GGRAVEA) damage *= 1.25;
             damage = Math.round(damage * iceDamageBoostedByDao());
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
@@ -3685,19 +3685,19 @@ public class Combat extends BaseContent {
 				outputText(" [weapon] left lingering Frostburn at [themonster].");
 			}
         }
-        else if (isLightningTypeWeapon() && !isPlasmaTypeWeapon()) {
+        else if (isLightningTypeWeaponMain() && !isPlasmaTypeWeaponMain()) {
             damage = Math.round(damage * lightningDamageBoostedByDao());
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
             doLightningDamage(damage, true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
         }
-        else if (isDarknessTypeWeapon()) {
+        else if (isDarknessTypeWeaponMain()) {
             damage = Math.round(damage * darknessDamageBoostedByDao());
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
             doDarknessDamage(damage, true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
         }
-        else if (isPlasmaTypeWeapon()) {
+        else if (isPlasmaTypeWeaponMain()) {
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
             doPlasmaDamage(damage, true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -3787,7 +3787,7 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 			}
 		}
-		else if (player.isUnarmedCombat() || IsFeralCombat) {
+		else if (player.isUnarmedCombat() || IsFeralCombat || !player.hasAetherTwinsFormsNotAllowingDualWield()) {
 			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) damage += Math.round(damage * 0.1);
 			if (player.armor == armors.SFLAREQ) damage *= 1.2;
 			doPhysicalDamage(damage, true, true);
@@ -3910,6 +3910,129 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 			if (player.weapon == weapons.PHALLUS) {
+				doPhysicalDamage((damage * 2), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+			else {
+				doPhysicalDamage(Math.round(damage * 0.2), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.1);
+			}
+		}
+        JabbingStyleIncrement();
+	}
+	public function checkForElementalEnchantmentAndDoDamageOff(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true, crit:Boolean = false, IsFeralCombat:Boolean = false):void{
+		if (isFireTypeWeaponOff() && !isPlasmaTypeWeaponOff()) {
+			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.2;
+			if (player.weaponOff == weapons.VGRAVEH) damage *= 1.25;
+			damage = Math.round(damage * fireDamageBoostedByDao());
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doFireDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.weaponOff == weapons.VGRAVEH && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
+				if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.BurnDoT, 4, 0.02, 0, 0);
+				outputText(" [weapon] left lingering Burn at [themonster].");
+			}
+			if (player.weaponOff == weapons.TIDAR) (player.weaponOff as Tidarion).afterStrike();
+        }
+        else if (isIceTypeWeaponOff()) {
+			if (player.weaponOff == weapons.GGRAVEA) damage *= 1.25;
+            damage = Math.round(damage * iceDamageBoostedByDao());
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+            doIceDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.weaponOff == weapons.GGRAVEA && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
+				if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.FrostburnDoT, 4, 0.02, 0, 0);
+				outputText(" [weapon] left lingering Frostburn at [themonster].");
+			}
+        }
+        else if (isLightningTypeWeaponOff() && !isPlasmaTypeWeaponOff()) {
+            damage = Math.round(damage * lightningDamageBoostedByDao());
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+            doLightningDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+        }
+        else if (isDarknessTypeWeaponOff()) {
+            damage = Math.round(damage * darknessDamageBoostedByDao());
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+            doDarknessDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+        }
+        else if (isPlasmaTypeWeaponOff()) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+            doPlasmaDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+        }
+        else if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doPhysicalDamage(damage, true, true);
+            doMagicDamage(Math.round(damage * 0.2), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		}
+        else if (player.weaponOff == weapons.MGSWORD) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doMagicDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		}
+        else if (player.weaponOff == weapons.PHALLUS || player.weaponOff == weapons.PHALUSS) {
+            if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) {
+				monster.teased(Math.round(monster.lustVuln * damage * 0.05));
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+            else {
+                doPhysicalDamage(Math.round(damage * 0.75), true, true);
+                monster.teased(Math.round(monster.lustVuln * damage * 0.0125));
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+            }
+        }
+		else if (player.weaponOff == weapons.PRURUMI) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doPhysicalDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.spe >= 150) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+			if (player.spe >= 225) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+			if (player.spe >= 300) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+		}
+        else {
+			if (player.weaponOff == weapons.ARI_SPR) {
+				var bonus:Number = 1;
+				if (player.mana100 < 100) bonus += 0.4;
+				else if (player.mana100 < 70) bonus += 0.8;
+				else if (player.mana100 < 40) bonus += 1.2;
+				else bonus += 1.6;
+				damage *= bonus;
+			}
+            doPhysicalDamage(damage, true, true);
+			if (player.weaponOff == weapons.VGRAVEH) doFireDamage(Math.round(damage * fireDamageBoostedByDao() * 0.25), true, true);
+			if (player.weaponOff == weapons.GGRAVEA) doIceDamage(Math.round(damage * iceDamageBoostedByDao() * 0.25), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.weaponOff == weapons.DAISHO) {
+				doPhysicalDamage(Math.round(damage * 0.5), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.5);
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doLightningDamage(Math.round(damage * 0.3), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		}
+		if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			if (player.weaponOff == weapons.PHALLUS) {
 				doPhysicalDamage((damage * 2), true, true);
 				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 			}
@@ -6689,13 +6812,9 @@ public class Combat extends BaseContent {
         var boolSwiftCast:Boolean = player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || player.weaponOff == weapons.ATWINSCY || (player.weapon.isSingleLarge() && player.hasPerk(PerkLib.GigantGrip)) || (player.weapon.isSingleMassive() && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand();
         var boolLifeLeech:Boolean = player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon();
         var boolFistingIs300Bucks:Boolean = (player.isFistOrFistWeapon() && (player.shield.isNothing || (player.shield == shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dagger and Shield" && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dual Daggers")) || player.isFeralCombat());
-		//outputText("HIT : " + flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] + " times\n");
-		//outputText("HIT : " + flags[kFLAGS.MULTIATTACK_STYLE_OFF] + " times\n");
 		if (offHand) howManyHits = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND];
 		else howManyHits = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND];
-        //outputText("HIT : " + flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] + " times\n");
-        //outputText("HIT : " + flags[kFLAGS.MULTIATTACK_STYLE_MAIN] + " times\n");
-		for(var i:int = 1; i <= howManyHits; i++){
+        for(var i:int = 1; i <= howManyHits; i++){
             damage = 0;
             if (rand(100) < accMelee) { // Attack hits... do stuff
                 //  get the raw damage value here
@@ -6817,7 +6936,8 @@ public class Combat extends BaseContent {
                         else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                     }
                     //Damage is delivered HERE
-					checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, IsFeralCombat);
+					if (offHand) checkForElementalEnchantmentAndDoDamageOff(damage, true, true, crit, IsFeralCombat);
+					else checkForElementalEnchantmentAndDoDamageMain(damage, true, true, crit, IsFeralCombat);
                 }
                 if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75 && damage > 0) {
                     if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
@@ -7526,25 +7646,51 @@ public class Combat extends BaseContent {
         return player.weapon.hasTag(ItemConstants.W_CORRUPT_TYPE)
     }
 
-    public function isFireTypeWeapon():Boolean {
+    public function isFireTypeWeaponMain():Boolean {
         return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.TRCLAYM || player.weapon == weapons.RDAGGER || player.weapon == weapons.VGRAVEH) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby"))
                 || player.weapon.hasTag(ItemConstants.W_FIRE_TYPE)
                 || player.hasStatusEffect(StatusEffects.FlameBlade);
     }
-    public function isIceTypeWeapon():Boolean {
+    public function isIceTypeWeaponMain():Boolean {
         return ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.TSCLAYM || player.weapon == weapons.SDAGGER || player.weapon == weapons.GGRAVEA) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire"))
                 || player.weapon.hasTag(ItemConstants.W_ICE_TYPE);
     }
-    public function isLightningTypeWeapon():Boolean {
+    public function isLightningTypeWeaponMain():Boolean {
         return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TTCLAYM || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz"))
                 || player.weapon.hasTag(ItemConstants.W_LIGHTNING_TYPE)
                 || player.hasStatusEffect(StatusEffects.ElectrifyWeapon);
     }
-    public function isDarknessTypeWeapon():Boolean {
+    public function isDarknessTypeWeaponMain():Boolean {
         return ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.TACLAYM || player.weapon == weapons.ADAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst"));
     }
-    public function isPlasmaTypeWeapon():Boolean {
-        return (isFireTypeWeapon() && isLightningTypeWeapon());
+    public function isPlasmaTypeWeaponMain():Boolean {
+        return (isFireTypeWeaponMain() && isIceTypeWeaponMain());
+    }
+    public function isBlackIceTypeWeaponMain():Boolean {
+        return (isIceTypeWeaponMain() && isDarknessTypeWeaponMain());
+    }
+	public function isFireTypeWeaponOff():Boolean {
+        return ((player.weaponOff == weapons.RCLAYMO || player.weaponOff == weapons.TRCLAYM || player.weaponOff == weapons.RDAGGER || player.weaponOff == weapons.VGRAVEH) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby"))
+                || player.weaponOff.hasTag(ItemConstants.W_FIRE_TYPE)
+                || player.hasStatusEffect(StatusEffects.FlameBlade);
+    }
+    public function isIceTypeWeaponOff():Boolean {
+        return ((player.weaponOff == weapons.SCLAYMO || player.weaponOff == weapons.TSCLAYM || player.weaponOff == weapons.SDAGGER || player.weaponOff == weapons.GGRAVEA) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire"))
+                || player.weaponOff.hasTag(ItemConstants.W_ICE_TYPE);
+    }
+    public function isLightningTypeWeaponOff():Boolean {
+        return ((player.weaponOff == weapons.TCLAYMO || player.weaponOff == weapons.TTCLAYM || player.weaponOff == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz"))
+                || player.weaponOff.hasTag(ItemConstants.W_LIGHTNING_TYPE)
+                || player.hasStatusEffect(StatusEffects.ElectrifyWeapon);
+    }
+    public function isDarknessTypeWeaponOff():Boolean {
+        return ((player.weaponOff == weapons.ACLAYMO || player.weaponOff == weapons.TACLAYM || player.weaponOff == weapons.ADAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst"));
+    }
+    public function isPlasmaTypeWeaponOff():Boolean {
+        return (isFireTypeWeaponOff() && isLightningTypeWeaponOff());
+    }
+    public function isBlackIceTypeWeaponOff():Boolean {
+        return (isIceTypeWeaponOff() && isDarknessTypeWeaponOff());
     }
 	
 	public function isUnarmedCombatButDealFireDamage():Boolean {

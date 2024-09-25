@@ -76,7 +76,7 @@ public class IceFistSkill extends AbstractSoulSkill {
 		}
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		if (display) outputText("The air around your fist seems to lose all heat as you dash at [themonster]. You place your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
-		combat.checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, false, 4);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage, true, true, crit, false, 4);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		//stun
 		if (monster.hasPerk(PerkLib.Resolute)) {

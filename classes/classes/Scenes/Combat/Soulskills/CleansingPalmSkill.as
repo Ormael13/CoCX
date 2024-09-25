@@ -116,7 +116,7 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 			if (display) {
 				outputText("[Themonster] takes ");
 			}
-			combat.checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, false, 2);
+			combat.checkForElementalEnchantmentAndDoDamageMain(damage, true, true, crit, false, 2);
 			if (display) {
 				if (crit) 
 					outputText(" <b>*Critical Hit!*</b>");

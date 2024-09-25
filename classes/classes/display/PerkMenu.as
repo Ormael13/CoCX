@@ -84,13 +84,8 @@ public class PerkMenu extends BaseContent {
 		addButton(3, "Mutations DB", mutationsDatabase, 0, true);
 		if (sorter === sorterRelativeDistance) sortedPerks = null; // clear cache, relative distance could've been changed
 		addButton(4, "Perks Database", perkDatabase);
-		if ((player.calculateMultiAttacks() > 1) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
-			((player.hasPerk(PerkLib.JobBeastWarrior) || player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
-			((player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.isRace(Races.JIANGSHI) ||
-			(((player.isStaffTypeWeapon() || player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) && player.weapon != weapons.TIDAR && player.weaponOff != weapons.TIDAR) && player.hasPerk(PerkLib.StaffChanneling))) {
-			outputText("\n<b>You can adjust your melee attack settings.</b>");
-			addButton(5, "Melee Opt",meleeOptions);
-		}
+		outputText("\n<b>You can adjust your melee attack settings.</b>");
+		addButton(5, "Melee Opt",meleeOptions);
 		if (player.calculateMultiAttacks(false) > 1 || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot)) {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
 			addButton(6, "Range Opt",rangedOptions);

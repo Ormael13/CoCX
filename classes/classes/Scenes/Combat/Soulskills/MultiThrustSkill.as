@@ -102,7 +102,7 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 			else damage *= (1.75 + buffMultiplier);
 		}
 		if (display) outputText(" ");
-		combat.checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 		if (crit) {
 			if (display) outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);

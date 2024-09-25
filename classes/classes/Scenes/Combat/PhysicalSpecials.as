@@ -995,8 +995,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
 			else damage *= 1.75 + buffMultiplier;
 		}
-		combat.checkForElementalEnchantmentAndDoDamage(damage);
-		if (player.hasPerk(PerkLib.TwinThunder) && player.weapon.isDualWielded()) combat.checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage);
+		if (player.hasPerk(PerkLib.TwinThunder) && player.weapon.isDualWielded()) combat.checkForElementalEnchantmentAndDoDamageOff(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -1162,7 +1162,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 300) doDamage(damage, true, true);
 			combat.WrathGenerationPerHit2(5);
 		}
-		combat.checkForElementalEnchantmentAndDoDamage(damage, false, false);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage, false, false);
 		if (crit) {
 			outputText(" <b>Critical!</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -1237,9 +1237,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= (critMulti + buffMultiplier);
 		}
 		damage = Math.round(damage);
-		combat.checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
-			combat.checkForElementalEnchantmentAndDoDamage(damage);
+			combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 			damage *= 2;
 		}
 		if (crit) {
@@ -1586,14 +1586,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= critMulti;
 		}
-		combat.checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 		if (player.weapon == weapons.D_LANCE) {
-			combat.checkForElementalEnchantmentAndDoDamage(damage);
+			combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 			damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
-			combat.checkForElementalEnchantmentAndDoDamage(damage);
-			if (player.weapon == weapons.D_LANCE) combat.checkForElementalEnchantmentAndDoDamage(damage);
+			combat.checkForElementalEnchantmentAndDoDamageMain(damage);
+			if (player.weapon == weapons.D_LANCE) combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 			damage *= 2;
 		}
 		if (crit) {
@@ -1736,7 +1736,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//final touches
 		damage = Math.round(damage);
 		outputText("Your [weapon] hits few of [themonster], dealing ");
-		combat.checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 		outputText(" damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
@@ -1817,7 +1817,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//final touches
 		damage = Math.round(damage);
 		outputText("Your [weapon] whipped few of [themonster], dealing ");
-		combat.checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 		outputText(" damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");

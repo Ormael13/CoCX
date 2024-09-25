@@ -81,7 +81,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 			else damage *= (1.75 + buffMultiplier);
 		}
 		if (display) outputText("Your [weapon] sweeps against [themonster], dealing ");
-		combat.checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage);
 		if (display) outputText(" damage! ");
 		if (crit) {
 			if (display) outputText(" <b>*Critical Hit!*</b>");

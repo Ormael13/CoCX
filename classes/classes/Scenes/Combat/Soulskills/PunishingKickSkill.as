@@ -88,7 +88,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 		}
 		monster.createStatusEffect(StatusEffects.PunishingKick, calcDuration(), 0, 0, 0);
 		if (display) outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. [Themonster] is knocked off balance by the ferocious blow! ");
-		combat.checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, false, 1);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage, true, true, crit, false, 1);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		endTurnBySpecialHit(damage, display);
 		

@@ -81,7 +81,7 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		}
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
 		if (display) outputText("Setting your fist ablaze, you rush at [themonster] and scorch [monster him] with your searing flames. ");
-		combat.checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, false, 3);
+		combat.checkForElementalEnchantmentAndDoDamageMain(damage, true, true, crit, false, 3);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		endTurnBySpecialHit(damage, display);
     }

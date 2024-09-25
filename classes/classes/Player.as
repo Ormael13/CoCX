@@ -5166,6 +5166,7 @@ use namespace CoC;
 				minions += perkv1(PerkLib.GreaterHarvest);
 				minions += perkv2(PerkLib.GreaterHarvest);
 			}
+			if (hasPerk(PerkLib.MummyLord) && perkv1(PerkLib.MummyLord) > 0) minions += perkv1(PerkLib.MummyLord);
 			if (hasPerk(PerkLib.JobTamer)) minions += SceneLib.campMakeWinions.currentTamedMonstersCount();
 			return minions;
 		}
