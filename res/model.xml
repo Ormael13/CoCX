@@ -1251,7 +1251,7 @@
 		<cell rect="711,320,49,29" name="fullbodyBalls/gnomelarge" dx="79" dy="104"/>
 		<cell rect="711,350,49,29" name="fullbodyBalls/gnomehuge" dx="79" dy="105"/>
 		<cell rect="711,380,49,29" name="fullbodyBalls/gnomesillyhuge" dx="79" dy="106"/>
-		<cell rect="fullbodyBalls/gnomesillyhuge" name="fullbodyBalls/gnomesillyhuge"/>
+		<cell rect="fullbodyBalls/gnomesillyhuge" name="fullbodyBalls/gnomegigahuge"/>
 		<cell rect="761,200,49,29" name="fullbodyPenis/ignis" dx="78" dy="106"/>
 		<cell rect="761,230,49,58" name="fullbodyPenis/ignisbig" dx="77" dy="104"/>
 		<cell rect="761,290,49,29" name="fullbodyBalls/ignissmall" dx="79" dy="104"/>
