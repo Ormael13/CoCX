@@ -143,7 +143,9 @@ public final class Reducto extends Consumable {
                 EngineCore.menu();
                 EngineCore.addButton(0, "Tip(-Len)", pickDoses, curry(shrink, dick1 - 1, "tip"));
                 EngineCore.addButton(1, "Side(-Thick)", pickDoses, curry(shrink, dick1 - 1, "side"));
-                EngineCore.addButton(2, "Whole(+Both)", pickDoses, curry(shrink, dick1 - 1, "entirety"));
+                EngineCore.addButton(2, "Whole(-Both)", pickDoses, curry(shrink, dick1 - 1, "entirety"));
+                EngineCore.addButton(2, "Knot", pickDoses, curry(shrink, dick1 - 1, "knot"))
+                        .disableIf(!player.hasKnot(dick1 - 1), "No knot present!");
                 EngineCore.addButton(4, "Back", useItem);
             }
         }
@@ -156,7 +158,14 @@ public final class Reducto extends Consumable {
             else if (part == "side") outputText("Your feel your [cock " + (dick + 1) + "] bending slightly as it has become noticeably thinner!");
             else if (part == "entirety") outputText("Your [cock " + (dick + 1) + "] twitches as it shrinks, disappearing steadily into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until it has lost about some of its old length and thickness.");
             while (d-- > 0) {
-                if (part == "tip") {
+                if (part == "knot") {
+                    outputText("Your knot starts to swell, but before it could even reach its full size, it suddenly shrivels, striking you with an unexpected relief.");
+                    player.cocks[dick].knotMultiplier -= 0.2;
+                    if (player.cocks[dick].knotMultiplier <= 1.0) {
+                        player.cocks[dick].knotMultiplier = 1.0;
+                        outputText(" It takes a bit longer than expected, but after all the veins surrounding it turn pale, you finally see that the knot has disappeared!");
+                    }
+                } else if (part == "tip") {
                     outputText("Your can't believe your eyes - your [cock " + (dick + 1) + "] has lost around one third of its length!");
                     player.growCock(dick, -player.cocks[dick].cockLength / 3);
                 } else if (part == "side") {
