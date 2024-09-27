@@ -882,9 +882,9 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.MUMMY_ATTACK] == 0) outputText("Your mummies will not attack.");
 		if (flags[kFLAGS.MUMMY_ATTACK] == 1) outputText("Your mummies will attack at the begining of each turn.");
 		addButton(10, "Disable", toggleFlag, mummyBehaviourOptions, kFLAGS.MUMMY_ATTACK)
-			.disableIf(flags[kFLAGS.MUMMY_ATTACK] != 0);
+			.disableIf(flags[kFLAGS.MUMMY_ATTACK] == 0);
 		addButton(11, "Enable", toggleFlag, mummyBehaviourOptions, kFLAGS.MUMMY_ATTACK)
-			.disableIf(flags[kFLAGS.MUMMY_ATTACK] != 1);
+			.disableIf(flags[kFLAGS.MUMMY_ATTACK] == 1);
 
 		addButton(14, "Back", minionOptions)
 	}

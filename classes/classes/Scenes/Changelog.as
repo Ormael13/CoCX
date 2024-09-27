@@ -255,7 +255,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 6 sensitivity lvl-up perk: Quasi Domain Kineses. Req. Advanced Kineses perk and 150+ sensitivity. Effect: All of your kinesis type specials would deal higher damage against single and group enemies. The larger group the higher bonus damage. (2x/10x/50x)\n");
 			outputText("-Entangle special (using shield slot item - Battle Net) have added effect: Enemies flying using wings would temporaly be grounded.\n");
 			outputText("-New upgrade options for camp buildings: next step in materials storage buildings (nails storage - increase nails store cap by 4,000)\n");
-			outputText("-\n");
+			outputText("-Can now Gro/Red knots! (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -319,8 +319,9 @@ public class Changelog extends BaseContent
 			outputText("bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards recovering hunger with demonic hunger perk, Atlach Nacha ");
 			outputText("locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene, during Urta scenes game mix up Urta and PC when checking for sex scenes selection, Cure spell not removing Blind, Whisker Fruit not giving multiple breast rows, some of status effects not cleaning up ");
 			outputText("after bad end or combat end, scene with Ayane when PC visit shrine as already 9 tailed kitusne without star sphere not gaining star sphere during the scene, Meteor Shower and Polar Midnight not recognized as spells for Channeling perk req., Healer npc in JttE never having her cure/heal options going off cooldown, Vixen&Cream with Urta unclosed tag, Straddle Tease variant for ");
-			outputText("Harpies not checking if enemy have cock, Mist Phouka ");
-			outputText("enemies dropping tarnished shard of metal\n\n");
+			outputText("Harpies not checking if enemy have cock, Mist Phouka enemies dropping tarnished shard of metal, ");
+			outputText("PC mummies behaviour choice menu buttons wrong labeled");
+			outputText("\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
