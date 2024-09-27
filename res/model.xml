@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE model [
-		<!ELEMENT model (palette|colorkeys|spritemap|layers|animations|logic)*>
+		<!ELEMENT model (palette|colorprops|colorkeys|spritemap|layers|animations|logic)*>
 		<!ATTLIST model
 				name CDATA #REQUIRED
 				dir CDATA #REQUIRED
@@ -9,16 +9,19 @@
 				scale CDATA #REQUIRED
 				originX CDATA #IMPLIED
 				originY CDATA #IMPLIED>
-		<!ELEMENT palette (common|property)*>
-		<!ELEMENT common (color)*>
+		<!ELEMENT palette (color)*>
+		<!ATTLIST palette
+				name CDATA #REQUIRED>
 		<!ELEMENT color (#PCDATA)>
 		<!ATTLIST color
 				name CDATA #REQUIRED>
-		<!ELEMENT property (color)*>
+		<!ELEMENT colorprops (property)*>
+		<!ELEMENT property (#PCDATA)>
 		<!ATTLIST property
 				default CDATA #REQUIRED
 				name CDATA #REQUIRED
-				src CDATA #REQUIRED>
+				src CDATA #REQUIRED
+				palette CDATA #REQUIRED>
 		<!ELEMENT colorkeys (key)*>
 		<!ELEMENT key (#PCDATA)>
 		<!ATTLIST key
@@ -90,184 +93,173 @@
 		]>
 <!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
 	<model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
-	<palette>
+	<palette name="common">
 		<!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
-			<common>
-			<color name="albino">#f2f2e8</color>
-			<color name="aqua">#00cccc</color>
-			<color name="ashen">#817d79</color>
-			<color name="ashen2">#9f948e</color>
-			<color name="auburn">#732d26</color>
-			<color name="black">#333333</color>
-			<color name="blond">#e0c685</color>
-			<color name="blonde">#f2e4bf</color>
-			<color name="blue">#405fce</color>
-			<color name="bright pink">#f000f0</color>
-			<color name="bronzed">#a89148</color>
-			<color name="brown">#664400</color>
-			<color name="caramel">#c39350</color>
-			<color name="caramel2">#c38c50</color>
-			<color name="cerulean">#59cfde</color>
-			<color name="cerulean2">#377bc3</color>
-			<color name="chocolate">#4a3b2b</color>
-			<color name="crimson">#dc143c</color>
-			<color name="crystal">#bc81ca</color>
-			<color name="dark">#694e44</color>
-			<color name="dark2">#352722</color>
-			<color name="dusky">#f000f0</color>
-			<color name="ebony">#3d3529</color>
-			<color name="eldritch green">#87d981</color>
-			<color name="emerald">#4cc875</color>
-			<color name="fair">#edccbf</color>
-			<color name="golden">#ffdd00</color>
-			<color name="gray">#808080</color>
-			<color name="green">#08a108</color>
-			<color name="indigo">#4d0080</color>
-			<color name="light">#feebd7</color>
-			<color name="neon blue">#29eaff</color>
-			<color name="spectral blue">#29eaff</color>
-			<color name="glacial blue">#94f6ff</color>
-			<color name="pure blue">#94f6ff</color>
-			<color name="mahogany">#81473b</color>
-			<color name="mahogany2">#672828</color>
-			<color name="metallic">#9c9c9c</color>
-			<color name="midnight">#30354a</color>
-			<color name="olive">#ddad72</color>
-			<color name="orange">#ffa600</color>
-			<color name="peach">#f4c0a4</color>
-			<color name="pink">#ffb3b3</color>
-			<color name="purple">#7a007a</color>
-			<color name="purplish black">#391939</color>
-			<color name="red">#f02c0a</color>
-			<color name="red2">#ff0000</color>
-			<color name="russet">#aa6546</color>
-			<color name="russet2">#793939</color>
-			<color name="sable">#d6caa9</color>
-			<color name="sanguine">#c03030</color>
-			<color name="silky">#ffd6ff</color>
-			<color name="silver">#d8e0e9</color>
-			<color name="tan">#a3845c</color>
-			<color name="tan2">#cfaa30</color>
-			<color name="tawny">#b97f27</color>
-			<color name="turquoise">#1ed9dc</color>
-			<color name="white">#e6e6eb</color>
-			<color name="yellow">#fff70f</color>
-			<color name="aphotic blue-black">#08155e</color>
-			<color name="bluish black">#22263a</color>
-			<color name="ashen grayish-blue">#93b6c8</color>
-			<color name="creamy-white">#f2ebde</color>
-			<color name="crimson platinum">#d56c6c</color>
-			<color name="fiendish crimson">#d56c6c</color>
-			<color name="blood-red">#d56c6c</color>
-			<color name="blazing red">#ff6224</color>
-			<color name="dark blue">#3d529e</color>
-			<color name="dark gray">#534f59</color>
-			<color name="dark green">#36582d</color>
-			<color name="deep blue">#1e3667</color>
-			<color name="deep red">#742525</color>
-			<color name="ember">#ff6224</color>
-			<color name="ghostly pale">#e3deed</color>
-			<color name="glacial white">#dee5f2</color>
-			<color name="golden blonde">#f5d88a</color>
-			<color name="grayish-blue">#3f3f50</color>
-			<color name="iridescent gray">#999999</color>
-			<color name="leaf green">#5eba5e</color>
-			<color name="light blonde">#ffe78f</color>
-			<color name="light blue">#b1c8ec</color>
-			<color name="light gray">#dddadd</color>
-			<color name="light green">#c5eec3</color>
-			<color name="light gray">#c4d1d9</color>
-			<color name="light purple">#e4cdf3</color>
-			<color name="light pink">#ffbdcb</color>
-			<color name="lime green">#73df72</color>
-			<color name="magenta">#470036</color>
-			<color name="mediterranean-toned">#ac7339</color>
-			<color name="metallic golden">#ddc469</color>
-			<color name="metallic silver">#cfedfc</color>
-			<color name="midnight black">#171622</color>
-			<color name="midnight purple">#47314b</color>
-			<color name="milky white">#f4dfdc</color>
-			<color name="pale white">#fff4eb</color>
-			<color name="pale yellow">#eeecaa</color>
-			<color name="pale purple">#d3d4e9</color>
-			<color name="platinum blonde">#f7f3e8</color>
-			<color name="platinum crimson">#ff745c</color>
-			<color name="platinum-blonde">#ffe5c7</color>
-			<color name="purplish-black">#7d597a</color>
-			<color name="purplish-pink">#bc81ca</color>
-			<color name="dark purple">#a700bd</color>
-			<color name="eldritch purple">#7a5f95</color>
-			<color name="quartz white">#ffffff</color>
-			<color name="pure white">#ffffff</color>
-			<color name="immaculate white">#fdfdfc</color>
-			<color name="reddish-orange">#df8453</color>
-			<color name="rough gray">#525252</color>
-			<color name="royal purple">#524496</color>
-			<color name="sandy blonde">#ebd69e</color>
-			<color name="sandy brown">#a28d57</color>
-			<color name="sandy-blonde">#e0cd9f</color>
-			<color name="shiny black">#1c262c</color>
-			<color name="silver blonde">#fcfaf8</color>
-			<color name="silver-white">#eff3f6</color>
-			<color name="snow white">#f9f9fa</color>
-			<color name="stormy blue">#2f308d</color>
-			<color name="ghastly white">#f9f9fa</color>
-			<color name="yellowish-green">#e1eca7</color>
-			<color name="black and yellow">#000000</color>
-			<color name="abyssal black">#000000</color>
-			<color name="white and black">#eff3f6</color>
-			<color name="fiendish pink">#ffccf3</color>
-			<color name="fiendish dark pink">#ea7bc5</color>
-			<color name="fiendish blue">#91a0e3</color>
-		</common>
-		<property name="hair" src="hairColor1" default="#ffffff">
-			<color name="red">#d85741</color>
-			<color name="flaxen">#e1ba94</color>
-			<color name="brown">#674f42</color>
-			<color name="black">#334252</color>
-			<color name="gray">#647a7d</color>
-			<color name="white">#aeaba3</color>
-			<color name="raven">#101728</color>
-			<color name="snowy">#dddfe4</color>
-		</property>
-		<property name="hair2" src="hairColor2" default="#ffffff">
-			<color name="red">#d85741</color>
-			<color name="flaxen">#e1ba94</color>
-			<color name="brown">#674f42</color>
-			<color name="black">#334252</color>
-			<color name="gray">#647a7d</color>
-			<color name="white">#aeaba3</color>
-			<color name="raven">#101728</color>
-			<color name="snowy">#dddfe4</color>
-		</property>
-		<property name="fur" src="furColor1" default="#ffffff">
-		</property>
-		<property name="fur2" src="furColor2" default="#ffffff">
-		</property>
-		<property name="feather" src="featherColor1" default="#ffffff">
-		</property>
-		<property name="feather2" src="featherColor2" default="#ffffff">
-		</property>
-		<property name="scales" src="scaleColor1" default="#ffffff">
-		</property>
-		<property name="scales2" src="scaleColor2" default="#ffffff">
-		</property>
-		<property name="chitin" src="chitinColor1" default="#ffffff">
-		</property>
-		<property name="chitin2" src="chitinColor2" default="#ffffff">
-		</property>
-		<property name="skin" src="skinColor1" default="#ffffff">
-			<color name="pale">#f2e8e3</color>
-		</property>
-		<property name="skin2" src="skinColor2" default="#ffffff">
-			<color name="pale">#f2e8e3</color>
-		</property>
-		<property name="skin3" src="skinColor3" default="#ffffff">
-			<color name="pale">#f2e8e3</color>
-		</property>
-		<property name="iris" src="eyes.colour" default="#0000ff">
-		</property>
+		<color name="albino">#f2f2e8</color>
+		<color name="aqua">#00cccc</color>
+		<color name="ashen">#817d79</color>
+		<color name="ashen2">#9f948e</color>
+		<color name="auburn">#732d26</color>
+		<color name="black">#333333</color>
+		<color name="blond">#e0c685</color>
+		<color name="blonde">#f2e4bf</color>
+		<color name="blue">#405fce</color>
+		<color name="bright pink">#f000f0</color>
+		<color name="bronzed">#a89148</color>
+		<color name="brown">#664400</color>
+		<color name="caramel">#c39350</color>
+		<color name="caramel2">#c38c50</color>
+		<color name="cerulean">#59cfde</color>
+		<color name="cerulean2">#377bc3</color>
+		<color name="chocolate">#4a3b2b</color>
+		<color name="crimson">#dc143c</color>
+		<color name="crystal">#bc81ca</color>
+		<color name="dark">#694e44</color>
+		<color name="dark2">#352722</color>
+		<color name="dusky">#f000f0</color>
+		<color name="ebony">#3d3529</color>
+		<color name="eldritch green">#87d981</color>
+		<color name="emerald">#4cc875</color>
+		<color name="fair">#edccbf</color>
+		<color name="golden">#ffdd00</color>
+		<color name="gray">#808080</color>
+		<color name="green">#08a108</color>
+		<color name="indigo">#4d0080</color>
+		<color name="light">#feebd7</color>
+		<color name="neon blue">#29eaff</color>
+		<color name="spectral blue">#29eaff</color>
+		<color name="glacial blue">#94f6ff</color>
+		<color name="pure blue">#94f6ff</color>
+		<color name="mahogany">#81473b</color>
+		<color name="mahogany2">#672828</color>
+		<color name="metallic">#9c9c9c</color>
+		<color name="midnight">#30354a</color>
+		<color name="olive">#ddad72</color>
+		<color name="orange">#ffa600</color>
+		<color name="peach">#f4c0a4</color>
+		<color name="pink">#ffb3b3</color>
+		<color name="purple">#7a007a</color>
+		<color name="purplish black">#391939</color>
+		<color name="red">#f02c0a</color>
+		<color name="red2">#ff0000</color>
+		<color name="russet">#aa6546</color>
+		<color name="russet2">#793939</color>
+		<color name="sable">#d6caa9</color>
+		<color name="sanguine">#c03030</color>
+		<color name="silky">#ffd6ff</color>
+		<color name="silver">#d8e0e9</color>
+		<color name="tan">#a3845c</color>
+		<color name="tan2">#cfaa30</color>
+		<color name="tawny">#b97f27</color>
+		<color name="turquoise">#1ed9dc</color>
+		<color name="white">#e6e6eb</color>
+		<color name="yellow">#fff70f</color>
+		<color name="aphotic blue-black">#08155e</color>
+		<color name="bluish black">#22263a</color>
+		<color name="ashen grayish-blue">#93b6c8</color>
+		<color name="creamy-white">#f2ebde</color>
+		<color name="crimson platinum">#d56c6c</color>
+		<color name="fiendish crimson">#d56c6c</color>
+		<color name="blood-red">#d56c6c</color>
+		<color name="blazing red">#ff6224</color>
+		<color name="dark blue">#3d529e</color>
+		<color name="dark gray">#534f59</color>
+		<color name="dark green">#36582d</color>
+		<color name="deep blue">#1e3667</color>
+		<color name="deep red">#742525</color>
+		<color name="ember">#ff6224</color>
+		<color name="ghostly pale">#e3deed</color>
+		<color name="glacial white">#dee5f2</color>
+		<color name="golden blonde">#f5d88a</color>
+		<color name="grayish-blue">#3f3f50</color>
+		<color name="iridescent gray">#999999</color>
+		<color name="leaf green">#5eba5e</color>
+		<color name="light blonde">#ffe78f</color>
+		<color name="light blue">#b1c8ec</color>
+		<color name="light gray">#c4d1d9</color>
+		<color name="light green">#c5eec3</color>
+		<color name="light purple">#e4cdf3</color>
+		<color name="light pink">#ffbdcb</color>
+		<color name="lime green">#73df72</color>
+		<color name="magenta">#470036</color>
+		<color name="mediterranean-toned">#ac7339</color>
+		<color name="metallic golden">#ddc469</color>
+		<color name="metallic silver">#cfedfc</color>
+		<color name="midnight black">#171622</color>
+		<color name="midnight purple">#47314b</color>
+		<color name="milky white">#f4dfdc</color>
+		<color name="pale white">#fff4eb</color>
+		<color name="pale yellow">#eeecaa</color>
+		<color name="pale purple">#d3d4e9</color>
+		<color name="platinum blonde">#f7f3e8</color>
+		<color name="platinum crimson">#ff745c</color>
+		<color name="platinum-blonde">#ffe5c7</color>
+		<color name="purplish-black">#7d597a</color>
+		<color name="purplish-pink">#bc81ca</color>
+		<color name="dark purple">#a700bd</color>
+		<color name="eldritch purple">#7a5f95</color>
+		<color name="quartz white">#ffffff</color>
+		<color name="pure white">#ffffff</color>
+		<color name="immaculate white">#fdfdfc</color>
+		<color name="reddish-orange">#df8453</color>
+		<color name="rough gray">#525252</color>
+		<color name="royal purple">#524496</color>
+		<color name="sandy blonde">#ebd69e</color>
+		<color name="sandy brown">#a28d57</color>
+		<color name="sandy-blonde">#e0cd9f</color>
+		<color name="shiny black">#1c262c</color>
+		<color name="silver blonde">#fcfaf8</color>
+		<color name="silver-white">#eff3f6</color>
+		<color name="snow white">#f9f9fa</color>
+		<color name="stormy blue">#2f308d</color>
+		<color name="ghastly white">#f9f9fa</color>
+		<color name="yellowish-green">#e1eca7</color>
+		<color name="black and yellow">#000000</color>
+		<color name="abyssal black">#000000</color>
+		<color name="white and black">#eff3f6</color>
+		<color name="fiendish pink">#ffccf3</color>
+		<color name="fiendish dark pink">#ea7bc5</color>
+		<color name="fiendish blue">#91a0e3</color>
 	</palette>
+	<palette name="hair">
+		<color name="red">#d85741</color>
+		<color name="flaxen">#e1ba94</color>
+		<color name="brown">#674f42</color>
+		<color name="black">#334252</color>
+		<color name="gray">#647a7d</color>
+		<color name="white">#aeaba3</color>
+		<color name="raven">#101728</color>
+		<color name="snowy">#dddfe4</color>
+	</palette>
+	<palette name="skin">
+		<color name="pale">#f2e8e3</color>
+	</palette>
+	<palette name="fur">
+	</palette>
+	<palette name="feather">
+	</palette>
+	<palette name="scales">
+	</palette>
+	<palette name="chitin">
+	</palette>
+	<palette name="iris">
+	</palette>
+	<colorprops>
+		<property name="hair" palette="hair" src="hairColor1" default="#ffffff"/>
+		<property name="hair2" palette="hair" src="hairColor2" default="#ffffff"/>
+		<property name="fur" palette="fur" src="furColor1" default="#ffffff"/>
+		<property name="fur2" palette="fur" src="furColor2" default="#ffffff"/>
+		<property name="feather" palette="feather" src="featherColor1" default="#ffffff"/>
+		<property name="feather2" palette="feather" src="featherColor2" default="#ffffff"/>
+		<property name="scales" palette="scales" src="scaleColor1" default="#ffffff"/>
+		<property name="scales2" palette="scales" src="scaleColor2" default="#ffffff"/>
+		<property name="chitin" palette="chitin" src="chitinColor1" default="#ffffff"/>
+		<property name="chitin2" palette="chitin" src="chitinColor2" default="#ffffff"/>
+		<property name="skin" palette="skin" src="skinColor1" default="#ffffff"/>
+		<property name="skin2" palette="skin" src="skinColor2" default="#ffffff"/>
+		<property name="skin3" palette="skin" src="skinColor3" default="#ffffff"/>
+		<property name="iris" palette="iris" src="eyes.colour" default="#0000ff"/>
+	</colorprops>
 	<colorkeys>
 		<key src="#FF88FF" base="hair" transform="lighten(25)"/>
 		<key src="#f934f9" base="hair" transform="lighten(10)"/>
