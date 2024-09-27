@@ -407,7 +407,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 	}
 	public function charyTrumpet():void {
 		outputText("<i>\"Ah, the brass section. Not for the faint of heart, weak of lips, or short on air.\"</i> He laughs at his bad joke. <i>\"Not really something we used, under the sea. Passing water through these things doesn’t really work.\"</i> He shrugs. <i>\"I’m nowhere near as good with these as the others, but sure, we can mess around.\"</i> He produces two trumpets from his boat, and the two of you spend an hour or so just goofing around, making goofy sound effects and little noises with the trumpets.\n\n");
-		outputText("You excuse yourself, and Charybdis looks almost disappointed. <i>\"I get it.\"</i> He says. <i>\"You’ve got your own life to live, no time to waste with the likes of me…\"</i> He then sticks his tongue out, blowing a massive raspberry through the trumpet. <i>\"Just kiddin’,\"</i> he says. <i>\"Give ‘em hell, [player].\"</i>\n\n");
+		outputText("You excuse yourself, and Charybdis looks almost disappointed. <i>\"I get it.\"</i> He says. <i>\"You’ve got your own life to live, no time to waste with the likes of me…\"</i> He then sticks his tongue out, blowing a massive raspberry through the trumpet. <i>\"Just kiddin’,\"</i> he says. <i>\"Give ‘em hell, [name].\"</i>\n\n");
 		player.trainStat("tou", 5, player.trainStatCap("tou",100));
 		endEncounter(60);
 	}

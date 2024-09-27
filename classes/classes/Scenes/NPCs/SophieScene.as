@@ -823,7 +823,7 @@ private function sophieFucked(dicked:Boolean = true):void {
 	//knock up if not knocked up
 	if (!pregnancy.isPregnant && dicked) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 48 + rand(48));
-		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Sophia is pregnant!</b>");
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Sophie is pregnant!</b>");
 	}
 	//if forced to lesbosecks
 	if(!dicked) {

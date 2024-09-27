@@ -7,11 +7,11 @@ public function joJoyCampMenu():void {
 		outputText("You see your Drider lover, Belisa, standing next to Joy. The two seem to be discussing something in earnest, while Belisa's working on patching one of Joy's robes.\n\n"); 
 		outputText("I know where you're coming from, even if I don't understand everything.\" Belisa says warmly. \"I personally wouldn't go to such extremes, Marae above, I understand your reluctance to tell them at all.\" She chuckles. \"But it seems to have worked for you. You're happier than I've ever seen you before.\" \n\n");
 		outputText("Joy seems a little bashful at that. \"Well...It was an accident the first time. It wasn't...Planned.\" \n\n");
-		outputText("\"Well, nobody sane would drink that...Beverage...Willingly, if they knew what it was.\" Belisa chides. \"Just consider yourself lucky that someone like" +[player] +"was there to get it removed. \n\n");
+		outputText("\"Well, nobody sane would drink that...Beverage...Willingly, if they knew what it was.\" Belisa chides. \"Just consider yourself lucky that someone like" +[name] +"was there to get it removed. \n\n");
 		outputText("\"Oh, I consider myself *very* lucky\" Joy teases. Belisa gently slaps the monk on the shoulder. \n\n");
 		outputText("\"That's what I get for being nice to you!\" Belisa fires back, but you can tell it's just friendly teasing. You step closer, and the two turn their heads, Belisa waving at you happily.\n\n");
 		outputText("\"Hello!\" Belisa says happily. \"We were just discussing-\" Joy lunges, cheeks bright red, to put her hands over the Drider's mouth, but Belisa laughs, ducking. \"Never mind!\" Joy 'chases' Belisa away, but you can tell both ladies are laughing, Joy, a bit embarassed, Belisa, amused to no end.  \n\n");
-		outputText("\"Joy comes back, breathing slightly heavily, her cheeks red. \"Hello, "+[player]+", what can I do for you?\" \n\n");
+		outputText("\"Joy comes back, breathing slightly heavily, her cheeks red. \"Hello, "+[name]+", what can I do for you?\" \n\n");
 		}
 		else if ((BelisaFollower.BelisaInCamp) == false) {
 		switch (rand(3)) {

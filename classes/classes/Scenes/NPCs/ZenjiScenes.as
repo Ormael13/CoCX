@@ -1750,7 +1750,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You tell him that you’re always happy to make him happy.\n\n");
 			if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700) {
 				outputText("You can feel even more cum run down your [legs]. You look up and Zenji is panting softly as he tries to give you a cheeky grin.\n\n");
-				outputText("Zenji moans softly, \"<i>I… I tink I’m at my limit, [player]... I can’t hold it anymore...</i>\"\n\n");
+				outputText("Zenji moans softly, \"<i>I… I tink I’m at my limit, [name]... I can’t hold it anymore...</i>\"\n\n");
 				outputText("There is so much cum, it quickly pools at your [feet]. You have turned him into a non-stop geyser of cum, it looks like Zenji will never stop at this point.\n\n");
 				awardAchievement("Virility God", kACHIEVEMENTS.GENERAL_VIRILITY_GOD, true, true);
 			}
