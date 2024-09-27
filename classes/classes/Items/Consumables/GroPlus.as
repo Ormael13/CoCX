@@ -117,7 +117,7 @@ public final class GroPlus extends Consumable {
             outputText("You sink the needle into the " + part + " of your [cock " + (dick + 1) + "].  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n");
             if (part == "knot") {
                 outputText("Your [cock " + (dick + 1) + "]'s knot grows bigger.");
-                player.cocks[dick].knotMultiplier += 0.2;
+                player.cocks[dick].knotMultiplier += 0.2*dose;
             } else if (part == "tip") {
                 outputText("Your [cock " + (dick + 1) + "] twitches, pouring more than an inch of new length from your " + (player.hasSheath() ? "sheath." : "crotch."));
                 player.growCock(dick, 6 * dose);

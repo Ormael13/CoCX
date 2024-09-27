@@ -160,7 +160,7 @@ public final class Reducto extends Consumable {
             while (d-- > 0) {
                 if (part == "knot") {
                     outputText("Your knot starts to swell, but before it could even reach its full size, it suddenly shrivels, striking you with an unexpected relief.");
-                    player.cocks[dick].knotMultiplier -= 0.2;
+                    player.cocks[dick].knotMultiplier -= 0.2*dose;
                     if (player.cocks[dick].knotMultiplier <= 1.0) {
                         player.cocks[dick].knotMultiplier = 1.0;
                         outputText(" It takes a bit longer than expected, but after all the veins surrounding it turn pale, you finally see that the knot has disappeared!");
