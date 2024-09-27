@@ -11,7 +11,7 @@ public function ArianPregChampCarries1():void {
 		outputText("“I apologise for the intrusion…But something’s felt…a little off about you, ever since we…” He blushes, and you almost roll your eyes. Since you had sex last.  \n\n");
 		outputText("“Yes.” Arian steps forward. “I-if you wouldn’t mind, I want to…examine you.”  \n\n");
 		outputText("Giving your bashful lover a wink, you ask him if he didn’t get a thorough enough examination last time.  \n\n");
-		outputText("“Not like that, [player].” He scratches his neck, tail twining around one of his legs. “I mean your mana’s flowing a little differently, in a way consistent with…” He blushes. “Consistent with lizan pregnancy.”  \n\n");
+		outputText("“Not like that, [name].” He scratches his neck, tail twining around one of his legs. “I mean your mana’s flowing a little differently, in a way consistent with…” He blushes. “Consistent with lizan pregnancy.”  \n\n");
 		outputText("A little surprised, you ask if he can really tell so soon. He nods. “Yes, but I need…contact to be sure.”  \n\n");
         outputText("You decide to humour Arian, especially if he can see so early. You bare your stomach, and he steps gingerly in, placing a scaly hand on you. Arian closes his eyes, and you can feel a little tingle as a pulse of mana flows through you.  \n\n");
 		outputText("Arian opens his eyes, and you can see a single tear well up in his left eye. You ask him what’s wrong, and he wraps his arms around you, squeezing shockingly tight for someone of his health. \n\n");
@@ -61,10 +61,10 @@ public function ArianCarriesChampBabies1():void {
 		outputText("“...So…I don’t know how much you know about Lizan anatomy…” She begins, tapping one foot. “But the last time we…Made love, it was a day where my eggs were…Available.” You blink, before clarifying. So Arian is…Pregnant? \n\n");
 		outputText("“Well…Yes.” She blushes, looking down and away. “Look…I’m concerned, that’s all. I wasn’t in the best shape before I met you, and even now, I’m not exactly a physical specimen.”  \n\n");
 		outputText("Teasingly, you tell Arian that you take exception to that. She’s beautiful, and how dare she degrade herself like that.  \n\n");
-		outputText("“You know what I mean by that, [player]”, she says, a little annoyed. You hold out your hands to your Lizan lover, and she takes them. You notice that Arian’s hands are shaking.  \n\n");
+		outputText("“You know what I mean by that, [name]”, she says, a little annoyed. You hold out your hands to your Lizan lover, and she takes them. You notice that Arian’s hands are shaking.  \n\n");
 		outputText("You ask her if it has more to do with the fact that she was born male, and Arian sighs, nodding slowly. “I know the alchemist who made the potion quite well, and that she wouldn’t have given me a dud…but I still worry.” You give Arian a reassuring smile and tell her that, worse comes to worst, you try again. You bring a hand to Arian’s cheek, telling her that no matter what, she’s still going to be here, and so will you.  \n\n");
         outputText("“Th-thank you.” Arian blushes at the attention, leaning in and resting her head against yours. “I’ll be fine now, if you need to go…Just promise to come back to me.” You promise, and she smiles, her hands no longer shaking. She lets go, and puts a hand to her stomach. “Well…I suppose I can’t really do much magic for the next few days.”  \n\n");
-		outputText("She lets go of your hands and stands, grabs a book from the back. “But thankfully, I did prepare myself for…This.” She sits down. “That’s all I needed to say, [player]. Thank you for being there for me.” \n\n");
+		outputText("She lets go of your hands and stands, grabs a book from the back. “But thankfully, I did prepare myself for…This.” She sits down. “That’s all I needed to say, [name]. Thank you for being there for me.” \n\n");
 		outputText("You give your Lizan lover a kiss on the forehead, excusing yourself.  \n\n");
 doNext(playerMenu);
 }
@@ -97,7 +97,7 @@ doNext(playerMenu);
 public function ArianPCLaysEggs():void {
 		clearOutput();
 		outputText("You feel your stomach lurch, your womb suddenly feeling twice as heavy as before. A thick, throbbing feeling starts in your [pussy], spreading through your pelvis. You double over, the strange feeling overwhelming.  \n\n");
-		outputText("“[player]!” You hear Arian’s voice, but he sounds like he’s so far…away…You feel dizzy, and Arian catches you as you begin to fall over. “-Ne secon-”... “-get my chair!” Suddenly, you see a bright light on your midsection, and you snap back to yourself. You’re being held up by Arian, who’s got a hand on your gravid belly, healing spell already working. “Can you make it to my tent?”  \n\n");
+		outputText("“[name]!” You hear Arian’s voice, but he sounds like he’s so far…away…You feel dizzy, and Arian catches you as you begin to fall over. “-Ne secon-”... “-get my chair!” Suddenly, you see a bright light on your midsection, and you snap back to yourself. You’re being held up by Arian, who’s got a hand on your gravid belly, healing spell already working. “Can you make it to my tent?”  \n\n");
 		outputText("You nod, and Arian helps you hobble into his tent. Inside, you see an odd chair, with a hole in the middle, and a padded basket underneath.  \n\n");
 		outputText("“Okay, so you’re going to sit over here.” Arian helps you undress, and gets your [pussy] positioned over the hole.  \n\n");
 		outputText("A contraction hits you, and you groan. Arian takes your hands in his, looking into your eyes. “Look at me, love.” He soothes, “Just look at me, and push. You’ve carried them for long enough.”  \n\n");
@@ -132,7 +132,7 @@ doNext(playerMenu);
 
 public function ArianHatching():void {
 		clearOutput();
-		outputText("You hear an excited yell from Arian’s tent, and s/he pokes his/her head out, motioning wildly. “[player]! Come quick!” You rush over to Arian, and s/he pulls you into his/her tent.  \n\n");
+		outputText("You hear an excited yell from Arian’s tent, and s/he pokes his/her head out, motioning wildly. “[name]! Come quick!” You rush over to Arian, and s/he pulls you into his/her tent.  \n\n");
 		outputText("You stand beside Arian, not knowing what to do, and s/he points at the incubation basket, where you hear a slight cracking sound. “They’re hatching!” Arian says, rather unnecessarily, grabbing your hand, hopping up and down with excitement.  \n\n");
 		outputText("Cracks form on the largest egg, and a piece comes flying off as a white-scaled little head pokes out, closing its eyes against the light. The little lizan makes a high-pitched chirping noise, and you see a clawed hand breach the shell, sending little pieces out. Arian steps forward, slowly, as the little one stretches out their spine, chirping as they break the egg wide open. Arian extends his/her hand, and they look up, sheer wonder in their slitted eyes as Arian picks them up, cradling them in his/her arms.  \n\n");
 		outputText("A much louder crack comes from the smallest egg, and as it tips over onto its side, you see a more slender nose poke out, catching a glimpse of yellow eye before they turn around. To your shock, their tail pokes out of the hole in the egg.  \n\n");
@@ -154,7 +154,7 @@ public function NadiaPregAnnouncement():void {
 		clearOutput();
 		outputText("Your mare is waiting for you back at camp, with a smile on her face, nearly jumping from joy. Her eyes gleam as she sees you, and she nearly skips over, her J-cup breasts bouncing with each step. She breaks into a run, and you brace yourself as Nadia tackles you, Smothering you in her massive mammaries. \n\n"); 
 		outputText("“Oh, my stallion, you wonderful, wonderful lover!” She gives you a big smack on the lips. You look at her, confused, then the penny drops. You bring a hand to her belly, and she nods, her horn glowing, and her eyes flashing with excitement. \n\n");
-		outputText("“I’m pregnant”, she says simply, cheeks red, and a huge grin on her face. “You’re going to be a father, [player].” She puts a hand on her stomach.  \n\n");
+		outputText("“I’m pregnant”, she says simply, cheeks red, and a huge grin on her face. “You’re going to be a father, [name].” She puts a hand on her stomach.  \n\n");
 		outputText("You congratulate Nadia, knowing that this has been what she wanted for a long time. She cuddles you for a minute or so, before letting you go. You excuse yourself, going about your day…but you can feel Nadia’s eyes on your back as you go about your work around camp.  \n\n");
 		outputText(" \n\n");
 doNext(playerMenu);
@@ -183,7 +183,7 @@ doNext(playerMenu);
 public function NadiaGivesBirth():void {
 		clearOutput();
 		outputText("You hear a choking cry from Nadia’s part of camp, and you rush over, seeing your unicorn lover, doubled over, with a small pool of clear fluid at her hooved feet.  \n\n"); 
-		outputText("“O-oh, [player]!” Nadia cries, reaching a hand out to you. You run over, catching her before she loses her balance entirely. “T-the baby’s coming!”  \n\n");
+		outputText("“O-oh, [name]!” Nadia cries, reaching a hand out to you. You run over, catching her before she loses her balance entirely. “T-the baby’s coming!”  \n\n");
 		outputText("You tell her that you kind of guessed that, and she grits her teeth, grunting as a contraction hits. “Sm-smartass.” She grunts, and points to her bedroll. “Lay me down there, please.”  \n\n");
 		outputText("You half-drag, half-carry Nadia over to her bedroll, and as she groans, you grab a towel, gently spreading your unicorn lover’s legs. Nadia covers herself with her tail, but you gently take it, pushing it out of your way. \n\n");
 		outputText("“S-sorry…Force of habit.” Nadia grunts. You shake your head slightly, telling her not to worry. Just focus on the birth. She whinneys as a contraction hits, and you position yourself between Nadia’s legs, ready to receive your newborn foal.  \n\n");
@@ -224,12 +224,12 @@ public function ElectraPregProgression1():void {
         //first time
 		outputText("The poor imp has been replaced by another. You see her talking to Ralthazul, who seems to have an idea. As you get closer, you can hear their discussion. \n\n");
 		outputText("“-been studying how the flow of electricity works, and I may be able to provide you a more…humane way to…release, as it were.” Electra seems interested, and Ralthazul continues. “Electricity, in its natural state, flows into the earth. I may be able to make something to allow you to discharge without the need for a…partner.”  \n\n");
-		outputText("“Well…I have [player] for that.” Electra says, smiling slightly. Ralthazul seems unamused at this, but continues.  \n\n");
+		outputText("“Well…I have [name] for that.” Electra says, smiling slightly. Ralthazul seems unamused at this, but continues.  \n\n");
 		outputText("“And what about your children?” Ralthazul asks. “Who’s going to deal with their ‘needs’? He frowns.  \n\n");
         outputText("“...I suppose you’re right.” Electra says. “...I’ll go hunting tomorrow, scrounge up some gems. What do you need to…make the device?” \n\n");
 		outputText("Ralthazul thinks for a moment. “I need some metal scraps, rubber from those darkwood trees, the copper wiring you have on that imp, and…An imprint of something you need for…release.”  \n\n");
 		outputText("Electra looks confused at that. “An…Imprint?” 
-The old mouse looks slightly annoyed. “...In order for you to achieve…Results…With the device, you’ll want to have an…erm…Plug…That you know will work for you.” He looks over and sees you. “I’m assuming you’d have an easier time with an imprint from [player]”.  \n\n");
+The old mouse looks slightly annoyed. “...In order for you to achieve…Results…With the device, you’ll want to have an…erm…Plug…That you know will work for you.” He looks over and sees you. “I’m assuming you’d have an easier time with an imprint from [name]”.  \n\n");
 		outputText("Electra blinks, realising what he means by an imprint. “Oh.” \n\n");
         outputText("You decide to make yourself known, and come over, telling Electra that you were just checking up on her. She zaps her imp, getting a low groan, before giving you a fuzzy hug. You ask what she’s doing with Ralthazul, and the old alchemist gives you a slight smile.  \n\n");
 		outputText("“Oh, just doing a little problem-solving, my friend. With the…New Raijus on the way, the thought of how to deal with their…Emissions…Came up.” He looks at you. “I have an idea, but it requires a little…innovation, and input from you.” He holds out a container, filled with plaster. “If you would go somewhere private, and…Imprint?” As you take it and walk away, he turns his head. “It needs to be erect!” \n\n");
@@ -355,7 +355,7 @@ public function SidoniePCKnockedUpAnnouncement1():void {
 		clearOutput();
 		outputText("You sit down by the firepit, a slight bit of nausea filling your stomach. As you gag, holding your stomach, you notice a bowl of oats in front of your face. Filled with a sudden hunger, you take a proffered spoon and dig in, your nausea fading with each bite. Only once you’re done do you look up, seeing Sidonie sitting next to you.  \n\n"); 
 		outputText("“Well…I guess that settles it then.” Sidonie says nervously. “...How are you feeling?” You thank her for the oats. For whatever reason, you really needed them.  \n\n");
-		outputText("“Common knowledge among us horse-morphs, [player]. When…well…When a woman’s stomach’s acting up, a few days after some fun, give ‘em oats. If they look at you weird, it’s nothin’. If it helps…Well…There’ll be a new foal runnin’ around soon enough.”  \n\n");
+		outputText("“Common knowledge among us horse-morphs, [name]. When…well…When a woman’s stomach’s acting up, a few days after some fun, give ‘em oats. If they look at you weird, it’s nothin’. If it helps…Well…There’ll be a new foal runnin’ around soon enough.”  \n\n");
 		outputText("Nervously, she twiddles her thumbs. “Uh…I’m not sure how you want to…do things going forward. Even with a foal in you, you’re way stronger than me, so it’s not like I can really protect you, but…”  \n\n");
 		outputText("You tell Sidonie that she’s rambling, and she winces, leaning back and resting her palms on the ground.  \n\n");
 		outputText("“Yeah…I am.” She sighs. “Look…I’ve never been a dad, not that I know of, and…I don’t really know how to process this.” She looks at you, concerned. “Are you…Okay? Like with me? Are WE okay?” \n\n");
@@ -473,7 +473,7 @@ public function PCKnockedUpSidonieSexy():void {
 		outputText("You ask if she’s still mad, and she tosses her hands up into the air. “I mean…Not really? I’m just…I never saw myself as the motherly type, and it’s…Not something to take lightly.”  \n\n");
 		outputText("You sit beside her, asking if she’s stressed out. “Well…Yeah. Look, I like you and all, but I always saw us as ‘friends with benefits’, not really…a couple.” You tell her that doesn’t have to change, and she shoves your shoulder, just enough to push you a bit away from her.  \n\n");
 		outputText("“We’re going to have a kid. There’s going to be SOMEthing between us. I…don’t want our kid to think of themselves as…unwanted.”  \n\n");
-		outputText("You put a hand on Sidonie’s stomach, spreading your fingers wide. She closes her eyes, sighing. “What am I gonna tell my old man, [player]? Half the reason he was cool with me coming back out here, was because I told him I was safe.”  \n\n");
+		outputText("You put a hand on Sidonie’s stomach, spreading your fingers wide. She closes her eyes, sighing. “What am I gonna tell my old man, [name]? Half the reason he was cool with me coming back out here, was because I told him I was safe.”  \n\n");
         outputText("You take a bit of offence to that. Sidonie IS safe, and you voice your objection. “I know that, you know that…But what is he gonna think? What do I tell him?”  \n\n");
 		outputText("You think for a moment, before suggesting that she tell him the truth. That you’re an outworlder champion, guarding a portal to your world. That you rescued her from gnolls, and that you and her have a casual relationship. That you have a camp guarded by powerful people, and that Sidonie’s built a life for herself here. \n\n");
 		outputText("“Well…I could do that…Or I could just stay out here until the kid’s born, then just show up.” She’s only half joking. “...Nah, you’re right. Dad deserves to know.” She wrings her hands. “So…We’re good?”  \n\n");
@@ -493,7 +493,7 @@ public function PCKnockedUpSidonieTroll():void {
         //Split End
 		outputText("“I’m worried about things.” Sidonie admits. “I always thought of us as ‘friends with benefits’, not as something serious…But if we’re gonna have a kid…Especially if I’m the mom…I just want to know that…That you’ll be there to help, y’know? I don’t want my kid not having their dad around.”  \n\n");
         outputText("You ask her if that really requires any changes between you two. You’ll still be around, as guarding the portal is your biggest priority.  \n\n");
-        outputText("“What the fuck am I gonna tell my old man, [player]?” You suggest that she just tell him the truth, and that you’re pretty sure they’re as safe, if not safer, with you than in Tel’Adre. Sidonie groans at that. “Do I have to?” You snort, barely holding in your laughter at the look on her face.  \n\n");
+        outputText("“What the fuck am I gonna tell my old man, [name]?” You suggest that she just tell him the truth, and that you’re pretty sure they’re as safe, if not safer, with you than in Tel’Adre. Sidonie groans at that. “Do I have to?” You snort, barely holding in your laughter at the look on her face.  \n\n");
         outputText("You tell Sidonie that whatever happens, you’ve got her back…It’s a pretty nice back, too. \n\n");
         outputText("“Oh, fuck you.” Sidonie playfully slaps the back of your head. “...Alright, I guess we’re rolling with it then.” She stands. “But I’ve got work to do now, since you’ve put me on a clock.”  \n\n");
         outputText(" \n\n");

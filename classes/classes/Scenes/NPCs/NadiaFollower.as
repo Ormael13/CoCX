@@ -1095,7 +1095,7 @@ private function BelisaNadiaTalk():void {
 		clearOutput();
 		outputText("Your mare is waiting for you back at camp, with a smile on her face, nearly jumping from joy. Her eyes gleam as she sees you, and she nearly skips over, her J-cup breasts bouncing with each step. She breaks into a run, and you brace yourself as Nadia tackles you, Smothering you in her massive mammaries. \n\n");
 		outputText("\"<i>Oh, my stallion, you wonderful, wonderful lover!</i>\" She gives you a big smack on the lips. You look at her, confused, then the penny drops. You bring a hand to her belly, and she nods, her horn glowing, and her eyes flashing with excitement. \n\n");
-		outputText("\"<i>I’m pregnant</i>\", she says simply, cheeks red, and a huge grin on her face. \"<i>You’re going to be a father, [player].</i>\" She puts a hand on her stomach.  \n\n");
+		outputText("\"<i>I’m pregnant</i>\", she says simply, cheeks red, and a huge grin on her face. \"<i>You’re going to be a father, [name].</i>\" She puts a hand on her stomach.  \n\n");
 		outputText("You congratulate Nadia, knowing that this has been what she wanted for a long time. She cuddles you for a minute or so, before letting you go. You excuse yourself, going about your day…but you can feel Nadia’s eyes on your back as you go about your work around camp.  \n\n");
 		outputText(" \n\n");
 		doNext(playerMenu);
@@ -1124,7 +1124,7 @@ private function BelisaNadiaTalk():void {
 	public function NadiaGivesBirth():void {
 		clearOutput();
 		outputText("You hear a choking cry from Nadia’s part of camp, and you rush over, seeing your unicorn lover, doubled over, with a small pool of clear fluid at her hooved feet.  \n\n");
-		outputText("\"<i>O-oh, [player]!</i>\" Nadia cries, reaching a hand out to you. You run over, catching her before she loses her balance entirely. \"<i>T-the baby’s coming!</i>\"  \n\n");
+		outputText("\"<i>O-oh, [name]!</i>\" Nadia cries, reaching a hand out to you. You run over, catching her before she loses her balance entirely. \"<i>T-the baby’s coming!</i>\"  \n\n");
 		outputText("You tell her that you kind of guessed that, and she grits her teeth, grunting as a contraction hits. \"<i>Sm-smartass.</i>\" She grunts, and points to her bedroll. \"<i>Lay me down there, please.</i>\"  \n\n");
 		outputText("You half-drag, half-carry Nadia over to her bedroll, and as she groans, you grab a towel, gently spreading your unicorn lover’s legs. Nadia covers herself with her tail, but you gently take it, pushing it out of your way. \n\n");
 		outputText("\"<i>S-sorry…Force of habit.</i>\" Nadia grunts. You shake your head slightly, telling her not to worry. Just focus on the birth. She whinneys as a contraction hits, and you position yourself between Nadia’s legs, ready to receive your newborn foal.  \n\n");
