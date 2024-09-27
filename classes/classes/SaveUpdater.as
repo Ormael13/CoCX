@@ -2403,7 +2403,7 @@ public class SaveUpdater extends NPCAwareContent {
 				SceneLib.exploration.counters.defiledRavine       = flags[kFLAGS.TAMED_08_NAME];
 				SceneLib.exploration.counters.beach               = flags[kFLAGS.TAMED_08_NAME];
 				SceneLib.exploration.counters.ocean               = flags[kFLAGS.TAMED_10_NAME];
-				SceneLib.exploration.counters.caves               = flags[kFLAGS.DISCOVERED_CAVES];
+				SceneLib.exploration.counters.caves               = flags[kFLAGS.ATTACKS_ACCURACY_OFF];
 				SceneLib.exploration.counters.tundra              = flags[kFLAGS.DISCOVERED_TUNDRA];
 				SceneLib.exploration.counters.glacialRiftOuter    = flags[kFLAGS.TAMED_06_NAME];
 				SceneLib.exploration.counters.ashlands            = flags[kFLAGS.DISCOVERED_ASHLANDS];

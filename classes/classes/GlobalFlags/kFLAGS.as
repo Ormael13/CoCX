@@ -2673,7 +2673,7 @@ public static const BLOOD_PUPPY_SUMMONS:int                                     
 public static const IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED:int                     = 2664;
 public static const DISPLACER_BEAST_WINS:int                                   		= 2665;
 public static const HERM_CAVE_WYRM:int                                   			= 2666;
-public static const DISCOVERED_CAVES:int                                   			= 2667; // No longer used
+public static const ATTACKS_ACCURACY_OFF:int                                   		= 2667;
 public static const DISCOVERED_ASHLANDS:int                                   		= 2668; // No longer used
 public static const DISCOVERED_TUNDRA:int                                   		= 2669; // No longer used
 public static const DISCOVERED_HILLS:int                                   			= 2670; // No longer used
