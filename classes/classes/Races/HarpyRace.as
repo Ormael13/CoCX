@@ -61,6 +61,7 @@ public class HarpyRace extends Race {
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS), +1)
 				.earType(ANY(Ears.HUMAN, Ears.ELFIN), +1);
 		
+		addBloodline(PerkLib.HarpysDescendant, PerkLib.BloodlineHarpy);
 		addMutation(IMutationsLib.HarpyHollowBonesIM);
 		
 		buildTier(8, "harpy")

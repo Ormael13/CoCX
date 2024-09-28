@@ -72,8 +72,8 @@ public class LizardRace extends Race {
 				.hasCockOfType(CockTypesEnum.LIZARD, +1)
 				.hasPerk(PerkLib.LizanRegeneration, +1);
 		
+		addBloodline(PerkLib.LizardsDescendant, PerkLib.BloodlineLizard);
 		addMutation(IMutationsLib.LizanMarrowIM);
-		
 		
 		buildTier(8, "lizan")
 				.namesTauric("lizan", "lizan-taur")

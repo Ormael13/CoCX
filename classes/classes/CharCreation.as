@@ -1419,8 +1419,10 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(8, "Vampire", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineMelkie)) addButton(9, "Melkie", confirmBloodline1, PerkLib.MelkiesDescendant).hint("(+2 to melkie score)");
 			else addButtonDisabled(9, "Melkie", "You already have this bloodline!");
-			addButton(12, "-2-", chooseBloodline2);
-			addButton(13, "-3-", chooseBloodline3);
+			addButton(10, "-2-", chooseBloodline2);
+			addButton(11, "-3-", chooseBloodline3);
+			addButton(12, "-4-", chooseBloodline4);
+			addButton(13, "-5-", chooseBloodline5);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
 		public function chooseBloodline2():void {
@@ -1429,49 +1431,78 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(0, "Hydra", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineSalamander)) addButton(1, "Salamander", confirmBloodline2, PerkLib.SalamandersDescendant).hint("(+2 to salamander score)");
 			else addButtonDisabled(1, "Salamander", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineWerefox)) addButton(2, "Werefox", confirmBloodline2, PerkLib.WerefoxsDescendant).hint("(+2 to werefox score)");
-			else addButtonDisabled(2, "Werefox", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineWerewolf)) addButton(3, "Werewolf", confirmBloodline2, PerkLib.WerewolfsDescendant).hint("(+2 to werewolf score)");
-			else addButtonDisabled(3, "Werewolf", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineWereshark)) addButton(4, "Wereshark", confirmBloodline2, PerkLib.WeresharksDescendant).hint("(+2 to wereshark score)");
-			else addButtonDisabled(4, "Wereshark", "You already have this bloodline!");
-			//any future wereraces would go here
-			if (!player.hasPerk(PerkLib.BloodlineRatatoskr)) addButton(5, "Ratatoskr", confirmBloodline2, PerkLib.RatatoskrsDescendant).hint("(+2 to ratatoskr score)");
-			else addButtonDisabled(5, "Ratatoskr", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineKraken)) addButton(6, "Kraken", confirmBloodline2, PerkLib.KrakensDescendant).hint("(+2 to scylla/kraken score)");
-			else addButtonDisabled(6, "Kraken", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineYukiOnna)) addButton(7, "Yuki Onna", confirmBloodline2, PerkLib.YukiOnnasDescendant).hint("(+2 to yuki onna score)");
-			else addButtonDisabled(7, "Yuki Onna", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineDemon)) addButton(8, "Demon", confirmBloodline2, PerkLib.DemonsDescendant).hint("(+2 to demon score)");
-			else addButtonDisabled(8, "Demon", "You already have this bloodline!");
-			addButton(12, "-1-", chooseBloodline1);
-			addButton(13, "-3-", chooseBloodline3);
+			if (!player.hasPerk(PerkLib.BloodlineRatatoskr)) addButton(2, "Ratatoskr", confirmBloodline2, PerkLib.RatatoskrsDescendant).hint("(+2 to ratatoskr score)");
+			else addButtonDisabled(2, "Ratatoskr", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineKraken)) addButton(3, "Kraken", confirmBloodline2, PerkLib.KrakensDescendant).hint("(+2 to scylla/kraken score)");
+			else addButtonDisabled(3, "Kraken", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineYukiOnna)) addButton(4, "Yuki Onna", confirmBloodline2, PerkLib.YukiOnnasDescendant).hint("(+2 to yuki onna score)");
+			else addButtonDisabled(4, "Yuki Onna", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineBunny)) addButton(5, "Bunny", confirmBloodline2, PerkLib.BunnysDescendant).hint("(+2 to bunny score)");
+			else addButtonDisabled(5, "Bunny", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineLizard)) addButton(6, "Lizard", confirmBloodline2, PerkLib.LizardsDescendant).hint("(+2 to lizard score)");
+			else addButtonDisabled(6, "Lizard", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineHarpy)) addButton(7, "Harpy", confirmBloodline2, PerkLib.HarpysDescendant).hint("(+2 to harpy score)");
+			else addButtonDisabled(7, "Harpy", "You already have this bloodline!");
+			addButton(10, "-1-", chooseBloodline1);
+			addButton(11, "-3-", chooseBloodline3);
+			addButton(12, "-4-", chooseBloodline4);
+			addButton(13, "-5-", chooseBloodline5);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
 		public function chooseBloodline3():void {
 			menu();
+			
+			addButton(10, "-1-", chooseBloodline1);
+			addButton(11, "-2-", chooseBloodline2);
+			addButton(12, "-4-", chooseBloodline4);
+			addButton(13, "-5-", chooseBloodline5);
+			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
+		}
+		public function chooseBloodline4():void {
+			menu();
+			if (!player.hasPerk(PerkLib.BloodlineWerefox)) addButton(0, "Werefox", confirmBloodline4, PerkLib.WerefoxsDescendant).hint("(+2 to werefox score)");
+			else addButtonDisabled(0, "Werefox", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineWerewolf)) addButton(1, "Werewolf", confirmBloodline4, PerkLib.WerewolfsDescendant).hint("(+2 to werewolf score)");
+			else addButtonDisabled(1, "Werewolf", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineWereshark)) addButton(2, "Wereshark", confirmBloodline4, PerkLib.WeresharksDescendant).hint("(+2 to wereshark score)");
+			else addButtonDisabled(2, "Wereshark", "You already have this bloodline!");
+			//any future wereraces would go here
+			if (!player.hasPerk(PerkLib.BloodlineDemon)) addButton(3, "Demon", confirmBloodline4, PerkLib.DemonsDescendant).hint("(+2 to demon score)");
+			else addButtonDisabled(3, "Demon", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineDevil)) addButton(4, "Devil", confirmBloodline4, PerkLib.DevilsDescendant).hint("(+2 to devil score)");
+			else addButtonDisabled(4, "Demon", "You already have this bloodline!");
+			addButton(10, "-1-", chooseBloodline1);
+			addButton(11, "-2-", chooseBloodline2);
+			addButton(12, "-3-", chooseBloodline3);
+			addButton(13, "-5-", chooseBloodline5);
+			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
+		}
+		public function chooseBloodline5():void {
+			menu();
 			if (!player.hasPerk(PerkLib.CommonHumanBloodline)) {
-				if (flags[kFLAGS.HUMAN_BLOODLINE] >= 1) addButton(0, "CommonH", confirmBloodline3, PerkLib.CommonHumansDescendant).hint("(+2 to human score)");
+				if (flags[kFLAGS.HUMAN_BLOODLINE] >= 1) addButton(0, "CommonH", confirmBloodline5, PerkLib.CommonHumansDescendant).hint("(+2 to human score)");
 				else addButtonDisabled(0, "CommonH", "You not meet req. for this bloodline: 10+ human score and 4+ different human internal mutations.");
 			}
 			else addButtonDisabled(0, "CommonH", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.NobleHumanBloodline)) {
-				if (flags[kFLAGS.HUMAN_BLOODLINE] >= 2) addButton(1, "NobleH", confirmBloodline3, PerkLib.NobleHumansDescendant).hint("(+4 to human score)");
+				if (flags[kFLAGS.HUMAN_BLOODLINE] >= 2) addButton(1, "NobleH", confirmBloodline5, PerkLib.NobleHumansDescendant).hint("(+4 to human score)");
 				else addButtonDisabled(1, "NobleH", "You not meet req. for this bloodline: 20+ human score and 8+ different human internal mutations.");
 			}
 			else addButtonDisabled(1, "NobleH", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.RoyalHumanBloodline)) {
-				if (flags[kFLAGS.HUMAN_BLOODLINE] >= 3) addButton(2, "RoyalH", confirmBloodline3, PerkLib.RoyalHumansDescendant).hint("(+6 to human score)");
+				if (flags[kFLAGS.HUMAN_BLOODLINE] >= 3) addButton(2, "RoyalH", confirmBloodline5, PerkLib.RoyalHumansDescendant).hint("(+6 to human score)");
 				else addButtonDisabled(2, "RoyalH", "You not meet req. for this bloodline: 40+ human score and 12+ different human internal mutations.");
 			}
 			else addButtonDisabled(2, "RoyalH", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.PrimarchBloodline)) {
-				if (flags[kFLAGS.HUMAN_BLOODLINE] >= 4) addButton(3, "PrimarchB", confirmBloodline3, PerkLib.PrimarchsDescendant).hint("(+10 to human score)");
+				if (flags[kFLAGS.HUMAN_BLOODLINE] >= 4) addButton(3, "PrimarchB", confirmBloodline5, PerkLib.PrimarchsDescendant).hint("(+10 to human score)");
 				else addButtonDisabled(3, "PrimarchB", "You not meet req. for this bloodline: 50+ human score and 14+ different human internal mutations.");
 			}
 			else addButtonDisabled(3, "PrimarchB", "You already have this bloodline!");
-			addButton(12, "-1-", chooseBloodline1);
-			addButton(13, "-2-", chooseBloodline2);
+			addButton(10, "-1-", chooseBloodline1);
+			addButton(11, "-2-", chooseBloodline2);
+			addButton(12, "-3-", chooseBloodline3);
+			addButton(13, "-4-", chooseBloodline4);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
 
@@ -1525,15 +1556,6 @@ import classes.Scenes.Combat.CombatAbility;
 				case PerkLib.SalamandersDescendant:
 					outputText("Your ancestor was a salamander?");
 					break;
-				case PerkLib.WerefoxsDescendant:
-					outputText("Your ancestor was a werefox?");
-					break;
-				case PerkLib.WerewolfsDescendant:
-					outputText("Your ancestor was a werewolf?");
-					break;
-				case PerkLib.WeresharksDescendant:
-					outputText("Your ancestor was a wereshark?");
-					break;
 				case PerkLib.RatatoskrsDescendant:
 					outputText("Your ancestor was a ratatoskr?");
 					break;
@@ -1543,8 +1565,14 @@ import classes.Scenes.Combat.CombatAbility;
 				case PerkLib.YukiOnnasDescendant:
 					outputText("Your ancestor was an yuki onna?");
 					break;
-				case PerkLib.DemonsDescendant:
-					outputText("Your ancestor was a demon?");
+				case PerkLib.BunnysDescendant:
+					outputText("Your ancestor was a bunny?");
+					break;
+				case PerkLib.LizardsDescendant:
+					outputText("Your ancestor was a lizan?");
+					break;
+				case PerkLib.HarpysDescendant:
+					outputText("Your ancestor was a harpy?");
 					break;
 				default:
 					outputText("Your ancestor was a hydra?");
@@ -1555,6 +1583,46 @@ import classes.Scenes.Combat.CombatAbility;
 		}
 
 		private function confirmBloodline3(choice:PerkType):void {
+			clearOutput();
+			switch (choice) {
+				case PerkLib.WerefoxsDescendant:
+					outputText("Your ancestor was a werefox?");
+					break;
+				default:
+					outputText("Your ancestor was a werefox?");
+			}
+			menu();
+			addButton(0, "Yes", setBloodline, choice);
+			addButton(1, "No", chooseBloodline3);
+		}
+
+		private function confirmBloodline4(choice:PerkType):void {
+			clearOutput();
+			switch (choice) {
+				case PerkLib.WerefoxsDescendant:
+					outputText("Your ancestor was a werefox?");
+					break;
+				case PerkLib.WerewolfsDescendant:
+					outputText("Your ancestor was a werewolf?");
+					break;
+				case PerkLib.WeresharksDescendant:
+					outputText("Your ancestor was a wereshark?");
+					break;
+				case PerkLib.DemonsDescendant:
+					outputText("Your ancestor was a demon?");
+					break;
+				case PerkLib.DevilsDescendant:
+					outputText("Your ancestor was a devil?");
+					break;
+				default:
+					outputText("Your ancestor was a werefox?");
+			}
+			menu();
+			addButton(0, "Yes", setBloodline, choice);
+			addButton(1, "No", chooseBloodline4);
+		}
+
+		private function confirmBloodline5(choice:PerkType):void {
 			clearOutput();
 			switch (choice) {
 				case PerkLib.CommonHumansDescendant:
@@ -1574,7 +1642,7 @@ import classes.Scenes.Combat.CombatAbility;
 			}
 			menu();
 			addButton(0, "Yes", setBloodline, choice);
-			addButton(1, "No", chooseBloodline3);
+			addButton(1, "No", chooseBloodline5);
 		}
 
 		private function setBloodline(choice:PerkType):void {
@@ -3118,9 +3186,29 @@ import classes.Scenes.Combat.CombatAbility;
 				player.createPerk(PerkLib.BloodlineYukiOnna,0,0,0,1);
 				bloodlineACQ2();
 			}
+			else if (player.hasPerk(PerkLib.BunnysDescendant)) {
+				player.removePerk(PerkLib.BunnysDescendant);
+				player.createPerk(PerkLib.BloodlineBunny,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.LizardsDescendant)) {
+				player.removePerk(PerkLib.LizardsDescendant);
+				player.createPerk(PerkLib.BloodlineLizard,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.HarpysDescendant)) {
+				player.removePerk(PerkLib.HarpysDescendant);
+				player.createPerk(PerkLib.BloodlineHarpy,0,0,0,1);
+				bloodlineACQ2();
+			}
 			else if (player.hasPerk(PerkLib.DemonsDescendant)) {
 				player.removePerk(PerkLib.DemonsDescendant);
 				player.createPerk(PerkLib.BloodlineDemon,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.DevilsDescendant)) {
+				player.removePerk(PerkLib.DevilsDescendant);
+				player.createPerk(PerkLib.BloodlineDevil,0,0,0,1);
 				bloodlineACQ2();
 			}
 			else if (player.hasPerk(PerkLib.CommonHumansDescendant)) {
