@@ -616,6 +616,12 @@ public final class WeaponLib extends ItemConstants
 		public const PHALLUS:Weapon = new ThePhalluspear();
 		public const PHALUSS:Weapon = new ThePhalluspears();
 		//public const RCHEEP:Weapon = new ReaperCheep(); TODO: finish!
+		public const PILEBUN:Weapon = new Weapon(
+				"PileBun","PileBunker","Pile Bunker","a Pile Bunker","pierce",74,5920,
+				"This weapon blasts the target by ejecting piles at incredible velocities through the use of gunpowder.",
+				WT_EXOTIC, WSZ_MASSIVE)
+				.withEffect(IELib.ArmorPenetration, 100)
+				.withTags(W_HTECHWEAPON)  as Weapon;
 		public const PIPE   :Weapon = new Weapon(
 				"Pipe   ","Pipe","pipe","a pipe","smash",2,80,
 				"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.",

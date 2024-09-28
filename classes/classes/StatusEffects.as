@@ -1095,6 +1095,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const NecroticRot:StatusEffectType           	   = mkCombat("Necrotic Rot");
 		public static const NagaBind:StatusEffectType                  = mkCombat("Naga Bind");
 		public static const NagaVenom:StatusEffectType                 = mkCombat("Naga Venom");
+		public static const Nailed:StatusEffectType					   = mkCombat("Nailed");
 		public static const NearWater:StatusEffectType                 = mkCombat("Near Water");
 		public static const NearbyPlants:StatusEffectType              = mkCombat("Nearby Plants");
 		public static const NoPlantsArea:StatusEffectType              = mkCombat("No Plants Area");

@@ -30,6 +30,7 @@ import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
@@ -5024,6 +5025,10 @@ public class Combat extends BaseContent {
                         monster.teased(rangeweaponLustDmg, false);
                     }
                 }
+				if (player.weaponRange == weaponsrange.NAILGUN && rand(3) == 0) {
+					if (monster.hasStatusEffect(StatusEffects.Nailed)) monster.addStatusValue(StatusEffects.Nailed, 1, (rand(2) + 2));
+					else monster.createStatusEffect(StatusEffects.Nailed, (rand(2) + 3), 0, 0, 0);
+				}
                 outputText("\n\n");
                 heroBaneProc(damage);
                 if (player.weaponRange == weaponsrange.DERPLAU && rand(10) == 0) {
@@ -5199,6 +5204,12 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 12;
+		if (player.weaponRange == weaponsrange.NAILGUN) {
+			var mininails:Number = 0;
+			if (CampStatsAndResources.NailsResc > 0) mininails += CampStatsAndResources.NailsResc;
+			if (mininails > 10) mininails = 10;
+            player.ammo = mininails;
+		}
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDEEAGL) player.ammo = 8;
         if (player.weaponRange == weaponsrange.SIXSHOT) player.ammo = 6;
@@ -5231,6 +5242,7 @@ public class Combat extends BaseContent {
             var lustDmg:int = rand(player.lib / 10) + 20;
             player.takeLustDamage(lustDmg, true);
         }
+		else if (player.weaponRange == weaponsrange.NAILGUN) outputText("You open the magazine of your " + player.weaponRangeName + " to insert new nails.");
 		else outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
     }
 
@@ -9325,6 +9337,30 @@ public class Combat extends BaseContent {
     }
 
     public function WeaponRangeStatusProcs():void {
+		var bleed:Boolean = false;
+        var bleedChance:int = 0;
+		bleedChance += player.weaponRange.effectPower(IELib.Bleed);
+		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyUndeadType)) bleedChance = 0;
+        if (rand(100) < bleedChance) bleed = true;
+        if (bleed) {
+            if (!monster.canMonsterBleed()) {
+                if (monster is LivingStatue) outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
+                else outputText("Despite the gashes you've torn in its exterior, [themonster] does not bleed.");
+            } else {
+                /*if (player.weaponOff == weapons.MACGRSW || player.weaponOff == weapons.TMACGRSW || player.weaponOff == weapons.RIPPER1 ||  player.weaponOff == weapons.TRIPPER1 || player.weaponOff == weapons.RIPPER2 || player.weaponOff == weapons.TRIPPER2) {
+					if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+                    if (player.weaponOff == weapons.MACGRSW || player.weaponOff == weapons.TMACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
+                    else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+                } else {*/
+				if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) {
+					if (monster.statusEffectv4(StatusEffects.IzmaBleed) == 0) monster.addStatusValue(StatusEffects.IzmaBleed, 4, 1);
+					monster.addStatusValue(StatusEffects.IzmaBleed, 2, 1);
+				} else monster.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+                //}
+                if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [weapon] leave behind.");
+                else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [weapon] left behind.");
+            }
+        }
 		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 			if (player.hasPerk(PerkLib.WayOfTheBlood)) HPChange(Math.round(player.maxHP() * (0.01+(0.0025 * player.progressBloodDemon()))), false);
 			else HPChange(Math.round(player.maxHP() * 0.01), false);
@@ -12200,6 +12236,11 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			player.addStatusValue(StatusEffects.EntangledByNet, 1, -1);
             if (player.statusEffectv1(StatusEffects.EntangledByNet) <= 0) player.removeStatusEffect(StatusEffects.EntangledByNet);
 		}
+		//Nailed
+		if (monster.hasStatusEffect(StatusEffects.Nailed)) {
+			player.addStatusValue(StatusEffects.Nailed, 1, -1);
+            if (player.statusEffectv1(StatusEffects.Nailed) <= 0) player.removeStatusEffect(StatusEffects.Nailed);
+		}
         //Giant boulder
         if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
             outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might be crushed!</b>\n\n");
@@ -14026,6 +14067,12 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 12;
+		if (player.weaponRange == weaponsrange.NAILGUN) {
+			var mininails:Number = 0;
+			if (CampStatsAndResources.NailsResc > 0) mininails += CampStatsAndResources.NailsResc;
+			if (mininails > 10) mininails = 10;
+            player.ammo = mininails;
+		}
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDEEAGL) player.ammo = 8;
         if (player.weaponRange == weaponsrange.SIXSHOT) player.ammo = 6;
@@ -18732,4 +18779,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

@@ -1118,7 +1118,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 		
 		override public function isFlying():Boolean {
-			return hasStatusEffect(StatusEffects.Flying) && !hasStatusEffect(StatusEffects.EntangledByNet);
+			return hasStatusEffect(StatusEffects.Flying) && !hasStatusEffect(StatusEffects.EntangledByNet) && !hasStatusEffect(StatusEffects.Nailed);
 		}
 
 		public function canMonsterBleed():Boolean
