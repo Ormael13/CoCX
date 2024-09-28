@@ -2,6 +2,8 @@
  * Coded by aimozg on 10.07.2017.
  */
 package coc.view {
+import classes.CoC;
+import classes.GlobalFlags.kFLAGS;
 import classes.internals.Utils;
 
 import coc.view.charview.CharViewCompiler;
@@ -70,6 +72,7 @@ public class CharView extends Sprite {
 	/**
 	 * @param location "external" or "internal"
 	 */
+
 	public function reload(location:String = "external"):void {
 		loaderLocation = location;
 		if (loading) return;
@@ -77,7 +80,7 @@ public class CharView extends Sprite {
 			loading = true;
 			clearAll();
 			if (loaderLocation == "external") trace("loading XML res/model.xml");
-			CoCLoader.loadText("res/model.xml", function (success:Boolean, result:String, e:Event):void {
+			CoCLoader.loadText(CoC.instance.flags[kFLAGS.CHARVIEWER_MODEL] == 0 ? "res/model.xml" : "res/model2.xml", function (success:Boolean, result:String, e:Event):void {
 				if (success) {
 					init(XML(result));
 				} else {
@@ -221,12 +224,12 @@ public class CharView extends Sprite {
 		composite.reset();
 		time = getTimer();
 		parts.execute(new CharViewContext(this,_character));
-		
+
 		composeFrame();
 		this.scaleX = scale;
 		this.scaleY = scale;
 	}
-	
+
 	protected function composeFrame():void {
 		var keyColors:Object = _palette.calcKeyColors(_character);
 		var bd:BitmapData    = composite.draw(keyColors);
@@ -239,7 +242,7 @@ public class CharView extends Sprite {
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
 	}
-	
+
 	private function loadSpritemap(xml:XML, sm:XML):void {
 		const filename:String = sm.@file;
 		var path:String       = xml.@dir + filename;

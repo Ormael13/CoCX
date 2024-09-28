@@ -1046,6 +1046,12 @@ public class GameSettings extends BaseContent {
 			outputText("Angelic Faction: <b>ABSENT</b>");
 		outputText("\n\n");
 
+		if (flags[kFLAGS.CHARVIEWER_MODEL] == 0)
+			outputText("Charviewer Model: <b>OLD</b>");
+		else
+			outputText("Charviewer model: <b>NEW</b>")
+		outputText("\n\n");
+
 		var buttons:ButtonDataList = new ButtonDataList();
 		menu();
 		buttons.add("Side Bar Font", curry(toggleFlag, kFLAGS.USE_OLD_FONT, settingsScreenInterfaceSettings), "Toggle between old and new font for side bar.");
@@ -1064,6 +1070,7 @@ public class GameSettings extends BaseContent {
 		buttons.add("Lust Percent", curry(toggleFlag, kFLAGS.LUST_STATBAR_PERCENTAGE, settingsScreenInterfaceSettings), "Toggle between showing the Lust stat as a percentage");
 		buttons.add("Wrath Percent", curry(toggleFlag, kFLAGS.WRATH_STATBAR_PERCENTAGE, settingsScreenInterfaceSettings), "Toggle between showing the Wrath stat as a percentage");
 		buttons.add("Angelic Fract", curry(toggleFlag, kFLAGS.ANGELIC_FRACTION_TOGGLE, settingsScreenInterfaceSettings), "Toggle between full and no presence of angelic fraction ingame");
+		buttons.add("CharView Model", toggleCharViewerModel, "Toggle between new/old character model on PC visualizer.");
 		submenu(buttons, settingsScreenMain, 0, false);
 	}
 	public function menuMainBackground():void {
@@ -1107,6 +1114,14 @@ public class GameSettings extends BaseContent {
 	public function toggleCharViewerStyle():void {
 		flags[kFLAGS.CHARVIEW_STYLE] = (flags[kFLAGS.CHARVIEW_STYLE]+1)%3;
 		settingsScreenInterfaceSettings();
+	}
+
+	public function toggleCharViewerModel():void {
+		if (flags[kFLAGS.CHARVIEWER_MODEL] < 1) flags[kFLAGS.CHARVIEWER_MODEL] = 1;
+		else flags[kFLAGS.CHARVIEWER_MODEL] = 0;
+		mainView.charView.reload();
+		settingsScreenInterfaceSettings();
+
 	}
 
 	public function setMainBackground(type:int):void {

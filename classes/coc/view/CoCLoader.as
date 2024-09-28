@@ -31,6 +31,10 @@ public class CoCLoader {
     public static var BUNDLE_RES_MODEL_XML:Class;
 	bundleText("res/model.xml", BUNDLE_RES_MODEL_XML);
 
+	[Embed(source="../../../res/model2.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_RES_MODEL2_XML:Class;
+	bundleText("res/model2.xml", BUNDLE_RES_MODEL2_XML);
+
 	[Embed(source="../../../content/coc.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_XML:Class;
 	bundleText("content/coc.xml", BUNDLE_CONTENT_COC_XML);
@@ -66,29 +70,57 @@ public class CoCLoader {
 	public static var BUNDLE_RES_CHARVIEW_BODY_PNG:Class;
 	bundleImage("res/charview/body.png", BUNDLE_RES_CHARVIEW_BODY_PNG);
 
+	[Embed(source="../../../res/charview/body2.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_BODY2_PNG:Class;
+	bundleImage("res/charview/body2.png", BUNDLE_RES_CHARVIEW_BODY2_PNG);
+
 	[Embed(source="../../../res/charview/extra.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_EXTRA_PNG:Class;
 	bundleImage("res/charview/extra.png", BUNDLE_RES_CHARVIEW_EXTRA_PNG);
+
+	[Embed(source="../../../res/charview/extra2.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_EXTRA2_PNG:Class;
+	bundleImage("res/charview/extra2.png", BUNDLE_RES_CHARVIEW_EXTRA2_PNG);
 
 	[Embed(source="../../../res/charview/hair.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_HAIR_PNG:Class;
 	bundleImage("res/charview/hair.png", BUNDLE_RES_CHARVIEW_HAIR_PNG);
 
+	[Embed(source="../../../res/charview/hair2.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_HAIR2_PNG:Class;
+	bundleImage("res/charview/hair2.png", BUNDLE_RES_CHARVIEW_HAIR2_PNG);
+
 	[Embed(source="../../../res/charview/head.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_HEAD_PNG:Class;
 	bundleImage("res/charview/head.png", BUNDLE_RES_CHARVIEW_HEAD_PNG);
+
+	[Embed(source="../../../res/charview/head2.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_HEAD2_PNG:Class;
+	bundleImage("res/charview/head2.png", BUNDLE_RES_CHARVIEW_HEAD2_PNG);
 	
 	[Embed(source="../../../res/charview/lewd.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_LEWD_PNG:Class;
 	bundleImage("res/charview/lewd.png", BUNDLE_RES_CHARVIEW_LEWD_PNG);
+
+	[Embed(source="../../../res/charview/lewd2.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_LEWD2_PNG:Class;
+	bundleImage("res/charview/lewd2.png", BUNDLE_RES_CHARVIEW_LEWD2_PNG);
 	
 	[Embed(source="../../../res/charview/tails.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_TAILS_PNG:Class;
 	bundleImage("res/charview/tails.png", BUNDLE_RES_CHARVIEW_TAILS_PNG);
+
+	[Embed(source="../../../res/charview/tails2.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_TAILS2_PNG:Class;
+	bundleImage("res/charview/tails2.png", BUNDLE_RES_CHARVIEW_TAILS2_PNG);
 	
 	[Embed(source="../../../res/charview/wings.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_WINGS_PNG:Class;
 	bundleImage("res/charview/wings.png", BUNDLE_RES_CHARVIEW_WINGS_PNG);
+
+	[Embed(source="../../../res/charview/wings2.png", mimeType="image/png")]
+	public static var BUNDLE_RES_CHARVIEW_WINGS2_PNG:Class;
+	bundleImage("res/charview/wings2.png", BUNDLE_RES_CHARVIEW_WINGS2_PNG);
 
 	public static function bundleImage(key:String, c:Class):void {
 		var o:BitmapData = c ? ((new c() as Bitmap).bitmapData) : null;
