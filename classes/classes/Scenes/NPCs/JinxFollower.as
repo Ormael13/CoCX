@@ -33,8 +33,8 @@ import classes.Scenes.SceneLib;
 			addButton(0, "MinoBomber", buyItemMinoBomber).hint("Both a sex toy and a weapon, the MinoBomber uses one rather unconventional ammunition: cum. Invented to take advantage of minotaur near endless supply of cum, this setup consists of a machine gun linked to a massive tank to be strapped on the users back and a harness with cockpump.");
 			addButton(1, "Nail Gun", buyItemNailGun).hint("Usefull when you need to nail down crux of a problem.");
 			addButton(2, "PileBunker", buyItemPileBunker).hint("When you need to jackhammer your point.");
-			addButton(3, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
-			addButton(4, "Golem Core", buyItemGolemCore).hint("Is this even functional golem core?");
+			//3 - ?
+			//4 - ?
 			addButton(5, "MetalPiecesx1", buyItemMetalPlates, 1).hint("A metal pieces for something really cool. (x1)");
 			addButton(6, "MetalPiecesx5", buyItemMetalPlates, 5).hint("A metal pieces for something really cool. (x5)");
 			addButton(7, "MetalPiecesx10", buyItemMetalPlates, 10).hint("A metal pieces for something really cool. (x10)");
@@ -43,6 +43,8 @@ import classes.Scenes.SceneLib;
 			if (flags[kFLAGS.JINX_LVL_UP] >= 0.8) addButton(10, "You", bazaarEncountersYouRepeat).hint("That a weird item to sell... but you all there behind [name] have very weird minds.");
 			else addButton(10, "You", bazaarEncountersYou).hint("That a weird item to sell... but you all there behind [name] have very weird minds.");
 			addButtonDisabled(11, "??? Core", "??? Core");
+			addButton(12, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
+			addButton(13, "Golem Core", buyItemGolemCore).hint("Is this even functional golem core?");
 			addButton(14, "Back", SceneLib.bazaar.enterTheBazaarAndMenu);
 		}
 		
@@ -203,7 +205,9 @@ import classes.Scenes.SceneLib;
 			addButton(4, "MetalPiecesx50", buyItemMetalPlates, 50).hint("A metal pieces for something really cool. (x50)");
 			addButton(5, "Golem Core", buyItemGolemCore).hint("Is this even functional golem core?");
 			addButton(6, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
-			addButtonDisabled(7, "MinoBomber", "MinoBomber");
+			addButton(7, "MinoBomber", buyItemMinoBomber).hint("Both a sex toy and a weapon, the MinoBomber uses one rather unconventional ammunition: cum. Invented to take advantage of minotaur near endless supply of cum, this setup consists of a machine gun linked to a massive tank to be strapped on the users back and a harness with cockpump.");
+			addButton(8, "Nail Gun", buyItemNailGun).hint("Usefull when you need to nail down crux of a problem.");
+			addButton(9, "PileBunker", buyItemPileBunker).hint("When you need to jackhammer your point.");
 			addButtonDisabled(10, "??? Core", "??? Core");
 			addButton(14, "Back", campJinxMenuMain);
 		}
