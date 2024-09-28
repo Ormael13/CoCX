@@ -55,6 +55,8 @@ public class TrollRace extends Race {
 							return body.player.femininity <= 70
 						}, +1);
 		
+		addBloodline(PerkLib.TrollsDescendant, PerkLib.BloodlineTroll);
+		
 		buildTier(10, "troll")
 				.buffs({
 					"str.mult": +0.30,

@@ -136,7 +136,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perks: Drake Bones/Heart/Lungs - they have same amount of tiers and effects as Draconic Bones/Heart/Lungs. Req. to get them are the same too. In cases when internal mutation wasn't accesable to race without changing partialy into different dragon-like race checks was fixed.\n");
 			outputText("-When needed in race scores IM checks for Draconic IM's was replaced by checks for Drake IM checks.\n");
 			outputText("-Yggdrasil dragon breath changed from poison breath to poisonous sap breath (deal poison+water+earth) damage.\n");
-			outputText("-Added Descendant and Bloodline perks for Human (4 stages), Werefox, Scylla/Kraken, Yuki Onna, Demon, Devil, Bunny, Lizan, Harpy races.\n");//, Werewolf, Wereshark
+			outputText("-Added Descendant and Bloodline perks for Human (4 stages), Werefox, Scylla/Kraken, Yuki Onna, Demon, Devil, Bunny, Lizan, Harpy, Raccoon/Tanuki, Shark, Spider, Troll races.\n");//, Were, Werespider
 			outputText("-Steel Storm would affect all dual gauntlet/claw type weapons too. Equipping gauntlet/claw type weapons will not req. Dual Wield perk.\n");
 			outputText("-Lethice Staff spellpower bonus doubled.\n");
 			outputText("-Finishing Alvina/Siegweird storyline (up to gain spell reward) would each grants 5 ascension perk points and will be under quest section of calculation.\n");
