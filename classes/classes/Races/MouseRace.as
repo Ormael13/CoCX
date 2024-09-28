@@ -59,6 +59,7 @@ public class MouseRace extends Race {
 				.height(LESS_THAN(60), +1)
 				.height(LESS_THAN(52), +1);
 		
+		//addBloodline(PerkLib.MousesDescendant, PerkLib.BloodlineMouse);
 		addMutation(IMutationsLib.HinezumiBurningBloodIM);
 		addMutation(IMutationsLib.BlazingHeartIM);
 		
