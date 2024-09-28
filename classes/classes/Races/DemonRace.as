@@ -74,6 +74,7 @@ public class DemonRace extends Race {
 				.hasPerk(PerkLib.DemonicLethicite, +1)
 				.hasPerk(PerkLib.Soulless, +4);
 		
+		addBloodline(PerkLib.DemonsDescendant, PerkLib.BloodlineDemon);
 		addMutation(IMutationsLib.BlackHeartIM);
 		addMutation(IMutationsLib.FiendishMetabolismIM);
 		addMutation(IMutationsLib.FiendishBallsIM);

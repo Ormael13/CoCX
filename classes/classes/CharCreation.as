@@ -1442,6 +1442,8 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(6, "Kraken", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineYukiOnna)) addButton(7, "Yuki Onna", confirmBloodline2, PerkLib.YukiOnnasDescendant).hint("(+2 to yuki onna score)");
 			else addButtonDisabled(7, "Yuki Onna", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineDemon)) addButton(8, "Demon", confirmBloodline2, PerkLib.DemonsDescendant).hint("(+2 to demon score)");
+			else addButtonDisabled(8, "Demon", "You already have this bloodline!");
 			addButton(12, "-1-", chooseBloodline1);
 			addButton(13, "-3-", chooseBloodline3);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
@@ -1540,6 +1542,9 @@ import classes.Scenes.Combat.CombatAbility;
 					break;
 				case PerkLib.YukiOnnasDescendant:
 					outputText("Your ancestor was an yuki onna?");
+					break;
+				case PerkLib.DemonsDescendant:
+					outputText("Your ancestor was a demon?");
 					break;
 				default:
 					outputText("Your ancestor was a hydra?");
@@ -3111,6 +3116,11 @@ import classes.Scenes.Combat.CombatAbility;
 			else if (player.hasPerk(PerkLib.YukiOnnasDescendant)) {
 				player.removePerk(PerkLib.YukiOnnasDescendant);
 				player.createPerk(PerkLib.BloodlineYukiOnna,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.DemonsDescendant)) {
+				player.removePerk(PerkLib.DemonsDescendant);
+				player.createPerk(PerkLib.BloodlineDemon,0,0,0,1);
 				bloodlineACQ2();
 			}
 			else if (player.hasPerk(PerkLib.CommonHumansDescendant)) {

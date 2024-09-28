@@ -5052,7 +5052,7 @@ public class Combat extends BaseContent {
                         monster.teased(rangeweaponLustDmg, false);
                     }
                 }
-				if (player.weaponRange == weaponsrange.NAILGUN && rand(3) == 0) {
+				if ((player.weaponRange == weaponsrange.NAILGUN || player.weaponRange == weaponsrange.NAILGUN2) && rand(3) == 0) {
 					if (monster.hasStatusEffect(StatusEffects.Nailed)) monster.addStatusValue(StatusEffects.Nailed, 1, (rand(2) + 2));
 					else monster.createStatusEffect(StatusEffects.Nailed, (rand(2) + 3), 0, 0, 0);
 				}
@@ -5228,6 +5228,12 @@ public class Combat extends BaseContent {
 			if (cumAmmo > 20) cumAmmo = 20;
             player.ammo = cumAmmo;
 		}
+        if (player.weaponRange == weaponsrange.NAILGUN2) {
+			var mininails2:Number = 0;
+			if (CampStatsAndResources.NailsResc > 0) mininails2 += CampStatsAndResources.NailsResc;
+			if (mininails2 > 20) mininails2 = 20;
+            player.ammo = mininails;
+		}
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 12;
@@ -5269,7 +5275,7 @@ public class Combat extends BaseContent {
             var lustDmg:int = rand(player.lib / 10) + 20;
             player.takeLustDamage(lustDmg, true);
         }
-		else if (player.weaponRange == weaponsrange.NAILGUN) outputText("You open the magazine of your " + player.weaponRangeName + " to insert new nails.");
+		else if (player.weaponRange == weaponsrange.NAILGUN || player.weaponRange == weaponsrange.NAILGUN2) outputText("You open the magazine of your " + player.weaponRangeName + " to insert new nails.");
 		else outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
     }
 
@@ -14090,6 +14096,12 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			var cumAmmo:Number = player.cumQ() / 100;
 			if (cumAmmo > 20) cumAmmo = 20;
             player.ammo = cumAmmo;
+		}
+        if (player.weaponRange == weaponsrange.NAILGUN2) {
+			var mininails2:Number = 0;
+			if (CampStatsAndResources.NailsResc > 0) mininails2 += CampStatsAndResources.NailsResc;
+			if (mininails2 > 20) mininails2 = 20;
+            player.ammo = mininails2;
 		}
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;

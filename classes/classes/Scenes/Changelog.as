@@ -136,7 +136,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perks: Drake Bones/Heart/Lungs - they have same amount of tiers and effects as Draconic Bones/Heart/Lungs. Req. to get them are the same too. In cases when internal mutation wasn't accesable to race without changing partialy into different dragon-like race checks was fixed.\n");
 			outputText("-When needed in race scores IM checks for Draconic IM's was replaced by checks for Drake IM checks.\n");
 			outputText("-Yggdrasil dragon breath changed from poison breath to poisonous sap breath (deal poison+water+earth) damage.\n");
-			outputText("-Added Descendant and Bloodline perks for Human (4 stages), Werefox, Scylla/Kraken, Yuki Onna races.\n");//, Werewolf, Wereshark
+			outputText("-Added Descendant and Bloodline perks for Human (4 stages), Werefox, Scylla/Kraken, Yuki Onna, Demon races.\n");//, Werewolf, Wereshark
 			outputText("-Steel Storm would affect all dual gauntlet/claw type weapons too. Equipping gauntlet/claw type weapons will not req. Dual Wield perk.\n");
 			outputText("-Lethice Staff spellpower bonus doubled.\n");
 			outputText("-Finishing Alvina/Siegweird storyline (up to gain spell reward) would each grants 5 ascension perk points and will be under quest section of calculation.\n");
@@ -167,8 +167,10 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 wisdom lvl-up perk: Three times a tame. Req. Beast 02 perk and 75+ wisdom. Effect: Now you can control 3 monsters at the same time.\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Psychic Barrier. Req. Sixth Sense perk and 50+ sensitivity. Effect: You learn to create an invisible barrier, using your psychokinesis that boost phys/magic resistance by 10% and giving very minor (1%) boost to toughness.\n");
 			outputText("-New tier 3 wisdom lvl-up perk: Fourth Tamer of the Apocalypse. Req. Three times a tame perk and 100+ wisdom. Effect: Now you can assemble 4 horsema... monsters team.\n");
+			outputText("-New tier 3 sensitivity lvl-up perk: Improved Kineses. Req. one of perks: Pyrokinesis, Hydrokinesis, Cryokinesis, Geokinesis, Electrokinesis, Aerokinesis, Umbrakinesis, Acidokinesis, Ionikinesis, Cocytokinesis and 75+ sensitivity. Effect: All of your kinesis type specials damage have added minor inteligence/wisdom scaling.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Conduction Soulforce Charge. Req. Job: Artificier perk and 125+ wisdom. Effect: As long you have sufficient amount of soulforce, expend them to keep Ayo Armor active instead of using internal storage.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Empowered Taming. Req. Fourth Tamer of the Apocalypse perk and 130+ wisdom. Effect: During taming monster it wisdom is treated as if it was 80% lower.\n");
+			outputText("-New tier 4 sensitivity lvl-up perk: Wide Area Kineses. Req. Improved Kineses perk and 100+ sensitivity. Effect: All of your kinesis type specials would be treated as AoE attacks against any group of enemies.\n");
 			outputText("-Ayo Armor Proficiency perk req. of Heavy Armor Proficiency was changed to Job: Artificer perk and it desc was slight changed to account for damage reduction depending on whenever armor is powered up or not (10% when unpowered and 20% when powered).\n");
 			outputText("-Job: All-Rounder req. for sensitivity was increased from 50 to 75 like other stats.\n");
 			outputText("-New type of minions: tamed monsters. Req. Tamer Job and they can be at any time released to be replaced by different one monster. To succeed player must defeat them in combat and then have higher wisdom to successfully tame them (non feral/true demon tamable enemies are treated as if they had 10x higher wis). Some perks/items can increase their damage. They would also benefit from effectivness bonus that is applied to any henchman.\n");
@@ -249,8 +251,6 @@ public class Changelog extends BaseContent
 			outputText("-Phantom racial bonuses been increased (all the changes are added to previous values): Phantom/Poltergeist/Eldritch Poltergeist - +5%/+10%/+10% to Spe multi, +25%/+70%/+160% to Int multi, +10%/+45%/+110% to Wis multi, +40/+125/+280 to Sens.\n");
 			outputText("-Telekinesis perk would now add minor scaling based on intelligence to all -kinesis specials for Psychic job.\n");
 			outputText("-Added 'auburn' color to satyr hair and fur colors pool.\n");
-			outputText("-New tier 3 sensitivity lvl-up perk: Improved Kineses. Req. one of perks: Pyrokinesis, Hydrokinesis, Cryokinesis, Geokinesis, Electrokinesis, Aerokinesis, Umbrakinesis, Acidokinesis, Ionikinesis, Cocytokinesis and 75+ sensitivity. Effect: All of your kinesis type specials damage have added minor inteligence/wisdom scaling.\n");
-			outputText("-New tier 4 sensitivity lvl-up perk: Wide Area Kineses. Req. Improved Kineses perk and 100+ sensitivity. Effect: All of your kinesis type specials would be treated as AoE attacks against any group of enemies.\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Advanced Kineses. Req. Wide Area Kineses perk and 125+ sensitivity. Effect: All of your kinesis type specials damage have improved scaling from sensitivity, wisdom and intelligence.\n");
 			outputText("-New tier 6 sensitivity lvl-up perk: Quasi Domain Kineses. Req. Advanced Kineses perk and 150+ sensitivity. Effect: All of your kinesis type specials would deal higher damage against single and group enemies. The larger group the higher bonus damage. (2x/10x/50x)\n");
 			outputText("-Entangle special (using shield slot item - Battle Net) have added effect: Enemies flying using wings would temporaly be grounded.\n");
@@ -258,7 +258,7 @@ public class Changelog extends BaseContent
 			outputText("-Can now Gro/Red knots! (Svalkash)\n");
 			outputText("-New melee weapon (by Ormael): Pile Bunker - buyable at Minx shop. Cost 1,480 spirit stones. Base atk is 74. It's massive exotic type weapon. It have 100% armor pierce effect.\n");
 			outputText("-New range weapon (by Ormael): Nail Gun - buyable at Minx shop. Cost 150 spirit stones. Base atk is 15 and ammo clip size 10. It use Nails so without any of them can't be used. It have 25% chance to cause bleeding. Attacking flying enemies have 33% chance to force them to land for 3-4 turns, following up attacks have 33% chance to extend this duration by 2-3 turns.\n");
-			outputText("-\n");
+			outputText("-New range weapon (by Ormael): Twin Nail Gun - can be gained by combining 2x Nail Gun weapon. Cost 300 spirit stones. Base atk is 15 and ammo clip size 20. It's Dual Firearm type range weapon that have all other properties of Nail Gun.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -75,6 +75,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const M1CERBE:WeaponRange = new WeaponRange("M1Cerbe", "M1Cerberus", "M1 Cerberus", "a M1 Cerberus", "shot", 45, 930, "A rifle prized for its precision and versatility, the Cerberus shoots multiple bullet in salvo ensuring that if one shot land all the others do with minimal recoil.\n\nGoblin Mech Compatibile", WT_2H_FIREARM);
 		public const MBOMBER:MinoBomber = new MinoBomber();
 		public const NAILGUN:WeaponRange = new WeaponRange("NailGun", "NailGun", "Nail Gun", "a Nail Gun", "shot", 15, 600, "With a white base and grey trims, this gun fires nails. Simple as that!", WT_PISTOL).withEffect(IELib.Bleed, 25) as WeaponRange;
+		public const NAILGUN2:TwinNailGun = new TwinNailGun();
 		public const O_JAVEL:WeaponRange = new WeaponRange("O.Javel", "OldJavelins", "old javelins", "an old javelins", "shot", 1, 50, "An old training javelin for ranged combat. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const RTKNIFE:WeaponRange = new WeaponRange("RTKnife", "R.ThrowingKnife", "ruby throwing knife", "a ruby throwing knife", "shot", 3, 300, "A small knife made of crimson metal and richly decorated with rubies and gold engravings that could be thrown. The magic within this crimson blade will flare up with magical flames when charged with magic. You can carry up to 15 on you and need to retrieve them after battles.", "Throwing");
 		public const SAGITTB:SagittariusBanefulGreatBow = new SagittariusBanefulGreatBow();
@@ -120,7 +121,8 @@ public final class WeaponRangeLib extends ItemConstants
 			[SIXSHOT, TWINSIXS],
 			[M1CERBE, TM1CERB],
 			[ALAKABL, DALAKABL],
-			[DESEAGL, TDEEAGL]
+			[DESEAGL, TDEEAGL],
+			[NAILGUN, NAILGUN2]
 			//[HARKON1, HARKON2],
 		];
 		
