@@ -2799,6 +2799,30 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		/**
+		 * <p>Called during combatStatusesUpdate Bind Statuses Check Section</p>
+		 * <p>Typically used for flavor text output</p>
+		 */
+		public function combatStatusesUpdateWhenBound():void{
+
+		}
+
+		/**
+		 * <p>Called during internal function struggle()</p>
+		 * @return If false, call enemyAIImpl at the end
+		 */
+		public function playerBoundStruggle():Boolean{
+			return false;
+		}
+
+		/**
+		 * <p>Called during internal function wait()</p>
+		 * @return If false, call enemyAIImpl at the end
+		 */
+		public function playerBoundWait():Boolean{
+			return false;
+		}
+
+		/**
 		 * <p>Combat.doDamage() Override Series - Part 1 (Ongoing maybe)</p>
 		 * <ul>
 		 *     <li>Called right before monster HP getting deducted</li>

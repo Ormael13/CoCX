@@ -16,6 +16,29 @@ use namespace CoC;
 
 	public class HellfireSnail extends Monster
 	{
+		override public function playerBoundStruggle():Boolean{
+			clearOutput();
+			//[Struggle](successful) :
+			if (rand(3) == 0 || rand(80) < player.str) {
+				outputText("You manage to break out of the snail’s burning embrace and she sighs in frustration as you take some distance.");
+				outputText("\n\n\"<i>Aw come back here! I just want a hug!</i>\"");
+				player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
+			}
+			//Failed struggle
+			else {
+				outputText("Your flesh begins burning as the snail embraces you with her molten body! The sound is terrifying, like cooking meat...YOUR meat!");
+				player.takeFireDamage((.05 + (.005 * statusEffectv1(StatusEffects.RisingInferno))) * player.maxHP(), true);
+			}
+			return true;
+		}
+
+		override public function playerBoundWait():Boolean{
+			clearOutput();
+			outputText("Your flesh begins burning as the snail embraces you with her molten body! You scream, but the molten girl doesn't stop!");
+			player.takeFireDamage((.1 + (.01 * statusEffectv1(StatusEffects.RisingInferno))) * player.maxHP(), true);
+			return true;
+		}
+
 		private function hellfireSnailBurningEmbrace():void
 		{
 			outputText("Your flesh begins burning as the snail embraces you with her molten body! Ironically this is both extremely hot and painful! ");
@@ -28,7 +51,7 @@ use namespace CoC;
 		{
 			outputText("Without warning the snail girl leaps on you in a sudden burst of speed, smearing you with liquid fire! You’re being grappled! The snail giggles.");
 			outputText("\n\n\"<i>Got you right where I want you.</i>\"");
-			if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) player.createStatusEffect(StatusEffects.PlayerBoundPhysical, 0, 0, 0, 0);
 		}
 		
 		private function hellfireSnailSpitMagma():void
@@ -111,8 +134,8 @@ use namespace CoC;
 			this.createStatusEffect(StatusEffects.EruptingRiposte, 0, 0, 0, 0);
 			this.abilities = [
 				{ call: hellfireSnailSpitMagma, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FLUID,]},
-				{ call: hellfireSnailEngulph, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return !player.hasStatusEffect(StatusEffects.GooBind) }},
-				{ call: hellfireSnailBurningEmbrace, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.GooBind) }, weight:Infinity}
+				{ call: hellfireSnailEngulph, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return !player.hasStatusEffect(StatusEffects.PlayerBoundPhysical) }},
+				{ call: hellfireSnailBurningEmbrace, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.PlayerBoundPhysical) }, weight:Infinity}
 			];
 			checkMonster();
 		}

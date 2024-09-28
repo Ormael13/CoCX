@@ -16,6 +16,28 @@ use namespace CoC;
 
 	public class DarkSlimeEmpress extends Monster
 	{
+		override public function playerBoundStruggle():Boolean{
+			clearOutput();
+			//[Struggle](successful) :
+			if (rand(3) == 0 || rand(80) < player.str) {
+				outputText("You barely manage to break out of the slimes clingy bodies standing up to resume the battle.");
+				player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
+			}
+			//Failed struggle
+			else {
+				outputText("You writhe uselessly, trapped inside the dark slime girls warm, seething bodies. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girls pulsing bodies around yours.");
+				player.takePhysDamage(.15 * player.maxHP(), true);
+			}
+			return true;
+		}
+
+		override public function playerBoundWait():Boolean{
+			clearOutput();
+			outputText("You writhe uselessly, trapped inside the dark slime girls warm, seething bodies. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girls pulsing bodies around yours.");
+			player.takePhysDamage(.35 * player.maxHP(), true);
+			return true;
+		}
+
 		private function gooHaremStrike():void
 		{
 			outputText("The slime girls begin to fondle your ");
@@ -59,7 +81,7 @@ use namespace CoC;
 			if(player.getEvasionRoll()) outputText("You barely manage to break out of their clingy bodies!");
 			else {
 				outputText("Before you know it you’re covered and pulled down by their combined bodies.");
-				if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
+				if (!player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) player.createStatusEffect(StatusEffects.PlayerBoundPhysical, 0, 0, 0, 0);
 			}
 		}
 
@@ -130,7 +152,7 @@ use namespace CoC;
 			this.abilities = [
 				{ call: gooHaremStrike, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FLUID,]},
 				{ call: gooGroupGrapple, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID]},
-				{ call: gooHaremStrike, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.GooBind) }, weight:Infinity},
+				{ call: gooHaremStrike, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.PlayerBoundPhysical) }, weight:Infinity},
 				{ call: gooSlimeBarrage, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_FLUID]}
 			];
 			checkMonster();

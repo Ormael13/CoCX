@@ -694,8 +694,6 @@ public class Combat extends BaseContent {
     public function isPlayerBound():Boolean {
         var playerStatuses:Array = [
             //combat statuses
-			StatusEffects.HarpyBind,
-            StatusEffects.GooBind,
             StatusEffects.TentacleBind,
             StatusEffects.NagaBind,
             StatusEffects.ScyllaBind,
@@ -725,6 +723,12 @@ public class Combat extends BaseContent {
             StatusEffects.KitsuneTailTangle,
             StatusEffects.MinotaurEntangled,
             StatusEffects.LadyRafflesiaGrab,
+            // PlayerBoundPhysical = Removable through possession
+            // PlayerBoundSpecial = Unremovable through possession
+            // Only add more status effects if additional interaction implemented
+            // Not gonna migrate all of them at once
+            StatusEffects.PlayerBoundPhysical,
+            StatusEffects.PlayerBoundSpecial
         ];
         if (player.hasStatusEffect(StatusEffects.MinotaurEntangled)) outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
         if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
@@ -2361,6 +2365,9 @@ public class Combat extends BaseContent {
 
     internal function wait():void {
         var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
+        if(isPlayerBound()){
+            skipMonsterAction = monster.playerBoundWait();
+        }
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
         if (player.hasStatusEffect(StatusEffects.KitsuneTailTangle)) {
             (monster as Kitsune).kitsuneWait();
@@ -2376,12 +2383,6 @@ public class Combat extends BaseContent {
         } else if (monster.hasStatusEffect(StatusEffects.Dig)) {
             clearOutput();
             outputText("You bid your time underground preparing your next move.\n\n");
-        } else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
-            clearOutput();
-            outputText("The brood continues to hammer away at your defenseless self. ");
-            var damage:int = 80 + rand(40);
-            player.takePhysDamage(damage, true);
-            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.QueenBind)) {
             (monster as HarpyQueen).ropeStruggles(true);
             skipMonsterAction = true;
@@ -2393,14 +2394,6 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.DragonsNom)) {
             if (monster is UltimisFlamespreader)(monster as UltimisFlamespreader).struggleNom(true);
-            skipMonsterAction = true;
-        } else if (player.hasStatusEffect(StatusEffects.GooBind)) {
-            clearOutput();
-            if (monster is HellfireSnail) outputText("Your flesh begins burning as the snail embraces you with her molten body! You scream, but the molten girl doesn't stop!");
-            else if (monster is DarkSlimeEmpress) outputText("You writhe uselessly, trapped inside the dark slime girls warm, seething bodies. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girls pulsing bodies around yours.");
-            else outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.");
-            if (monster is HellfireSnail) player.takeFireDamage((.1 + (.01 * monster.statusEffectv1(StatusEffects.RisingInferno))) * player.maxHP(), true);
-            else player.takePhysDamage(.35 * player.maxHP(), true);
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
             clearOutput();
@@ -2532,7 +2525,7 @@ public class Combat extends BaseContent {
     }
 
     internal function struggle():void {
-        var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
+        var skipMonsterAction:Boolean = monster.playerBoundStruggle(); // If false, enemyAI() will be called. If true, combatRoundOver()
         if (player.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
             clearOutput();
             if ((player.str / 9 + rand(20) + 1 >= 15) || player.hasPerk(PerkLib.FluidBody)) {
@@ -2555,27 +2548,7 @@ public class Combat extends BaseContent {
             (monster as HarpyQueen).ropeStruggles();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.SiegweirdGrapple)) (monster as SiegweirdBoss).siegweirdStruggle(); //no skipping?
-         else if (player.hasStatusEffect(StatusEffects.GooBind)) {
-            clearOutput();
-            //[Struggle](successful) :
-            if (rand(3) == 0 || rand(80) < player.str) {
-                if (monster is HellfireSnail) {
-                    outputText("You manage to break out of the snail’s burning embrace and she sighs in frustration as you take some distance.");
-                    outputText("\n\n\"<i>Aw come back here! I just want a hug!</i>\"");
-                } else if (monster is DarkSlimeEmpress) outputText("You barely manage to break out of the slimes clingy bodies standing up to resume the battle.");
-                else outputText("You claw your fingers wildly within the slime and manage to brush against her heart-shaped nucleus. The girl silently gasps and loses cohesion, allowing you to pull yourself free while she attempts to solidify.");
-                player.removeStatusEffect(StatusEffects.GooBind);
-            }
-            //Failed struggle
-            else {
-                if (monster is HellfireSnail) outputText("Your flesh begins burning as the snail embraces you with her molten body! The sound is terrifying, like cooking meat...YOUR meat!");
-                else if (monster is DarkSlimeEmpress) outputText("You writhe uselessly, trapped inside the dark slime girls warm, seething bodies. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girls pulsing bodies around yours.");
-                else outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you slow, lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours. ");
-                if (monster is HellfireSnail) player.takeFireDamage((.05 + (.005 * monster.statusEffectv1(StatusEffects.RisingInferno))) * player.maxHP(), true);
-                else player.takePhysDamage(.15 * player.maxHP(), true);
-            }
-            skipMonsterAction = true;
-        } else if (player.hasStatusEffect(StatusEffects.ArcaneWeb)) {
+        else if (player.hasStatusEffect(StatusEffects.ArcaneWeb)) {
 			clearOutput();
 			outputText("You struggle against your magical bonds");
 			if (rand(3) == 0 || rand(80) < player.str) {
@@ -2584,10 +2557,7 @@ public class Combat extends BaseContent {
 			}
 			else outputText(".");
 			skipMonsterAction = true;
-		} else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
-            (monster as HarpyMob).harpyHordeGangBangStruggle();
-            skipMonsterAction = true;
-        } else if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
+		} else if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
             (monster as Magnar).magnarPinStruggle();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.Straddle)) {
@@ -11981,6 +11951,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			repeatArcaneVenom(damageDBL, 0, damageDBH);
 			outputText("\n\n");
 		}
+        if(isPlayerBound())
+        monster.combatStatusesUpdateWhenBound();
+
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
             player.takeLustDamage(3, true);
@@ -11990,12 +11963,6 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you and have you at its mercy.\n\n");
                 player.takeLustDamage(3, true);
             } else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
-        }
-        if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
-            if (flags[kFLAGS.PC_FETISH] >= 2) {
-                outputText("The harpies are holding you down and restraining you, making the struggle all the sweeter!\n\n");
-                player.takeLustDamage(3, true);
-            } else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
         }
         if ((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("Coiled tightly by [themonster] and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");

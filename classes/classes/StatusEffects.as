@@ -1108,6 +1108,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PhysicalDisabled:StatusEffectType          = mkCombat("Physical Disabled");
 		public static const PiercingBlow:StatusEffectType	           = mkCombat("Piercing Blow");
 		public static const PlantGrowth:StatusEffectType               = mkCombat("Plant Growth");
+		public static const PlayerBoundPhysical:StatusEffectType	   = mkCombat("Player Bound Physical");
+		public static const PlayerBoundSpecial:StatusEffectType	       = mkCombat("Player Bound Special");
 		public static const PlayerRegenerate:StatusEffectType		   = mkCombat("Player Regenerate");
 		public static const Poison:StatusEffectType                    = mkCombat("Poison");
 		public static const PoisonDoT:StatusEffectType                 = mkCombat("Poison DoT");
