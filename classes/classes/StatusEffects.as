@@ -999,6 +999,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DemonSeed:StatusEffectType                 = mkCombat("DemonSeed");
 		public static const Devoured:StatusEffectType     	  		   = mkCombat("Devoured");
 		public static const Dig:StatusEffectType     	  			   = mkCombat("Dig");
+		public static const DisableMHActing:StatusEffectType		   = mkCombat("DisableMinionsAndHenchmanActing");
 		public static const Disarmed:StatusEffectType                  = mkCombat("Disarmed");
 		public static const Displacement:StatusEffectType      		   = mkCombat("Displacer beast displacement");
 		public static const DisplacerPlug:StatusEffectType             = mkCombat("Displacer Plugged for milking");

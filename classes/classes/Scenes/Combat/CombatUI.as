@@ -557,7 +557,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isWispTurn():Boolean {
-		return CombatAbilities.WillOfTheWisp.isKnownAndUsable && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1;
+		return CombatAbilities.WillOfTheWisp.isKnownAndUsable && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && !doWeDisableThisOne(7);
 	}
 
 	public function doWispTurn():void {
@@ -584,7 +584,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isFlyingSwordTurn():Boolean {
-		return player.hasPerk(PerkLib.FirstAttackFlyingSword) && CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
+		return player.hasPerk(PerkLib.FirstAttackFlyingSword) && CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1 && !doWeDisableThisOne(5);
 	}
 
 	public function doFlyingSwordTurn():void {
@@ -601,7 +601,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isMummyTurn():Boolean {
-		return CombatAbilities.MummyAttack.isKnownAndUsable && flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 1 && flags[kFLAGS.MUMMY_ATTACK] == 1;
+		return CombatAbilities.MummyAttack.isKnownAndUsable && flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 1 && flags[kFLAGS.MUMMY_ATTACK] == 1 && !doWeDisableThisOne(6);
 	}
 	
 	public function doMummyTurn():void {
@@ -618,7 +618,7 @@ public class CombatUI extends BaseCombatContent {
 	public function isMechAITurn():Boolean {
 		return player.isInGoblinMech() && (player.hasKeyItem("Improved Artificial Intelligence") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK2") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK3") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK4") >= 0)
 				&& (player.hasKeyItem("Auto turret") >= 0 || player.hasKeyItem("Auto turret MK2") >= 0 || player.hasKeyItem("Auto turret MK3") >= 0 || player.hasKeyItem("Auto turret MK4") >= 0 || player.hasKeyItem("Auto turret MK5") >= 0 || player.hasKeyItem("Auto turret MK6") >= 0)
-				&& flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] != 1;
+				&& flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] != 1;// && !doWeDisableThisOne(8)
 	}
 	
 	public function doMechAITurn():void {
@@ -634,7 +634,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isGolemTurn():Boolean {
-		return player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost();
+		return player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost() && !doWeDisableThisOne(4);
 	}
 
 	public function doGolemTurn():void {
@@ -699,11 +699,11 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isSkeletonsTurn():Boolean {
-		return (player.hasPerk(PerkLib.FirstAttackSkeletons) && ((player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 && !monster.isFlying()) || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) && flags[kFLAGS.NECROMANCER_SKELETONS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] != 1;
+		return (player.hasPerk(PerkLib.FirstAttackSkeletons) && ((player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 && !monster.isFlying()) || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) && flags[kFLAGS.NECROMANCER_SKELETONS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] != 1 && !doWeDisableThisOne(3);
 	}
 
 	public function isEpicElementalTurn():Boolean {
-		return player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && !flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED];
+		return player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && !flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] && !doWeDisableThisOne(1);
 	}
 
 	public function doEpicElementalTurn():void {
@@ -731,7 +731,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isElementalTurn():Boolean {
-		return player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && !flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED];
+		return player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && !flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] && !doWeDisableThisOne(2);
 	}
 
 	public function doElementalTurn():void {
@@ -756,7 +756,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isBloodPuppiesTurn():Boolean {
-		return player.hasPerk(PerkLib.MyBloodForBloodPuppies) && flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1 && flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0;
+		return player.hasPerk(PerkLib.MyBloodForBloodPuppies) && flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1 && flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0 && !doWeDisableThisOne(0);
 	}
 
 	public function doBloodPuppiesTurn():void {
@@ -843,6 +843,10 @@ public class CombatUI extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 		}
 		monster.postCompanionAction();
+	}
+	
+	private function doWeDisableThisOne(nr:Number):Boolean {
+		return player.hasStatusEffect(StatusEffects.DisableMHActing) && player.statusEffectv1(StatusEffects.DisableMHActing) >= nr;
 	}
 
 	private function BuildSpellBookMenu(buttons:ButtonDataList):void {
