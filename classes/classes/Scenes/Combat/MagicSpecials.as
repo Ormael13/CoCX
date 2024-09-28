@@ -5805,8 +5805,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(!combatIsOver()) enemyAI();
 	}
 	public function possess2():void {
-		if (player.hasStatusEffect(StatusEffects.HarpyBind)) player.removeStatusEffect(StatusEffects.HarpyBind);
-		if (player.hasStatusEffect(StatusEffects.GooBind)) player.removeStatusEffect(StatusEffects.GooBind);
+		if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
 		if (player.hasStatusEffect(StatusEffects.TentacleBind)) player.removeStatusEffect(StatusEffects.TentacleBind);
 		if (player.hasStatusEffect(StatusEffects.NagaBind)) player.removeStatusEffect(StatusEffects.NagaBind);
 		if (player.hasStatusEffect(StatusEffects.ScyllaBind)) player.removeStatusEffect(StatusEffects.ScyllaBind);
