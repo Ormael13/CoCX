@@ -56,7 +56,7 @@ public class DeerRace extends Race{
 				.skinCoatType(Skin.FUR, +1)
 				.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.EQUINE, +1);
 		
-		//addBloodline(PerkLib.DeersDescendant, PerkLib.BloodlineDeer);
+		addBloodline(PerkLib.DeersDescendant, PerkLib.BloodlineDeer);
 		
 		buildTier(8, "deer")
 				.namesMaleFemaleMorphTaur("deer-morph", "deer-girl", "deer-morph", "deer-taur")

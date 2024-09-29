@@ -1466,14 +1466,16 @@ import classes.Scenes.Combat.CombatAbility;
 			if (!player.hasPerk(PerkLib.BloodlineCancer)) addButton(4, "Cancer", confirmBloodline3, PerkLib.CancersDescendant).hint("(+2 to cancer score)");
 			else addButtonDisabled(4, "Cancer", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineGazer)) addButton(5, "Gazer", confirmBloodline3, PerkLib.GazersDescendant).hint("(+2 to gazer score)");
-			else addButtonDisabled(5, "Gazer", "You already have this bloodline!");/*
+			else addButtonDisabled(5, "Gazer", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineDeer)) addButton(6, "Deer", confirmBloodline3, PerkLib.DeersDescendant).hint("(+2 to deer score)");
 			else addButtonDisabled(6, "Deer", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineMouse)) addButton(7, "Mouse", confirmBloodline3, PerkLib.MousesDescendant).hint("(+2 to mouse score)");
 			else addButtonDisabled(7, "Mouse", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineMantis)) addButton(8, "Mantis", confirmBloodline3, PerkLib.MantisesDescendant).hint("(+2 to mantis score)");
-			else addButtonDisabled(8, "Mantis", "You already have this bloodline!");*/
-			//if (!player.hasPerk(PerkLib.BloodlineMouse)) addButton(9, "Cat", confirmBloodline3, PerkLib.MousesDescendant).hint("(+2 to cat score)");
+			else addButtonDisabled(8, "Mantis", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineCentipede)) addButton(9, "Centipede", confirmBloodline3, PerkLib.CentipedesDescendant).hint("(+2 to centipede score)");
+			else addButtonDisabled(9, "Centipede", "You already have this bloodline!");
+			//if (!player.hasPerk(PerkLib.BloodlineCat)) addButton(9, "Cat", confirmBloodline3, PerkLib.CatsDescendant).hint("(+2 to cat score)");
 			//else addButtonDisabled(9, "Cat", "You already have this bloodline!");
 			addButton(10, "-1-", chooseBloodline1);
 			addButton(11, "-2-", chooseBloodline2);
@@ -1640,6 +1642,9 @@ import classes.Scenes.Combat.CombatAbility;
 					break;
 				case PerkLib.MantisesDescendant:
 					outputText("Your ancestor was a mantis?");
+					break;
+				case PerkLib.CentipedesDescendant:
+					outputText("Your ancestor was a centipede?");
 					break;
 				default:
 					outputText("Your ancestor was a spider?");
@@ -3309,6 +3314,11 @@ import classes.Scenes.Combat.CombatAbility;
 				player.createPerk(PerkLib.BloodlineMantis,0,0,0,1);
 				bloodlineACQ2();
 			}
+			else if (player.hasPerk(PerkLib.CentipedesDescendant)) {
+				player.removePerk(PerkLib.CentipedesDescendant);
+				player.createPerk(PerkLib.BloodlineCentipede,0,0,0,1);
+				bloodlineACQ2();
+			}
 			else if (player.hasPerk(PerkLib.DemonsDescendant)) {
 				player.removePerk(PerkLib.DemonsDescendant);
 				player.createPerk(PerkLib.BloodlineDemon,0,0,0,1);
@@ -4089,3 +4099,4 @@ import classes.Scenes.Combat.CombatAbility;
 		}
 	} // what the fuck are those weird comments here? ^
 }
+

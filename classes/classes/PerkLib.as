@@ -333,10 +333,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and a Mantis. (+2 to mantis score)");
 		public static const BloodlineMantis:PerkType = mk("Bloodline: Mantis", "Bloodline: Mantis",
 				"Your Mantis bloodline appears strongly within you. (+2 to mantis score)", null, true);
-	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
-	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
-	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
-	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
+		public static const CentipedesDescendant:PerkType = mk("Centipede's descendant", "Centipede's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Centipede. (+2 to centipede score)");
+		public static const BloodlineCentipede:PerkType = mk("Bloodline: Centipede", "Bloodline: Centipede",
+				"Your Centipede bloodline appears strongly within you. (+2 to centipede score)", null, true);
 	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
 	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
 	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
