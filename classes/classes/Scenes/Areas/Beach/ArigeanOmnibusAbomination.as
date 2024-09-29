@@ -11,11 +11,23 @@ import coc.view.CoCButton;
 
 public class ArigeanOmnibusAbomination extends Monster
 	{
+		override public function combatStatusesUpdateWhenBound():void{
+			tentacleBindUpdateWhenBound();
+		}
+
+		override public function playerBoundStruggle():Boolean{
+			return tentacleBindStruggle();
+		}
+
+		override public function playerBoundWait():Boolean{
+			return tentacleBindWait();
+		}
+
 		private function arigeanOmnibusAbominationFoulMagic():void {
 			outputText("Her body goes limp before her arms lazily start tracing various shapes in the air, quickly gaining a crackling aura as she strikes you with a bolt of pink lightning. \"<i>P-please k- GIVE UP ALREADY!</i>\" ");
 			var lustDmg:Number = 0;
 			lustDmg += Math.round(eBaseIntelligenceDamage() / 3);
-			if (player.hasStatusEffect(StatusEffects.TentacleBind)) lustDmg *= 2;
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) lustDmg *= 2;
 			player.takeLustDamage(lustDmg, true);
 		}
 		private function arigeanOmnibusAbominationSpray():void {
@@ -23,7 +35,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			var lustDmg:Number = this.lust;
 			lustDmg += this.lib;
 			lustDmg *= 3;
-			if (player.hasStatusEffect(StatusEffects.TentacleBind)) lustDmg *= 2;
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) lustDmg *= 2;
 			this.lust = 0;
 			player.takeLustDamage(lustDmg, true);
 		}
@@ -32,7 +44,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			var lustDmg:Number = 0;
 			lustDmg += this.lib;
 			lustDmg *= 3;
-			if (player.hasStatusEffect(StatusEffects.TentacleBind)) lustDmg *= 2;
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) lustDmg *= 2;
 			player.takeLustDamage(lustDmg, true);
 		}
 		private function arigeanOmnibusAbominationMultiBite():void {
@@ -42,7 +54,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			damage += eBaseDamage();
 			damage += eBaseSpeedDamage();
 			damage *= 4;
-			if (player.hasStatusEffect(StatusEffects.TentacleBind)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) damage *= 2;
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
@@ -55,7 +67,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			damage += eBaseDamage();
 			damage += eBaseStrengthDamage();
 			damage *= 3;
-			if (player.hasStatusEffect(StatusEffects.TentacleBind)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) damage *= 2;
 			player.takePhysDamage(damage, true);
 		}
 		private function arigeanOmnibusAbominationViolate():void {
@@ -69,7 +81,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) outputText("Fortunately you're much quicker then they are, and evade their grasps.");
 			else {
 				outputText("They find their target, swiftly grabbing and entangling you within the mass.");
-				player.createStatusEffect(StatusEffects.TentacleBind, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PlayerBoundPhysical, 0, 0, 0, 0);
 			}
 		}
 		public function arigeanOmnibusAbominationEnsnareStruggle():void
@@ -79,7 +91,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			//33% chance to break free + up to 50% chance for strength
             if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) {
                 outputText("You're able to use your strength to slip out of the slippery tentacles.\n\n");
-                player.removeStatusEffect(StatusEffects.TentacleBind);
+                player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
                 createStatusEffect(StatusEffects.TentacleCoolDown, 3, 0, 0, 0);
             }
             //Fail to break free
@@ -98,7 +110,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			SceneLib.combat.enemyAIImpl();
 		}
 		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
-			if (player.hasStatusEffect(StatusEffects.TentacleBind)) {
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) {
 				btnStruggle.call(arigeanOmnibusAbominationEnsnareStruggle);
 				btnBoundWait.call(arigeanOmnibusAbominationEnsnareWait);
 			}
@@ -110,7 +122,7 @@ public class ArigeanOmnibusAbomination extends Monster
 			if (choice == 0 || choice == 1) {
 				if (player.hasStatusEffect(StatusEffects.TentacleCoolDown)) arigeanOmnibusAbominationFoulMagic();
 				else {
-					if (player.hasStatusEffect(StatusEffects.TentacleBind)) arigeanOmnibusAbominationViolate();
+					if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) arigeanOmnibusAbominationViolate();
 					else arigeanOmnibusAbominationEnsnare();
 				}
 			}

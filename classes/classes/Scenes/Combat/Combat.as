@@ -694,8 +694,6 @@ public class Combat extends BaseContent {
     public function isPlayerBound():Boolean {
         var playerStatuses:Array = [
             //combat statuses
-            StatusEffects.TentacleBind,
-            StatusEffects.NagaBind,
             StatusEffects.ScyllaBind,
             StatusEffects.WolfHold,
             StatusEffects.TrollHold,
@@ -2364,10 +2362,7 @@ public class Combat extends BaseContent {
     }
 
     internal function wait():void {
-        var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
-        if(isPlayerBound()){
-            skipMonsterAction = monster.playerBoundWait();
-        }
+        var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()\
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
         if (player.hasStatusEffect(StatusEffects.KitsuneTailTangle)) {
             (monster as Kitsune).kitsuneWait();
@@ -2405,17 +2400,6 @@ public class Combat extends BaseContent {
                 else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
                 return;
             }
-            skipMonsterAction = true;
-        } else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
-            clearOutput();
-            if (monster is Diva) {
-                (monster as Diva).moveBite();
-            }
-            if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
-            else outputText("The [monster name]");
-            outputText("'s grip on you tightens as you relax into the stimulating pressure.");
-            player.takeLustDamage(player.effectiveSensitivity() / 5 + 5, true);
-            player.takePhysDamage(5 + rand(5));
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
             clearOutput();
@@ -2468,15 +2452,6 @@ public class Combat extends BaseContent {
         } else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             (monster as Holli).waitForHolliConstrict(true);
             skipMonsterAction = true;
-        } else if (player.hasStatusEffect(StatusEffects.TentacleBind)) {
-            clearOutput();
-            if (player.cocks.length > 0)
-                outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!");
-            else if (player.hasVagina())
-                outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
-            else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
-            player.takeLustDamage((8 + player.effectiveSensitivity() / 10), true);
-            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             clearOutput();
             if (monster as FrostGiant) (monster as FrostGiant).giantGrabFail(false);
@@ -2503,10 +2478,13 @@ public class Combat extends BaseContent {
             clearOutput();
             outputText("You decide not to take any action this round.\n\n");
             (monster as Doppleganger).handlePlayerWait();
+        } else if(isPlayerBound()){
+            skipMonsterAction = monster.playerBoundWait();
         } else {
             clearOutput();
             outputText("You decide not to take any action this round.\n\n");
         }
+
         if (skipMonsterAction) {
             combatRoundOver();
         } else {
@@ -2592,24 +2570,6 @@ public class Combat extends BaseContent {
             clearOutput();
             outputText("You claw your way out of the webbing while Kiha does her best to handle the spiders single-handedly!\n\n");
             player.removeStatusEffect(StatusEffects.UBERWEB);
-        } else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
-            clearOutput();
-            if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
-                outputText("You wriggle and squirm violently, tearing yourself out from within [themonster]'s coils.");
-                player.removeStatusEffect(StatusEffects.NagaBind);
-            } else {
-                if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
-                else outputText("The [monster name]");
-                outputText("'s grip on you tightens as you struggle to break free from the stimulating pressure.");
-                player.takeLustDamage(player.effectiveSensitivity() / 10 + 2, true);
-                if (monster is Naga) player.takePhysDamage(7 + rand(5));
-                if (monster is Gorgon) player.takePhysDamage(17 + rand(15));
-                if (monster is CaiLin) player.takePhysDamage(10 + rand(8));
-                if (monster is Diva) {
-                    (monster as Diva).moveBite();
-                }
-            }
-            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
             clearOutput();
             outputText("You struggle to get free from the [monster name]'s mighty tentacles. ");
@@ -2684,28 +2644,8 @@ public class Combat extends BaseContent {
             if (monster as FrostGiant) (monster as FrostGiant).giantGrabStruggle();
             if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantGrabStruggle();
             skipMonsterAction = true;
-        } else {
-            clearOutput();
-            outputText("You struggle with all of your might to free yourself from the tentacles before the creature can fulfill whatever unholy desire it has for you.\n");
-            //33% chance to break free + up to 50% chance for strength
-            if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) {
-                outputText("As the creature attempts to adjust your position in its grip, you free one of your [legs] and hit the beast in its beak, causing it to let out an inhuman cry and drop you to the ground smartly.\n\n");
-                player.removeStatusEffect(StatusEffects.TentacleBind);
-                monster.createStatusEffect(StatusEffects.TentacleCoolDown, 3, 0, 0, 0);
-            }
-            //Fail to break free
-            else {
-                outputText("Despite trying to escape, the creature only tightens its grip, making it difficult to breathe.\n\n");
-                player.takePhysDamage(5);
-                if (player.cocks.length > 0)
-                    outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!");
-                else if (player.hasVagina())
-                    outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
-                else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
-                player.takeLustDamage((3 + player.effectiveSensitivity() / 10 + player.lib / 20), true);
-                skipMonsterAction = true;
-            }
         }
+
         if (skipMonsterAction) {
             combatRoundOver();
         } else {
@@ -11951,9 +11891,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			repeatArcaneVenom(damageDBL, 0, damageDBH);
 			outputText("\n\n");
 		}
-        if(isPlayerBound())
-        monster.combatStatusesUpdateWhenBound();
-
+        if(isPlayerBound()){
+            monster.combatStatusesUpdateWhenBound();
+        }
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
             player.takeLustDamage(3, true);
@@ -11964,16 +11904,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 player.takeLustDamage(3, true);
             } else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
         }
-        if ((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) && flags[kFLAGS.PC_FETISH] >= 2) {
+        if (player.hasStatusEffect(StatusEffects.ScyllaBind) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("Coiled tightly by [themonster] and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
             player.takeLustDamage(5, true);
-        }
-        if (player.hasStatusEffect(StatusEffects.TentacleBind)) {
-            outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n");
-            if (flags[kFLAGS.PC_FETISH] >= 2) {
-                outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n");
-                player.takeLustDamage(3, true);
-            }
         }
         if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
             outputText("You are firmly held in Magnar's grip.  <b>The only thing you can try to do is struggle free!</b>\n\n");

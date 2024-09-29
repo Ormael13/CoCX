@@ -22,6 +22,26 @@ use namespace CoC;
 		private var _biteCounter:int = 0;
 		private var _sonicScreamCooldown:int = 0;
 
+		override public function combatStatusesUpdateWhenBound():void{
+			nagaBindUpdateWhenBound();
+		}
+
+		override public function playerBoundStruggle():Boolean{clearOutput();
+			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
+				outputText("You wriggle and squirm violently, tearing yourself out from within [themonster]'s coils.");
+				player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
+			} else {
+				outputText("The [monster name]'s grip on you tightens as you struggle to break free from the stimulating pressure.");
+				player.takeLustDamage(player.effectiveSensitivity() / 10 + 2, true);
+				player.takePhysDamage(20 + rand(18));
+			}
+			return true;
+		}
+
+		override public function playerBoundWait():Boolean{
+			return nagaBindWait();
+		}
+
 		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
 			if (player.hasStatusEffect(StatusEffects.MonsterInvisible)) {
 				if (player.hasStatusEffect(StatusEffects.KnowsBlind) && ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
@@ -85,7 +105,7 @@ use namespace CoC;
 		
 		private function draculinaEmbrace():void {
 			if (!player.getEvasionRoll()) {
-				player.createStatusEffect(StatusEffects.NagaBind, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PlayerBoundPhysical, 0, 0, 0, 0);
 				outputText("The arch vampire closes her wings, blurring with speed as she arrows towards you. Her body collides with you, the impact sending you reeling, and she wraps her limbs around you, locking you in a cold embrace!");
 				if (EngineCore.silly()) outputText("  Bad touch, bad touch!");
 			} else {
@@ -178,7 +198,7 @@ use namespace CoC;
 			if (player.statStore.hasBuff("FoxflamePelt")) {
 				player.removeStatusEffect(StatusEffects.MonsterInvisible);
 			}
-			if (player.hasStatusEffect(StatusEffects.NagaBind)) {
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) {
 				draculinaBite();
 			} else {
 				var choice:Number = rand(3);

@@ -10,6 +10,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Desert.NagaScene;
 import classes.Stats.Buff;
 import classes.internals.*;
@@ -17,7 +18,27 @@ import classes.internals.*;
 public class Gorgon extends Monster
 	{
 		public var nagaScene:NagaScene = new NagaScene(true);
-		
+
+		override public function combatStatusesUpdateWhenBound():void{
+			nagaBindUpdateWhenBound();
+		}
+
+		override public function playerBoundStruggle():Boolean{clearOutput();
+			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
+				outputText("You wriggle and squirm violently, tearing yourself out from within [themonster]'s coils.");
+				player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
+			} else {
+				outputText("The [monster name]'s grip on you tightens as you struggle to break free from the stimulating pressure.");
+				player.takeLustDamage(player.effectiveSensitivity() / 10 + 2, true);
+				player.takePhysDamage(17 + rand(15));
+			}
+			return true;
+		}
+
+		override public function playerBoundWait():Boolean{
+			return nagaBindWait();
+		}
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			nagaScene.nagaRapeChoice();
@@ -36,7 +57,7 @@ public class Gorgon extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			if (player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.Stunned)) {
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical) || player.hasStatusEffect(StatusEffects.Stunned)) {
 				if (player.hasStatusEffect(StatusEffects.Stunned)) {
 					if (rand(2) == 0) eAttack();
 					else TailWhip();
@@ -99,7 +120,7 @@ public class Gorgon extends Monster
 		
 		public function gorgonConstrict():void {
 			outputText("The " + this.short + " draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
-			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
+			player.createStatusEffect(StatusEffects.PlayerBoundPhysical,0,0,0,0); 
 			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(4+rand(8));
 			}
@@ -125,7 +146,7 @@ public class Gorgon extends Monster
 			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ");
 			player.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
-			if (player.hasStatusEffect(StatusEffects.NagaBind)) player.removeStatusEffect(StatusEffects.NagaBind);
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
 		}
 		
 		public function Gorgon() 
