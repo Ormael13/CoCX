@@ -260,7 +260,7 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Ormael): Nail Gun - buyable at Minx shop. Cost 150 spirit stones. Base atk is 15 and ammo clip size 10. It use Nails so without any of them can't be used. It have 25% chance to cause bleeding. Attacking flying enemies have 33% chance to force them to land for 3-4 turns, following up attacks have 33% chance to extend this duration by 2-3 turns.\n");
 			outputText("-New range weapon (by Ormael): Twin Nail Gun - can be gained by combining 2x Nail Gun weapon. Cost 300 spirit stones. Base atk is 15 and ammo clip size 20. It's Dual Firearm type range weapon that have all other properties of Nail Gun.\n");
 			outputText("-Added a toggle in Interface Game settings to alternate between current charviewer model and the one that's being developed (Only human body added for now, the other finished sprites will be added gradually) (Cangsz)\n");
-			outputText("-Bite-sized Bind Rework (.HarpyBind,.Goobind) (NUZ/Shirane)\n");//Rework Bind Related Checks and Function, Lettuce Cleanup and Tentacle Attack Fix
+			outputText("-Bind Rework (HarpyBind, Goobind, TentacleBind, NagaBind) (NUZ/Shirane)\n");//Rework Bind Related Checks and Function, Lettuce Cleanup and Tentacle Attack Fix
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
