@@ -1520,11 +1520,13 @@
 		<cell rect="61,440,49,29" name="bra_fg/qipaoRedBraD" dx="79" dy="68"/>
 		<cell rect="61,470,49,29" name="bra_fg/qipaoRedBraF" dx="79" dy="68"/>
 		<cell rect="61,470,49,29" name="bra_fg/qipaoRedBraG" dx="79" dy="68"/>
+		<cell rect="61,470,49,29" name="bra_fg/qipaoRedBraH" dx="79" dy="68"/>
 		<cell rect="111,410,49,29" name="bra_fg/qipaoPurpleBra0" dx="79" dy="68"/>
 		<cell rect="111,410,49,29" name="bra_fg/qipaoPurpleBraB" dx="79" dy="68"/>
 		<cell rect="111,440,49,29" name="bra_fg/qipaoPurpleBraD" dx="79" dy="68"/>
 		<cell rect="111,470,49,29" name="bra_fg/qipaoPurpleBraF" dx="79" dy="68"/>
 		<cell rect="111,470,49,29" name="bra_fg/qipaoPurpleBraG" dx="79" dy="68"/>
+		<cell rect="111,470,49,29" name="bra_fg/qipaoPurpleBraH" dx="79" dy="68"/>
 		<cell rect="161,410,49,29" name="bra_fg/qipaoGreenBra0" dx="79" dy="68"/>
 		<cell rect="161,410,49,29" name="bra_fg/qipaoGreenBraB" dx="79" dy="68"/>
 		<cell rect="161,440,49,29" name="bra_fg/qipaoGreenBraD" dx="79" dy="68"/>
@@ -1535,14 +1537,17 @@
 		<cell rect="211,440,49,29" name="bra_fg/qipaoBlueBraD" dx="79" dy="68"/>
 		<cell rect="211,470,49,29" name="bra_fg/qipaoBlueBraF" dx="79" dy="68"/>
 		<cell rect="211,470,49,29" name="bra_fg/qipaoBlueBraG" dx="79" dy="68"/>
+		<cell rect="211,470,49,29" name="bra_fg/qipaoBlueBraH" dx="79" dy="68"/>
 		<cell rect="711,410,49,29" name="bra_fg/comfortableClotheBraB" dx="79" dy="68"/>
 		<cell rect="711,440,49,29" name="bra_fg/comfortableClotheBraD" dx="79" dy="68"/>
 		<cell rect="711,470,49,29" name="bra_fg/comfortableClotheBraF" dx="79" dy="68"/>
 		<cell rect="711,470,49,29" name="bra_fg/comfortableClotheBraG" dx="79" dy="68"/>
+		<cell rect="711,470,49,29" name="bra_fg/comfortableClotheBraH" dx="79" dy="68"/>
 		<cell rect="861,410,49,29" name="bra_fg/berserkerBraB" dx="79" dy="68"/>
 		<cell rect="861,440,49,29" name="bra_fg/berserkerBraD" dx="79" dy="68"/>
 		<cell rect="861,470,49,29" name="bra_fg/berserkerBraF" dx="79" dy="68"/>
 		<cell rect="bra_fg/berserkerBraF" name="bra_fg/berserkerBraG"/>
+		<cell rect="bra_fg/berserkerBraF" name="bra_fg/berserkerBraH"/>
 		<cell rect="911,410,49,29" name="bra_fg/vampireBra0" dx="79" dy="68"/>
 		<cell rect="911,440,49,29" name="bra_fg/vampireBraB" dx="79" dy="68"/>
 		<cell rect="911,440,49,29" name="bra_fg/vampireBraB" dx="79" dy="68"/>
@@ -1552,15 +1557,18 @@
 		<cell rect="961,440,49,29" name="bra_fg/merchantClotheBraD" dx="79" dy="68"/>
 		<cell rect="961,470,49,29" name="bra_fg/merchantClotheBraF" dx="79" dy="68"/>
 		<cell rect="961,470,49,29" name="bra_fg/merchantClotheBraG" dx="79" dy="68"/>
+		<cell rect="961,470,49,29" name="bra_fg/merchantClotheBraH" dx="79" dy="68"/>
 		<cell rect="1061,410,49,29" name="bra_fg/mageRobeBra0" dx="79" dy="68"/>
 		<cell rect="1061,410,49,29" name="bra_fg/mageRobeBraB" dx="79" dy="68"/>
 		<cell rect="1061,440,49,29" name="bra_fg/mageRobeBraD" dx="79" dy="68"/>
 		<cell rect="1061,470,49,29" name="bra_fg/mageRobeBraF" dx="79" dy="68"/>
 		<cell rect="1061,470,49,29" name="bra_fg/mageRobeBraG" dx="79" dy="68"/>
+		<cell rect="1061,470,49,29" name="bra_fg/mageRobeBraH" dx="79" dy="68"/>
 		<cell rect="1111,410,49,29" name="bra_fg/elfClothingBraB" dx="79" dy="68"/>
 		<cell rect="1111,440,49,29" name="bra_fg/elfClothingBraD" dx="79" dy="68"/>
 		<cell rect="1111,470,49,29" name="bra_fg/elfClothingBraF" dx="79" dy="68"/>
 		<cell rect="1111,470,49,29" name="bra_fg/elfClothingBraG" dx="79" dy="68"/>
+		<cell rect="1111,470,49,29" name="bra_fg/elfClothingBraH" dx="79" dy="68"/>
 		<cell rect="1211,410,49,29" name="bra_fg/darkPriestBraB" dx="79" dy="68"/>
 		<cell rect="1211,440,49,29" name="bra_fg/darkPriestBraD" dx="79" dy="68"/>
 		<cell rect="1211,470,49,29" name="bra_fg/darkPriestBraF" dx="79" dy="68"/>
@@ -1572,10 +1580,12 @@
 		<cell rect="1311,440,49,29" name="bra_fg/elfDressBraD" dx="79" dy="68"/>
 		<cell rect="1311,470,49,29" name="bra_fg/elfDressBraF" dx="79" dy="68"/>
 		<cell rect="1311,470,49,29" name="bra_fg/elfDressBraG" dx="79" dy="68"/>
+		<cell rect="1311,470,49,29" name="bra_fg/elfDressBraH" dx="79" dy="68"/>
 		<cell rect="1411,410,49,29" name="bra_fg/nurseClothingBraB" dx="80" dy="66"/>
 		<cell rect="1411,440,49,29" name="bra_fg/nurseClothingBraD" dx="80" dy="66"/>
 		<cell rect="1411,470,49,29" name="bra_fg/nurseClothingBraF" dx="80" dy="66"/>
 		<cell rect="1411,470,49,29" name="bra_fg/nurseClothingBraG" dx="80" dy="66"/>
+		<cell rect="1411,470,49,29" name="bra_fg/nurseClothingBraH" dx="80" dy="66"/>
 		<cell rect="1411,500,49,29" name="bra_fg/samuraiShirtB" dx="80" dy="65"/>
 		<cell rect="1411,530,49,29" name="bra_fg/samuraiShirtD" dx="79" dy="66"/>
 		<cell rect="1411,560,49,29" name="bra_fg/samuraiShirtF" dx="79" dy="66"/>
@@ -1585,75 +1595,90 @@
 		<cell rect="11,440,49,29" name="bra/goblinTechnomancerBraD" dx="79" dy="68"/>
 		<cell rect="11,470,49,29" name="bra/goblinTechnomancerBraF" dx="79" dy="68"/>
 		<cell rect="11,470,49,29" name="bra/goblinTechnomancerBraG" dx="79" dy="68"/>
+		<cell rect="11,470,49,29" name="bra/goblinTechnomancerBraH" dx="79" dy="68"/>
 		<cell rect="261,410,49,29" name="bra/sexyBlackBikiniBra0" dx="79" dy="68"/>
 		<cell rect="261,410,49,29" name="bra/sexyBlackBikiniBraB" dx="79" dy="68"/>
 		<cell rect="261,440,49,29" name="bra/sexyBlackBikiniBraD" dx="79" dy="68"/>
 		<cell rect="261,470,49,29" name="bra/sexyBlackBikiniBraF" dx="79" dy="68"/>
 		<cell rect="261,470,49,29" name="bra/sexyBlackBikiniBraG" dx="79" dy="68"/>
+		<cell rect="261,470,49,29" name="bra/sexyBlackBikiniBraH" dx="79" dy="68"/>
 		<cell rect="311,410,49,29" name="bra/sexyAquamarineBikiniBra0" dx="79" dy="68"/>
 		<cell rect="311,410,49,29" name="bra/sexyAquamarineBikiniBraB" dx="79" dy="68"/>
 		<cell rect="311,440,49,29" name="bra/sexyAquamarineBikiniBraD" dx="79" dy="68"/>
 		<cell rect="311,470,49,29" name="bra/sexyAquamarineBikiniBraF" dx="79" dy="68"/>
 		<cell rect="311,470,49,29" name="bra/sexyAquamarineBikiniBraG" dx="79" dy="68"/>
+		<cell rect="311,470,49,29" name="bra/sexyAquamarineBikiniBraH" dx="79" dy="68"/>
 		<cell rect="361,410,49,29" name="bra/sexyBlueBikiniBra0" dx="79" dy="68"/>
 		<cell rect="361,410,49,29" name="bra/sexyBlueBikiniBraB" dx="79" dy="68"/>
 		<cell rect="361,440,49,29" name="bra/sexyBlueBikiniBraD" dx="79" dy="68"/>
 		<cell rect="361,470,49,29" name="bra/sexyBlueBikiniBraF" dx="79" dy="68"/>
 		<cell rect="361,470,49,29" name="bra/sexyBlueBikiniBraG" dx="79" dy="68"/>
+		<cell rect="361,470,49,29" name="bra/sexyBlueBikiniBraH" dx="79" dy="68"/>
 		<cell rect="411,410,49,29" name="bra/sexyGreenBikiniBra0" dx="79" dy="68"/>
 		<cell rect="411,410,49,29" name="bra/sexyGreenBikiniBraB" dx="79" dy="68"/>
 		<cell rect="411,440,49,29" name="bra/sexyGreenBikiniBraD" dx="79" dy="68"/>
 		<cell rect="411,470,49,29" name="bra/sexyGreenBikiniBraF" dx="79" dy="68"/>
 		<cell rect="411,470,49,29" name="bra/sexyGreenBikiniBraG" dx="79" dy="68"/>
+		<cell rect="411,470,49,29" name="bra/sexyGreenBikiniBraH" dx="79" dy="68"/>
 		<cell rect="461,410,49,29" name="bra/sexyPinkBikiniBra0" dx="79" dy="68"/>
 		<cell rect="461,410,49,29" name="bra/sexyPinkBikiniBraB" dx="79" dy="68"/>
 		<cell rect="461,440,49,29" name="bra/sexyPinkBikiniBraD" dx="79" dy="68"/>
 		<cell rect="461,470,49,29" name="bra/sexyPinkBikiniBraF" dx="79" dy="68"/>
 		<cell rect="461,470,49,29" name="bra/sexyPinkBikiniBraG" dx="79" dy="68"/>
+		<cell rect="461,470,49,29" name="bra/sexyPinkBikiniBraH" dx="79" dy="68"/>
 		<cell rect="511,410,49,29" name="bra/sexyRedBikiniBra0" dx="79" dy="68"/>
 		<cell rect="511,410,49,29" name="bra/sexyRedBikiniBraB" dx="79" dy="68"/>
 		<cell rect="511,440,49,29" name="bra/sexyRedBikiniBraD" dx="79" dy="68"/>
 		<cell rect="511,470,49,29" name="bra/sexyRedBikiniBraF" dx="79" dy="68"/>
 		<cell rect="511,470,49,29" name="bra/sexyRedBikiniBraG" dx="79" dy="68"/>
+		<cell rect="511,470,49,29" name="bra/sexyRedBikiniBraH" dx="79" dy="68"/>
 		<cell rect="561,410,49,29" name="bra/sexyWhiteBikiniBra0" dx="79" dy="68"/>
 		<cell rect="561,410,49,29" name="bra/sexyWhiteBikiniBraB" dx="79" dy="68"/>
 		<cell rect="561,440,49,29" name="bra/sexyWhiteBikiniBraD" dx="79" dy="68"/>
 		<cell rect="561,470,49,29" name="bra/sexyWhiteBikiniBraF" dx="79" dy="68"/>
 		<cell rect="561,470,49,29" name="bra/sexyWhiteBikiniBraG" dx="79" dy="68"/>
+		<cell rect="561,470,49,29" name="bra/sexyWhiteBikiniBraH" dx="79" dy="68"/>
 		<cell rect="611,410,49,29" name="bra/sexyYellowBikiniBra0" dx="79" dy="68"/>
 		<cell rect="611,410,49,29" name="bra/sexyYellowBikiniBraB" dx="79" dy="68"/>
 		<cell rect="611,440,49,29" name="bra/sexyYellowBikiniBraD" dx="79" dy="68"/>
 		<cell rect="611,470,49,29" name="bra/sexyYellowBikiniBraF" dx="79" dy="68"/>
 		<cell rect="611,470,49,29" name="bra/sexyYellowBikiniBraG" dx="79" dy="68"/>
+		<cell rect="611,470,49,29" name="bra/sexyYellowBikiniBraH" dx="79" dy="68"/>
 		<cell rect="661,410,49,29" name="bra/scandalousSuccubusClothingBra0" dx="79" dy="67"/>
 		<cell rect="661,440,49,29" name="bra/scandalousSuccubusClothingBraB" dx="79" dy="67"/>
 		<cell rect="661,440,49,29" name="bra/scandalousSuccubusClothingBraD" dx="79" dy="67"/>
 		<cell rect="661,470,49,29" name="bra/scandalousSuccubusClothingBraF" dx="80" dy="67"/>
 		<cell rect="661,470,49,29" name="bra/scandalousSuccubusClothingBraG" dx="80" dy="67"/>
+		<cell rect="661,470,49,29" name="bra/scandalousSuccubusClothingBraH" dx="80" dy="67"/>
 		<cell rect="761,410,49,29" name="bra/chainMailBra0" dx="79" dy="68"/>
 		<cell rect="761,440,49,29" name="bra/chainMailBraB" dx="79" dy="68"/>
 		<cell rect="761,470,49,29" name="bra/chainMailBraD" dx="79" dy="68"/>
 		<cell rect="bra/chainMailBraD" name="bra/chainMailBraF"/>
 		<cell rect="bra/chainMailBraD" name="bra/chainMailBraG"/>
+		<cell rect="bra/chainMailBraD" name="bra/chainMailBraH"/>
 		<cell rect="811,410,49,29" name="bra/dragonScaleBra0" dx="79" dy="68"/>
 		<cell rect="811,410,49,29" name="bra/dragonScaleBraB" dx="79" dy="68"/>
 		<cell rect="811,440,49,29" name="bra/dragonScaleBraD" dx="79" dy="68"/>
 		<cell rect="811,470,49,29" name="bra/dragonScaleBraF" dx="79" dy="68"/>
 		<cell rect="811,470,49,29" name="bra/dragonScaleBraG" dx="79" dy="68"/>
+		<cell rect="811,470,49,29" name="bra/dragonScaleBraH" dx="79" dy="68"/>
 		<cell rect="1011,410,49,29" name="bra/comfortableBra0" dx="79" dy="68"/>
 		<cell rect="1011,410,49,29" name="bra/comfortableBraB" dx="79" dy="68"/>
 		<cell rect="1011,440,49,29" name="bra/comfortableBraD" dx="79" dy="68"/>
 		<cell rect="1011,470,49,29" name="bra/comfortableBraF" dx="79" dy="68"/>
 		<cell rect="bra/comfortableBraF" name="bra/comfortableBraG"/>
+		<cell rect="bra/comfortableBraF" name="bra/comfortableBraH"/>
 		<cell rect="1161,410,49,29" name="bra/cowBra0" dx="79" dy="68"/>
 		<cell rect="bra/cowBra0" name="bra/cowBraB"/>
 		<cell rect="1161,440,49,29" name="bra/cowBraD" dx="79" dy="68"/>
 		<cell rect="1161,470,49,29" name="bra/cowBraF" dx="79" dy="68"/>
 		<cell rect="1161,530,49,29" name="bra/cowBraG" dx="80" dy="68"/>
+		<cell rect="1161,530,49,29" name="bra/cowBraH" dx="80" dy="68"/>
 		<cell rect="1361,410,49,29" name="bra/anubisRoyalDressBraB" dx="79" dy="68"/>
 		<cell rect="1361,440,49,29" name="bra/anubisRoyalDressBraD" dx="79" dy="68"/>
 		<cell rect="1361,470,49,29" name="bra/anubisRoyalDressBraF" dx="79" dy="68"/>
 		<cell rect="1361,470,49,29" name="bra/anubisRoyalDressBraG" dx="79" dy="68"/>
+		<cell rect="1361,470,49,29" name="bra/anubisRoyalDressBraH" dx="79" dy="68"/>
 		<cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="79" dy="99"/>
 		<cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="79" dy="99"/>
 		<cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="79" dy="99"/>
@@ -2189,6 +2214,13 @@
 		<set var="showPanty" value="true"/>
 		<set var="playerHasLargeLowerBody" value="false"/>
 		<set var="playerHasWeirdLowerBody" value="false"/>
+		<set var="succuPose" value="femininity gte 40 and cor gte 50 and skin.coverage == Skin.COVERAGE_NONE"/>
+		<!-- true if actually showing succu left arm - set in arm code -->
+		<set var="succuLeftArm" value="false"/>
+		<!-- true if actually showing succu right arm - set in arm code -->
+		<set var="succuRightArm" value="false"/>
+		<!-- true if actually showing succu legs - set in leg code -->
+		<set var="succuLegs" value="false"/>
 		<if test="not PlayerIsInHumanForm">
 			<if test="isTaur()">
 				<set var="showLegClothing" value="false"/>
@@ -2248,12 +2280,13 @@
 		<if test="not showShield">
 			<set var="ShieldSprite" value="''"/>
 		</if>
+
 		<!-- CLOTHING VARS SHOULDN'T CHANGE BELOW.
 		     SETUP VARIABLES THAT DEPEND ON CLOTHING -->
 		<if test="showPanty and PantySprite or showLegClothing and ArmorSprite">
 			<set var="showDickDrippies" value="false"/>
 		</if>
-		<set var="armStanceNonBannedList" value="ArmorSprite isin ['scandalousSuccubusClothing','elfClothing','elfWizardDress','blueQipao','greenQipao','purpleQipao','redQipao','berserkerArmor']"/>
+		<set var="armStanceNonBannedList" value="ArmorSprite isin ['scandalousSuccubusClothing','elfClothing','elfWizardDress','blueQipao','greenQipao','purpleQipao','redQipao','vladimirRegalia']"/>
 		<set var="sleevelessList" value="ArmorSprite isin ['blueQipao','greenQipao','purpleQipao','redQipao','berserkerArmor']"/>
 		<set var="playerWearsAStanceBannedDress" value="ArmorSprite isin ['yukiDress','sakuraPetalKimono','whiteKimono','blueKimono','redKimono','purpleKimono','blackKimono','legendKimono','OniLegendaryKimono','goblinTechnomancerClothe','krakenBlackDress']"/>
 		<set var="playerWearsAStanceBannedArmor" value="ArmorSprite isin ['platemail','centaurPaladinArmor']"/>
@@ -3757,56 +3790,26 @@
 					<show part="arms_bg/human"/>
 					<show part="arms/human"/>
 				<else/>
-					<if test="ArmorSprite">
-						<if test="armStanceNonBannedList">
-							<if test="femininity &gt;=40">
-								<if test="cor &gt;=50">
-									<if test="skin.coverage==Skin.COVERAGE_NONE">
-										<hide part="hands/*"/>
-										<hide part="arms/*"/>
-										<if test="MeleeWeaponSprite">
-											<show part="arms_bg/human"/>
-										<else/>
-											<hide part="arms_bg/*"/>
-											<hide part="hands_bg/*"/>
-											<show part="arms_bg/demonlewd"/>
-										</if>
-										<if test="ShieldSprite or PlayerHasADualWeapon">
-											<show part="arms/human"/>
-										<else/>
-											<hide part="arms/*"/>
-											<hide part="hands/*"/>
-											<show part="arms/demonlewd"/>
-											<show part="arms_fg/demonlewd"/>
-										</if>
-									</if>
-								</if>
+					<if test="succuPose">
+						<if test="not (ArmorSprite and not armStanceNonBannedList)">
+							<hide part="hands/*"/>
+							<hide part="arms/*"/>
+							<if test="MeleeWeaponSprite">
+								<show part="arms_bg/human"/>
+							<else/>
+								<hide part="arms_bg/*"/>
+								<hide part="hands_bg/*"/>
+								<show part="arms_bg/demonlewd"/>
+								<set var="succuLeftArm" value="true"/>
 							</if>
-						</if>
-					<else/>
-						<if test="femininity &gt;=40">
-							<if test="cor &gt;=50">
-								<if test="skin.coverage==Skin.COVERAGE_NONE">
-									<if test="showClothing">
-										<hide part="hands/*"/>
-										<hide part="arms/*"/>
-										<if test="MeleeWeaponSprite">
-											<show part="arms_bg/human"/>
-										<else/>
-											<hide part="arms_bg/*"/>
-											<hide part="hands_bg/*"/>
-											<show part="arms_bg/demonlewd"/>
-										</if>
-										<if test="ShieldSprite or PlayerHasADualWeapon">
-											<show part="arms/human"/>
-										<else/>
-											<hide part="arms/*"/>
-											<hide part="hands/*"/>
-											<show part="arms/demonlewd"/>
-											<show part="arms_fg/demonlewd"/>
-										</if>
-									</if>
-								</if>
+							<if test="ShieldSprite or PlayerHasADualWeapon">
+								<show part="arms/human"/>
+							<else/>
+								<hide part="arms/*"/>
+								<hide part="hands/*"/>
+								<show part="arms/demonlewd"/>
+								<show part="arms_fg/demonlewd"/>
+								<set var="succuRightArm" value="true"/>
 							</if>
 						</if>
 					</if>
@@ -4220,12 +4223,13 @@
 				<!--see switch[value=skin.coverage]-->
 				<if test="ArmorSprite">
 					<if test ="armStanceNonBannedList">
-						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage == Skin.COVERAGE_NONE)">
+						<if test="succuPose">
 							<switch value="arms.type">
 								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
 									<hide part="feet/*"/>
 									<hide part="legs/*"/>
 									<show part="legs/demonlewd"/>
+									<set var="succuLegs" value="true"/>
 								</case>
 								<default>
 								</default>
@@ -4233,12 +4237,13 @@
 						</if>
 					</if>
 				<else/>
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+					<if test="succuPose">
 						<switch value="arms.type">
 							<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
 								<hide part="feet/*"/>
 								<hide part="legs/*"/>
 								<show part="legs/demonlewd"/>
+								<set var="succuLegs" value="true"/>
 							</case>
 							<default>
 							</default>
@@ -5416,50 +5421,44 @@
 		</if>
 
 		<!-- Succu arm stuff -->
-		<if test="femininity &gt;=40">
-			<if test="cor &gt;=50">
-				<if test="not (playerWearsAStanceBannedDress or playerWearsAStanceBannedArmor)">
-					<if test="skin.coverage==Skin.COVERAGE_NONE">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE">
-								<switch value="lowerBody">
-									<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-										<hide part="arms_pattern/*"/>
-										<hide part="arms_bg_pattern/*"/>
-										<hide part="legs_pattern/*"/>
-									</case>
-									<default>
-									</default>
-								</switch>
-							</case>
-							<case values="Arms.LION, Arms.DISPLACER">
-								<switch value="lowerBody">
-									<case values="LowerBody.LION">
-										<hide part="arms_pattern/*"/>
-										<hide part="arms_bg_pattern/*"/>
-										<hide part="legs_pattern/*"/>
-									</case>
-									<default>
-									</default>
-								</switch>
-							</case>
-							<case values="Arms.WOLF">
-								<switch value="lowerBody">
-									<case values="LowerBody.WOLF">
-										<hide part="arms_pattern/*"/>
-										<hide part="arms_bg_pattern/*"/>
-										<hide part="legs_pattern/*"/>
-									</case>
-									<default>
-									</default>
-								</switch>
-							</case>
-							<default>
-							</default>
-						</switch>
-					</if>
-				</if>
-			</if>
+		<if test="(succuLeftArm or succuRightArm or succuLegs)">
+			<switch value="arms.type">
+				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE">
+					<switch value="lowerBody">
+						<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+							<hide part="arms_pattern/*"/>
+							<hide part="arms_bg_pattern/*"/>
+							<hide part="legs_pattern/*"/>
+						</case>
+						<default>
+						</default>
+					</switch>
+				</case>
+				<case values="Arms.LION, Arms.DISPLACER">
+					<switch value="lowerBody">
+						<case values="LowerBody.LION">
+							<hide part="arms_pattern/*"/>
+							<hide part="arms_bg_pattern/*"/>
+							<hide part="legs_pattern/*"/>
+						</case>
+						<default>
+						</default>
+					</switch>
+				</case>
+				<case values="Arms.WOLF">
+					<switch value="lowerBody">
+						<case values="LowerBody.WOLF">
+							<hide part="arms_pattern/*"/>
+							<hide part="arms_bg_pattern/*"/>
+							<hide part="legs_pattern/*"/>
+						</case>
+						<default>
+						</default>
+					</switch>
+				</case>
+				<default>
+				</default>
+			</switch>
 		</if>
 
 		<!-- HIDING INVALID LEG PATTERN AREA -->
@@ -6440,41 +6439,21 @@
 			<show part="bra/scandalousSuccubusClothingBra${cup}"/>
 			<if test="showClothing">
 				<if test="showArmClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-								<show part="clothRightArm/scandalousSuccubusClothingRightArmLewd"/>
-								<if test="MeleeWeaponSprite">
-									<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
-								<else/>
-									<show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
-								</if>
-								<show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
-							</case>
-							<default>
-								<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
-								<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
-							</default>
-						</switch>
+					<if test="succuLeftArm">
+						<show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
 					<else/>
 						<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+					</if>
+					<if test="succuRightArm">
+						<show part="clothRightArm/scandalousSuccubusClothingRightArmLewd"/>
+						<show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
+					<else/>
 						<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
 					</if>
 				</if>
 				<if test="showLegClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="lowerBody">
-							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-								<switch value="arms.type">
-									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
-									</case>
-									<default>
-										<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
-									</default>
-								</switch>
-							</case>
-						</switch>
+					<if test="succuLegs">
+						<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
 					<else/>
 						<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
 					</if>
@@ -6501,41 +6480,21 @@
 				<show part="clothe/elfClothingSkirt"/>
 				<show part="armorNeck/elfClotheCape_fg"/>
 				<if test="showArmClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-								<show part="clothRightArm/elfClothingRightArmLewd"/>
-								<if test="MeleeWeaponSprite">
-									<show part="clothLeftArm/elfClothingleftArm"/>
-								<else/>
-									<show part="clothLeftArm/elfClothingleftArmLewd"/>
-								</if>
-								<show part="glove_fg/elfClothingRightArmFront"/>
-							</case>
-							<default>
-								<show part="clothLeftArm/elfClothingleftArm"/>
-								<show part="clothRightArm/elfClothingRightArm"/>
-							</default>
-						</switch>
+					<if test="succuLeftArm">
+						<show part="clothLeftArm/elfClothingleftArmLewd"/>
 					<else/>
 						<show part="clothLeftArm/elfClothingleftArm"/>
+					</if>
+					<if test="succuRightArm">
+						<show part="clothRightArm/elfClothingRightArmLewd"/>
+						<show part="glove_fg/elfClothingRightArmFront"/>
+					<else/>
 						<show part="clothRightArm/elfClothingRightArm"/>
 					</if>
 				</if>
 				<if test="showLegClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="lowerBody">
-							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-								<switch value="arms.type">
-									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/elfClothinglegsLewd"/>
-									</case>
-									<default>
-										<show part="clotheLegs/elfClothinglegs"/>
-									</default>
-								</switch>
-							</case>
-						</switch>
+					<if test="succuLegs">
+						<show part="clotheLegs/elfClothinglegsLewd"/>
 					<else/>
 						<show part="clotheLegs/elfClothinglegs"/>
 					</if>
@@ -6559,41 +6518,21 @@
 				<show part="clothCape_bg/elfClotheCape_bg"/>
 				<show part="armorNeck/elfClotheCape_fg"/>
 				<if test="showArmClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-								<show part="clothRightArm/elfClothingRightArmLewd"/>
-								<if test="MeleeWeaponSprite">
-									<show part="clothLeftArm/elfClothingleftArm"/>
-								<else/>
-									<show part="clothLeftArm/elfClothingleftArmLewd"/>
-								</if>
-								<show part="glove_fg/elfClothingRightArmFront"/>
-							</case>
-							<default>
-								<show part="clothLeftArm/elfClothingleftArm"/>
-								<show part="clothRightArm/elfClothingRightArm"/>
-							</default>
-						</switch>
+					<if test="succuLeftArm">
+						<show part="clothLeftArm/elfClothingleftArmLewd"/>
 					<else/>
 						<show part="clothLeftArm/elfClothingleftArm"/>
+					</if>
+					<if test="succuRightArm">
+						<show part="clothRightArm/elfClothingRightArmLewd"/>
+						<show part="glove_fg/elfClothingRightArmFront"/>
+					<else/>
 						<show part="clothRightArm/elfClothingRightArm"/>
 					</if>
 				</if>
 				<if test="showLegClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="lowerBody">
-							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-								<switch value="arms.type">
-									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/elfClothinglegsLewd"/>
-									</case>
-									<default>
-										<show part="clotheLegs/elfClothinglegs"/>
-									</default>
-								</switch>
-							</case>
-						</switch>
+					<if test="succuLegs">
+						<show part="clotheLegs/elfClothinglegsLewd"/>
 					<else/>
 						<show part="clotheLegs/elfClothinglegs"/>
 					</if>
@@ -6607,43 +6546,23 @@
 			<if test="showClothing">
 				<show part="clothe/vampireTop"/>
 				<if test="showArmClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-								<show part="clothRightArm/vampireClothingRightArmLewd"/>
-								<if test="MeleeWeaponSprite">
-									<show part="clothLeftArm/vampireClothingleftArm"/>
-								<else/>
-									<show part="clothLeftArm/vampireClothingleftArmLewd"/>
-								</if>
-								<show part="glove_fg/vampireClothingRightArmFront"/>
-							</case>
-							<default>
-								<show part="clothLeftArm/vampireClothingleftArm"/>
-								<show part="clothRightArm/vampireClothingRightArm"/>
-							</default>
-						</switch>
+					<if test="succuLeftArm">
+						<show part="clothLeftArm/vampireClothingleftArmLewd"/>
 					<else/>
 						<show part="clothLeftArm/vampireClothingleftArm"/>
+					</if>
+					<if test="succuRightArm">
+						<show part="clothRightArm/vampireClothingRightArmLewd"/>
+						<show part="glove_fg/vampireClothingRightArmFront"/>
+					<else/>
 						<show part="clothRightArm/vampireClothingRightArm"/>
 					</if>
 				</if>
 				<if test="showLegClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="lowerBody">
-							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-								<switch value="arms.type">
-									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/vampireClothinglegsLewd"/>
-										<hide part="legs/*"/>
-										<hide part="feet/*"/>
-									</case>
-									<default>
-										<show part="clotheLegs/vampireClothinglegs"/>
-									</default>
-								</switch>
-							</case>
-						</switch>
+					<if test="succuLegs">
+						<show part="clotheLegs/vampireClothinglegsLewd"/>
+						<hide part="legs/*"/>
+						<hide part="feet/*"/>
 					<else/>
 						<show part="clotheLegs/vampireClothinglegs"/>
 					</if>
