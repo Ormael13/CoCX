@@ -11,6 +11,26 @@ import classes.internals.*;
 
 public class Naga extends Monster
 	{
+		override public function combatStatusesUpdateWhenBound():void{
+			nagaBindUpdateWhenBound();
+		}
+
+		override public function playerBoundStruggle():Boolean{clearOutput();
+			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
+				outputText("You wriggle and squirm violently, tearing yourself out from within [themonster]'s coils.");
+				player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
+			} else {
+				outputText("The [monster name]'s grip on you tightens as you struggle to break free from the stimulating pressure.");
+				player.takeLustDamage(player.effectiveSensitivity() / 10 + 2, true);
+				player.takePhysDamage(7 + rand(5));
+			}
+			return true;
+		}
+
+		override public function playerBoundWait():Boolean{
+			return nagaBindWait();
+		}
+
 		//2a) Ability - Poison Bite - poisons player
 		protected function nagaPoisonBiteAttack():void {
 			//(Deals damage over 4-5 turns, invariably reducing
@@ -49,7 +69,7 @@ public class Naga extends Monster
 		//every turn until you break free
 		protected function nagaConstrict():void {
 			outputText("The " + this.short + " draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
-			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.PlayerBoundPhysical,0,0,0,0);
 			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(2+rand(4));
 			}
