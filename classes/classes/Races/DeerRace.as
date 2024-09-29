@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
 
@@ -54,6 +55,8 @@ public class DeerRace extends Race{
 				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(34), +1)
 				.skinCoatType(Skin.FUR, +1)
 				.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.EQUINE, +1);
+		
+		//addBloodline(PerkLib.DeersDescendant, PerkLib.BloodlineDeer);
 		
 		buildTier(8, "deer")
 				.namesMaleFemaleMorphTaur("deer-morph", "deer-girl", "deer-morph", "deer-taur")
