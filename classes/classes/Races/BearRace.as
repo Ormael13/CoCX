@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Race;
 
 public class BearRace extends Race {
@@ -50,6 +51,8 @@ public class BearRace extends Race {
 				.furColor1(ANY(BearFurColors), +1)
 				.furColors("white and black", +1)
 				.height(GREATER_THAN(72), +2);
+		
+		addBloodline(PerkLib.UrsinesDescendant, PerkLib.BloodlineUrsine);
 		
 		buildTier(10,"bear")
 				.customNamingFunction(function(body:BodyData):String {
