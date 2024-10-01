@@ -796,12 +796,6 @@ public class SceneHunter extends BaseContent {
         if (player.statusEffectv1(StatusEffects.FuckedMarble) > 0)
             addButton(7, "MarblSexFarm", SceneLib.marbleScene.standardSex)
                 .hint("Marble invites you to her bed.");
-        if (player.statusEffectv2(StatusEffects.FuckedMarble) > 0)
-            addButton(8, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
-                .hint("Something hot after milking. Why not?");
-        if (player.statusEffectv2(StatusEffects.FuckedMarble) > 0)
-            addButton(9, "MilkySex", SceneLib.marbleScene.marbleMilkSex)
-                .hint("Something hot after milking. Why not?");
         addButton(14, "Back", recallScenes_places);
     }
 

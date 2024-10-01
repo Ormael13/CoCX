@@ -2108,7 +2108,7 @@ internal function urtaHomeLuvLuvinsMenu():void {
 		.disableIf(!player.isGoo() || player.skinType != Skin.GOO, "Req. goo skin and body", "???");
 	if (flags[kFLAGS.URTA_PETPLAY_DONE] >= 0) addButton(7, "Collar", urtaPetPlayDeletedForeverBecauseThirdProovedMeWrongAboutDice)
 		.disableIf(player.isGenderless(), "Not for genderless.");
-	if (flags[kFLAGS.KATHERINE_TRAINING] & KatherineEmployment.KBIT_TRAINING_URTA_HELP)
+	if (flags[kFLAGS.KATHERINE_TRAINING] && KatherineEmployment.KBIT_TRAINING_URTA_HELP)
 		addButton(8, "ChastityBelt", chastityBeltFun, true);
 }
 
