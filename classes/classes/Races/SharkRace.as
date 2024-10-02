@@ -63,6 +63,7 @@ public class SharkRace extends Race {
 				.vaginaType(VaginaClass.SHARK, +1)
 				.wingType(NOT(Wings.FEATHERED_LARGE), 0, -1000);
 		
+		addBloodline(PerkLib.SharksDescendant, PerkLib.BloodlineShark);
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
 		buildTier(10, "shark-morph")

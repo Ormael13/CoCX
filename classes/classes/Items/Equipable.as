@@ -148,7 +148,8 @@ public class Equipable extends Useable {
 		var equipLevel:int = 54;
 		equipLevel -= game.player.perkv1(PerkLib.AscensionHerosBirthrightRankX) * 9;
 		if (equipLevel < 0) equipLevel = 0;
-		if (game.player.compatibileSwordImmortalWeapons() && game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) equipLevel = 0;
+		if (game.player.compatibileSwordImmortalWeaponsMain() && game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) equipLevel = 0;// && ItemConstants.SLOT_WEAPON_MELEE
+		//if (game.player.compatibileSwordImmortalWeaponsMain() && ItemConstants.SLOT_WEAPON_MELEE_OFF && game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) equipLevel = 0;
 		return equipLevel;
 	}
 	

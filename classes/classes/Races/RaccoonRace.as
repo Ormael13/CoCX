@@ -60,6 +60,7 @@ public class RaccoonRace extends Race {
 				.hasBalls(+1)
 				.skinCoatType(Skin.FUR, +1);
 		
+		addBloodline(PerkLib.TanukisDescendant, PerkLib.BloodlineTanuki);
 		addMutation(IMutationsLib.NukiNutsIM);
 		
 		buildTier(8, "raccoon-morph")

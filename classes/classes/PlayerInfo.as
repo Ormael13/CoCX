@@ -495,8 +495,8 @@ public class PlayerInfo extends BaseContent {
 		displayHeader("Combat Stats");
 		// Begin Combat Stats
 		var combatStats:String = "";
-		var mAccMH:Number= combat.meleeAccuracy();
-		var mAccOH:Number= combat.meleeAccuracy(true);
+		var mAccMH:Number= combat.meleeAccuracyMain();
+		var mAccOH:Number= combat.meleeAccuracyOff();
 		var mAccPen:Number= combat.meleeAccuracyPenalty();
 		var bAcc:Number = combat.arrowsAccuracy();
 		var bAccPen:Number = combat.arrowsAccuracyPenalty();

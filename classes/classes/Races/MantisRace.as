@@ -54,6 +54,7 @@ public class MantisRace extends Race {
 		//4 eyes - adj spider 4 eyes desc
 		//var. of arms, legs, wings, tail, ears
 		
+		addBloodline(PerkLib.MantisesDescendant, PerkLib.BloodlineMantis);
 		addMutation(IMutationsLib.MantislikeAgilityIM);
 		addMutation(IMutationsLib.TrachealSystemIM);
 		

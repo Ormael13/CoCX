@@ -51,6 +51,7 @@ public class SpiderRace extends Race {
 				.hasStatusEffect(StatusEffects.BlackNipples,"black nipples", +1)
 				.hasPerk(PerkLib.SpiderOvipositor, +1)
 		
+		addBloodline(PerkLib.SpidersDescendant, PerkLib.BloodlineSpider);
 		addMutation(IMutationsLib.VenomGlandsIM);
 		addMutation(IMutationsLib.ArachnidBookLungIM);
 		

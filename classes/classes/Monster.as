@@ -1118,7 +1118,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 		
 		override public function isFlying():Boolean {
-			return hasStatusEffect(StatusEffects.Flying) && !hasStatusEffect(StatusEffects.EntangledByNet);
+			return hasStatusEffect(StatusEffects.Flying) && !hasStatusEffect(StatusEffects.EntangledByNet) && !hasStatusEffect(StatusEffects.Nailed);
 		}
 
 		public function canMonsterBleed():Boolean
@@ -2796,6 +2796,119 @@ import classes.Scenes.Combat.CombatAbilities;
 		 * </ul>
 		 */
 		public function changeBtnWhenBound(btnStruggle:CoCButton,btnBoundWait:CoCButton):void{
+		}
+
+		/**
+		 * <p>Called during combatStatusesUpdate Bind Statuses Check Section</p>
+		 * <p>Typically used for flavor text output</p>
+		 * <p>Also put in bondage check/text here (flags[kFLAGS.PC_FETISH] >= 2)</p>
+		 */
+		public function combatStatusesUpdateWhenBound():void{
+
+		}
+
+		/**
+		 * <p>Called during internal function struggle()</p>
+		 * @return If false, call enemyAIImpl at the end
+		 */
+		public function playerBoundStruggle():Boolean{
+			return false;
+		}
+
+		/**
+		 * <p>Called during internal function wait()</p>
+		 * @return If false, call enemyAIImpl at the end
+		 */
+		public function playerBoundWait():Boolean{
+			return false;
+		}
+
+		/**
+		 * <p>Patchwork solution for duplicated tentacleBind bondage text</p>
+		 * <p>Make use of extend class if you wanted to recycle code/combat move for new (sub-)monster (see extend Kitsune)</p>
+		 * <p>Used class: ArigeanOmnibusAbomination,TentacleBeast,MindbreakerFemale (StatusEffects.TentacleBind)</p>
+		 * call it during combatStatusesUpdateWhenBound
+		 */
+		protected function tentacleBindUpdateWhenBound():void{
+			outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n");
+			if (flags[kFLAGS.PC_FETISH] >= 2) {
+				outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n");
+				player.takeLustDamage(3, true);
+			}
+		}
+
+		/**
+		 * <p>Patchwork solution for duplicated nagaBind bondage text</p>
+		 * <p>Make use of extend class if you wanted to recycle code/combat move for new (sub-)monster (see extend Kitsune)</p>
+		 * <p>Used class: CaiLin,Gorgon,Naga,Draculina,Diva (StatusEffects.NagaBind)</p>
+		 * call it during combatStatusesUpdateWhenBound
+		 */
+		protected function nagaBindUpdateWhenBound():void{
+			if (flags[kFLAGS.PC_FETISH] >= 2) {
+				outputText("Coiled tightly by [themonster] and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
+				player.takeLustDamage(5, true);
+			}
+		}
+
+		/**
+		 * <p>Patchwork solution for duplicated struggle</p>
+		 * <p>Make use of extend class if you wanted to recycle code/combat move for new (sub-)monster (see extend Kitsune)</p>
+		 * <p>Used class: ArigeanOmnibusAbomination,TentacleBeast,MindbreakerFemale (StatusEffects.TentacleBind)</p>
+		 * @return result for playerBoundStruggle (If false, call enemyAIImpl at the end)
+		 */
+		protected function tentacleBindStruggle():Boolean{
+			clearOutput();
+			outputText("You struggle with all of your might to free yourself from the tentacles before the creature can fulfill whatever unholy desire it has for you.\n");
+			//33% chance to break free + up to 50% chance for strength
+			if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) {
+				outputText("As the creature attempts to adjust your position in its grip, you free one of your [legs] and hit the beast in its beak, causing it to let out an inhuman cry and drop you to the ground smartly.\n\n");
+				player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
+				createStatusEffect(StatusEffects.TentacleCoolDown, 3, 0, 0, 0);
+			}
+			//Fail to break free
+			else {
+				outputText("Despite trying to escape, the creature only tightens its grip, making it difficult to breathe.\n\n");
+				player.takePhysDamage(5);
+				if (player.cocks.length > 0)
+					outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!");
+				else if (player.hasVagina())
+					outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
+				else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
+				player.takeLustDamage((3 + player.effectiveSensitivity() / 10 + player.lib / 20), true);
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * <p>Patchwork solution for duplicated wait</p>
+		 * <p>Make use of extend class if you wanted to recycle code/combat move for new (sub-)monster (see extend Kitsune)</p>
+		 * <p>Used class: ArigeanOmnibusAbomination,TentacleBeast,MindbreakerFemale (StatusEffects.TentacleBind)</p>
+		 * @return result for playerBoundWait (If false, call enemyAIImpl at the end)
+		 */
+		protected function tentacleBindWait():Boolean{
+			clearOutput();
+			if (player.cocks.length > 0)
+				outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!");
+			else if (player.hasVagina())
+				outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
+			else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
+			player.takeLustDamage((8 + player.effectiveSensitivity() / 10), true);
+			return true;
+		}
+
+		/**
+		 * <p>Patchwork solution for duplicated wait</p>
+		 * <p>Make use of extend class if you wanted to recycle code/combat move for new (sub-)monster (see extend Kitsune)</p>
+		 * <p>Used class: Gorgon,Naga,Draculina (StatusEffects.NagaBind)</p>
+		 * @return result for playerBoundWait (If false, call enemyAIImpl at the end)
+		 */
+		protected function nagaBindWait():Boolean{
+			clearOutput();
+			outputText("The [monster name]'s grip on you tightens as you relax into the stimulating pressure.");
+			player.takeLustDamage(player.effectiveSensitivity() / 5 + 5, true);
+			player.takePhysDamage(5 + rand(5));
+			return true;
 		}
 
 		/**

@@ -11,6 +11,17 @@ import classes.internals.*;
 
 public class TentacleBeast extends Monster
 	{
+		override public function combatStatusesUpdateWhenBound():void{
+			tentacleBindUpdateWhenBound();
+		}
+
+		override public function playerBoundStruggle():Boolean{
+			return tentacleBindStruggle();
+		}
+
+		override public function playerBoundWait():Boolean{
+			return tentacleBindWait();
+		}
 		
 		private function tentaclePhysicalAttack():void {
 			outputText("The shambling horror throws its tentacles at you with a murderous force.\n");
@@ -30,7 +41,7 @@ public class TentacleBeast extends Monster
 		private function tentacleEntwine():void {
 			outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n");
 			//Not Trapped yet
-			if(!player.hasStatusEffect(StatusEffects.TentacleBind)) {
+			if(!player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) {
 				//Success
 				if(player.getEvasionRoll()) {
 					outputText("In an impressive display of gymnastics, you dodge, duck, dip, dive, and roll away from the shower of grab-happy arms trying to hold you. Your instincts tell you that this was a GOOD thing.\n");
@@ -45,7 +56,7 @@ public class TentacleBeast extends Monster
 					//Genderless
 					else outputText("The creature quickly positions a long tentacle against your " + Appearance.assholeDescript(player) + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n");
 					player.takeLustDamage((8+player.effectiveSensitivity()/20), true);
-					player.createStatusEffect(StatusEffects.TentacleBind,0,0,0,0);
+					player.createStatusEffect(StatusEffects.PlayerBoundPhysical,0,0,0,0);
 				}
 			}
 		}

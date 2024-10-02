@@ -104,6 +104,7 @@ public class BeeRace extends Race {
 							return body.player.hasStatusEffect(StatusEffects.BlackNipples)
 						}, +1);
 		
+		addBloodline(PerkLib.BeesDescendant, PerkLib.BloodlineBee);
 		addMutation(IMutationsLib.TrachealSystemIM);
 		addMutation(IMutationsLib.PoisonGlandIM);
 		

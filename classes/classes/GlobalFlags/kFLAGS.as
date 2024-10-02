@@ -2673,7 +2673,7 @@ public static const BLOOD_PUPPY_SUMMONS:int                                     
 public static const IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED:int                     = 2664;
 public static const DISPLACER_BEAST_WINS:int                                   		= 2665;
 public static const HERM_CAVE_WYRM:int                                   			= 2666;
-public static const DISCOVERED_CAVES:int                                   			= 2667; // No longer used
+public static const ATTACKS_ACCURACY_OFF:int                                   		= 2667;
 public static const DISCOVERED_ASHLANDS:int                                   		= 2668; // No longer used
 public static const DISCOVERED_TUNDRA:int                                   		= 2669; // No longer used
 public static const DISCOVERED_HILLS:int                                   			= 2670; // No longer used
@@ -3007,6 +3007,7 @@ public static const HYPER_HAPPY:int                                             
 public static const HP_STATBAR_PERCENTAGE:int                                   	= 2999; //HP bars show a percentage rather than the core number
 public static const LUST_STATBAR_PERCENTAGE:int                                   	= 3000; //Lust bars show a percentage rather than the core number
 public static const WRATH_STATBAR_PERCENTAGE:int                                   	= 3001; //Wrath bars show a percentage rather than the core number
+public static const CHARVIEWER_MODEL:int                                   			= 3002; //0 is old charviewer model, 1 is new one
 
 public static const GLOBAL_FLAGS_ARRAY:Array = [
 	NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, SHOW_SPRITES_FLAG, SILLY_MODE_ENABLE_FLAG, SCENEHUNTER_PRINT_CHECKS,

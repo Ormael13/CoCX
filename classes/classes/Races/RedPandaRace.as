@@ -53,6 +53,8 @@ public class RedPandaRace extends Race{
 				.skinCoatType(Skin.FUR, +1)
 				.height(GREATER_THAN(72), +2);
 		
+		addBloodline(PerkLib.UrsinesDescendant, PerkLib.BloodlineUrsine);
+		
 		buildTier(10, "red panda")
 				.namesMaleFemaleMorphTaur("red-panda-boy","red-panda-girl",
 						"red-panda-morph","red-panda-taur")

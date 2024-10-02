@@ -51,6 +51,7 @@ public class AvianRace extends Race{
 				.skinCoatType(Skin.FEATHER, +1)
 				.hasCockOfType(CockTypesEnum.AVIAN, +1);
 		
+		addBloodline(PerkLib.AviansDescendant, PerkLib.BloodlineAvian);
 		addMutation(IMutationsLib.HarpyHollowBonesIM);
 		
 		buildTier(9, "avian-morph")

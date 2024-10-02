@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Race;
 import classes.StatusEffects;
 
@@ -67,6 +68,7 @@ public class GazerRace extends Race {
 						}
 				);
 		
+		addBloodline(PerkLib.GazersDescendant, PerkLib.BloodlineGazer);
 		addMutation(IMutationsLib.GazerEyesIM);
 		
 		buildTier(14, "gazer")

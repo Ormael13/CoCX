@@ -5,10 +5,31 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
 public class HarpyMob extends Monster
 	{
+		override public function combatStatusesUpdateWhenBound():void{
+			if (flags[kFLAGS.PC_FETISH] >= 2) {
+				outputText("The harpies are holding you down and restraining you, making the struggle all the sweeter!\n\n");
+				player.takeLustDamage(3, true);
+			} else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
+		}
+
+		override public function playerBoundStruggle():Boolean{
+			harpyHordeGangBangStruggle();
+			return true;
+		}
+
+		override public function playerBoundWait():Boolean{
+			clearOutput();
+			outputText("The brood continues to hammer away at your defenseless self. ");
+			var damage:int = 80 + rand(40);
+			player.takePhysDamage(damage, true);
+			return true;
+		}
+
 		public function harpyHordeAI():void {
 			if(rand(3) == 0) harpyHordeLustAttack();
 			else if(rand(3) > 0) harpyHordeClawFlurry();
@@ -26,7 +47,7 @@ public class HarpyMob extends Monster
 		//ATTACK TWO: Gangbang
 		public function harpyHordeGangBangAttack():void {
 			outputText("Suddenly, a pair of harpies grabs you from behind, holding your arms to keep you from fighting back! Taking advantage of your open state, the other harpies leap at you, hammering your chest with punches and kicks - only one hangs back from the gang assault.\n\n");
-			player.createStatusEffect(StatusEffects.HarpyBind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.PlayerBoundPhysical,0,0,0,0);
 			//(PC must struggle:
 			harpyHordeGangBangStruggle(false);
 		}
@@ -35,7 +56,7 @@ public class HarpyMob extends Monster
 			if(clearDisp) clearOutput();
 			//Success:
 			if((rand(10) == 0 && player.str/5 + rand(20) >= 23) || player.hasPerk(PerkLib.FluidBody)) {
-				player.removeStatusEffect(StatusEffects.HarpyBind);
+				player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
 				outputText("With a mighty roar, you throw off the harpies grabbing you and return to the fight!");
 			}
 			//Failure:

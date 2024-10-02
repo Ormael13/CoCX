@@ -16,23 +16,52 @@ import classes.internals.*;
 
 public class CaiLin extends Monster
 	{
+		override public function combatStatusesUpdateWhenBound():void{
+			nagaBindUpdateWhenBound();
+		}
+
+		override public function playerBoundStruggle():Boolean{
+			clearOutput();
+			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
+				outputText("You wriggle and squirm violently, tearing yourself out from within [themonster]'s coils.");
+				player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
+			} else {
+				if (flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
+				else outputText("The [monster name]");
+				outputText("'s grip on you tightens as you struggle to break free from the stimulating pressure.");
+				player.takeLustDamage(player.effectiveSensitivity() / 10 + 2, true);
+				player.takePhysDamage(10 + rand(8));
+			}
+			return true;
+		}
+
+		override public function playerBoundWait():Boolean{
+			clearOutput();
+			if (flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
+			else outputText("The [monster name]");
+			outputText("'s grip on you tightens as you relax into the stimulating pressure.");
+			player.takeLustDamage(player.effectiveSensitivity() / 5 + 5, true);
+			player.takePhysDamage(5 + rand(5));
+			return true;
+		}
+
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(6);
 			if (choice == 0) eAttack();
 			if (choice == 1) medusaPoisonBiteAttack();
 			if (choice == 2) {
-				if (player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.Stunned)) TailWhip();
+				if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical) || player.hasStatusEffect(StatusEffects.Stunned)) TailWhip();
 				else medusaConstrict();
 			}
 			if (choice == 3) {
 				if (player.hasStatusEffect(StatusEffects.Stunned)) castSpell();
-				else if (player.hasStatusEffect(StatusEffects.NagaBind)) medusaPoisonBiteAttack();
+				else if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) medusaPoisonBiteAttack();
 				else TailWhip();
 			}
 			if (choice == 4) {
 				if (player.hasStatusEffect(StatusEffects.Stunned)) castSpell();
-				else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
+				else if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) {
 					if (rand(2) == 0) medusaPoisonBiteAttack();
 					else TailWhip();
 				}
@@ -88,7 +117,7 @@ public class CaiLin extends Monster
 			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
 			else outputText("The gorgon");
 			outputText(" draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
-			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
+			player.createStatusEffect(StatusEffects.PlayerBoundPhysical,0,0,0,0); 
 			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(3+rand(6));
 			}
@@ -117,7 +146,7 @@ public class CaiLin extends Monster
 			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ");
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
-			if (player.hasStatusEffect(StatusEffects.NagaBind)) player.removeStatusEffect(StatusEffects.NagaBind);
+			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);
 		}
 		
 		public function spellCostWhitefire():Number {

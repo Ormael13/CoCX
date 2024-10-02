@@ -59,6 +59,7 @@ public class DevilRace extends Race {
 							return !(AzazelRace.isAzazelLike(body));
 						}, 0, -1000);
 		
+		addBloodline(PerkLib.DevilsDescendant, PerkLib.BloodlineDevil);
 		addMutation(IMutationsLib.ObsidianHeartIM);
 		
 		buildTier(11, "devilkin")

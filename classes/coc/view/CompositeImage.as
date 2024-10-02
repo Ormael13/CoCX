@@ -80,6 +80,9 @@ public class CompositeImage {
 	}
 	private function getParts(name:String, prefix:Boolean):/*CompositeLayer*/Array {
 		if (prefix) {
+			if (name == "") {
+				return allParts;
+			}
 			if (!(name in layer2index)) {
 				trace("[ERROR] No such layer '"+name+"'");
 				return [];

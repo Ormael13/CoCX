@@ -1206,11 +1206,6 @@ use namespace CoC;
 		{
 			return !weapon.isDualWielded() && weapon.size < ItemConstants.WSZ_LARGE  && weapon != game.weapons.DAISHO && !weapon.isStaffType();
 		}
-		//Non Large/Massive weapons
-		public function isNoLargeNoStaffWeapon():Boolean
-		{
-			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weaponOff.isDualLarge() && !weaponOff.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !weaponOff.isDualMassive() && !weaponOff.isSingleMassive() && !weapon.isStaffType() && !weaponOff.isStaffType());
-		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
@@ -1380,13 +1375,21 @@ use namespace CoC;
 		{
 			return (hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.Snowstorms)) && !hasPerk(PerkLib.SixthSense);
 		}
-		public function flameBladeActive():Boolean
+		public function flameBladeActiveMain():Boolean
 		{
-			return ((weapon.isDuelingType() || weaponOff.isDuelingType() || weapon.isSwordType() || weaponOff.isSwordType() || weapon.isAxeType() || weaponOff.isAxeType() || weapon.isDaggerType() || weaponOff.isDaggerType() || weapon.isScytheType() || weaponOff.isScytheType()) && hasStatusEffect(StatusEffects.FlameBlade));
+			return ((weapon.isDuelingType() || weapon.isSwordType() || weapon.isAxeType() || weapon.isDaggerType() || weapon.isScytheType()) && hasStatusEffect(StatusEffects.FlameBlade));
 		}
-		public function electrifyWeaponActive():Boolean
+		public function flameBladeActiveOff():Boolean
 		{
-			return ((weapon.isMaceHammerType() || weaponOff.isMaceHammerType() || weapon.isDuelingType() || weaponOff.isDuelingType() || weapon.isSwordType() || weaponOff.isSwordType() || weapon.isAxeType() || weaponOff.isAxeType() || weapon.isDaggerType() || weaponOff.isDaggerType() || weapon.isScytheType() || weaponOff.isScytheType()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+			return ((weaponOff.isDuelingType() || weaponOff.isSwordType() || weaponOff.isAxeType() || weaponOff.isDaggerType() || weaponOff.isScytheType()) && hasStatusEffect(StatusEffects.FlameBlade));
+		}
+		public function electrifyWeaponActiveMain():Boolean
+		{
+			return ((weapon.isMaceHammerType() || weapon.isDuelingType() || weapon.isSwordType() || weapon.isAxeType() || weapon.isDaggerType() || weapon.isScytheType()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+		}
+		public function electrifyWeaponActiveOff():Boolean
+		{
+			return ((weaponOff.isMaceHammerType() || weaponOff.isDuelingType() || weaponOff.isSwordType() || weaponOff.isAxeType() || weaponOff.isDaggerType() || weaponOff.isScytheType()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
 		}
 		public function mummyControlLimit():Number
 		{
@@ -1423,8 +1426,12 @@ use namespace CoC;
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) progressBD += 1;
 			return progressBD;
 		}
-		public function compatibileSwordImmortalWeapons():Boolean {
-			if (weapon.isSwordType() || weaponOff.isSwordType() || weapon.isDuelingType() || weaponOff.isDuelingType() || weapon.isDaggerType() || weaponOff.isDaggerType()) return true;
+		public function compatibileSwordImmortalWeaponsMain():Boolean {
+			if (weapon.isSwordType() || weapon.isDuelingType() || weapon.isDaggerType()) return true;
+			else return false;
+		}
+		public function compatibileSwordImmortalWeaponsOff():Boolean {
+			if (weaponOff.isSwordType() || weaponOff.isDuelingType() || weaponOff.isDaggerType()) return true;
 			else return false;
 		}
 		public function pcHaveBleedAbility():Boolean

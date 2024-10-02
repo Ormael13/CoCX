@@ -63,6 +63,7 @@ public class BunnyRace extends Race {
 							return !body.player.hasPerk(PerkLib.EasterBunnyBalls)
 						}, 0, -10);
 		
+		addBloodline(PerkLib.BunnysDescendant, PerkLib.BloodlineBunny);
 		addMutation(IMutationsLib.MightyLegsIM);
 		
 		buildTier(10, "bunny")

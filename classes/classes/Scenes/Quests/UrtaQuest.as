@@ -1439,7 +1439,7 @@ private function urtaSidewinder():void {
 	//Kick back to main if no damage occured!
 	if(monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
-			combat.attack();
+			combat.attack1();
 			return;
 		}
 		outputText("\n");
@@ -1478,7 +1478,7 @@ private function urtaVaultAttack():void {
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
 		outputText("\n");
 		if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-			combat.attack();
+			combat.attack1();
 			return;
 		}
 		else outputText("\n");
@@ -1528,7 +1528,7 @@ private function urtaVaultAttack():void {
 	//Kick back to main if no damage occured!
 	if(monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
-			combat.attack();
+			combat.attack1();
 			return;
 		}
 		outputText("\n");

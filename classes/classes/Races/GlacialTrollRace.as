@@ -54,6 +54,8 @@ public class GlacialTrollRace extends Race {
 							return body.player.femininity <= 55
 						}, +1);
 		
+		addBloodline(PerkLib.TrollsDescendant, PerkLib.BloodlineTroll);
+		
 		buildTier(10, "glacial troll")
 				.buffs({
 					"str.mult": +0.30,
