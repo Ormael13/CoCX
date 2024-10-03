@@ -1344,6 +1344,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 		}
 		public function LunaPregAnnouncement():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_luna_maid);
 			outputText("As you head back into camp, you find that your maid, Luna, is sitting by your (bedroll/cabin), waiting for you with a very nervous expression on her face. She stands up as you approach, curtseying deeply, while looking down at the ground.  \n\n");
 			outputText("\"<i>[Master]...I hope your day was enjoyable.</i>\" She looks up a little, but still can’t seem to look you in the eyes. She almost seems…Guilty. You look around, but everything seems to be in order…and nobody seems to be missing, or angry.  \n\n");
 			outputText("\"<i>Please, [master], would you…sit? I have tea and a meal ready for you.</i>\" You don’t see any reason to deny Luna’s request, and she seems relieved. She brings you her usual tea, and the meal, if anything, is more delicious than usual…But Luna barely speaks at all, and as she picks up your plate, you notice that Luna’s hands are shaking, her face paler than usual. Something’s clearly bothering your maid.  \n\n");
