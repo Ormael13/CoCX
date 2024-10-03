@@ -93,10 +93,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 					case 4: LunaPregProgression3();
 						return true;
 				}
-				return false;
 			}
-
-
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				LunaGivesBirth();
 				pregnancy.knockUpForce(); //Clear Pregnancy
@@ -135,9 +132,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 			score += player.virilityQ() * 200;
 			if((player.cumQ() > (score >= rand(100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 				preg = true;
-				outputText("Luna is pregnant!");
 			}
-			else outputText("Luna isn't pregnant");
 			if (preg) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_LUNA);
 				sceneHunter.print("\n<b>Luna is pregnant!</b>");
@@ -1345,7 +1340,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 		public function LunaPregAnnouncement():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_luna_maid);
-			outputText("As you head back into camp, you find that your maid, Luna, is sitting by your (bedroll/cabin), waiting for you with a very nervous expression on her face. She stands up as you approach, curtseying deeply, while looking down at the ground.  \n\n");
+			outputText("As you head back into camp, you find that your maid, Luna, is sitting by your [cabin], waiting for you with a very nervous expression on her face. She stands up as you approach, curtseying deeply, while looking down at the ground.  \n\n");
 			outputText("\"<i>[Master]...I hope your day was enjoyable.</i>\" She looks up a little, but still can’t seem to look you in the eyes. She almost seems…Guilty. You look around, but everything seems to be in order…and nobody seems to be missing, or angry.  \n\n");
 			outputText("\"<i>Please, [master], would you…sit? I have tea and a meal ready for you.</i>\" You don’t see any reason to deny Luna’s request, and she seems relieved. She brings you her usual tea, and the meal, if anything, is more delicious than usual…But Luna barely speaks at all, and as she picks up your plate, you notice that Luna’s hands are shaking, her face paler than usual. Something’s clearly bothering your maid.  \n\n");
 			menu();
@@ -1391,7 +1386,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 			spriteSelect(SpriteDb.s_Luna_Mooning);
 			clearOutput();
 			outputText("You lean in, wrapping an arm around Luna, running your fingers through her fur. Gently, you tell Luna to look around at the camp around her, and tell you what she sees. Slowly, she begins to look around.  \n\n");
-			outputText("\"<i>I-I…See your [camp]...The river I wash laundry in…The campfire…</i>\"You nod. Gently, you ask Luna if your campsite has even a remote resemblance to the kind of manor a maid like her would usually serve in. Seemingly nervous about answering, Luna looks down. You reassure her, telling her that you want an honest answer.  \n\n");
+			outputText("\"<i>I-I…See your [cabin]...The river I wash laundry in…The campfire…</i>\"You nod. Gently, you ask Luna if your campsite has even a remote resemblance to the kind of manor a maid like her would usually serve in. Seemingly nervous about answering, Luna looks down. You reassure her, telling her that you want an honest answer.  \n\n");
 			outputText("\"<i>...No, [Master]. This place…While you make it worthwhile…Is nothing like a manor.</i>\" She seems to deflate, and you lean in, resting your head on her shoulder. You ask her, then why does she act like it is? \n\n");
 			outputText("\"<i>B-Because I’m your maid!</i>\" She stutters. \"<i>I’ve been a maid my whole life, and that’s not…Not changing…</i>\" Her voice trails off at that.  \n\n");
 			outputText("Almost laughing, you tell Luna that you’re living out in the middle of nowhere. The portal is the only reason you stayed here, your duty to your people still strong, despite everything. But, you tell Luna, things HAVE changed. You’ve changed, the world you live in is constantly changing...And while you don’t expect Luna to change for you, the way you think of her certainly has. She’s not just a maid to you, but a lover, protector…And now? Mother to your children.  \n\n");
@@ -1421,6 +1416,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 			outputText("You don’t know where your former maid is going…But you have the distinct feeling that you’ll never see her again.  \n\n");
 			flags[kFLAGS.LUNA_FOLLOWER] = 2;
 			//Lia, if you want to put the suicide scene in, do it here, I'm not gonna. -Snas
+			pregnancy.knockUpForce(); // at least make her REALLY disappear -Sval
 			doNext(playerMenu);
 		}
 
@@ -1438,7 +1434,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 
 		public function LunaPregProgression3():void {
 			clearOutput();
-			outputText("Luna’s not just clearly pregnant, she’s swollen. She frequently has to stop, much to her annoyance. She stays near your (Bedroll/Cabin) when not actively doing anything. You notice, if you remain in one spot in camp for any length of time, Luna seems to \"<i>Coincidentally</i>\" need to clean right next to you, often mere inches from your sides or back.  \n\n");
+			outputText("Luna’s not just clearly pregnant, she’s swollen. She frequently has to stop, much to her annoyance. She stays near your [cabin] when not actively doing anything. You notice, if you remain in one spot in camp for any length of time, Luna seems to \"coincidentally\" need to clean right next to you, often mere inches from your sides or back.  \n\n");
 			outputText("You stop to sit by the campfire, and as you expected, Luna ‘cleans’ her way over to you. She slowly puts a hand on your shoulder, and you shake your head at her silliness, gently pulling the pregnant maid down to sit beside you.  \n\n");
 			outputText("\"<i>I-I shouldn’t-</i>\" Luna begins, but you put a finger to her lips, telling her that you are ordering her to take a break. Now. Luna opens her mouth, trying to think of something to say, but you put your finger on her mouth again. Gently, you tell Luna that you won’t have her maidly duties putting your child at risk. She blinks, tears welling up in her eyes, but you hold her close before they can fall. She’s tense, and you can feel her squirm slightly, as if she’s stopping herself from pulling away. \n\n");
 			outputText("Slowly, Luna relaxes, her breathing slows. She rests her chin on your shoulder, wrapping her arms around you. She lets out a slight whimper, and a split second later, you can feel her stomach lurch. Luna’s grip tightens, almost painful, and you support her weight as she leans on you for support.  \n\n");
@@ -1449,15 +1445,15 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 
 		public function LunaGivesBirth():void {
 			clearOutput();
-			outputText("A sudden, ear-splitting noise fills the air, a woman’s cry of pain changing partway to a wolf’s howl. You immediately know who it is, even before you see your pregnant maid making a mad dash for your (tent/cabin), holding her stomach. She gasps, a trickle of fluid staining her dress, making it painfully obvious what’s happening.  \n\n");
-			outputText("Despite her obvious pain, Luna still stops at the door, giving you time to catch up. You take her arm and force your way underneath, half-carrying her to your (bedroll/bed).  \n\n");
+			outputText("A sudden, ear-splitting noise fills the air, a woman’s cry of pain changing partway to a wolf’s howl. You immediately know who it is, even before you see your pregnant maid making a mad dash for your [cabin], holding her stomach. She gasps, a trickle of fluid staining her dress, making it painfully obvious what’s happening.  \n\n");
+			outputText("Despite her obvious pain, Luna still stops at the door, giving you time to catch up. You take her arm and force your way underneath, half-carrying her to your bed.  \n\n");
 			outputText("“M-[master], not your bed!” She protests, but you ignore her. Your maid she may be, but right now, she’s in labour, with YOUR kid, and that comes first. You lay her down as gently as you can, but she’s squirming, her wolfish claws expanding and retracting with her breathing. Her eyes are wide, and Luna’s breathing quickens. She’s beginning to panic! \n\n");
 			outputText("You call her name, getting her attention, and take her hands in one of yours, gently pressing down on her chest to keep her steady. Her legs are shaking, and you gently shush her. Slowly, Luna calms down, her transformation no longer creeping out.  \n\n");
 			outputText("“Th-thank you.” She whispers, biting her lip. “I…I…” You gently pull at the sleeves of her beloved maid dress, pulling it off her. Her panties are next, and the stockings, slightly ripped by her partial transformation, come off as well, leaving your maid completely naked. She looks up into your eyes, shivering, and you kiss her on the forehead, covering her upper body with your bedroll. Jokingly, you tell Luna that she doesn’t need to be shy, and she shudders again, looking more vulnerable than ever. She gasps as a contraction hits, and she squeezes your hand, biting her lip over a cry. You kiss her on the forehead, and she gives you a weak smile. \n\n");
 			outputText("You make your way to her lower half, gently spreading her legs. Luna squirms, but you rub her inner thigh, and she subsides.  \n\n");
 			outputText("Luna falls into a steady rhythm of contractions and pushing, and you encourage her to keep going. You see a little head, covered with hair, pushing its way past her labia, and you tell Luna, encouraging her to keep pushing…She cries out, a mix of pain and pleasure, and you bring your hands to her, deftly catching your newborn as they slide from Luna’s pussy.  \n\n");
 			outputText("You swaddle your child, who opens their eyes, looking up at you with what you can only describe as sheer, unfiltered surprise. You grin, bringing a single finger to their nose in a gentle boop. They gurgle happily, but as you hear Luna moan, you turn back to her. Holding your offspring with one hand, you help Luna into a sitting position, and she looks at the child in your arms with awe.  \n\n");
-			outputText("“...Come here…Please?” Luna asks, her voice soft. You feel your lips tug into a warm smile, and you lie down beside her. For some time, you lie beside her, and she nuzzles close, your kid nestled between you. \n\n");
+			outputText("\"<i>...Come here... Please?</i>\" Luna asks, her voice soft. You feel your lips tug into a warm smile, and you lie down beside her. For some time, you lie beside her, and she nuzzles close, your kid nestled between you. \n\n");
 			outputText(" \n\n");
 			outputText(" \n\n");
 			switch (rand(2)) {

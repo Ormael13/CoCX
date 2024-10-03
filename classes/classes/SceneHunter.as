@@ -589,6 +589,20 @@ public class SceneHunter extends BaseContent {
         return Math.round(num);
     }
 
+    public function shortPregVector(oldVector:Vector.<int>):Vector.<int> {
+        if (!shortPreg) return oldVector;
+        var newVector:Vector.<int> = new Vector.<int>(oldVector.length);
+        // Copy type [0] and fallback value [length-1], which is -1
+        newVector[0] = oldVector[0];
+        newVector[oldVector.length-1] = oldVector[oldVector.length-1];
+        // Scale down [1], which should be full preg time
+        newVector[1] = shortPregTimer(oldVector[1]);
+        // Copy other values, scale them
+        for(var i:int = 2; i < oldVector.length-1; ++i)
+            newVector[i] =  Math.round(oldVector[i]/oldVector[1] * newVector[1]);
+        return newVector;
+    }
+
     private function toggleShortPreg():void {
         flags[kFLAGS.SCENEHUNTER_SHORT_PREG] = !flags[kFLAGS.SCENEHUNTER_SHORT_PREG];
         if (shortPreg && player) {

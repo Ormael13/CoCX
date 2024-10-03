@@ -267,11 +267,10 @@ public class PregnancyStore extends Object
 			for (var i:int = 0; i < _pregnancyEventValue.length; i++) {
 				pregEventVector = _pregnancyEventValue[i];
 				if (pregEventVector[0] == pregType) {
-					for (var j:int = 1; j < pregEventVector.length; j++) { //Skip element zero, the pregnancy type
-						if (incubationValue > (CoC.instance.gameSettings.sceneHunter_inst.shortPreg ?
-								Math.round(pregEventVector[j]/pregEventVector[1] * CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(pregEventVector[1])) // 1 usually stores zero-hour stuff
-								: pregEventVector[j])) return j; //Will always find a value that is < incubationValue as last value is -1
-					}
+					pregEventVector = CoC.instance.gameSettings.sceneHunter_inst.shortPregVector(pregEventVector);
+					for (var j:int = 1; j < pregEventVector.length; j++) //Skip element zero, the pregnancy type
+						if (incubationValue > pregEventVector[j]) // 1 usually stores zero-hour stuff
+							return j; //Will always find a value that is < incubationValue as last value is -1
 				}
 			}
 			return 1; //If there are no pregnancy events for this type of pregnancy then return 1

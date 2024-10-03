@@ -778,7 +778,7 @@ public static const BIKINI_ARMOR_BONUS:int                                      
 public static const OWN_MAIDEN_BIKINI:int                                           =  770; //
 public static const AMILY_X_IZMA_POTION_3SOME:int                                   =  771; //
 public static const MET_ESSY:int                                                    =  772; //
-public static const UNKNOWN_FLAG_NUMBER_00773:int                              		=  773; //
+public static const ARIAN_PREGNANCY_INCUBATION:int                              	=  773; //
 public static const ESSRAYLE_SEXED:int                                 				=  774; //
 public static const GIVEN_AMILY_NURSE_OUTFIT:int                                    =  775; //
 public static const TIMES_EATEN_EDRYN_PUSSY_RUT:int                                 =  776; //
@@ -1048,7 +1048,7 @@ public static const IZUMI_TIMES_GRABBED_THE_HORN:int                            
 public static const IZUMI_TIMES_LOST_FIGHT:int                                      = 1040; // Times the player has been beaten by Izumi in a fight
 public static const IZUMI_SEEN_PC_GENDER:int                                        = 1041; // Indicates if Izumi knows the PCs true gender/equipment (val in the last gender int that izumi knows the player was)
 public static const CUSTOM_FONT_SIZE:int                                            = 1042; // Defines the currently set font size for output text elements. (Hacky, need to do something better, but this works for now.)
-public static const UNKNOWN_FLAG_NUMBER_01043:int                                   = 1043;
+public static const ARIAN_PREGNANCY_TYPE:int                                   		= 1043;
 public static const TIMES_TALKED_WITH_JOJO:int                                      = 1044; // Number of times the player has talked with Pure Jojo.
 public static const TIMES_TRAINED_WITH_JOJO:int                                     = 1045; // Number of times the player has trained with Jojo
 public static const UNLOCKED_JOJO_TRAINING:int                                      = 1046;

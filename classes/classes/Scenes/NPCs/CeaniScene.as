@@ -144,10 +144,10 @@ public function beachInteractionsAfterArcheryTraining():void
 	}
 	else {
 		outputText("You find Ceani lazily resting on the beach and head out to say hello.\n\n");
-		outputText("\"<i>Hey it’s you [name] nice to see you. I was wondering how you were. How is your demon hunting going?</i>\"\n\n");
+		outputText("\"<i>Hey it’s you, [name]! Nice to see you. I was wondering how you were. How is your demon hunting going?</i>\"\n\n");
 		outputText("You tell her your latest accomplishment as she smiles widely. However her belly rumble and she sighs, lifting up and heading to the water.\n\n");
-		outputText("\"<i>I would like to spend more time with you [name] however I’m hungry and need to go catch some fish. I will see you around.</i>\"\n\n");
-		outputText("<b>Perhaps bringing her some food so she doesn’t have to hunt it could buy you some time with her?</b>\n\n");
+		outputText("\"<i>I would like to spend more time with you, [name]. However, I’m hungry and need to go catch some fish. I will see you around.</i>\"\n\n");
+		outputText("<b>Perhaps bringing her some food, so she doesn’t have to hunt it, could buy you some time with her?</b>\n\n");
 		endEncounter();
 	}
 }
@@ -155,7 +155,7 @@ public function beachInteractionsAfterArcheryTraining():void
 private function ceaniHungry(ocean:Boolean):void {
 	outputText("You tell her your latest accomplishment as she smiles widely. However her belly rumbles. You realise she must be getting hungry and pull a fish out of your bags. Ceani eyes sparkles as she sees the fish.\n\n");
 	outputText("\"<i>Fresh from the lake?! Really?! For me?!</i>\"\n\n");
-	outputText("Ceani pick up the fish from your hands and sniffs it before taking a bite and starting to cry.\n\n");
+	outputText("Ceani picks up the fish from your hands and sniffs it before taking a bite and starting to cry.\n\n");
 	outputText("\"<i>I just can’t swim in the lake with all those crazed shark girls but the fish there are so tasty! Thank you so much!</i>\"\n\n");
 	if (player.hasItem(consumables.FISHFIL) && player.hasItem(consumables.FREFISH)) {
 		if (rand(2) == 0) player.destroyItems(consumables.FISHFIL, 1);

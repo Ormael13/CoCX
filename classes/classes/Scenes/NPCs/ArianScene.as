@@ -132,10 +132,10 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 	}
 		public function ArianScene()
 		{
-		pregnancy = new PregnancyStore(PregnancyStore.INCUBATION_ARIAN, 0, 0, 0);
-		pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 140, 90, 50);
-		EventParser.timeAwareClassAdd(this);
-		Saves.registerSaveableState(this);
+			pregnancy = new PregnancyStore(kFLAGS.ARIAN_PREGNANCY_TYPE, kFLAGS.ARIAN_PREGNANCY_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 140, 90, 50);
+			EventParser.timeAwareClassAdd(this);
+			Saves.registerSaveableState(this);
 		}
 		private function ArianPregChance():void {
 			//Get out if already pregged.
@@ -183,11 +183,11 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 						ArianCarriesChampBabies3();
 						return true;
 				}
-				return false;
 			}
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				ArianEggLaying();
 				pregnancy.knockUpForce(); //Clear Pregnancy
+				return true;
 			}
 			return false;
 		}
@@ -4441,7 +4441,7 @@ private function arianAppearance():void {
 
 public function ArianPregChampCarries1():void {
 		clearOutput();
-		outputText("As you get back to camp, you see your lizard-wizard lover, Arian, standing by your (tent/cabin). You ask what brings [arian em] over, and he tilts his head.  \n\n");
+		outputText("As you get back to camp, you see your lizard-wizard lover, Arian, standing by your [cabin]. You ask what brings [arian em] over, and he tilts his head.  \n\n");
 		outputText("\"<i>I apologise for the intrusion…But something’s felt…a little off about you, ever since we…</i>\" He blushes, and you almost roll your eyes. Since you had sex last.  \n\n");
 		outputText("\"<i>Yes.</i>\" Arian steps forward. \"<i>I-if you wouldn’t mind, I want to…examine you.</i>\"  \n\n");
 		outputText("Giving your bashful lover a wink, you ask [arian em] if [arian ey] didn’t get a thorough enough examination last time.  \n\n");
@@ -4543,13 +4543,14 @@ doNext(playerMenu);
 }
 
 public function ArianEggLaying():void {
+		spriteSelect(SpriteDb.s_arian);
 		clearOutput();
 		outputText("You hear a cry from Arian’s tent. Rushing over, you see her doubled over, just outside her tent. Seeing you, Arian blushes bright red, waving you over.  \n\n"); 
 		outputText("\"<i>J-just help me into my tent, please.</i>\" She says, with gritted teeth. \"<i>I’ll be fine once I’m inside.</i>\" You follow her instructions, helping her into her tent. You notice that an odd-looking chair sits along the back, and Arian points to it. \"<i>Over there.</i>\" As you get closer, you notice that there’s a hole in the middle of the chair, with a padded basket underneath. \"<i>Laying is annoying</i>\", she says simply, through gritted teeth. \"<i>But I got that from Tel’Adre. Very handy.</i>\" You help her over to the chair, and she strips out of her robe and undergarments, giving them to you. You place them to one side, and Arian groans, sitting down, positioning her drooling cunt over the egg-hole.  \n\n");
 		outputText("Arian clutches her stomach with one hand, and you take her other hand, holding it tight. Arian gives you a worried smile, and you reassure her, putting a hand on Arian’s belly.  \n\n");
 		outputText("She gasps, trembling, closing her eyes as the tip of a pure-white egg crowns. Arian gasps, and it sinks slightly back in. You encourage your Lizan lover to push, and with a girly wail, Arian pushes the egg out. She’s gasping, pussy gaping, but you know she isn’t done yet. Taking Arian’s hand, you keep her steady. She looks at you, fear and pain in her eyes, but you act calm, your voice anchoring Arian.  \n\n");
         //calculate between 2-4 eggs
-		outputText("She pushes (2-4) eggs out, before finally collapsing back into her chair. For a few minutes, she passes out, and you decide to move her to her bed.  \n\n");
+		outputText("She pushes " + (rand(3)+2) + " eggs out, before finally collapsing back into her chair. For a few minutes, she passes out, and you decide to move her to her bed.  \n\n");
 		outputText("Arian wakes back up as you’re tucking her in, and she sits bolt upright. \"<i>The eggs! Where are they?!</i>\" She demands, and you gently, but firmly, lay Arian back down, telling her that you’re bringing them over. But Arian needs to rest and recover.  \n\n");
         outputText("As you bring the eggs over, Arian visibly relaxes, and as you place the basket at the foot of Arian’s bed, she smiles, motioning for you to join her.  \n\n");
         outputText("You sit beside Arian, and she nuzzles your hand. \"<i>Thank you for being here with me.</i>\" She sighs. \"<i>I’m pretty sure kid me would be properly horrified right now.</i>\" She says, chuckling. \n\n");
