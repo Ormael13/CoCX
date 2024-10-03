@@ -133,7 +133,6 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 			//1% chance per 100mLs of cum, max 15%
 			var score:Number = Math.min(player.cumQ()/100,5);
 			score += player.virilityQ() * 200;
-			outputText("Luna checking virility score " + score);
 			if((player.cumQ() > (score >= rand(100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 				preg = true;
 				outputText("Luna is pregnant!");
