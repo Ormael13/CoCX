@@ -57,16 +57,16 @@ use namespace CoC;
 				},
 				chance: 30,
 				call: partsofDartPistol
-			}, {
-				name: "ignis",
-				label : "Ignis",
-				kind  : 'npc',
-				unique: true,
-				night: false,
-				when: function ():Boolean {
-					return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1
-				},
-				call: ignisIntro
+//			}, {
+//				name: "ignis",
+//				label : "Ignis",
+//				kind  : 'npc',
+//				unique: true,
+//				night: false,
+//				when: function ():Boolean {
+//					return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1
+//				},
+//				call: ignisIntro
 			}, {
 				name: "sieg1",
 				label : "Sieg",
