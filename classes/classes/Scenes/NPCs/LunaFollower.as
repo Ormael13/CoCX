@@ -1355,6 +1355,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 
 		public function LunaPregTakeHand():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_Luna_Mooning);
 			outputText("You take Luna’s hand in yours, with your off-hand taking the plate, lowering it to the improvised table. As you noticed, her hands are shaking heavily. She weakly tries to pull away, but you tighten your grip slightly.  \n\n");
 			outputText("You gently tell Luna to sit with you, and she meekly obeys, still not looking at you. For a few seconds, you sit with her, and you notice that it isn’t just her hands. Her knees are shaking, and while Luna’s always been meek while serving you, this is…more. Way more. You wrap your arms around Luna, pulling her into you. She stiffens, almost like a wild animal, and you pull back, not wanting to startle her further.  \n\n");
 			outputText("\"<i>...I j-just wanted to do so-something nice for my [master].</i>\" Luna bites her lip, clearly lying. She’s…Never directly lied to you before.  \n\n");
@@ -1387,9 +1388,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 		}
 
 		public function LunaPregComfort():void {
+			spriteSelect(SpriteDb.s_Luna_Mooning);
 			clearOutput();
 			outputText("You lean in, wrapping an arm around Luna, running your fingers through her fur. Gently, you tell Luna to look around at the camp around her, and tell you what she sees. Slowly, she begins to look around.  \n\n");
-			outputText("\"<i>I-I…See your [Cabin/Bedroll]...The river I wash laundry in…The campfire…</i>\"You nod. Gently, you ask Luna if your campsite has even a remote resemblance to the kind of manor a maid like her would usually serve in. Seemingly nervous about answering, Luna looks down. You reassure her, telling her that you want an honest answer.  \n\n");
+			outputText("\"<i>I-I…See your [camp]...The river I wash laundry in…The campfire…</i>\"You nod. Gently, you ask Luna if your campsite has even a remote resemblance to the kind of manor a maid like her would usually serve in. Seemingly nervous about answering, Luna looks down. You reassure her, telling her that you want an honest answer.  \n\n");
 			outputText("\"<i>...No, [Master]. This place…While you make it worthwhile…Is nothing like a manor.</i>\" She seems to deflate, and you lean in, resting your head on her shoulder. You ask her, then why does she act like it is? \n\n");
 			outputText("\"<i>B-Because I’m your maid!</i>\" She stutters. \"<i>I’ve been a maid my whole life, and that’s not…Not changing…</i>\" Her voice trails off at that.  \n\n");
 			outputText("Almost laughing, you tell Luna that you’re living out in the middle of nowhere. The portal is the only reason you stayed here, your duty to your people still strong, despite everything. But, you tell Luna, things HAVE changed. You’ve changed, the world you live in is constantly changing...And while you don’t expect Luna to change for you, the way you think of her certainly has. She’s not just a maid to you, but a lover, protector…And now? Mother to your children.  \n\n");
@@ -1408,6 +1410,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 		}
 
 		public function LunaPregDismiss():void {
+			spriteSelect(SpriteDb.s_Luna_Mooning);
 			clearOutput();
 			outputText("You frown slightly, agreeing with Luna. Her eyes widen, and she lets out a whimper. You stand, and she looks up at you, tears in her eyes, her fur flattening against her skin.  \n\n");
 			outputText("You tell Luna that she’s performed well as your maid…But that she’s overstepped, time and again. You bring up her sabotage of your campmates, her need for attention, and then her deception, not telling you about her curse, and the dangers she poses.  \n\n");
