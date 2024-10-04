@@ -502,8 +502,8 @@ public function beachDateMaleVer():void {
 	}
 	outputText("Ceani, holding off her formidable strength, gently pushes you on your back and gets in position, her tail swishing left and right as she takes your [cock] in her mouth wrapping her large tongue around it. For someone equipped with dagger like teeth, you're surprised she can give a blowjob this well. You moan in pleasure as she slowly brings your [cock] to its full length, coating it entirely with her salty saliva. Soon Ceani is done lubing your ship mast as she slowly ");
 	outputText("pull her mouth off your still dripping cock, a thin strand of saliva still covering your glan. She giggles as she begins to pull away to change position.\n\n");
-	outputText("\"<i>Hmmm your manhood seems nice and ready but look at my pussy, I think It’s more than just the water. Care to have a look?</i>\"\n\n");
-	outputText("She lay on her back so you can have a full view of her drooling snatch and white erect nipples. You approach her cunt and take a whiff of her smell. Mmmmm looks like a female in heat and she’s all the more ready for you to breed. You get in position above her, slowly inserting yourself in her drooling snatch.");
+	outputText("\"<i>Hmmm your manhood seems nice and ready, but look at my pussy. I think It’s more than just the water. Care to have a look?</i>\"\n\n");
+	outputText("She lay on her back so you can have a full view of her drooling snatch and white erect nipples. You approach her cunt and take a whiff of her smell. Looks like a female in heat, and she’s all the more ready for you to breed. You get in position above her, slowly inserting yourself in her drooling snatch.");
 	if (player.cocks[x].cockLength >= 22) {
 		outputText("Ceani eyes grows wide as your [cock] fills her to the brim, moaning from your insertion alone as her cunt begins to grip your [cock] like a vice.\n\n");
 		outputText("\"<i>Ahhhh It's so freaking big! Fuck me! Please fuck my brain’s out!</i>\"");

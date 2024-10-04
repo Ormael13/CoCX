@@ -668,7 +668,7 @@ public function visitAriansHouse(back:Boolean = false):void {
 				outputText("\n\nArian opens the door, smiling brightly at you.  \"<i>Hello [name]!  Come in!</i>\"  [arian Ey] says, stepping back and holding the door for you.  You step in and Arian closes the door behind you and embraces you in a friendly hug.  You return [arian eir] hug with one of your own.");
 				outputText("\n\nBreaking the hug Arian leads you to [arian eir] table");
 				if(!player.isTaur()) outputText(" and offers you the chair nearby");
-				outputText(",  taking a" + player.isTaur ? "nother" : "" + " chair for [arian em]self.  \"<i>I love when you come visit, [name].  So, what are we going to do today?</i>\" [arian ey] asks, expectantly.");
+				outputText(",  taking a" + (player.isTaur ? "nother" : "" + " chair for [arian em]self.  \"<i>I love when you come visit, [name].  So, what are we going to do today?</i>\" [arian ey] asks, expectantly."));
 			}
 			//(Display Options)
 			arianHomeMenu();
