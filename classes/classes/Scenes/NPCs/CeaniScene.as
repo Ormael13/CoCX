@@ -365,7 +365,7 @@ public function beachInteractionsDateUnderwater2():void
 	outputText("Why didn’t she ask you sooner? You begin to slowly remove her pink bikini exposing her generous white breast. All in all if she wasn’t this huge her JJ cup would look like a fairly normal E");
 	if (!player.armor.isNothing) outputText(". You were too busy pondering these details to notice as Ceani slowly removed your [armor]");
 	if (!player.lowerGarment.isNothing) outputText(" and undergarment");
-	outputText(". Ceani surprise you by grabbing your shoulder and kissing you. Is it just you or the water around you both is starting to get even warmer. The two of you play with each other tongue for a moment. You aren’t so surprised to find a sea salt taste on Ceani’s saliva, as both of you have been pretty much talking underwater for this long.\n\n");
+	outputText(". Ceani surprises you by grabbing your shoulder and kissing you. Is it just you, or the water around you both is starting to get even warmer? The two of you play with each other tongue for a moment. You aren’t so surprised to find a sea salt taste on Ceani’s saliva, as both of you have been pretty much talking underwater for this long.\n\n");
 	if (player.gender == 3) { //additional check
 		outputText("Now that you think of it, you could take her as a man or a woman, so which way do you prefer?\n\n");
 		menu();
@@ -388,7 +388,7 @@ public function underwaterDateMaleVer():void
 		outputText("\"<i>This kind of treasure is rare under the sea. Even males orca don’t exactly always have the biggest one’s even for their sizes. So when I find one of these I reaaally have to try it out!</i>\"\n\n");
 	}
 	outputText("Her other hands runs under your balls, cupping and playing with them for a moment before she swims under you, still gripping your [cock], and start to suckle on your [balls] one after the other. Ceani takes a look at your cock give it a playful lick and begin to suck on your lenght, her agile tongue playing with your tip. You moan as she sucks you for a fair minute then swim back up, wrapping her two legs around your waist as she slowly grinds her pussy against you dick sliding the glan between her vaginal lips. ");
-	outputText("She isn’t exactly the best at sex due to the sheer size of her cunt but she makes for it with raw skills, making sure to vice grip around your length so you can feel the entirety of her vagina. You moan as your glan/flare is teased by her cunt lips never truly going in but never breaking contact either. She plays with your tip for a fair minute before giggling.\n\n");
+	outputText("She isn’t exactly the best at sex due to the sheer size of her cunt but she makes for it with raw skills, making sure to vice grip around your length so you can feel the entirety of her vagina. You moan as your [cockhead] is teased by her cunt lips never truly going in but never breaking contact either. She plays with your tip for a fair minute before giggling.\n\n");
 	outputText("\"<i>You want it in, don’t you? Mmmmmm. Don’t worry, I am done playing.</i>\"\n\n");
 	outputText("She finally lower herself down on your prick, sighing in delight as your dick fills her. Her insides feels like a wet glove, it's so lubricated you almost instantly get your full length in. However comes the question of how you will fuck her. Ceani doesn’t seem to see any issue there, as she gets her tail in position.\n\n");
 	outputText("\"<i>Don’t worry about moving, just let your big girl do the job for you.</i>\"\n\n");
