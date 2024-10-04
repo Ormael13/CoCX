@@ -960,10 +960,10 @@ use namespace CoC;
 			if (sceneHunter.lossSelect) {
 				//good
 				if (canEscapeCum)
-					outputText("Will you try to stimulate yourself further so you could flood the entire pod with your cum?");
+					outputText("Will you try to stimulate yourself further so you could flood the entire pod with your cum?\n");
 				addButtonIfTrue(0, "Escape-Cum", escapeCum, "Req. to have higher cum amount.", canEscapeCum);
 				if (canEscapeMilk)
-					outputText("You can try to use your overproductive mammaries to overload the pod.");
+					outputText("You can try to use your overproductive mammaries to overload the pod.\n");
 				addButtonIfTrue(1, "Escape-Milk", escapeMilk, "Req. to have higher milk+cum amounts.", canEscapeMilk);
 				if (player.gender == 0) addButton(2, "Surrender?", escapeGless);
 				//bad
