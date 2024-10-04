@@ -602,7 +602,7 @@ private function ElectraPregChance():void {
 //----------Electra Preg Stuff---------------
 
 public function ElectraPregAnnouncement():void {
-		clearOutput();
+	spriteSelect(SpriteDb.s_electra);
        if (ElectraTotalKidsNum == 0) {
 		outputText("As you return to camp, you notice Electra sitting by your [cabin]. As she notices you, she stands. You notice, to your discomfort, she has an imp tied up at her feet. Upon further inspection, her hands are sparking, and that the imp’s cock is ramrod straight, despite the small pool of cum around him. \n\n");
 		outputText("She drags the imp behind her, and as she gets closer, you notice that he’s tied up, not with rope, but with a copper cable. She sighs, annoyed, and the imp flails as blue electricity arcs down her wire, through him.  \n\n");
@@ -623,7 +623,7 @@ doNext(playerMenu);
 }
 
 public function ElectraPregProgression1():void {
-		clearOutput();
+	spriteSelect(SpriteDb.s_electra);
 		outputText("Electra isn’t showing yet, but you can feel a slight crackle in the air when you get closer to her. She’s eating more, but her fur is all standing up.  \n\n"); 
 		if (ElectraTotalKidsNum != 0) {
         outputText("You notice her heading into the charging hut and she gives you a wave, blushing slightly. \"<i>Feel free to join me</i>\". She enters, winking. You decide to keep moving for now, as tempting as that offer is. \n\n"); 
@@ -653,7 +653,7 @@ addButton (3, "Nah", ElectraCleanYourself);
 }
 
 public function ElectraPregProgression2():void {
-		clearOutput();
+	spriteSelect(SpriteDb.s_electra);
 		if (ElectraTotalKidsNum == 0) {
         //first time pregnant Electra
 		outputText("You see Electra, her stomach noticeably bulging, talking to Ralthazul. Behind her, you can see a steel pole, firmly planted in the ground, with several small ‘branches’ off of them. A small mechanical device is at the base of each metal ‘branch’, and you notice Electra holding what appears to be a clear dildo with a copper wire through it…A cock you recognize.  \n\n"); 
@@ -678,14 +678,14 @@ doNext(playerMenu);
 }
 
 public function ElectraPregProgression3():void {
-		clearOutput();
+	spriteSelect(SpriteDb.s_electra);
 		outputText("Electra stands in front of (first time) a small wooden building, (otherwise) the charging hut, (split end) looking up at its roof and lightning rod with more than a little nervousness. Seeing her, you walk over, wrapping an arm around her waist.  \n\n"); 
 		outputText("\"<i>Oh, hey.</i>\" Electra says softly. Her belly is swollen, far more than before, and she leans on you. There’s small bags under her eyes, and you notice that she’s walking a little funny. You ask if she’s alright, and she nods, resting her chin on your shoulder.  \n\n");
 		outputText("\"<i>I’ll be fine. Your kids are burning up a ton of food though</i>\", she complains. \"<i>And once they produce the electricity, I need to burn it off again.</i>\" You notice that other than her belly, Electra’s looking a bit more thin than usual. You comment that, and she nods. \"<i>Raiju tend to lose weight during pregnancy. I’ll put it back on in a few days.</i>\" She smiles a little, seeming happy at your concern. \n\n");
 doNext(playerMenu);
 }
 public function ElectraDeliversRaijuBabies():void {
-		clearOutput();
+	spriteSelect(SpriteDb.s_electra);
 		outputText("As you walk towards camp, you notice that the otherwise clear sky is…black over your section of camp. Dark clouds rumble every so often, and you see a bolt of lightning strike the charging hut. Far fainter, you hear a woman’s cry…It’s Electra! \n\n"); 
 		outputText("You rush into camp, heading straight for the charging hut. You hear Electra inside, yelping in pain, and you shoulder open the door. Inside, Electra’s panting, eyes wide as she dangles from one of the charging outlets, her ‘plug’ up her ass. Her water’s already broken, and she hisses in pain with each breath.  \n\n");
 		outputText("Thankfully, she disabled the machine, but you have more pressing concerns. She looks over and sees you, but as she does, more electricity shoots out of her, up the machine and into the lightning rod. You wait, counting the seconds, and as soon as her lightning fades, you grab Electra’s shoulders, pulling her up and off the ‘plug’.  \n\n");

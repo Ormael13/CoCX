@@ -1338,7 +1338,6 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 			}
 		}
 		public function LunaPregAnnouncement():void {
-			clearOutput();
 			spriteSelect(SpriteDb.s_luna_maid);
 			outputText("As you head back into camp, you find that your maid, Luna, is sitting by your [cabin], waiting for you with a very nervous expression on her face. She stands up as you approach, curtseying deeply, while looking down at the ground.  \n\n");
 			outputText("\"<i>[Master]...I hope your day was enjoyable.</i>\" She looks up a little, but still can’t seem to look you in the eyes. She almost seems…Guilty. You look around, but everything seems to be in order…and nobody seems to be missing, or angry.  \n\n");
@@ -1421,19 +1420,17 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 		}
 
 		public function LunaPregProgression1():void {
-			clearOutput();
 			outputText("You notice that Luna’s belly has gotten slightly larger, and she occasionally rubs it, smiling slightly. When she notices you watching, Luna takes a single step towards you, her face lighting up, before suddenly returning to her usual expression. She seems to subconsciously be closer than usual when you’re in camp, and her eyes follow you with a mixture of longing and affection.  \n\n");
 			doNext(playerMenu);
 		}
 
 		public function LunaPregProgression2():void {
-			clearOutput();
 			outputText("Luna’s stomach has grown considerably, and you notice that she’s moving around the camp a little slower than usual. When you ask her if she’s alright, her eyes widen a little, and she seems to make an extra effort to keep at her maidly duties. Her pregnant belly isn’t hidden anymore by her maid’s dress, and she blushes whenever anyone looks at it.  \n\n");
 			doNext(playerMenu);
 		}
 
 		public function LunaPregProgression3():void {
-			clearOutput();
+			spriteSelect(SpriteDb.s_luna_maid);
 			outputText("Luna’s not just clearly pregnant, she’s swollen. She frequently has to stop, much to her annoyance. She stays near your [cabin] when not actively doing anything. You notice, if you remain in one spot in camp for any length of time, Luna seems to \"coincidentally\" need to clean right next to you, often mere inches from your sides or back.  \n\n");
 			outputText("You stop to sit by the campfire, and as you expected, Luna ‘cleans’ her way over to you. She slowly puts a hand on your shoulder, and you shake your head at her silliness, gently pulling the pregnant maid down to sit beside you.  \n\n");
 			outputText("\"<i>I-I shouldn’t-</i>\" Luna begins, but you put a finger to her lips, telling her that you are ordering her to take a break. Now. Luna opens her mouth, trying to think of something to say, but you put your finger on her mouth again. Gently, you tell Luna that you won’t have her maidly duties putting your child at risk. She blinks, tears welling up in her eyes, but you hold her close before they can fall. She’s tense, and you can feel her squirm slightly, as if she’s stopping herself from pulling away. \n\n");
@@ -1444,7 +1441,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 		}
 
 		public function LunaGivesBirth():void {
-			clearOutput();
+			spriteSelect(SpriteDb.s_luna_maid);
 			outputText("A sudden, ear-splitting noise fills the air, a woman’s cry of pain changing partway to a wolf’s howl. You immediately know who it is, even before you see your pregnant maid making a mad dash for your [cabin], holding her stomach. She gasps, a trickle of fluid staining her dress, making it painfully obvious what’s happening.  \n\n");
 			outputText("Despite her obvious pain, Luna still stops at the door, giving you time to catch up. You take her arm and force your way underneath, half-carrying her to your bed.  \n\n");
 			outputText("“M-[master], not your bed!” She protests, but you ignore her. Your maid she may be, but right now, she’s in labour, with YOUR kid, and that comes first. You lay her down as gently as you can, but she’s squirming, her wolfish claws expanding and retracting with her breathing. Her eyes are wide, and Luna’s breathing quickens. She’s beginning to panic! \n\n");
