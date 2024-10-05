@@ -159,14 +159,13 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-
 			if (flags[kFLAGS.ARIAN_EGG_COUNTER] > 0) flags[kFLAGS.ARIAN_EGG_COUNTER]++;
 			if (model.time.hours > 23) {
 				if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0) flags[kFLAGS.ARIAN_EGG_EVENT]++;
 				flags[kFLAGS.ARIAN_LESSONS] = 0;
 				flags[kFLAGS.ARIAN_TREATMENT] = 0;
-				pregnancy.pregnancyAdvance();
 			}
+			pregnancy.pregnancyAdvance();
 			return false;
 		}
 
