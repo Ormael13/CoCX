@@ -1092,7 +1092,6 @@ private function BelisaNadiaTalk():void {
 	endEncounter();
 }
 	public function NadiaPregAnnouncement():void {
-		clearOutput();
 		outputText("Your mare is waiting for you back at camp, with a smile on her face, nearly jumping from joy. Her eyes gleam as she sees you, and she nearly skips over, her J-cup breasts bouncing with each step. She breaks into a run, and you brace yourself as Nadia tackles you, Smothering you in her massive mammaries. \n\n");
 		outputText("\"<i>Oh, my stallion, you wonderful, wonderful lover!</i>\" She gives you a big smack on the lips. You look at her, confused, then the penny drops. You bring a hand to her belly, and she nods, her horn glowing, and her eyes flashing with excitement. \n\n");
 		outputText("\"<i>I’m pregnant</i>\", she says simply, cheeks red, and a huge grin on her face. \"<i>You’re going to be a father, [name].</i>\" She puts a hand on her stomach.  \n\n");
@@ -1102,27 +1101,23 @@ private function BelisaNadiaTalk():void {
 	}
 
 	public function NadiaPreg1():void {
-		clearOutput();
 		outputText("Nadia’s stomach is noticeably larger than before, but barely. She pats her stomach occasionally, a huge, dopey smile on her face. You notice that she keeps a small bag of oats on her hip. She sees you looking, and gives you a smile.  \n\n");
 		outputText(" \n\n");
 		doNext(playerMenu);
 	}
 
 	public function NadiaPreg2():void {
-		clearOutput();
 		outputText("Nadia’s belly hasn’t grown much more, but she’s moving slower than before. Occasionally, you can see her wince, and she seems to rub her pregnant belly more than usual.\n\n");
 		doNext(playerMenu);
 	}
 
 	public function NadiaPreg3():void {
-		clearOutput();
 		outputText("Nadia’s stomach is distended, and it’s clear to anyone with eyes that she’s heavily pregnant. You notice her stomach jerk, getting a startled cry from Nadia. Rushing over, you ask her if she’s alright, and your unicorn lover sighs. \"<i>I’ll be fine…But your kid is kicking hard, my stallion.</i>\" She guides your hand to her belly, and you can feel a sudden impact. Nadia groans, and you gently rub her stomach, trying to ease her pain a little. Before long, the kicks subside, and she leans into you.  \n\n");
 		outputText("\"<i>Thank you for that.</i>\" She whispers, all but falling asleep on you. You help her over to her bed, and she sighs, lying down.  \n\n");
 		doNext(playerMenu);
 	}
 
 	public function NadiaGivesBirth():void {
-		clearOutput();
 		outputText("You hear a choking cry from Nadia’s part of camp, and you rush over, seeing your unicorn lover, doubled over, with a small pool of clear fluid at her hooved feet.  \n\n");
 		outputText("\"<i>O-oh, [name]!</i>\" Nadia cries, reaching a hand out to you. You run over, catching her before she loses her balance entirely. \"<i>T-the baby’s coming!</i>\"  \n\n");
 		outputText("You tell her that you kind of guessed that, and she grits her teeth, grunting as a contraction hits. \"<i>Sm-smartass.</i>\" She grunts, and points to her bedroll. \"<i>Lay me down there, please.</i>\"  \n\n");

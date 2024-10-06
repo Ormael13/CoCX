@@ -2094,7 +2094,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.031) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00477] = 0;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_01043] = 0;
+				flags[kFLAGS.ARIAN_PREGNANCY_TYPE] = 0;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02600] = 0;
 				if (HelSpawnScene.incestEnabled() && flags[kFLAGS.HAD_FIRST_HELSPAWN_TALK]) { //printed only for "our" people in debug version
 					flags[kFLAGS.HELSPAWN_INCEST] = 1;
@@ -2130,7 +2130,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.033) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02358] = 0; //reclaiming soulforce flag
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00773] = 1; //reclaiming essy flag
+				flags[kFLAGS.ARIAN_PREGNANCY_INCUBATION] = 1; //reclaiming essy flag
 				flags[kFLAGS.SCENEHUNTER_SHORT_PREG] = 1; //reclaiming no gore flag (wasn't used)
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.033;
 			}

@@ -607,7 +607,7 @@ public class SidonieFollower extends NPCAwareContent
 
 	public function PCKnockedUpSidonieAnnouncement1():void {
 		clearOutput();
-		outputText("As you come back to camp, you see your camp carpenter, sitting next to your [Bedroll/Cabin] with a frown on her face. As she sees you, Sidonie stands, walking over to you. As she gets close, she pulls up her shirt, pointing down at her abs. \n\n");
+		outputText("As you come back to camp, you see your camp carpenter, sitting next to your [cabin] with a frown on her face. As she sees you, Sidonie stands, walking over to you. As she gets close, she pulls up her shirt, pointing down at her abs. \n\n");
 		outputText("“This is why I don’t usually catch, [Name]. You look down, and to your surprise, Sidonie’s belly is beginning to swell slightly. It’s barely noticeable unless directly pointed out, but Sidonie seems to be annoyed. \n\n");
 		outputText("“Well? What do you have to say for yourself?” Sidonie puts one hand on her hip, waiting for a response.  \n\n");
 		outputText(" \n\n");
@@ -620,7 +620,7 @@ public class SidonieFollower extends NPCAwareContent
 	}
 	public function PCKnockedUpSidonieAnnouncement2():void {
 		clearOutput();
-		outputText("You get into camp, to see your camp woodworker sitting by your (cabin/bedroll), a bowl of oats in her hand. You head over, sitting beside her, and she winces, patting her stomach.  \n\n");
+		outputText("You get into camp, to see your camp woodworker sitting by your ([Cabin]), a bowl of oats in her hand. You head over, sitting beside her, and she winces, patting her stomach.  \n\n");
 		outputText("“H-hey…” She seems a little embarrassed, but you wrap an arm around her shoulder. “Y-yeah, it’s what you think. I’m having another kid, and it’s yours.” She leans in. “Just…Hold me for a sec, would you?” You hold her for a few minutes, before she sighs, going back to her work and cracking her knuckles. “Thanks.” You see Sidonie swing her axe into one of the logs…Way harder than she needed to. Clearly Sidonie isn’t the happiest about being a mother again. \n\n");
 		doNext(playerMenu);
 	}

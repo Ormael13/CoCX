@@ -7,7 +7,7 @@ ARIAN SCENES
 */
 public function ArianPregChampCarries1():void {
 		clearOutput();
-		outputText("As you get back to camp, you see your wizard lover, Arian, standing by your (tent/cabin). You ask what brings him over, and he tilts his head.  \n\n");
+		outputText("As you get back to camp, you see your wizard lover, Arian, standing by your [cabin]. You ask what brings him over, and he tilts his head.  \n\n");
 		outputText("“I apologise for the intrusion…But something’s felt…a little off about you, ever since we…” He blushes, and you almost roll your eyes. Since you had sex last.  \n\n");
 		outputText("“Yes.” Arian steps forward. “I-if you wouldn’t mind, I want to…examine you.”  \n\n");
 		outputText("Giving your bashful lover a wink, you ask him if he didn’t get a thorough enough examination last time.  \n\n");
@@ -200,7 +200,7 @@ doNext(playerMenu);
 public function ElectraPregAnnouncement():void {
 		clearOutput();
         //if the first time you've knocked her up
-		outputText("As you return to camp, you notice Electra sitting by your (bedroll/Cabin). As she notices you, she stands. You notice, to your discomfort, she has an imp tied up at her feet. Upon further inspection, her hands are sparking, and that the imp’s cock is ramrod straight, despite the small pool of cum around him. \n\n"); 
+		outputText("As you return to camp, you notice Electra sitting by your [cabin]. As she notices you, she stands. You notice, to your discomfort, she has an imp tied up at her feet. Upon further inspection, her hands are sparking, and that the imp’s cock is ramrod straight, despite the small pool of cum around him. \n\n");
 		outputText("She drags the imp behind her, and as she gets closer, you notice that he’s tied up, not with rope, but with a copper cable. She sighs, annoyed, and the imp flails as blue electricity arcs down her wire, through him.  \n\n");
 		outputText("You ask about her…toy, and Electra shakes her head, looking at you as if it’s your fault. “Well, for the next little while, I’m going to be producing more electricity.” She gives you a little shake of her tail, dropping the imp. “I’m…Going to be making electricity for two.”  \n\n");
 		outputText("She lets the silence hang for a few seconds. “...Yeah. I’m…Pregnant.” She looks down and away, to your shock, she’s actually blushing. “Normally we Raiju don’t get pregnant. Not if we don’t want it.” Her tail wraps around herself, and she hugs it, unusually bashful. “It’s not something we…consciously control, but our bodies just seem to…know when it means more to us than release.”  \n\n");
@@ -233,7 +233,7 @@ The old mouse looks slightly annoyed. “...In order for you to achieve…Result
 		outputText("Electra blinks, realising what he means by an imprint. “Oh.” \n\n");
         outputText("You decide to make yourself known, and come over, telling Electra that you were just checking up on her. She zaps her imp, getting a low groan, before giving you a fuzzy hug. You ask what she’s doing with Ralthazul, and the old alchemist gives you a slight smile.  \n\n");
 		outputText("“Oh, just doing a little problem-solving, my friend. With the…New Raijus on the way, the thought of how to deal with their…Emissions…Came up.” He looks at you. “I have an idea, but it requires a little…innovation, and input from you.” He holds out a container, filled with plaster. “If you would go somewhere private, and…Imprint?” As you take it and walk away, he turns his head. “It needs to be erect!” \n\n");
-		outputText("You nod, and Electra brings you to your (Cabin/Bedroll). Electra looks down at your groin wistfully, rubbing her stomach. “Well…You heard the rat.” You strip, and she steps in, rubbing your [cock], letting little sparks tingle across your girth. You harden quickly, and Electra sighs in disappointment, girding your member with the liquid plaster. It’s not the most comfortable of feelings, nor the most arousing, and you feel yourself starting to soften. Electra, realising your predicament, steps in, rubbing herself against you. She leans in, kissing you on the lips, running her claws along your back, and moaning in arousal at your touch.  \n\n");
+		outputText("You nod, and Electra brings you to your ([Cabin]). Electra looks down at your groin wistfully, rubbing her stomach. “Well…You heard the rat.” You strip, and she steps in, rubbing your [cock], letting little sparks tingle across your girth. You harden quickly, and Electra sighs in disappointment, girding your member with the liquid plaster. It’s not the most comfortable of feelings, nor the most arousing, and you feel yourself starting to soften. Electra, realising your predicament, steps in, rubbing herself against you. She leans in, kissing you on the lips, running her claws along your back, and moaning in arousal at your touch.  \n\n");
         outputText("Ten minutes pass in a blur, and Electra drops her hands to your plaster-clad [cock]. Gently, slowly, she carves a groove in the plaster, then slowly peels the mould off.  \n\n");
 		outputText("Electra leaves for a moment, presumably to drop the finished mould off with Ralthzul, before coming back, hips swaying. She has a bowl of water and a cloth, and she smiles, looking down at your [cock]. You realise that some of the plaster is still there, on your [cock], and bits of it have splashed on your [legs]. \n\n");
 		outputText("“Thank you for this.” Electra says. “But…There’s still some left on you.” She gets on her knees, putting the bowl in front of her. \n\n");
@@ -432,7 +432,7 @@ doNext(playerMenu);
 
 public function PCKnockedUpSidonieAnnouncement1():void {
 		clearOutput();
-		outputText("As you come back to camp, you see your camp carpenter, sitting next to your [Bedroll/Cabin] with a frown on her face. As she sees you, Sidonie stands, walking over to you. As she gets close, she pulls up her shirt, pointing down at her abs. \n\n"); 
+		outputText("As you come back to camp, you see your camp carpenter, sitting next to your [Cabin] with a frown on her face. As she sees you, Sidonie stands, walking over to you. As she gets close, she pulls up her shirt, pointing down at her abs. \n\n");
 		outputText("“This is why I don’t usually catch, [Name]. You look down, and to your surprise, Sidonie’s belly is beginning to swell slightly. It’s barely noticeable unless directly pointed out, but Sidonie seems to be annoyed. \n\n");
 		outputText("“Well? What do you have to say for yourself?” Sidonie puts one hand on her hip, waiting for a response.  \n\n");
 		outputText(" \n\n");
@@ -445,7 +445,7 @@ addButton (3, "WhyUMad", PCKnockedUpSidonieTroll);
 }
 public function PCKnockedUpSidonieAnnouncement2():void {
 		clearOutput();
-		outputText("You get into camp, to see your camp woodworker sitting by your (cabin/bedroll), a bowl of oats in her hand. You head over, sitting beside her, and she winces, patting her stomach.  \n\n"); 
+		outputText("You get into camp, to see your camp woodworker sitting by your ([cabin]), a bowl of oats in her hand. You head over, sitting beside her, and she winces, patting her stomach.  \n\n");
 		outputText("“H-hey…” She seems a little embarrassed, but you wrap an arm around her shoulder. “Y-yeah, it’s what you think. I’m having another kid, and it’s yours.” She leans in. “Just…Hold me for a sec, would you?” You hold her for a few minutes, before she sighs, going back to her work and cracking her knuckles. “Thanks.” You see Sidonie swing her axe into one of the logs…Way harder than she needed to. Clearly Sidonie isn’t the happiest about being a mother again. \n\n");
 	doNext(playerMenu);
 }

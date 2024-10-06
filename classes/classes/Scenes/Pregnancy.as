@@ -19,7 +19,6 @@ public class Pregnancy extends NPCAwareContent {
 
     public function updatePregnancy():Boolean {
         var displayedUpdate:Boolean = false;
-        var pregText:String = "";
         if(player.pregnancyType == 0 && player.pregnancy2Type == 0 && player.buttPregnancyType == 0) {
             return false;
         }
@@ -52,7 +51,24 @@ public class Pregnancy extends NPCAwareContent {
                 womb["incubation"] = player.pregnancy2Incubation;
                 wombs.push(womb);
             }
-            for each(womb in wombs) {
+            for each(womb in wombs)
+                displayedUpdate ||= eventVag(womb);
+        }
+        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT && player.pregnancyType != PregnancyStore.PREGNANCY_HARPY_HATCHING)
+            displayedUpdate ||= birthVag();
+        if(player.pregnancy2Incubation == 1 && player.pregnancy2Type != PregnancyStore.PREGNANCY_BENOIT && player.pregnancy2Type != PregnancyStore.PREGNANCY_HARPY_HATCHING)
+            displayedUpdate ||= birthVag2();
+        //IF INCUBATION IS ANAL
+        if(player.buttPregnancyIncubation > 1)
+            displayedUpdate ||= eventButt();
+        if (player.buttPregnancyIncubation == 1)
+            displayedUpdate ||= birthButt();
+        displayedUpdate ||= birthSpecial();
+        return displayedUpdate;
+    }
+
+            private function eventVag(womb:Object):Boolean {
+                var displayedUpdate:Boolean = false;
                 if (womb["type"] == PregnancyStore.PREGNANCY_FAERIE) {
                     displayedUpdate = SceneLib.bog.phoukaScene.phoukaPregUpdate(womb);
                 }
@@ -897,6 +913,7 @@ public class Pregnancy extends NPCAwareContent {
                     }
                 }
                 if (womb["type"] == PregnancyStore.PREGNANCY_EMBER) {
+                    var pregText:String = "";
                     //Pregnancy notes: Egg Laying
                     if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
                         if (womb["incubation"] == sceneHunter.adjustPregEventTimer(330, womb["type"])) pregText = "Your belly has swollen, becoming larger - proof that Ember's seed did its work.  The dragon seems to be constantly checking you out, as if looking for the signs of weight gain.";
@@ -930,7 +947,7 @@ public class Pregnancy extends NPCAwareContent {
                             else if (player.cor < 75) pregText += "You smile, knowing you'll have your egg in your hands the next few days.  A part of you is almost sad that you'll be empty, but you can always entice Ember into getting you pregnant again.";
                             //(If Corruption >= 75)
                             else {
-                                pregText += "You find yourself daydreaming about giving birth, your belly swollen huge - bigger than it currently is - and the orgasmic sensation of many large, round eggs sliding out of your "+player.vaginaDescript(womb["womb"])+".\n\nYou start to absently rub yourself as you envision eggs by the dozens coming from within you; you shall be mothergod for a whole new race of dragons...";
+                                pregText += "You find yourself daydreaming about giving birth, your belly swollen huge - bigger than it currently is - and the orgasmic sensation of many large, round eggs sliding out of your " + player.vaginaDescript(womb["womb"]) + ".\n\nYou start to absently rub yourself as you envision eggs by the dozens coming from within you; you shall be mothergod for a whole new race of dragons...";
                                 player.dynStats("lus", 35, "scale", false);
                             }
                             pregText += "\n\nEmber interrupts your musings with a question.  \"<i>How are you feeling? Do you need me to get you anything?</i>\"";
@@ -1213,13 +1230,13 @@ public class Pregnancy extends NPCAwareContent {
                     if (womb["incubation"] == sceneHunter.adjustPregEventTimer(8, womb["type"])) {
                         //Egg Maturing
                         if (player.hasVagina()) {
-                            EngineCore.outputText("\nYour gut churns, and with a squelching noise, a torrent of transparent slime gushes from your "+player.vaginaDescript(womb["womb"])+".  You immediately fall to your knees, landing wetly amidst the slime.  The world around briefly flashes with unbelievable colors, and you hear someone giggling.\n\nAfter a moment, you realize that it’s you.");
+                            EngineCore.outputText("\nYour gut churns, and with a squelching noise, a torrent of transparent slime gushes from your " + player.vaginaDescript(womb["womb"]) + ".  You immediately fall to your knees, landing wetly amidst the slime.  The world around briefly flashes with unbelievable colors, and you hear someone giggling.\n\nAfter a moment, you realize that it’s you.");
                             //pussy:
-                            if (player.hasVagina()) EngineCore.outputText("  Against your "+player.vaginaDescript(womb["womb"])+", the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
+                            if (player.hasVagina()) EngineCore.outputText("  Against your " + player.vaginaDescript(womb["womb"]) + ", the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
                             //[balls:
                             else if (player.hasBalls()) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
                             //genderless:
-                            else EngineCore.outputText("  Your "+player.vaginaDescript(womb["womb"])+" begins twitching, aching for something to push through it over and over again.");
+                            else EngineCore.outputText("  Your " + player.vaginaDescript(womb["womb"]) + " begins twitching, aching for something to push through it over and over again.");
                             EngineCore.outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
                             player.dynStats("lus=", player.maxOverLust(), "scale", false);
                             displayedUpdate = true;
@@ -1359,31 +1376,31 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Cockatrice Pregnancy
                 else if (womb["type"] == PregnancyStore.PREGNANCY_COCKATRICE) {
-                    if (womb["incubation"] === 185) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(185, womb["type"])) {
                         outputText("\n<b>Your belly grumbles as if empty, even though you ate not long ago.  Perhaps with all the exercise you're getting you just need to eat a little bit more.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 160) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(160, womb["type"])) {
                         outputText("\n<b>Your belly looks a little pudgy");
                         if (player.thickness > 60 && player.tone < 40) outputText(" even for you");
                         outputText(", maybe you should cut back on all the food you've been consuming lately?</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 140) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(140, womb["type"])) {
                         outputText("\n<b>Your belly is definitely getting bigger, and no matter what you do, you can't seem to stop yourself from eating at the merest twinge of hunger.  The only explanation you can come up with is that you've gotten pregnant during your travels.  Hopefully it won't inconvenience your adventuring.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 110) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(110, womb["type"])) {
                         outputText("\n<b>Your belly has gotten nice and big, perhaps as big as you remember the bellies of the pregnant women back home being.  The elders always did insist on everyone doing their part to keep the population high enough to sustain the loss of a champion every year.  You give yourself a little hug, getting a surge of happiness from your hormone-addled body.  Pregnancy sure is great!</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 72) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         outputText("\n<b>The huge size of your pregnant belly constantly impedes your movement, but the constant squirming and shaking of your unborn offspring makes you pretty sure you won't have to carry them much longer.  A sense of motherly pride wells up in your breast - you just know you'll have such wonderful babies.");
                         if (player.cor < 50) outputText("  You shudder and shake your head, wondering why you're thinking such unusual things.");
                         outputText("</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 32 || womb["incubation"] === 64 || womb["incubation"] === 85 || womb["incubation"] === 150) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] === sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] === sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] === sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
@@ -1418,11 +1435,11 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Quasi-Phoenix Pregnancy
                 else if (womb["type"] == PregnancyStore.PREGNANCY_QUASI_PHOENIX) {
-                    if (womb["incubation"] === 168) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(168, womb["type"])) {
                         outputText("\nYour stomach has grown noticeably distended, and feels hard and solid to the touch. A strange warm sensation emanates from within you; you don’t think it’s had any effect on you, but it does feel nice.\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 120) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         outputText("\n<b>You are quite visibly pregnant now, your belly round and firm, easily comparable to a woman exiting her second trimester.</b> The egg in your womb radiates heat, filling your body with its unearthly warmth. You feel tougher, hardier, like the flame in your belly is burning out weakness... But your loins are also full of a far more familiar warmth.\n");
 
                         player.statStore.addBuffObject({
@@ -1432,7 +1449,7 @@ public class Pregnancy extends NPCAwareContent {
                         player.addCurse("spe", 3);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 72) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         outputText("\nA gut like this on a woman back home would normally signal that she’s about to pop, but you have the feeling that the egg inside you isn’t done growing yet. The heat radiating from it is stronger than ever; you wonder if this is what a pot-bellied stove with a roaring fire feels like. You feel hardened and aroused all at once from the ever-burning flames.\n");
                         player.statStore.addBuffObject({
                             "tou": 2,
@@ -1440,7 +1457,7 @@ public class Pregnancy extends NPCAwareContent {
                         }, 'Quasi-Phoenix Egg', {text: 'Quasi-Phoenix Egg'});
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 24) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(24, womb["type"])) {
                         outputText("\nSurely this huge egg can’t grow much bigger; you’re already wondering how you’re going to pass the massive thing! Your stomach looks more like you have a small child curled up inside you than a fully grown baby, and you have to move slower because of how it’s weighing you down. Despite your huge size, you feel hornier and hardier than ever, the heat from inside you literally radiating off of your swollen form and heating up everything nearby.\n");
                         player.statStore.addBuffObject({
                             "tou": 2,
@@ -1448,7 +1465,7 @@ public class Pregnancy extends NPCAwareContent {
                         }, 'Quasi-Phoenix Egg', {text: 'Quasi-Phoenix Egg'});
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] === 16 || womb["incubation"] === 48 || womb["incubation"] === 86) {
+                    if (womb["incubation"] === sceneHunter.adjustPregEventTimer(16, womb["type"]) || womb["incubation"] === sceneHunter.adjustPregEventTimer(48, womb["type"]) || womb["incubation"] === sceneHunter.adjustPregEventTimer(86, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
@@ -1481,9 +1498,11 @@ public class Pregnancy extends NPCAwareContent {
                         }
                     }
                 }
+                return displayedUpdate;
             }
-        }
-        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT && player.pregnancyType != PregnancyStore.PREGNANCY_HARPY_HATCHING) {
+
+        private function birthVag():Boolean {
+            var displayedUpdate:Boolean = false;
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -1613,7 +1632,7 @@ public class Pregnancy extends NPCAwareContent {
                     player.knockUpForce(); //Clear Pregnancy
                     return true;
                 }
-                else if(player.anemoneCocks() > 0 && player.cor < 25 && flags[kFLAGS.ANEMONE_KID] == 0) {
+                else if(player.anemoneCocks() > 0 && player.cor <= 50 + player.corruptionTolerance && flags[kFLAGS.ANEMONE_KID] == 0) {
                     EngineCore.outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The ensuing pain in your labia and " + clitDescript() + " makes you lock up and nearly takes away your consciousness, and with " + player.multiCockDescript() + " in the way, you can't get any leverage on the pull at all!  The anemone detaches weakly, but writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Searching about weakly with the feelers, it touches along your thigh and searches out the entrance of your pussy.  When the tentacled crown brushes past your lips a venomous heat stirs your crotch and fills you with energy; shocked into sense, you look at the absurd creature.  You raise your arm to slap at it, but something stays your hand.  As if sensing your hesitation, it stands upright and holds itself at attention for inspection.  It would be easy to knock it away... and yet, the unprepossessing little thing looks so proud that you can't quite bring yourself to do so.");
                     EngineCore.outputText("\n\nYou scoop the diminutive anemone up and look around for somewhere wet to put it.  The stream is too far, the lake doubly so; you'd never make it to either, as sick as you feel from yanking viciously on your clitoris.  Driven to last resorts, you lurch over to the water barrel in your camp and, wrenching the lid off, drop the blue stalk unceremoniously inside.  Exhausted by the shock and pain of the ordeal, you slump down beside the barrel and slip into a doze...");
                     player.cuntChange(20,true,true,false);
@@ -1809,14 +1828,14 @@ public class Pregnancy extends NPCAwareContent {
                             EngineCore.outputText("You notice that Marble seems to be deep in thought, and you ask her what is wrong.  She starts after a moment and says, \"<i>Oh sweetie, no, it's nothing really.  I just never thought that I'd actually be able to father a son is all.  The thought never occurred to me.\"</i>");
                         }
                         //Add to marble-kids:
-						if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) {
-							flags[kFLAGS.MARBLE_KIDS] += 2;
-							flags[kFLAGS.MARBLE_BOYS] += 2;
-						}
-						else {
-							flags[kFLAGS.MARBLE_KIDS]++;
-							flags[kFLAGS.MARBLE_BOYS]++; //increase the number of male kids with Marble
-						}
+                        if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) {
+                            flags[kFLAGS.MARBLE_KIDS] += 2;
+                            flags[kFLAGS.MARBLE_BOYS] += 2;
+                        }
+                        else {
+                            flags[kFLAGS.MARBLE_KIDS]++;
+                            flags[kFLAGS.MARBLE_BOYS]++; //increase the number of male kids with Marble
+                        }
                     }
                     else // end of new content
                             //it's a girl!
@@ -1833,7 +1852,7 @@ public class Pregnancy extends NPCAwareContent {
                         }
                         EngineCore.outputText("The little girl is already starting to look like she is a few years old; she's trotting around on her little hooves.");
                         //Add to marble-kids:
-						if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.MARBLE_KIDS] += 2;
+                        if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.MARBLE_KIDS] += 2;
                         else flags[kFLAGS.MARBLE_KIDS]++;
                     }
                     //Increase the size of the PC's hips, as per normal for pregnancies, increase birth counter
@@ -1909,7 +1928,7 @@ public class Pregnancy extends NPCAwareContent {
             if (player.pregnancyType == PregnancyStore.PREGNANCY_GOBLIN) {
                 player.boostLactation(.01);
                 player.knockUpForce(); //Clear Pregnancy
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 1;//Do not doNext to camp, pregnancy event set ups menu - also if this flag is used can skip adding "return false/true;"
+                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 1;//Do not doNext to camp, pregnancy event set ups menu - also if this flag is used can skip adding "return false/true;"
                 SceneLib.camp.campScenes.goblinsBirthScene();
                 return false;
             }
@@ -2143,8 +2162,11 @@ public class Pregnancy extends NPCAwareContent {
                 player.knockUpForce(); //Clear Pregnancy
                 displayedUpdate = true;
             }
+            return displayedUpdate;
         }
-        if(player.pregnancy2Incubation == 1 && player.pregnancy2Type != PregnancyStore.PREGNANCY_BENOIT && player.pregnancy2Type != PregnancyStore.PREGNANCY_HARPY_HATCHING) {
+
+        private function birthVag2():Boolean {
+            var displayedUpdate:Boolean = false;
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -2471,13 +2493,13 @@ public class Pregnancy extends NPCAwareContent {
                         }
                         //Add to marble-kids:
                         if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) {
-							flags[kFLAGS.MARBLE_KIDS] += 2;
-							flags[kFLAGS.MARBLE_BOYS] += 2;
-						}
-						else {
-							flags[kFLAGS.MARBLE_KIDS]++;
-							flags[kFLAGS.MARBLE_BOYS]++; //increase the number of male kids with Marble
-						}
+                            flags[kFLAGS.MARBLE_KIDS] += 2;
+                            flags[kFLAGS.MARBLE_BOYS] += 2;
+                        }
+                        else {
+                            flags[kFLAGS.MARBLE_KIDS]++;
+                            flags[kFLAGS.MARBLE_BOYS]++; //increase the number of male kids with Marble
+                        }
                     }
                     else // end of new content
                             //it's a girl!
@@ -2569,7 +2591,7 @@ public class Pregnancy extends NPCAwareContent {
             if (player.pregnancy2Type == PregnancyStore.PREGNANCY_GOBLIN) {
                 player.boostLactation(.01);
                 player.knockUpForce(0, 0, 1); //Clear Pregnancy
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 1;//Do not doNext to camp, pregnancy event set ups menu - also if this flag is used can skip adding "return false/true;"
+                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 1;//Do not doNext to camp, pregnancy event set ups menu - also if this flag is used can skip adding "return false/true;"
                 SceneLib.camp.campScenes.goblinsBirthScene(1);
                 return false;
             }
@@ -2802,9 +2824,11 @@ public class Pregnancy extends NPCAwareContent {
                 player.knockUpForce(0, 0, 1); //Clear Pregnancy
                 displayedUpdate = true;
             }
+            return displayedUpdate;
         }
-        //IF INCUBATION IS ANAL
-        if(player.buttPregnancyIncubation > 1) {
+
+        private function eventButt():Boolean {
+            var displayedUpdate:Boolean = false;
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
                 if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(8, player.buttPregnancyType)) {
                     //Egg Maturing
@@ -2947,9 +2971,11 @@ public class Pregnancy extends NPCAwareContent {
                     player.buttKnockUpForce(); //Clear Butt Pregnancy
                 }
             }
+            return displayedUpdate;
         }
-        //Give birf if its time... to ANAL EGGS
-        if (player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(1, player.buttPregnancyType)) {
+
+        private function birthButt():Boolean {
+            var displayedUpdate:Boolean = false;
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
                 SceneLib.bog.frogGirlScene.birthFrogEggsAnal();
                 displayedUpdate = true;
@@ -3019,7 +3045,13 @@ public class Pregnancy extends NPCAwareContent {
                 displayedUpdate = true;
                 SceneLib.plains.satyrScene.satyrBirth(false);
             }
+            return displayedUpdate;
         }
+
+    // Unusual checks that are separated for some reason
+    // I'm sorry if they NEEDED
+    private function birthSpecial():Boolean {
+        var displayedUpdate:Boolean = false;
         if (player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT && player.pregnancyIncubation <= 2) {
             if(model.time.hours != 5 && model.time.hours != 6) {
                 player.knockUpForce(player.pregnancyType, 3); //Make sure eggs are only birthed early in the morning
@@ -3041,7 +3073,7 @@ public class Pregnancy extends NPCAwareContent {
             }
         }
         if ((player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING && player.pregnancyIncubation <= 2) ||
-            (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING && player.pregnancy2Incubation <= 2)) {
+                (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING && player.pregnancy2Incubation <= 2)) {
             if(model.time.hours != 5 && model.time.hours != 6) {
                 if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancyType, 3); //Make sure eggs are only birthed early in the morning
                 if (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancy2Type, 3, 1); //Make sure eggs are only birthed early in the morning

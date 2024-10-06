@@ -1623,13 +1623,10 @@ public function marbleMilkSex():void {
 	marbleSprite();
 	if(player.gender == 0) {
 		marbleGenderlessNoFuck();
-        doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+        doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-    if (!recalling) {
-        marbleFuckStatus(2);
-        outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
-    }
+    marbleFuckStatus(2);
 	outputText("Drinking her milk has filled you with an intense need, and you can see that need in Marble's eyes too.  You have no choice; you are going to have sex with her.\n\n");
 	//[player is wearing fetish gear]
 	if(player.armorName == "bondage patient clothes" ||
@@ -1672,11 +1669,9 @@ public function marbleMilkSex():void {
 		else outputText("Marble bottoms out at eight inches and you can go no further.  ");
 		outputText("With a delighted shiver, Marble starts to push herself up and down on you, her movements growing more and more frantic over time.  You try to slow her down but she seems to be beyond the capability of listening to you now, giving only louder and more frantic moans of pleasure.  Sooner than you would have preferred, you explode inside her. At that moment, Marble gives a final moan that sounds almost exactly like a moo.  She slows down, seeming to have already reached her peak.\n\n");
 		outputText("You can see that Marble is quite pleased and satisfied after that milking and sex combo session.  She rolls off you onto her bed and is soon asleep.  It takes you a few moments to get cleaned up, still in a slight daze after that frantic lovemaking.  As you depart, you give a final glance to Marble and see her still dozed off on her bed in a slightly lopsided position.");
-        if (!recalling) {
-            player.sexReward("vaginalFluids", "Dick");
-            player.sexReward("milk", "Lips");
-        }
-        doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour)
+        player.sexReward("vaginalFluids", "Dick");
+        player.sexReward("milk", "Lips");
+        doNext(camp.returnToCampUseOneHour)
 	}
 	//(player is female)
 	function vagF():void {
@@ -1712,8 +1707,8 @@ public function marbleMilkSex():void {
 		if(player.totalNipples() > 2) outputText("next");
 		else outputText("other");
 		outputText(" " + nippleDescript(0) + " and starts the experience all over again.  By the end, her efforts have successfully rung an orgasm from you. After cleaning up a bit, Marble sends you off in high spirits.");
-        if (!recalling) player.sexReward("milk", "Lips");
-        doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+        player.sexReward("milk", "Lips");
+        doNext(camp.returnToCampUseOneHour);
 	}
 }
 
