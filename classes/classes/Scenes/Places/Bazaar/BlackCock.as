@@ -408,7 +408,7 @@ import classes.lists.Gender;
 			outputText("\n\nWhen you begin to press more roughly against her, thinking of pushing your [cock] into her slobbering cunt, she shoves you, halting your advances as she grins up at the question on your face, \"<i>Always lick it before you stick it... darlin'.</i>\"");
 			outputText("\n\nAs she says this you grab her by her soft thighs and lift. She's as light as a feather, easier to pick up than a fork and spoon. You shove her up into the air and get a good look at her smooth lady-parts as they leak a steady stream of sweet-smelling wetness. All you do is push your [tongue] across the surface and a pair of legs lock around your neck with hands clutching at your [hair]. This must be one sensitive pussy.");
 			outputText("\n\nGrinning against her girl bits you begin to tickle and tease her swollen clitoris, enjoying the sound of the harpy lady screeching and groaning above you. She tastes like candy, as if someone melted a sugary treat and filled her with the juices. The sweetness is intoxicating and sends tingles down to [eachCock] as you practically drink from the harpy's nethers.");
-			outputText("\n\nSuddenly the legs clamped around your neck become dangerously tight. With surprising strength Anita holds you in place and grinds her pussy against your [face] with a high pitch keen rending the air. Then she begins to squirt. It is a sudden spray of girlcum drenching your face, coating your jaw in the sugary substance as it travels down to your [fullChest], it leaks down your erect [cock] [if (hasBalls = true) \"and dribbles past your [balls]\"] before streaming down your [legs] and ending at your [feet]. With your entire front half covered in sweet girl cum the Harpy slides down your body, a look of supreme bliss on her face as she says, \"<i>Well partner, let's get that there cock taken care of.</i>\"");
+			outputText("\n\nSuddenly the legs clamped around your neck become dangerously tight. With surprising strength Anita holds you in place and grinds her pussy against your [face] with a high pitch keen rending the air. Then she begins to squirt. It is a sudden spray of girlcum drenching your face, coating your jaw in the sugary substance as it travels down to your [fullChest], it leaks down your erect [cock] [if (hasBalls = true) and dribbles past your [balls]] before streaming down your [legs] and ending at your [feet]. With your entire front half covered in sweet girl cum the Harpy slides down your body, a look of supreme bliss on her face as she says, \"<i>Well partner, let's get that there cock taken care of.</i>\"");
 			sceneHunter.print("Fork: Biped,Goo,Drider / Taur / Naga");
 			if (player.isBiped() || player.isGoo() || player.isDrider()) {
 				sceneHunter.callBigSmall(sceneBiped, 18, 10, "length");
@@ -430,6 +430,7 @@ import classes.lists.Gender;
 					}
 					outputText("\n\nAfter fucking her for a few more minutes you begin to feel a familiar tingle streaming through your [cock " + x1 + "]. With clenched teeth you double down and pound Anita as hard as you can. She's trembling but so are you and with a final thrust forward you reach climax just as she does, your [cock " + x1 + "] pouring seed into her squirting vulva as the two of you groan between ragged breaths.[if (cumExtreme) \"<i>Once you've recovered from your orgasm you open your eyes to find Anita's belly swollen as if she's pregnant. She rubs your cum baby with obvious delight and tells you not to worry she can't get pregnant unless she takes some pill. When you pull your [cock " + x1 + "] from her your cum comes flooding out like a waterfall and soon she's back to normal.");
 					outputText("\n\n\"<i>Whoa stud… just whoa,</i>\" she says, breathless as she reaches forward to press her lips against yours. After the kiss the two of you rise and after a little small talk part ways.");
+					sharedEnd();
 				}
 			}
 			else if (player.isTaur()) {
@@ -450,6 +451,7 @@ import classes.lists.Gender;
 					}
 					outputText("\n\nAfter fucking her for a few more minutes you begin to feel a familiar tingle streaming through your [cock " + x1 + "]. With clenched teeth you double down and pound Anita as hard as you can. She's trembling beneath you, like a vibrating onahole milking your [cock " + x1 + "]. With a final brutal thrust forward you reach climax just as she does, your [cock " + x1 + "] pouring seed into her squirting vulva as the two of you groan between ragged breaths.[if (cumExtreme) \"<i>Once you've recovered from your orgasm you open your eyes to find Anita's standing in front of your. Her belly is swollen as if she's pregnant. She rubs your cum baby with obvious delight and tells you not to worry: she can't get pregnant unless she takes some pill.");
 					outputText("\n\n\"<i>Can't wait to get on that horse again,</i>\" Anita intones as she kisses you before the two of you redress and part ways.");
+					sharedEnd();
 				}
 			}
 			else if (player.isNaga()) {
@@ -464,11 +466,14 @@ import classes.lists.Gender;
 					else outputText("\n\nThe moment you shove your [cock " + x1 + "] into Anita she grabs you and with a deep throaty groan squirts another heavy helping of girl-cum around your almost hilted [cock " + x1 + "] and down your [legs]. You watch her convulse as you hold her down, her pussy gripping your dick with surprisingly strong internal muscles. She sure is one hot little winged squirter. When you begin to move, undulating each coil in turn as work your [cock " + x1 + "] around in a circular motion, fucking the little cum crazed country girl with circular strokes, each punctuated with a sudden sharp thrust. The practice sends a desperate look through Anita's face, \"<i>Shit you're bigger'n my husband.</i>\" She says as you fuck her harder and harder, pounding her dripping pussy with increasing passion and listening to her call out and babble like a fool.");
 					outputText("\n\nYou begin to feel less and less in control of your swirling, thrusting [cock " + x1 + "] as a familiar tingle foods your [cock " + x1 + "]. Its time and as you slam forward, coils tight around the harpy's legs and fists clenched around her wrists, she smashes her lips into yours. With her tongue in your mouth your dick begins hosing down her insides, your baby batter spreading through her hungry pussy with what can only be described as shuddering convulsions that leave you feeling exhausted as the sensations ebb, your body falling limply onto the harpy lady as your still embedded [cock " + x1 + "] slips out, temporarily sated.");
 					outputText("\n\nAfter a few seconds of blissful rest you begin the process of disengaging your coils from the dozing harpy lady. [if (cumExtreme) \"<i>As you do, you notice a large amount of your own jism leaking from her slightly distended snatch, her pussy unable to soak it up. Looking down you see a huge puddle of mixed cum around the two of you, most of it yours.</i>\"] Once you've managed to release her the married woman stands on visibly wobbly legs and leaves you after saying, \"<i>You cum back here anytime, darlin'…</i>\" and with a smile you slither back to camp.");
+					sharedEnd();
 				}
 			}
-			player.sexReward("vaginalFluids", "Dick");
-			flags[kFLAGS.BLACK_COCK_ANITA_SEX_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			function sharedEnd():void {
+				player.sexReward("vaginalFluids", "Dick");
+				flags[kFLAGS.BLACK_COCK_ANITA_SEX_COUNTER]++;
+				doNext(camp.returnToCampUseOneHour);
+			}
 		}
 
 		private function sex69Anita():void { //69 with Anita, must not be a taur.

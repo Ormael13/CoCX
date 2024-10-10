@@ -190,7 +190,7 @@ public function edrynBarTalk():void {
 		outputText("Swaying back and forth, alternatively snorting and breathing deeply of the female's scent, your gaze immediately locks onto the returning mare.  Your [cock] jumps and bounces underneath you, painfully hard and swollen.  A thick dollop of pre beads on your [cockhead], as if the bar needed your display to be any more overtly sexual.  Edryn looks you over, walking alongside you she talks, \"<i>My my, someone liked what they saw.  Or was it smelled?  I can never tell what it is that gets you " + player.mf("studs","hotties") + " so worked up about me.</i>\"\n\n");
 		outputText("A soft hand slides under your belly, hefting your [cock] and smearing the bead of pre over it with long slick strokes.  She coos, \"<i>");
 		dynStats("lus", 70, "scale", false);
-		sceneHunter.callBigSmall(edrynOffer, 300, 24);
+		edrynOffer();
 	}
 	else if(player.cockTotal() > 0) {
 		if(player.horseCocks() > 0) {
@@ -199,7 +199,7 @@ public function edrynBarTalk():void {
 			else outputText("You squirm uncomfortably, feeling constrained by your [armor] as you surge to erectness.\n\n");
 			outputText("Swaying back and forth in a scent induced haze, you fail to notice Edryn's return.  She coughs noisily, drawing you back to the real world and pushing away the memory of her glistening snatch.  You start to fumble for words until you realize she's smiling knowingly at you.  Unexpectedly, caresses slide against your groin, hefting and measuring you through your [armor].\n\n");
 			dynStats("lus", 60, "scale", false);
-			sceneHunter.callBigSmall(edrynOffer, 300, 24);
+			edrynOffer();
 		}
 		//Non horsedick
 		else {
@@ -212,7 +212,7 @@ public function edrynBarTalk():void {
 				if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("  She smiles coyly when your [cock] wriggles, wrapping around her arm.");
 				outputText("\n\n");
 				dynStats("lus", 40, "scale", false);
-				sceneHunter.callBigSmall(edrynOffer, 300, 24);
+				edrynOffer();
 			}
 			else {
 				outputText("\n\nYou wait until she returns, wishing for once that things could be normal.  Though the remaining conversation is pleasant, you have a hard time enjoying yourself, and eventually bid the pretty centaur farewell.");
@@ -244,13 +244,16 @@ private function getCost():int {
 	else return 200 / Math.pow(2, player.statusEffectv1(StatusEffects.Edryn)); //200, 100, 50, 25
 }
 
-private function edrynOffer(x:Number):void {
+private function edrynOffer():void {
 	edrynSprite();
 	var cost:int = getCost();
 	////Pick most appropriate cock
-	//var x:Number = player.cockThatFits(300);
-	////If no cocks fit, set to main.
-	//if(x < 0) x = 0;
+	var x:int = player.findCock(1, 24, 300);
+	//If no cocks fit, set to main.
+	if(x < 0) {
+		x = 0;
+		sceneHunter.print("Req. a cock from 24 to 300 area.")
+	}
 
 	//(cont centaur)
 	if(player.isTaur() && player.cockTotal() > 0) {
