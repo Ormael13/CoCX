@@ -261,8 +261,8 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Ormael): Twin Nail Gun - can be gained by combining 2x Nail Gun weapon. Cost 300 spirit stones. Base atk is 15 and ammo clip size 20. It's Dual Firearm type range weapon that have all other properties of Nail Gun.\n");
 			outputText("-Added a toggle in Interface Game settings to alternate between current charviewer model and the one that's being developed (Only human body added for now, the other finished sprites will be added gradually) (Cangsz)\n");
 			outputText("-Bind Rework (HarpyBind, Goobind, TentacleBind, NagaBind) (NUZ/Shirane)\n");//Rework Bind Related Checks and Function, Lettuce Cleanup and Tentacle Attack Fix
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: FindCockWithType, anita sex, anita broken tags (Svalkash)\n");
+			outputText("-GroPlus can grow horns (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
