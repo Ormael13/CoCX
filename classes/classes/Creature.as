@@ -2111,14 +2111,6 @@ public class Creature extends Utils
 		public function hasAnyStatusEffect(...stypes:Array):Boolean {
 			return stypes.some(function(stype:StatusEffectType, index:int, array:Array):Boolean { return hasStatusEffect(stype); });
 		}
-		/**
-		 * Check if this creature has all of the specified status effects.
-		 * @param stypes {Array - StatusEffectType}
-		 * @return {Boolean} True if creature has all of the status effects, otherwise false.
-		 */
-		public function hasStatusEffects(...stypes:Array):Boolean {
-			return stypes.all(function(stype:StatusEffectType, index:int, array:Array):Boolean { return hasStatusEffect(stype); });
-		}
 		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
 			return this._statusEffects.changeStatusValue(stype, statusValueNum, newNum);
@@ -2450,7 +2442,7 @@ public class Creature extends Utils
                                 compareBy == "thickness" ? cocks[sorted[j]].cockThickness :
                                 cockArea(sorted[j]);
                         if (jsize < nsize) {
-                            sorted.insertAt(j, num);
+                            sorted.splice(j, 0, num);
                             break;
                         }
                     }

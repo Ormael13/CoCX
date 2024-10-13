@@ -345,7 +345,6 @@ public class SharkGirlScene extends AbstractBoatContent {
         else outputText("lass");
         outputText(".\n\nYou’re going to satisfy my needs, because if you don’t I will rip a huge chunk out of you!</i>\"\n\n");
         outputText("She flashes her teeth to make her statement and you nod right away in understanding, she ain’t bloody kidding!\n\n");
-        outputText("shark girl is faster than you. She grabs your leg and pulls you into the depths");
         if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) {
             outputText("You see her dong harden before you as she grabs your head and forcefully pulls it down to the level of her crotch.\n\n");
             outputText("\"<i>Suck it!!!</i>\"\n\n");
