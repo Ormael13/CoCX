@@ -66,6 +66,7 @@ public class AnubisRace extends Race {
 				.corruption(AT_LEAST(50), +1)
 				.hasPerk(PerkLib.MummyLord, +1);
 		
+		addBloodline(PerkLib.CaninesDescendant, PerkLib.BloodlineCanine);
 		addMutation(IMutationsLib.AnubiHeartIM);
 		addMutation(IMutationsLib.AlphaHowlIM);
 		

@@ -52,6 +52,8 @@ public class DogRace extends Race {
 							return !(CerberusRace.isCerberus(body));
 						}, 0, -1000);
 		
+		addBloodline(PerkLib.CaninesDescendant, PerkLib.BloodlineCanine);
+		
 		buildTier(4, "dog-morph")
 				.namesMaleFemaleMorphTaur("dog-boy", "dog-girl", "dog-morph", "dog-taur")
 				.buffs({

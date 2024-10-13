@@ -1479,6 +1479,8 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(10, "Ursine", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineFeline)) addButton(11, "Feline", confirmBloodline3, PerkLib.FelinesDescendant).hint("(+2 to cat / hellcat / cheshire cat / displacer beast / nekomata score)");
 			else addButtonDisabled(11, "Feline", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineCanine)) addButton(12, "Canine", confirmBloodline3, PerkLib.CaninesDescendant).hint("(+2 to anubis / dog / wolf score)");
+			else addButtonDisabled(12, "Canine", "You already have this bloodline!");
 			addButton(4, "-4-", chooseBloodline4);
 			addButton(9, "-2-", chooseBloodline2);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
@@ -1657,6 +1659,9 @@ import classes.Scenes.Combat.CombatAbility;
 					break;
 				case PerkLib.FelinesDescendant:
 					outputText("Your ancestor was a feline race member?");
+					break;
+				case PerkLib.CaninesDescendant:
+					outputText("Your ancestor was a canine race member?");
 					break;
 				default:
 					outputText("Your ancestor was a cancer?");
@@ -3349,6 +3354,11 @@ import classes.Scenes.Combat.CombatAbility;
 			else if (player.hasPerk(PerkLib.FelinesDescendant)) {
 				player.removePerk(PerkLib.FelinesDescendant);
 				player.createPerk(PerkLib.BloodlineFeline,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.CaninesDescendant)) {
+				player.removePerk(PerkLib.CaninesDescendant);
+				player.createPerk(PerkLib.BloodlineCanine,0,0,0,1);
 				bloodlineACQ2();
 			}
 			else if (player.hasPerk(PerkLib.DemonsDescendant)) {
