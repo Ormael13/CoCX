@@ -55,6 +55,7 @@ public class DisplacerBeastRace extends Race {
 						CatRace.isDisplacerSubrace,0,-1000
 				);
 		
+		addBloodline(PerkLib.FelinesDescendant, PerkLib.BloodlineFeline);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.DisplacerMetabolismIM);
 		

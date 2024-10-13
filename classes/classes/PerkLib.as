@@ -346,9 +346,17 @@ public class PerkLib
 		public static const BloodlineAvian:PerkType = mk("Bloodline: Avian", "Bloodline: Avian",
 				"Your Avian bloodline appears strongly within you. (+2 to avian score)", null, true);
 		public static const UrsinesDescendant:PerkType = mk("Ursine's descendant", "Ursine's descendant",
-				"You are a descendant of your ancestor, who was the child of a human and an Ursine. (+2 to bear/panda/red panda score)");
+				"You are a descendant of your ancestor, who was the child of a human and an Ursine. (+2 to bear / panda / red panda score)");
 		public static const BloodlineUrsine:PerkType = mk("Bloodline: Ursine", "Bloodline: Ursine",
-				"Your Ursine bloodline appears strongly within you. (+2 to bear/panda/red panda score)", null, true);
+				"Your Ursine bloodline appears strongly within you. (+2 to bear / panda /r ed panda score)", null, true);
+		public static const FelinesDescendant:PerkType = mk("Feline's descendant", "Feline's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Feline. (+2 to cat / hellcat / cheshire cat / displacer beast / nekomata score)");
+		public static const BloodlineFeline:PerkType = mk("Bloodline: Feline", "Bloodline: Feline",
+				"Your Feline bloodline appears strongly within you. (+2 to cat / hellcat / cheshire cat / displacer beast / nekomata score)", null, true);
+	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
+	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
+	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
 	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
 	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
 	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",

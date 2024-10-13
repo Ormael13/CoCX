@@ -1475,10 +1475,10 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(7, "Cyclop", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineAvian)) addButton(8, "Avian", confirmBloodline3, PerkLib.AviansDescendant).hint("(+2 to avian score)");
 			else addButtonDisabled(8, "Avian", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineUrsine)) addButton(10, "Ursine", confirmBloodline3, PerkLib.UrsinesDescendant).hint("(+2 to bear/panda/red panda score)");
+			if (!player.hasPerk(PerkLib.BloodlineUrsine)) addButton(10, "Ursine", confirmBloodline3, PerkLib.UrsinesDescendant).hint("(+2 to bear / panda / red panda score)");
 			else addButtonDisabled(10, "Ursine", "You already have this bloodline!");
-			//if (!player.hasPerk(PerkLib.BloodlineCat)) addButton(11, "Cat", confirmBloodline3, PerkLib.CatsDescendant).hint("(+2 to cat score)");
-			//else addButtonDisabled(11, "Cat", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineFeline)) addButton(11, "Feline", confirmBloodline3, PerkLib.FelinesDescendant).hint("(+2 to cat / hellcat / cheshire cat / displacer beast / nekomata score)");
+			else addButtonDisabled(11, "Feline", "You already have this bloodline!");
 			addButton(4, "-4-", chooseBloodline4);
 			addButton(9, "-2-", chooseBloodline2);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
@@ -1654,6 +1654,9 @@ import classes.Scenes.Combat.CombatAbility;
 					break;
 				case PerkLib.UrsinesDescendant:
 					outputText("Your ancestor was an ursine?");
+					break;
+				case PerkLib.FelinesDescendant:
+					outputText("Your ancestor was a feline race member?");
 					break;
 				default:
 					outputText("Your ancestor was a cancer?");
@@ -3341,6 +3344,11 @@ import classes.Scenes.Combat.CombatAbility;
 			else if (player.hasPerk(PerkLib.UrsinesDescendant)) {
 				player.removePerk(PerkLib.UrsinesDescendant);
 				player.createPerk(PerkLib.BloodlineUrsine,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.FelinesDescendant)) {
+				player.removePerk(PerkLib.FelinesDescendant);
+				player.createPerk(PerkLib.BloodlineFeline,0,0,0,1);
 				bloodlineACQ2();
 			}
 			else if (player.hasPerk(PerkLib.DemonsDescendant)) {

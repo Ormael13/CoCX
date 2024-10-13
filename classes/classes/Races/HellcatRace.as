@@ -54,6 +54,7 @@ public class HellcatRace extends Race{
 						CatRace.isHellcatSubrace,0,-1000
 				);
 		
+		addBloodline(PerkLib.FelinesDescendant, PerkLib.BloodlineFeline);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		addMutation(IMutationsLib.BlazingHeartIM);

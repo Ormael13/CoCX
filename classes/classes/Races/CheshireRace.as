@@ -59,6 +59,7 @@ public class CheshireRace extends Race{
 						CatRace.isCheshireSubrace,0,-1000
 				);
 		
+		addBloodline(PerkLib.FelinesDescendant, PerkLib.BloodlineFeline);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		

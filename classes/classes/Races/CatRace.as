@@ -90,6 +90,7 @@ public class CatRace extends Race {
 				)
 				.hasPerk(PerkLib.Flexibility, +1);
 		
+		addBloodline(PerkLib.FelinesDescendant, PerkLib.BloodlineFeline);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		

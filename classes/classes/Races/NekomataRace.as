@@ -55,6 +55,7 @@ public class NekomataRace extends Race{
 						CatRace.isNekomataSubrace,0,-1000
 				);
 		
+		addBloodline(PerkLib.FelinesDescendant, PerkLib.BloodlineFeline);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		
