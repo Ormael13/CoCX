@@ -541,7 +541,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				//(no effect, but you can just save edit the values you want anyway)
 			}
 			//if hp = 0 after tutor, override any other result and output new PG:
-			if (player.HP <= player.minHP()) {
+			if (Math.round(player.HP) <= Math.round(player.minHP())) {
 				outputText("\n\nWith a groan, you fall flat on your back and close your eyes.  As if from far away, you hear ");
 				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != weapons.S_GAUNT.id &&
 						flags[kFLAGS.ANEMONE_WEAPON_ID] != weapons.H_GAUNT.id) outputText("the thump of something hitting the ground and ");

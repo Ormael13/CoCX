@@ -31,7 +31,7 @@ public function lostToWereshark():void {
 	clearOutput();
 	//spriteSelect(SpriteDb.s_DarkElf);
 	if (player.isRaceCached(Races.WERESHARK)) {
-		if (player.HP <= player.minHP()) outputText("Your injuries are mounting, your fins slowly give up support as you’re caught by the ocean. The current surrounds you as you’re unable to withstand his assault any longer. ");
+		if (Math.round(player.HP) <= Math.round(player.minHP())) outputText("Your injuries are mounting, your fins slowly give up support as you’re caught by the ocean. The current surrounds you as you’re unable to withstand his assault any longer. ");
 		else outputText("Your body stiffens, heat growing in your loins. The cool water around you is like a gentle caress from a tender lover as you find yourself caught by the current. ");
 		outputText("The wereshark swims up to you, teeth barred eagerly as he inspects your form on a deeper level.\n\n");
 		if (player.hasVagina()) {
@@ -60,7 +60,7 @@ public function lostToWereshark():void {
 		}
 	}
 	else {
-		if (player.HP <= player.minHP()) outputText("Your injuries are mounting, your cuts growing too deep as the saltwater pours into your wounds. You're caught by the current around you, unable to withstand his assault any longer. ");
+		if (Math.round(player.HP) <= Math.round(player.minHP())) outputText("Your injuries are mounting, your cuts growing too deep as the saltwater pours into your wounds. You're caught by the current around you, unable to withstand his assault any longer. ");
 		else outputText("Your body stiffens, heat growing in your loins. The cool water around you is like a gentle caress from a tender lover as you find yourself caught by the current. ");
 		outputText("The wereshark swims up to you, teeth barred eagerly as he inspects your form on a deeper level.\n\n");
 		outputText("As you're carried by the waves, you see a twinge of disappointment in his eyes, but his grin betrays nothing aside from ferocity. With a lurch forward, his teeth sink into your shoulder, clamping down, but not enough to make you bleed... any more than you already are. ");

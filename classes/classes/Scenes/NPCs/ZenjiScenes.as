@@ -158,7 +158,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public function part1TrollEncounterFightPCDefeated():void {
 			clearOutput();
 			zenjiPerspectiveOnPlayer(-4);
-			if (player.HP <= player.minHP()) {
+			if (Math.round(player.HP) <= Math.round(player.minHP())) {
 				outputText("The troll looks down on you, bruised and beaten. \"<i>Ahaha, dat was fun, but it looks like someone couldn’t handle me. I’ll be gettin ma payment now if ya don't mind.</i>\"\n\n");
 				outputText("You see him rifling through your gem pouch as you black out.\n\n");
 			}
@@ -215,7 +215,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public function part1TrollEncounterFightTOTHEDEATHPCDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
-			if (player.HP <= player.minHP()) {
+			if (Math.round(player.HP) <= Math.round(player.minHP())) {
 				outputText("You fall to the ground, bruised and beaten, wounds too severe for you to walk off right now.\n\n");
 				if (player.cor < 90 + player.corruptionTolerance) {
 					outputText("\"<i>Qué lástima,</i>\" he growls, \"<i>Not even worth my time.</i>\"\n\n");
@@ -663,7 +663,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public function part2TrollEncounterRepeatFightPCDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
-			if (player.HP <= player.minHP()) {
+			if (Math.round(player.HP) <= Math.round(player.minHP())) {
 				if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>[name]... Are you okay..? Would it help if I went easier? You don’ have ta fight me if you aren’t ready… Please, get some rest.</i>\"\n\n");
 				else outputText("\"<i>Das all ya got?</i>\" Zenji shakes his head, \"<i>Ya gotta try harder dan dat next time. Ya be safe out dere now.</i>\"\n\n");
 				zenjiPerspectiveOnPlayer(-4);
@@ -997,7 +997,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public function followerZenjiSparPCDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
-			if (player.HP <= player.minHP()) {
+			if (Math.round(player.HP) <= Math.round(player.minHP())) {
 				outputText("You hold up your hand and tell him that you can't fight him anymore.\n\n");
 				outputText("\"<i>Ya did good, but I know ya can do betta next time. Here, I know a trick ta help ya recova.</i>\" Zenji examines you for any wounds he may have caused and holds his hand over you, you feel a little better after he's done. \"<i>Give it a moment, you may want ta see if ya can do anything about it personally, 'cause I don’t usually use my tricks to help othas.</i>\"\n\n");
 			}

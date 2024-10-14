@@ -32,7 +32,7 @@ public class HellHound extends Monster
 				player.takeFireDamage(temp, true);
 				player.takeLustDamage(20+(player.effectiveSensitivity()/10), true);
 				statScreenRefresh();
-				if(player.HP <= player.minHP()) {
+				if(Math.round(player.HP) <= Math.round(player.minHP())) {
 					doNext(SceneLib.combat.endHpLoss);
 					return;
 				}

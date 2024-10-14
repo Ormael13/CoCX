@@ -157,7 +157,7 @@ public class LabGuard extends Monster {
         //Lab Guard tanking
         if (shieldWall && !hasStatusEffect(StatusEffects.Stunned)) {
             eOneAttack(true);
-            if (player.HP <= player.minHP()) {
+            if (Math.round(player.HP) <= Math.round(player.minHP())) {
                 doNext(SceneLib.combat.endHpLoss);
                 return damage;
             }
