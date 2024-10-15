@@ -24,10 +24,10 @@ public class HumanBloodstreamMutation extends IMutationPerkType
                 descS += "5.";
             }
             if (pTier == 2){
-                descS += "10. Increase a bit fatigue recovery (+5) and wrath generation (+2).";
+                descS += "10. Increases fatigue recovery by (+5) and wrath generation (+2).";
             }
             if (pTier == 3){
-                descS += "10, maximum trainable Spe/Lib by 20%. Increase a bit fatigue recovery (+10) and wrath generation (+4).";
+                descS += "10, maximum trainable Spe/Lib by 20%. Increases fatigue recovery by (+10) and wrath generation (+4).";
             }
             if (pTier == 4){
                 descS += "20, maximum trainable Spe/Lib by 30%. Increase fatigue recovery (+15), wrath generation (+6) and +2 to fatigue recovery/wrath gains multiplier. +5% to max overfatigue/overwrath.";
