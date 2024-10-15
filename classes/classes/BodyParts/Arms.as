@@ -363,7 +363,7 @@ public class Arms extends SaveableBodyPart {
 	public static const FROSTWYRM:int = 45;
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {
 		name:"frostwyrm",
-		appearanceDesc: "Your forearms are covered by scales which themselves are covered by fur, ending in five fingered clawed hands. Your claws are strong enough to rip and tear through next to anything.",
+		appearanceDesc: "Your forearms are covered by scales which themselves are covered by fur, ending in five-fingered clawed hands. Your claws are strong enough to rip and tear through next to anything.",
 		claw: true,
 		scales: true
 	});
@@ -420,7 +420,7 @@ public class Arms extends SaveableBodyPart {
 	public static const WENDIGO:int = 53;
 	EnumValue.add(Types, WENDIGO, "WENDIGO", {
 		name:"wendigo",
-		appearanceDesc: "Your arms and hands are practically human, save for the sharp white claws you have in place of normal nails.",
+		appearanceDesc: "Your arms and hands are practically human, save for the sharp white, claws you have in place of normal nails.",
 		claw: true
 	});
 
@@ -449,7 +449,7 @@ public class Arms extends SaveableBodyPart {
 	public static const JABBERWOCKY:int = 57;
 	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
 		name:"jabberwocky",
-		appearanceDesc: "Your forearms are covered by scales which themselves are covered by fur, ending in five fingered clawed hands. Your claws are strong enough to rip and tear through next to anything though you tend to use your arms as a mean to keep your partners pinned down so they don't move during sex.",
+		appearanceDesc: "Your forearms are covered by scales which themselves are covered by fur, ending in five-fingered clawed hands. Your claws are strong enough to rip and tear through next to anything though you tend to use your arms as a mean to keep your partners pinned down so they don't move during sex.",
 		claw: true,
 		scales: true
 	});
