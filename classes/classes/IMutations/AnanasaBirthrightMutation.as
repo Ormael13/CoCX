@@ -32,7 +32,7 @@ public class AnanasaBirthrightMutation extends IMutationPerkType
             if (pTier == 4){
                 descS += "fully developed";
             }
-            if (descS != "")descS += " multi-functional self-sustain system modeled after progenitor of all werespiders.";
+            if (descS != "")descS += " multi-functional self-sustain system modeled after the progenitor of all werespiders.";
             return descS;
         }
 
