@@ -20,11 +20,11 @@ public class HumanMetabolismMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Your metabolism changes allowing to slowly detoxification of poisons ";
+                descS += "Your metabolism changes, allowing for the slow detoxification of poisons ";
             }
 			if (pTier >= 3) descS += "or slight faster fatigue recovery ";
             if (pTier >= 1){
-                descS += "("+pTier+"0% chance to instantly remove some of toxic substance from body, -"+pTier+"% of lust";
+                descS += "("+pTier+"0% chance to instantly remove some toxic substances from your body, -"+pTier+"% of lust";
             }
 			if (pTier >= 3) descS += " / -1% of fatigue";
             if (pTier >= 1){
