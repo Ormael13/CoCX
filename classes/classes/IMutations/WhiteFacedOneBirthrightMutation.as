@@ -32,7 +32,7 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
             if (pTier == 4){
                 descS += "fully developed";
             }
-            if (descS != "")descS += " soul nexus-like organ modeled after White-Faced One. (+";
+            if (descS != "")descS += " soul nexus-like organ modeled after the White-Faced One. (+";
 			if (pTier == 1){
                 descS += "0.25/0.5/1";
             }
