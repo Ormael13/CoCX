@@ -203,8 +203,8 @@ public class Hair extends BodyPart {
 	public static const COW:int = 21;
 	EnumValue.add(Types, COW, "COW", {
 		name:"cow like",
-		shortDesc: "dark spoted {hair}",
-		appearanceDesc: "Your {hairInfo} looks about normal except that they have darker spot reminding of cow fur."
+		shortDesc: "dark spotted {hair}",
+		appearanceDesc: "Your {hairInfo} looks about normal except that they have darker spot reminiscent of cow fur."
 	});
 
 	public static const DRIPPING:int = 22;
