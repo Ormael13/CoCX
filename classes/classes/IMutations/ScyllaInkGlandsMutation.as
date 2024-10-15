@@ -20,10 +20,10 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Your Scylla Ink Glands increase rate at which your body produce ink";
+                descS += "Your Scylla Ink Glands increases the rate at which your body produce ink";
             }
             if (pTier >= 2){
-                descS += ", duration ink spray affect enemies and lust damage by "+(pTier-1)+"00%";
+                descS += ", the duration ink spray affects enemies and your lust damage increases by "+(pTier-1)+"00%";
             }
             if (pTier >= 1){
                 descS += ", boost to your natural strength";
@@ -32,13 +32,13 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
                 descS += ", speed";
             }
             if (pTier >= 2){
-                descS += " and toughness, Scylla Squeeze damage during grapple as Kraken would be multiplied by "+pTier+"x";
+                descS += " and toughness, Scylla Squeeze damage during grapple as Kraken is multiplied by "+pTier+"x";
             }
             if (pTier >= 3){
                 descS += ", scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is "+(pTier-1)+"x larger";
             }
             if (pTier >= 4){
-                descS += ", final boost from aquatic battle boost is 2x higher, enemy can't escape from scylla grapple using only it own strength and using Scylla Squeeze as Kraken would give each time 4% combat wounds debuff on enemy (up to 80%)";
+                descS += ", final boost from aquatic battle boost is 2x higher, enemy can't escape from scylla grapple using only its own strength and using Scylla Squeeze as Kraken will give the enemy a 4% combat wounds debuff each time (up to 80%)";
             }
             if (descS != "")descS += ".";
             return descS;
