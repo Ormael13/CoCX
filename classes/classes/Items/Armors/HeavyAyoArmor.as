@@ -13,7 +13,7 @@ package classes.Items.Armors
 	public class HeavyAyoArmor extends Armor {
 		
 		public function HeavyAyoArmor() {//100 * armor + mres
-			super("HAyoArm","HAyoArm","heavy ayo armor","a heavy ayo armor",120,20,14000,"This suit of armor is more than typical heavy armor - it have added pieces of Ayo Tech that increase by a huge margin it properties as long user is capable to feed it on regular basis with soulforce.","Heavy Ayo");
+			super("HAyoArm","HAyoArm","heavy ayo armor","a heavy ayo armor",120,20,14000,"This suit of armor is more than typical heavy armor — It has added pieces of Ayo Tech that greatly enhance its properties, as long as the user regularly feeds it with soulforce.","Heavy Ayo");
 		}
 		
 		override public function get def():Number {
@@ -50,7 +50,7 @@ package classes.Items.Armors
 		
 		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			if (game.player.str >= 40 && game.player.spe >= 40) return super.canEquip(doOutput, slot);
-			if(doOutput) outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
+			if(doOutput) outputText("You aren't strong or agile enough to wear this armor!  Unless you like moving slower than a snail and hitting weaker than a wet noodle!  ");
 			return false;
 		}
 	}

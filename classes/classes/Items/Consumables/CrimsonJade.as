@@ -23,7 +23,7 @@ public class CrimsonJade extends Consumable {
 
     override public function useItem():Boolean {
         clearOutput();
-        outputText("What you want to do with this Crimson Jade?");
+        outputText("What do you want to do with this Crimson Jade?");
 		crimsonJade();
         return true;
     }
@@ -56,7 +56,7 @@ public class CrimsonJade extends Consumable {
 		}
 	}
 	public function crimsonJade0():void {
-		outputText("You put away crimson jade. Now is not good time to use it.");
+		outputText("You put away the crimson jade. Now is not good time to use it.");
 		SceneLib.inventory.returnItemToInventory(this);
 	}
     public function crimsonJade1(soulskill:Number):void {

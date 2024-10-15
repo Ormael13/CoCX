@@ -20,7 +20,7 @@ public class MightyLowerHalfMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Tentacle and tail attack deals " + 25 * pTier + "% more damage. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
+                descS += "Tentacle and tail attacks deals " + 25 * pTier + "% more damage. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
             }
             if (pTier >= 2){
                 descS += ". Grapple damage gains " + ((5 * pTier) - 5) + "0% more bonus from your strength.";

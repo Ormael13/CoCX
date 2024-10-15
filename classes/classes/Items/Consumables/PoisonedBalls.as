@@ -14,7 +14,7 @@ package classes.Items.Consumables
 		
 		public function PoisonedBalls() 
 		{
-			super("PoisonB", "PoisonedBalls", "a Poisoned Balls", 60, "Three poisonous ball-shaped throwing weapons.  Though good for only a single use, they're guaranteed to do medium to high damage to solo or weak group of enemies if they hit.  Inflicts 1440 to 8640 poison damage.");
+			super("PoisonB", "PoisonedBalls", "a Poisoned Balls", 60, "Three poisonous, ball-shaped throwing weapons.  Though good for only a single use, they're guaranteed to do medium to high damage to solo or weak group of enemies if they hit.  Inflicts 1440 to 8640 poison damage.");
 		}
 		
 		override public function canUse():Boolean {
@@ -41,7 +41,7 @@ package classes.Items.Consumables
 					else damage *= 2;
 				}
 				if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-				outputText(game.monster.capitalA + game.monster.short + " is hit with the Poisoned Balls!  They breaks apart, leaving " + game.monster.pronoun2 + " in a cloud of poison. ");
+				outputText(game.monster.capitalA + game.monster.short + " is hit with the Poisoned Balls!  They break apart, leaving " + game.monster.pronoun2 + " in a cloud of poison. ");
 				damage = SceneLib.combat.doPoisonDamage(damage, true, true);
 				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}

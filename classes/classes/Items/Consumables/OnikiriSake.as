@@ -89,12 +89,12 @@ public class OnikiriSake extends Consumable {
 				if (player.cocks[selectedCock].cockThickness < 4) {
 					temp = player.growCock(selectedCock, 2 + rand(4));
 					temp += player.thickenCock(selectedCock, 1);
-					outputText("\n\nYour cock suddenly hardens, blood pumping in as it enlarges, growing both longer and thicker! The pleasure of the change cause you to orgasm, a big load of cum splattering the ground below you.");
+					outputText("\n\nYour cock suddenly hardens, blood pumping in as it enlarges, growing both longer and thicker! The pleasure of the change causes you to orgasm, a big load of cum splattering the ground below you.");
 					outputText("  To your delight and surprise, you discover it has grown slightly thicker as well!");
 				}
 				else {
 					temp = player.growCock(selectedCock, 2 + rand(4));
-					outputText("\n\nYour cock suddenly hardens, blood pumping in as it enlarges, growing both longer and thicker! The pleasure of the change cause you to orgasm, a big load of cum splattering the ground below you.");
+					outputText("\n\nYour cock suddenly hardens, blood pumping in as it enlarges, growing both longer and thicker! The pleasure of the change causes you to orgasm, a big load of cum splattering the ground below you.");
 				}
 				changes++;
 			}

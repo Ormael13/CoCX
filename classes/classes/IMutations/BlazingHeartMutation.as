@@ -21,7 +21,7 @@ public class BlazingHeartMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Gain permanent weakness to cold and fire resistance. Increase fire damage by "+(25*pTier)+"%";
-            if (pTier >= 2) descS += ". Heat and Rut also grants you a bonus equal to ";
+            if (pTier >= 2) descS += ". Heat and Rut also grant you a bonus equal to ";
             if (pTier == 2 || pTier == 3) descS += "1";
 			if (pTier >= 4) descS += "2";
             if (pTier >= 2) descS += "0% of the libido bonus to strength";

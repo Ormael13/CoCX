@@ -57,7 +57,7 @@ import classes.VaginaClass;
                 case 4:
                     --player.ass.analLooseness;
                     outputText("  The feeling lasts pretty long, and at some point your entire [butt] feels numb and tickling. ");
-                    if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN) outputText("You marvel at the odd feeling - <b>your [asshole] is so tight as if it was never penetrated!</b>!");
+                    if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN) outputText("You marvel at the odd feeling - <b>your [asshole] is as tight as if it has never been penetrated!</b>!");
                     else outputText("Touching it experimentally, you try to slip a finger inside and find out that <b>your [asshole] is tighter than before!</b>!");
                     break;
                 case 5:
@@ -77,7 +77,7 @@ import classes.VaginaClass;
                         player.createStatusEffect(StatusEffects.Dysfunction, 50 + rand(100), 0, 0, 0);
                     }
                     else {
-                        outputText("\n\nSadly your groin becomes even more deadened to sensation.  You wonder how much longer you'll have to wait until you can please yourself again.");
+                        outputText("\n\nSadly, your groin becomes even more deadened to sensation.  You wonder how much longer you'll have to wait until you can please yourself again.");
                         player.addStatusValue(StatusEffects.Dysfunction, 1, 50 + rand(100));
                     }
                     break;

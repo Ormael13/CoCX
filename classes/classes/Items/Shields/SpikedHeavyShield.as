@@ -11,7 +11,7 @@ package classes.Items.Shields
 		
 		public function SpikedHeavyShield()
 		{
-			super("SpiH Sh", "SpikeHShield", "spiked heavy shield", "a spiked heavy shield", 24, 1800, "A large shield with spikes. \nReq 60 strength to fully use it potential.", "Large");
+			super("SpiH Sh", "SpikeHShield", "spiked heavy shield", "a spiked heavy shield", 24, 1800, "A large shield with spikes. \nReq 60 strength to fully utilize its potential.", "Large");
 		}
 		
 		override public function get block():Number {

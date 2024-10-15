@@ -194,7 +194,7 @@ public class PerkMenu extends BaseContent {
 		}
 		// your pain, my power wrath generation
 		if (player.hasPerk(PerkLib.YourPainMyPower)) {
-			outputText("\n\nYou choose whether wrath is generated while healing from blood: " + (
+			outputText("\n\nYou can choose whether wrath is generated while healing from blood: " + (
 				flags[kFLAGS.YPMP_WRATH_GEN] == 0 ? "Enabled" : "Disabled"
 			));
 			addButton(11, "YPMP Wrath", curry(toggleFlagMisc, kFLAGS.YPMP_WRATH_GEN));
@@ -265,7 +265,7 @@ public class PerkMenu extends BaseContent {
 		}
 		//build the buttondatalist
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.isRace(Races.JIANGSHI)) {
-			outputText("\n\nYou can choose between fighting feral or normaly with your fists. (Req. to have natural attacks or a gaunlet type weapon with claws to enable feral mode)");
+			outputText("\n\nYou can choose between fighting feral or normaly with your fists. (Requires natural attacks or a gauntlet-type weapon with claws to enable feral mode)");
 			outputText("\nFighting Style: <b>" + (flags[kFLAGS.FERAL_COMBAT_MODE] ? "Feral" : "Normal") + "</b>");
 			bd.add("Normal/Feral", curry(toggleFlagMelee, kFLAGS.FERAL_COMBAT_MODE))
 				.disableIf(!player.hasAllRizzForFeral(), "You need to be unarmed and possess a natural weapon OR to have equipped gaunlets with any type of artifical claws OR have any other natural weapons like tail/wings/sharp teeth.");
@@ -300,7 +300,7 @@ public class PerkMenu extends BaseContent {
 			bd.add("AsuraForm", curry(toggleFlagMelee, kFLAGS.ASURA_FORM_COMBAT_MODE));
 		}
 		if (player.hasPerk(PerkLib.Poisoning)) {
-			outputText("\n\nIf you can naturaly produce venom, you can add its effects to your weapon. (Works only with small weapons; requires to have a poisonous bodypart)");
+			outputText("\n\nIf you can naturally produce venom, you can add its effects to your weapon. (Works only with small weapons; requires to have a poisonous bodypart)");
 			outputText("\nVenom effect added: <b>" + (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] ? "Yes" : "No") + "</b>");
 			bd.add("Venom", curry(toggleFlagMelee, kFLAGS.ENVENOMED_MELEE_ATTACK))
 				.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
@@ -440,7 +440,7 @@ public class PerkMenu extends BaseContent {
 				.disableIf(!player.hasStatusEffect(StatusEffects.KnowsArouse), "You don't know the required spell.");
 		}
 		if (player.hasPerk(PerkLib.EnvenomedBolt)) {
-			outputText("\n\nIf you can naturaly produce venom, you can add its effects to the projectiles. (Works only with bows and crosbows)"
+			outputText("\n\nIf you can naturally produce venom, you can add its effects to the projectiles. (Works only with bows and crosbows)"
 				+ "\nVenom effect added: <b>" + (flags[kFLAGS.ENVENOMED_BOLTS] ? "Yes" : "No") + "</b>");
 			bd.add("Venom", curry(toggleFlagRanged, kFLAGS.ENVENOMED_BOLTS))
 				.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
@@ -499,13 +499,13 @@ public class PerkMenu extends BaseContent {
 		var attackingEpicElementalType:Function = curry(setflag,kFLAGS.ATTACKING_EPIC_ELEMENTAL_TYPE);
 		clearOutput();
 		menu();
-		outputText("You can choose how your summoned elementals will behave during each fight.\n\n");
+		outputText("You can choose how your Summoned Elementals' will behave during combat.\n\n");
 		outputText("\n<b>Elementals behavious:</b>\n");
-		if (elementalConjuerSummons == 4) outputText("Elemental will attack enemy on it own alongside PC + Attacking instead of PC each time melee attack command is chosen");
-        if (elementalConjuerSummons == 3) outputText("Elemental will attack enemy on it own alongside PC.");
-		if (elementalConjuerSummons == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
+		if (elementalConjuerSummons == 4) outputText("The elemental will attack the enemy on its own alongside the player + Attacking instead of the player each time a melee attack command is chosen");
+        if (elementalConjuerSummons == 3) outputText("The elemental will attack the enemy on its own alongside the player.");
+		if (elementalConjuerSummons == 2) outputText("Attacking instead of the player each time a melee attack command is chosen.");
 		if (elementalConjuerSummons < 2) outputText("Not participating");
-		outputText("\n\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
+		outputText("\n\n<b>Elemental, which would attack in case the option for them helping in attacks is enabled:</b>\n");
         switch(attackingElementalTypeFlag){
 			case 1: outputText("Air"); break;
             case 2: outputText("Earth"); break;
@@ -521,7 +521,7 @@ public class PerkMenu extends BaseContent {
             case 12: outputText("Purity"); break;
             case 13: outputText("Corruption"); break;
 		}
-		outputText("\n\n<b>Epic Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
+		outputText("\n\n<b>Epic Elemental, which would attack in case the option for them helping in attacks is enabled:</b>\n");
         switch(attackingEpicElementalTypeFlag){
 			case 31: outputText("Air"); break;
             case 32: outputText("Earth"); break;
@@ -570,9 +570,9 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 		else {
-			addButtonDisabled(11, "MeleeAtk", "Req. to have summoned at least 1 elemental.");
-			addButtonDisabled(12, "Helping", "Req. to have summoned at least 1 elemental.");
-			addButtonDisabled(13, "Melee+Help", "Req. to have summoned at least 1 elemental.");
+			addButtonDisabled(11, "MeleeAtk", "Requires having summoned at least 1 elemental.");
+			addButtonDisabled(12, "Helping", "Requires having summoned at least 1 elemental.");
+			addButtonDisabled(13, "Melee+Help", "Requires having summoned at least 1 elemental.");
 		}
 		if (page == 1) {
 					addButton(14, "Back", minionOptions);
@@ -655,7 +655,7 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 		outputText("<b>Permanent golems attack pattern behavious:</b>\n");
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) outputText("Attacking at the begining of each turn (owner would need to just choose how many of them will be sent).");
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) outputText("Attacking at the beginning of each turn (owner would need to just choose how many of them will be sent).");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
 		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
 			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
@@ -674,7 +674,7 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "G. Attacking", golemsAttacking, true).hint("Golems will attack at the beginning of the turn.");
 		if (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) {
 			outputText("\n\n<b>Skeletons attack pattern behavious:</b>\n");
-			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) outputText("Attacking at the begining of each turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) outputText("Attacking at the beginning of each turn.");
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(12, "S. Waiting", skeletonsAttacking,false).hint("Skeletons will not attack at the beginning of the turn.");
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(13, "S. Attacking", skeletonsAttacking, true).hint("Skeletons will attack at the beginning of the turn.");
@@ -835,8 +835,8 @@ public class PerkMenu extends BaseContent {
 		outputText("You can choose how your will-o'-the-wisp will behave during each fight.\n\n");
 		outputText("\n<b>Will-o'-the-wisp behaviour:</b>\n");
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 2) outputText("Commanding other pets or minions (other minions will get boost to dmg).");
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) outputText("Attacking at the begining of each turn. (Need to confirm attack order each turn)");
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 0) outputText("Attacking at the begining of each turn. (No need to confirm attack order each turn)");
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) outputText("Attacking at the beginning of each turn. (Need to confirm attack order each turn)");
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 0) outputText("Attacking at the beginning of each turn. (No need to confirm attack order each turn)");
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 0) addButton(10, "Attacking(A)", WOTWAttacking, 0).hint("Would attack without need to confirm attack order.");
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 1) addButton(11, "Attacking(M)", WOTWAttacking, 1).hint("Would attack after confirming attack order.");
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 2) addButton(12, "Commanding", WOTWAttacking, 2);

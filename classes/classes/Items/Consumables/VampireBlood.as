@@ -63,7 +63,7 @@ public class VampireBlood extends Consumable {
         } else if (pure) {
             outputText("The blood tastes awful, a strong, coppery taste, and is thick from the iron content. Yet, under the blood’s metallic aftertaste, there's a hint of sweetness to it that you can’t really put your finger on.\n\nAs you try to get the taste out of your mouth, you feel your body starting to change.");
         } else {
-            outputText("You uncork the vial and down its contents. You gag disgusted as the thick, metallic tang of blood coats your throat.\n\n");
+            outputText("You uncork the vial and down its contents. You gag in disgust as the thick, metallic tang of blood coats your throat.\n\n");
             if (EngineCore.silly()) outputText("What else were you expecting with that label and smell? Tomato juice with iron shavings?\n\n");
             outputText("With some effort, you force down the blood and swallow it. A rush of heat flows through your veins as your body starts to react to the new blood.");
         }
@@ -100,7 +100,7 @@ public class VampireBlood extends Consumable {
 
             if (rand(3) == 0 && changes < changeLimit && player.bodyColor !== "pale") {
                 outputText("\n\n");
-                outputText("Your skin suddenly starts itching, causing you to look at it just in time for you to see it finish paling into a shade that wouldn’t be     out of place on a corpse. You feel sleepy… horribly so, but you dismiss it as being the fault of the glaring light above your head. <b>You guess    you could use some extra sunlight with your pale skin.</b>");
+                outputText("Your skin suddenly starts itching, causing you to look at it just in time for you to see it finish paling into a shade that wouldn’t be     out of place on a corpse. You feel sleepy… horribly so, but you dismiss it as due to the glaring light above your head. <b>You guess    you could use some extra sunlight with your pale skin.</b>");
                 player.skinColor = "pale";
 
                 changes++;

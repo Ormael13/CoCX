@@ -11,7 +11,7 @@ package classes.Items.Consumables
 	{
 		public function Coal() 
 		{
-			super("Coal   ","Coal", "two pieces of coal", ConsumableLib.DEFAULT_VALUE, "These two pieces of coal may look ordinary but it makes you wonder what happens when you rub them.");
+			super("Coal   ","Coal", "two pieces of coal", ConsumableLib.DEFAULT_VALUE, "These two pieces of coal may look ordinary, but you wonder what happens when you rub them.");
 		}
 		
 		override public function useItem():Boolean

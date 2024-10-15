@@ -112,7 +112,7 @@ public class Armor extends Equipable
 		
 		
 		override public function getItemText(textid:String):String {
-			if (textid == "legendary_fail") return "You try to equip the legendary armor, but to your disappointment the item simply refuses to stay on your body. It seems you still lack the right to wear this item.";
+			if (textid == "legendary_fail") return "You try to equip the legendary armor, but to your disappointment, the item simply refuses to stay on your body. It seems you still lack the right to wear this item.";
 			return super.getItemText(textid);
 		}
 	}

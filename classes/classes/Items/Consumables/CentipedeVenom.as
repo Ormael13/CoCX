@@ -36,7 +36,7 @@ public class CentipedeVenom extends Consumable {
 
 		//Transformation effect list
 		if (changeLimit && rand(3) == 0) {
-			outputText("\n\nYou shudder as a strange warmth briefly spreads through you. The venom lingers on your tastebuds leaving behind a tingling sensation and lingering pleasure.");
+			outputText("\n\nYou shudder as a strange warmth briefly spreads through you. The venom lingers on your tastebuds, leaving behind a tingling sensation and lingering pleasure.");
 			dynStats("lus", (10+player.lib/10), "scale", false);
 			changes++;
 		}

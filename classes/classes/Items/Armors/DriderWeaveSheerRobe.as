@@ -23,7 +23,7 @@ package classes.Items.Armors
 		}
 		
 		override public function equipText():void {
-			outputText("The robes are light, and as you slide them over your head, sliding easily down over your shoulders, you could swear you’re wearing nothing at all. As you slide your middle finger into the metal at the end of the sleeve, it tightens slightly, just enough to make a snug fit. You can feel magic pulsing through the robe, culminating at the clasp. You focus on the shimmering metal, letting your magic flow…The robe lights up, and as you look down at yourself, you can clearly see through the fabric.\n\n");
+			outputText("The robes are light, and as you pull them over your head, they glide easily down over your shoulders, you could swear you’re wearing nothing at all. As you slide your middle finger into the metal at the end of the sleeve, it tightens slightly, just enough to make a snug fit. You can feel magic pulsing through the robe, culminating at the clasp. You focus on the shimmering metal, letting your magic flow…The robe lights up, and as you look down at yourself, you can clearly see through the fabric.\n\n");
 			if (!game.player.upperGarment.isNothing) outputText("You poke your [uppergarment] through the sheer fabric, then take some of the robe between two fingers.");
 			else outputText("Your [breasts] are visible to the world, and as you watch, your nipples stand up at the exposure.");
 			if (game.player.lowerGarment.isNothing) {

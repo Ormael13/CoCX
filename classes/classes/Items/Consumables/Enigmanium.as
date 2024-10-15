@@ -39,7 +39,7 @@ public class Enigmanium extends Consumable {
       changeLimit += 100; //too many stat changes
       //Text go!
       clearOutput();
-      outputText("You chug down the potion pinching your nose and hoping for the best. Knowledge flood your mind. Hey you could as well get to making riddles as a pastime.");
+      outputText("You chug down the potion pinching your nose and hoping for the best. Knowledge flood your mind. You briefly consider taking up riddles as a pastime.");
 
       //Speed raises up to 75
       if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("spe", 2)) {

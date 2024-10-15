@@ -18,7 +18,7 @@ import classes.internals.WeightedDrop;
 	{
 		//ATTACK ONE: SPARTAN RUSH
 		public function phoenixSquadRush():void {
-			outputText("You fall back under a hail of scimitar attacks.  The sheer number of quasi-phoenixes attacking is bad enough, but their attacks are perfectly coordinated, leaving virtually no room for escape or maneuver without getting hit!\n");
+			outputText("You fall back under a hail of scimitar attacks.  The sheer number of quasi-phoenixes attacking is bad enough, but their attacks are perfectly coordinated, leaving virtually no room for escape or to maneuver without getting hit!\n");
 			//(Effect: Multiple medium-damage attacks)
 			//(Effect: Multiple light attacks)
 			createStatusEffect(StatusEffects.Attacks, 4 + rand(3),0,0,0);
@@ -29,7 +29,7 @@ import classes.internals.WeightedDrop;
 		public function phoenixSquadFireBreath():void {
 			//(Effect: One heavy-damage attack)
 			var damage:Number = ((inte + wis) * 1.2) + rand(80);
-			outputText("Suddenly, the shield wall parts, revealing two members of the platoon, two particularly muscular girls with raging erections.  Before you can consider what's going on, they rear back, light erupting from their throats as they unleash a burst of fire-breath right at you.  You dive, but are still caught partially in the inferno.");
+			outputText("Suddenly, the shield wall parts, revealing two particularly muscular members of the platoon with raging erections.  Before you can react, they rear back, light erupting from their throats as they unleash a burst of fire-breath right at you.  You dive, but are still partially caught in the inferno.");
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 				outputText("Luckily, you still have your blizzard spell active, the whirling snow mitigating the phoenix's flame somewhat");
@@ -82,7 +82,7 @@ import classes.internals.WeightedDrop;
 			this.a = "the ";
 			this.short = "quasi-phoenix squad";
 			this.imageName = "phoenixmob";
-			this.long = "You are faced with a squad of heavy infantry, all armed to the teeth and protected by chain vests and shields. They look like a cross between salamander and harpy, humanoid save for crimson wings, scaled feet, and long fiery tails. They stand in a tight-knit shield wall, each quasi-phoenix protecting herself and the warrior next to her with their tower-shield. Their scimitars cut great swaths through the room as they slowly advance upon you.";
+			this.long = "You are faced with a squad of heavy infantry, all armed to the teeth and protected by chain vests and shields. They look like a cross between a salamander and a harpy, humanoid save for crimson wings, scaled feet, and long fiery tails. They stand in a tight-knit shield wall, each quasi-phoenix protecting herself and the warrior next to her with her tower-shield. Their scimitars cut great swaths through the room as they slowly advance upon you.";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";

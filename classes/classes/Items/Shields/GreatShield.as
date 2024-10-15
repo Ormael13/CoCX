@@ -14,7 +14,7 @@ package classes.Items.Shields
 		
 		public function GreatShield()
 		{
-			super("GreatSh", "GreatShld", "greatshield", "a greatshield", 18, 900, "A large metal shield. \nReq 40 strength to fully use it potential.", "Large");
+			super("GreatSh", "GreatShld", "greatshield", "a greatshield", 18, 900, "A large metal shield. \nReq 40 strength to fully utilize its potential.", "Large");
 		}
 		
 		override public function get block():Number {

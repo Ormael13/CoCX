@@ -24,7 +24,7 @@ public class Gills extends BodyPart {
 	public static const FISH: int = 2;
 	EnumValue.add(Types, FISH, "FISH", {
 		name:"fish",
-		appearanceDesc: "A set of fish like gills reside on your neck, several small slits that can close flat against your skin. They allow you to stay in the water for quite a long time."
+		appearanceDesc: "A set of fish-like gills reside on your neck, several small slits that can close flat against your skin. They allow you to stay in the water for quite a long time."
 	});
 	public static const GILLS_IN_TENTACLE_LEGS: int = 3;
 	EnumValue.add(Types, GILLS_IN_TENTACLE_LEGS, "GILLS_IN_TENTACLE_LEGS", {

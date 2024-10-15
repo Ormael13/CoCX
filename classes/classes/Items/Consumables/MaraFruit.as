@@ -172,7 +172,7 @@ public class MaraFruit extends Consumable{
 						temp3++;
 					}
 					if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
-					if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
+					if (temp2 == 3) outputText("\nWithout the extra weight, you feel noticeably limber.");
 					if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
 					if (temp2 > 0) changes++;
 				}

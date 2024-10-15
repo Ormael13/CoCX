@@ -20,7 +20,7 @@ package classes.Items.Consumables
 			clearOutput();
 			player.slimeFeed();
 			var i:Number = 0;
-			outputText("You drink the milk potion.  It tastes like milk.");
+			outputText("You drink the milk potion.  Unsurprisingly, it tastes like milk.");
 			//Player doesn't lactate
 			if (player.biggestLactation() < 1) {
 				outputText("\n\n");

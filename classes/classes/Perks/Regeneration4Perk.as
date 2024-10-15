@@ -18,8 +18,8 @@ import classes.PerkClass;
 		public function Regeneration4Perk()
 		{
 			super("Regeneration IV", "Regeneration IV",
-				"Regenerates further 1% of max HP/hour and 0,5% of max HP/round.",
-				"You choose the 'Regeneration IV' perk, giving you an additional 0,5% of max HP per turn in combat and 1% of max HP per hour.");
+				"Regenerates an additional 1% of max HP per hour and 0.5% of max HP per round.",
+				"You choose the 'Regeneration IV' perk, giving you an additional 0.5% of max HP per round in combat and 1% of max HP per hour.");
 		}
 		
 	}

@@ -14,12 +14,12 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "(Rank: " + params.value1 + ") Consume the stored energy of souls to raise your intelligence, wisdom and libido by " + params.value1 * 5 + "% permanently. This change persists through time.";
+			return "(Rank: " + params.value1 + ") Consume the stored energy of souls to increase your intelligence, wisdom, and libido by " + params.value1 * 5 + "% permanently. This change persists through time.";
 		}
 		
 		public function StrengthenMagicPerk()
 		{
-			super("Strengthen Magic", "Strengthen Magic", "", "Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.");
+			super("Strengthen Magic", "Strengthen Magic", "", "Consume the stored energy of souls to increase your intelligence, wisdom, and libido by 5% permanently. This change persists through time.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean

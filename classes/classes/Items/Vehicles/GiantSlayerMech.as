@@ -16,7 +16,7 @@ public class GiantSlayerMech extends Vehicles
 		
 		public function GiantSlayerMech()
 		{
-			super("GS Mech", "GiantSlayerMech", "Giant Slayer Mech", "a Giant Slayer Mech", 0, 0, 2000, "A customisable goblin invention, this bipedal, large mech is equipped with a comfortable seat, fit for a goblin or a small person. Within it you feel like you could kill gods or well gigants... \n\nType: Goblin Mech \nBase value: 2000","Mech");
+			super("GS Mech", "GiantSlayerMech", "Giant Slayer Mech", "a Giant Slayer Mech", 0, 0, 2000, "A customisable goblin invention, this bipedal, large mech is equipped with a comfortable seat, fit for a goblin or a small person. Within it, you feel like you could kill gods, or at least giants... \n\nType: Goblin Mech \nBase value: 2000","Mech");
 		}
 		
 		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
@@ -28,7 +28,7 @@ public class GiantSlayerMech extends Vehicles
 				return false;
 			}
 			if (game.player.basetallness > 66 || game.player.haveWingsForWingSlap()) { //Taller than 5'6" ft
-				if (doOutput) outputText("Your current size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+				if (doOutput) outputText("Your current size prevents you from properly entering the small, compact cockpit of the vehicle.\n\n");
 				return false;
 			}
 			return true;
@@ -50,7 +50,7 @@ public class GiantSlayerMech extends Vehicles
 					if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) EHP += 0.75;
 					game.player.HP = EHP * game.player.maxHP();
 				}
-				outputText("As you turn the mech on the welcoming voice of your AI booms in. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
+				outputText("As you turn the mech on, the welcoming voice of your AI booms. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
 			}
 			super.afterEquip(doOutput, slot);
 		}

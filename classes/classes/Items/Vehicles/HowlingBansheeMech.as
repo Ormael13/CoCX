@@ -13,7 +13,7 @@ package classes.Items.Vehicles
 		
 		public function HowlingBansheeMech()
 		{
-			super("HB Mech", "HowlingBansheeMech", "Howling Banshee Mech", "a Howling Banshee Mech", 0, 0, 2000, "This twenty meters tall mech is equipped with a comfortable seat, fit for a medium sized person. It white bipedal frame covered with white armor plates is customisable. \n\nType: Howling Banshee Mech \nBase value: 2000","Mech");
+			super("HB Mech", "HowlingBansheeMech", "Howling Banshee Mech", "a Howling Banshee Mech", 0, 0, 2000, "This twenty-meter-tall mech is equipped with a comfortable seat, fit for a medium-sized person. It white, bipedal frame covered with white armor plates is customizable. \n\nType: Howling Banshee Mech \nBase value: 2000","Mech");
 			withBuffs({"str.mult": 0.15, "tou.mult": 0.10, "spe.mult": 0.25});
 		}
 		

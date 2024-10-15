@@ -41,7 +41,7 @@ public class PhoukaWhiskey extends Consumable {
 			game.player.slimeFeed();
 			switch (phoukaWhiskeyDrink(game.player)) {
 				case 0: //Player isn't pregnant
-					outputText("You uncork the bottle and drink some whiskey, hoping it will let you relax for a while.\n\nIt's strong stuff and afterwards you worry a bit less about the future.  Surely things will right themselves in the end.");
+					outputText("You uncork the bottle and drink some whiskey, hoping it will let you relax for a while.\n\nIt's strong stuff and afterwards you worry a bit less about the future.  Surely, things will work themselves out in the end.");
 					game.player.dynStats("cor", Utils.rand(2) + 1, "lus", Utils.rand(8) + 1); //These gains are permanent
 					break;
 				case 1: //Child is a phouka or satyr, loves alcohol
@@ -144,7 +144,7 @@ public class PhoukaWhiskey extends Consumable {
 			player.addCurse("lib", libidoChange,1);
 			player.removeStatusEffect(StatusEffects.PhoukaWhiskeyAffect);
 			if (numDrunk > 3)
-				outputText("\n<b>The dizzy sensation dies away and is replaced by a throbbing pain that starts in your skull and then seems to run all through your body, seizing up your joints and making your stomach turn.  The world feels like it’s off kilter and you aren’t in any shape to face it.  You suppose you could down another whiskey, but right now that doesn’t seem like such a good idea.</b>\n");
+				outputText("\n<b>The dizzy sensation dies away and is replaced by a throbbing pain that starts in your skull and then seems to run all through your body, seizing up your joints and making your stomach turn.  The world feels like it’s off kilter and you aren’t in any shape to face it.  You suppose you could down another whiskey, but right now, that doesn’t seem like such a good idea.</b>\n");
 			else if (numDrunk > 1)
 				outputText("\n<b>The fuzzy, happy feeling ebbs away.  With it goes the warmth and carefree feelings.  Your head aches and you wonder if you should have another whiskey, just to tide you over</b>\n");
 			else

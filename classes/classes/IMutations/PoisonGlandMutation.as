@@ -24,10 +24,10 @@ public class PoisonGlandMutation extends IMutationPerkType
                 descS += "Double the efficiency of poison damage, applied poisons now has a "+(pTier*25)+"% chance of dealing its effect twice per turn";
             }
             if (pTier >= 2){
-                descS += ". All poison becomes deadlier inflicting "+(pTier-1)+"% toughness damage per round";
+                descS += ". All poison becomes deadlier, inflicting "+(pTier-1)+"% toughness damage per round";
             }
             if (pTier >= 4){
-                descS += ". All poison now becomes lewder inflicting tease damage equal to your tease value per round on top of any other effect they would do";
+                descS += ". All poison now becomes lewder, inflicting tease damage equal to your tease value per round on top of any other effect they would do";
             }
             if (descS != "")descS += ".";
             return descS;

@@ -79,11 +79,11 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 			if (player.horns.type == Horns.DRACONIC_X2) {
 				if (player.horns.count < 12) {
 					if (rand(2) == 0) {
-						outputText("\n\nYou get a headache as an inch of fresh horns escapes from your pounding skull.");
+						outputText("\n\nYou feel a sharp headache as new horns push out from your skull, growing by an inch.");
 						player.horns.count += 1;
 					}
 					else {
-						outputText("\n\nYour head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
+						outputText("\n\nYour head aches as your horns grow a few inches longer.  The base of your horns thickens, giving you a menacing appearance.");
 						player.horns.count += 2 + rand(4);
 					}
 					if (player.horns.count >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
@@ -251,7 +251,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	var canReactMale:Boolean = player.hasCock() && (drakesHeart || SceneLib.emberScene.hasVagina());
 	var canReactFemale:Boolean = player.hasVagina() && (drakesHeart || SceneLib.emberScene.hasCock());
 	if (player.racialScore(Races.DRAGON, false) >= 4 && rand(3) == 0 && (canReactMale || canReactFemale)) {
-		outputText("\n\nA sudden swell of lust races through your ");
+		outputText("\n\nA sudden swell of lust surges through your ");
 		if (canReactMale) {
 			outputText(cockDescript(0));
 			if (canReactFemale) outputText(" and ");

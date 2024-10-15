@@ -29,7 +29,7 @@ public final class SeductiveArmor extends Armor {
 				game.flags[kFLAGS.PC_FETISH] = 2;
 			}
 			else {
-				outputText("As you're trying to put on the armor, Ceraph appears from nowhere, apologizing profusely and stopping you before you can slide the last strap into place.  \"<i>Please don't put that on, " + game.player.mf("Master","Mistress") + ".  I trapped that armor to pierce new fetishes the unwary so that I could add them to my harem.  I'd hate to garner your anger.</i>\"  She wrings her hands nervously.  \"<i>If you'll hand it here, I'll get rid of it for you. Noone would buy it anyway.</i>\"");
+				outputText("As you're trying to put on the armor, Ceraph appears from nowhere, apologizing profusely and stopping you before you can slide the last strap into place.  \"<i>Please don't put that on, " + game.player.mf("Master","Mistress") + ".  I trapped that armor to pierce new fetishes the unwary so that I could add them to my harem.  I'd hate to garner your anger.</i>\"  She wrings her hands nervously.  \"<i>If you'll hand it here, I'll get rid of it for you. No one would buy it anyway.</i>\"");
 				outputText("\n\nYou shrug and toss her the armor, disappointed that you're down a potentially sexy outfit.");
 				outputText("\n\nCeraph bows gratefully and swiftly backpedals, offering, \"<i>And if you ever want me to stuff you full of magic fetishes, just ask, okay?</i>\"");
 				outputText("\n\nShe's gone before you can reply.  Sometimes she's more trouble than she's worth.");

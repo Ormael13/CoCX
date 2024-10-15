@@ -65,15 +65,15 @@ public class Shield extends Equipable
 				return false;
 			}
 			else if (!game.player.weaponOff.isNothing) {
-				if (doOutput) outputText("You can't hold with one hand both off hand weapon and shield. Unequip your current melee off hand weapon before equipping this shield. ");
+				if (doOutput) outputText("You can't hold both an off-hand weapon and a shield with one hand. Unequip your current melee off-hand weapon before equipping this shield. ");
 				return false;
 			}
 			else if (game.player.hasPerk(PerkLib.Rigidity)) {
-				if (doOutput) outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+				if (doOutput) outputText("You would very much like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
 			else if (game.player.shieldPerk == "Massive" && !game.player.hasPerk(PerkLib.GigantGrip)) {
-				if (doOutput) outputText("This shield requires use of both hands. Unequip your current melee weapon before equipping it. ");
+				if (doOutput) outputText("This shield requires the use of both your hands. Unequip your current melee weapon before equipping it. ");
 				return false;
 			}
 			return super.canEquip(doOutput, slot);

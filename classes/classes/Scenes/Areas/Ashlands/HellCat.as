@@ -26,7 +26,7 @@ import classes.internals.*;
 		{
 			var damage:int = (inte * 1.1) + rand(25);
 			damage = Math.round(damage);
-			outputText("The hellcat holds out her hand, a fireball forming in her palm. She launches the ball of molten heat your way.");
+			outputText("The hellcat holds out her hand, a fireball forming in her palm. She launches the ball of molten heat towards you.");
 			player.takeFireDamage(damage, true);
 		}
 		
@@ -47,12 +47,12 @@ import classes.internals.*;
 				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 				else player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.05, 0, 0);
 			}
-			outputText(" Reeling in pain you begin to bleed and burn at the same time.");
+			outputText(" Reeling in pain, you begin to bleed and burn at the same time.");
 		}
 		
 		public function hellcatFelineCurse():void
 		{
-			outputText("The hellcat incants a curse. Your head reels as the world around you seems to grow. You fall, unable to balance as your [legs] give way. After a few seconds, you open your eyes, trying to rub them...but your arm isn't moving right. You look down and see...fuzzy paws. Cat paws. To your growing horror, you realize what she did. You're now a housecat!");
+			outputText("The hellcat incants a curse. Your head reels as the world around you appears to expand. You fall, unable to balance as your [legs] give way. After a few seconds, you open your eyes, trying to rub them...but your arm isn't moving properly. You look down and see...fuzzy paws. Cat paws. To your growing horror, you realize what she did. You're now a housecat!");
 			player.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 8, 0, 0, 0);
 		}

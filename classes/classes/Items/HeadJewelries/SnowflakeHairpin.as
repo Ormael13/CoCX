@@ -12,7 +12,7 @@ package classes.Items.HeadJewelries
 		
 		public function SnowflakeHairpin()
 		{
-			super("SnowfH", "Snowflake hairpin", "Snowflake hairpin", "a Snowflake hairpin", 0, 0, 400, "This hair ornament favored by Yuki Onna empowers ice abilities and magic but weaken fire magic as well. (+30% ice spell dmg, -30% fire spell dmg)",HJT_HAIRPIN);
+			super("SnowfH", "Snowflake hairpin", "Snowflake hairpin", "a Snowflake hairpin", 0, 0, 400, "This hair ornament, favored by Yuki Onna, empowers ice abilities and magic but weakens fire magic as well. (+30% ice spell dmg, -30% fire spell dmg)",HJT_HAIRPIN);
 		}
 		
 		override public function afterEquip(doOutput:Boolean, slot:int):void {

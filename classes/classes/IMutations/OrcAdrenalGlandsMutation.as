@@ -32,13 +32,13 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
 			}
 			if (pTier >= 1) descS += "Your Orc adrenal glands are increasing Ferocity limit by " + fero + "%, +" + phan + "% of max core Str as phantom Str";
             if (pTier >= 2){
-                descS += ", increase your natural strength and tone";
+                descS += ", increases your natural strength and tone";
             }
             if (pTier >= 3){
-                descS += ", boost natural wrath generation rate, allow to use Ferocity even when been no longer an orc";
+                descS += ", boost natural wrath generation rate, allows you to use Ferocity even when you are no longer an orc";
             }
             if (pTier >= 4){
-                descS += ", out of combat when below 10% would not loose wrath and gain +2% per hour, +0.5% wrath generated in combat";
+                descS += ", when out of combat and below 10% wrath, you will not lose wrath and instead gain +2% per hour, +0.5% wrath generated in combat";
             }
             if (descS != "")descS += ".";
             return descS;

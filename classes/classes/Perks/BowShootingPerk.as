@@ -17,7 +17,7 @@ package classes.Perks
 
 		public function BowShootingPerk()
 		{
-			super("Bow Shooting","Bow Shooting", "Reduces cost of shotting arrows.");
+			super("Bow Shooting","Bow Shooting", "Reduces cost of shooting arrows.");
 		}
 	}
 }

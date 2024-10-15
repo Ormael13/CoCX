@@ -116,7 +116,7 @@ public class PlayerAppearance extends BaseContent {
 
 	public function	BoobDisplay():void {
 		clearOutput();
-		outputText("Do you want to display Breast Bigger then F cup.");
+		outputText("Do you want to display Breast Bigger than F cup.");
 		if (flags[kFLAGS.BOOB_DISPLAY_FLAG] == 0) outputText("[pg]Display Style: <b>Yes</b>");
 		if (flags[kFLAGS.BOOB_DISPLAY_FLAG] == 1) outputText("[pg]Display Style: <b>No</b>");
 		mainView.hideAllMenuButtons();
@@ -202,7 +202,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.necklaceName != "nothing")
 			gearDesc += " On your neck is a " + player.necklaceName + ".";
 		if (player.hasKeyItem("Gleipnir Collar") >= 0) {
-			if (player.necklaceName != "nothing") gearDesc += " Benath it is ";
+			if (player.necklaceName != "nothing") gearDesc += " Beneath it is ";
 			else gearDesc += " On your neck is ";
 			gearDesc += "Fenrir's spiked Collar, pieces of the spectral chain Gleipnir still dangling from it, floating weightlessly and tracing your movements.";
 		}
@@ -267,22 +267,22 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			var element:int = ElementalRace.getElement(player);
 			if (element == ElementalRace.ELEMENT_UNDINE) {
-				outputText("You have currently fusioned with an water elemental spirit as an undine. Your body is humanoid in shape but many of your traits remind of water. You have light blue skin the color of azure while your "+Hair.getHairLength(player)+" blue liquid hair are human at a first glance but drips into a vanishing trail of water toward the end. ");
+				outputText("You have currently fused with a water elemental spirit as an undine. our body is humanoid in shape, but many of your traits resemble water. You have light blue skin the color of azure while your "+Hair.getHairLength(player)+" blue liquid hair are human at a first glance but drips into a vanishing trail of water toward the end. ");
 				outputText("Your eyes are the color sea water and your expression albeit serene mask the violent mood swing your element can be subject to. Calm like a pond or raging like the sea amidst a storm you can just as easily move from one to the other in a blink.\n\n");
 				outputText("Your body, while mostly unified like a pool of water, is ornamented by a number of energy runes that allows you to maintain a solid shape somewhat. Your arms are human-like in shape, but just as the rest of your body, you can extend and shift your arms into churning water at any will. The skin is like water and can be semi seen through. ");
 				outputText("Your legs are human-like in shape, though they occasionally drip water to the ground. Just like the rest of your semi liquid body, it's translucent as if staring through a pool of water. Your semi liquid form allows you to pleasantly float in the air like condensation, though you cannot outright fly.");
 			}
 			else if (element == ElementalRace.ELEMENT_IGNIS) {
-				outputText("You have currently fusioned with an fire elemental spirit as a ignis. Your body is humanoid in shape but many of your traits remind of fire. You have tan skin as if spending too much time under the sun while your "+Hair.getHairLength(player)+" burning, raging flame like hair flow like raging flames. Your eyes are the color of blazing embers while your vicious expression mirrors the raging fire in your heart. You feel like going violent and reckless might solve some of your problems.\n\n");
+				outputText("You have currently fused with a fire elemental spirit as a ignis. our body is humanoid in shape, but many of your traits resemble fire. You have tan skin as if spending too much time under the sun while your "+Hair.getHairLength(player)+" burning, raging flame like hair flow like raging flames. Your eyes are the color of blazing embers while your vicious expression mirrors the raging fire in your heart. You feel like going violent and reckless might solve some of your problems.\n\n");
 				outputText("Your arms are human-like in shape, but at the junction of your wrists, fire wicks about in the palm of your hands. Your legs are human-like in shape, but a raging fire starts at your ankles, coating your feet entirely. You levitate by burning the ambient air around you. Wreathed in a corona of flame, you can fly freely as long as you have oxygen to propel you.");
 			}
 			else if (element == ElementalRace.ELEMENT_GNOME) {
-				outputText("You have currently fusioned with an earth elemental spirit as a gnome. Your body is humanoid in shape but many of your traits remind of the solid stone. You have dark brown skin the color of stone and fertile earth while your "+Hair.getHairLength(player)+" polished stone, golem like, straight hair are decorated with a single budding vine. ");
+				outputText("You have currently fused with an earth elemental spirit as a gnome. our body is humanoid in shape, but many of your traits resemble the solid stone. You have dark brown skin the color of stone and fertile earth while your "+Hair.getHairLength(player)+" polished stone, golem-like, straight hair are decorated with a single budding vine. ");
 				outputText("Your eyes are the color of emerald and verdant greenery, brimming with life while your calm serene expression mirrors the stone near infinite patience but can abruptly turn to violent quaking anger when provoked.\n\n");
 				outputText("Your arms are human-like in shape, at least up to your elbow. Past your elbows, your arms shift into something large, sturdy and golem-like, capable of crushing anything. Beneath your torso, your legs turn to solid rock, fully fusing with the ground beneath you. While anybody could assume you have no mobility, you can simply move by sliding across the solid ground as if you were merely swimming.");
 			}
 			else {
-				outputText("You have currently fused with a wind elemental spirit, morphing your body and becoming a sylph. Your body is humanoid in shape but many of your traits remind of wind. You have light green skin and "+Hair.getHairLength(player)+", weightless flowing hair that swirls into a vortex above your head in flowing locks. ");
+				outputText("You have currently fused with a wind elemental spirit, morphing your body and becoming a sylph. our body is humanoid in shape, but many of your traits resemble wind. You have light green skin and "+Hair.getHairLength(player)+", weightless flowing hair that swirls into a vortex above your head in flowing locks. ");
 				outputText("Your eyes are the color of the orange twilight sky and your expression is playful and capricious but mostly free. The wind goes where it wants and does what it wants. You feel like you could do anything without barrier or restraint.\n\n");
 				outputText("Your arms are human-like in shape, but are covered in tattoos, vaguely resembling swirling vortexes of wind. Silky smooth gloves cover your hands up to your shoulders. "+(player.gender == 1 ?"":" like cloth forming what would appear like a translucent skirt to the untrained eye")+". ");
 				outputText(" Being air incarnate, you can float and fly at will anywhere. It’s as if you’re one with the air itself.");

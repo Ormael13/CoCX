@@ -26,9 +26,9 @@ public final class Reducto extends Consumable {
         EngineCore.menu();
         outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?");
         if (player.hasCock()) EngineCore.addButton(0, "Cock", reductoCock)
-            .disableIf(player.longestCockLength() <= 2 && player.thickestCockThickness() <= 0.5, "It can't shrink further!");
+            .disableIf(player.longestCockLength() <= 2 && player.thickestCockThickness() <= 0.5, "It can't shrink any further!");
         if (player.hasBalls()) EngineCore.addButton(1, "Balls", pickDoses, reductoBalls)
-            .disableIf(player.ballSize == 1, "They can't be any smaller!");
+            .disableIf(player.ballSize == 1, "They can't get any smaller!");
         if (player.biggestTitSize() > 0) EngineCore.addButton(2, "Breasts", reductoBreasts);
         EngineCore.addButton(3, "Nipples", pickDoses, reductoNipples)
             .disableIf(player.nippleLength <= 0.25, "Minimum size reached.");
@@ -54,7 +54,7 @@ public final class Reducto extends Consumable {
     private function reductoBalls(dose:int):void {
         var d:int = dose;
         clearOutput();
-        outputText("You smear the foul-smelling paste onto your [sack].  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n");
+        outputText("You smear the foul-smelling paste onto your [sack].  It feels cool at first, but rapidly warms to an uncomfortable level of heat.\n\n");
         while (d-- > 0) game.player.ballSize -= Utils.rand(4) + 2;
         if (game.player.ballSize < 1) game.player.ballSize = 1;
         outputText("You feel your scrotum shift, shrinking down along with your [balls].  Within a few seconds the paste has been totally absorbed and the shrinking stops.");
@@ -79,7 +79,7 @@ public final class Reducto extends Consumable {
             var d:int = dose;
             var randProcs:int = 0;
             clearOutput();
-            outputText("You smear the foul-smelling ointment all over your breasts, covering them entirely as the paste begins to get absorbed into your " + game.player.skinDesc + ".\n");
+            outputText("You smear the foul-smelling paste all over your breasts, covering them entirely as the paste begins to get absorbed into your " + game.player.skinDesc + ".\n");
             while (d-- > 0) {
                 game.player.shrinkTits(true, row1 - 1);
                 if (Utils.rand(2) == 0) ++randProcs;
@@ -134,7 +134,7 @@ public final class Reducto extends Consumable {
         function pickPlace(dick1:int):void {
             clearOutput();
             if (player.cocks[dick1 - 1].cockType == CockTypesEnum.BEE) {
-                outputText("The gel produces an odd effect when you rub it into your [cock " + dick1 + "].  It actually seems to calm the need that usually fills you.  In fact, as your [cock " + dick1 + "] shrinks, its skin tone changes to be more in line with yours and the bee hair that covered it falls out.  <b>You now have a human cock!</b>");
+                outputText("The gel produces an odd effect as you rub it into your [cock " + dick1 + "].  It actually seems to calm the need that usually fills you.  In fact, as your [cock " + dick1 + "] shrinks, its skin tone changes to be more in line with yours and the bee hair that covered it falls out.  <b>You now have a human cock!</b>");
                 player.cocks[dick1 - 1].cockType = CockTypesEnum.HUMAN;
                 player.dynStats("sen", -2, "lus", -10);
                 SceneLib.inventory.itemGoNext();

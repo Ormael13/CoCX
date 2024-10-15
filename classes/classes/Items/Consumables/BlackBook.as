@@ -23,7 +23,7 @@ public class BlackBook extends Consumable {
 
     override public function useItem():Boolean {
         clearOutput();
-        outputText("What you want to do with this White Book?");
+        outputText("What do you want to do with this Black Book?");
         blackSpellbook();
         return true;
     }

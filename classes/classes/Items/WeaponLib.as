@@ -90,7 +90,7 @@ public final class WeaponLib extends ItemConstants
 		
 		public const A_STAFF:Weapon = new Weapon(
 				"A.Staff", "A. Staff", "amethyst staff", "an amethyst staff", "smack", 2, 240,
-				"This staff is made of very old wood and seems to tingle to the touch.  The top has amethyst embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.",
+				"This staff is made of very old wood and seems to tingle to the touch.  The top has an amethyst embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.",
 				WT_STAFF, WSZ_LARGE)
 				.withBuffs({'spellpower':+0.2}) as Weapon;
 		public const ACLAYMO:Weapon = new Weapon(
@@ -103,10 +103,10 @@ public final class WeaponLib extends ItemConstants
 				"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.",
 				WT_DAGGER, WSZ_SMALL);
 		public const AETHERD:Weapon = new AetherD();
-		//Effect: Magic catalyst 180%, Count as a dual weapon this item also damage enemies mana on each successful swing. Also cause the burn status for 3 rounds.
+		//Effect: Magic catalyst 180%, Count as a dual weapon this item also damages enemies' mana on each successful swing. Also cause the burn status for 3 rounds.
 		public const ATWINSCY:Weapon = new Weapon(
 				"ATWINSCY","A.TwinScythe","twin scythe","Alvina's Twin Scythes","slash",20,12000,
-				"Alvina’s beloved weapons. These pair of scythes were used to slay rival mages. The black flame which blaze along this cursed item’s blade burns the victim’s magic like fuel. Alvina rarely ever used this item to its full extent, only pulling it out as a trump card against her deadliest opponents when magic alone proved insufficient.",
+				"Alvina’s beloved weapons. This pair of scythes. The black flame which blazes along this cursed item’s blade burns the victim’s magic like fuel. Alvina rarely ever used this item to its full extent, only pulling it out as a trump card against her deadliest opponents when magic alone proved insufficient.",
 				WT_SCYTHE,WSZ_LARGE,true)
 				.withBuff('spellpower', +1.8)
 				.withTags(W_WHIRLWIND,W_STAFFPART, W_FIRE_TYPE)
@@ -114,7 +114,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.AttackBonus_Cor, 1/20) as Weapon;
 		public const ANGSTD :Weapon = new Weapon(
 				"AngstD","AngstDaggers","Angst Daggers","a set of Angst Daggers","stab",20,3200,
-				"A pair of small blades filled with anger. To fully unleash potential of those deadly blades is required 300+ speed and 60+ strength.",
+				"A pair of small blades filled with anger. To fully unleash the potential of these deadly blades, 300+ speed and 60+ strength are required.",
 				WT_DAGGER, WSZ_SMALL, true)
 				.withEffect(IELib.ScaleAttack_Spe, 300)
 				.withEffect(IELib.ScaleAttack_Str, 60) as Weapon;
@@ -177,7 +177,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.ScaleAttack_Spe, 100) as Weapon;
 		public const BCLAWS:BlizzardClaws = new BlizzardClaws();
 		public const BFGAUNT:BigFuckingGauntlets = new BigFuckingGauntlets();
-		public const BFTHSWORD:Weapon = new Weapon("BFTHSword", "BFTHSword", "big fucking two-handed sword", "a big fucking two-handed sword", "slash", 100, 4000, "Big Fucking Two-Handed Sword - if the best solution for a tiny e-pen complex at this side of the Mareth not work take this one! This 2H 4 meters long sword requires 250 strength to fully unleash it power.", WT_SWORD, WSZ_MASSIVE)
+		public const BFTHSWORD:Weapon = new Weapon("BFTHSword", "BFTHSword", "big fucking two-handed sword", "a big fucking two-handed sword", "slash", 100, 4000, "Big Fucking Two-Handed Sword - if the best solution for a tiny e-pen complex at this side of the Mareth not work take this one! This 4-meter long sword requires 250 strength to fully unleash its power.", WT_SWORD, WSZ_MASSIVE)
 				.withTag(W_LGWRATH)
 				.withEffect(IELib.ScaleAttack_StrXL, 250) as Weapon;
 		public const BFSWORD:Weapon = new Weapon("BFSword", "B.F.Sword", "big fucking sword", "a big fucking sword", "slash", 50, 2000, "Big Fucking Sword - the best solution for a tiny e-pen complex at this side of the Mareth!  This 2H 2,5 meters long sword requires 150 strength to fully unleash it power.", WT_SWORD, WSZ_LARGE)
@@ -291,7 +291,7 @@ public final class WeaponLib extends ItemConstants
 				.withTag(I_LEGENDARY) as Weapon;
 		public const DE_GAXE:Weapon = new Weapon(
 				"D.GAXE", "Demon G.Axe", "demonic greataxe", "a demonic greataxe", "cleave", 80, 8000,
-				"A greataxe made in black metal and imbued with unholy power. Its shaft is wrapped in bat wings made of darkened bronze. Its deadly blade seems to always aim for the enemy necks.",
+				"A greataxe made in black metal and imbued with unholy power. IIts shaft is wrapped in bat wings made of darkened bronze. Its deadly blade seems to always aim for the enemy necks.",
 				WT_AXE, WSZ_LARGE)
 				.withTags(I_LEGENDARY, W_CORRUPT_TYPE)
 				.withEffect(IELib.AttackBonus_Cor, 1/5)
@@ -315,7 +315,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.AttackBonus_Cor, 1/5) as Weapon;
 		public const DRAPIER:Weapon = new Weapon(
 				"DRapier", "DRapier", "dragon rapier", "Dragon's Rapier", "slash", 18, 1440,
-				"Ancient looking rapier forged in dragon fire. Tales saying that some of the dragon fire could still linger inside of it.  Still blade is piece of an extraordinatry quality and perfect for stabbing.",
+				"Ancient looking rapier forged in dragon fire. Tales saying that some of the dragon fire could still linger inside of it.  The blade is still a piece of extraordinary quality and perfect for stabbing.",
 				WT_DUELING, WSZ_MEDIUM)
 				.withTags(W_RAPIER) as Weapon;
 		public const DWARWA :Weapon = new Weapon(
@@ -348,7 +348,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.ScaleAttack_Spe, 100) as Weapon;
 		public const DL_AXE_:Weapon = new Weapon(
 				"D.L.Axe", "D.L.Axe", "dual large axes", "a pair of axes large enough for a minotaur", "cleaves", 18, 1440,
-				"This pair of massive axes once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  Those axes are double-bladed and deadly-looking.  Requires height of 6'6\".",
+				"This pair of massive axes once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  These axes are double-bladed and deadly-looking.  Requires height of 6'6\".",
 				WT_AXE, WSZ_LARGE, true)
 				.withEffect(IELib.ScaleAttack_Str, 120) as Weapon;
 		public const DL_WHIP:Weapon = new Weapon(
@@ -359,7 +359,7 @@ public final class WeaponLib extends ItemConstants
 				.withTags(W_WHIPPING, W_FIRE_TYPE) as Weapon;
 		public const DOCDEST:Weapon = new Weapon(
 				"DOCDest", "DOCDestroyer", "Defiled Oni Chieftain Destroyer", "a Defiled Oni Chieftain Destroyer", "smash", 160, 16800,
-				"This unrealistically large two handed mace was clearly made for some legendary oni chieftain to wield. Even bigger than the standard oni tetsubo this thing could topple buildings. You likely will need some absurd strength just to lift it.",
+				"This unrealistically large two handed mace was clearly made for some legendary oni chieftain to wield. Even bigger than the standard oni tetsubo, this thing could topple buildings. You likely will need some absurd strength just to lift it.",
 				WT_MACE_HAMMER,WSZ_LARGE)
 				.withTags(W_WHIRLWIND,W_LGWRATH,W_TETSUBO,I_LEGENDARY)
 				.withEffect(IELib.Stun, 15)
@@ -367,7 +367,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.AttackBonus_Cor, 1/2) as Weapon;
 		public const DSWORD_:Weapon = new Weapon(
 				"DSwords", "DualSwords", "dual swords", "a pair of swords", "slashes", 10, 800,
-				"A pair of swords made of the finest steel usefull for fight groups of enemies.",
+				"A pair of swords made of the finest steel, usefull for fight groups of enemies.",
 				WT_SWORD, WSZ_MEDIUM, true);
 		public const DSSPEAR:Weapon = new Weapon(
 				"DSSpear", "Demon Sn Spear", "demon snake spear", "a demon snake spear", "piercing stab", 60, 4800,
@@ -457,7 +457,7 @@ public final class WeaponLib extends ItemConstants
 		public const HALBERD:Weapon = findCommonDynamicWeapon("halberd");
 		public const HATWINSCY:Weapon = new Weapon(
 				"HATWINSCY","H.A.TwinScythe","half of twin scythe","Half of Alvina Twin Scythe","slash",20,6000,
-				"One half of Alvina’s beloved twin weapons. This scythe was used to slay rival mages. The black flame which blaze along this cursed item’s blade burns the victim’s magic like fuel. Alvina rarely ever used this item to its full extent, only pulling it out as a trump card against her deadliest opponents when magic alone proved insufficient.",
+				"One half of Alvina’s beloved twin weapons. This scythe was used to slay rival mages. The black flame which blazes along this cursed item’s blade burns the victim’s magic like fuel. Alvina rarely ever used this item to its full extent, only pulling it out as a trump card against her deadliest opponents when magic alone proved insufficient.",
 				WT_SCYTHE,WSZ_LARGE)
 				.withBuff('spellpower', +0.9)
 				.withTags(W_WHIRLWIND,W_STAFFPART, W_FIRE_TYPE)
@@ -547,7 +547,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.AttackBonus_Cor, -1/10) as Weapon;
 		public const LRAPIER:Weapon = new Weapon(
 				"LRapier", "LRapier", "lust rapier", "lust-coated rapier", "slash", 8, 640,
-				"A rapier with edge that seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.",
+				"A rapier with an edge that seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.",
 				WT_DUELING, WSZ_MEDIUM)
 				.withTags(W_RAPIER) as Weapon;
 		public const MACE   :Weapon = findCommonDynamicWeapon("mace");
@@ -592,7 +592,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.Bleed, 10) as Weapon;
 		public const NTWHIP :Weapon = new Weapon(
 				"NTWhip ", "NineTailWhip", "nine tail whip", "a nine tail whip", "whipping", 18, 720,
-				"A rope that unravelled into three small ropes, each of which is unravelled again designed to whip your foes into submission.",
+				"A rope that unraveled into three small ropes, each of which is unraveled again, designed to whip your foes into submission.",
 				WT_WHIP, WSZ_LARGE)
 				.withBuffs({'teasedmg': 40})
 				.withTags(W_WHIPPING)
@@ -628,7 +628,7 @@ public final class WeaponLib extends ItemConstants
 				WT_MACE_HAMMER, WSZ_MEDIUM);
 		public const POCDEST:Weapon = new Weapon(
 				"POCDest", "POCDestroyer", "Purified Oni Chieftain Destroyer", "a Purified Oni Chieftain Destroyer", "smash", 210, 16800,
-				"This unrealistically large two handed mace was clearly made for some legendary oni chieftain to wield. Even bigger than the standard oni tetsubo this thing could topple buildings. You likely will need some absurd strength just to lift it.",
+				"This unrealistically large two handed mace was clearly made for some legendary oni chieftain to wield. Even bigger than the standard oni tetsubo, this thing could topple buildings. You likely will need some absurd strength just to lift it.",
 				WT_MACE_HAMMER, WSZ_LARGE)
 				.withEffect(IELib.Stun, 15)
 				.withEffect(IELib.AttackBonus_Cor, -1/2)
@@ -956,19 +956,19 @@ public final class WeaponLib extends ItemConstants
 				.withBuff('spellpower', +0.40)
 				.withTags(W_STAFFPART) as Weapon;
 		public const A_WAND:Weapon = new Weapon(
-				"A.Wand", "A.Wand", "Apprentice wand", "an apprentice wand", "smack", 1, 80, "A low quality wand. Light and cheap it is commonly used by young apprentices who have started learning magic. Seeing as beginners tend to cause their catalyst to explode this is the perfect weapon for them.", WT_WAND, WSZ_MEDIUM)
+				"A.Wand", "A.Wand", "Apprentice wand", "an apprentice wand", "smack", 1, 80, "A low quality wand. Light and cheap, it is commonly used by young apprentices who have started learning magic. Seeing as beginners tend to cause their catalyst to explode this is the perfect weapon for them.", WT_WAND, WSZ_MEDIUM)
 				.withBuff('spellpower', +0.30) as Weapon;
 		public const O_WAND:Weapon = new Weapon(
 				"O.Wand", "O.Wand", "Old wand", "an old wand", "smack", 1, 500, "An old wand. It seems to be broken or worn out, perhaps it can be repaired by a skilled wizard? It is not very useful in its current state but may be able to boost your spellpower if repaired.", WT_WAND, WSZ_MEDIUM)
 				.withBuff('spellpower', +0.10) as Weapon;
 		public const R_WAND:Weapon = new Weapon(
-				"R.Wand", "R.Wand", "Repaired Old wand", "an old wand repaired by alvina", "smack", 1, 800, "An old wand that has been repaired for you by Alvina. It boosts your spellpower, though not as much as if it were made specifically for you.", WT_WAND, WSZ_MEDIUM)
+				"R.Wand", "R.Wand", "Repaired Old wand", "an old wand repaired by alvina", "smack", 1, 800, "An old wand that has been repaired for you by Alvina. It boosts your spellpower, tthough not as much as if it had been made specifically for you.", WT_WAND, WSZ_MEDIUM)
 				.withBuff('spellpower', +0.80) as Weapon;
 		public const H_WAND:Weapon = new Weapon(
 				"H.Wand", "H.Wand", "hellcat wand", "a hellcat wand", "smack", 1, 500, "A hellcat witch wand. Commonly used by hellcats to deliver their iconic fire magic.", WT_WAND, WSZ_MEDIUM)
 				.withBuff('spellpower', +1) as Weapon;
 		public const WDAGGER:Weapon = new Weapon(
-				"WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", WT_DAGGER, WSZ_SMALL)
+				"WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around, it is light, discreet, and excelent for delivering spells.", WT_DAGGER, WSZ_SMALL)
 				.withBuff('spellpower', +0.20)
 				.withTags(W_STAFFPART) as Weapon;
 		public const SFLUTTE:Weapon = new Weapon(
@@ -982,7 +982,7 @@ public final class WeaponLib extends ItemConstants
 				.withPerk(PerkLib.PerformancePower, 1, 0, 0, 0)
 				.withTags(W_MUSICINSTR) as Weapon;
 		public const HELLCAL:Weapon = new Weapon(
-				"Hellcaller","Hellcaller","Hellcaller","a Hellcaller","smack",1,640,"Pan flute further infused with the power of corruption. Its depraved notes invite the listener to act of wanton debauchery or self destruction. This is an instrument of ruin not of creation.", WT_MACE_HAMMER, WSZ_SMALL)
+				"Hellcaller","Hellcaller","Hellcaller","a Hellcaller","smack",1,640,"Pan flute further infused with the power of corruption. Its depraved notes invite the listener to act of wanton debauchery or self destruction. This is an instrument of ruin, not of creation.", WT_MACE_HAMMER, WSZ_SMALL)
 				.withBuff('spellpower', +1.50)
 				.withPerk(PerkLib.PerformancePower, 1.5, 0, 0, 0)
 				.withTags(W_MUSICINSTR, I_LEGENDARY, W_CORRUPT_TYPE) as Weapon;

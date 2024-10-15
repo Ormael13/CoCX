@@ -34,7 +34,7 @@ package classes.Items.Consumables
             player.refillHunger(15);
             //Special texts for corruption
             if (player.cor < 10){
-                outputText("\nThe fluid tingles as it flows down your throat but quickly passes, leaving you more clearheaded");
+                outputText("\nThe fluid tingles as it flows down your throat but quickly passes, leaving you more clear-headed");
             }
 
             if (player.cor >= 10 && player.cor < 20){
@@ -46,15 +46,15 @@ package classes.Items.Consumables
             }
 
             if (player.cor >= 40 && player.cor < 60){
-                outputText("\n\nA wave of stining pain slices through your body and head as the freezing liquid hits your stomach, you suddenly feel as if you were standing naked in a blizard. Your arms and legs start to go numb, and even though you think you've never felt colder in your life, your body is covered in sweat.\n\nEventually, you begin to feel more normal, though your thoughts seem more clear now.");
+                outputText("\n\nA wave of stininging pain slices through your body and head as the freezing liquid hits your stomach, you suddenly feel as if you were standing naked in a blizzard. Your arms and legs start to go numb, and even though you think you've never felt colder in your life, your body is covered in sweat.\n\nEventually, you begin to feel more normal, though your thoughts seem more clear now.");
             }
 
             if (player.cor >= 60 && player. cor < 80){
-                outputText("\n\nAs you swallow the liquid you feel a sharp pain snap right before your eyes. In moments, you fall to your knees, gasping for breath. It feels as if somebody has turned your skin to ice. You break out in a cold sweat as the sensation grows more intense, and you feel as if your blood is freezing in your veins. As you start loosing feeling in your extremeties, you pass out. \n\nLater, when you wake up, the constant haze of lust that clouded your thoughts seemes to have lightened.");
+                outputText("\n\nAs you swallow the liquid you feel a sharp pain snap right before your eyes. In moments, you fall to your knees, gasping for breath. It feels as if somebody has turned your skin to ice. You break out in a cold sweat as the sensation grows more intense, and you feel as if your blood is freezing in your veins. As you start losing feeling in your extremities, you pass out. \n\nLater, when you wake up, the constant haze of lust that clouded your thoughts seems to have lightened.");
             }
 
             if (player.cor >= 80){
-                outputText("\n\nNot long after the fluid touched your tongue did pain start to errupt through your body. You fall to your knees screaming as the numbing cold, yet burning hot sensation spread through your body, nearly feeling as if somebody was ripping the skin from your form. Miraculously you pass out. \n\nOnce you eventually regain conciousness, the mist the clouded your thoughts has lifted somewhat.");
+                outputText("\n\nNot long after the fluid touched your tongue did pain start to erupt through your body. You fall to your knees screaming as the numbing cold, yet burning hot sensation spread through your body, nearly feeling as if somebody was ripping the skin from your form. Miraculously you pass out. \n\nOnce you eventually regain conciousness, the mist that clouded your thoughts has lifted somewhat.");
             }
 
             //Remove corruption

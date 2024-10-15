@@ -25,7 +25,7 @@ public class UnicornStaff extends Weapon implements TimeAwareInterface
 		public function UnicornStaff()
 		{
 			super("U.Staff", "U. Staff", "unicorn staff", "a unicorn staff", "bonk", 23, 3680,
-					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates. Furthermore, the staff allows the user to preserve mana when casting using a minimal ammount of energy on each spell. (Spell Cost -50%, increases Spellpower based on purity)",
+					"This blessed staff is made from pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within greatly enhances the user’s healing spells, similar to the fabled creature it emulates. Additionally, the staff allows the user to conserve mana, using only a minimal amount of energy for each spell. (Spell Cost -50%, increases Spellpower based on purity).",
 					WT_STAFF, WSZ_LARGE
 			);
 			withBuff('spellpower', +1.0);

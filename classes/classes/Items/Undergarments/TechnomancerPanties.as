@@ -11,7 +11,7 @@ package classes.Items.Undergarments
 		
 		public function TechnomancerPanties()
 		{
-			super("T.Panty", "T.Panties", "Technomancer panties", "a pair of Technomancer panties", UT_BOTTOM, 600, 0, 0, 0, "A black latex panty to match with the technomancer clothes, it is decorated with a gears motif and is oil, shock and stainproof. This item also improve your aptitude at using technology. \n\nType: Undergarment (Lower)");
+			super("T.Panty", "T.Panties", "Technomancer panties", "a pair of Technomancer panties", UT_BOTTOM, 600, 0, 0, 0, "A black latex pair of panties designed to complement technomancer clothing, decorated with a gear motif. It is oil, shock, and stainproof. This item also improves your aptitude for using technology. \n\nType: Undergarment (Lower)");
 		}
 		
 		override public function canEquip(doOutput:Boolean, slot:int):Boolean{

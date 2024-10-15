@@ -12,7 +12,7 @@ package classes.Items.Undergarments
 		
 		public function DriderPanties()
 		{
-			super("D. Pnte", "Drider silk Panties", "drider panties", "Silky Drider-Weave Panties", UT_BOTTOM, 2100, 2, 4, 4, "This pair of panties is exquisitely made, to the point where you genuinely think they belong in a picture frame. Thin strands of silk cross the front in a weblike pattern, offering just enough solid material to cover your most enticing bits. The rest of it is sheer, letting whoever’s looking see pretty much everything else. Brown-tinted bits of silk form the seams, looking for all the world like the twigs such a web would nestle between. Despite the translucent nature of the fabric, the flex of the material is clear, and each strand, while gentle on your fingers and assets, shows no sign of yielding to a blade. \n\nType: Undergarment (Lower)");
+			super("D. Pnte", "Drider silk Panties", "drider panties", "Silky Drider-Weave Panties", UT_BOTTOM, 2100, 2, 4, 4, "This pair of panties is exquisitely crafted, so fine that they seem worthy of being displayed in a frame. Thin strands of silk cross the front in a web-like pattern, providing just enough material to cover your most intimate areas. The rest is sheer, leaving almost nothing to the imagination. The seams, made from brown-tinted silk, resemble twigs where a web might rest. Despite the translucent nature of the fabric, the flex of the material is clear, and each strand, while gentle on your fingers, shows no sign of yielding even to a blade. \n\nType: Undergarment (Lower)");
 			withBuff('spellpower', +0.1);
 		}
 		
