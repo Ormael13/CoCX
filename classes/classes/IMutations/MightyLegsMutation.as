@@ -20,7 +20,7 @@ public class MightyLegsMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Make Kick permanent no matter your leg type. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
+                descS += "Makes Kick permanent no matter your leg type. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
             }
             if (pTier >= 2){
                 descS += ". Kick is " + ((5 * pTier) - 5) + "0% stronger";
