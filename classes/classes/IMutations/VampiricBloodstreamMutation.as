@@ -22,9 +22,9 @@ public class VampiricBloodstreamMutation extends IMutationPerkType
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Your bloodstream has started to adapt to the presence of vampiric blood";
             if (pTier >= 2) descS += " Vampire Thirst stack now decays every " + decay() + " days.";
-            descS += " Increases the maximum numbers of stacks of Vampire Thirst by " + vampStackC();
+            descS += " Increases the maximum number of Vampire Thirst stacks by " + vampStackC();
             if (pTier >= 3) descS += ", and increase their potency by " + potency() + "%";
-            if (pTier >= 4) descS += ", each Vampire Bite giving 2 more stacks";
+            if (pTier >= 4) descS += ", each Vampire Bite gives 2 more stacks";
             if (descS != "")descS += ".";
             return descS;
 			
