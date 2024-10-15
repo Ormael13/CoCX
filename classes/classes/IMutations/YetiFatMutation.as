@@ -22,13 +22,13 @@ public class YetiFatMutation extends IMutationPerkType
 			if (pTier >= 2) pDR += 10;
 			if (pTier >= 3) pDR += 20;
             if (pTier >= 1){
-                descS += "Gain damage reduction (" + pDR + "%) against attacks, increase strength of yeti ice breath by 50%";
+                descS += "Gain (" + pDR + "%) damage reduction against attacks, increases the strength of yeti ice breath by 50%";
             }
             if (pTier >= 2){
-                descS += ", potency of Big Hand and Feet by 50%";
+                descS += ", the potency of Big Hand and Feet increases by 50%";
             }
             if (pTier >= 3){
-                descS += ", duration of yeti breath stun by 1 round and reduce cooldown by 3 rounds.";
+                descS += ", increases the duration of yeti breath stun by 1 round and reduce its cooldown by 3 rounds.";
             }
             if (descS != "")descS += ".";
             return descS;
