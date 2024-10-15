@@ -79,11 +79,11 @@ public class LowerBody extends SaveableBodyPart {
 			var desc: String = ""
 
 			if (player.isBiped()) {
-				desc += "Your two legs are muscled and jointed oddly, covered in [fur color] fur, and end in a bestial hooves.";
+				desc += "Your two legs are muscled and jointed oddly, covered in [fur color] fur, and end in bestial hooves.";
 			}
 
 			if (player.isTaur()) {
-				desc += "From the waist down, you have the body of a horse, with four muscled legs which are jointed oddly, covered in [fur color] fur, and end in a bestial hooves."
+				desc += "From the waist down, you have the body of a horse, with four muscled legs which are jointed oddly, covered in [fur color] fur, and end in bestial hooves."
 			}
 
 			return desc;
@@ -407,7 +407,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const PLANT_ROOT_CLAWS:int = 32;
 	EnumValue.add(Types, PLANT_ROOT_CLAWS, "PLANT_ROOT_CLAWS", {
 		name: "root feet",
-		appearanceDesc: "Your {legCount} legs looks quite normal aside feet. They turned literally into roots only vaguely retaining the shape of the feet."
+		appearanceDesc: "Your {legCount} legs looks quite normal aside from the feet. They turned literally into roots only vaguely retaining the shape of the feet."
 	});
 
 	public static const WOLF:int = 33;
@@ -800,10 +800,10 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = ""
 			if (player.isBiped()) {
-				desc += "Your two legs are muscled and jointed oddly, covered in patterned [fur color] fur, and end in a bestial hooves.";
+				desc += "Your two legs are muscled and jointed oddly, covered in patterned [fur color] fur, and end in bestial hooves.";
 			}
 			if (player.isTaur()) {
-				desc += "From the waist down, you have the body of a kirin, with four muscled legs which are jointed oddly, covered in patterned [fur color] fur, and end in a bestial hooves."
+				desc += "From the waist down, you have the body of a kirin, with four muscled legs which are jointed oddly, covered in patterned [fur color] fur, and end in bestial hooves."
 			}
 			return desc;
 		},
