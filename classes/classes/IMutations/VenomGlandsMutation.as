@@ -21,16 +21,16 @@ public class VenomGlandsMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "You now possess venom glands, and your teeth now can inject the venom when you bite";
+                descS = "You now possess venom glands, and your teeth can now inject the venom when you bite";
             }
             if (pTier == 2){
-                descS = "You now possess venom glands with increased venom capacity, and your teeth now can inject the venom when you bite (+5% poison resistance)";
+                descS = "You now possess venom glands with increased venom capacity, and your teeth can now inject venom when you bite (+5% poison resistance)";
             }
             if (pTier == 3){
-                descS = "You now possess venom glands with increased venom capacity, and your teeth now can inject the venom when you bite (+15% poison resistance)";
+                descS = "You now possess venom glands with increased venom capacity, and your teeth can now inject venom when you bite (+15% poison resistance)";
             }
             if (pTier == 4){
-                descS = "You now possess venom glands with greatly increased venom capacity, and your teeth now can inject the venom when you bite (+30% poison resistance)";
+                descS = "You now possess venom glands with greatly increased venom capacity, and your teeth can now inject venom when you bite (+30% poison resistance)";
             }
             if (descS != "")descS += ".";
             return descS;
