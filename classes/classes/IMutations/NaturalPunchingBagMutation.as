@@ -20,13 +20,13 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "Increases the damage reduction from Bouncy body by 5% and increase your natural toughness";
+                descS = "Increases the damage reduction from Bouncy body by 5% and increases your natural toughness";
             }
             else if (pTier == 2){
-                descS = "Increases the damage reduction from Bouncy body by 15%, continue to increase your natural toughness and healing items are more effective";
+                descS = "Increases the damage reduction from Bouncy body by 15%, continues to increase your natural toughness and healing items are more effective";
             }
             else if (pTier == 3){
-                descS = "Increases the damage reduction from Bouncy body by 35%, continue to increase your natural toughness, healing/wrath/stat boosting items are more effective and allows you to keep the effect of bouncy body as long as you are below 4 feet tall";
+                descS = "Increases the damage reduction from Bouncy body by 35%, continues to increase your natural toughness, healing/wrath/stat boosting items are more effective and allows you to keep the effect of bouncy body as long as you are below 4 feet tall";
             }
             if (descS != "")descS += ".";
             return descS;
