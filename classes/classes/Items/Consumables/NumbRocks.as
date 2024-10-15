@@ -32,13 +32,13 @@ import classes.VaginaClass;
             //effects: stop heat, stop rut, dysfunction, int curse, thick skin perk, ass looseness, vag looseness.
             var choices:Array = [];
             //effects: heat, rut, anal, vag looseness
-            if (player.inHeat) choices.push(1);
-            if (player.inRut) choices.push(2);
+            if (player.inRut) choices.push(1);
+            if (player.inHeat) choices.push(2);
             if (player.hasVagina() && player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) choices.push(3);
             if (player.ass.analLooseness > AssClass.LOOSENESS_VIRGIN) choices.push(4);
-            if (!player.hasPerk(PerkLib.ThickSkin)) choices.push(5);
-            if (rand(2) == 0) choices.push(6);
-            else if (rand(2) == 0) choices.push(7); //add one debuff to the pool
+            if (!player.hasPerk(PerkLib.ThickSkin)) choices.push(7);
+            if (rand(2) == 0) choices.push(5);
+            else if (rand(2) == 0) choices.push(6); //add one debuff to the pool
             else choices.push(0); //no effects
 
             switch(choices[rand(choices.length)]) {
