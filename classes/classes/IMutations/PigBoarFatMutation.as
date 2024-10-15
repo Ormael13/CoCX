@@ -21,13 +21,13 @@ public class PigBoarFatMutation extends IMutationPerkType
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Your altered fat tissue allows to increase your natural resistance to damage, toughness and thickness";
             if (pTier == 1){
-                descS = "Increase max Hunger cap by 5 (if PC have Hunger bar active)";
+                descS = "Increase max Hunger cap by 5 (if PC has Hunger bar active)";
             }
             if (pTier == 2){
-                descS = "Body Slam req. lower thickness to be used, increase max Hunger cap by 15 (if PC have Hunger bar active)";
+                descS = "Body Slam requires lower thickness to be used, increase max Hunger cap by 15 (if PC has Hunger bar active)";
             }
             if (pTier == 3){
-                descS = "Body Slam thickness requirement lowered and it power is doubled, pig/boar/red panda req. removed, increase max Hunger cap by 35 (if PC have Hunger bar active)";
+                descS = "Body Slam thickness requirement lowered and its power is doubled, pig/boar/red panda req. removed, increase max Hunger cap by 35 (if PC has Hunger bar active)";
             }
             if (descS != "")descS += ".";
             return descS;
