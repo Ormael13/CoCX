@@ -30,7 +30,7 @@ public class EquineMuscleMutation extends IMutationPerkType
                 descS += ". Physical ability that stuns do so for one extra round";
             }
             if (pTier >= 4){
-                descS += ". While Galloping gains +10% evasion against ranged attack";
+                descS += ". While Galloping gain +10% evasion against ranged attack";
             }
             if (descS != "")descS += ".";
             return descS;
