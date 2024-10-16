@@ -500,16 +500,10 @@ public class BeeGirlScene extends BaseContent
 		private function fightTheBeeGirl():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
+			attitude = BEE_GIRL_TALKED;
             flags[kFLAGS.BEE_GIRL_RESET_COUNTER] = 0;
-			outputText("You clear your head and resolve to defeat the monstrous bee-girl");
-			if (player.level >= 16 && rand(2) == 0) {
-				outputText(" huntress.");
-				startCombat(new BeeGirlHuntress());
-			}
-			else {
-				outputText(".");
-				startCombat(new BeeGirl());
-			}
+			outputText("You clear your head and resolve to defeat the monstrous bee-girl.");
+			startCombat(new BeeGirl());
 		}
 
 		public function afterfightoptionswithBeeGirl(hpVictory:Boolean):void {
