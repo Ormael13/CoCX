@@ -34,7 +34,7 @@ public class Antennae extends BodyPart {
 	public static const FIRE_SNAIL: int = 4;
 	EnumValue.add(Types, FIRE_SNAIL, "FIRE_SNAIL", {
 		name: "fire snail",
-		appearanceDesc: "Two horn like antennae grow from your head, feeling the air around and feeding you sensory information."
+		appearanceDesc: "Two horn-like antennae grow from your head, feeling the air around and feeding you sensory information."
 	});
 	public static const MOTH: int = 5;
 	EnumValue.add(Types, MOTH, "MOTH", {

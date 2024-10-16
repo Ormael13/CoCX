@@ -14,14 +14,14 @@ import classes.StatusEffects;
 		
 		public function CeruleanPotion()
 		{
-			super("Cerul P", "Cerulean P.", "a cerulean-tinted potion", ITEM_VALUE, "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly, it will make you irresistible, though to who or what is unkown.");
+			super("Cerul P", "Cerulean P.", "a cerulean-tinted potion", ITEM_VALUE, "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly, it will make you irresistible, though to who or what is unknown.");
 		}
 		
 		override public function useItem():Boolean
 		{
 			clearOutput();
 			player.slimeFeed();
-			if (player.hasPerk(PerkLib.Soulless)) outputText("The liquid tastes rather bland and goes down easily. You do not notice any real effects. Did the merchant con you? Or maybe it not works for true demons?");
+			if (player.hasPerk(PerkLib.Soulless)) outputText("The liquid tastes rather bland and goes down easily. You don't notice any real effects. Did the merchant con you? Or maybe it doesn't works for true demons?");
 			else {
 				//Repeat genderless encounters
 				if (player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
@@ -34,9 +34,9 @@ import classes.StatusEffects;
 				else {
 					outputText("The liquid tastes rather bland and goes down easily. ");
 					//Special repeat texts
-					if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) outputText("You look forwards to tonight's encounter.");
+					if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) outputText("You look forward to tonight's encounter.");
 					//First timer huh?
-					else outputText("You do not notice any real effects.  Did the merchant con you?");
+					else outputText("You don't notice any real effects.  Did the merchant con you?");
 				}
 				if (player.hasStatusEffect(StatusEffects.SuccubiNight)) {
 					if (player.statusEffectv1(StatusEffects.SuccubiNight) < 3) player.addStatusValue(StatusEffects.SuccubiNight,1,1);

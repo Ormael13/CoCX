@@ -26,7 +26,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
                 descS += ", ";
             }*/
             if (pTier >= 3){
-                descS += ", increases your natural evasion, and decrease melee/range accuracy penalty when using multiattack options. Elven signature abilities will keep working regardless if you are a full blooded elf or not";
+                descS += ", increases your natural evasion, and decreases melee/ranged accuracy penalty when using multiattack options. Elven signature abilities will keep working regardless if you are a full blooded elf or not";
             }
             if (pTier >= 4){
                 descS += ". Heal for an amount of hit points equal to the mana cost when spending mana. Spells have a 10% increased critical chance";

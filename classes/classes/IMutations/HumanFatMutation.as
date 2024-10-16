@@ -23,10 +23,10 @@ public class HumanFatMutation extends IMutationPerkType
                 descS = "Your altered fat tissue allows to increase your natural toughness and thickness.";
             }
             if (pTier == 2){
-                descS = "Your fat tissue continue to increase your natural toughness and thickness gained from previous change. (+15% of max core Tou as phantom Tou)";
+                descS = "Your fat tissue continues to increase your natural toughness and thickness gained from previous changes. (+15% of max core Tou as phantom Tou)";
             }
             if (pTier >= 3){
-                descS += "Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage (+";
+                descS += "Your fat tissue once again increases your natural toughness and thickness limit. Increased damage reduction against physical damage (+";
             }
             if (pTier == 3){
                 descS += "15% DR), natural resistance to damage (+15 armor/m.res), increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";

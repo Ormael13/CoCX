@@ -10,7 +10,7 @@ import classes.Items.Armor;
 		
 		public function BattleMaidenArmor()
 		{
-			super("BMArmor", "BMArmor", "Battle maiden armor", "a Battle maiden armor", 80, 40, 4800, "The purified original maiden armor recovered its former property. It fully protect the virginity of its wielder even going so far as to progressively clear the fog of lust from her mind.", "Light", false, false);
+			super("BMArmor", "BMArmor", "Battle maiden armor", "a Battle maiden armor", 80, 40, 4800, "The purified original maiden armor recovered its former property. It fully protects the virginity of its wielder even going so far as to progressively clear the fog of lust from her mind.", "Light", false, false);
 			withTag(A_REVEALING);
 			withTag(I_LEGENDARY);
 		}

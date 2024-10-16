@@ -31,7 +31,7 @@ public class FerasBirthrightMutation extends IMutationPerkType
             if (pTier == 4){
                 descS += "fully developed";
             }
-            if (descS != "") descS += " restorative system modeled by creator of all corrupted werebeasts. (+";
+            if (descS != "") descS += " restorative system modeled by the creator of all corrupted werebeasts. (+";
 			if (pTier == 1){
                 descS += "0.5/1/2";
             }

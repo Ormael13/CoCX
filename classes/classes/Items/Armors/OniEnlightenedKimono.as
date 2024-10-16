@@ -13,7 +13,7 @@ import classes.Player;
 		
 		public function OniEnlightenedKimono()
 		{
-			super("OE Kimo", "OniEnlightenedKimono", "Oni Noble kimono", "a oni noble kimono", 30, 50, 27000, "This deceptively sturdy kimono belonged to a beloved shogun amonst oni nobility. Despite their natural predisposition for domination over smaller races, some oni lords decides to rule as benevolent rulers rather then slavemasters. These benevolent oni lords more often then not are in search of the so called drunken enlightment.", "Light");
+			super("OE Kimo", "OniEnlightenedKimono", "Oni Noble kimono", "an oni noble kimono", 30, 50, 27000, "This deceptively sturdy kimono belonged to a beloved shogun amngst oni nobility. Despite their natural predisposition for domination over smaller races, some oni lords decide to rule as benevolent rulers rather than slavemasters. These benevolent oni lords more often than not are in search of the so called drunken enlightenment.", "Light");
 			withTag(A_AGILE);
 			withPerk(PerkLib.OniEnlightenedKimono, 0, 0, 0, 0);
 			withTag(I_LEGENDARY);

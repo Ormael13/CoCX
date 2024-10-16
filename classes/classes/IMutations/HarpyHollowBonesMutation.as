@@ -22,10 +22,10 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
                 descS = "Your bones are hollow like those of a harpy, decreasing your toughness, but increasing your speed and physical damage by 20%";
             }
             if (pTier >= 2){
-                descS = "Your bones are hollow like those of a harpy, decreasing your toughness, but increasing your physical damage by 50% and speed by 45% and evasiveness by 10%";
+                descS = "Your bones are hollow like those of a harpy, decreasing your toughness, but increasing your physical damage by 50%, your speed by 45% and evasiveness by 10%";
             }
             if (pTier >= 3){
-                descS = "Your bones are hollow like those of a harpy, decreasing your toughness, but increasing your physical damage by 80% and speed by 90%, evasiveness by 10%, \"Great Dive\" damage by 50%, and prevents it from ending flight";
+                descS = "Your bones are hollow like those of a harpy, decreasing your toughness, but increasing your physical damage by 80%, your speed by 90%, evasiveness by 10%, \"Great Dive\" damage by 50%, and prevents it from ending flight";
             }
             if (descS != "")descS += ".";
             return descS;

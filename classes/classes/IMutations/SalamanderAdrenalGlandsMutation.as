@@ -19,7 +19,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1) descS += "Your Salamander adrenal glands are giving you slight boost to your natural stamina";
+            if (pTier >= 1) descS += "Your Salamander adrenal glands are giving you slight boosts to your natural stamina";
             if (pTier == 1){
                 descS += " and libido";
             }

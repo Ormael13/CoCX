@@ -188,7 +188,7 @@ public class Ears extends BodyPart {
 	public static const RED_PANDA: int = 30;
 	EnumValue.add(Types, RED_PANDA, "RED_PANDA", {
 		name: "red-panda",
-		appearanceDesc: "Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.",
+		appearanceDesc: "Big, white-furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.",
 		fur: true
 	});
 	public static const AVIAN: int = 31;
@@ -223,7 +223,7 @@ public class Ears extends BodyPart {
 	public static const SHARK: int = 36;
 	EnumValue.add(Types, SHARK, "SHARK", {
 		name: "shark",
-		appearanceDesc: "A pair of fin like ears with fins stick out from your head. They allow you to hear every sound with perfect clarity while underwater."
+		appearanceDesc: "A pair of fin-like ears stick out from your head. They allow you to hear every sound with perfect clarity while underwater."
 	});
 	public static const DISPLACER: int = 37;
 	EnumValue.add(Types, DISPLACER, "DISPLACER", {
@@ -266,7 +266,7 @@ public class Ears extends BodyPart {
 	public static const KIRIN: int = 43;
 	EnumValue.add(Types, KIRIN, "KIRIN", {
 		name: "kirin",
-		appearanceDesc: "A pair of animal like ears rise up from the top of your head. Well animal like is the proper therm seeing as your kirin ears are covered with scales.",
+		appearanceDesc: "A pair of animal-like ears rise up from the top of your head. Well, animal-like is the proper term seeing as your kirin ears are covered with scales.",
 		fur: true
 	});
 	public static const BIG: int = 44;

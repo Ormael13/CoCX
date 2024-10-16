@@ -57,7 +57,7 @@ public class AsumaKirin extends Consumable {
 		var temp3:Number = 0;
 		player.slimeFeed();
 		clearOutput();
-		outputText("You down the alchohol, feeling giddy for a few second as it gets to your brain. Suddenly you jump as a random shock of statics jolts you.");
+		outputText("You down the alcohol, feeling giddy for a few second as it gets to your brain. Suddenly you jump as a random shock of static jolts you.");
 		//Speed up to 100
 		if (changes < changeLimit && rand(3) == 0 && player.MutagenBonus("spe", 3)) {
 			changes++;
@@ -289,7 +289,7 @@ public class AsumaKirin extends Consumable {
 					player.horns.count += temp;
 					if (temp == 0) changes--;
 					if (temp == 1) outputText("\n\nAn aching pressure builds in your temples as you feel your horns push another inch of length from your skull. ");
-					if (temp == 2) outputText("\n\nA powerful headache momentarily doubles you over.  With painful slowness, you feel your horns push another two inches of length out from your brow, gradually thickening as it grow.  ");
+					if (temp == 2) outputText("\n\nA powerful headache momentarily doubles you over.  With painful slowness, you feel your horns push another two inches of length out from your brow, gradually thickening as it grows.  ");
 					if (temp == 3) outputText("\n\nAgony overwhelms you as a headache of terrifying intensity sweeps through your skull.  You squeeze your eyes shut from the pain, but it does little to help.  The torture intensifies before finally diminishing as you feel an inch or two of new horns force its way out of your forehead.  The headache remains despite this, and desperate for relief, you grab hold of your horns and tug, pulling another inch of new horns free.  At last the pain fades, leaving you with significantly enhanced head-spike.  ");
 					if (player.horns.count < 3) outputText("It is the size of a tiny nub.");
 					if (player.horns.count >= 3 && player.horns.count < 6) outputText("It is similar to what you would see on a young unicorn.");

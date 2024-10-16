@@ -34,7 +34,7 @@ import classes.ItemType;
 			}
 			outputText("Next, you put on your reinforced bark bracers to protect your arms.\n\n");
             if (!CoC.instance.player.isTaur()) {
-                outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Konstantin for that and you know that you easily have access to your ");
+                outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Konstantin for that, and you know that you easily have access to your ");
                 if (CoC.instance.player.hasCock()) outputText(CoC.instance.player.multiCockDescriptLight());
                 if (CoC.instance.player.hasCock() && CoC.instance.player.hasVagina()) outputText(" and ");
                 if (CoC.instance.player.hasVagina()) outputText("[vagina]");
@@ -43,7 +43,7 @@ import classes.ItemType;
                 outputText(" should you need to. ");
                 if (CoC.instance.player.hasCock()) {
                     if (CoC.instance.player.biggestCockArea() >= 40 && CoC.instance.player.biggestCockArea() < 100) {
-                        outputText("Large bulge forms against your silken loincloth. ");
+                        outputText("A large bulge forms against your silken loincloth. ");
 					}
                     if (CoC.instance.player.biggestCockArea() >= 100) {
                         outputText("Your manhood is too big to be concealed by your silken loincloth. Part of your " + CoC.instance.player.cockDescriptShort(CoC.instance.player.biggestCockIndex()) + " is visible. ");

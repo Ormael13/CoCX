@@ -18,7 +18,7 @@ public class GreyBook extends Consumable {
 	
 	public function GreyBook() 
 	{
-		super("G. Book", "G. Book", "a small book with a ash-grey cover", 200, "This grey book is totally unmarked, and on the cover is wrote few words that seems have no meaning or maybe you just aren't able to decipher them yet. A plain green clasp keeps the covers closed until you are ready to read it.");
+		super("G. Book", "G. Book", "a small book with a ash-grey cover", 200, "This grey book is totally unmarked, and on the cover are a few words that seem to have no meaning, or perhaps you just aren't able to decipher them yet. A plain green clasp keeps the covers closed until you are ready to read it.");
 	}
 
     override public function useItem():Boolean {
@@ -70,7 +70,7 @@ public class GreyBook extends Consumable {
 		else EngineCore.addButtonDisabled(5, "B.Life", "You not have have enough int or already know this spell.");
 	}
 	public function greySpellbook0():void {
-		outputText("You close the grey tome. Now is not good time to use it.");
+		outputText("You close the grey tome. Now is not a good time to use it.");
 		SceneLib.inventory.returnItemToInventory(this);
 	}
     public function greySpellbook1(spell:Number):void {

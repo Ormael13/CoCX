@@ -11,7 +11,7 @@ package classes.Items.Armors
 		
 		public function DeathPrinceOutfit() 
 		{
-			super("DeathPO","DeathPrinceOutfit","Death Prince Outfit","a Death Prince Outfit",0,5,500,"The formal outfit worn by anubi slavers from the inner desert region. (+50% Magic Soulskill power, grants 2% regeneration when soulforce is above half)","Light")
+			super("DeathPO","DeathPrinceOutfit","Death Prince Outfit","a Death Prince Outfit",0,5,500,"The formal outfit worn by Anubi slavers from the inner desert region. (+50% Magic Soulskill power, grants 2% regeneration when soulforce is above half)","Light")
 		}
 		
 		override public function afterEquip(doOutput:Boolean, slot:int):void {
