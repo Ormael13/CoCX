@@ -20,12 +20,12 @@ public class DemonizeMe extends Consumable {
 		
 		override public function canUse():Boolean {
 			if (!player.blockingBodyTransformations()) return true;
-			outputText("How do you want transform with this perfect form already attained?\n\n");
+			outputText("Why would you want to transform when you've already achieved perfection?\n\n");
 			return false;
 		}
 
 		override public function useItem():Boolean {
-			outputText("You pop off the greasy cap, the smell of rotten flesh invading your lungs.\n\n");
+			outputText("You pop off the greasy cap, the smell of rotten flesh invades your lungs.\n\n");
 			if (player.hasPerk(PerkLib.Soulless)) {
 				outputText("A wave of euphoria washes over you as you lock your lips around the bottle. Not only allowing the invasive liquid, you force it down your throat with unimaginable hunger- LUST.\n");
 				outputText("Sheer expectation is enough to {} (gender arousal here with tits, dicks and cunts)\n\n");
@@ -71,7 +71,7 @@ public class DemonizeMe extends Consumable {
 					outputText("Boiling blood is on constant move right above your skin, yet not a single drop has smeared the ground.\n");
 					outputText("Its colour changes from red to "+player.skinColor1+" before your body slowly starts to drain it back.\n\n");
 					outputText("New additions on your back and head momentarily disorients you.\n\n");
-					outputText("You rise from the ashes of so-called Champion. You are no longer the \"<i>Lamb of Ingam</i>\". You are someone strong, someone to be feared!.. And desired.\n\n");
+					outputText("You rise from the ashes of the so-called Champion. You are no longer the \"<i>Lamb of Ingam</i>\". You are someone strong, someone to be feared!.. And desired.\n\n");
 					outputText("As you are observing your new wings, tail and extra demonic additions, the small note written at the bottom of the label catches your eye.\n");
 					outputText("\"<i>Use in small dosage.</i>\"\n\n");
 				}
