@@ -13,7 +13,7 @@ import classes.StatusEffects;
 		
 		public function TamamoNoMaeCursedKimono()
 		{
-			super("T.C.Kimono","T.C.Kimono","Tamamo no Mae Cursed Kimono","a Tamamo no Mae Cursed Kimono",10,60,12000,"It is said that this beautiful Kimono decorated with flower motifs was worn by lady Tamamoe, last leader of the kitsunes, before she fell from grace into a Kumiho. Increase the potency of spells and soulskill by up to 50% based on corruption and empower all Kitsunes ability. Like most kitsune outfit this Kimono is made to improve ones charms and thus leaves you as agile as if naked.","Light");
+			super("T.C.Kimono","T.C.Kimono","Tamamo no Mae Cursed Kimono","a Tamamo no Mae Cursed Kimono",10,60,12000,"It is said that this beautiful Kimono decorated with flower motifs was worn by Lady Tamamoe, last leader of the kitsunes, before she fell from grace and became a Kumiho. Increases the potency of spells and soulskills by up to 50% based on corruption and empower all Kitsunes abilities. Like most kitsune outfits, this Kimono is made to improve ones charms, and thus leaves you as agile as if you were naked.","Light");
 			withBuffs({
 				'spellcost': -0.60,
 				'teasedmg': +15
