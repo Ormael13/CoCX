@@ -14,7 +14,7 @@ import classes.ItemType;
 	{
 		public function MaraeArmor()
 		{
-			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",110,110,26400,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles though.","Heavy");
+			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",110,110,26400,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles, though.","Heavy");
 			withBuffs({'minlustx': 0.2});
 		}
 		//każde 1 armor point kosztuje 120
@@ -28,7 +28,7 @@ import classes.ItemType;
 			outputText("You " + game.player.clothedOrNaked("strip yourself naked before you ") + "proceed to put on the armor. ");
             if (CoC.instance.player.cor < 33) outputText("You shudder at the idea of wearing armor that is infested with tentacles but you proceed anyway. ");
             if (CoC.instance.player.cor >= 33 && CoC.instance.player.cor < 66) outputText("You are not sure about the idea of armor that is infested with tentacles. ");
-            if (CoC.instance.player.cor >= 66) outputText("You are eager with the idea of wearing tentacle-infested armor. ");
+            if (CoC.instance.player.cor >= 66) outputText("You are eager at the idea of wearing tentacle-infested armor. ");
             outputText("\n\nFirst, you clamber into the breastplate. ");
             if (CoC.instance.player.isBiped()) //Some variants.
             {
@@ -37,7 +37,7 @@ import classes.ItemType;
 			}
 			outputText("Next, you put on your reinforced bark bracers to protect your arms.\n\n");
             if (!CoC.instance.player.isTaur()) {
-                outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Konstantin for that and you know that you easily have access to your ");
+                outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Konstantin for that, and you know that you easily have access to your ");
                 if (CoC.instance.player.hasCock()) outputText(CoC.instance.player.multiCockDescriptLight());
                 if (CoC.instance.player.hasCock() && CoC.instance.player.hasVagina()) outputText(" and ");
                 if (CoC.instance.player.hasVagina()) outputText("[vagina]");
@@ -46,7 +46,7 @@ import classes.ItemType;
                 outputText(" should you need to. ");
                 if (CoC.instance.player.hasCock()) {
                     if (CoC.instance.player.biggestCockArea() >= 40 && CoC.instance.player.biggestCockArea() < 100) {
-                        outputText("Large bulge forms against your silken loincloth. ");
+                        outputText("A large bulge forms against your silken loincloth. ");
 					}
                     if (CoC.instance.player.biggestCockArea() >= 100) {
                         outputText("Your manhood is too big to be concealed by your silken loincloth. Part of your " + CoC.instance.player.cockDescriptShort(CoC.instance.player.biggestCockIndex()) + " is visible. ");
@@ -68,7 +68,7 @@ import classes.ItemType;
 			}
 			outputText("You are suited up and all good to go. ");
             if (CoC.instance.player.lust < 20) {
-				outputText("\n\nYou can feel the tentacles inside your breastplate slither their way and tease your [butt]. You " + (game.player.cor < 60 ? "gasp in surprise" : "moan in pleasure") + ".");
+				outputText("\n\nYou can feel the tentacles inside your breastplate slither and tease your [butt]. You " + (game.player.cor < 60 ? "gasp in surprise" : "moan in pleasure") + ".");
 				game.player.dynStats("lust", 30);
 			}
 		}
