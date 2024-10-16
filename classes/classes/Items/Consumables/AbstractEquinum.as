@@ -135,7 +135,7 @@ public class AbstractEquinum extends Consumable {
 					if (player.gender == 1) outputText("stallion ");
 					if (player.gender == 2) outputText("mare ");
 					outputText(" with beautiful [haircolor] [skin.type] covering its body gazes back up at you.  That's you, and yet the doubt in your mind remains. Strange images fill your mind, and you feel as if you have not always been a horse, but some kind of funny fur-less creature standing on two legs. Your equine mind rapidly dismisses that doubt as a daydream however, and you trot away, oblivious to who you once were.\n\n");
-					outputText("<b>One year later...</b>\n\nAs you graze upon the small plants that coat the open plains of your home, you hear a noise on your right side. As you raise your head to check where the noise comes from, preparing to run from a potential predator, you see a strange creature. It stands on its two feet, its furless pink skin appearing beneath its clothes.  With a start, you realize you can identify the strange creatures gender.  ");
+					outputText("<b>One year later...</b>\n\nAs you graze upon the small plants that coat the open plains of your home, you hear a noise on your right side. As you raise your head to check where the noise comes from, preparing to run from a potential predator, you see a strange creature. It stands on its two feet, its furless, pink skin appearing beneath its clothes.  With a start, you realize you can identify the strange creatures gender.  ");
 					if (player.gender == 0 || player.gender == 1) outputText("He is clearly a male, but you are somewhat confused as you can see not one but three bulges where his manhood would be.\n\n");
 					if (player.gender == 2) outputText("She is clearly a female, as you can see her six breasts jiggle as she walks towards you, small stains appearing on her shirt where her nipples are.\n\n");
 					if (player.gender == 3) outputText("You are somewhat confused as you can see a bulge near her thighs but also huge boobs jiggling as she walks, and you can't say if she's a male or female.\n\n");
@@ -306,7 +306,7 @@ public class AbstractEquinum extends Consumable {
 				player.thickenCock(temp, .5);
 				outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.HORSE) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
 				if (player.cor + player.lib < 60) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " plowing them relentlessly, stuffing them pregnant with cum");
-				if (player.cor + player.lib >= 60 && player.cor + player.lib < 100) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum");
+				if (player.cor + player.lib >= 60 && player.cor + player.lib < 100) outputText(" to be this way... You breathe the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum");
 				if (player.cor + player.lib >= 100 && player.cor + player.lib <= 175) outputText(" to be a rutting stud.  You ache to find a mare or centaur to breed with.  Longing to spend your evenings plunging a " + Appearance.cockNoun(CockTypesEnum.HORSE) + " deep into their musky passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking horsecunts morning, noon, and night.  Maybe somewhere there is a farm needing a breeder..");
 				if (player.cor + player.lib > 175) outputText(" to whinny loudly like a rutting stallion.  Your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " is perfect for fucking centaurs and mares.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant centaurs.");
 				outputText(".");
@@ -363,7 +363,7 @@ public class AbstractEquinum extends Consumable {
 					changes++;
 				}
 				if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
-					outputText("\n\nYour [vagina] moistens perceptably, giving off an animalistic scent.");
+					outputText("\n\nYour [vagina] moistens perceptibly, giving off an animalistic scent.");
 					player.vaginas[0].vaginalWetness++;
 					changes++;
 				}
@@ -385,7 +385,7 @@ public class AbstractEquinum extends Consumable {
 					}
 				}
 				if (player.vaginas[temp].vaginalWetness <= VaginaClass.WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
-					outputText("Your [vagina "+(temp+1)+"] moistens perceptably, giving off an animalistic scent.");
+					outputText("Your [vagina "+(temp+1)+"] moistens perceptibly, giving off an animalistic scent.");
 					player.vaginas[temp].vaginalWetness++;
 					changes++;
 				}
