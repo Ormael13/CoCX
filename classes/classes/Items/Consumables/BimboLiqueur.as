@@ -48,7 +48,7 @@ public class BimboLiqueur extends Consumable {
 				outputText("A wave of numbness rolls through your features, alerting you that another change is happening.  You reach up to your feel your jaw narrowing, becoming more... feminine?  Heavy, filling lips purse in disappointment as your face takes on a very feminine cast.  You're probably pretty hot now!\n\n");
 				if (game.player.femininity < 80) game.player.femininity = 80;
 
-				outputText("Your surging, absurdly potent libido surges through your body, reminding you that you need to fuck.  Not just bitches, but guys too.  Hard cocks, wet pussies, hell, you don't care.  They can have both or a dozen of either.  You just want to get laid and bone something, hopefully at the same time!");
+				outputText("Your absurdly potent libido surges through your body, reminding you that you need to fuck.  Not just bitches, but guys too.  Hard cocks, wet pussies, hell, you don't care.  They can have both or a dozen of either.  You just want to get laid and bone something, hopefully at the same time!");
 				outputText("\n\n<b>(Perks Lost: Bro Body");
 				if (game.player.hasPerk(PerkLib.BroBrains)) outputText(", Bro Brains");
 				outputText(")\n");
