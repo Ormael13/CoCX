@@ -127,6 +127,7 @@ private function resistKeltsBSBreakHimIntro():void {
 		//[if (PC doesn't have items)
 		if(!(player.hasItem(consumables.SUCMILK,15) || (player.hasItem(consumables.SUCMILK,10) && hasPinkEgg()) || (player.hasItem(consumables.P_S_MLK,10) && hasPinkEgg()) || player.hasItem(consumables.P_S_MLK,15))) {
 			outputText(" Unfortunately, you don't have anything that could be useful to tame his arrogant maleness.  You want items that would make his disgracious horsecock and balls shrink.  A nice set of breasts on his human chest would be fine, too.  You know you're going to need A LOT of such items - or very potent ones.");
+			sceneHunter.print("15 Succubus Milk should be enough")
 			menu();
 			addButton(0,"Next",farm.farmExploreEncounter);
 		}

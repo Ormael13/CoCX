@@ -500,9 +500,10 @@ public class BeeGirlScene extends BaseContent
 		private function fightTheBeeGirl():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
+			attitude = BEE_GIRL_TALKED;
             flags[kFLAGS.BEE_GIRL_RESET_COUNTER] = 0;
 			outputText("You clear your head and resolve to defeat the monstrous bee-girl");
-			if (player.level >= 16 && rand(2) == 0) {
+			if (player.level >= 16 && rand(2) == 0 && !sceneHunter.other) {
 				outputText(" huntress.");
 				startCombat(new BeeGirlHuntress());
 			}
@@ -1434,7 +1435,7 @@ public class BeeGirlScene extends BaseContent
 				else if (player.gender == 3) {
 					outputText("She returns to your rear end and assesses it some more. With an almost desperate scrabbling she climbs on top of you, jabbing you repeatedly with her outstretched stinger and causing " + sMultiCockDesc() + " to go rock hard and your " + vaginaDescript() + " to squirt fluid behind you.\n\n");
 
-					outputText("She can't see your cock, of course, and while she sees the spray and strokes your ass gently, can do nothing to help as she busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels.\n\n");
+					outputText("She can't see your cock, of course, and while she sees the spray and strokes your ass gently, she can do nothing to help as she busies herself with inserting her ovipositor into your " + assholeDescript() + ". Its thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels.\n\n");
 
 					outputText("The sensation proves too much for your massively engorged " + Appearance.cockNoun(player.cocks[cockIndex].cockType) + " and " + vaginaDescript(0) + " to take, and you begin to shake violently, incapable of touching it as one is trapped underneath you with the weight of the bee-girl preventing you from getting the leverage needed to hump the hard ground, and the other is hopelessly out of reach.\n\n");
 					outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to massage your " + vaginaDescript() + " with her 'feet' while periodically stroking the back of your [cock].\n\n");

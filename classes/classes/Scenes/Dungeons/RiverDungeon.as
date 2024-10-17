@@ -670,7 +670,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		}
 		public function defeatedByTwinBosses():void {
 			clearOutput();
-			outputText("You collapse, your "+(player.HP <= player.minHP()?"wounds":"lust")+" burdening your body too much to continue.\n\n");
+			outputText("You collapse, your "+(Math.round(player.HP) <= Math.round(player.minHP())?"wounds":"lust")+" burdening your body too much to continue.\n\n");
 			outputText("You hear an echoing ringing through your ears, like the bell of a massive alarm clock. The two odd creatures start to walk towards you, but you notice that they walk unevenly, their footsteps echoing out of synch with their movements. Your head begins to pound, and they stand over you. One of them looks down with…a wistful expression? Like they know you from somewhere. The other seems indifferent, scowling slightly.\n\n");
 			outputText("\"<i>Every battle you’ve fought, loss or victory, was to bring you here.</i>\" The indifferent one says simply. Behind them, a violet portal opens, swirling violently…or is that your head? That ticking noise is starting up again, and to your shock, two new forms walk backwards, out of the portal.\n\n");
 			outputText("The wistful one speaks, placing a cool hand on your forehead. \"<i>Try not to resent us, champion. From the beginning, you were fated to come here.</i>\" You blink, trying to shake the disorientation. These beings…Their outlines are blurring, and you can see…Is that them? Back behind the ones speaking to you, outlines starting from where they were, and rapidly flitting to their current places. The two other beings from the portal slowly walk backwards, vanishing into another pair of portals.\n\n");

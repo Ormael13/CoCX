@@ -195,7 +195,7 @@ public class PhoenixScene extends BaseContent
 		//LOSS! GET RAPED!
 		public function loseToPhoenix(many:Boolean = false):void {
 			clearOutput();
-			if (player.HP <= player.minHP()) {
+			if (Math.round(player.HP) <= Math.round(player.minHP())) {
 				flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER]++;
 				if (flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] >= 4) {
 					phoenixBadEnd();

@@ -209,7 +209,7 @@ public class Alvina extends Monster
 				if (player.shieldBlock > 0) damage -= 0.01 * player.maxHP() * combatBlock2();
 				if (damage < 1) damage = 0;
 				player.HP -= damage;
-				if (player.HP <= player.minHP()) outputText("You dodge, deflect, parry and block as best as you can to take as little damage as possible yet are still impaled a few hundred times!"); //This seems rather boring of a death message.
+				if (Math.round(player.HP) <= Math.round(player.minHP())) outputText("You dodge, deflect, parry and block as best as you can to take as little damage as possible yet are still impaled a few hundred times!"); //This seems rather boring of a death message.
 				else {
 					outputText("Realising that you are still alive Alvina applauds your resilience in annoyance. The fight is far from over but what matters is that you can win.");
 				}

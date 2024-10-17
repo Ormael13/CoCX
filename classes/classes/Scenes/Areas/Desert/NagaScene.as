@@ -943,7 +943,7 @@ public function nagaPlayerConstrict():void {
 			//Failure (-10 HPs) -
 			outputText("You quickly dig your way up and underneath your opponent and, as you break out of the ground, launch yourself at your opponent and attempt to wrap yourself around [monster him]. Before you can even get close enough, [themonster] jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
 			player.takePhysDamage(5, true);
-			if (player.HP <= player.minHP()) {
+			if (Math.round(player.HP) <= Math.round(player.minHP())) {
 				doNext(SceneLib.combat.endHpLoss);
 				if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
 				return;
@@ -967,7 +967,7 @@ public function nagaPlayerConstrict():void {
 			//Failure (-10 HPs) -
 			outputText("You launch yourself at your opponent and attempt to wrap yourself around [monster him]. Before you can even get close enough, [themonster] jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
 			player.takePhysDamage(5, true);
-			if (player.HP <= player.minHP()) {
+			if (Math.round(player.HP) <= Math.round(player.minHP())) {
 				doNext(SceneLib.combat.endHpLoss);
 				if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
 				return;
