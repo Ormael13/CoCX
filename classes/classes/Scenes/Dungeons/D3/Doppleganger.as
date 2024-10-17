@@ -66,7 +66,7 @@ import classes.VaginaClass;
 			statScreenRefresh();
 			if (SceneLib.combat.monsterDefeatCheck())
 				return;
-			if (player.HP <= player.minHP())
+			if (Math.round(player.HP) <= Math.round(player.minHP()))
 			{
 				doNext(SceneLib.combat.endHpLoss);
 				return;

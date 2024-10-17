@@ -263,9 +263,9 @@ public class Changelog extends BaseContent
 			outputText("-Bind Rework (HarpyBind, Goobind, TentacleBind, NagaBind) (NUZ/Shirane)\n");//Rework Bind Related Checks and Function, Lettuce Cleanup and Tentacle Attack Fix
 			outputText("-Fixed bugs: FindCockWithType, anita sex, anita broken tags (Svalkash)\n");
 			outputText("-GroPlus can grow horns (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Large / Massive proof reading of body parts and mutation descriptions. (Agentfunfun)\n");
+			outputText("-HP rounding for comparison. (Svalkash)\n");
+			outputText("-Fixed numbrockx. Fixed beegirl triggering wrong scenes. Added attitude reset after the fight. SH:Other - disables sandwitch bad end. Disables (not very logical) transition from bee girl to huntress in the forest. Let nothing distract you from buzz. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

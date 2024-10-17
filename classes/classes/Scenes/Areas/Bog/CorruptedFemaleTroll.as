@@ -66,7 +66,7 @@ import classes.internals.*;
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			clearOutput();
-			outputText("You fall to the ground, "+(player.HP <= player.minHP() ? "wounded from combat, unable to fight any longer":"your arousal has bested you")+".\n\n");
+			outputText("You fall to the ground, "+(Math.round(player.HP) <= Math.round(player.minHP()) ? "wounded from combat, unable to fight any longer":"your arousal has bested you")+".\n\n");
 			SceneLib.trollScene.encounterAdultFemaleTrollWon();
 		}
 		

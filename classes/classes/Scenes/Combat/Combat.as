@@ -5445,7 +5445,7 @@ public class Combat extends BaseContent {
                     // Migrate Incubus Scientist ShieldHits checks and ShieldsHitMelee()
                     if(monster.midAttackSeal()){
                         // rest of the attack here
-                        if (player.HP <= player.minHP()) {
+                        if (Math.round(player.HP) <= Math.round(player.minHP())) {
                             doNext(endHpLoss);
                             return;
                         }
@@ -5530,7 +5530,7 @@ public class Combat extends BaseContent {
                     // Migrate Incubus Scientist ShieldHits checks and ShieldsHitMelee()
                     if(monster.midAttackSeal()){
                         // rest of the attack here
-                        if (player.HP <= player.minHP()) {
+                        if (Math.round(player.HP) <= Math.round(player.minHP())) {
                             doNext(endHpLoss);
                             return;
                         }
@@ -8765,7 +8765,7 @@ public class Combat extends BaseContent {
             //Lab Guard tanking
             if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
                 monster.eOneAttack(true);
-                if (player.HP <= player.minHP()) {
+                if (Math.round(player.HP) <= Math.round(player.minHP())) {
                     doNext(endHpLoss);
                     return;
                 }
@@ -9387,7 +9387,7 @@ public class Combat extends BaseContent {
     public function WrathWeaponsProc():void {
         if (player.weapon == weapons.BLETTER || player.weapon == weapons.C_BLADE) {
             player.takePhysDamage(player.maxHP() * 0.02);
-            if (player.HP <= player.minHP()) {
+            if (Math.round(player.HP) <= Math.round(player.minHP())) {
                 doNext(endHpLoss);
                 return;
             }
@@ -9396,7 +9396,7 @@ public class Combat extends BaseContent {
             if (player.wrath >= 5) player.wrath -= 5;
             else {
                 player.takePhysDamage(50);
-                if (player.HP <= player.minHP()) {
+                if (Math.round(player.HP) <= Math.round(player.minHP())) {
                     doNext(endHpLoss);
                     return;
                 }
@@ -9406,7 +9406,7 @@ public class Combat extends BaseContent {
             if (player.wrath >= 10) player.wrath -= 10;
             else {
                 player.takePhysDamage(100);
-                if (player.HP <= player.minHP()) {
+                if (Math.round(player.HP) <= Math.round(player.minHP())) {
                     doNext(endHpLoss);
                 }
             }
@@ -9415,7 +9415,7 @@ public class Combat extends BaseContent {
             if (player.wrath >= 20) player.wrath -= 20;
             else {
                 player.takePhysDamage(200);
-                if (player.HP <= player.minHP()) {
+                if (Math.round(player.HP) <= Math.round(player.minHP())) {
                     doNext(endHpLoss);
                 }
             }
@@ -9424,7 +9424,7 @@ public class Combat extends BaseContent {
             if (player.wrath >= 40) player.wrath -= 40;
             else {
                 player.takePhysDamage(400);
-                if (player.HP <= player.minHP()) {
+                if (Math.round(player.HP) <= Math.round(player.minHP())) {
                     doNext(endHpLoss);
                 }
             }
@@ -9440,7 +9440,7 @@ public class Combat extends BaseContent {
                 player.takePhysDamage(damage);
             }
         }
-        if (player.HP <= player.minHP()) doNext(endHpLoss);
+        if (Math.round(player.HP) <= Math.round(player.minHP())) doNext(endHpLoss);
     }
 
     public function heroBaneProc2():void {
@@ -9450,7 +9450,7 @@ public class Combat extends BaseContent {
             player.takePhysDamage(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
             flags[kFLAGS.HERO_BANE_DAMAGE_BANK] = 0;
         }
-        if (player.HP <= player.minHP()) doNext(endHpLoss);
+        if (Math.round(player.HP) <= Math.round(player.minHP())) doNext(endHpLoss);
     }
 
     public function EruptingRiposte():void {
@@ -9459,7 +9459,7 @@ public class Combat extends BaseContent {
             outputText("\nAs you strike the snail her shell erupts with magma, splashing with liquid fire. \n");
             player.takeFireDamage(ERD, true);
             outputText(" \n");
-            if (player.HP <= player.minHP()) {
+            if (Math.round(player.HP) <= Math.round(player.minHP())) {
                 doNext(endHpLoss);
             }
         }
@@ -9471,7 +9471,7 @@ public class Combat extends BaseContent {
             player.takeFireDamage(flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK], true);
             flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] = 0;
             outputText(" \n");
-            if (player.HP <= player.minHP()) {
+            if (Math.round(player.HP) <= Math.round(player.minHP())) {
                 doNext(endHpLoss);
             }
         }
@@ -13130,7 +13130,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
         regeneration1(true);
         if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged") && !tyrantiaTrainingExtension()) doNext(endLustLoss);
-        if (player.HP <= player.minHP()) doNext(endHpLoss);
+        if (Math.round(player.HP) <= Math.round(player.minHP())) doNext(endHpLoss);
         monsterDefeatCheck();
     }
 	
@@ -14601,7 +14601,7 @@ public function combatIsOver(goToPlayerMenu:Boolean = true):Boolean {
         doNext(endHpLoss);
         return true;
     }
-    if (player.HP <= player.minHP()) {
+    if (Math.round(player.HP) <= Math.round(player.minHP())) {
         doNext(endHpLoss);
         return true;
     }
@@ -14937,7 +14937,7 @@ public function CancerGrab():void {
             //Failure (-10 HPs) -
             outputText(". Sadly, you miss by a mere inch. Your opponent escapes your grapple attempt.");
             player.takePhysDamage(5, true);
-            if (player.HP <= player.minHP()) {
+            if (Math.round(player.HP) <= Math.round(player.minHP())) {
                 doNext(endHpLoss);
                 return;
             }
@@ -14952,7 +14952,7 @@ public function CancerGrab():void {
             //Failure (-10 HPs) -
             outputText("surging right under your target but missing by a mere inch as your opponent escapes your pincers.\n");
             player.takePhysDamage(5, true);
-            if (player.HP <= player.minHP()) {
+            if (Math.round(player.HP) <= Math.round(player.minHP())) {
                 doNext(endHpLoss);
                 if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
                 return;
@@ -14968,7 +14968,7 @@ public function CancerGrab():void {
             //Failure (-10 HPs) -
             outputText(". Sadly, you miss by a mere inch. Your opponent escapes your grapple attempt.");
             player.takePhysDamage(5, true);
-            if (player.HP <= player.minHP()) {
+            if (Math.round(player.HP) <= Math.round(player.minHP())) {
                 doNext(endHpLoss);
                 if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
                 return;
@@ -15911,7 +15911,7 @@ public function SwallowWhole():void {
         player.takePhysDamage(5, true);
     }
 
-    if (player.HP <= player.minHP()) {
+    if (Math.round(player.HP) <= Math.round(player.minHP())) {
         doNext(SceneLib.combat.endHpLoss);
         if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
         return;
@@ -18718,4 +18718,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}
