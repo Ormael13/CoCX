@@ -18,7 +18,7 @@ import classes.VaginaClass;
 
 public class ManticoreVenom extends Consumable {
 	public function ManticoreVenom() {
-		super("ManticV", "MantiVen", "a vial of manticore venom", 50, "This vial contains a clear green liquid, reminding you of some toxic liquids used back in ignam to kill vermin. Ingesting poison directly might not be the smartest idea. Who knows what it could do to you?");
+		super("ManticV", "MantiVen", "a vial of manticore venom", 50, "This vial contains a clear green liquid, reminding you of some toxic liquids used back in Ignam to kill vermin. Ingesting poison directly might not be the smartest idea. Who knows what it could do to you?");
 		withTag(U_TF);
 		refineableInto(
 				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -33,7 +33,7 @@ public class ManticoreVenom extends Consumable {
 		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		clearOutput();
-		outputText("You guzzle down the vial and your lust immediately spikes up, making you spontaneously orgasm. Your body seems to react strangely to the poison however.");
+		outputText("You guzzle down the vial and your lust immediately spikes up, making you spontaneously orgasm. However, your body seems to react strangely to the poison.");
 		if (changes < changeLimit && rand(2) == 0 && player.MutagenBonus("spe", 1)) {
 			outputText("\n\nFeeling energetic you suddenly make a dash for the nearest tree and realize you're way faster than before.");
 			changes++;
@@ -43,7 +43,7 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		if (changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nYou suddenly became exceedingly aware of your surroundings, feeling the caress of the wind on your skin and especially its passage next to your endowment. You make a musical note of delighted pleasure at it.");
+			outputText("\n\nYou suddenly become exceedingly aware of your surroundings, feeling the caress of the wind on your skin and especially its passage next to your endowment. You make a musical note of delighted pleasure at it.");
 			player.addCurse("sen", 2,1);
 			changes++;
 		}

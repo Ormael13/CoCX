@@ -19,7 +19,7 @@ package classes.Perks
 		public function PerformancePowerPerk() 
 		{
 			super("Performance Power", "Performance Power",
-					"Your equipment boost your perfomance power.");
+					"Your equipment boosts your perfomance power.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean

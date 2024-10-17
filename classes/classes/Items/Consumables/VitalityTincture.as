@@ -12,7 +12,7 @@ import classes.Items.Consumable;
 		
 		public function VitalityTincture()
 		{
-			super("Vital T", "Vitality T.", "a vitality tincture", ITEM_VALUE, "This potent tea is supposedly good for the strengthening the body.");
+			super("Vital T", "Vitality T.", "a vitality tincture", ITEM_VALUE, "This potent tea is supposedly good for strengthening the body.");
 		}
 		
 		override public function useItem():Boolean

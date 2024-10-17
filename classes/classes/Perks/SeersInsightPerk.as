@@ -19,7 +19,7 @@ package classes.Perks
 		public function SeersInsightPerk()
 		{
 			super("Seer’s Insight", "Seer’s Insight",
-					"Your equipment boost your spells/magical soulskills power and lowering costs of specials/soulskills!");
+					"Your equipment boosts your spell and magical soul skill power and lowering the costs of specials and soul skills!");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean

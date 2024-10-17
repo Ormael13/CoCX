@@ -13,7 +13,7 @@ package classes.Items.Consumables
 	public final class LustStick extends Consumable {
 		
 		public function LustStick() {
-			super("LustStk", "LustStk", "a tube of golden lipstick", ConsumableLib.DEFAULT_VALUE, "This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.");
+			super("LustStk", "LustStk", "a tube of golden lipstick", ConsumableLib.DEFAULT_VALUE, "This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties for anyone with male genitalia and is most effective when applied to the lips or groin.");
 		}
 
 		override public function canUse():Boolean {
@@ -34,7 +34,7 @@ package classes.Items.Consumables
 				game.player.createStatusEffect(StatusEffects.LustStickApplied, 24, 0, 0, 0);
 				outputText("You carefully open the sweet-smelling tube and smear the lipstick over your lips.  ");
 				if (game.player.hasCock()) outputText("It tingles a little, but the drugs have little to no effect on you now.");
-				else outputText("Honestly, it amazes you that something as little as a kiss can make a man putty in your hands.");
+				else outputText("Honestly, it amazes you that something as little as a kiss can make a man into putty in your hands.");
 				outputText("  You finish and pucker your lips, feeling fairly sexy with your new makeup on.\n\n");
 			}
 			game.player.dynStats("lus", 1, "scale", false);

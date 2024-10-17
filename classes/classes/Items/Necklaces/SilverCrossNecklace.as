@@ -17,7 +17,7 @@ package classes.Items.Necklaces
 		
 		public function SilverCrossNecklace() 
 		{
-			super("SilCNec", "SilverCrossNecklace", "Silver cross necklace", "a Silver cross necklace", 0, 0, 400, "A small chain with a silver cross or X attached. At first glance, it seems to be a very ordinary accessory. \n\nType: Jewelry (Necklace) \nBase value: 800 \nSpecial: +50% to tease and magical damage.","Necklace");
+			super("SilCNec", "SilverCrossNecklace", "Silver cross necklace", "a Silver cross necklace", 0, 0, 400, "A small chain with a silver cross or X-shaped pendant attached. At first glance, it seems to be a very ordinary accessory. \n\nType: Jewelry (Necklace) \nBase value: 800 \nSpecial: +50% to tease and magical damage.","Necklace");
 		}
 		
 		override public function canUnequip(doOutput:Boolean):Boolean {
@@ -41,7 +41,7 @@ package classes.Items.Necklaces
 		}
 		
 		override public function unequipText(slot:int):void{
-			outputText("You "+(CoC.instance.player.hasStatusEffect(StatusEffects.MeetXuviel)?"untie master Xuviel’s necklace with nostalgic fondness":"untie necklace")+". You could keep it on but right now you want to try a different accessory. It comes off with no difficulty obviously, putting it back should also be child’s play.");
+			outputText("You "+(CoC.instance.player.hasStatusEffect(StatusEffects.MeetXuviel)?"untie master Xuviel’s necklace with nostalgic fondness":"untie the necklace")+". You could keep it on but right now you want to try a different accessory. It comes off easily, and putting it back should be just as simple.");
 		}
 		
 	}

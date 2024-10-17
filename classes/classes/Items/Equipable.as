@@ -169,13 +169,13 @@ public class Equipable extends Useable {
 			case "onunequip":
 				return "You unequip "+longName+". ";
 			case "legendary_fail":
-				return "You try to equip the legendary item, but to your disapointment the item simply refuses to stay on your body. It seems you still lack the right to use this item.";
+				return "You try to equip the legendary item, but to your disappointment, it simply refuses to stay on your body. It seems you still lack the right to use this item.";
 			case "too_corrupt":
-				return "You grab hold of the handle of " + name + " only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the tool must be displeased."
+				return "You grab hold of the handle of " + name + " only for it to grow burning hot. You're forced to let go lest you burn yourself. Something within the tool must be displeased."
 			case "too_pure":
 				return "As soon as you try to wield " + name + ", it jerks wildly like a bucking horse. You quickly put it back into your pouches before it can do harm to you."
 			case "rigidity_fail":
-				return "You would very like to equip this item but your body stiffness prevents you from doing so."
+				return "You would very much like to equip this item but your body stiffness prevents you from doing so."
 			default:
 				return "Error getEquipText("+textid+")";
 		}

@@ -22,17 +22,17 @@ public class HellCatScene extends BaseContent
 public function HellCatIntro():void {
 	spriteSelect(SpriteDb.s_Hellcat_16bit);
 	clearOutput();
-	outputText("As you explore the crag you run into a strange sight. You spot a hooded figure with a cape walking silently toward you. Only when it’s finally up close does it throw its cape open revealing the ashen naked skin of a human woman inside--or what could have been a human if not for the swishing tail of fire, black furry cat legs and pawed hands with sharp claws. The hood now pulled back reveals a somewhat human face with eyes and hair ");
-	outputText("of literal fire and feline ears to top it off. Well, guess you have seen everything now, including pyrocatgirls. Speaking of pyro, the intent of the cat girl manifest as a large fireball which she proceeds to throw at you. Barely dodging this surprise assault you steady yourself just in time to see her grin wide as a 10 inch spiked cat cock slides out of the sheath just above her drooling pussy. You ready your [weapon] for a fight!");
+	outputText("As you explore the crag you run into a strange sight. You spot a hooded figure with a cape walking silently toward you. Only when it’s finally up close does it throw its cape open revealing the ashen naked skin of a human woman inside—or what what might have been a human, if not for the swishing tail of fire, black furry cat legs and pawed hands with sharp claws. The hood now pulled back reveals a somewhat human face with eyes and hair ");
+	outputText("of literal fire and feline ears to top it off. Well, guess you have seen everything now, including pyrocatgirls. Speaking of pyro, the intent of the cat girl manifests as a large fireball which she proceeds to throw at you. Barely dodging this surprise assault you steady yourself just in time to see her grin wide as a 10-inch spiked cat cock slides out of the sheath just above her drooling pussy. You ready your [weapon] for a fight!");
 	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HELLCATS);
 	if (flags[kFLAGS.WITCHES_SABBATH] < 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
 	startCombat(new HellCat());
 }
 public function DefeatedHellCat():void {
 	clearOutput();
-	outputText("The Hellcat falls on her knee, unable to fight further. She’s shaking like an overheating cauldron with the lid shut.\n\n");
-	outputText("\"<i>Please... I beg of you... fuck me or rape me I don’t care I just want the heat to go!</i>\"\n\n");
-	outputText("How amusing, you did guess right, she's completely and literally consumed by her heat. The big question is... should you really indulge her with what she wants?");
+	outputText("The Hellcat falls on her knees, unable to fight further. She’s shaking like an overheating cauldron with the lid shut.\n\n");
+	outputText("\"<i>Please... I beg of you... fuck me, rape me, I don’t care, I just want the heat to go!</i>\"\n\n");
+	outputText("How amusing, you guessed right, she's completely and literally consumed by her heat. The big question is... should you really indulge her?");
 	menu();
 	addButton(0, "Back", cleanupAfterCombat);
 	if (player.hasCock()) addButton(1, "Pussycat", DefeatedHellCatPussycat);
@@ -44,19 +44,19 @@ public function DefeatedHellCat():void {
 public function DefeatedHellCatPussycat():void {
 	if (player.gender == 3) outputText("You ain’t gonna get any close to that feline penis of hers. " + (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0 ? "If your hunch is good it’s likely even worse than that of the hellhounds. " : "") + "");
 	outputText("However her pussy is, for lack of any better word, a hell of a lot more tempting.\n\n");
-	outputText("You firmly shove the catgirl down taking hold of her generous breasts for handles as your own cock hardens" + (player.hasSheath() ? " out of its sheath" : "") + " to readiness for this female. The hellcat doesn’t even struggle, instead taking on the most inviting position she can muster, her wet snatch drooling in anticipation. Unable to wait any further you proceed to slowly insert your rod between her open folds, her pussy attempting ");
+	outputText("You firmly shove the catgirl down taking hold of her generous breasts for handles as your own cock hardens" + (player.hasSheath() ? " out of its sheath" : "") + " to readiness in anticipation of her. The hellcat doesn’t even struggle, instead taking on the most inviting position she can muster, her wet snatch drooling in anticipation. Unable to wait any further you proceed to slowly insert your rod between her open folds, her pussy attempting ");
 	outputText("to wrap around every inch of your length" + (player.cockAdjective.length > 20 ? ", which to your absolute surprise it does. Guess corrupted creatures are all adept at taking impossible lengths and girths in" : "") + ". Now fully in control, you savor the sensation of your [cock] as you proceed to mate with the catgirl. ");
-	outputText("God the slut is enjoying herself even more than you do, guess you can’t rape the willing? You would tell her to shut the fuck up if you weren't busy moaning from the hellish ministrations of her pussy around your cock.\n\n");
-	outputText("Before a minute has passed you’re already reaching your own orgasm, your [cock] flooding her warm cunt with fresh baby bater. The hellcat only relaxes her rocking hips once you’ve shot all of your ropes inside, purring in contentment. Done with the horny witch, you grab back your gear and head back to camp.");
+	outputText("God the slut is enjoying herself even more than you are, guess you can’t rape the willing? You would tell her to shut the fuck up if you weren't busy moaning from the hellish ministrations of her pussy around your cock.\n\n");
+	outputText("Before a minute has passed you’re already reaching your own orgasm, your [cock] flooding her warm cunt with fresh baby batter. The hellcat only relaxes her rocking hips once you’ve shot all of your ropes inside, purring in contentment. Done with the horny witch, you grab back your gear and head back to camp.");
 	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 }
 public function DefeatedHellCatCatcock():void {
-	if (silly()) outputText("Oh my gawsh, a true catcock for once! You’ve seen horse, dog, demon, lizard, dragon and even plant dongs so why is it you could never find a cat one to bone yourself with in the entirety of this porn adventure" + (flags[kFLAGS.AKBAL_SUBMISSION_STATE] != 0 ? " save for Akbal" : "") + "?! ");
+	if (silly()) outputText("Oh my gawsh, a true catcock for once! You’ve seen horse, dog, demon, lizard, dragon, and even plant dongs so why is it you could never find a cat one to bone yourself with in the entirety of this porn adventure" + (flags[kFLAGS.AKBAL_SUBMISSION_STATE] != 0 ? " save for Akbal" : "") + "?! ");
 	outputText("You gleefully walk out to your prize and shove her on her back to take a look at the 10 inch joystick between her legs. The hellcat looks at you confused.\n\n");
 	outputText("\"<i>Nya?? Are you seriously doing this? Next time why not just skip defending yourself and get to it right away?</i>\"\n\n");
 	outputText("You squeeze her cock painfully. Who said she had right to talk back? You make it quite clear that you will do with her what you want and only what you want, which swiftly wipes away that coy smirk of hers. Now that positions have been clearly determined, you move over the hellcat in order to slowly align you pussy with that barbed cock of hers. You sigh as her barbs one by one slide past your lips, tickling your walls with devilish pleasure. ");
-	outputText("Only once your unwilling partner is fully in do you begin to slide up along the length, savoring the multitude of caresses that go with the movement. You moan loud and high as you grab the catgirl's orbs for support, enjoying yourself as the growing sensation of heat permeates your pussy. The heat travels everywhere in your body until it lands in your brain. ");
+	outputText("Only once your unwilling partner is fully in do you begin to slide up along the length, savoring the multitude of caresses that go with the movement. You moan loud and high as you grab the catgirl's orbs for support, enjoying yourself as the growing sensation of heat permeates your pussy. The heat travels everywhere in your body until it reaches your brain. ");
 	outputText("You are so distracted by the overload of sensations that you forget your partner who, reaching her own orgasm, floods your burning pussy with a welcome load of catjizz. You thought this would end the heat, but it only makes it worse; the hot cum bubbling in your pussy only seems to make the heat in your brain more intense. You need to fuck, you desperately need to fuck!\n\n");
 	outputText("The catgirl does not seem to mind as you repetitively ravish her cock. Only when she passes out from exhaustion do you realise her cum is only intensifying the heat. You kick her in frustration before you head back to camp. <b>It would seem you have gone into heat!</b>");
 	player.goIntoHeat(false);
@@ -75,7 +75,7 @@ public function DefeatedByHellCat():void {
 	else {
 		outputText("You fall to the ground, unable to fight further and the hellcat’s smile widdens.\n\n");
 		outputText("\"<i>How purrfect, I suggest you stay still and not try anything funny. Else I could accidentally torch you alive.</i>\"\n\n");
-		outputText("Considering how much fire she packs up, literally and figuratively, you consider it is better indeed to not anger her. " + (player.isNaked() ? "" : "She moves her clawed finger across your gear, striping you naked so she can better admire what she’s caught. ") + " Her paws trace the shape of your body before moving all the way to your ass which she grabs firmly. You can already feel the barbs of her cock tickling the entrance to your pucker ");
+		outputText("Considering how much fire she packs up, literally and figuratively, you consider it is better indeed to not anger her. " + (player.isNaked() ? "" : "She moves her clawed finger across your gear, stripping you naked so she can better admire what she’s caught. ") + " Her paws trace the shape of your body before moving all the way to your ass, which she grabs firmly. You can already feel the barbs of her cock tickling the entrance to your pucker ");
 		outputText("as she begins to insert herself in. You are almost thankful her cock isn’t as big as those of the majority of the corrupted creatures that wander Mareth, but your relief is short lived as she begins to pound your ass in earnest. For some weird reason the more she pounds you the hotter you get, until you realise with horror what is going on. She’s not just getting off, she is outright transferring her heat to you!\n\n");
 		outputText("You begin panting in desire, your breath following the rhythm of her thrusts until she finally explodes, filling your ass with kitty jizz. You let yourself go limp on the ground but the hellcat is far from done with you.\n\n");
 		outputText("\"<i>What do you think you’re doing laying down like that? I’m far from done!</i>\"\n\n");
@@ -132,7 +132,7 @@ public function WitchesSabbath():void {
 			outputText("\"<i>Great day sister how well are you weathering the warmth?</i>\"\n\n");
 			outputText("She then stops as if she smelled something, then looks at your body in confusion.\n\n");
 			outputText("\"<i>Hey what happened there?! Ah no worry sister, I’m going to fix this dreadful curse for you.</i>\"\n\n");
-			outputText("She’s definitively about to perform magic on you, do you let her?");
+			outputText("She’s definitively about to perform magic on you. Do you let her?");
 			menu();
 			addButton(0, "Yeah Sure", WitchesSabbathFourthVisitYeahSure).hint("Let her cure your body's \"curse\"");
 			addButton(1, "No Way", WitchesSabbathFourthVisitNoWay).hint("You don't need the Hellcat's cure");

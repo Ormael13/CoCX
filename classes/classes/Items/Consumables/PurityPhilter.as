@@ -12,7 +12,7 @@ import classes.Items.Consumable;
 		
 		public function PurityPhilter()
 		{
-			super("PPhiltr","P.Philter", "a vial of purity philter", ITEM_VALUE, "This silver vial feels cool to the touch. In fact, it feels a bit cold. Given the label, you suspect this will help to erase corruption.");
+			super("PPhiltr","P.Philter", "a vial of purity philter", ITEM_VALUE, "This silver vial feels cool to the touch—almost cold. Given the label, you suspect this will help reduce corruption.");
 			refineableInto([], [], [[1, AlchemyLib.AR_CORR_DEC]]);
 		}
 		
@@ -33,7 +33,7 @@ import classes.Items.Consumable;
 			}
 			
 			if (player.cor >= 60) {
-				outputText("As you swallow the liquid, you fall gasping to your knees. It feels like someone shoved an icicle through your middle. You break out in a cold sweat as the sensation spreads, and you feel like your blood is freezing in your veins. Mercifully, you pass out.\n\nLater, when you wake up, the constant haze of lust that usually clouds your thoughts seems a bit thinner.");
+				outputText("As you swallow the liquid, you fall gasping to your knees. It feels like someone shoved an icicle through your core. You break out in a cold sweat as the sensation spreads, and you feel like your blood is freezing in your veins. Mercifully, you pass out.\n\nLater, when you wake up, the constant haze of lust that usually clouds your thoughts seems a bit thinner.");
 			}
 			
 			var corLoss:Number = 5 + Math.floor(player.cor / 10);

@@ -32,7 +32,7 @@ package classes.Items.Consumables
 		}
 		
 		override public function useText():void {
-			outputText("As you take Rathazul concoction you can't help but sigh in relief as whatever messed up knowledge leaves your brain sadly at the same time the loss of such knowledge leaves you diminished, ignorant of whatever terrible truth you uncovered. Ignorance is bliss as they say.");
+			outputText("As you take Rathazul concoction you can't help but sigh in relief as whatever messed up knowledge leaves your brain sadly at the same time the loss of such knowledge leaves you diminished, ignorant of whatever terrible truth you uncovered. Ignorance is bliss, as they say.");
 		}
 	}
 }

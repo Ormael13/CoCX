@@ -12,7 +12,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String {
 			if (!player || !params) return _desc;
-			return "Repeated mental exercise as well as the increasing size of the mindbreaker collective psionic network allowed your brain to increase beyond normal size. Empowers all of mindbreaker your abilities by " + params.value1 * 50 + "% and allow you to store more stolen knowledge with Brain Melt. Your current tier is "+params.value1+"";
+			return "Repeated mental exercise as well as the increasing size of the mindbreaker collective psionic network has allowed your brain to grow beyond its normal size. Empowers all of your mindbreaker abilities by " + params.value1 * 50 + "% and allows you to store more stolen knowledge with Brain Melt. Your current tier is "+params.value1+"";
 		}
 
 		override public function name(params:PerkClass=null):String {

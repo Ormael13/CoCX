@@ -27,7 +27,7 @@ public class PurePearl extends Consumable {
 
     public function eatIt():void {
         clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
+        outputText("You pop the pearl into your mouth and swallow it like a giant pill, though with some difficulty.  Surprisingly there is no discomfort—only a cool, calming sensation that springs up from your core.");
         dynStats("lus", -25, "cor", -10);
         player.addCurse("lib", 10, 1);
         if (!player.hasPerk(PerkLib.PurityBlessing)) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);

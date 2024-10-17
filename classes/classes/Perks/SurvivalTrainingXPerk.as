@@ -10,7 +10,7 @@ public class SurvivalTrainingXPerk extends PerkType
 	override public function desc(params:PerkClass = null):String
 	{
 		if (!player || !params) return _desc;
-		return "You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +" + params.value1 * 10 + "%)";
+		return "You have trained to better survive this realm's hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard every 3 levels up to +" + params.value1 * 10 + "%)";
 	}
 
 	override public function name(params:PerkClass=null):String {

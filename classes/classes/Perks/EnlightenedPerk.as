@@ -16,7 +16,7 @@ package classes.Perks
 
 		public function EnlightenedPerk()
 		{
-			super("Enlightened", "Enlightened", "Jojo’s tutelage has given you a master’s focus and you can feel the universe in all its glory spread out before you. You’ve finally surpassed your teacher.");
+			super("Enlightened", "Enlightened", "Jojo’s tutelage has given you the focus of a master, and you can feel the universe in all its glory spread out before you. As a result, you’ve finally surpassed your teacher.");
 		}
 	}
 }

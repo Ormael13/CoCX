@@ -12,7 +12,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String {
 			if (!player || !params) return _desc;
-			return "Those creatures you defeat and drink from have parts of their soul stolen with their blood increasing your overall stats by " + params.value1 + "% (1% for each victim drained).";
+			return "The creatures you defeat and drink from have parts of their soul stolen with their blood, increasing your overall stats by " + params.value1 + "% (1% for each victim drained).";
 		}
 
 		public function SoulDrinkerPerk() 

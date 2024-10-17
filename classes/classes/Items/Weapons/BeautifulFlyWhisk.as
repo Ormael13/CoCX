@@ -35,7 +35,7 @@ import classes.TimeAwareInterface;
 				0,
 				400,
 				"This beautiful fly-whisk shines brilliantly in the light, showing its flawless craftsmanship." +
-				"  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this tool.",
+				"  The pommel and guard are heavily decorated in gold and brass.  Some craftsman has clearly poured their heart and soul into this tool.",
 				WT_EXOTIC,
 				WSZ_MEDIUM,
 				false

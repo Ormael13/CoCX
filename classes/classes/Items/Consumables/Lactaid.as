@@ -18,7 +18,7 @@ package classes.Items.Consumables
 			clearOutput();
 			player.slimeFeed();
 			var i:Number = 0;
-			outputText("You gulp down the bottle of lactaid, easily swallowing the creamy liquid.");
+			outputText("You gulp down the bottle of Lactaid, easily swallowing the creamy liquid.");
 			//Bump up size!
 			if (player.averageBreastSize() < 8) {
 				outputText("\n\n");

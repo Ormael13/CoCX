@@ -13,7 +13,7 @@ import classes.PerkLib;
 		public function DarkAegis()
 		{
 			super("SanctD", "Dark Aegis", "dark aegis", "a dark aegis", 55, 5500,
-					"Gleaming in black metal and obsidian plates, this legendary shield is said to heal and protect a fallen knight. Demonic ornaments cover most of its obsidian-carved surface.",
+					"Gleaming in black metal and obsidian plates, this legendary shield is said to heal and protect a fallen knight. Demonic ornaments adorn most of its obsidian-carved surface.",
 					"Large");
 			withPerk(PerkLib.Sanctuary, 2, 0, 0, 0);
 			withTag(I_LEGENDARY);

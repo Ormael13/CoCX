@@ -15,7 +15,7 @@ package classes.Perks
 		
 		public function AscensionFortunePerk()
 		{
-			super("Ascension: Fortune", "Ascension: Fortune", "", "Increases gems gains by 20% per level.");
+			super("Ascension: Fortune", "Ascension: Fortune", "", "Increases gem gains by 20% per level.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean

@@ -42,12 +42,12 @@ import classes.Scenes.SceneLib;
 					if (player.hasPureLegendaryItem()) {
 						return true;
 					}
-					outputText("\nIf only you had a holy item with you to act as a catalyst like Marae Pearl did for her.\n")
+					outputText("\nIf only you had a holy item with you to act as a catalyst, like the Marae Pearl did for her.\n")
 				}
 				outputText("\nYour body has grown too resistant to transformations, this potion will have no effect on you.\n");
 			}
 
-			outputText("\nThe transformation would only properly work if you at least had the same kind of body structure Alvina did before her own ascension and in order to canalyse your want into a new shape you will probably need to at least look like a devil would if only to properly convert the power through otherwise who's to say what could happen.\n");
+			outputText("\nThe transformation will only work properly if your body structure is similar to what Alvina had before her ascension. To channel your desire into a new form, you will probably need to at least resemble a devil to properly convert the power. Otherwise, who's to say what could happen?\n");
 			return false;
 		}
 

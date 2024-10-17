@@ -213,7 +213,7 @@ public class DynamicWeaponRange extends WeaponRange implements IDynamicItem {
 			name: "crossbow",
 			shortName: "Crossbow",
 			verb: "shot",
-			desc: "This is a light crossbow. A most basic one that fires bolts at your enemies.",
+			desc: "This is a light crossbow, a most basic one that fires bolts at your enemies.",
 			perk: WT_CROSSBOW,
 			attack: 5,
 			qattack: 0.25,

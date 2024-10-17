@@ -26,7 +26,7 @@ package classes.Items.Shields
 		
 		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			if ((CoC.instance.player.perkv2(PerkLib.PrestigeJobNecromancer) - 1) > SceneLib.campMakeWinions.maxSkeletonWarriors() || (CoC.instance.player.perkv1(PerkLib.GreaterHarvest) - 1) > SceneLib.campMakeWinions.maxSkeletonArchers() || (CoC.instance.player.perkv2(PerkLib.GreaterHarvest) - 1) > SceneLib.campMakeWinions.maxSkeletonMages()) {
-				outputText("\n\nAfter you unequip necro shield some of your skeletons falls apart due to not enough control to sustain them. You gather leftover bones for future use.  ");
+				outputText("\n\nAfter unequipping the necro shield, some of your skeletons fall apart due to insufficient control to sustain them. You gather the leftover bones for future use.  ");
 				if ((CoC.instance.player.perkv2(PerkLib.PrestigeJobNecromancer) - 1) > SceneLib.campMakeWinions.maxSkeletonWarriors()) {
 					CoC.instance.player.addPerkValue(PerkLib.PrestigeJobNecromancer, 2, -1);
 					CoC.instance.player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, 20);

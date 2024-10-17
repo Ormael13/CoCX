@@ -33,23 +33,23 @@ public class RedManuscript extends Consumable {
 		EngineCore.addButton(1, "Use", redManuscript1, 0).hint("Only Int gain with no spell learned.");
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) EngineCore.addButton(2, "B.Miss", redManuscript1, 1).hint("Learn Blood Missiles spell.");
-			else EngineCore.addButtonDisabled(2, "B.Miss", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(2, "B.Miss", "You do not have enough intelligence or already know this spell.");
 			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodShield)) EngineCore.addButton(3, "B.Shie", redManuscript1, 2).hint("Learn Blood Shield spell.");
-			else EngineCore.addButtonDisabled(3, "B.Shie", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(3, "B.Shie", "You do not have enough intelligence or already know this spell.");
 			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) EngineCore.addButton(4, "B.Expl", redManuscript1, 3).hint("Learn Blood Explosion spell.");
-			else EngineCore.addButtonDisabled(4, "B.Expl", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(4, "B.Expl", "You do not have enough intelligence or already know this spell.");
 			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodChains)) EngineCore.addButton(5, "B.Chai", redManuscript1, 4).hint("Learn Blood Chains spell.");
-			else EngineCore.addButtonDisabled(5, "B.Chai", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(5, "B.Chai", "You do not have enough intelligence or already know this spell.");
 			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) EngineCore.addButton(6, "B.Wave", redManuscript1, 5).hint("Learn Blood Wave spell.");
-			else EngineCore.addButtonDisabled(6, "B.Wave", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(6, "B.Wave", "You do not have enough intelligence or already know this spell.");
 			if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsLifestealEnchantment)) EngineCore.addButton(7, "L.Ench", redManuscript1, 6).hint("Learn Lifesteal Enchantment spell.");
-			else EngineCore.addButtonDisabled(7, "L.Ench", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(7, "L.Ench", "You do not have enough intelligence or already know this spell.");
 			if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsBloodField)) EngineCore.addButton(8, "B.Fiel", redManuscript1, 7).hint("Learn Blood Field spell.");
-			else EngineCore.addButtonDisabled(8, "B.Fiel", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(8, "B.Fiel", "You do not have enough intelligence or already know this spell.");
 		}
 	}
 	public function redManuscript0():void {
-		outputText("You close the red manuscript. Now is not good time to use it.");
+		outputText("You close the red manuscript. Now is not a good time to use it.");
 		SceneLib.inventory.returnItemToInventory(this);
 	}
 	public function redManuscript1(spell:Number):void {

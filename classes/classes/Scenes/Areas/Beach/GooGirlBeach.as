@@ -21,7 +21,7 @@ import classes.internals.*;
 			this.a = "the ";
 			this.short = "goo-girl";
 			this.imageName = "googirl";
-			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your [chest].") : "");
+			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her slender body drips globs of slime from her limbs, which splatter into the goo puddle forming beneath her hips. In her chest, a small, heart-shaped nucleus pulses with a red glow." + (playerHasBigBoobs ? ("  She seems to have made herself more like you, as her chest now mirrors your own [chest].") : "");
 			// this.long = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 9001, 0, 0, 0);

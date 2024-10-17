@@ -13,7 +13,7 @@ import classes.Items.Weapon;
 		public function HookedGauntlets() 
 		{
 			super("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400,
-				"These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.",
+				"These metal gauntlets are covered in nasty-looking hooks that are sure to tear at your foe's flesh and cause them significant harm.",
 				WT_GAUNTLET, WSZ_MEDIUM);
 				withEffect(IELib.Bleed, 25);
 		}

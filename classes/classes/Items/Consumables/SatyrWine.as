@@ -13,7 +13,7 @@ import classes.Scenes.SceneLib;
 		
 		public function SatyrWine()
 		{
-			super("SatyrWn", "SatyrWine", "a bottle of satyr wine", 20, "A dark bottle with a brilliant red liquid sloshing around inside. On the label there is a picture of a satyr playing pipes.");
+			super("SatyrWn", "SatyrWine", "a bottle of satyr wine", 20, "A dark bottle with a brilliant red liquid sloshing around inside. The label features a picture of a satyr playing pipes..");
 			withTag(U_TF);
 			refineableInto(
 					AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -22,7 +22,7 @@ import classes.Scenes.SceneLib;
 		}
 		
 		override public function useItem():Boolean {
-			outputText("Feeling parched you tug the cork from a bottle of wine. As you put the bottle to your lips and drink the rich, invigorating liquid you soon find yourself with an empty bottle and a smile. ");
+			outputText("Feeling parched, you tug the cork from a bottle of wine. As you put the bottle to your lips and drink the rich, invigorating liquid, you soon find yourself with an empty bottle and a smile. ");
 			mutations.DrunkenPowerEmpowerIfPossible();
 			mutations.AelfwineEmpowerIfPossible();
             player.refillHunger(10);

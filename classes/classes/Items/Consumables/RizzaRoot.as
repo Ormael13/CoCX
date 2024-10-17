@@ -18,11 +18,11 @@ public class RizzaRoot extends SimpleConsumable
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(2) == 0) changeLimit++;
 			changeLimit += player.additionalTransformationChances;
-			outputText("You chew on the thin red roots.  They have a rubbery texture and the taste is something like lemons and oranges mixed together.  The roots dry out your mouth as you chew them but at the same time they cause a cooling and numbing sensation that’s rather pleasant.");
+			outputText("You chew on the thin red roots.  They have a rubbery texture, and taste something like a mix of lemons and oranges.  The roots dry out your mouth as you chew them but at the same time they cause a cooling and numbing sensation that’s rather pleasant.");
 			if (player.blockingBodyTransformations()) changeLimit = 0;
 			if ((changes < changeLimit) && (player.skinType != 0) && (Utils.rand(6) == 0)){
 				if (player.skinType == 1)
-					outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is hairless, or nearly so. <b>You've lost your fur!</b>");
+					outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  Within seconds, your skin becomes hairless, or nearly so. <b>You've lost your fur!</b>");
 				else if (player.skinType == 2)
 					outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>");
 				else if (player.skinType > 2)

@@ -458,7 +458,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.buff("RealisticMode").remove();
 			}
 			if (player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) < 15 && player.cor < (50-player.corruptionTolerance)) {
-				outputText("\nWith the waning of your anubi powers so does your ability to command your slaves. No longer hearing your orders your pets keeps to the last command you gave them and stick to the area at the far edge of your camp locked in a small recurring orgy of their own making in order to attempt to sate their unending hunger for sex and life force, something only you in your anubi form or a victim could provide to them.\n\n(<b>Lost the Mummy Lord Perk!</b>)\n");
+				outputText("\nWith the waning of your anubi powers, so does your ability to command your slaves. No longer hearing your orders your pets keeps to the last command you gave them and stick to the area at the far edge of your camp locked in a small recurring orgy of their own making in order to attempt to satisfy their unending hunger for sex and life force, something only you in your anubi form or a victim could provide to them.\n\n(<b>Lost the Mummy Lord Perk!</b>)\n");
 				if (player.perkv1(PerkLib.MummyLord) > 0) {
 					var mummies:Number = player.perkv1(PerkLib.MummyLord);
 					var dura:Number = player.perkv2(PerkLib.MummyLord);
@@ -468,7 +468,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.MummyCurse) && player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) >= 20) {
-				outputText("\nAs your power over death increase you aquire the ability to control and command mummies as the Anubis dark priest do.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				outputText("\nAs your power over death increase you acquire the ability to control and command mummies as the Anubis dark priest do.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
 				player.createPerk(PerkLib.MummyCurse,0,0,0,0);
 				player.createPerk(PerkLib.DeathPriest,0,0,0,0);
 				player.createPerk(PerkLib.SoulNexus,0,0,0,0);
@@ -634,7 +634,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext ||= player.gainPerk(PerkLib.ImprovedVenomGlandEx, flags[kFLAGS.VENOM_TIMES_USED] >= 125, "You feel wonderfully healthy. After using your venom so many times your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom.");
 			needNext ||= player.gainPerk(PerkLib.ImprovedVenomGlandSu, flags[kFLAGS.VENOM_TIMES_USED] >= 375, "You feel wonderfully healthy. After using your venom so many times your venom gland started to produce more potent venom. Allowing for increased capacity, production and increased effects of venom.");
 
-			needNext ||= player.gainPerk(PerkLib.GeneticMemory, flags[kFLAGS.TIMES_TRANSFORMED] >= 25, "Your body behave weirdly as if all the transformation, which you have undergone started to make it unsure about what it truly is. Sometime you even try to move limbs that are no longer there. Suddenly you realise that no mather how many time you change your body remembers it. Your body developed genetic memory!");
+			needNext ||= player.gainPerk(PerkLib.GeneticMemory, flags[kFLAGS.TIMES_TRANSFORMED] >= 25, "Your body behave weirdly as if all the transformation, which you have undergone started to make it unsure about what it truly is. Sometimes you even try to move limbs that are no longer there. Suddenly you realise that no matter how many time you change your body remembers it. Your body developed genetic memory!");
 			needNext ||= player.gainPerk(PerkLib.TransformationResistance, flags[kFLAGS.TIMES_TRANSFORMED] >= 100, "You feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate.");
 			needNext ||= player.gainPerk(PerkLib.TransformationAcclimation, flags[kFLAGS.TIMES_TRANSFORMED] >= 200, "Due to you're continued consumption of transformative items, you have discovered a way to draw out more of the transformative properties of the food in Mareth.");
 			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
@@ -821,7 +821,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removeStatusEffect(StatusEffects.Luststick);
 					player.buff("Luststick").remove();
 					dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
-					outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>");
+					outputText("\n<b>The lust-increasing effects of the harpy lipstick have worn off!\n</b>");
 					needNext = true;
 				}
 			}
@@ -905,7 +905,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_ITEM_GATHERED) {
-				outputText("\n<b>Oops you seem to have forgot that Vala needs those items to repair the royal scepter and parted way with them! Well its fine you can always go beat some more Phouka for extras.</b>\n");
+				outputText("\n<b>Oops, you seem to have forgotten that Vala needs those items to repair the royal scepter and parted way with them! Well its fine you can always go beat some more Phouka for extras.</b>\n");
 				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_STARTED;
 				needNext = true;
 			}
@@ -1458,7 +1458,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Soul Sense
 			if (!player.hasPerk(PerkLib.SoulSense) && player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage)) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
-				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that Mrs. Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
+				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that Mrs. Shigure you met in a lecture at He'Xin'Dao mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finally developed it too.\n");
 				player.removeKeyItem("'Soul Sense and You' Manual");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
@@ -1619,7 +1619,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			player.updateRacialCache();
 			//Demonic hunger perk
-			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL, Races.DRACULA) || player.hasPerk(PerkLib.Phylactery) || player.fiendishMetabolismNFER(), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");
+			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL, Races.DRACULA) || player.hasPerk(PerkLib.Phylactery) || player.fiendishMetabolismNFER(), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you acquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");
 			needNext ||= player.gainOrLosePerk(PerkLib.SoulEater, player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery), "You begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power!", "Due to your miraculous soul recovery you have lost the ability to consume souls!");
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
@@ -1825,7 +1825,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Fenrir Soulbite
 				if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FenrirSpiritstrike)) {
-					outputText("\nLike Fenrir you have aquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
+					outputText("\nLike Fenrir you have acquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
 					player.createPerk(PerkLib.FenrirSpiritstrike, 0, 0, 0, 0);
 					needNext = true;
 				}
@@ -1893,10 +1893,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}, function():void {
 						player.vaginaType(VaginaClass.HUMAN);
 					});
-			needNext ||= player.gainOrLosePerk(PerkLib.PlantKnowledge, player.isAlraune(), "It would seem you aquired additionnal skills in herbalism thanks to behing a plant yourself.", "No longer a plant you lost some of your innate floral knowledge.");
+			needNext ||= player.gainOrLosePerk(PerkLib.PlantKnowledge, player.isAlraune(), "It would seem you acquired additionnal skills in herbalism thanks to behing a plant yourself.", "No longer a plant you lost some of your innate floral knowledge.");
 			//Kamaitachi perks
 			needNext ||= player.gainOrLosePerk(PerkLib.CursedWound, player.arms.type == Arms.KAMAITACHI, "Your kamaitachi blades shines with a sharp, deadly glow. Those will clearly leaves deadly wounds.", "Lacking a pair of kamaitachi scythe you can no longer inflict your trademark cursed kamaitachi wounds.");
-			needNext ||= player.gainOrLosePerk(PerkLib.NaturalHerbalism, player.isRaceCached(Races.KAMAITACHI), "Great knowledges flows through your mind as you become more Kamaitachi like. It dawns on you that you have aquired a natural affinity for medicine and herbalism, something your species is famous for, heck you can identify every single plant near your camp by name and species now.", "No longer a Kamaitachi, you seem to have lost your knack for herbs and medicines.");
+			needNext ||= player.gainOrLosePerk(PerkLib.NaturalHerbalism, player.isRaceCached(Races.KAMAITACHI), "Great knowledges flows through your mind as you become more Kamaitachi like. It dawns on you that you have acquired a natural affinity for medicine and herbalism, something your species is famous for, heck you can identify every single plant near your camp by name and species now.", "No longer a Kamaitachi, you seem to have lost your knack for herbs and medicines.");
 			//Aquatic Affinity
 			needNext ||= player.gainOrLosePerk(PerkLib.AquaticAffinity, (InCollection(player.lowerBody,LowerBody.ORCA,LowerBody.SEA_DRAGON) && InCollection(player.arms.type,Arms.ORCA,Arms.SEA_DRAGON) && player.tailType == Tail.ORCA && InCollection(player.ears.type,Ears.ORCA,Ears.ORCA)) || player.isScylla() || player.isKraken() || InCollection(player.tailType,Tail.ARIGEAN_GREEN,Tail.ARIGEAN_RED,Tail.ARIGEAN_YELLOW,Tail.ARIGEAN_PRINCESS),
 					"You suddenly feel an urge to jump into the nearest pool of water as your breath becomes ragged and messy. You swiftly run up to the stream and scream in release as you fill your aching respiratory systems with water. Wait water? You realise you just gained the ability to breath underwater but to make sure you can still breath normal air you go back to the surface. It soon appears you can still breath fresh air. Reassured on your condition you head back to camp." +(player.rearBody.type == RearBody.ORCA_BLOWHOLE ? "\nIt dawns on you that you didn't breathe for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your breath for very lengthy periods. This will be perfect for underwater exploration.":""),
@@ -2167,7 +2167,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Goblinoid blood & Bouncy body & goblin mechs periodical check up
 			if ((player.isGoblinoid()) && !player.hasPerk(PerkLib.GoblinoidBlood)) {
-				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
+				outputText("\nAs you become a goblinoid again you can feel the chemicals from your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
 				if (player.hasKeyItem("Drug injectors") >= 0){
 					player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
@@ -2277,34 +2277,34 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.isGoblinoid() && (!player.statStore.hasBuff('DrugInjector') || !player.statStore.hasBuff('Power bracer'))) {
 				if (!player.statStore.hasBuff('DrugInjector')) {
 					if (player.hasKeyItem("Drug injectors") >= 0){
-						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+						outputText("\nYou can feel the chemicals from your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'});
 						needNext = true;
 					}
 					if (player.hasKeyItem("Improved Drug injectors") >= 0){
-						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+						outputText("\nYou can feel the chemicals from your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'});
 						needNext = true;
 					}
 					if (player.hasKeyItem("Potent Drug injectors") >= 0){
-						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+						outputText("\nYou can feel the chemicals from your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'});
 						needNext = true;
 					}
 				}
 					else {
 					if (player.hasKeyItem("Power bracer") >= 0) {
-						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+						outputText("\nYou can feel the chemicals from your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'});
 						needNext = true;
 					}
 					if (player.hasKeyItem("Powboy") >= 0) {
-						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+						outputText("\nYou can feel the chemicals from your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'});
 						needNext = true;
 					}
 					if (player.hasKeyItem("M.G.S. bracer") >= 0) {
-						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+						outputText("\nYou can feel the chemicals from your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'});
 						needNext = true;
 					}

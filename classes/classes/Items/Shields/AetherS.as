@@ -15,7 +15,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		
 		public function AetherS()
 		{
-			super("AetherS", "AetherS", "Aether (Sin)", "an Aether (Sin)", 0, 0, "Aether - sinister part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.");
+			super("AetherS", "AetherS", "Aether (Sin)", "an Aether (Sin)", 0, 0, "Aether - sinister part of a mysterious sentient weapon pair rumored to be forged by the god of blacksmiths.");
 		}
 		
 		override public function get block():Number {

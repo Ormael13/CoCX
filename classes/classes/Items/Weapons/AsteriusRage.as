@@ -10,7 +10,7 @@ import classes.PerkLib;
 public class AsteriusRage extends Weapon {
 		
 		public function AsteriusRage() {
-			super("A.R", "A.R", "Asterius Rage", "Asterius Rage", "cleaves", 200, 20000, "This pair of massive axes once belonged to Asterius the god of the minotaurs.  It'd be hard for anyone smaller than a giant to wield effectively and as a mather of fact seems to work best in the hand of someone of truly titanic strength.  Those axes are double-bladed and deadly-looking.  Requires height of 6'6 or above\".",
+			super("A.R", "A.R", "Asterius Rage", "Asterius Rage", "cleaves", 200, 20000, "This pair of massive axes once belonged to Asterius the god of the minotaurs.  It'd be hard for anyone smaller than a giant to wield effectively, and as a matter of fact, seems to work best in the hands of someone with truly titanic strength.  Those axes are double-bladed and deadly-looking.  Requires height of 6'6 or above\".",
 					WT_AXE,WSZ_MASSIVE,true);
 			withTag(W_MGWRATH);
 			withTag(I_LEGENDARY);

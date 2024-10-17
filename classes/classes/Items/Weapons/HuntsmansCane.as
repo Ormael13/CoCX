@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function useText():void {
-			outputText("You equip the lightweight cane, wondering about the effectiveness of such a small stick. With the cane in your hand, though, you feel intensely focused, and you doubt anything could distract you from your goals. ");
+			outputText("You equip the lightweight cane, questioning the effectiveness of such a small stick. However, as you hold it, an intense focus washes over you, and you feel certain that nothing could distract you from your goals. ");
 		}
 	}
 }

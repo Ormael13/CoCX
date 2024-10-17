@@ -20,9 +20,9 @@ public class DemonPackBeach extends Monster
 		{
 			outputText("\n");
 			if(lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");
-			else if(lustDelta > 0 && lustDelta < 5) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you.");
-			else if(lustDelta >= 5 && lustDelta < 10) outputText("The demons are obviously steering clear from damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow. Some are starting to cop quick feels with their other hands and you can smell the demonic lust of a dozen bodies on the air.");
-			else if(lustDelta >= 10) outputText("The demons are less and less willing to hit you and more and more willing to just stroke their hands sensuously over you. The smell of demonic lust is thick on the air and part of the group just stands there stroking themselves openly.");
+			else if(lustDelta > 0 && lustDelta < 5) outputText("The demons slightly lessen the intensity of their attacks, and some even eye your assets as they strike.");
+			else if(lustDelta >= 5 && lustDelta < 10) outputText("The demons are clearly avoiding damaging anything you might use for sex, lingering their hands on you a little longer after each blow. Some are even sneaking quick gropes with their free hands, and the air is thick with the scent of demonic lust from a dozen bodies.");
+			else if(lustDelta >= 10) outputText("The demons are increasingly hesitant to strike, opting instead to sensuously stroke their hands over you. The scent of demonic lust fills the air, and part of the group has stopped fighting altogether, openly stroking themselves.");
 			applyTease(lustDelta, display, aura);
 		}
 		
@@ -31,7 +31,7 @@ public class DemonPackBeach extends Monster
 			this.a = "the ";
 			this.short = "beach demons";
 			this.imageName = "demonmob";
-			this.long= "The group is composed of roughly fifty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a shark head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small crew carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders and eye path over his left eye.  You spot an odd patch that reads, \"<i>42nd East Sea Company: Vaginal Clearance</i>\" on his shoulder.";
+			this.long= "The group consists of roughly fifty tan-skinned demons, mostly humanoid in shape but with a wide variety of corruptions. You spot demonic high heels, twisting horns, and swinging cocks of all shapes and sizes. There even seems to be a shark head among them. You also notice a variety of breasts, from small ones to a pair so large they require a second person to carry them. Below those breasts is an equally diverse array of pussies, some dripping and others dry, often paired with a demonic dick.  The small crew carries no weapons, and what little clothing they wear is tattered, except for one hefty male wearing a cloak of what appears to be snakeskin draped his broad shoulders and an eye path over his left eye.  You spot an odd patch that reads, \"<i>42nd East Sea Company: Vaginal Clearance</i>\" on his shoulder.";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";

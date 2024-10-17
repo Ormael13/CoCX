@@ -173,10 +173,10 @@ public class EventParser {
                 EngineCore.outputText("\n<b>You groan softly as your body begins to feels less sluggish and mind less sharp. It looks like the effects of Andy's pipe smoke have worn off.</b>\n");
             }
             if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]) {
-                EngineCore.outputText("\nYou sober up, loosing the benefits of your oni drunken rampage.\n");
+                EngineCore.outputText("\nYou sober up, losing the benefits of your oni drunken rampage.\n");
             }
             if (player.statStore.recentlyRemovedTags["AelfwineEmpower"]) {
-                EngineCore.outputText("\nYou sober up, loosing the benefits of Aelfwine.\n");
+                EngineCore.outputText("\nYou sober up, losing the benefits of Aelfwine.\n");
             }
             if (player.statStore.recentlyRemovedTags["Hangover"]) {
                 EngineCore.outputText("\nYour head finally clears as your hangover wears off. Drinking with the shemale lizard was definitely a bad idea.\n");
@@ -206,13 +206,13 @@ public class EventParser {
                 player.statStore.advanceTime(Buff.RATE_DAYS,1);
                 player.HP = HPPercent*player.maxHP();
                 if (player.statStore.recentlyRemovedTags["KitsuneShrine"]){
-                    EngineCore.outputText("\nYou feel like you should meditate again at the kitsune shrine as the serenity and peace you have recently aquired has waned.\n");
+                    EngineCore.outputText("\nYou feel like you should meditate again at the kitsune shrine as the serenity and peace you have recently acquired has waned.\n");
                 }
                 if (player.statStore.recentlyRemovedTags["WellFed"]){
-                    EngineCore.outputText("\nYou begin feeling hungry again as the satisfaction of your last cooked meal has all but disapeared.\n");
+                    EngineCore.outputText("\nYou begin feeling hungry again as the satisfaction of your last cooked meal has all but disappeared.\n");
                 }
                 if (player.statStore.recentlyRemovedTags["TaothBlessing"] || player.statStore.recentlyRemovedTags["FenrirBlessing"]){
-                    EngineCore.outputText("\nThe divine blessing starts to fade. You think it’s high time you go back to the temple and pray.\n");
+                    EngineCore.outputText("\nThe divine blessing starts to fade. You think it’s high time you went back to the temple and pray.\n");
                 }
             } else if (CoC.instance.model.time.hours == 21) {
                 if (CoC.instance.flags[kFLAGS.LETHICE_DEFEATED] <= 0) EngineCore.outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
@@ -271,7 +271,7 @@ public class EventParser {
 
         //Drop axe if too short!
         if (player.tallness < 78 && player.weapon == CoC.instance.weapons.L__AXE) {
-            EngineCore.outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n");
+            EngineCore.outputText("<b>\nThis axe is too large for someone of your stature to wield, though you can keep it in your inventory until you are big enough.</b>\n");
             SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
@@ -303,7 +303,7 @@ public class EventParser {
             return true;
         }
         if ((player.weapon == CoC.instance.weapons.DEXCALI || player.weapon == CoC.instance.weapons.DBSWORD) && player.cor >= 33 + player.corruptionTolerance) {
-            EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop them.  Whatever power inhabits those weapons appears to be unhappy with you.  Touching them gingerly, you realize they are no longer hot, but as soon as you go to grab the hilts, they nearly burns you.\n\nYou realize you won't be able to use them right now, but you could probably keep them in your inventory.</b>\n\n");
+            EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop them.  Whatever power inhabits those weapons appears to be unhappy with you.  Touching them gingerly, you realize they are no longer hot, but as soon as you go to grab the hilts, they nearly burn you.\n\nYou realize you won't be able to use them right now, but you could probably keep them in your inventory.</b>\n\n");
             SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }

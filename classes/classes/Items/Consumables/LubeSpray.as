@@ -16,7 +16,7 @@ public class LubeSpray extends Consumable {
     //basically, SH workaround to get this shit earlier for me.
     override public function get description():String {
         var desc:String = flags[kFLAGS.DISCUSSED_LUBE_SPRAY] ? "A highly concentrated spray juice Lianna distilled for you, it may have some transforming properties." :
-            "A vial strange spray found in Tel'Adre. It's unknown if it has any special effects, but you'd better be careful with it.";
+            "A vial of strange spray found in Tel'Adre. It's unknown if it has any special effects, but you'd better be careful with it.";
         return desc + super.description;
     }
 
@@ -54,7 +54,7 @@ public class LubeSpray extends Consumable {
                 ++player.ass.analWetness;
                 break;
             case 2:
-                outputText("Somehow your [balls] feels heavier than before, though they don't look any bigger.  You reach down to weigh them and moan in pleasure as a sudden pressure erupts from then and you shoot a small rope of cum on the floor.  Looks like your <b>cum production has been augmented</b> somehow.");
+                outputText("Somehow your [balls] feel heavier than before, though they don't look any bigger.  You reach down to weigh them and moan in pleasure as a sudden pressure erupts from then and you shoot a small rope of cum on the floor.  Looks like your <b>cum production has been augmented</b> somehow.");
                 ++player.cumMultiplier;
                 break;
             case 3:

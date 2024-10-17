@@ -25,11 +25,11 @@ package classes.Items.Consumables
 		
 		override public function useItem():Boolean {
 			clearOutput();
-			outputText("You toss THUNDERballs at your foe");
+			outputText("You toss the THUNDERballs at your foe");
 			if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) outputText("s");
-			outputText("!  The shocking spheres fly straight and true, almost as if they are sentient as they arc towards " + game.monster.a + game.monster.short + "!\n");
+			outputText("!  The shocking spheres fly straight and true, almost as if they are sentient, as they arc towards " + game.monster.a + game.monster.short + "!\n");
 			if (game.monster.spe - 320 > Utils.rand(100) + 1) { //1% dodge for each point of speed over 320
-				outputText("Quick reflexes allow " + game.monster.pronoun2 + " to avoid the balls!  The thunderous spheres shatter far from your opponent, causing electricity discharge as they impact something in the distance.");
+				outputText("Quick reflexes allow " + game.monster.pronoun2 + " to avoid the balls!  The thunderous spheres shatter far from your opponent, causing an electric discharge as they impact something in the distance.");
 			}
 			else { //Not dodged
 				var damage:Number = 1440 + Utils.rand(721);

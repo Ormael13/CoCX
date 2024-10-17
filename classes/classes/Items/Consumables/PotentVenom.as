@@ -30,7 +30,7 @@ public class PotentVenom extends Consumable {
 
 		//Transformation effect list
 		if (changeLimit && rand(2) == 0) {
-			outputText("\n\nYou shudder as a strange warmth briefly spreads through you. The venom lingers on your tastebuds leaving behind a tingling sensation and lingering pleasure.");
+			outputText("\n\nYou shudder as a strange warmth briefly spreads through you. The venom lingers on your tastebuds, leaving behind a tingling sensation and a lingering pleasure.");
 			dynStats("lus", (10+player.lib/10), "scale", false);
 			changes++;
 		}
@@ -114,7 +114,7 @@ public class PotentVenom extends Consumable {
 			var playerhadasheath:Boolean = false;
 			outputText("\n\nYou double over as an overwhelming heat pools in your groin ");
 			if (player.hasVagina() && player.vaginaType() != VaginaClass.VENOM_DRIPPING && player.vaginaType() != VaginaClass.HUMAN){
-				outputText("as your vagina returns back to a human one, at least in appearance.");
+				outputText("as your vagina reverts back to a human one, at least in appearance.");
 				playerhadabnormalVagina = true;
 			}
 			//Female area
@@ -145,7 +145,7 @@ public class PotentVenom extends Consumable {
 				if (playerhadmorethenonecock) outputText("Y");
 				else outputText("y");
 				outputText("our sheath tightens and starts to smooth out, revealing ever greater amounts of your " + player.cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b> " +
-						"This said the changes are only starting as you moan out feeling your cock harden and tingle as it dribbles venoms. ");
+						"This said the changes are only starting as you moan out feeling your cock harden and tingle as it dribbles venom. ");
 				playerhadasheath = true;
 			}
 			if (!player.hasVagina() && player.hasCock())
@@ -155,7 +155,7 @@ public class PotentVenom extends Consumable {
 				{
 					if (playerhadasheath || playerhadmorethenonecock) outputText("You ");
 					else outputText("and ");
-					outputText("moan out, feeling your cock harden and tingle as it dribbles venoms. ");
+					outputText("moan out, feeling your cock harden and tingle as it dribbles venom. ");
 				}
 				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE)
 				{
@@ -172,13 +172,13 @@ public class PotentVenom extends Consumable {
 				{
 					if (playerhadasheath || playerhadmorethenonecock || playerhadabnormalVagina) outputText("You ");
 					else outputText("and ");
-					outputText("moan out, feeling your cock harden and tingle as it dribbles venoms. ");
+					outputText("moan out, feeling your cock harden and tingle as it dribbles venom. ");
 				}
 				if (player.cocks[0].cockType == CockTypesEnum.OOMUKADE && player.vaginaType() == VaginaClass.VENOM_DRIPPING)
 				{
 					if (playerhadasheath || playerhadmorethenonecock || playerhadabnormalVagina) outputText("You ");
 					else outputText("and ");
-					outputText("moan out feeling your cock harden and pussy clenching tightly as venoms drools from them. ");
+					outputText("moan out feeling your cock harden and pussy clenching tightly as venom drools from them. ");
 				}
 				else if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE || player.vaginaType() != VaginaClass.VENOM_DRIPPING)
 				{
@@ -187,14 +187,14 @@ public class PotentVenom extends Consumable {
 						if (playerhadasheath || playerhadmorethenonecock || playerhadabnormalVagina) outputText("You ");
 						else outputText("and ");
 						outputText("moan out feeling your cock harden and pussy clenching tightly as a strange dark purple liquid drools from them.");
-						outputText("It would seems your venomous markings altered something fundamental about your genitals.");
+						outputText("It seems your venomous markings altered something fundamental about your genitals.");
 					}
 					else
 					{
 						if (playerhadasheath || playerhadmorethenonecock || playerhadabnormalVagina) outputText("You ");
 						else outputText("and ");
-						outputText("moan out feeling your cock harden and pussy clenching tightly as venoms drools from them.");
-						outputText("It would seems your venomous markings altered your newly aquired genitals into producing venom as well.");
+						outputText("moan out feeling your cock harden and pussy clenching tightly as venom drools from them.");
+						outputText("It seems your venomous markings altered your newly acquired genitals into producing venom as well.");
 					}
 				}
 				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) {

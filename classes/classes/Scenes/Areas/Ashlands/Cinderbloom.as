@@ -32,7 +32,7 @@ public class Cinderbloom extends Alraune
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.a = "a ";
 				this.short = "mist cinderbloom alraune";
-				this.long = "You are fighting against a Mist Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. Whole her body cover faint vein-like lines. She seems really keen on raping you.";
+				this.long = "You are fighting against a Mist Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. Her whole body is covered in faint vein-like lines. She seems really keen on raping you.";
 				this.bodyColor = "chocolate";
 				this.hairColor = "blonde";
 			}

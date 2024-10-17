@@ -57,9 +57,9 @@ import classes.TimeAwareInterface;
             if (game && game.player)
                 return _description + (
                     game.player.cor < 3 ? "\n\nYour perfectly pure aura increases the staff's power!\n" :
-                    game.player.cor < 10 ? "\n\nYour almost pure aura <i>almost</i> doesn't interrupt your connection with the staff, but doesn't increase its power either.\n" :
-                    game.player.cor < 20 ? "\n\nYour slightly unclean aura starts to mingle with flow of energy inside it.\n" :
-                    game.player.cor < 30 ? "\n\nYour impure aura mingles with energy inside it, notably reducing its power.\n" :
+                    game.player.cor < 10 ? "\n\nYour nearly pure aura <i>barely</i> doesn't interrupt your connection with the staff, but it doesn't increase its power either.\n" :
+                    game.player.cor < 20 ? "\n\nYour slightly unclean aura starts to mingle with the flow of energy inside it.\n" :
+                    game.player.cor < 30 ? "\n\nYour impure aura mingles with the energy inside it, noticeably reducing its power.\n" :
                     "\n\nYour slightly corrupted aura almost breaks the flow of energy inside the staff.\n");
             else
                 return _description;

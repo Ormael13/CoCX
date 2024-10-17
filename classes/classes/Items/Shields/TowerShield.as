@@ -7,7 +7,7 @@ package classes.Items.Shields
 		
 		public function TowerShield()
 		{
-			super("TowerSh", "TowerShld", "tower shield", "a tower shield", 36, 1800, "A towering metal shield.  It looks heavy! \nReq 100 strength to fully use it potential.", "Massive");
+			super("TowerSh", "TowerShld", "tower shield", "a tower shield", 36, 1800, "A towering metal shield.  It looks heavy! \nReq 100 strength to fully utilize its potential.", "Massive");
 		}
 		
 		override public function get block():Number {

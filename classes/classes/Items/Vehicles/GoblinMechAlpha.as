@@ -24,11 +24,11 @@ public class GoblinMechAlpha extends Vehicles
 				return false;
 			}
 			if (game.player.isRace(Races.ELF) || game.player.isRace(Races.WOODELF)) { //Elf
-				if(doOutput) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+				if(doOutput) outputText("There's no way you're going into this mechanical abomination. As an Elf, you have a natural aversion to technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}
 			if (game.player.basetallness > 48 || game.player.tailType != Tail.NONE || game.player.hasPhysicalWings()) { //Taller than 4 ft or having wings/tail
-				if (doOutput) outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+				if (doOutput) outputText("Your current anatomy or size prevents you from properly entering the small, compact cockpit of the vehicle.\n\n");
 				return false;
 			}
 			return true;
@@ -42,7 +42,7 @@ public class GoblinMechAlpha extends Vehicles
 				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) game.player.HP = 1.8 * game.player.maxHP();
 				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) game.player.HP = 2 * game.player.maxHP();
 				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) game.player.HP = 2.2 * game.player.maxHP();
-				outputText("As you turn the mech on the welcoming voice of your AI booms in. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
+				outputText("As you turn the mech on, the welcoming voice of your AI booms. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
 			}
 			super.afterEquip(doOutput, slot);
 		}

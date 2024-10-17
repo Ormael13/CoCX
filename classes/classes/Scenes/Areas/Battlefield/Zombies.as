@@ -17,12 +17,12 @@ import classes.internals.*;
 		private var hopping:Number = 0;
 		
 		private function ZombiesHop():void {
-			outputText("The zombies tries to get closer by hopping toward you.");
+			outputText("The zombies try to get closer by hopping toward you.");
 			hopping += 1;
 		}
 		
 		public function ZombiesUndyingFlurry():void {
-			outputText("The zombies flails wildly attempting to strike you with their pale purple claw like nails. ");
+			outputText("The zombies flail wildly, attempting to strike you with their pale, purple claw-like nails.");
 			var zuf:Number = 25;
 			while (zuf-->0) ZombiesUndyingFlurryH();
 		}
@@ -40,7 +40,7 @@ import classes.internals.*;
 		}
 		
 		public function ZombiesDrainingKiss():void {
-			outputText("One of the zombies shambles towards you. You shove it back, but as you do, another hops in from the side, grabbing at you! ");
+			outputText("One of the zombies shambles towards you. You shove it back, but as you do, another hops in from the side, grabbing at you!");
 			if (player.hasPerk(PerkLib.TitanicSize)) {
 				outputText("They try to grab you, but they can barely reach your knees. You easily shrug them off, slapping one in the face for good measure.");
 				hopping = 0;
@@ -85,7 +85,7 @@ import classes.internals.*;
 			this.a = "the ";
 			this.short = "zombies";
 			this.imageName = "zombies";
-			this.long = "Those pale naked women and men slowly hops toward you with unwavering determination, their greedy hands hanging in front of them as they tries to grab you. Their mouths sports a set of fiendish canines more at home on a monster then a human and regularly lets out a dim-witted moan. Those zombies, for lacking of a better word, are starved for sex and intends to rape you to satisfy their craving for life.";
+			this.long = "Those pale naked women and men slowly hop toward you with unwavering determination, their greedy hands hanging in front of them as they try to grab you. Their mouths sport a set of fiendish canines, more at home on a monster than a human, and regularly let out a dim-witted moan. Those zombies, for lack of a better word, are starved for sex and intend to rape you to satisfy their craving for life.";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";

@@ -13,7 +13,7 @@ import classes.PerkLib;
 		public function Sanctuary()
 		{
 			super("SanctL", "SanctuaryL", "Sanctuary shield (L)", "a Sanctuary shield (L)", 55, 5500,
-					"Shining in snow-white ivory with a silver trim, this legendary shield is said to heal and protect a knight of pure heart. Embellishments carved on the ivory cover most of its surface.",
+					"Shining in snow-white ivory with a silver trim, this legendary shield is said to heal and protect a knight of pure heart. Intricate carvings embellish most of its ivory surface.",
 					"Large");
 			withPerk(PerkLib.Sanctuary, 1, 0, 0, 0);
 			withTag(I_LEGENDARY);

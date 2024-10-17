@@ -10,7 +10,7 @@ package classes.Scenes.Areas.Ashlands
 	public class GolemTrueFire extends Monster
 	{
 		public function backhand():void {
-			outputText("The golem visage twists into a grimace of irritation, and it flyby you swinging hand at you in a vicious backhand.");
+			outputText("The golem visage twists into a grimace of irritation, and it flies by you, swinging its hand at you in a vicious backhand.");
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
 			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.FireShadowAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
@@ -26,7 +26,7 @@ package classes.Scenes.Areas.Ashlands
 		}
 		
 		public function overhandSmash():void {
-			outputText("Raising it fists high overhead, golem swiftly dives down bringing it fists down in a punishing strike!");
+			outputText("Raising its fists high overhead, golem swiftly dives down bringing it fists down in a punishing strike!");
 			
 			var damage:Number = 100 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
@@ -88,7 +88,7 @@ package classes.Scenes.Areas.Ashlands
 			this.a = "the ";
 			this.short = "true fire golem";
 			this.imageName = "true fire golem";
-			this.long = "You're currently fighting true fire golem. It's over twenty four feet tall without any sexual characteristics, it body shaped like gigantic lizard, with bat-like wings, covered with dense layer of flames and using bare fists to smash enemies.";
+			this.long = "You're currently fighting a true fire golem. It’s over twenty-four feet tall, without any sexual characteristics. Its body is shaped like a gigantic lizard, with bat-like wings, covered with dense layer of flames and it uses its bare fists to smash enemies.";
 			//this.plural = true;
 			initStrTouSpeInte(315, 295, 175, 20);
 			initWisLibSensCor(20, 10, 10, 0);

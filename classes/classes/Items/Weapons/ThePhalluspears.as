@@ -16,7 +16,7 @@ import classes.Items.Weapon;
 		public function ThePhalluspears()
 		{
 			super("D.Phallus", "Phalluspears", "The Phalluspears", "The Phalluspears", "piercing stab", 40, 2600,
-				"Those spears are a polearms with a dick-shaped point. You can rotate the shaft to reveal or conceal a wicked, poison-dripping blade hidden within the phalluses. Pleasure or pain, this weapon can do both.",
+				"These spears are polearms with phallus-shaped tips. The shaft can be rotated to reveal or conceal a wicked, poison-dripping blade hidden within the designs. Whether it's pleasure or pain, these weapons deliver both.",
 				WT_SPEAR, WSZ_LARGE, true
 			);
 			withEffect(IELib.ScaleAttack_Spe, 200);

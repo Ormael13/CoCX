@@ -24,7 +24,7 @@ import classes.PerkType;
 		public function StarSphereMasteryPerk()
 		{
 			super("Star Sphere Mastery", "Star Sphere Mastery",
-					"You have mastered your control over the flow of energy in your star sphere. You are now able to recover fatigue, soulforce and mana over time.");
+					"You have mastered control over the flow of energy in your star sphere. Allowing you to recover fatigue, soulforce, and mana over time.");
 		}
 		
 	}
