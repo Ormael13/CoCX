@@ -2357,7 +2357,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 			outputText(" The landing from your impressive charge and tackle deals some recoil damage, leaving you a bit winded. ");
 			player.takePhysDamage(Math.round(slamDmg * 0.1), true);
-			if (player.HP <= player.minHP()) doNext(endHpLoss);
+			if (Math.round(player.HP) <= Math.round(player.minHP())) doNext(endHpLoss);
 			return;
 		}
 		if (silly()) outputText(" The force causes you to literally bounce off of [themonster], allowing the camera to get a nice shot of [themonster] twitching in an indent in their general shape.");
@@ -3837,7 +3837,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Failure (-10 HPs) -
 			outputText("As you attempt to grapple your target it slips out of your reach delivering a glancing blow to your limbs. ");
 			player.takePhysDamage(5, true);
-			if(player.HP <= player.minHP()) {
+			if(Math.round(player.HP) <= Math.round(player.minHP())) {
 				doNext(endHpLoss);
 				return;
 			}
@@ -3877,7 +3877,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Failure (-10 HPs) -
 			outputText("[monster a] [monster name] manage to avoid the binding! ");
 			player.takePhysDamage(5, true);
-			if(player.HP <= player.minHP()) {
+			if(Math.round(player.HP) <= Math.round(player.minHP())) {
 				doNext(endHpLoss);
 				return;
 			}
@@ -4032,7 +4032,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Failure (-10 HPs) -
 			outputText("[Themonster] dodge at the last second stepping out of your slimy embrace and using the opening to strike you.");
 			player.takePhysDamage(5, true);
-			if(player.HP <= player.minHP()) {
+			if(Math.round(player.HP) <= Math.round(player.minHP())) {
 				doNext(endHpLoss);
 				return;
 			}
@@ -4110,7 +4110,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Failure (-10 HPs) -
 			outputText("As you attempt to grapple your target it slips out of your reach delivering a glancing blow to your limbs. ");
 			player.takePhysDamage(5, true);
-			if(player.HP <= player.minHP()) {
+			if(Math.round(player.HP) <= Math.round(player.minHP())) {
 				doNext(endHpLoss);
 				return;
 			}
@@ -4498,7 +4498,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("As you attempt to grapple your target it slips out of your reach delivering a glancing blow to your limbs. Unable to grab your opponent flap your wing and resume flight.");
 			combat.WrathGenerationPerHit2(5);
 			player.takePhysDamage(5, true);
-			if(player.HP <= player.minHP()) {
+			if(Math.round(player.HP) <= Math.round(player.minHP())) {
 				doNext(endHpLoss);
 				return;
 			}
