@@ -770,10 +770,6 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.OWCA_SACRIFICE_DISABLED])
             addButton(6, "OwcaDemons", SceneLib.owca.loseOrSubmitToVapula)
                 .hint("Why not submit to lusty demons again, huh?");
-        if (flags[kFLAGS.OWCA_UNLOCKED] == -1 || sceneHunter.other && flags[kFLAGS.OWCA_SACRIFICE_DISABLED])
-            addButton(7, "RapeRebecc", SceneLib.owca.loseOrSubmitToVapula)
-                .hint("Payback for the sheep-girl."
-                    + (flags[kFLAGS.OWCA_UNLOCKED] != -1 ? "\n\n<b>Brought here by SceneHunter:Other.</b>" : ""));
 
         //Sub-pages
         if (player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1)

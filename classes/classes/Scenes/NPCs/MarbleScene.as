@@ -1627,7 +1627,7 @@ public function marbleMilkSex():void {
 		return;
 	}
     marbleFuckStatus(2);
-	outputText("Drinking her milk has filled you with an intense need, and you can see that need in Marble's eyes too.  You have no choice; you are going to have sex with her.\n\n");
+	outputText(" Drinking her milk has filled you with an intense need, and you can see that need in Marble's eyes too.  You have no choice; you are going to have sex with her.\n\n");
 	//[player is wearing fetish gear]
 	if(player.armorName == "bondage patient clothes" ||
 		   player.armorName == "crotch-revealing clothes" || player.armorName == "cute servant's clothes" ||
