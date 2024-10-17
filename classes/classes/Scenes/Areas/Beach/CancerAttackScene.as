@@ -92,21 +92,21 @@ public class CancerAttackScene extends BaseContent
             //SCENES
             //==========================================================================================
             function maleRape():void {
-                outputText("The cancer looks at you for a full minute and considers your body for a moment before smiling, " +
-                        "except his eyes kept the same blank expression of earlier which makes the small smile only more awkward.\n\n" +
+                outputText("The cancer looks at you for a full minute, considering your body before smiling, " +
+                        "though his eyes retain the same blank expression as before, making the smile even more awkward.\n\n" +
                         "<i>\"I’m going to enjoy this…\"</i>\n\n" +
-                        "He grabs you in his pincer and pulls you closer. The mandibula at the junction between his human and cancer body parting away to reveal a literal foaming penis. " +
+                        "He grabs you with his pincer and pulls you closer. The mandibles at the junction between his human and crab body part to reveal a frothing penis. " +
                         "Wow you didn’t expect from the look of his face that he was getting off already, or maybe it's how he is at all times?");
                 if (!player.hasVagina() || rand(2) == 0 && sceneHunter.uniHerms) {
-                    outputText("He move you all the way to him");
-                    if (!player.isNaga() && !player.lowerBody != LowerBody.MELKIE && !player.lowerBody != LowerBody.GOO) outputText(" and proceeds to pull one of your leg away with his free pincer");
-                    outputText("  slowly and forcefully shoving you into his cock like a sleeve. You gasp as he begins to use you like a sex toy denying your movement in favor of simply sliding you up and down his cock. " +
-                            "Its still sex albeit not on your own terms this guy is controlling the entire event spearing you at his leisure.");
-                    if (player.looseness() < 2) outputText(" Thankfully his rod isn’t too small or you wouldn’t be getting off at all from this, to be honest you have begun to enjoy yourself as well despite your predicament.");
+                    outputText("He moves you all the way to him");
+                    if (!player.isNaga() && !player.lowerBody != LowerBody.MELKIE && !player.lowerBody != LowerBody.GOO) outputText(" and proceeds to pull one of your legs away with his free pincer");
+                    outputText("  slowly and forcefully shoving you onto his cock like a sleeve. You gasp as he begins to use you like a sex toy denying your movement in favor of simply sliding you up and down his cock. " +
+                            "It’s still sex, albeit not on your terms. This guy is controlling the entire encounter, spearing you at his leisure.");
+                    if (player.looseness() < 2) outputText(" Thankfully, his rod isn’t too small, or you wouldn’t be getting any pleasure from this. To be honest, you’ve even begun to enjoy yourself despite the situation.");
                     outputText("\n\n<i>\"Ahhh… cumming…\"</i>\n\n" +
                             "Unsurprisingly, even his orgasmic expression is barely different from his normal pleasured one but you can feel in his bodily movement and the massive bubbling splash in your hole that he's enjoying himself. " +
                             "Your pussy also did achieve orgasm through yours was way louder than his. " +
-                            "Satisfied with this he simply drops you on the sand still in the afterglow and dig himself back into the hole he came from. " +
+                            "Satisfied with this, he simply drops you on the sand, still in the afterglow, and digs himself back into the hole he came from. " +
                             "Still panting, you proceed to slowly redress as you make your way back to camp.");
                     player.sexReward("cum","Vaginal");
                 }
@@ -135,16 +135,16 @@ public class CancerAttackScene extends BaseContent
                             "<i>\"I’m going to enjoy this…\"</i>\n\n" +
                             "She grabs you in her pincer and pulls you closer. The mandibula at the junction between her human and cancer body parting away to reveal a literally foaming pussy. " +
                             "Wow you didn’t expect from the look of her face that she was this wet already. " +
-                            "She pulls you all the way to her and proceeds to hug your body with her human arms as she forcefully shoves your nethers against her wet soaping hole. " +
+                            "She pulls you all the way to her, hugging your body with her human arms as she forcefully shoves your nethers against her wet, frothing hole. " +
                             "You consider for a moment to deny her then realise she's still holding you in her pincer which means you could probably crush you at a moment's notice if she wanted.");
                     if (player.hasVagina() && (!player.hasCock() || !sceneHunter.uniHerms || rand(2) == 0)) {
                         outputText(" You gently begin to rub your pussy against the girl's bubbling mess making her gasp in delight. " +
-                                "She thankfully control her pincers well enough not to squeeze you to death while in the middle of a mating session something you are very relieved off. " +
-                                "Her pussy keeps on gushing everytime you rub yourself against her and to be honest you have begun to enjoy yourself as well despite your predicament.\n\n" +
+                                "Thankfully, she controls her pincers well enough not to squeeze you to death during the mating session, something you’re very relieved about. " +
+                                "Her pussy keeps gushing every time you rub yourself against her, and to be honest, you’ve begun to enjoy yourself despite your predicament.\n\n" +
                                 "<i>\"Ahhh… cumming…\"</i>\n\n" +
                                 "Unsurprisingly even her orgasmic expression is barely different from her normal pleasured one but you can feel in her bodily movement and the massive bubbling splash on your bottom half that she's enjoying herself. " +
                                 "Your own pussy also did achieve orgasm through yours was way louder than hers. " +
-                                "Satisfied with this she simply drops you on the sand still in the afterglow and dig herself back into the hole she came from. " +
+                                "Satisfied with this, she simply drops you on the sand, still in the afterglow, and digs herself back into the hole she came from. " +
                                 "Still panting, you proceed to slowly redress as you make your way back to camp.\n")
                         player.sexReward("vaginalFluids","Vaginal");
                     } else if (player.hasCock()) {
@@ -155,7 +155,7 @@ public class CancerAttackScene extends BaseContent
                                 "<i>\"Ahhh… cumming…\"</i>\n\n" +
                                 "Unsurprisingly even her orgasmic expression is barely different from her normal pleasured one but you can feel in her bodily movement and the massive bubbling splash on your bottom half that she's enjoying herself. " +
                                 "Your penis also does achieve orgasm, your cum mixing in with her foam as you fertilize her hole thoroughly, though your own moan was way louder than hers. " +
-                                "Satisfied with this she simply drops you on the sand still in the afterglow and dig herself back into the hole she came from. Still panting, you proceed to slowly redress as you make your way back to camp.")
+                                "Satisfied with this, she simply drops you on the sand, still in the afterglow, and digs herself back into the hole she came from. Still panting, you proceed to slowly redress as you make your way back to camp.")
                         player.sexReward("vaginalFluids","Dick");
                     }
                 }

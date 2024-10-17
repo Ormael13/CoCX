@@ -27,14 +27,14 @@ import classes.Scenes.Areas.Battlefield.*;
 		
 		public function defeatVengefulApparitions():void {
 			clearOutput();
-			outputText("Finaly it's over. With the last of apparitions defeated you can catch your breath. But your victory seems to looks empty as they all starts to disperse nearly the same way they appeared before. Only thing that was left behind is a bottle with some green-tinded substance.");
+			outputText("Finally, it's over. With the last of the apparitions defeated, you finally catch your breath. But your victory seems hollow, as they all begin to disperse the same way they appeared. The only thing left behind is a bottle containing some green-tinted substance.");
 			//outputText("Finally, it's over. As the last violet aura fades, the final skeleton down, you stop to catch your breath. With a hissing screech, the bones begin to crumble. A cold wind picks up, carrying the remains away...After a few moments, the only thing that's left of the vengeful spirits is a bottle with some bubbling, green-tinted substance.");
 			inventory.takeItem(consumables.ECTOPLS, cleanupAfterCombat);
 		}
 		
 		public function loseToAVengefulApparitions():void {
 			clearOutput();
-			outputText("You fall to your knees out of steam to keep fighting your adversaries. Without delay they all pounce at you starting to ripping pieces of you. Suprisingly it's not your flesh but something more etheral but before you can think more on this you loose consciousness...");
+			outputText("You fall to your knees out of steam to keep fighting your adversaries. Without delay, they all pounce at you, ripping pieces of you apart. Surprisingly, it's not your flesh but something more ethereal, and before you can think further, you lose consciousness...");
 			//outputText("You fall, [legs] giving way and dropping your face to the dusty ground. Without delay they all pounce, rattling bones steaming as they rip into you. With each gash, each rip in your body, you can feel less and less, blackness overtaking your vision...");
 			//outputText("...You wake, still in the debris of the ancient battlefield...but you're not the same. Your flesh is gone, and in its place is pale, translucent...ectoplasm?");
 			player.fatigue = player.maxOverFatigue();
@@ -57,7 +57,7 @@ import classes.Scenes.Areas.Battlefield.*;
 		
 		public function defeatZombies():void {
 			clearOutput();
-			outputText("The last of the undead creatures fall, unable to stand. Looking back, you see a variety of bodies...That still move faintly. You haven't killed them, they're just down for now. You decide to grab what loot you can and get out before they get back up");
+			outputText("The last of the undead creatures fall, unable to stand. Looking back, you see a variety of bodies...That still move faintly. You haven't killed them; they're just down for now. You decide to grab what loot you can and get out before they get back up.");
 			inventory.takeItem(consumables.L_DRAFT, cleanupAfterCombat);
 		}
 		
@@ -69,9 +69,9 @@ import classes.Scenes.Areas.Battlefield.*;
 				outputText("lapping at your exposed slit");
 			}
 			else outputText("forcing you into a kiss");
-			outputText(".\n\nTry as you might, the thing is unbelievably strong and you just can't manage to push it off, something your unrequited growing pleasure only makes harder. As the undead quite literally forces you toward your impending orgasm, you feel your life energy being sucked out by the ravenous dead, leaving you increasingly drained, which only drives you closer to orgasm as your will and ability to resist dies out");
+			outputText(".\n\nTry as you might, the thing is unbelievably strong and you just can't manage to push it off, something made harder by your involuntary growing pleasure. As the undead quite literally forces you toward your impending orgasm, you feel your life energy being sucked out by the ravenous dead, leaving you increasingly drained, which only drives you closer to orgasm as your will and ability to resist die out");
 			if (player.hasCock() || player.hasVagina()) {
-				outputText(". You spasm helplessly as you cum into the mouth of the zombie, your energy being forcefully extracted along the way. Too weak to go on you pass out as the zombie mouth and ravenous tongue unplug from your ");
+				outputText(". You spasm helplessly as you cum into the mouth of the zombie, your energy is being forcefully extracted along the way. Too weak to go on, you pass out as the zombie mouth and ravenous tongue unplug from your ");
 				if (player.gender == 3) outputText("[cock] and [vagina]");
 				else if (player.gender == 2) outputText("[vagina]");
 				else outputText("[cock]");
