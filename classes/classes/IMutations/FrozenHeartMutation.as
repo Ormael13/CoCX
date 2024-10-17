@@ -19,7 +19,7 @@ public class FrozenHeartMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Allow you to retain the abilities Ice Barrage and Hungering Cold at all times and increase their damage by " + 10 * pTier + "%";
+                descS += "Allows you to retain the abilities Ice Barrage and Hungering Cold at all times and increase their damage by " + 10 * pTier + "%";
             }
             if (pTier >= 3){
                 descS += ", Hungering Cold lasts for 3 additional turns and recharges 3 turns faster. Gain an extra modifier from your intelligence to health. (Increases original value by 50%)";

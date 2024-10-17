@@ -52,7 +52,7 @@ public class Tongue extends BodyPart{
 	public static const DOG: int = 7;
 	EnumValue.add(Types, DOG, "DOG", {
 		name:"dog",
-		appearanceDesc: "You sometime let your canine tongue out to vent heat."
+		appearanceDesc: "You sometimes let your canine tongue out to vent heat."
 	});
 	public static const CAVE_WYRM: int = 8;
 	EnumValue.add(Types, CAVE_WYRM, "CAVE_WYRM", {
@@ -67,7 +67,7 @@ public class Tongue extends BodyPart{
 	public static const MELKIE: int = 10;
 	EnumValue.add(Types, MELKIE, "MELKIE", {
 		name:"melkie",
-		appearanceDesc: "Your voice is unnaturally beautiful and melodious; your mermaid-like song is capable of captivating the minds of those who listens to it."
+		appearanceDesc: "Your voice is unnaturally beautiful and melodious; your mermaid-like song is capable of captivating the minds of those who listen to it."
 	});
 	public static const RATATOSKR: int = 11;
 	EnumValue.add(Types, RATATOSKR, "RATATOSKR", {
@@ -102,7 +102,7 @@ public class Tongue extends BodyPart{
 	public static const ARIGEAN: int = 17;
 	EnumValue.add(Types, ARIGEAN, "ARIGEAN", {
 		name:"arigean",
-		appearanceDesc: "Your tongue is identical to that of a human’s save for it’s light blue color, most likely caused by your blue blood."
+		appearanceDesc: "Your tongue is identical to that of a human’s save for its light blue color, most likely caused by your blue blood."
 	});
 
 	public function Tongue(creature:Creature) {

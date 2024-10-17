@@ -11,12 +11,12 @@ package classes.Items.Armors
 	{
 		public function FurLoincloth()
 		{
-			super("FurLoin","FurLoin","revealing fur loincloths","a front and back set of loincloths",0,0,100,"A pair of loincloths to cover your crotch and butt.  Typically worn by people named 'Conan'.","Light");
+			super("FurLoin","FurLoin","revealing fur loincloths","a front and back set of loincloths",0,0,100,"A pair of loincloths to cover your crotch and butt. Typically worn by adventurers named 'Conan'.","Light");
 		}
 		
 		override public function get description():String
 		{
-			return "A pair of loincloths to cover your crotch and " + game.player.buttDescript() + ".  Typically worn by people named 'Conan'. \n\nType: Clothing \nDefense: 0 \nBase value: 100"
+			return "A pair of loincloths to cover your crotch and " + game.player.buttDescript() + ". Typically worn by adventurers named 'Conan'. \n\nType: Clothing \nDefense: 0 \nBase value: 100"
 		}
 	}
 }

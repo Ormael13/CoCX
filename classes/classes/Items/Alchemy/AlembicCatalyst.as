@@ -61,7 +61,7 @@ public class AlembicCatalyst extends Useable {
 				break;
 		}
 		shortName +="ACat";
-		var description:String = "This magical crystal, when placed inside alchemical alembic, " + powerName + " chances to extract " + compName + ". It is not consumed in the process and can be used muliple times."
+		var description:String = "This magical crystal, when placed inside an alchemical alembic, " + powerName + " chances to extract " + compName + ". It is not consumed in the process and can be used mmultiple times."
 		super(id, shortName, longName, value, description);
 	}
 	

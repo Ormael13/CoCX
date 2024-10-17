@@ -20,7 +20,7 @@ public class HollowFangsMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "Your fangs and mouth started to slowly change showing rudimental ability to suck out fluids like blood. (+5 max stack of Vampire Thirst)";
+                descS = "Your fangs and mouth have started to slowly change showing rudimental ability to suck out fluids like blood. (+5 max stack of Vampire Thirst)";
             }
             if (pTier == 2){
                 descS = "Your ability to suck substances like blood have developed halfway. (+5 max stack of Vampire Thirst, +2% more healed from Vampire Bite)";

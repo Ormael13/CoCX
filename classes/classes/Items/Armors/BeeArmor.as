@@ -15,15 +15,15 @@ import classes.Player;
 		}
 		
 		override public function equipText():void {
-			outputText("\n\nYou" + game.player.clothedOrNaked(" first strip yourself naked and ") + " equip your armor, one piece at a time. \n\nFirst, you clamber into the breastplate. ");
+			outputText("\n\nYou" + game.player.clothedOrNaked(" first strip naked and ") + " equip your armor, one piece at a time. \n\nFirst, you clamber into the breastplate. ");
             if (CoC.instance.player.isBiped()) //Some variants.
             {
                 if (CoC.instance.player.lowerBody == 0) outputText("Then you put your feet into your boots. With the boots fully equipped, you move on to the next piece. ");
-                else outputText("Then you attempt to put your feet into your boots. You realize that the boots are designed for someone with normal feet. You have to modify the boots to fit and when you do put on your boots, your feet are exposed. ");
+                else outputText("Then you attempt to put your feet into your boots. You realize that the boots are designed for someone with normal feet. You have to modify the boots to fit and when you do put on your boots, leaving your feet exposed. ");
 			}
 			outputText("Next, you put on your chitinous bracers to protect your arms.\n\n");
             if (!CoC.instance.player.isTaur()) {
-                outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Konstantin for that and you know that you easily have access to your ");
+                outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Konstantin for the loincloth and you know that you easily have access to your ");
                 if (CoC.instance.player.hasCock()) outputText(CoC.instance.player.multiCockDescriptLight());
                 if (CoC.instance.player.hasCock() && CoC.instance.player.hasVagina()) outputText(" and ");
                 if (CoC.instance.player.hasVagina()) outputText("[vagina]");
@@ -32,7 +32,7 @@ import classes.Player;
                 outputText(" should you need to. ");
                 if (CoC.instance.player.hasCock()) {
                     if (CoC.instance.player.biggestCockArea() >= 40 && CoC.instance.player.biggestCockArea() < 100) {
-                        outputText("Large bulge forms against your silken loincloth. ");
+                        outputText("A large bulge forms against your silken loincloth. ");
 					}
                     if (CoC.instance.player.biggestCockArea() >= 100) {
                         outputText("Your manhood is too big to be concealed by your silken loincloth. Part of your " + CoC.instance.player.cockDescriptShort(CoC.instance.player.biggestCockIndex()) + " is visible. ");

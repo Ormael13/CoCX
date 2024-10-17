@@ -31,7 +31,7 @@ public class HengeyokaiBirthrightMutation extends IMutationPerkType
             if (pTier == 4){
                 descS += "fully developed";
             }
-            if (descS != "") descS += " restorative system modeled after progenitor of all werebeasts. (+";
+            if (descS != "") descS += " restorative system modeled after the progenitor of all werebeasts. (+";
 			if (pTier == 1){
                 descS += "0.5/1/2";
             }

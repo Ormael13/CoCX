@@ -14,7 +14,7 @@ package classes.Items.Consumables
 		
 		public function FrozenBalls() 
 		{
-			super("FrozenB", "FrozenBalls", "a Frozen Balls", 60, "Three ball-shaped throwing weapons.  Though good for only a single use, they're guaranteed to do medium to high damage to solo or weak group of enemies if they hit.  Inflicts 1440 to 8640 ice damage.");
+			super("FrozenB", "FrozenBalls", "a Frozen Balls", 60, "Three ball-shaped throwing weapons.  Though good for only a single use, they're guaranteed to do medium to high damage to a solo or weak group of enemies if they hit.  Inflicts 1440 to 8640 ice damage.");
 		}
 		
 		override public function canUse():Boolean {
@@ -27,9 +27,9 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You toss Frozen Balls at your foe");
 			if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) outputText("s");
-			outputText("!  The icy spheres fly straight and true, almost as if they have a mind of their own as they arc towards " + game.monster.a + game.monster.short + "!\n");
+			outputText("!  The icy spheres fly straight and true, almost as if they have a minds of their own as they arc towards " + game.monster.a + game.monster.short + "!\n");
 			if (game.monster.spe - 320 > Utils.rand(100) + 1) { //1% dodge for each point of speed over 320
-				outputText("Quick reflexes allow " + game.monster.pronoun2 + " to avoid the balls!  The chilled spheres shatter far from your opponent, covering an area in the distance in shards of razor ice.");
+				outputText("Quick reflexes allow " + game.monster.pronoun2 + " to avoid the balls!  The chilled spheres shatter far from your opponent, covering the area in the distance with shards of razor ice.");
 			}
 			else { //Not dodged
 				var damage:Number = 1440 + Utils.rand(721);

@@ -79,7 +79,7 @@ public class Skin extends SaveableBodyPart {
 	public static const GOO: int = 3;
 	EnumValue.add(SkinTypes, GOO, "GOO", {
 		name:"skin",
-		adj: "goopey",
+		adj: "goopy",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} made of [skin coat].",
 		plural: false,
 		base:true,

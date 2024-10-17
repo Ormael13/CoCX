@@ -20,13 +20,13 @@ public class OniMusculatureMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "Your altered musculature allows to increase your natural strength and tone. Oni Rampage and Drunker Power can be used at Half-Oni score";
+                descS = "Your altered musculature allows you to increase your natural strength and tone. Oni Rampage and Drunker Power can be used at Half-Oni score";
             }
             if (pTier == 2){
-                descS = "Your musculature continue to increase your natural strength and tone gained from previous change. Oni Rampage and Drunker Power req. only 3+ pts in Oni score and dmg multi from Oni Rampage increased to 4x";
+                descS = "Your musculature continues to increase your natural strength and tone gained from previous changes. Oni Rampage and Drunker Power req. only 3+ pts in Oni score and dmg multi from Oni Rampage increased to 4x";
             }
             if (pTier == 3){
-                descS = "Your musculature increased again your natural strength and tone limit. Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
+                descS = "Your musculature once again increases your natural strength and tone limit. Dmg multi from Oni Rampage increased to 6x, its duration is increased by 3 turns and its cooldown is decreased by 3 turns. Drunken Power boost increased to 6x";
             }
             if (descS != "")descS += ".";
             return descS;

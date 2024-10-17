@@ -13,7 +13,7 @@ package classes.Items.Armors
 	public class HBArmor extends Armor {
 		
 		public function HBArmor() {//160 * armor + mres
-			super("HBArmor","HBArmor","HB armor","a HB armor",100,80,28800,"This white suit of armor is more than just platemail - it was reverse engineered from almost intact armor of elf-like offworlder. It protective properties would increase as long user is capable to feed it on regular basis with soulforce. (Req. to be 7+ feet tall)","Light Ayo");
+			super("HBArmor","HBArmor","HB armor","a HB armor",100,80,28800,"This white suit of armor is more than just platemail - it was reverse-engineered from the nearly intact armor of an elf-like offworlder. Its protective properties increase as long as the user regularly feeds it with soulforce. (Req. to be 7+ feet tall)","Light Ayo");
 		}
 		
 		override public function get def():Number {
@@ -51,7 +51,7 @@ package classes.Items.Armors
 			if (game.player.str >= 60 && game.player.spe >= 60 && game.player.tallness >= 84) return super.canEquip(doOutput, slot);
 			if (doOutput) {
 				if (game.player.tallness < 84) outputText("You aren't tall enough to wear this armor!  ");
-				else outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
+				else outputText("You aren't strong and agile enough to wear this armor!  Unless you likes moving slower than a snail and hitting weaker than a wet noddle!  ");
 			}
 			return false;
 		}

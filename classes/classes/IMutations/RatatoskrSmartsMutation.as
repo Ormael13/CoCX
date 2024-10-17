@@ -22,7 +22,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
                 descS += "Allows you to perm Weird words";
             }
             if (pTier >= 3){
-                descS += ", knowledge is power is now three times as effective";
+                descS += ", Knowledge is Power is now three times as effective";
             }
             if (pTier >= 2){
                 descS += ", increase the damage of Weird words by " + ((pTier == 2)?"20%":((pTier == 3)?"50%":"")) + ", lower cooldown of Knowledge overload by " + ((pTier == 2)?"1 turn":((pTier == 3)?"2 turns":""));

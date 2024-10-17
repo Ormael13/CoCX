@@ -26,7 +26,7 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You toss a bangball mk 2 at your foe");
 			if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) outputText("s");
-			outputText("!  It flies straight and true, almost as if it has a mind of its own as it arcs towards " + game.monster.a + game.monster.short + "!\n");
+			outputText("!  It flies straight and true, almost as if it has a mind of its own, as it arcs towards " + game.monster.a + game.monster.short + "!\n");
 			if (game.monster.spe - 240 > Utils.rand(100) + 1) { //1% dodge for each point of speed over 240
 				outputText("Somehow " + game.monster.a + game.monster.short + "'");
 				if (!game.monster.plural) outputText("s");

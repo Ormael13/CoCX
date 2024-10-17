@@ -263,7 +263,7 @@ public class Changelog extends BaseContent
 			outputText("-Bind Rework (HarpyBind, Goobind, TentacleBind, NagaBind) (NUZ/Shirane)\n");//Rework Bind Related Checks and Function, Lettuce Cleanup and Tentacle Attack Fix
 			outputText("-Fixed bugs: FindCockWithType, anita sex, anita broken tags (Svalkash)\n");
 			outputText("-GroPlus can grow horns (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Large / Massive proof reading of body parts and mutation descriptions. (Agentfunfun)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

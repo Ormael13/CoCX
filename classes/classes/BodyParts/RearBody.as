@@ -156,7 +156,7 @@ public class RearBody extends BodyPart {
 	EnumValue.add(Types, COBRA_HOOD, "COBRA_HOOD", {
 		name:"cobra hood",
 		appearanceDescFunc: function(player: *): String {
-			var desc: String = " Behind your hair is a large cobra hood decorated with intimating red triangular patterns.";
+			var desc: String = " Behind your hair is a large cobra hood decorated with intimidating red triangular patterns.";
 			if (player.faceType == Face.SNAKE_FANGS) desc += " Anyone can tell just from the vibrant colors that you are highly venomous.";
 			return desc;
 		}
@@ -174,7 +174,7 @@ public class RearBody extends BodyPart {
 	public static const ABYSSAL_SHARK_FIN: int = 28;
 	EnumValue.add(Types, ABYSSAL_SHARK_FIN, "ABYSSAL_SHARK_FIN", {
 		name: "abyss shark fin",
-		appearanceDesc: "A large, shark-like fin has sprouted between your shoulders, and a second, smaller fin beneath it at the height of your navel. With them, you have much a easier ability to swim around."
+		appearanceDesc: "A large, shark-like fin has sprouted between your shoulders, and a second, smaller fin beneath it at the height of your navel. With them, you have a much easier ability to swim around."
 	});
 	public static const ARIGEAN_RED_AURA: int = 29;
 	EnumValue.add(Types, ARIGEAN_RED_AURA, "ARIGEAN_RED_AURA", {

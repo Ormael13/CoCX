@@ -222,7 +222,7 @@ public class Wings extends SaveableBodyPart {
 	public static const FEY_DRAGON: int = 26;
 	EnumValue.add(Types, FEY_DRAGON, "FEY_DRAGON", {
 		name:"large majestic fey draconic",
-		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look like butterfly wings albeith far to large to belong to any regular butterfly. The delicate frame of your fey dragon wings allows for great speed and maneuverability.",
+		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look like butterfly wings albeit far to large to belong to any regular butterfly. The delicate frame of your fey dragon wings allows for great speed and maneuverability.",
 		wingSlap: true,
 		canFly: true,
 		physical: true
@@ -354,7 +354,7 @@ public class Wings extends SaveableBodyPart {
 	public static const JABBERWOCKY: int = 42;
 	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
 		name:"large exotic draconic",
-		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are splited in cells like that of a butterfly though some parts are covered in fine, delicate scales . While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.",
+		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are split into cells like that of a butterfly though some parts are covered in fine, delicate scales . While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.",
 		wingSlap: true,
 		canFly: true,
 		physical: true
@@ -364,7 +364,7 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, COUATL, "COUATL", {
 		name:"large colorful feathered",
 		desc:"large, colorful, feathered",
-		appearanceDesc: "A pair of large, feathery wings sprout from your back. The feathers are colorful with shades combining those of your hairs, scales and even their own unique feather colors. Though you usually keep the your wings folded close, they can unfurl to allow you to soar as gracefully as a couatl.",
+		appearanceDesc: "A pair of large, feathery wings sprout from your back. The feathers are colorful with shades combining those of your hairs, scales and even their own unique feather colors. Though you usually keep the your wings folded closely, they can unfurl to allow you to soar as gracefully as a couatl.",
 		wingSlap: true,
 		canFly: true,
 		feathers: true,
