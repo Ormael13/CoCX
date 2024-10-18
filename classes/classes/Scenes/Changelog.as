@@ -266,7 +266,7 @@ public class Changelog extends BaseContent
 			outputText("-Large / Massive proof reading of body parts and mutation descriptions. (Agentfunfun)\n");
 			outputText("-HP rounding for comparison. (Svalkash)\n");
 			outputText("-Fixed numbrockx. Fixed beegirl triggering wrong scenes. Added attitude reset after the fight. SH:Other - disables sandwitch bad end. Disables (not very logical) transition from bee girl to huntress in the forest. Let nothing distract you from buzz. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-All alchemy, armors, consumables, dynamics, effects, flying swords, headjewelries, jewelries, miscjewelries, necklaces, other, shield, undergarments, vehicles, weapons and weaponsrange items proofread and adjusted accordingly. (Agentfunfun)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

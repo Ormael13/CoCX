@@ -17,7 +17,7 @@ import classes.Items.Weapon;
 		
 		public function TaintlessKnives()
 		{
-			super("TKnives", "T.Knives", "Taintless Knives", "a Taintless Knives", "slash", 15, 800, "These beautiful steel knives shine with a light all of their own. Engraved with white runes, the silk-bound handles mold themselves seamlessly to your grip. Each knife has its own sheath, attached to a leather bandolier that fits snugly around your waist without any need for adjustment. The knives feel almost weightless, like an extension of your hand."", WT_DAGGER, WSZ_SMALL, true);
+			super("TKnives", "T.Knives", "Taintless Knives", "a Taintless Knives", "slash", 15, 800, "These beautiful steel knives shine with a light all of their own. Engraved with white runes, the silk-bound handles mold themselves seamlessly to your grip. Each knife has its own sheath, attached to a leather bandolier that fits snugly around your waist without any need for adjustment. The knives feel almost weightless, like an extension of your hand.", WT_DAGGER, WSZ_SMALL, true);
 			withEffect(IELib.Require_CorBelow, 33);
 			withEffect(IELib.AttackBonus_Cor, -1/6)
 		}
