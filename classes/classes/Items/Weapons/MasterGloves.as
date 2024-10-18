@@ -13,7 +13,7 @@ import classes.Items.Weapon;
 		public function MasterGloves() 
 		{
 			super("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400,
-				"These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.",
+				"These gloves once belonged to Chi Chi. They naturally strengthen the user's soulforce techniques.",
 				WT_GAUNTLET, WSZ_MEDIUM);
 			withBuffs({ 'psoulskillpower': +0.4 });
 		}

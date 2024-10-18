@@ -425,15 +425,15 @@ public class Weapon extends Equipable
 					if (weaponType == WT_DUELING) weaponType = "Sword";
 					return "You try to equip the legendary " + weaponType.toLowerCase() + ", but to your disappointment the item simply refuses to stay in your hands. It seems you still lack the right to wear this item.";
 				case "dual_fail":
-					return "You aren't skilled enough to handle pair of weapons!  ";
+					return "You aren't skilled enough to handle a pair of weapons!  ";
 				case "dualmasssive_4afail":
-					return "You lack second pair of arms and aren't skilled enough to handle both pairs of weapons!  "
+					return "You lack a second pair of arms and aren't skilled enough to handle both pairs of weapons!  "
 				case "dual_4afail":
-					return "You lack second pair of arms!  "
+					return "You lack a second pair of arms!  "
 				case "dualmassive_fail":
-					return "You aren't skilled enough to handle this pair of weapons with only two hands!  Unless you want to hurt yourself instead of your enemies when trying to use them...  "
+					return "You aren't skilled enough to handle these weapons with only two hands!  Unless you want to hurt yourself instead of your enemies when trying to use them...  "
 				case "massive_fail":
-					return "You aren't skilled enough in handling massive weapons, even when using both hands to use this weapon.  "
+					return "You aren't skilled enough in handling massive weapons, even when using both hands to wield this weapon.  "
 				case "unshield_fail":
 					return "You currently cannot remove your [shield]."
 				case "unoffhand_fail":
@@ -447,11 +447,11 @@ public class Weapon extends Equipable
 				case "unoffhand":
 					return "Because " +
 							(isDual() ? "those main hand weapons require":"this main hand weapon requires") +
-							" the use of two hands, you have unequipped your off hand weapon. ";
+							" the use of two hands, you have unequipped your off-hand weapon. ";
 				case "unmainhand":
 					return "Because " +
 							(isDual() ? "those off hand weapons require":"this off hand weapon requires") +
-							" the use of two hands, you have unequipped your main hand weapon. ";
+							" the use of two hands, you have unequipped your main-hand weapon. ";
 			}
 			return super.getItemText(textid);
 		}

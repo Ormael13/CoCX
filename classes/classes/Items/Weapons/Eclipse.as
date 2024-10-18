@@ -24,7 +24,7 @@ public class Eclipse extends Weapon implements TimeAwareInterface
 		public function Eclipse()
 		{
 			super("Eclipse", "Eclipse", "Eclipse", "an Eclipse", "bonk", 10, 1600,
-					"Created using the blood and bones of a titan for material Eclipse as it is now called constantly craves for oblivion. As a corrupted sentient weapon it constantly craves death and suffering but more then anything the life of its owner for Eclipse obeys no master and seeks to destroy everything indescriminately. Due to its nature as an item infused with the essense of annihilation Eclipse weakens the power of healing spells. (Weakens healing spell, Spellpower bonus for corruption)",
+					"Created using the blood and bones of a titan, Eclipse, as it is now called, constantly craves oblivion. As a corrupted sentient weapon, it constantly craves death and suffering, but more than anything, it craves the life of its owner. Eclipse obeys no master and seeks to destroy everything indiscriminately. Due to its nature as an item infused with the essence of annihilation, Eclipse weakens the power of healing spells. (Weakens healing spells, grants a spellpower bonus for corruption)",
 					WT_WAND, WSZ_MEDIUM);
 			withBuff('spellpower', +1.0);
 			withTag(I_LEGENDARY);
@@ -56,7 +56,7 @@ public class Eclipse extends Weapon implements TimeAwareInterface
             if (game && game.player)
                 return _description + (
                     game.player.cor < 25 ? "\n\nYour pure aura almost breaks the flow of energy inside the wand, decreasing its power!\n" :
-                    game.player.cor < 50 ? "\n\nYour pure aura sligtly interrupts your connection with the wand, decreasing its power.\n" :
+                    game.player.cor < 50 ? "\n\nYour pure aura slightly interrupts your connection with the wand, decreasing its power.\n" :
                     game.player.cor < 75 ? "\n\nYour corrupted aura slightly increases the wand's power.\n" :
                     "\n\nYour corrupted energy flows through the wand, empowering it!\n");
             else

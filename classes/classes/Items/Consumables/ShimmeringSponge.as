@@ -49,7 +49,7 @@ public class ShimmeringSponge extends Consumable {
         }
 
         function usePussy():void {
-            outputText("You decide to rub your pussy with the sponge. As you bring the bright yellow to your [pussy], you feel a slight pull. As you make contact, the shimmering sponge clings slightly to your labia, and with each pull, you feel your fluid being sucked into the thing. You groan, the draining feeling... odd, and not that pleasant.After a few rubs, you pull the sponge away.\n"
+            outputText("You decide to rub your pussy with the sponge. As you bring the bright yellow to your [pussy], you feel a slight pull. As you make contact, the shimmering sponge clings slightly to your labia, and with each pull, you feel your fluid being sucked into the thing. You groan, the draining feeling... odd, and not particularly pleasant. After a few rubs, you pull the sponge away.\n"
                 + "<b>Bringing your hand to your muff, you realise that not only is it drier, your pussy isn’t replacing the moisture as fast as before!</b>");
             --player.vaginas[0].vaginalWetness;
             if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) outputText("<b>Your pussy is completely dry!</b>\n");

@@ -56,7 +56,7 @@ public final class ArmorLib extends ItemConstants
 		public const A_ROBE_:Armor = new Armor("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",0,1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light")
 				.withBuffs({'spellcost': -0.10}) as Armor;
 		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,0,50,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
-		public const ANE_UNI:Armor = new Armor("ANe.Uni","ArigeanNCUni","Arigean Ne-Class Uniform","an Arigean Ne-Class Uniform",9,0,720,"A waterproof uniform designed to fit your body type, it seems to only consist of what looks like a black tank top with a built in mantle coming off the collar and metal fragments to help cover your squishy bits. it doesn’t seem to come with anything to cover your downstairs region however.","Light");
+		public const ANE_UNI:Armor = new Armor("ANe.Uni","ArigeanNCUni","Arigean Ne-Class Uniform","an Arigean Ne-Class Uniform",9,0,720,"A waterproof uniform designed to fit your body type, it seems to only consist of what looks like a black tank top with a built in mantle coming off the collar and metal fragments to help cover your squishy bits. It doesn’t seem to come with anything to cover your downstairs region, however.","Light");
 		public const ARCBANG:Armor = new Armor("ArcaBangl","ArcaneBangles","arcane bangles","a set of arcane bangles",0,1,150,"Silver bangles to be worn from the wrists and ankles, inscribed with arcane runes.  For some reason, you feel like wearing these with armor or clothes is somehow wrong.","Light")
 				.withBuffs({
 					'spellcost':-0.20,
@@ -67,12 +67,12 @@ public final class ArmorLib extends ItemConstants
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,0,40,"A long ballroom dress patterned with sequins.  Perfect for important occasions.","Medium");
 		public const B_QIPAO:Armor = new Armor("B.Qipao","BlueQipao","Blue Lunar new year dress (f)","a Blue Lunar new year dress (f)",0,0,100,"A simple yet elegant blue qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const BEEARMR:BeeArmor = new BeeArmor();
-		public const BERA:Armor = new Armor("B.Armor","B.Armor","berserker armor","a berserker armor",12,0,30720,"A sturdy albeith skimpy armor made of leather and metal plates tied up to the body with straps. While it offers limited protections it also does not hinder the movement of its owner allowing for greater agility then most armors.","Medium")
+		public const BERA:Armor = new Armor("B.Armor","B.Armor","berserker armor","a berserker armor",12,0,30720,"A sturdy albeith skimpy armor made of leather and metal plates tied up to the body with straps. While it offers limited protection, it also does not hinder the movement of its owner, allowing for greater agility than most armors.","Medium")
 				.withBuffs({'teasedmg':8})
 				.withPerk(PerkLib.BerserkerArmor, 0, 0, 0, 0)
 				.withTag(A_AGILE) as Armor;
 		public const BESTBLA:BestialBlademasterArmor = new BestialBlademasterArmor();
-		public const BIMBOSK:Armor = new Armor("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light", false, false)
+		public const BIMBOSK:Armor = new Armor("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undeniable.","Light", false, false)
 				.withBuffs({'teasedmg': 10})
 				.withTag(A_REVEALING) as Armor;
 		public const BLIZZ_K:BlizzardKimono = new BlizzardKimono();
@@ -132,11 +132,11 @@ public final class ArmorLib extends ItemConstants
 		public const FCLOAK:FrancescaBlackCloak = new FrancescaBlackCloak();
 		public const FCLOTHS:Armor =  new Armor("FCloths","Fur Clothes","Fur Clothes","fur clothes",1,0,40,"Generic brown fur clothing that trolls wear. It’s made to be form fitting and suit anyone of reasonable size or shape.\n","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
-		public const FMDRESS:Armor = new Armor("FMageDress","Forest Mage Dress","Forest Mage Dress","a Forest Mage Dress",0,0,800,"The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress.","Light")
+		public const FMDRESS:Armor = new Armor("FMageDress","Forest Mage Dress","Forest Mage Dress","a Forest Mage Dress",0,0,800,"The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambient natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire, instead causing the ambient flora to turn on and rape the wearer of the dress.","Light")
 				.withBuffs({
 					'spellcost': -0.10
 				}) as Armor;	//Effect: Slutty Seduction 10, Wizard Endurance 60. Increase tease total damage by x 2 when worn by a wood elf. Inflicting Tease damage reduces the wielder's own lust by a small amount.
-		public const FQR:Armor = new Armor("F.Q.Regalia","F.Q.Regalia","Fairy Queen Regalia","a Fairy Queen Regalia",0,30,6000,"This long dress has full glove sleeves to match, and changes color depending on your mood. It is lighter than air and about almost as transparent. Modeled after its people carefree nature this dress barely conceal anything though it still hide your assets just enough that you don’t appear outright naked. It also magicaly enhances one's ability to evade and is especially useful when worn by someone trained in the art of misdirection or fey magic. It comes with an assorted Tiara and choker.","Light")
+		public const FQR:Armor = new Armor("F.Q.Regalia","F.Q.Regalia","Fairy Queen Regalia","a Fairy Queen Regalia",0,30,6000,"This long dress has full glove sleeves to match, and changes color depending on your mood. It is lighter than air and about almost as transparent. Modeled after its people carefree nature this dress barely conceal anything though it still hides your assets just enough that you don’t appear outright naked. It also magicaly enhances one's ability to evade and is especially useful when worn by someone trained in the art of misdirection or fey magic. It comes with an assorted Tiara and choker.","Light")
 				.withBuffs({
 					'spellcost': -0.60,
 					'teasedmg': 10
@@ -166,7 +166,7 @@ public final class ArmorLib extends ItemConstants
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const IBKIMO:Armor = new InariBlessedKimono();
-		public const INDECST:Armor = new Armor("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,0,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium")
+		public const INDECST:Armor = new Armor("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,0,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt plates.","Medium")
 				.withBuffs({'teasedmg': 6})
 				.withTag(A_REVEALING) as Armor;
 		public const INDEDSR:Armor = new Armor("IndeDSR","Indec D.Scale Robe","indecent dragonscale robe","an indecent dragonscale robe",0,4,400,"More of a longcoat than a robe, this outfit is crafted from dragon scales. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have. The dragonscale is treated to be durable yet remain comfortable.","Light")
@@ -234,22 +234,22 @@ public final class ArmorLib extends ItemConstants
 		public const S_ARMOR:SuccubusArmor = new SuccubusArmor();
 		public const S_SWMWR:SluttySwimwear = new SluttySwimwear();
 		public const SAMUARM:Armor = new Armor("SamuArm","Samu.Armor","samurai armor","a suit of samurai armor",18,0,300,"This suit of armor is originally worn by the Samurai, the warriors from the far East.","Heavy");
-		public const SAQBIKNI:Armor = new Armor("SAqBikini","S Aq Bikini","Sexy Aquamarine Bikini","a Sexy Aquamarine Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
+		public const SAQBIKNI:Armor = new Armor("SAqBikini","S Aq Bikini","Sexy Aquamarine Bikini","a Sexy Aquamarine Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect outfit for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
-		public const SBABIKNI:Armor = new Armor("SBaBikini","S Ba Bikini","Sexy Black Bikini","a Sexy Black Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
+		public const SBABIKNI:Armor = new Armor("SBaBikini","S Ba Bikini","Sexy Black Bikini","a Sexy Black Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect outfit for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
-		public const SBUBIKNI:Armor = new Armor("SBuBikini","S Bu Bikini","Sexy Blue Bikini","a Sexy Blue Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
+		public const SBUBIKNI:Armor = new Armor("SBuBikini","S Bu Bikini","Sexy Blue Bikini","a Sexy Blue Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect outfit for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const SCALEML:Armor = new Armor("ScaleMl","Scale Mail","scale-mail armor","a set of scale-mail armor",12,0,720,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.","Heavy");
 		public const SEDUCTA:SeductiveArmor = new SeductiveArmor();
 		public const SEDUCTU:SeductiveArmorUntrapped = new SeductiveArmorUntrapped();
 		public const SFLAREQ:SpiritFlareQipao = new SpiritFlareQipao();
-		public const SGRBIKNI:Armor = new Armor("SGrBikini","S Gr Bikini","Sexy Green Bikini","a Sexy Green Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
+		public const SGRBIKNI:Armor = new Armor("SGrBikini","S Gr Bikini","Sexy Green Bikini","a Sexy Green Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect outfit for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
-		public const SPIBIKNI:Armor = new Armor("SPiBikini","S Pi Bikini","Sexy Pink Bikini","a Sexy Pink Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
+		public const SPIBIKNI:Armor = new Armor("SPiBikini","S Pi Bikini","Sexy Pink Bikini","a Sexy Pink Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect outfit for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const SPKIMO :SakuraPetalKimono = new SakuraPetalKimono();
-		public const SREBIKNI:Armor = new Armor("SReBikini","S Re Bikini","Sexy Red Bikini","a Sexy Red Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
+		public const SREBIKNI:Armor = new Armor("SReBikini","S Re Bikini","Sexy Red Bikini","a Sexy Red Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect outfit for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const SS_ROBE:Armor = new Armor("SS.Robe","SS.Robes","spider-silk robes","a spider-silk robes",0,6,300,"This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood.","Light")
 				.withBuffs({'spellcost': -0.30}) as Armor;
@@ -260,9 +260,9 @@ public final class ArmorLib extends ItemConstants
 				.withTag(A_REVEALING)
 				.withTag(A_AGILE) as Armor;
 		public const SLEATHR:Armor = new Armor("SLeathr", "Stud.Leather", "Studded Leather", "a cured leather armor", 8, 0,250, "A cured leather armor, it’s tough and can offer some modest protection while also allowing freedom of movement.", "Light");
-		public const SWHBIKNI:Armor = new Armor("SWhBikini","S Wh Bikini","Sexy White Bikini","a Sexy White Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
+		public const SWHBIKNI:Armor = new Armor("SWhBikini","S Wh Bikini","Sexy White Bikini","a Sexy White Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect outfit for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
-		public const SYEBIKNI:Armor = new Armor("SYeBikini","S Ye Bikini","Sexy Yellow Bikini","a Sexy Yellow Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
+		public const SYEBIKNI:Armor = new Armor("SYeBikini","S Ye Bikini","Sexy Yellow Bikini","a Sexy Yellow Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect outfit for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const T_BSUIT:Armor = new Armor("T.BSuit","Bodysuit","semi-transparent bodysuit","a semi-transparent, curve-hugging bodysuit",0,0,50,"A semi-transparent bodysuit. It looks like it will cling to all the curves of your body.","Light")
 				.withBuffs({'teasedmg': 7}) as Armor;

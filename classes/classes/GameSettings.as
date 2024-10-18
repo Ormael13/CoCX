@@ -46,7 +46,7 @@ public class GameSettings extends BaseContent {
 		displayHeader("Settings");
 		outputText("Here, you can adjust the gameplay and interface settings. Setting flags are saved in a special file so you don't have to re-adjust it each time you load a save file.");
 		menu();
-		addButton(0, "Gameplay(1)", settingsScreenGameSettings).hint("Mainly setting that need to have loaded save.");
+		addButton(0, "Gameplay(1)", settingsScreenGameSettings).hint("Mainly settings that require a loaded save.");
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
 		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings.");
 		addButton(3, "Font Size", fontSettingsMenu);
@@ -85,10 +85,10 @@ public class GameSettings extends BaseContent {
 			player.displayFinalGameDifficulty();
 			outputText("\n\n");
 			if (flags[kFLAGS.PRIMARY_DIFFICULTY] <= 0) {
-				outputText("Primary Difficulty: [font-olive]<b>Easy</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
+				outputText("Primary Difficulty: [font-olive]<b>Easy</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penalties for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
 			}
 			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) {
-				outputText("Primary Difficulty: <b>[font-dred]Normal[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.");
+				outputText("Primary Difficulty: <b>[font-dred]Normal[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penalties for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.");
 			}
 			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) {
 				outputText("Primary Difficulty: <b>[font-red]Hard[/font]</b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP." +
@@ -171,7 +171,7 @@ public class GameSettings extends BaseContent {
 			}
 			outputText("\n\n");
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
-				outputText("Easier Mode: [font-green]<b>ON</b>[/font]\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
+				outputText("Easier Mode: [font-green]<b>ON</b>[/font]\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling for certain combat stats, and no penalties for level differences)");
 			}
 			else {
 				outputText("Easier Mode: [font-dred]<b>OFF</b>[/font]\n Bad-ends can ruin your game and combat is back to what it should be.");
@@ -585,13 +585,13 @@ public class GameSettings extends BaseContent {
 	public function settingsScreenGameSettings2():void {
 		clearOutput();
 		displayHeader("Gameplay Settings");
-		if (debug) outputText("Debug Mode: [font-green]<b>ON</b>[/font]\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
+		if (debug) outputText("Debug Mode: [font-green]<b>ON</b>[/font]\n Items will not be consumed upon use, fleeing always succeeds, and bad-ends can be ignored.");
 		else outputText("Debug Mode: [font-dred]<b>OFF</b>[/font]\n Items consumption will occur as normal.");
 		outputText("\n\n");
 		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 			outputText("Silly Mode: [font-green]<b>ON</b>[/font]\n Crazy, nonsensical, and possibly hilarious things may occur.");
 		else
-			outputText("Silly Mode: [font-dred]<b>OFF</b>[/font]\n You're an incorrigable stick-in-the-mud with no sense of humor.");
+			outputText("Silly Mode: [font-dred]<b>OFF</b>[/font]\n You're an incorrigible stick-in-the-mud with no sense of humor.");
 		outputText("\n\n");
 		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
 			outputText("Low standards Mode: [font-green]<b>ON</b>[/font]\n NPCs ignore body type preferences.");
@@ -608,7 +608,7 @@ public class GameSettings extends BaseContent {
 			outputText("Hyper Happy Mode: [font-dred]<b>OFF</b>[/font]\n Male enhancement potions shrink female endowments, and vice versa.");
 		outputText("\n\n");
 		if (flags[kFLAGS.ITS_EVERY_DAY]) {
-			outputText("Eternal Holiday Mode: [font-green]<b>ON</b>[/font]\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
+			outputText("Eternal Holiday Mode: [font-green]<b>ON</b>[/font]\n All holiday events like Easter/X-mas and etc. can happen at any day of the year.");
 		}
 		else
 			outputText("Eternal Holiday Mode: [font-dred]<b>OFF</b>[/font]\n All holiday events happen only during their respective holiday times.");
@@ -642,7 +642,7 @@ public class GameSettings extends BaseContent {
 		addButton(1, "Silly Toggle", toggleFlag, kFLAGS.SILLY_MODE_ENABLE_FLAG, settingsScreenGameSettings2).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(2, "Low Standards", toggleFlag, kFLAGS.LOW_STANDARDS_FOR_ALL, settingsScreenGameSettings2);
 		addButton(3, "Hyper Happy", toggleFlag, kFLAGS.HYPER_HAPPY, settingsScreenGameSettings2);
-		addButton(4, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
+		addButton(4, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Easter/X-mas and etc. can happen at any day of the year.");
 		addButton(5, "Wis scaling", toggleFlag, kFLAGS.WISDOM_SCALING, settingsScreenGameSettings2).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
 		addButton(6, "Int scaling", toggleFlag, kFLAGS.INTELLIGENCE_SCALING, settingsScreenGameSettings2).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
 		addButton(7, "Str scaling", toggleFlag, kFLAGS.STRENGTH_SCALING, settingsScreenGameSettings2).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
@@ -686,7 +686,7 @@ public class GameSettings extends BaseContent {
 		menu();
 		addButton(0, "Fast Lvl", flagUpdate, kFLAGS.LVL_UP_FAST, 2).hint("Immediately level to the highest possible from XP instead of spamming next.");
 		addButton(1, "Mutation Assist", flagUpdate, kFLAGS.MUTATIONS_SPOILERS, 1).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
-		addButton(2, "PerkView Simplfied", flagUpdate, kFLAGS.NEWPERKSDISPLAY, 1).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
+		addButton(2, "PerkView Simplified", flagUpdate, kFLAGS.NEWPERKSDISPLAY, 1).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
 		addButton(3, "Inventory Mgmt", flagUpdate, kFLAGS.INVT_MGMT_TYPE, 1).hint("Toggle between existing SHIFT to remove items vs an extra menu. Recommended to enable for Mobile users.");
 		addButton(4,"USS Display Opt.", flagUpdate, kFLAGS.USSDISPLAY_STYLE,1).hint("Switches between USS Display options.");
 		addButton(5,"IMDB Details", flagUpdate, kFLAGS.IMDB_DETAILS,1).hint("Switches between Internal Mutation DB display styles.");
@@ -701,7 +701,7 @@ public class GameSettings extends BaseContent {
 			else {
 				outputText("Instant Leveling: [font-dred]<b>OFF</b>[/font]\nIndividual leveling up, i.e. One level click at a time.");
 			}
-			outputText("\nThis setting has three modes: Default(Levelling up one at a time), Direct(Auto-calculates your highest and sets accordingly), and Manual(You are given the option to increase levels in increments.)");
+			outputText("\nThis setting has three modes: Default(Leveling up one at a time), Direct(Auto-calculates your highest and sets accordingly), and Manual(You are given the option to increase levels in increments.)");
 			outputText("Works in conjunction with Auto-Leveling.");
 			outputText("\n\n");
 		}
@@ -861,8 +861,8 @@ public class GameSettings extends BaseContent {
 	public function difficultySelectionMenu1():void {
 		clearOutput();
 		outputText("You can choose a prime difficulty to set how hard battles will be.\n");
-		if (flags[kFLAGS.PRIMARY_DIFFICULTY] <= 0) outputText("\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
-		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) outputText("\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score. (+1 diff modifier)");
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] <= 0) outputText("\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penalties for too high wrath. Negative effects from internal mutations will be triggered after accumulating 11 points in your internal mutation score.");
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) outputText("\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penalties for too high wrath. Bad-ends can ruin your game. Negative effects from internal mutations will be triggered after accumulating 6 points in your internal mutation score. (+1 diff modifier)");
 		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) outputText("\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP. If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately. (+1 diff modifier)");
 		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) outputText("\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP. If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately. (+1 diff modifier)");
 		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) outputText("\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP. If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately. (+1 diff modifier)");
@@ -882,7 +882,7 @@ public class GameSettings extends BaseContent {
 	public function difficultySelectionMenu2():void {
 		clearOutput();
 		outputText("You can choose a difficulty to set how hard battles will be.\n");
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) outputText("\n No stats changes.");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) outputText("\n No stat changes.");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) outputText("\n 10x (bosses) and 5x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) outputText("\n 30x (bosses) and 10x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) outputText("\n 100x (bosses) and 25x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
@@ -907,7 +907,7 @@ public class GameSettings extends BaseContent {
 	public function difficultySelectionMenu3():void {
 		clearOutput();
 		outputText("You can choose how hard elite/champion/boss battles will be.\n");
-		outputText("\n<b>Normal:</b> No stats changes.");
+		outputText("\n<b>Normal:</b> No stat changes.");
 		outputText("\n<b>Fantasy:</b> 1.25x/2.5x/5x HP for elite/champion/boss monsters. (+1 diff modifier)");
 		outputText("\n<b>Torment:</b> 2.5x/5x/10x HP for elite/champion/boss monsters. (+1 diff modifier)");
 		outputText("\n<b>Infernium:</b> 3.75x/7.5x/15x HP for elite/champion/boss monsters. (+1 diff modifier)");

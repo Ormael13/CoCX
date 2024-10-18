@@ -33,9 +33,9 @@ package classes.Items.Consumables
 		 */
 		override public function useItem():Boolean {
 			game.player.slimeFeed();
-			outputText("You pop the cork and gulp down the thick greenish fluid.  The taste is unusual and unlike anything you've tasted before.");
+			outputText("You pop the cork and gulp down the thick, greenish fluid.  The taste is unusual and unlike anything you've tasted before.");
 			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) {
-				outputText("\n\nFor a moment you feel even more bloated than you already are.  That feeling is soon replaced by a dull throbbing pain.  It seems that with Valeria's goo filling your womb the ovielixir is unable to work its magic on you.");
+				outputText("\n\nFor a moment you feel even more bloated than you already are.  That feeling is soon replaced by a dull throbbing pain.  It seems that with Valeria's goo filling your womb, the ovielixir is unable to work its magic on you.");
 				return false;
 			}
 			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_WORM_STUFFED) {

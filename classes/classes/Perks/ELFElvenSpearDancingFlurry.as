@@ -12,7 +12,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String {
 			if (!player || !params) return _desc;
-			return "As an elf add " + params.value1 + " extra attacks when full attacking using a one handed or two handed spear with no shield equipped. Increases spear damage by " + params.value1 * 20 + "% when full attacking.";
+			return "As an elf, you gain " + params.value1 + " extra attacks when making a full attack with a one-handed or two-handed spear, without a shield equipped. It also increases spear damage by " + params.value1 * 20 + "% when full attacking.";
 		}
 
 		override public function name(params:PerkClass = null):String {

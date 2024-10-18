@@ -51,10 +51,10 @@ public class PlayerInfo extends BaseContent {
 		addButton(8, "Children", displayStatsChildren);
 		addButton(9, "Mastery", displayStatsmastery);
 		if (currentButton >= 4 && currentButton <= 9) {
-			button(currentButton).disable("You are currently at this stats page.");
+			button(currentButton).disable("You are currently on this stats page.");
 		}
 		if (currentButton == 4 || (currentButton >= 10 && currentButton <= 14)) {
-			button(4).disable("You are currently at this stats page.");
+			button(4).disable("You are currently on this stats page.");
 			if (currentButton == 4) {
 				//Should show all abilities by default
 				currentButton = 10;
@@ -146,7 +146,7 @@ public class PlayerInfo extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
 			bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
 			if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
-				bodyStats += " (Too long! Sensitivity Increasing!)";
+				bodyStats += " (Too long! Sensitivity increasing!)";
 			bodyStats += "\n";
 		}
 		bodyStats += "<b>Pregnancy Speed Multiplier:</b> ";
@@ -238,19 +238,19 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
 
 		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) {
-			miscStats += "<b>Imps Hunt Quests completed:</b> " + player.statusEffectv1(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
+			miscStats += "<b>Imp Hunt Quests completed:</b> " + player.statusEffectv1(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
 			miscStats += "<b>Demons Hunt Quests completed:</b> " + player.statusEffectv2(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
 			miscStats += "<b>Minotaurs Hunt Quests completed:</b> " + player.statusEffectv3(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
 		}
 		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter2)) {
 			miscStats += "<b>Feral Tentacle Beasts Hunt Quests completed:</b> " + player.statusEffectv1(StatusEffects.AdventureGuildQuestsCounter2) + "\n";
-			miscStats += "<b>Feral Imps Hunt Quests completed:</b> " + player.statusEffectv2(StatusEffects.AdventureGuildQuestsCounter2) + "\n";
-			//miscStats += "<b>Imps Hunt Quests completed:</b> " + player.statusEffectv3(StatusEffects.AdventureGuildQuestsCounter2) + "\n";
+			miscStats += "<b>Feral Imp Hunt Quests completed:</b> " + player.statusEffectv2(StatusEffects.AdventureGuildQuestsCounter2) + "\n";
+			//miscStats += "<b>Imp Hunt Quests completed:</b> " + player.statusEffectv3(StatusEffects.AdventureGuildQuestsCounter2) + "\n";
 		}
 		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter4)) {
 			miscStats += "<b>Black Chitin Gathering Quests completed:</b> " + player.statusEffectv1(StatusEffects.AdventureGuildQuestsCounter4) + "\n";
 			miscStats += "<b>Green Gel Gathering Quests completed:</b> " + player.statusEffectv2(StatusEffects.AdventureGuildQuestsCounter4) + "\n";
-			//miscStats += "<b>Imps Hunt Quests completed:</b> " + player.statusEffectv3(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
+			//miscStats += "<b>Imp Hunt Quests completed:</b> " + player.statusEffectv3(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
 		}
 
 		if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0) {
@@ -299,7 +299,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Ebon Labyrinth:</b> Explored up to " + flags[kFLAGS.EBON_LABYRINTH_RECORD] + " room\n";
 		miscStats += "<b>Exp needed to lvl up:</b> ";
 		if (player.level < CoC.instance.levelCap || player.negativeLevel > 0) miscStats += "" + player.requiredXP() + "\n";
-		else miscStats += "N/A (You already at max lvl)\n";
+		else miscStats += "N/A (You are already at max lvl)\n";
 		miscStats += "<b>Ascension points (currently possessed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
 		miscStats += "<i>Ascension points - Dungeons Edition:</i> " + camp.possibleToGainAscensionPointsDungeons() + " / 22\n";
@@ -367,7 +367,7 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Blessing of Divine Agency - Taoth: " + player.buff('TaothBlessing').getRemainingTicks() + " days remaining (Your speed is empowered by ~10% under the guidance of Taoth)\n";
 
 		if (player.statStore.hasBuff("FenrirBlessing"))
-			statEffects += "Blessing of Divine Agency - Fenrir: " + player.buff('FenrirBlessing').getRemainingTicks() + " days remaining (Your strenght & toughness is empowered by ~10% under the guidance of Fenrir)\n";
+			statEffects += "Blessing of Divine Agency - Fenrir: " + player.buff('FenrirBlessing').getRemainingTicks() + " days remaining (Your strength & toughness is empowered by ~10% under the guidance of Fenrir)\n";
 
 		if (player.statusEffectv1(StatusEffects.Luststick) > 0)
 			statEffects += "Luststick - " + Math.round(player.statusEffectv1(StatusEffects.Luststick)) + " hours remaining\n";
@@ -412,7 +412,7 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
 
 		if (player.statusEffectv1(StatusEffects.HinezumiCoat) > 0)
-			statEffects += "Hinezumi Coat: Unarmed attacks minor deal fire damage and discharge lust (1 point per attack) when you are aroused above 50%.\n";
+			statEffects += "Hinezumi Coat: Unarmed attacks deal minor fire damage and discharge lust (1 point per attack) when you are aroused above 50%.\n";
 
 		if (player.statusEffectv1(StatusEffects.Airweed) > 0)
 			statEffects += "Airweed: Water breathing for " + Math.round(player.statusEffectv1(StatusEffects.Airweed)) + " hours.\n";

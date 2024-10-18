@@ -13,7 +13,7 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "Increase spell power by " + (params.value1 * 100) + "% and increase power/lower cost of black magic by " + (params.value2 * 100) + "%.";
+			return "Increases spell power by " + (params.value1 * 100) + "% and increases power and lowers the cost of black magic by " + (params.value2 * 100) + "%.";
 		}
 
 		public function ObsessionPerk()

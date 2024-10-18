@@ -120,7 +120,7 @@ public class WeaponRange extends Equipable
 				}
 				
 				return "You try to equip the legendary " + itemType.toLowerCase() +
-						", but to your disappointment the item simply refuses to stay in your hands. It seems you still lack the right to wield this item.";
+						", but to your disappointment, the item simply refuses to stay in your hands. It seems you still lack the right to wield this item.";
 			}
 			return super.getItemText(textid);
 		}

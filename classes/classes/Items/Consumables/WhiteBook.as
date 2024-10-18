@@ -32,61 +32,61 @@ public class WhiteBook extends Consumable {
 		EngineCore.addButton(0, "Back", whiteSpellbook0);
 		EngineCore.addButton(1, "Use", whiteSpellbook1, 0).hint("Only Int gain with no spell learned.");
 		if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) EngineCore.addButton(2, "Whitef", whiteSpellbook1, 1).hint("Learn Whitefire spell.");
-		else EngineCore.addButtonDisabled(2, "Whitef", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(2, "Whitef", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) EngineCore.addButton(3, "L.Bolt", whiteSpellbook1, 2).hint("Learn Lightning Bolt spell.");
-		else EngineCore.addButtonDisabled(3, "L.Bolt", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(3, "L.Bolt", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) EngineCore.addButton(4, "C.Weap", whiteSpellbook1, 3).hint("Learn Charge Weapon spell.");
-		else EngineCore.addButtonDisabled(4, "C.Weap", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(4, "C.Weap", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeR)) EngineCore.addButton(5, "C.R.We", whiteSpellbook1, 4).hint("Learn Charge Range Weapon spell.");
-		else EngineCore.addButtonDisabled(5, "C.R.We", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(5, "C.R.We", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) EngineCore.addButton(6, "C.Armo", whiteSpellbook1, 5).hint("Learn Charge Armor spell.");
-		else EngineCore.addButtonDisabled(6, "C.Armo", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(6, "C.Armo", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) EngineCore.addButton(7, "Heal", whiteSpellbook1, 6).hint("Learn Heal spell.");
-		else EngineCore.addButtonDisabled(7, "Heal", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(7, "Heal", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) EngineCore.addButton(8, "Blind", whiteSpellbook1, 7).hint("Learn Blind spell.");
-		else EngineCore.addButtonDisabled(8, "Blind", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(8, "Blind", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) EngineCore.addButton(9, "P.Burs", whiteSpellbook1, 8).hint("Learn Pyre Burst spell.");
-		else EngineCore.addButtonDisabled(9, "P.Burs", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(9, "P.Burs", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) EngineCore.addButton(10, "C.Ligh", whiteSpellbook1, 9).hint("Learn Chain Lightning spell.");
-		else EngineCore.addButtonDisabled(10, "C.Ligh", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(10, "C.Ligh", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) EngineCore.addButton(11, "Blizza", whiteSpellbook1, 10).hint("Learn Blizzard spell.");
-		else EngineCore.addButtonDisabled(11, "Blizza", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(11, "Blizza", "You don’t have enough intelligence or you already know this spell.");
 		EngineCore.addButton(14, "-2-", whiteSpellbookPage2);
 	}
 	public function whiteSpellbookPage2():void {
 		EngineCore.menu();
 		EngineCore.addButton(0, "-1-", whiteSpellbook);
 		if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) EngineCore.addButton(1, "M.Shie", whiteSpellbook1, 11).hint("Learn Mental Shield spell.");
-		else EngineCore.addButtonDisabled(1, "M.Shie", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(1, "M.Shie", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsCure)) EngineCore.addButton(2, "Cure", whiteSpellbook1, 12).hint("Learn Cure spell.");
-		else EngineCore.addButtonDisabled(2, "Cure", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(2, "Cure", "You don’t have enough intelligence or you already know this spell.");
 		if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) EngineCore.addButton(3, "F.Stor", whiteSpellbook1, 13).hint("Learn Fire Storm spell.");
-		else EngineCore.addButtonDisabled(3, "F.Stor", "You not have have enough int or already know this spell.");
+		else EngineCore.addButtonDisabled(3, "F.Stor", "You don’t have enough intelligence or you already know this spell.");
 		if (player.hasPerk(PerkLib.DivineKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) EngineCore.addButton(4, "Aegis", whiteSpellbook1, 14).hint("Learn Aegis spell.");
-			else EngineCore.addButtonDisabled(4, "Aegis", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(4, "Aegis", "You don’t have enough intelligence or you already know this spell.");
 			if (player.inte >= 160 && !player.hasStatusEffect(StatusEffects.KnowsExorcise)) EngineCore.addButton(5, "Exorci", whiteSpellbook1, 15).hint("Learn Exorcise spell.");
-			else EngineCore.addButtonDisabled(5, "Exorci", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(5, "Exorci", "You don’t have enough intelligence or you already know this spell.");
 			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsDivineShield)) EngineCore.addButton(6, "D.Shie", whiteSpellbook1, 16).hint("Learn Divine Shield spell.");
-			else EngineCore.addButtonDisabled(6, "D.Shie", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(6, "D.Shie", "You don’t have enough intelligence or you already know this spell.");
 			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsThunderstorm)) EngineCore.addButton(7, "Thunde", whiteSpellbook1, 17).hint("Learn Thunderstorm spell.");
-			else EngineCore.addButtonDisabled(7, "Thunde", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(7, "Thunde", "You don’t have enough intelligence or you already know this spell.");
 			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsTearsOfDenial)) EngineCore.addButton(8, "T.Deni", whiteSpellbook1, 18).hint("Learn Tears of Denial spell.");
-			else EngineCore.addButtonDisabled(8, "T.Deni", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(8, "T.Deni", "You don’t have enough intelligence or you already know this spell.");
 		}
 		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsPlantGrowth)) EngineCore.addButton(9, "P.Grow", whiteSpellbook1, 19).hint("Learn Plant growth spell.");
-			else EngineCore.addButtonDisabled(9, "P.Grow", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(9, "P.Grow", "You don’t have enough intelligence or you already know this spell.");
 			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsEntangle)) EngineCore.addButton(10, "Entang", whiteSpellbook1, 20).hint("Learn Entangle spell.");
-			else EngineCore.addButtonDisabled(10, "Entang", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(10, "Entang", "You don’t have enough intelligence or you already know this spell.");
 			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBriarthorn)) EngineCore.addButton(11, "Briart", whiteSpellbook1, 21).hint("Learn Briarthorn spell.");
-			else EngineCore.addButtonDisabled(11, "Briart", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(11, "Briart", "You don’t have enough intelligence or you already know this spell.");
 			if (player.inte >= 130 && !player.hasStatusEffect(StatusEffects.KnowsDeathBlossom)) EngineCore.addButton(12, "D.Blos", whiteSpellbook1, 22).hint("Learn Death Blossom spell.");
-			else EngineCore.addButtonDisabled(12, "D.Blos", "You not have have enough int or already know this spell.");
+			else EngineCore.addButtonDisabled(12, "D.Blos", "You don’t have enough intelligence or you already know this spell.");
 		}
 	}
 	public function whiteSpellbook0():void {
-		outputText("You close the white tome. Now is not good time to use it.");
+		outputText("You close the white tome. Now is not a good time to use it.");
 		SceneLib.inventory.returnItemToInventory(this);
 	}
     public function whiteSpellbook1(spell:Number):void {

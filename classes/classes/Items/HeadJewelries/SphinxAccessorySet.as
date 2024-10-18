@@ -12,7 +12,7 @@ package classes.Items.HeadJewelries
 		
 		public function SphinxAccessorySet()
 		{
-			super("SphinxAS", "Sphinx accessory set", "Sphinx accessory set", "a Sphinx accessory set", 0, 0, 400, "This set of enchanted accessories is favored by sphinxes. It consists of a golden tiara depicting a rising cobra, a set of arm braces and a cloth collar with blue and yellow patterns that does not cover the shoulders. It assists its wielder in making better riddles and general spellcasting.",HJT_HAIRPIN,"","\nSpecial: Increase of Cursed Riddle damage and Spellpower by 50%.");
+			super("SphinxAS", "Sphinx accessory set", "Sphinx accessory set", "a Sphinx accessory set", 0, 0, 400, "This set of enchanted accessories is favored by sphinxes. It consists of a golden tiara depicting a rising cobra, a set of arm bracers, and a cloth collar with blue and yellow patterns that does not cover the shoulders. It assists its wielder in making better riddles and improving general spellcasting.",HJT_HAIRPIN,"","\nSpecial: Increase of Cursed Riddle damage and Spellpower by 50%.");
 		}
 		
 		override public function afterEquip(doOutput:Boolean, slot:int):void {

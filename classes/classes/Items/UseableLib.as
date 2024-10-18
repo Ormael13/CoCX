@@ -25,22 +25,22 @@ use namespace CoC;
 			"You look over the perfect diamond. Likely worth a lot of gems.");
 		public const G_INGOT:SimpleUseable = new SimpleUseable("G.Ingot", "Gold ingot", "a Gold ingot", 800,
 			"A Gold ingot.",//weight around 11-13 kg
-			"You look over the Gold ingot. Likely usefull to making some accesories.");
+			"You look over the Gold ingot. Likely useful for making some accesories.");
 		public const S_INGOT:SimpleUseable = new SimpleUseable("S.Ingot", "Silver ingot", "a Silver ingot", 200,
 			"A Silver ingot.",//weight around 3-3,2 kg
-			"You look over the Silver ingot. Likely usefull to making some accesories.");
+			"You look over the Silver ingot. Likely useful for making some accesories.");
 		public const COP_ORE:SimpleUseable = new SimpleUseable("Cop.Ore", "Copper ore", "a Copper ore", 40,
 			"A Copper ore.",
-			"You look over the chunk of Copper ore. Likely usefull to making some equipment.");
+			"You look over the chunk of Copper ore. Likely useful for making some equipment.");
 		public const TIN_ORE:SimpleUseable = new SimpleUseable("Tin Ore", "Tin ore", "a Tin ore", 40,
 			"A Tin ore.",
-			"You look over the chunk of Tin ore. Likely usefull to making some equipment.");
+			"You look over the chunk of Tin ore. Likely useful for making some equipment.");
 		public const IRONORE:SimpleUseable = new SimpleUseable("Iron Ore", "Iron ore", "an Iron ore", 90,
 			"An Iron ore.",
-			"You look over the chunk of Iron ore. Likely usefull to making some equipment.");
+			"You look over the chunk of Iron ore. Likely useful for making some equipment.");
 		public const BRONZEB:SimpleUseable = new SimpleUseable("BronzeB", "Bronze bar", "a Bronze bar", 80,
 			"A Bronze bar.",
-			"You look over the Bronze bar. Likely usefull to making some equipment.");
+			"You look over the Bronze bar. Likely useful for making some equipment.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
 			"An unscathed piece of black chitin, not a single blemish aside from the bit of fuzz still on the back of it.",
 			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
@@ -61,16 +61,16 @@ use namespace CoC;
 			"You look over the grey metallic flowers such as these are known to bloom in the deepest caves that run below the mountains of Mareth. Prized by mountain dwellers, these blooms fetch a high price due to their rarity and alchemical value.");
 		public const EBONING:SimpleUseable = new SimpleUseable("EbonIng", "Ebon Ingot", "an ebon ingot", 600,
 			"An Ebon ingot.",
-			"You look over the Ebon ingot. Likely usefull to making some weapons.");
+			"You look over the Ebon ingot. Likely useful for making some weapons.");
 		public const WT_BRAN:SimpleUseable = new SimpleUseable("WT.Bran", "W.T.Branch", "a World Tree Branch", 200,
 			"A branch from World Tree.  It's infused with small amount of soulforce.",
 			"You look over the branch of World Tree.  Maybe someone else will know how to use it.");
 		public const TBAPLAT:SimpleUseable = new SimpleUseable("TBaPlat", "T.BarkPlates", "a Tentacled Bark Plates", 3000,
 			"A Tentacled Bark Plates.",
-			"You look over the Tentacled Bark Plates.  Tencales writhe and worm softly along the thick, sturdy plate.");
+			"You look over the Tentacled Bark Plates.  Tentacles writhe and worm softly along the thick, sturdy plate.");
 		public const DBAPLAT:SimpleUseable = new SimpleUseable("DBaPlat", "D.BarkPlates", "a Divine Bark Plates", 3000,
 			"A Divine Bark Plates.",
-			"You look over the Divine Bark Plates.  Tencales writhe and worm softly along the thick, sturdy plate.");
+			"You look over the Divine Bark Plates.  Tentacles writhe and worm softly along the thick, sturdy plate.");
 		public const GOLCORE:SimpleUseable = new SimpleUseable("GolCore", "GolemCore", "a golem core", 1,
 			"An undamaged core taken from a defeated golem.",
 			"You look at the undamaged golem core. A simple small crystal sphere, no larger than your fist glows gently. Any proper Golemancer knows the use of each core. For others, it's vendor fodder, preferably to a merchant that specifically seeks such items.");
@@ -85,16 +85,16 @@ use namespace CoC;
 			"You look at the purple crystal. It occasionally glows gently in your hand, but you can't seem to find a use for the crystal.");
 		public const LPSCSHA:SimpleUseable = new SimpleUseable("LPSCSha", "Large Purple Soul Crystal Shard", "a Large Purple Soul Crystal Shard", 5,
 			"A Large Purple Soul Crystal Shard.",
-			"You look at the large purple soul crystal shard. It occasionally glows gently in your hand highlighting the fine poweder embedded inside, but you can't seem to find a use for the shard. Not like someone would try take a bit of it, right?");
+			"You look at the large purple soul crystal shard. It occasionally glows gently in your hand, highlighting the fine powder embedded inside, but you can't seem to find a use for the shard. Not like someone would try take a bit of it, right?");
 		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 1,
 			"An Elemental Shard.",
-			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
+			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be useful for ranking up your summoned elementals.");
 		public const LELSHARD:SimpleUseable = new SimpleUseable("LELShard", "Large Elemental Shard", "a Large Elemental Shard", 3,
 			"A Large Elemental Shard.",
-			"You look at the large elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
+			"You look at the large elemental shard. It occasionally glows gently in your hand.  It may be useful for ranking up your summoned elementals.");
 		public const ELCRYST:SimpleUseable = new SimpleUseable("ELCryst", "Elemental Crystal", "an Elemental Crystal", 10,
 			"An Elemental Crystal.",
-			"You look at the elemental crystal. It occasionally glows gently in your hand.  It precious material that may be usefull to make your summoned elementals stronger.");
+			"You look at the elemental crystal. It occasionally glows gently in your hand.  It's a precious material that may be useful for making your summoned elementals stronger.");
 		public const EL_CORE:SimpleUseable = new SimpleUseable("ELCore", "Elemental Core", "an Elemental Core", 20,
 			"An Elemental Core.",
 			"You look at the elemental core. It occasionally glows gently in your hand.  Rare treasure that have wide range of uses for elementalists.");
@@ -105,20 +105,20 @@ use namespace CoC;
 			"A vial of diluted E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for crafting pills.");
 		public const BTSOLUTION:SimpleUseable = new SimpleUseable("BTSolution", "Body Tempering Solution vial", "a vial of Body Tempering solution", 100,
-			"An vial of Body Tempering solution.",
-			"You look at the vial of substance called Body Tempering solution. It's only usefull for Body Cultivators and probably harmfull for anyone else.");
+			"A vial of Body Tempering solution.",
+			"You look at the vial of substance called Body Tempering solution. It's only useful for Body Cultivators and probably harmful for anyone else.");
 		public const SRESIDUE:SimpleUseable = new SimpleUseable("SoulResidue", "Soul Residue", "a Soul Residue", 1,
 			"A Soul Residue.",
 			"You look at the soul residue. It looks to be incredibly fine powder and may have some uses. If you find anyone that could work with this.");
 		public const SKYMETA:SimpleUseable = new SimpleUseable("Skymetal", "Skymetal" , "a Skymetal", 900,
 			"A Skymetal ore.",
-			"You gaze at the skymetal ore. Likely usefull to making some weapons.");
+			"You gaze at the skymetal ore. Likely useful for making some weapons.");
 		public const MOONSTO:SimpleUseable = new SimpleUseable("Moonsto", "Moonstone" , "a Moonstone", 900,
 			"A Moonstone.",
-			"You gaze at the Moonstone. Likely usefull to making some weapons.");
+			"You gaze at the Moonstone. Likely useful for making some weapons.");
 		public const UNICORNH:SimpleUseable = new SimpleUseable("UnicornH", "UnicornHair" , "an Unicorn Hair", 900,
 			"An Unicorn Hair.",
-			"You gaze at the Unicorn Hair. Likely usefull to making some weapons stronger.");
+			"You gaze at the Unicorn Hair. Likely useful for making some weapons stronger.");
 		public const AMEGEM:SimpleUseable = new SimpleUseable("Amet.Gem", "Amethyst Gem" , "an Amethyst Gem", 1200,
 			"An Amethyst Gem.",
 			"You gaze at the Amethyst Gem. It would make for great ornamentation, if one knew how to use it.");
@@ -164,13 +164,13 @@ use namespace CoC;
 			"You look at the imp skull.  A pair of horns protrude from the skull. You admire the overall frame of the skull, yet you find no obvious uses for it.");
 		public const MECHANI:SimpleUseable = new SimpleUseable("Mechani", "Mechanism", "a Mechanism", 1200,
 			"A complex set of gears and gyros.",
-			"You look at Mechanism.  It's component used to make goblin tech.");
+			"You look at the Mechanism.  It's a component used to make goblin tech.");
 		public const MINOHOR:SimpleUseable = new SimpleUseable("MinoHor", "MinoHorns", "a minotaur horns", 35,
 			"A pair of horns from a minotaur.",
 			"You look at the pair of minotaur horns.  You admire the overall frame of the horns yet you find no obvious uses for them.");
 		public const SEVTENT:SimpleUseable = new SimpleUseable("SevTent", "SevTent", "a severed tentacle", 50,
 			"A severed tentacle taken from a slain tentacle beast.",
-			"You look at the severed tentacle skull.  It certainly looks a bit ...deformed, more than any other tentacle you seen so far.  Is it natural occuring or forced mutation?");
+			"You look at the severed tentacle skull.  It certainly looks a bit ...deformed, more than any other tentacle you seen so far.  Is it natural occuring or a forced mutation?");
 		public const SOULGEM:SimpleUseable = new SimpleUseable("SoulGem", "Soul Gem", "a Soul Gem", 2500,
 			"A Soul Gem.",
 			"You examine the purplish crystal. It must be soul gem. It's used to capture and hold souls.");
@@ -185,22 +185,22 @@ use namespace CoC;
 			"You inspect the tusk covered in a series of rings from the tip to the midsection. A trophy of your triumph.\n\nThere’s not much you can do but admire its glory, you grin in satisfaction knowing that cowards get what they deserve. It’ll likely be worth a hefty sum of gems to someone willing to buy it.");
 		public const VIALCLE:SimpleUseable = new SimpleUseable("VialCle", "V.Clear", "a clear vial", 1,
 			"A clear vial used to dye scales.",
-			"You look at clear vial.  It would help Arian change scales color.");
+			"You look at the clear vial.  It would help Arian change the color of their scales.");
 		public const VIALTUR:SimpleUseable = new SimpleUseable("VialTur", "V.Turquoise", "a turquoise vial", 1,
 			"A turquoise vial used to dye scales.",
-			"You look at turquoise vial.  It would help Arian change scales color.");
+			"You look at the turquoise vial.  It would help Arian change scales color.");
 		public const VIALPIN:SimpleUseable = new SimpleUseable("VialPin", "V.Pink", "a pink vial", 1,
 			"A pink vial used to dye scales.",
-			"You look at pink vial.  It would help Arian change scales color.");
+			"You look at the pink vial.  It would help Arian change scales color.");
 		public const VIALRAI:SimpleUseable = new SimpleUseable("VialRai", "V.Rainbow", "a rainbow vial", 1,
 			"A rainbow vial used to dye scales.",
-			"You look at rainbow vial.  It would help Arian change scales color.");
+			"You look at the rainbow vial.  It would help Arian change scales color.");
 		public const REAGENT:SimpleUseable = new SimpleUseable("Reagent", "Reagent", "a reagent vial", 12,
 			"A vial of reagent.",
 			"You look at the reagent vial.  It's used with dyes to dye scales, chitins and other similar types of natural armor covering your body.");
 		public const S_SHARD:SimpleUseable = new SimpleUseable("S_SHARD", "S.Shard", "a tarnished shard of metal wich may have been part of a golden weapon", 200,
-			"These appears to be the shards of a shattered weapon.",
-			"These appears to be the shards of a shattered weapon though which one you do not know. You are no smith and thus have no idea how to reforge this item. From what Vala told you it might have been part of the scepter of the fairy queen. You recall that you will need 15 shards in total to start...");
+			"These appear to be the shards of a shattered weapon.",
+			"These appear to be the shards of a shattered weapon though which one you do not know. You are no smith and thus have no idea how to reforge this item. From what Vala told you it might have been part of the scepter of the fairy queen. You recall that you will need 15 shards in total to start...");
 		public const IARROWHEAD:SimpleUseable = new SimpleUseable("IArrowHead", "IArrowHeads", "an iron arrowheads", 1,
 			"Hundred iron arrowheads.",
 			"You look at a hundred iron arrowheads.  They could be used to craft special arrows.");
@@ -214,8 +214,8 @@ use namespace CoC;
 			"Hundred ebonbloom arrowheads.",
 			"You look at a hundred ebonbloom arrowheads.  They could be used to craft special arrows.");
 		public const TEDDY:SimpleUseable = new SimpleUseable("TeddyBear", "TeddyBear", "a Teddy bear", 200,
-				"An old Teddy bear with a small paper with the name Mister Paw tied to it.",
-				"You look at an old Teddy bear and see there is a small paper with the name Mister Paw tied to it.");
+				"An old Teddy bear with A small piece of paper with the name Mister Paw tied to it.",
+				"You look at an old Teddy bear and see there is A small piece of paper with the name Mister Paw tied to it.");
 		public const BANDAGE:SimpleUseable = new SimpleUseable("Bandage", "Bandages", "a Bandages", 25,
 			"A Bandages.",
 			"A roll of bandages. What are you gonna do with this anyway?");
@@ -240,7 +240,7 @@ use namespace CoC;
 				"You inspect the transparent liquid in the vial.\n\n<i>(Use Crafting menu to create hair dyes from this item)</i>");
 		public const OIL_FOUNDATION:SimpleUseable = new SimpleUseable("OilFoundation", "Oil Found", "a bottle of skin oil foundation", 100,
 				"Alchemical reagent to turn pigments into skin oils.",
-				"You inspect the transparent liquid in the ottle.\n\n<i>(Use Crafting menu to create skin oils from this item)</i>");
+				"You inspect the transparent liquid in the bottle.\n\n<i>(Use Crafting menu to create skin oils from this item)</i>");
 		public const DROP_FOUNDATION:SimpleUseable = new SimpleUseable("DropFoundation", "Drop Found", "a vial of eyedrop foundation", 150,
 				"Alchemical reagent to turn pigments into iris-recoloring eyedrops.",
 				"You inspect the transparent liquid in the vial.\n\n<i>(Use Crafting menu to create eyedrops from this item)</i>");
