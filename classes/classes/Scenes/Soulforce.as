@@ -955,6 +955,7 @@ public class Soulforce extends BaseContent
 	public function accessDemonicEnergyMenuReSoulYes():void {
 		player.demonicenergy -= 2100;
 		player.removePerk(PerkLib.Soulless);
+		if (player.hasKeyItem("Dimensional Pocket") >= 0) player.removeKeyItem("Dimensional Pocket");
 		doNext(playerMenu);
 	}
 	public function demonicEnergyCorruptElement():void {

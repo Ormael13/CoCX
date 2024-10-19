@@ -267,8 +267,8 @@ public class Changelog extends BaseContent
 			outputText("-HP rounding for comparison. (Svalkash)\n");
 			outputText("-Fixed numbrockx. Fixed beegirl triggering wrong scenes. Added attitude reset after the fight. SH:Other - disables sandwitch bad end. Disables (not very logical) transition from bee girl to huntress in the forest. Let nothing distract you from buzz. (Svalkash)\n");
 			outputText("-All alchemy, armors, consumables, dynamics, effects, flying swords, headjewelries, jewelries, miscjewelries, necklaces, other, shield, undergarments, vehicles, weapons and weaponsrange items proofread and adjusted accordingly. (Agentfunfun)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Swiftcasting not possible when PC turned on feral combat.\n");
+			outputText("-Removed form bodypart req. Hinezumi Tail to reach 2nd tier of race bonuses for mouse/hinezumi race score calcultion.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -319,8 +319,8 @@ public class Changelog extends BaseContent
 			outputText("bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards recovering hunger with demonic hunger perk, Atlach Nacha ");
 			outputText("locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene, during Urta scenes game mix up Urta and PC when checking for sex scenes selection, Cure spell not removing Blind, Whisker Fruit not giving multiple breast rows, some of status effects not cleaning up ");
 			outputText("after bad end or combat end, scene with Ayane when PC visit shrine as already 9 tailed kitusne without star sphere not gaining star sphere during the scene, Meteor Shower and Polar Midnight not recognized as spells for Channeling perk req., Healer npc in JttE never having her cure/heal options going off cooldown, Vixen&Cream with Urta unclosed tag, Straddle Tease variant for ");
-			outputText("Harpies not checking if enemy have cock, Mist Phouka enemies dropping tarnished shard of metal, ");
-			outputText("PC mummies behaviour choice menu buttons wrong labeled");
+			outputText("Harpies not checking if enemy have cock, Mist Phouka enemies dropping tarnished shard of metal, PC mummies behaviour ");
+			outputText("choice menu buttons wrong labeled, pair of black cat gloves not allowing swiftcasting");
 			outputText("\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");

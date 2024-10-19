@@ -1193,7 +1193,7 @@ public class Exploration extends BaseContent implements SaveableState
 						unique: true,
 						chance: 1,
 						when  : function ():Boolean {
-							return (player.level > 2 || flags[kFLAGS.HARDCORE_MODE] == 1) && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1;
+							return (player.level > 2 || flags[kFLAGS.HARDCORE_MODE] == 1) && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && player.hasKeyItem("Dimensional Pocket") < 0;
 						},
 						call  : pearldiscovery
 					}, {
