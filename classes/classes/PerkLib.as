@@ -90,36 +90,36 @@ public class PerkLib
 		public static const AscensionSkyPoisonPearlMasteryStageX:PerkType = new AscensionSkyPoisonPearlMasteryX();
 
 		public static const AscensionBloodlineHeritage:PerkType = mk("Ascension: Bloodline Heritage", "Ascension: Bloodline Heritage",
-				"Your current body have faint trace of some unidentified bloodline in it. Not super good but how could you be picky at this point, right?");
+				"Your current body has faint traces of some unidentified bloodline in it. Not super good, but how could you be picky at this point, right?");
 		public static const AscensionCruelChimerasThesis:PerkType = mk("Ascension: Cruel Chimera's Thesis", "Ascension: Cruel Chimera's Thesis",
 				"Allows you to reduce the number of points required by one to acquire race-specific effects.");
 		public static const AscensionHerosHeritage:PerkType = mk("Ascension: Hero's Heritage", "Ascension: Hero's Heritage",
 				"After you reincarnated, you ended up in the body of a local hero descendant possessing a much firmer body and resolve giving you a slightly easier start to your quest in Mareth.");
 		public static const AscensionHerosLegacy:PerkType = mk("Ascension: Hero's Legacy", "Ascension: Hero's Legacy",
-				"You reincarnated into regional hero descendant, gaining much better start into your journey. As of now after another reincarnation you know you NEED it.");
+				"You were reincarnated as the descendant of a regional hero, giving you a significantly better start to your journey. Now, after another reincarnation, you realize how much you truly NEEDED it");
 		public static const AscensionHerosLineage:PerkType = mk("Ascension: Hero's Lineage", "Ascension: Hero's Lineage",
-				"The body you reincarnate into has a stronger hero lineage than you, granting you an even better start before venturing into Mareth. You would probably need it.");
+				"The body you reincarnate into has a stronger heroic lineage than yours, offering you an even greater advantage before embarking on your journey into Mareth. You’ll likely need it.");
 		public static const AscensionHybridTheory:PerkType = mk("Ascension: Hybrid Theory", "Ascension: Hybrid Theory",
 				"Allows you to reduce the number of points required by one to acquire race-specific effects.");
 		public static const AscensionNaturalMetamorph:PerkType = mk("Ascension: Natural Metamorph", "Ascension: Natural Metamorph",
 				"While others had to work hard to unlock their metamorphic potential, it came naturally to you. Whatever the reason for that is... truth be told you try not to think about it, afraid of what it might mean for you. As long as it's nothing harmful for you in the long run, right?");
 		public static const AscensionUnderdog:PerkType = mk("Ascension: Underdog", "Ascension: Underdog",
-				"You're the underdog. Gain twice as much exp for beating up enemies above your current level with double the limit after which increases to gained exp stops.");// Also allows you to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
+				"You're the underdog. Earn double the experience for defeating enemies above your current level, with twice the limit before experience gains are capped.");// Also allows you to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
 
 		//public static const AscensionUnlockedPotentialX:PerkType = new AscensionUnlockPotentialX();
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",
-				"Due to your past experiences, your body gets stronger faster than in your past life (increased passive hp (+80), lust (+6), fatigue (+6) gains at level-up).")
+				"Due to your past experiences, your body gets stronger faster than in your previous life (increased passive hp (+80), lust (+6), fatigue (+6) gains at level-up).")
 				.withBuffs({'maxfatigue_perlevel':+6,'maxlust_perlevel':+6});
 		public static const AscensionUnlockedPotential2ndStage:PerkType = mk("Ascension: Unlocked Potential (2nd Stage)", "Ascension: Unlocked Potential (2nd Stage)",
-				"Due to your past experiences, your body gets stronger faster than in your past life (increased passive wrath (+10), mana (+12), soulforce (+6) gains at level-up).")
+				"Due to your past experiences, your body gets stronger faster than in your previous life (increased passive wrath (+10), mana (+12), soulforce (+6) gains at level-up).")
 				.withBuffs({'maxwrath_perlevel':+10,'maxmana_perlevel':+12,'maxsf_perlevel':+6});
 		public static const AscensionUnlockedPotential3rdStage:PerkType = mk("Ascension: Unlocked Potential (3rd Stage)", "Ascension: Unlocked Potential (3rd Stage)",
-				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive hp (+80), lust (+6), fatigue (+6) gains at level-up).")
+				"Due to your past experiences, your body gets stronger faster than in your previous life (2nd increase to passive hp (+80), lust (+6), fatigue (+6) gains at level-up).")
 				.withBuffs({'maxfatigue_perlevel':+6,'maxlust_perlevel':+6});
 		public static const AscensionUnlockedPotential4thStage:PerkType = mk("Ascension: Unlocked Potential (4th Stage)", "Ascension: Unlocked Potential (4th Stage)",
-				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive wrath (+10), mana (+12), soulforce (+6) gains at level-up).")
+				"Due to your past experiences, your body gets stronger faster than in your previous life (2nd increase to passive wrath (+10), mana (+12), soulforce (+6) gains at level-up).")
 				.withBuffs({'maxwrath_perlevel':+10,'maxmana_perlevel':+12,'maxsf_perlevel':+6});
-		//	public static const Ascension:PerkType = mk("Ascension: Artifical-made Metamorph", "Ascension: Artifical-made Metamorph",
+		//	public static const Ascension:PerkType = mk("Ascension: Artifical-made Metamorph", "Ascension: Artificial-made Metamorph",
 		//			".");
 		//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: Bloodline Lineage",
 		//			".");
@@ -139,13 +139,13 @@ public class PerkLib
 		//Deprecated Ascension Perks, kept only for upgrading. --Perhaps a seperate Lib for deprecated Perks?
 		//Organs
 		public static const AscensionAdditionalOrganMutation01:PerkType = mk("Ascension: Additional Organ Mutation (1st Stage)", "Ascension: Additional Organ Mutation (1st Stage)",
-				"Numerous internal mutations changed your body to allow handle a 2nd mutation of the same organ/internal body part.");
+				"Numerous internal mutations has changed your body to allow handling a 2nd mutation of the same organ/internal body part.");
 		public static const AscensionAdditionalOrganMutation02:PerkType = mk("Ascension: Additional Organ Mutation (2nd Stage)", "Ascension: Additional Organ Mutation (2nd Stage)",
-				"Numerous internal mutations changed your body to allow handle a 3rd mutation of the same organ/internal body part.");
+				"Numerous internal mutations has changed your body to allow handling a 3rd mutation of the same organ/internal body part.");
 		public static const AscensionAdditionalOrganMutation03:PerkType = mk("Ascension: Additional Organ Mutation (3rd Stage)", "Ascension: Additional Organ Mutation (3rd Stage)",
-				"Numerous internal mutations changed your body to allow handle a 4th mutation of the same organ/internal body part.");
+				"Numerous internal mutations has changed your body to allow handling a 4th mutation of the same organ/internal body part.");
 		public static const AscensionAdditionalOrganMutation04:PerkType = mk("Ascension: Additional Organ Mutation (4th Stage)", "Ascension: Additional Organ Mutation (4th Stage)",
-				"Numerous internal mutations changed your body to allow handle a 5th mutation of the same organ/internal body part.");
+				"Numerous internal mutations has changed your body to allow handling a 5th mutation of the same organ/internal body part.");
 		//Prestige
 		public static const AscensionBuildingPrestige01:PerkType = mk("Ascension: Building Prestige (1st Stage)", "Ascension: Building Prestige (1st Stage)",
 				"Your understanding of prestige jobs from your previous life allows you to pick a 2nd one at lvl 54+.");
@@ -438,15 +438,15 @@ public class PerkLib
 				"You've chosen the 'Bicycle' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const BroadSelection:PerkType = mk("Broad Selection", "Broad Selection",
-				"Increasing the Tease damage by 25% for each different type of penis that you have.",
-				"You've chosen the 'Broad Selection' perk, increasing the Tease damage by 25% for each different type of penis that you have.");
+				"Increases Tease damage by 25% for each different type of penis that you have.",
+				"You've chosen the 'Broad Selection' perk, increases Tease damage by 25% for each different type of penis that you have.");
 		public static const DoorKnob:PerkType = mk("Door Knob", "Door Knob",
 				"Everyone's had their turn with you. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Door Knob' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
-		public static const EnchancedWarriorsRage:PerkType = mk("Enchanced Warrior's Rage", "Enchanced Warrior's Rage",
-				"Warrior's Rage would be automatically recast when it ends as long PC got enough wrath and its effects would be enhanced. (+1 per 5 pts of core stat value)",
-				"You've chosen the 'Enhanced Warrior's Rage' perk. Warrior's Rage would be automatically recast when it ends as long PC got enough wrath and its effects would be enhanced.");
+		public static const EnchancedWarriorsRage:PerkType = mk("Enchanced Warrior's Rage", "Enhanced Warrior's Rage",
+				"Warrior's Rage will be automatically recast when it ends as long as the PC has enough wrath. Its effects are also increased. (+1 per 5 pts of core stat value)",
+				"You've chosen the 'Enhanced Warrior's Rage' perk. Warrior's Rage will be automatically recast when it ends as long as the PC has enough wrath. Its effects are also increased.");
 		public static const Fellowship:PerkType = mk("Fellowship", "Fellowship",
 				". (+10% minions/pets damage)",
 				"You've chosen the 'Fellowship' perk. (+10% minions/pets damage)");
@@ -460,29 +460,29 @@ public class PerkLib
 				"History was written by the victors, and you've a mind to put their winning strategies to use. (+10% minions/pets damage)",
 				"You've chosen the 'History Buff' perk. (+10% minions/pets damage)");
 		public static const HumanSupremacyAdvanced:PerkType = mk("Human Supremacy (Advanced)", "Human Supremacy (Advanced)",
-				"Delay by 1 point appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))",
-				"You've chosen the 'Human Supremacy (Advanced)' perk. Delay by 1 point appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))");
+				"Delay the onset of negative HP regeneration by 1 point. (+1 to internal mutations slots capacity (+2 for adaptation slots))",
+				"You've chosen the 'Human Supremacy (Advanced)' perk. Delay the onset of negative HP regeneration by 1 point. (+1 to internal mutations slots capacity (+2 for adaptation slots))");
 		public static const HumanSupremacyBasic:PerkType = mk("Human Supremacy (Basic)", "Human Supremacy (Basic)",
-				"Delays the appearance of negative HP regeneration by 5 points. (+2 to human score)",
-				"You've chosen the 'Human Supremacy (Basic)' perk. Delays the appearance of negative HP regeneration by 5 points. (+2 to human score)");
+				"Delay the onset of negative HP regeneration by 5 point. (+2 to human score)",
+				"You've chosen the 'Human Supremacy (Basic)' perk. Delay the onset of negative HP regeneration by 5 points. (+2 to human score)");
 		public static const HumanSupremacyImproved:PerkType = mk("Human Supremacy (Improved)", "Human Supremacy (Improved)",
-				"Delay by 10 points appearing effect of negative HP regeneration. (+3 to human score)",
-				"You've chosen the 'Human Supremacy (Improved)' perk. Delay by 10 points appearing effect of negative HP regeneration. (+3 to human score)");
+				"Delay the onset of negative HP regeneration by 10 points. (+3 to human score)",
+				"You've chosen the 'Human Supremacy (Improved)' perk. Delay the onset of negative HP regeneration by 10 points. (+3 to human score)");
 		public static const HumanSupremacyInitial:PerkType = mk("Human Supremacy (Initial)", "Human Supremacy (Initial)",
-				"Delays the appearance of negative HP regeneration by 5 points. (+2 to human score)",
-				"You've chosen the 'Human Supremacy (Initial)' perk. Delays the appearance of negative HP regeneration by 5 points. (+2 to human score)");
+				"Delay the onset of negative HP regeneration by 5 points. (+2 to human score)",
+				"You've chosen the 'Human Supremacy (Initial)' perk. Delay the onset of negative HP regeneration by 5 points. (+2 to human score)");
 		public static const HumanSupremacyPeerless:PerkType = mk("Human Supremacy (Peerless)", "Human Supremacy (Peerless)",
-				"Delay by 15 points appearing effect of negative HP regeneration. (+5 to human score)",
-				"You've chosen the 'Human Supremacy (Peerless)' perk. Delay by 15 points appearing effect of negative HP regeneration. (+5 to human score)");
+				"Delay the onset of negative HP regeneration by 15 points. (+5 to human score)",
+				"You've chosen the 'Human Supremacy (Peerless)' perk. Delay the onset of negative HP regeneration by 15 points. (+5 to human score)");
 		public static const HumanSupremacySuperior:PerkType = mk("Human Supremacy (Superior)", "Human Supremacy (Superior)",
-				"Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)",
+				"Delay the onset of negative HP regeneration by 15 points. (+4 to human score)",
 				"You've chosen the 'Human Supremacy (Superior)' perk. Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)");
 		public static const MattressActressActor:PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
 				"You know just how they like it, every time. No need for words; just lay back and let the fantasy come to life. Don't worry, you'll take good care of them. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Mattress Actress/Actor' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const MeatHole:PerkType = mk("Meat Hole", "Meat Hole",
-				"Having your holes filled is all you know or understand. +10% max lust, +5 to anal/vaginal capacity.",
+				"Having your holes filled is all you know and understand. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Meat Hole' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const PartyBoyGirl:PerkType = mk("Party Boy/Girl", "Party Boy/Girl",
@@ -519,19 +519,19 @@ public class PerkLib
 				//"You are currently sacrificing blood to empower your spells.");
 		public static const FlyingSwordPath:FlyingSwordPathPerk = new FlyingSwordPathPerk();
 		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
-				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
+				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantian attained.");
 		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
 				"You and your companions in party will receive multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmetically.",
 				"You've chosen the 'Party Synergy' perk. You and your companions in party will receive multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmetically.");
 		public static const MasterpieceGolem:PerkType = mk("Masterpiece Golem", "Masterpiece Golem",
-				"Now you could make your very own and unique golem that would be your pride as golemancer. (Allow to make 1 special golem that can be upgraded and rebuild into better form after attaining additional knowledge)",
-				"You've chosen the 'Masterpiece Golem' perk. Now you could make your very own and unique golem that would be your pride as golemancer.");
+				"Now you can make your very own and unique golem that would be your pride as golemancer. (Allow to make 1 special golem that can be upgraded and rebuild into better form after attaining additional knowledge)",
+				"You've chosen the 'Masterpiece Golem' perk. Now you can make your very own and unique golem that would be your pride as golemancer.");
 		public static const Alliance:PerkType = mk("Alliance", "Alliance",
 				". (+10% minions/pets damage)",
 				"You've chosen the 'Alliance' perk. (+10% minions/pets damage)");
 		public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
-				"When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.",
-				"You've chosen the 'Twin Thunder' perk. When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.");
+				"When using more than one weapon at once, power attack/strike now delivers as many hits as the number of weapons used.",
+				"You've chosen the 'Twin Thunder' perk. When using more than one weapon at once, power attack/strike now delivers as many hits as the number of weapons used.");
 		public static const Metabolization:PerkType = mk("Metabolization", "Metabolization",
 				"Increases the duration of lingering nourishment effects by 100% of base duration, and slows hunger progression, if any (note: does not raise racial scores).",
 				"You've chosen the 'Metabolization' perk. Increases the duration of lingering nourishment effects by 100% of base duration, and slows hunger progression, if any (note: does not raise racial scores).");
@@ -575,8 +575,8 @@ public class PerkLib
 				"Allows you to wield two firearms (2H ones) more effectively. (damage and accuracy penalties decreased by 40% and 20%)",
 				"You've chosen the 'Dual Wield (Firearms)' perk, training the skill of using two firearms (2H ones). (damage and accuracy penalties decreased by 40% and 20%)");
 		public static const ImprovedArousingAura:PerkType = mk("Improved Arousing Aura", "Improved Arousing Aura",
-				"Double the effect from arousing aura.",
-				"You've chosen the 'Improved Arousing Aura' perk. Double the effect from arousing aura.");
+				"Double the effect from Arousing Aura.",
+				"You've chosen the 'Improved Arousing Aura' perk. Double the effect from Arousing Aura.");
 		public static const CorruptTheBody:PerkType = mk("Corrupt the body", "Corrupt the body",
 				"Lust vulnerability debuff can now stack beyond 0 up to -100%.",
 				"You've chosen the 'Corrupt the body' perk. Lust vulnerability debuff can now stack beyond 0 up to -100%.");
@@ -587,7 +587,7 @@ public class PerkLib
 				"Lust vulnerability debuff can now stack beyond 0 up to -300%.",
 				"You've chosen the 'Corrupt the mind' perk. Lust vulnerability debuff can now stack beyond 0 up to -300%.");
 		public static const CorruptTheSoul:PerkType = mk("Corrupt the soul", "Corrupt the soul",
-				"Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'infinity')",
+				"Lust vulnerability debuff can now stack beyond 0 up to infinity. (Well, technically not infinity but only Spilly Stonewall PC could maybe reach that 'infinity')",
 				"You've chosen the 'Corrupt the soul' perk. Lust vulnerability debuff can now stack beyond 0 up to infinity.");
 		public static const ImprovedGrapple:PerkType = mk("Improved Grapple", "Improved Grapple",
 				"Do two action per straddle or grappling turn. Increase straddle damage by 20%.",
@@ -596,8 +596,8 @@ public class PerkLib
 				"Attack three times per straddle or grappling turn. Increase straddle damage by another 20%.",
 				"You've chosen the 'Greater Grapple' perk. Attack three times per straddle or grappling turn. Increase straddle damage by another 20%.");
 		public static const DevouringAura:PerkType = mk("Devouring Aura", "Devouring Aura",
-				"Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.",
-				"You've chosen the 'Devouring Aura' perk. Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.");
+				"Your arousing aura now also erodes your victim's lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.",
+				"You've chosen the 'Devouring Aura' perk. Your arousing aura now also erodes your victim's lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.");
 		public static const DamnationAura:PerkType = mk("Damnation Aura", "Damnation Aura",
 				"Double the effect of Devouring Aura.",
 				"You've chosen the 'Damnation Aura' perk. Double the effect of Devouring Aura.");
@@ -623,23 +623,23 @@ public class PerkLib
 				"Now you can assemble 4 horsema... monsters team.",
 				"You've chosen the 'Fourth Tamer of the Apocalypse' perk. Now you can assemble 4 horsema... monsters team.");
 		public static const WorkingTogether:PerkType = mk("Working Together", "Working Together",
-				"Cooperating between all your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
-				"You've chosen the 'Working Together' perk. Cooperating between all your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
+				"Cooperating between themselves, your tamed monsters will empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
+				"You've chosen the 'Working Together' perk. Cooperating between themselves, your tamed monsters will empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
 		public static const SixthSense:PerkType = mk("Sixth Sense", "Sixth Sense",
 				"You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.",
 				"You've chosen the 'Sixth Sense' perk. You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.");
 		public static const EmpoweredTaming:PerkType = mk("Empowered Taming", "Empowered Taming",
-				"During taming monster it wisdom is treated as if it was 80% lower.",
-				"You've chosen the 'Empowered Taming' perk. During taming monster it wisdom is treated as if it was 80% lower.");
+				"During taming monster, its wisdom is treated as if it was 80% lower.",
+				"You've chosen the 'Empowered Taming' perk. During taming monster, its wisdom is treated as if it was 80% lower.");
 		public static const PsychicBarrier:PerkType = mk("Psychic Barrier", "Psychic Barrier",
 				"You learn to create an invisible barrier, using your psychokinesis that boost phys/magic resistance by 10% and giving very minor (1%) boost to toughness.",
 				"You've chosen the 'Psychic Barrier' perk. You learn to create an invisible barrier, using your psychokinesis that boost phys/magic resistance by 10% and giving very minor (1%) boost to toughness.");
 		public static const PsychicBolt:PerkType = mk("Psychic Bolt", "Psychic Bolt",
-				"Enable use of Psychic Bolt. (scaless off Sensitivity)",
-				"You've chosen the 'Psychic Bolt' perk. Enable use of Psychic Bolt. (scaless off Sensitivity)");
+				"Enable the use of Psychic Bolt. (scales off Sensitivity)",
+				"You've chosen the 'Psychic Bolt' perk. Enable the use of Psychic Bolt. (scales off Sensitivity)");
 		public static const TelekineticGrapple:PerkType = mk("Telekinetic Grapple", "Telekinetic Grapple",
-				"Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).",
-				"You've chosen the 'Telekinetic Grapple' perk. Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).");
+				"Enable the use of Telekinetic Grab (with 2x shorter than normal cooldown).",
+				"You've chosen the 'Telekinetic Grapple' perk. Enable the use of Telekinetic Grab (with 2x shorter than normal cooldown).");
 		public static const Pyrokinesis:PerkType = mk("Pyrokinesis", "Pyrokinesis",
 				"As psychic you have gained ability to manipulate or control fire.",
 				"You've chosen the 'Pyrokinesis' perk. As psychic you have gained ability to manipulate or control fire.");
@@ -1098,44 +1098,44 @@ public class PerkLib
 				"+4 extra HP per point of speed.",
 				"You've chosen the 'Cheetah VI' perk, granting +4 extra maximum HP for each point of speed.");
 		public static const ChimericalBodyAdvancedStage:PerkType = mk("Chimerical Body: Advanced Stage", "Chimerical Body: Advanced Stage",
-				"Your chimerical body attained Advanced Stage. (negate up to 8 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Advanced Stage' perk. Your chimerical body attained Advanced Stage. (negate up to 8 acial perk points' negative effects)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.15,'int.mult':0.05,'wis.mult':0.10,'sens':5});
+				"Your chimerical body attained Advanced Stage. (negate up to 8 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Advanced Stage' perk. Your chimerical body attained Advanced Stage. (negate up to 8 racial perk points' negative effects)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.15,'int.mult':0.05,'wis.mult':0.10,'sens':5});
 		public static const ChimericalBodyBasicStage:PerkType = mk("Chimerical Body: Basic Stage", "Chimerical Body: Basic Stage",
-				"Your chimerical body attained Basic Stage. (negate up to 4 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Basic Stage' perk. Your chimerical body attained Basic Stage. (negate up to 4 acial perk points' negative effects)").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.10,'sens':5});
+				"Your chimerical body attained Basic Stage. (negate up to 4 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Basic Stage' perk. Your chimerical body attained Basic Stage. (negate up to 4 racial perk points' negative effects)").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.10,'sens':5});
 		public static const ChimericalBodyEpicStage:PerkType = mk("Chimerical Body: Epic Stage", "Chimerical Body: Epic Stage",
-				"Your chimerical body attained Epic Stage. (negate up to 14 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Epic Stage' perk. Your chimerical body attained Epic Stage. (negate up to 14 acial perk points' negative effects)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.15,'sens':15});
+				"Your chimerical body attained Epic Stage. (negate up to 14 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Epic Stage' perk. Your chimerical body attained Epic Stage. (negate up to 14 racial perk points' negative effects)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.15,'sens':15});
 		public static const ChimericalBodyImprovedStage:PerkType = mk("Chimerical Body: Improved Stage", "Chimerical Body: Improved Stage",
-				"Your chimerical body attained Improved Stage. (negate up to 6 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Improved Stage' perk. Your chimerical body attained Improved Stage. (negate up to 6 acial perk points' negative effects).").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.10,'sens':5});
+				"Your chimerical body attained Improved Stage. (negate up to 6 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Improved Stage' perk. Your chimerical body attained Improved Stage. (negate up to 6 racial perk points' negative effects).").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.10,'sens':5});
 		public static const ChimericalBodyInitialStage:PerkType = mk("Chimerical Body: Initial Stage", "Chimerical Body: Initial Stage",
 				"Your chimerical body has attained the Initial Stage. (Negates up to 2 negative effects from racial perk points",
 				"You've chosen the 'Chimerical Body: Initial Stage' perk. Your chimerical body has attained the Initial Stage. (Negates up to 2 negative effects from racial perk points").withBuffs({'tou.mult':0.05,'lib.mult':0.05});
 		public static const ChimericalBodyPeerlessStage:PerkType = mk("Chimerical Body: Peerless Stage", "Chimerical Body: Peerless Stage",
-				"Your chimerical body attained Peerless Stage. (negate up to 12 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Peerless Stage' perk. Your chimerical body attained Peerless Stage. (negate up to 12 acial perk points' negative effects)").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.05,'sens':10});
+				"Your chimerical body attained Peerless Stage. (negate up to 12 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Peerless Stage' perk. Your chimerical body attained Peerless Stage. (negate up to 12 racial perk points' negative effects)").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.05,'sens':10});
 		public static const ChimericalBodySuperiorStage:PerkType = mk("Chimerical Body: Superior Stage", "Chimerical Body: Superior Stage",
-				"Your chimerical body attained Superior Stage. (negate up to 10 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Superior Stage' perk. Your chimerical body attained Superior Stage. (negate up to 10 acial perk points' negative effects)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.05,'sens':5});
+				"Your chimerical body attained Superior Stage. (negate up to 10 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Superior Stage' perk. Your chimerical body attained Superior Stage. (negate up to 10 racial perk points' negative effects)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.05,'sens':5});
 		public static const ChimericalBodySemiAdvancedStage:PerkType = mk("Chimerical Body: Semi-Advanced Stage", "Chimerical Body: Semi-Advanced Stage",
-				"Your chimerical body attained Semi-Advanced Stage. (negate up to 7 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Semi-Advanced Stage' perk. Your chimerical body attained Semi-Advanced Stage. (negate up to 7 acial perk points' negative effects)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.05,'sens':5});
+				"Your chimerical body attained Semi-Advanced Stage. (negate up to 7 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Semi-Advanced Stage' perk. Your chimerical body attained Semi-Advanced Stage. (negate up to 7 racial perk points' negative effects)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.05,'sens':5});
 		public static const ChimericalBodySemiBasicStage:PerkType = mk("Chimerical Body: Semi-Basic Stage", "Chimerical Body: Semi-Basic Stage",
-				"Your chimerical body attained Semi-Basic Stage. (negate up to 3 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Semi-Basic Stage' perk. Your chimerical body attained Semi-Basic Stage. (negate up to 3 acial perk points' negative effects)").withBuffs({'str.mult':0.05,'spe.mult':0.05,'int.mult':0.05});
+				"Your chimerical body attained Semi-Basic Stage. (negate up to 3 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Semi-Basic Stage' perk. Your chimerical body attained Semi-Basic Stage. (negate up to 3 racial perk points' negative effects)").withBuffs({'str.mult':0.05,'spe.mult':0.05,'int.mult':0.05});
 		public static const ChimericalBodySemiEpicStage:PerkType = mk("Chimerical Body: Semi-Epic Stage", "Chimerical Body: Semi-Epic Stage",
-				"Your chimerical body attained Semi-Peerless Stage. (negate up to 13 acial perk points' negative effects // +1 to racial score when the PC has the third racial-specific mutation perk)",
-				"You've chosen the 'Chimerical Body: Semi-Epic Stage' perk. Your chimerical body attained Semi-Peerless Stage. (negate up to 13 acial perk points' negative effects // +1 to racial score when the PC has the third racial-specific mutation perk)");
+				"Your chimerical body attained Semi-Peerless Stage. (negate up to 13 racial perk points' negative effects // +1 to racial score when the PC has the third racial-specific mutation perk)",
+				"You've chosen the 'Chimerical Body: Semi-Epic Stage' perk. Your chimerical body attained Semi-Peerless Stage. (negate up to 13 racial perk points' negative effects // +1 to racial score when the PC has the third racial-specific mutation perk)");
 		public static const ChimericalBodySemiImprovedStage:PerkType = mk("Chimerical Body: Semi-Improved Stage", "Chimerical Body: Semi-Improved Stage",
-				"Your chimerical body attained Semi-Improved Stage. (negate up to 5 acial perk points' negative effects // +1 to racial score when the PC has the first racial-specific mutation perk)",
-				"You've chosen the 'Chimerical Body: Semi-Improved Stage' perk. Your chimerical body attained Semi-Improved Stage. (negate up to 5 acial perk points' negative effects // +1 to racial score when the PC has the first racial-specific mutation perk)");
+				"Your chimerical body attained Semi-Improved Stage. (negate up to 5 racial perk points' negative effects // +1 to racial score when the PC has the first racial-specific mutation perk)",
+				"You've chosen the 'Chimerical Body: Semi-Improved Stage' perk. Your chimerical body attained Semi-Improved Stage. (negate up to 5 racial perk points' negative effects // +1 to racial score when the PC has the first racial-specific mutation perk)");
 		public static const ChimericalBodySemiPeerlessStage:PerkType = mk("Chimerical Body: Semi-Peerless Stage", "Chimerical Body: Semi-Peerless Stage",
-				"Your chimerical body attained Semi-Peerless Stage. (negate up to 11 acial perk points' negative effects)",
-				"You've chosen the 'Chimerical Body: Semi-Peerless Stage' perk. Your chimerical body attained Semi-Peerless Stage. (negate up to 11 acial perk points' negative effects)").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.10,'sens':10});
+				"Your chimerical body attained Semi-Peerless Stage. (negate up to 11 racial perk points' negative effects)",
+				"You've chosen the 'Chimerical Body: Semi-Peerless Stage' perk. Your chimerical body attained Semi-Peerless Stage. (negate up to 11 racial perk points' negative effects)").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.10,'sens':10});
 		public static const ChimericalBodySemiSuperiorStage:PerkType = mk("Chimerical Body: Semi-Superior Stage", "Chimerical Body: Semi-Superior Stage",
-				"Your chimerical body attained Semi-Superior Stage. (negate up to 9 acial perk points' negative effects // +1 to racial score when the PC has the second racial-specific mutation perk)",
-				"You've chosen the 'Chimerical Body: Semi-Superior Stage' perk. Your chimerical body attained Semi-Superior Stage. (negate up to 9 acial perk points' negative effects // +1 to racial score when the PC has the second racial-specific mutation perk)");
+				"Your chimerical body attained Semi-Superior Stage. (negate up to 9 racial perk points' negative effects // +1 to racial score when the PC has the second racial-specific mutation perk)",
+				"You've chosen the 'Chimerical Body: Semi-Superior Stage' perk. Your chimerical body attained Semi-Superior Stage. (negate up to 9 racial perk points' negative effects // +1 to racial score when the PC has the second racial-specific mutation perk)");
 		public static const ChimericalBodyUltimateStage:PerkType = mk("Chimerical Body: Ultimate Stage", "Chimerical Body: Ultimate Stage",
 				".",
 				"You've chosen the 'Chimerical Body: Ultimate Stage' perk.").withBuffs({'str.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
@@ -1366,8 +1366,8 @@ public class PerkLib
 				"When in an infused state, passively gain Dao Comprehension for the associated element. Increases Dao Comprehension speed when in an infused state for the associated element.",
 				"You've chosen the 'Elemental Bloodline' perk. Enables passive Dao Comprehension and increased Comprehension speed when in an infused state");
 		public static const ElementalBolt:PerkType = mk("Elemental Bolt", "Elemental Bolt",
-				"Enable use of Elemental bolt. (would prevent decay of buff from building up elemental damage)",
-				"You've chosen the 'Elemental Bolt' perk. Enable use of Elemental bolt. (would prevent decay of buff from building up elemental damage)");
+				"Enable the use of Elemental bolt. (would prevent decay of buff from building up elemental damage)",
+				"You've chosen the 'Elemental Bolt' perk. Enable the use of Elemental bolt. (would prevent decay of buff from building up elemental damage)");
 		public static const ElementalBondFlesh:PerkType = mk("Elemental Bond: Flesh", "Elemental Bond: Flesh",
 				"You gains bonus to max HP depending on amount of summoned elementals and their ranks.",
 				"You've chosen the 'Elemental Bond: Flesh' perk, allowing you to form a bond with summoned elementals to share received damage.");
@@ -3976,11 +3976,11 @@ public class PerkLib
 		public static const BunnyEggs:PerkType = mk("Bunny Eggs", "Bunny Eggs",
 				"Laying eggs has become a normal part of your bunny-body's routine.");
 		public static const ChimericalBodySemiImprovedStageEx:PerkType = mk("Chimerical Body: Semi-Improved (Ex) Stage", "Chimerical Body: Semi-Improved (Ex) Stage",
-				"Your chimerical body attained Semi-Improved (Ex) Stage. (negate up to 18 acial perk points' negative effects // +1 to racial score when the PC has the first racial-specific mutation perk)").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':10});
+				"Your chimerical body attained Semi-Improved (Ex) Stage. (negate up to 18 racial perk points' negative effects // +1 to racial score when the PC has the first racial-specific mutation perk)").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':10});
 		public static const ChimericalBodySemiSuperiorStageEx:PerkType = mk("Chimerical Body: Semi-Superior (Ex) Stage", "Chimerical Body: Semi-Superior (Ex) Stage",
-				"Your chimerical body attained Semi-Superior (Ex) Stage. (negate up to 56 acial perk points' negative effects // +1/+2 to racial score when the PC has the first/second racial-specific mutation perk)").withBuffs({'str.mult':0.55,'tou.mult':0.55,'spe.mult':0.55,'int.mult':0.35,'wis.mult':0.40,'lib.mult':0.35,'sens':35});
+				"Your chimerical body attained Semi-Superior (Ex) Stage. (negate up to 56 racial perk points' negative effects // +1/+2 to racial score when the PC has the first/second racial-specific mutation perk)").withBuffs({'str.mult':0.55,'tou.mult':0.55,'spe.mult':0.55,'int.mult':0.35,'wis.mult':0.40,'lib.mult':0.35,'sens':35});
 		public static const ChimericalBodySemiEpicStageEx:PerkType = mk("Chimerical Body: Semi-Epic (Ex) Stage", "Chimerical Body: Semi-Epic (Ex) Stage",
-				"Your chimerical body attained Semi-Epic (Ex) Stage. (negate up to 118 acial perk points' negative effects // +1/+2/+3 to racial score when the PC has the first/second/third racial-specific mutation perk)").withBuffs({'str.mult':1.1,'tou.mult':1.1,'spe.mult':1.1,'int.mult':0.7,'wis.mult':0.75,'lib.mult':0.65,'sens':70});
+				"Your chimerical body attained Semi-Epic (Ex) Stage. (negate up to 118 racial perk points' negative effects // +1/+2/+3 to racial score when the PC has the first/second/third racial-specific mutation perk)").withBuffs({'str.mult':1.1,'tou.mult':1.1,'spe.mult':1.1,'int.mult':0.7,'wis.mult':0.75,'lib.mult':0.65,'sens':70});
 		public static const Cinderbloom:PerkType = mk("Cinderbloom", "Cinderbloom",
 				"Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.");
 		public static const ColdAffinity:PerkType = mk("Cold Affinity", "Cold Affinity",
@@ -4251,7 +4251,7 @@ public class PerkLib
 				"An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
-		public static const StrengthOfStone:PerkType = mk("Strength of stone", "Strength of stone",
+		public static const StrengthOfStone:PerkType = mk("Strenght of stone", "Strength of stone", //first is purposeful typo to revert back to original perk id
 				"Add half of the gargoyle toughness as a bonus to strength.");
 		public static const Supercharged:PerkType = mk("Supercharged", "Supercharged",
 				"Double Speed when over 75% lust and gain immunity to defeat by lust but lose the ability to use magic other than racial spells.");
