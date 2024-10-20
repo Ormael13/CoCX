@@ -105,7 +105,7 @@ public class DivaScene extends XXCNPC {
             + "\n"
             + "\"<i>Thou may not know but my very fragile stomach does not allow any other form of nutrition. I wouldn't be able to eat like the others even if I wanted to.</i>\"\n"
             + "\n"
-            + "So she literally gets sick when eating normal food... well that's sad for her. What about garlic?\n"
+            + "So she literally gets sick when eating normal food... Well, that's sad for her. What about garlic?\n"
             + "\n"
             + "\"<i>Simple allergy, nothing more.</i>\"\n"
             + "\n"

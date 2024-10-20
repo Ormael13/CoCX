@@ -366,7 +366,7 @@ public class EventParser {
             SceneLib.inventory.takeItem(player.unequipShield(), playerMenu);
             return true;
         }
-        // update cock type as dog/fox depending on whether the player resembles one more then the other.
+        // update cock type as dog/fox depending on whether the player resembles one more than the other.
         // Previously used to be computed directly in cockNoun, but refactoring prevents access to the Player class when in cockNoun now.
         if (player.cockTotal() != 0) {
             var counter:Number = player.cockTotal() - 1;

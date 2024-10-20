@@ -106,7 +106,7 @@ public class WerewolfFemaleScene extends BaseContent
 			}
 			else{
 				outputText("Perhaps as a last display of [monster his] fast breaking pride the defeated werewolf runs away");
-				if(player.isAnyRaceCached(Races.WEREWOLF, Races.WOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
+				if(player.isAnyRaceCached(Races.WEREWOLF, Races.WOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well, it looks like you didn't get that one, maybe next time.\n\n");
 				outputText(".\n\n");
 			}
 			outputText("Thoroughly satisfied by this nightly encounter you head back to camp.");
@@ -150,7 +150,7 @@ public class WerewolfFemaleScene extends BaseContent
 			}
 			else{
 				outputText("Perhaps as a last display of [monster his] fast breaking pride the defeated werewolf runs away");
-				if(player.isAnyRaceCached(Races.WEREWOLF, Races.WOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well it looks like you didn't get that one, maybe next time.\n\n");
+				if(player.isAnyRaceCached(Races.WEREWOLF, Races.WOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)) outputText(", preferring escape over subservience. Well, it looks like you didn't get that one, maybe next time.\n\n");
 				outputText(".\n\n");
 			}
 			outputText("Thoroughly satisfied by this nightly encounter you head back to camp.");

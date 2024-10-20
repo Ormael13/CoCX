@@ -212,7 +212,7 @@ package com.bit101.components
 		}
 
 		/**
-		 * Sets / gets the group name, which allows groups of RadioButtons to function seperately.
+		 * Sets / gets the group name, which allows groups of RadioButtons to function separately.
 		 */
 		public function get groupName():String
 		{

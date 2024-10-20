@@ -187,7 +187,7 @@ public function campMichikoTalkRegionForest():void {
 public function campMichikoTalkRegionDeepwood():void {
 	clearOutput();
 	outputText("You ask Michiko if she got anything on the deep woods.\n\n");
-	outputText("\"<i>Yea I kind of do, the place is nasty as it's pretty much the source of all the corruption in the forest. At first you would think it’s just that sealed demon Akhbal but truth be told it goes way deeper than that, it's like the deepwoods became a refuge for fiends ranging from the infamous Erlking’s Wyld hunt to the dark mistress of the twilight grove. Speaking of grove watch out for tentacle beast and more then anything watch out for alraunes, ");
+	outputText("\"<i>Yea I kind of do, the place is nasty as it's pretty much the source of all the corruption in the forest. At first you would think it’s just that sealed demon Akhbal but truth be told it goes way deeper than that, it's like the deepwoods became a refuge for fiends ranging from the infamous Erlking’s Wyld hunt to the dark mistress of the twilight grove. Speaking of grove watch out for tentacle beast and more than anything watch out for alraunes, ");
 	outputText("they just seem to grow all over the place. Amidst all this corruption the kitsunes somehow still manage to thrive in secrecy while the fairies flutter around. Be wary of who you trust in those woods.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	advanceMinutes(15);
@@ -236,7 +236,7 @@ public function campMichikoTalkRegionSwamp():void {
 	clearOutput();
 	outputText("What does she have on the local swamps?\n\n");
 	outputText("\"<i>The swamps of Mareth are old [name]. The dragon tribes used to reside there until they became extinct or so I think. No one has seen a dragon in years but if an artefact of the dragon does exist it’s likely hidden somewhere in the swamp away from the gaze of the lesser races. The spider morphs and driders are the local nuisances there and they are as random as a coin. ");
-	outputText("Either they attack you or they talk to you. I generally prefer to flee rather then find out.</i>\"\n\n");
+	outputText("Either they attack you or they talk to you. I generally prefer to flee rather than find out.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	advanceMinutes(15);
 }

@@ -23,7 +23,7 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 		}
 		public function EraendirBuyMenu():void {
 			clearOutput();
-			outputText("The elf gives you a wide display of his many knife and swords. Small blades indeed but sharp and light, ideal to deliver many cuts in the time it normaly takes to deliver 1 strike.");
+			outputText("The elf gives you a wide display of his many knife and swords. Small blades indeed but sharp and light, ideal to deliver many cuts in the time it normally takes to deliver 1 strike.");
 			menu();
 			addButton(0, weapons.DAGGER.shortName, itemBuy, weapons.DAGGER, EraendirMainMenu, "Eraendir");
 			addButton(1, weapons.TRIDAG.shortName, itemBuy, weapons.TRIDAG, EraendirMainMenu, "Eraendir");

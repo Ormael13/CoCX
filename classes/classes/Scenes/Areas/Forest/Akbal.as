@@ -124,7 +124,7 @@ public class Akbal extends Monster
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					var damage2:int = inte / 4;
 					if (flags[kFLAGS.AKBAL_LVL_UP] >= 1) damage2 *= (1 + (flags[kFLAGS.AKBAL_LVL_UP] * 0.1));
-					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of loosing some of it protective power.\n");
+					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of losing some of it protective power.\n");
 					outputText("You are burned badly by the flames! ");
 					player.takeFireDamage(damage2, true);
 					return;

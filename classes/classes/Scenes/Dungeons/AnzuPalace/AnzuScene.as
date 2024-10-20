@@ -776,7 +776,7 @@ use namespace CoC;
 			outputText("In the mood for some bird butt, you tell Anzu that you'd like a turn on his ass.");
 			if (flags[kFLAGS.ANZU_ANAL_PITCH_COUNTER] == 0) {
 				outputText("\n\n\"<i>Well, you see, being, that I am…I never, well, had anything, or anyone, you know…back there…and…</i>\"");
-				outputText("\n\nOh, It’s that. Well there is a first time for everything. And you’ll make it a pleasant experience for both of you.");
+				outputText("\n\nOh, It’s that. Well, there is a first time for everything. And you’ll make it a pleasant experience for both of you.");
 				outputText("\n\n\"<i>If you say that...[name]. I think that I’ll trust in you.</i>\"");
 				outputText("\n\nYou take off his robes and let them fall to the floor. He strips from his vest and pants, dropping them in the armchair" + player.clothedOrNakedLower(", while you remove your [armor]") + ". This done, you remove his underwear, leaving his avian cock bounce free in the air.");
 				outputText("\n\nThen, you instruct him to lean on the bed, while you open his legs and caress the softness of his feathered buttcheeks. You prod one of your fingers inside his tight anus and find your way to his prostate while other caress his balls. The big bird blushes red under your ministrations.");

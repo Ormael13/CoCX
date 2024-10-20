@@ -94,7 +94,7 @@ public class KitsuneRace extends Race {
 						},
 						-7
 				)
-				.customRequirement("skin", "fur or magical tatoo",
+				.customRequirement("skin", "fur or magical tattoo",
 						function (body:BodyData):Boolean {
 							return body.skinCoatType == Skin.FUR
 									|| body.skinBasePattern == Skin.PATTERN_MAGICAL_TATTOO

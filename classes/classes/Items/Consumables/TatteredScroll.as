@@ -33,7 +33,7 @@ public class TatteredScroll extends Consumable {
 				var temp:int = player.breastRows.length;
 				while (temp > 0) {
 					temp--;
-					//If that breast didnt have nipples reset length
+					//If that breast didn't have nipples reset length
 					if (player.breastRows[0].nipplesPerBreast < 1) player.nippleLength = .2;
 					player.breastRows[0].nipplesPerBreast = 1;
 				}

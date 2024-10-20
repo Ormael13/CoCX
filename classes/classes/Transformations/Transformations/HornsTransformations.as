@@ -279,7 +279,7 @@ public class HornsTransformations extends MutationsHelper {
 				if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.NONE) {
 					if (player.horns.type == Horns.COW_MINOTAUR) {
 						if (player.horns.count < 5) {
-							desc += "Your small horns get a bit bigger, stopping as medium sized nubs.";
+							desc += "Your small horns get a bit bigger, stopping as medium-sized nubs.";
 							player.horns.count += 1 + rand(2);
 						}
 					}

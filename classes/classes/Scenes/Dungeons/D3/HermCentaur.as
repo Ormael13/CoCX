@@ -141,7 +141,7 @@ import classes.internals.WeightedDrop;
 				outputText("\n\nYou sigh and try to gain a better position during the pink rain");
 				if (player.hasCock()) outputText(" ignoring the stiffening pressure of [eachCock]");
 				else outputText(" ignoring the increasing wetness of your inner [armor]");
-				outputText(". It's getting harder to think straight with all this desire welling up inside you.  It isn't for a few moments that you realize you tongue is hanging out and drooling all over youself.  Gods, you want to fuck!");
+				outputText(". It's getting harder to think straight with all this desire welling up inside you.  It isn't for a few moments that you realize you tongue is hanging out and drooling all over yourself.  Gods, you want to fuck!");
 			}
 			else if (player.lust < .9*player.maxLust())
 			{

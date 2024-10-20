@@ -91,7 +91,7 @@ public class Marae extends Monster
 			if (hasStatusEffect(StatusEffects.Uber)) removeStatusEffect(StatusEffects.Uber);
 		}
 		public function maraeStrangulate():void {
-			outputText("Marae’s vines suddenly wrap tight around your neck and strangle you, preventing you from pronouncing any incantations. The godess woman gives you an annoyed glare.");
+			outputText("Marae’s vines suddenly wrap tight around your neck and strangle you, preventing you from pronouncing any incantations. The goddess woman gives you an annoyed glare.");
 			outputText("\"<i>I’m done with your magic. Be a good " + player.mf("boy", "girl") + " and just give in.</i>\"");
 			player.removeStatusEffect(StatusEffects.CastedSpell);
 			player.createStatusEffect(StatusEffects.Sealed, 2, 10, 0, 0);

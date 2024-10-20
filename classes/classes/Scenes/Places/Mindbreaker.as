@@ -327,7 +327,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 						"\n\nAs an alpha male your job is to inseminate the females so that they can lay eggs and infest new lifeforms, a most important duty." +
 						" While any males can properly fertilise a mindbreaker egg the chances of success are rather slim." +
 						" Unlike some random minotaur up these mountains, your cum is particularly fertile and suited to this task" +
-						" While females typicaly leads the sorority you are higher in rank then most of them. This is an honor only you, my chosen male, will get." +
+						" While females typically lead the sorority, you are higher in rank than most of them. This is an honor only you, my chosen male, will get." +
 						" How Kaerb-Dnim found this one egg she gave you you got no idea, but she's likely had it for a long while. You assume that she just needed a proper host, an host such as you to lay it." +
 						" A wicked plan starts to form in your mind as you begin to plan out how to get new hosts." +
 						" You imagine everyone living in an endless orgy of constant mind-shattering pleasure as you create an entire sorority of creatures like you." +
@@ -558,7 +558,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 
 		public function SexCaerbDnim():void {
 			clearOutput();
-			outputText("Now that she mentions it, yes, but the slaves are not what you're interested in right now. Kaerb-Dnim blushes at your allusion. You laugh before closing in on her, initiating with a sloppy kiss as you drive your tentacle-like tongue in her mouth. You can feel her tongue moving in, going so far down your throat however, you won’t gag from this.\n\n");
+			outputText("Now that she mentions it, yes, but the slaves are not what you're interested in right now. Kaerb-Dnim blushes at your illusion. You laugh before closing in on her, initiating with a sloppy kiss as you drive your tentacle-like tongue in her mouth. You can feel her tongue moving in, going so far down your throat however, you won’t gag from this.\n\n");
 			sceneHunter.passCheckOnce();
 			sceneHunter.selectGender(dickF, vagF);
 
@@ -593,7 +593,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			outputText("and find the girl turned into quite the interesting plaything since she met Kaerb-Dnim." +
 					" The goblin looks at you with a pouting expression, more fitting on a spoiled child than a mature woman." +
 					" It’s not just her attitude as she wears what could only be described as pink clothes fit for a kid." +
-					"\n\n\"<i>Big " + player.mf("brother", "sister") + " [name] finaly came home! I’ve been so lonely.</i>\"" +
+					"\n\n\"<i>Big " + player.mf("brother", "sister") + " [name] finally came home! I’ve been so lonely.</i>\"" +
 					"\n\nYou assure the goblin that you will take care of her, as you lift her and insert your tentacles into her ears, leaving the goblin with a debased expression as you squirm inside and move one of your hands under her skirt." +
 					" Without surprise, the goblin wears no panties under her clothes and your finger gains quick access to her pussy." +
 					"\n\n\"<i>Yay! Big " + player.mf("bro", "sis") + ", make me all messy and dirty.</i>\"\n\n");

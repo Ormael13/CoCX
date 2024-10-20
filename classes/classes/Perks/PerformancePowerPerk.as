@@ -13,13 +13,13 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "Increase perfomance power by " + (params.value1 * 100) + "%.";
+			return "Increase performance power by " + (params.value1 * 100) + "%.";
 		}
 
 		public function PerformancePowerPerk() 
 		{
 			super("Performance Power", "Performance Power",
-					"Your equipment boosts your perfomance power.");
+					"Your equipment boosts your performance power.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean

@@ -450,13 +450,13 @@ public class VaginaTransformations extends MutationsHelper {
 					if (player.vaginas.length > vagina){
 						desc += "Something fundamental changes in your [vagina " +(vagina+1)+ "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. "+
 								"Intrigued you shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. "+
-								"<b>Your vagina is now like that of a scylla and can take in lenghtier insertions.</b>";
+								"<b>Your vagina is now like that of a scylla and can take in lengthier insertions.</b>";
 					}
 					else {
 						desc += GrowVaginaGenericText();
 						desc += "The insides of your vagina begins to heat up. Out of curiosity you take a peek and are amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. " +
 								"Intrigued you shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. " +
-								"<b>Your vagina is now like that of a scylla and can take in lenghtier insertions.</b>";
+								"<b>Your vagina is now like that of a scylla and can take in lengthier insertions.</b>";
 					}
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.SCYLLA, vagina);
@@ -485,13 +485,13 @@ public class VaginaTransformations extends MutationsHelper {
 					if (player.vaginas.length > vagina) {
 						desc += "Something fundamental changes in your [vagina " +(vagina+1)+ "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail.  "+
 								"Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in heck you could easily insert a good part of your own tail inside and still find space. It takes all of your willpower not to fist yourself to orgasm. "+
-								"<b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>";
+								"<b>Your vagina is now like that of a naga and can take in lengthier insertions.</b>";
 					}
 					else {
 						desc += GrowVaginaGenericText();
 						desc += "The insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail. " +
 								"Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in heck you could easily insert a good part of your own tail inside and still find space. It takes all of your willpower not to fist yourself to orgasm. " +
-								"<b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>";
+								"<b>Your vagina is now like that of a naga and can take in lengthier insertions.</b>";
 					}
 					if (doOutput) outputText(desc);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;

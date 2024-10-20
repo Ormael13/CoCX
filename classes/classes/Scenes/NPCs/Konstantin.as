@@ -1151,7 +1151,7 @@ public class Konstantin extends NPCAwareContent
 			outputText(".\n\nSlowly, he takes your saliva-coated penis out of his mouth, but before you can protest, he slides it in again sucking softly. He repeats this process, your cock going in and out of his mouth, while your need to cum becomes overwhelming. Suddenly, something massive starts prodding you butthole. When you look up to see what is, you manage to see how Konstantin slides one of his fingers inside and starts fingering you. The dual assault more of than you can handle, and you find yourself cumming, your ");
 			if (player.hasBalls()) outputText("balls");
 			else outputText("cock");
-			outputText(" unloading the barely-contained load throught your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
+			outputText(" unloading the barely-contained load through your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
 			if (player.cumQ() > 1500) {
 				outputText("Konstantin gulps down you seed with a bit of difficulty as your torrent of cums never seems to subside. When it finally does, the bear has gotten a little rounder from all the cum that he has drinked. Smiling, he gives your cockhead a final, slobbering kiss.\n\n");
 				outputText("\"<i>Whoa, I hadn't expected you to be so productive, in that area. Still, it was tasty.</i>\" the bear mutters, looking at his slightly larger belly.\n\n");
@@ -1216,7 +1216,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("The oral ministrations that Konstantin is giving you soon prove to be too much, and you find yourself cumming, your ");
 			if (player.hasBalls()) outputText("balls");
 			else outputText("[cock]");
-			outputText(" unloading the barely-contained load throught your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
+			outputText(" unloading the barely-contained load through your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
 			if (player.cumQ() > 1500) outputText("He gulps down you seed with a bit of difficulty as your torrent of cums never seems to subside. When it finally does, the bear has gotten a little rounder from all the cum that he has drinked.");
 			else outputText("He gulps down your seed with ease, not letting any drop to waste. Once you’re done, he gives your cockhead some playful slurps.");
 			outputText("\n\nNot much later, Konstantin gasps and the way that his penis throbs inside you tell you that he’s close to coming. You slide most of his cock out, so only the head remains inside you, and play with his nuts, enticing them into flooding your mouth with his thick cream. You’re not left waiting too long, as his cumslit opens like a dam breaking, and a torrent of bear cum invades your mouth. Sealing your ");

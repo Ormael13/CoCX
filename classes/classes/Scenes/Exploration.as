@@ -1458,7 +1458,7 @@ public class Exploration extends BaseContent implements SaveableState
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
-//Temporaly place of finding enemies for lvl between 31 and 49
+//Temporarily place of finding enemies for lvl between 31 and 49
 		public function tryDiscoverLL():void {
 			clearOutput();
 			if (rand(4) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) {
@@ -1502,7 +1502,7 @@ public class Exploration extends BaseContent implements SaveableState
 				return;
 			}
 		}
-		//Temporaly place of finding enemies for lvl between 51 and 69
+		//Temporarily place of finding enemies for lvl between 51 and 69
 		public function tryDiscoverML():void {
 			clearOutput();
 			if (rand(4) == 0) {
@@ -1541,7 +1541,7 @@ public class Exploration extends BaseContent implements SaveableState
 				return;
 			}
 		}
-		//Temporaly place of finding enemies for lvl between 70 and 94
+		//Temporarily place of finding enemies for lvl between 70 and 94
 		public function tryDiscoverHL():void {
 			clearOutput();
 			if (rand(2) == 0) {
@@ -1559,7 +1559,7 @@ public class Exploration extends BaseContent implements SaveableState
 				return;
 			}
 		}
-		//Temporaly place of finding enemies for lvl between 95 and 124
+		//Temporarily place of finding enemies for lvl between 95 and 124
 		public function tryDiscoverXHL():void {
 			clearOutput();
 			//if (rand(2) == 0) {
@@ -1580,7 +1580,7 @@ public class Exploration extends BaseContent implements SaveableState
 				return;
 			}*/
 		}
-		//Temporaly place of finding enemies for lvl 125+
+		//Temporarily place of finding enemies for lvl 125+
 		public function tryDiscoverXXHL():void {
 			clearOutput();
 			//else {
@@ -1604,7 +1604,7 @@ public class Exploration extends BaseContent implements SaveableState
 		public function pearldiscovery():void {
 			flags[kFLAGS.SKY_POISON_PEARL] = 1;
 			clearOutput();
-			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pearl.  Knowing that it may be more then it looks to be you check the suroundings next to it for a while before deciding to touch it.  Nothing happens so since it somehow attracted your attention you pocket this pearl.\n\n");
+			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pearl.  Knowing that it may be more than it looks to be you check the surroundings next to it for a while before deciding to touch it.  Nothing happens so since it somehow attracted your attention you pocket this pearl.\n\n");
 			inventory.takeItem(consumables.SPPEARL, explorer.done);
 		}
 
@@ -1625,7 +1625,7 @@ public class Exploration extends BaseContent implements SaveableState
 			addButton(8, "Leave", pocketwatchdiscoveryNo);
 		}
 		private function pocketwatchdiscoveryYes():void {
-			outputText("Determined you grab the watch. A feeling of pain pierces your soul making you momentarily black out. After returning to your senses, you see the watch is already hanging on your waist. A feeling of missing some piece of yourself nags at you but there doesn't appear to be anything missing at first glance. Well guess it won't kill you for now...	 you hope as you return to camp.\n\n");
+			outputText("Determined you grab the watch. A feeling of pain pierces your soul making you momentarily black out. After returning to your senses, you see the watch is already hanging on your waist. A feeling of missing some piece of yourself nags at you but there doesn't appear to be anything missing at first glance. Well, guess it won't kill you for now...	 you hope as you return to camp.\n\n");
 			player.superPerkPoints--;
 			player.createKeyItem("Pocket Watch", 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);

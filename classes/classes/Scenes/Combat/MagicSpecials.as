@@ -82,7 +82,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 0 && player.wrath >= combat.asuraformCost() && !player.hasPerk(PerkLib.ElementalBody)) {
 			outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.hasFourArms() ? "":"two ") + "additional pair" + (player.hasFourArms() ? "":"s") + " of arms grows under your " + (player.hasFourArms() ? "second":"first") + " pair" + (player.hasFourArms() ? "s":"") + " of arms. ");
 			if (player.hasPerk(PerkLib.AsuraStrength)) {
-				outputText("Additionaly from your back emerge ");
+				outputText("Additionally from your back emerge ");
 				outputText("pair");
 				outputText(" of semi-transparent arms. ");
 			}
@@ -377,7 +377,7 @@ public class MagicSpecials extends BaseCombatContent {
 					bd.disable("You cannot use a gaze attack against an opponent you cannot see or target.");
 				}
 				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 4) {
-					bd = buttons.add("E. Petrify", curry(petrify, true)).hint("Use your enhanced gaze to temporally turn your enemy into a stone and even halt it recovery temporaly. \n");
+					bd = buttons.add("E. Petrify", curry(petrify, true)).hint("Use your enhanced gaze to temporally turn your enemy into a stone and even halt its recovery temporarily. \n");
 					bd.requireFatigue(spellCost(1000), true);
 					if (isEnemyInvisible && player.hasStatusEffect(StatusEffects.MonsterDig)) {
 						bd.disable("You cannot use a gaze attack against an opponent you cannot see or target.");
@@ -833,7 +833,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isAnyRaceCached(Races.SHARK, Races.ABYSSAL_SHARK)) {
 			bd = buttons.add("Blood Frenzy", bloodFrenzy);
 			if (monster.monsterIsBleeding()) {
-				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your inteligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");
+				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your intelligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");
 			}
 			else bd.disable("You can't go into a blood frenzy if your opponent is not bleeding.");
 			if (player.statStore.hasBuff("Blood Frenzy")) {
@@ -1383,7 +1383,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function ElectricDischarge():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("You begin to gather energy within your electrocytes your bodily lights turning bright white as you enter overcharge. Suddenly you deliver the amassed current your energy running throught the air like a bright bolt of white death and roaring thunder.");
+		outputText("You begin to gather energy within your electrocytes your bodily lights turning bright white as you enter overcharge. Suddenly you deliver the amassed current your energy running through the air like a bright bolt of white death and roaring thunder.");
 		if (monster.hasStatusEffect(StatusEffects.DragonWaterBreath)){
 			outputText("Electrified Water is blasted all around your wet target as lightning and fluid turn into a booming explosion the force of wich plaster [monster him] to the ground dazed the violence of the impact!");
 			monster.removeStatusEffect(StatusEffects.DragonWaterBreath);
@@ -1745,7 +1745,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You use your flexibility to barely fold your body out of the way!");
 			}
 			else if(applyBlizzard && player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the " + attack + " energy, causing it to hit with far less force!</b>");
+				outputText("  <b>Surrounding you blizzard at the cost of losing some of it remaining power massively dissipated most of the " + attack + " energy, causing it to hit with far less force!</b>");
 				player.addStatusValue(StatusEffects.Blizzard,1,-1);
 				damage = Math.round(0.2 * damage);
 				damage = player.takeFireDamage(damage);
@@ -4160,8 +4160,8 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(petrifycost, USEFATG_MAGIC_NOBM);
 		if(monster.plural) {
 			outputText("With a moment of concentration you activating petrifying properties of your gaze");
-			if (player.hairType == Hair.GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss");
-			outputText(" and then casual glance at enemies. Due to many of them your petrifying power spread on too many targets to be much effective. Still few of them petrified for a short moment and rest scared or suprised by such turn of events also refrain from attacking you for a moment.\n\n");
+			if (player.hairType == Hair.GORGON) outputText(" and awaken normally dormant snake hair that starts to hiss");
+			outputText(" and then casual glance at enemies. Due to many of them your petrifying power spread on too many targets to be much effective. Still few of them petrified for a short moment and rest scared or surprised by such turn of events also refrain from attacking you for a moment.\n\n");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 				if (enhanced) {
 					petrifyduration += 1;
@@ -4183,7 +4183,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			outputText("With a moment of concentration you activating petrifying properties of your gaze");
-			if (player.hairType == Hair.GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss");
+			if (player.hairType == Hair.GORGON) outputText(" and awaken normally dormant snake hair that starts to hiss");
 			outputText(" and then casual glance at enemy. Caught off guard [themonster] petrify.\n\n");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 				petrifyduration += 1;
@@ -5554,7 +5554,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) lusttransfered2 += 0.15;
 		lusttransfered += Math.round(player.lust * lusttransfered2);
 		player.lust -= lusttransfered;
-		outputText("Your eyes glaze over and you feel your mind suddenly becoming more clear after you transfered some blurs of every sexual perversion you could possibly think of to your enemy");
+		outputText("Your eyes glaze over and you feel your mind suddenly becoming more clear after you transferred some blurs of every sexual perversion you could possibly think of to your enemy");
 		if(!monster.plural) outputText(".");
 		else outputText("s.");
 		if(monster.lustVuln == 0) {
@@ -5732,7 +5732,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) numberOfImage += player.perkv1(PerkLib.MindbreakerBrain1toX);
 		if (player.hasStatusEffect(StatusEffects.MirrorImage)){
 			numberOfImage = numberOfImage-player.statusEffectv1(StatusEffects.MirrorImage);
-			outputText("You weave back the spell, resplenishing "+ numberOfImage +" additionnal replicas of yourself to the remaining ones.\n\n");
+			outputText("You weave back the spell, resplenishing "+ numberOfImage +" additional replicas of yourself to the remaining ones.\n\n");
 			player.addStatusValue(StatusEffects.MirrorImage, 1,numberOfImage);
 		}
 		else{
@@ -7065,7 +7065,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (type == 3) {
-			outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
+			outputText("You gather energy in your mouth before spitting a pyroclastic matter at your opponent, searing their flesh and setting [themonster] on fire. ");
 			damage = calcInfernoMod(damage, true);
 			if (player.armor == armors.SFLAREQ) damage *= 3;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());

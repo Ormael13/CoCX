@@ -141,14 +141,14 @@ import classes.internals.*;
 				this.createPerk(PerkLib.EnemyChampionType, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] < 5) {
-				this.long = "Galia is short, only 2 feet 3 inches tall. An unkempt mane of shaggy platinum blond hair hangs from her head, parted by two short curved horns. Her eyes are solid black, save for tiny red irises. Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap fighting to keep her massive for her height breasts. Her extremely well-muscled body is nowhere to be seen replaced by much soft one, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws. A pair of tiny but functional wings occasionally flap from her back.";
+				this.long = "Galia is short, only 2 feet 3 inches tall. An unkempt mane of shaggy platinum blond hair hangs from her head, parted by two short curved horns. Her eyes are solid black, save for tiny red irises. Her skin is bright red, unencumbered by clothing or armor, save for a small loincloth at her belt and wraps fighting to keep her massive breasts, which are large for her height. Her extremely well-muscled body is nowhere to be seen, replaced by a much softer one. Her feet are covered by tiny wooden sandals, and her hands are tipped with sharp claws. A pair of tiny but functional wings occasionally flap from her back.";
 				createBreastRow(Appearance.breastCupInverse("DD"));
 				this.hairLength = 36;
 				this.tallness = 26;
 				
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 5 && flags[kFLAGS.GALIA_LVL_UP] < 8) {
-				this.long = "Galia is now taller reaching 4 feet 4 inches. An unkempt mane of shaggy platinum blond hair hangs from her head, parted by two short curved horns. Her eyes are solid black, save for tiny red irises. Her skin is bright red unencumbered by clothing or armor, save for bandage-like loincloths wrapped around her foreamrs, forelegs and hips. The one wrapped around her more them ample chest seems to be from some elastic metalic material that barely doing it job. Her extremely well-muscled body is nowhere to be seen replaced by much soft one, her feet are covered by wooden sandals, and her hands tipped with sharp claws. A pair of small but functional wings occasionally flap from her back.";
+				this.long = "Galia is now taller reaching 4 feet 4 inches. An unkempt mane of shaggy platinum blond hair hangs from her head, parted by two short curved horns. Her eyes are solid black, save for tiny red irises. Her skin is bright red unencumbered by clothing or armor, save for bandage-like loincloths wrapped around her forearms, forelegs, and hips. The one wrapped around her more than ample chest seems to be from some elastic metallic material that barely does its job. Her extremely well-muscled body is nowhere to be seen, replaced by a much softer one. Her feet are covered by wooden sandals, and her hands tipped with sharp claws. A pair of small but functional wings occasionally flap from her back.";
 				createBreastRow(Appearance.breastCupInverse("DD"));
 				this.hairLength = 62;
 				this.tallness = 52;//for later desc - two middle length curved horns

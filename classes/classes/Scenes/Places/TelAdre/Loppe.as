@@ -1814,7 +1814,7 @@ private function loppeSqueezedickWhateverThatIs():void {
 	else outputText("beside");
 	outputText(" the bed and pat the sheets with one hand; Loppe seats herself obediently next to you.  She doesn't bother hiding her excitement, letting her equine endowment bob as she settles herself; she sits beside you as instructed and rests her hands on her lap.  \"<i>Ok, I'm very ready for whatever you got planned,</i>\" Loppe giggles as her cock throbs; a small dollop of precum slowly pools inside her flare.");
 
-	outputText("\n\nYou grin back and slide your hands across hers, worming your way between her fingers in search of access to her base.  Loppe accomodates you, moving her hands to either side to brace herself.  Your own stroke the round, full orbs of her sack as you look forward to seeing what holding an orgasm or two in will do to them.  You cup them in the palm of your hand, awkwardly rolling them around with your fingers, reaching underneath to gently play with Loppe's clit.");
+	outputText("\n\nYou grin back and slide your hands across hers, worming your way between her fingers in search of access to her base.  Loppe accommodates you, moving her hands to either side to brace herself.  Your own stroke the round, full orbs of her sack as you look forward to seeing what holding an orgasm or two in will do to them.  You cup them in the palm of your hand, awkwardly rolling them around with your fingers, reaching underneath to gently play with Loppe's clit.");
 
 	outputText("\n\n\"<i>Oh!  I like where this is going,</i>\" she giggles, spreading her legs and supporting herself on her elbows to allow you full access to her assets.  \"<i>Knock yourself out, sugar.</i>\"");
 

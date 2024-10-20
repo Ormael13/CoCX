@@ -29,7 +29,7 @@ public class EyeTyrantScene extends BaseContent {
     
     public function defeat():void {
         clearOutput();
-        outputText("You watch in confusion as the omni eyed girl simply vanishes from existence with a growl of anger. Well the passage ahead of you is free now so might as well take it.\n\n");
+        outputText("You watch in confusion as the omni eyed girl simply vanishes from existence with a growl of anger. Well, the passage ahead of you is free now so might as well take it.\n\n");
         if (player.hasStatusEffect(StatusEffects.TFDealer2) && player.statusEffectv1(StatusEffects.TFDealer2) < 1) player.addStatusValue(StatusEffects.TFDealer2, 1, 1);
         else player.createStatusEffect(StatusEffects.TFDealer2, 1, 0, 0, 0);
         cleanupAfterCombat();

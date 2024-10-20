@@ -146,7 +146,7 @@ public class MimicScene extends BaseContent {
                 outputText("to suck and massage your cockteats with a sort of spinning motion. The combined sensations from that and the countless other tendrils quickly bring you to orgasm, causing you to spew unusually large amounts of ");
                 if (player.breastRows[0].lactationMultiplier > 0) outputText("milky ");
                 outputText("cum deep into the creatures hungry mouth. Unfortunately, the beast doesn’t seem satisfied with just one emission, and its ministrations become more forceful as you are made to cum again and again. Far beyond the limits of your endurance, you still manage to hold on to some last shred of consciousness. Even as dozens of small tendrils are forced into your tortured nippledicks in search of more cum, your only reaction is a weak moan. As the thing continues to alternate between scouring your body for any last traces of semen and attempting to coax you to further orgasm, you eventually slip into unconsciousness. ");
-                //if you didnt get swallowed earlier, get swallowed now
+                //if you didn't get swallowed earlier, get swallowed now
                 if (mimicAppearance == 2 || mimicAppearance == 3) outputText("\n\nJust before you black out, you look up to see yourself being lifted towards the beast’s suddenly huge, gaping maw. ");
             }
             */
@@ -181,7 +181,7 @@ public class MimicScene extends BaseContent {
                 else outputText("its huge tongue deep into each of your tortured nipples one by one");
                 outputText(", your reaction is only a weak moan. ");
                 outputText("As the thing continues to alternate between scouring your body for any last traces of nectar and attempting to coax you to further orgasm, you eventually slip into unconsciousness. ");
-                //if you didnt get swallowed earlier, get swallowed now
+                //if you didn't get swallowed earlier, get swallowed now
                 if (mimicAppearance == 2 || mimicAppearance == 3) outputText("\n\nJust before you black out, you look up to see yourself being lifted towards the beast’s suddenly huge, gaping maw. ");
             }
             //just a boring, genderless freak?
@@ -189,7 +189,7 @@ public class MimicScene extends BaseContent {
                 if (mimicAppearance == 2 || mimicAppearance == 3) outputText("and its eyes narrow, giving it a singularly furious expression. ");
                 else outputText("and the tentacles holding you seem to quiver with a palpable fury. ");
                 outputText("\n\nWithout warning, hundreds of tentacles begin whipping and beating you violently. You try to scream, but your shouts are cut off by a punishing series of blows to the stomach. Your ears are filled with the monster's burbling roars of fury as you are pummeled into unconsciousness. ");
-                //if you didnt get swallowed earlier, get swallowed now
+                //if you didn't get swallowed earlier, get swallowed now
                 if (mimicAppearance == 2 || mimicAppearance == 3) outputText("\n\nJust before you black out, you look up to see yourself being lifted towards the beast’s suddenly huge, gaping maw. ");
             }
         }
@@ -240,7 +240,7 @@ public class MimicScene extends BaseContent {
             outputText(". Unfortunately, the beast doesn’t seem satisfied with just one emission, and its ministrations become more forceful as you are made to cum again and again. Far beyond the limits of your endurance, you still manage to hold on to some last shred of consciousness. Even as dozens of small tendrils are forced down your urethra");
             if (player.cockTotal() > 1/* || player.breastRows[0].nippleCocks*/) outputText("s");
             outputText(" in search of more cum, your only reaction is a weak moan. As the thing continues to alternate between scouring your body for any last traces of semen and attempting to coax you to further orgasm, you eventually slip into unconsciousness. ");
-            //if you didnt get swallowed earlier, get swallowed now
+            //if you didn't get swallowed earlier, get swallowed now
             if (mimicAppearance == 2 || mimicAppearance == 3) outputText("\n\nJust before you black out, you look up to see yourself being lifted towards the beast’s suddenly huge, gaping maw. ");
         }
         //Girl Parts!
@@ -310,7 +310,7 @@ public class MimicScene extends BaseContent {
             outputText(", your reaction is only a weak moan. ");
             if (player.hasFuckableNipples()) outputText("Your moan drags out a bit longer as your poor nipples receive the same treatment. ");
             outputText("As the thing continues to alternate between scouring your body for any last traces of nectar and attempting to coax you to further orgasm, you eventually slip into unconsciousness. ");
-            //if you didnt get swallowed earlier, get swallowed now
+            //if you didn't get swallowed earlier, get swallowed now
             if (mimicAppearance == 2 || mimicAppearance == 3) outputText("\n\nJust before you black out, you look up to see yourself being lifted towards the beast’s suddenly huge, gaping maw. ");
         }
         //Futaz!
@@ -413,7 +413,7 @@ public class MimicScene extends BaseContent {
             if (player.hasVagina()) player.cuntChange(60, true);
             if (player.hasFuckableNipples()) outputText("Your moan drags out a bit longer as your poor nipples receive the same treatment. ");
             outputText("As the thing continues to alternate between scouring your body for any last traces of fluid and attempting to coax you to further orgasm, you eventually slip into unconsciousness. ");
-            //if you didnt get swallowed earlier, get swallowed now
+            //if you didn't get swallowed earlier, get swallowed now
             if (mimicAppearance == 2 || mimicAppearance == 3) outputText("\n\nJust before you black out, you look up to see yourself being lifted towards the beast’s suddenly huge, gaping maw. ");
         }
         doNext(mimicTentacleEnd);

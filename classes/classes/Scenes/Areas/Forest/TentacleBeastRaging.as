@@ -27,7 +27,7 @@ public class TentacleBeastRaging extends Monster
 			}
 		}
 		private function tentaclePhysicalAttackWrath():void {
-			outputText("The shambling horror throws its tentacles at you with a crazy and uncontroled manner.\n");
+			outputText("The shambling horror throws its tentacles at you with a crazy and uncontrolled manner.\n");
 			var temp:int = int(((str + weaponAttack) * 2) - Math.random()*(player.tou) - player.armorDef);
 			if (temp < 0) temp = 0;
 			this.wrath -= 200;

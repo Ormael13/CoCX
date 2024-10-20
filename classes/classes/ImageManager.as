@@ -283,7 +283,7 @@ import flash.display.Loader;
 		 * to the maximal Y position of text in the TextField /once the image has reflowed the text, possibly adding more height to the text.
 		 * Handwave the difference in this pixel height as a line count (this could be more accurate by using TextMetrics, but fuck it) and
 		 * add this many blank lines to the text.
-		 * Critical point; once the new lines have been added to the text, force an update of the scrollbar UI element (its actually a seperate
+		 * Critical point; once the new lines have been added to the text, force an update of the scrollbar UI element (its actually a separate
 		 * UI component that "targets" the TextField, and not actually a part of the TextField itself) to account for the new text height.
 		 *
 		 * Handwavey Bullshit Internals:

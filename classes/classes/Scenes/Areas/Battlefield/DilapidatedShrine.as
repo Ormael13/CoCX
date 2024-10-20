@@ -173,7 +173,7 @@ public class DilapidatedShrine extends BaseContent
 			var weaponClasses:Array = [ItemConstants.WT_GAUNTLET, ItemConstants.WT_SWORD, ItemConstants.WT_AXE, ItemConstants.WT_MACE_HAMMER, ItemConstants.WT_DUELING, ItemConstants.WT_POLEARM, ItemConstants.WT_SPEAR, ItemConstants.WT_DAGGER, ItemConstants.WT_WHIP, ItemConstants.WT_EXOTIC, ItemConstants.WT_THROWING, ItemConstants.WT_BOW, ItemConstants.WT_CROSSBOW, ItemConstants.WT_2H_FIREARM, ItemConstants.WT_RIFLE, ItemConstants.WT_PISTOL, ItemConstants.WT_DUAL_FIREARMS, ItemConstants.WT_EXOTIC, ItemConstants.WT_RIBBON]; // "Scythe", "Staff", "Tetsubo", "Ribbon", "Tome"
 			var btnInt:int = 0;
 			var tempAry:Array = [];
-			outputText("Welcome. Here, you can offer your weapons to the god of war, consuming the weapon to gain knowledge of the battles its seen.\n");
+			outputText("Welcome. Here, you can offer your weapons to the god of war, consuming the weapon to gain knowledge of the battles it's seen.\n");
 			for (var i:int = 0; i < inventory.getMaxSlots(); i++){
 				var weaponType:String = "";
 				var itemClassReplace:*;
@@ -195,7 +195,7 @@ public class DilapidatedShrine extends BaseContent
 					if (weaponClasses.indexOf(weaponType) >= 0){
 						tempAry.push([player.itemSlot(i).itype,weaponType])
 					}
-					else if (weaponType) outputText("\nYou canot offer "+player.itemSlot(i).itype.longName +" to the shrine.");
+					else if (weaponType) outputText("\nYou cannot offer "+player.itemSlot(i).itype.longName +" to the shrine.");
 				}
 				catch (e:Error){
 					outputText(e + "\n");

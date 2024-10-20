@@ -916,7 +916,7 @@ public function dildoFuckRubi():void {
 	outputText("\n\nFinally, mercifully, the orgasm welling up inside you rolls over you like a tidal wave, quenching the fires of lust that burned within.  Your lips contort into an \"<i>O</i>\" and a long groan escapes your lips.");
 	//(PC has cock?)
 	if(player.hasCock()) {
-		outputText("  [EachCock] twitches and shudders, loosing several jets of cum onto your body, ");
+		outputText("  [EachCock] twitches and shudders, spurting several jets of cum onto your body, ");
 		if(player.cumQ() < 250) outputText("splattering messily");
 		else if(player.cumQ() < 500) outputText("coating you lightly");
 		else if(player.cumQ() < 1000) outputText("covering you in a copious layer of cum");
@@ -2052,7 +2052,7 @@ private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 		else outputText("furred");
 		outputText(" legs buckle, one jerking like mad, causing [rubi em] to impale [rubi emself] fully onto the imitation shaft of man meat.  Amid the chaos of spasming limbs and newfound modesty, Rubi loses [rubi eir] breath, making small gasping noises when [rubi ey] isn't moaning for more.");
 
-		if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText("\n\nRubi's cock spasms along with [rubi em] suddenly loosing a spray of pearly white cum into the air.  It doesn't stop with just one spurt however, instead turning [rubi eir] crotch into some kind of lewd sprinkler, covering nearly every surface within the immediate vicinity with [rubi eir] love juices.");
+		if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText("\n\nRubi's cock spasms along with [rubi em] suddenly releasing a spray of pearly white cum into the air.  It doesn't stop with just one spurt however, instead turning [rubi eir] crotch into some kind of lewd sprinkler, covering nearly every surface within the immediate vicinity with [rubi eir] love juices.");
 		if(flags[kFLAGS.RUBI_NO_CUNT] == 0) outputText("\n\nWith a clear look at Rubi's crotch, you can see [rubi eir] pussylips contract around the artificial vaginal invader, [rubi eir] clitoris sinking into the flesh for a moment before pushing right back out.  [rubi Eir] little love button pulses like this several times, the next one more languid than the last.");
 
 		outputText("\n\nWith [rubi eir] orgasm subsiding, Rubi slouches back against the wall, the small human-like dildo taking this opportunity to slip about halfway out of [rubi eir] ");
@@ -2161,7 +2161,7 @@ private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 		else outputText("cunt");
 		outputText(", to make [rubi em] squeal from your actions, and not that of a lifeless dildo.  You imagine the " + rubiMF("demon","demoness") + "'s hot, wet walls clamped around you, milking you for everything you've got.");
 
-		outputText("\n\nAnd that's enough to push you over.  You grip the soft sheets of the bed and stifle a moan of your own.  The heat in your body rises, centering around the cock you have half-buried in Rubi's throat.  You can feel the intensity building, and do your best to hold it back, but to no avail.  With a loud grunt you cum, loosing one spray of pearlescent jizz after another deep into your lover's gullet.  [rubi Ey] gulps it all down eagerly, trying not to waste a drop.");
+		outputText("\n\nAnd that's enough to push you over.  You grip the soft sheets of the bed and stifle a moan of your own.  The heat in your body rises, centering around the cock you have half-buried in Rubi's throat.  You can feel the intensity building, and do your best to hold it back, but to no avail.  With a loud grunt you cum, spurting one spray of pearlescent jizz after another deep into your lover's gullet.  [rubi Ey] gulps it all down eagerly, trying not to waste a drop.");
 
 		outputText("\n\nRubi pulls [rubi eir] head back finally, just in time for two last jets of cum to blast [rubi em] in the face.  [rubi Ey] just gives you a sultry smile, however, and scoops up the remaining mass of sweet semen with [rubi eir] fingers before licking them clean.  You collapse back onto the bed, completely spent.  You hadn't expected things to go that way.  Not that you're complaining of course.");
 
@@ -2372,7 +2372,7 @@ private function teaseButtjobs():void {
 
 	outputText("\n\nYou feel your orgasm coming on, fueled by Rubi's display of submission.  No matter how you tease [rubi em], [rubi ey] remains stock-still, with only a shudder and a longing sigh to mark the pleasurable feelings no doubt coursing through [rubi eir] body.  You grip one buttcheek hard and thrust upwards as much as you can as a dam suddenly breaks within you.  Your [balls] churns pleasurably, your [cock biggest] stiffens suddenly, and you let loose a long, drawn-out sigh as your dick erupts, jetting cum upwards, which immediately splatters against Rubi's tail and back before dripping down [rubi eir] bountiful asscheeks.");
 
-	outputText("\n\nYou immediately spin Rubi around, and [rubi ey], getting the idea, wraps [rubi eir] already cock-smeared lips around the [cockHead biggest] as your cock spasms wildly, loosing spray after spray of sweet jism into Rubi's waiting mouth.  [rubi Ey] gulps it all down ");
+	outputText("\n\nYou immediately spin Rubi around, and [rubi ey], getting the idea, wraps [rubi eir] already cock-smeared lips around the [cockHead biggest] as your cock spasms wildly, releasing spray after spray of sweet jism into Rubi's waiting mouth.  [rubi Ey] gulps it all down ");
 	if(player.cumQ() <= 50) outputText("in one go, with a small, proud look on [rubi eir] face");
 	else if(player.cumQ() <= 150) outputText("with one, throat-straining swallow, a small, proud smile taking [rubi eir] face when [rubi ey] stops panting for breath");
 	else outputText("as it comes, mouthful after mouthful of cum practically injected straight into [rubi eir] stomach. There's so much of it, [rubi ey] can't help but smile mid-way through, proud to take such a huge load");
@@ -2410,7 +2410,7 @@ private function popButtjobs():void {
 	else outputText("asshole quivers and attempts to suck in more of your thumb before clamping down, leaking slick fluids all over your hand");
 	outputText(".  [rubi Eir] entire body spasms as the climax wracks it, one sexy leg suddenly jerking back and forth uncontrollably.  Rubi grips at a pillow, biting it and stifling another orgasmic moan.");
 	//(If Rubi has Penis)
-	if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText("  Beneath [rubi em], [rubi eir] cock jerks and twitches, loosing a spray of pearly white cum which splatters against the couch below");
+	if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText("  Beneath [rubi em], [rubi eir] cock jerks and twitches, spurting a spray of pearly white cum which splatters against the couch below");
 	if(flags[kFLAGS.RUBI_BLU_BALLS] < 4) {}
 	//((blueballs 4-5)
 	else if(flags[kFLAGS.RUBI_BLU_BALLS] <= 5) outputText(" which is quickly followed by another, more powerful stream of cum, which splashes against [rubi eir] stomach, coating [rubi eir] [rubi breasts] in semen");
@@ -2424,7 +2424,7 @@ private function popButtjobs():void {
 	else outputText("churns");
 	outputText(" pleasurably, your [cock biggest] stiffens suddenly, and you let loose a long, drawn-out sigh as your dick erupts, jetting cum upwards, which immediately splatters against Rubi's tail and back before dripping down [rubi eir] bountiful asscheeks.");
 
-	outputText("\n\nYou immediately spin Rubi around, and though [rubi ey]'s still recovering from [rubi eir] own mind-wracking orgasm, [rubi ey] seems to get the idea, and wraps [rubi eir] already cock-smeared lips around the [cockHead biggest] as your cock spasms wildly, loosing spray after spray of sweet jism into Rubi's waiting mouth.  [rubi Ey] gulps it all down ");
+	outputText("\n\nYou immediately spin Rubi around, and though [rubi ey]'s still recovering from [rubi eir] own mind-wracking orgasm, [rubi ey] seems to get the idea, and wraps [rubi eir] already cock-smeared lips around the [cockHead biggest] as your cock spasms wildly, releasing spray after spray of sweet jism into Rubi's waiting mouth.  [rubi Ey] gulps it all down ");
 	if(player.cumQ() <= 50) outputText("in one go, with a small, proud look on [rubi eir] face");
 	else if(player.cumQ() <= 150) outputText("with one, throat-straining swallow, a small, proud smile taking [rubi eir] face when [rubi ey] stops panting for breath");
 	else outputText("as it comes, mouthful after mouthful of cum practically injected straight into [rubi eir] stomach. There's so much of it, [rubi ey] can't help but smile mid-way through, proud to take such a huge load");
@@ -2755,7 +2755,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 
 		//(Gaining Cat Ears)
 		if(flags[kFLAGS.RUBI_EAR_TYPE] != 1) {
-			outputText("\n\nRubi's hands dart to [rubi eir] head and [rubi ey] kneels down in pain.  For a moment, you're not sure what's wrong, and then you see it: [rubi eir] ears twist and elongate, suddenly sprouting a fine layer of white fur.  They slowly form into a triangular shape and migrate up Rubi's head until they stop, perching on top like... well like a pair of cat's ears.");
+			outputText("\n\nRubi's hands dart to [rubi eir] head and [rubi ey] kneels down in pain.  For a moment, you're not sure what's wrong, and then you see it: [rubi eir] ears twist and elongate, suddenly sprouting a fine layer of white fur.  They slowly form into a triangular shape and migrate up Rubi's head until they stop, perching on top like... well, like a pair of cat's ears.");
 			flags[kFLAGS.RUBI_EAR_TYPE] = 1;
 		}
 		//(Gaining Whiskers and Paws)

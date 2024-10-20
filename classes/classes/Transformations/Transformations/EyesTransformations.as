@@ -534,7 +534,7 @@ public class EyesTransformations extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["neon blue"]), false);
 
-				desc += "Something shift in your eyes as the level of light around you seems to increase. You go to check on what happened and discover your pupils not only changed to reptilian slits but now glow with a neon blue light. Well seeing in the dark will be easy with your <b>new dark blue iris with reptilian neon blue pupils that glow in the dark.</b>";
+				desc += "Something shift in your eyes as the level of light around you seems to increase. You go to check on what happened and discover your pupils not only changed to reptilian slits but now glow with a neon blue light. Well, seeing in the dark will be easy with your <b>new dark blue iris with reptilian neon blue pupils that glow in the dark.</b>";
 
 				player.eyes.type = Eyes.CAVE_WYRM;
 				if (doOutput) outputText(desc);

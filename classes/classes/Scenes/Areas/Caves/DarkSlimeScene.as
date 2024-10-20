@@ -74,7 +74,7 @@ public class DarkSlimeScene extends BaseContent
             outputText("\"<i>Mmmm...a prey that doesn’t resist. How delicious…. Nice body, too. Quite the catch I have found, huh. I think I will help myself.</i>\"\n\n");
         }
         else {
-            outputText("You smirk and proceed to play with the slime’s body, discarding your gear to the side as you prepare for some nice relief. However the moment your naked body comes into contact with her she swiftly uses her mass to shift the position, forcing you on your back as she now towers over you.\n\n" +
+            outputText("You smirk and proceed to play with the slime’s body, discarding your gear to the side as you prepare for some nice relief. However, the moment your naked body comes into contact with her she swiftly uses her mass to shift the position, forcing you on your back as she now towers over you.\n\n" +
             "\"<i>Hehehe… you poor idiot you thought you could just rape the rapist? I got you right where I wanted and now that you're naked I can proceed with what I had in mind, starting with making you more compliant.</i>\"\n\n" +
             "You realise the depth of your mistake as your body begins to tingle. Obviously her fluids are filled with aphrodisiacs and they began affecting you the moment you were in contact with her body. " +
             "Now that you are weakened by your own arousal the slime has no issue taking over, some of her drool falling over your chest as she slowly covers you. Eventually, you are left floating inside her body as she forces you to sit, a slimy hand holding you up. ");

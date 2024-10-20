@@ -17,7 +17,7 @@ package classes.Scenes.Dungeons.RiverDungeon
 		private function angelReactsToLustiness():void {
 			outputText("Angel with it lil helpers stops their actions clearly overflowing with lust.");
 			outputText("\n\n\"<i>Tricky one opponent. Fighting like a demon.</i>\"");
-			outputText("\n\nThe angel starts then to shine with pure white light so intense you must temporaly avert your gaze. When you look again at spot it was you could only see a bit of powder.");
+			outputText("\n\nThe angel starts then to shine with pure white light so intense you must temporarily avert your gaze. When you look again at spot it was you could only see a bit of powder.");
 			gems = 0;
 			XP = 0;
 			HP = minHP() - 1;

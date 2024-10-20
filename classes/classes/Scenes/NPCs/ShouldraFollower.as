@@ -1200,7 +1200,7 @@ public function shouldersWarnings():Boolean {
 		trace("LEVEL 2 LUST INCREASE HAPPEN");
 		//increased minimum lust +20 until Shouldra is satisfied
 		if(rand(3) == 0) {
-			outputText("\nYour [if (hasCock = true) dick is begining to get hard][if (isHerm = true)  while your ][if (hasVagina = true) cunt is getting moist with need]");
+			outputText("\nYour [if (hasCock = true) dick is beginning to get hard][if (isHerm = true)  while your ][if (hasVagina = true) cunt is getting moist with need]");
 			if(player.gender == 0) outputText("libido seems to be going haywire");
 			outputText(".  Shouldra's unfulfilled sexual needs are starting to blend into your own.  Nothing you do will satisfy your urging until she's seen to her own.\n\n<b>Minimum lust raised by 20.</b>\n");
 		}

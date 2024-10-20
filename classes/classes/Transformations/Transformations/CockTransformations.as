@@ -422,14 +422,14 @@ public class CockTransformations extends MutationsHelper {
 					var cock:int = cockIndex(index, CockTypesEnum.CANCER);
 
 					if (player.cocks.length > cock) {
-						desc += "Your [cock] begins foaming bubbles... well guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>";
+						desc += "Your [cock] begins foaming bubbles... well, guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>";
 						//(REMOVE SHEATH IF NECESSARY)
 						if (player.hasSheath())
 							desc +="[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your [cock "+(cock+1)+"]'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>";
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "your cock begins foaming bubbles... well guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>";
+						desc += "your cock begins foaming bubbles... well, guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -1093,12 +1093,12 @@ public class CockTransformations extends MutationsHelper {
 					var cock:int = cockIndex(index, CockTypesEnum.GRYPHON);
 
 					if (player.cocks.length > cock){
-						desc += "Your nethers tingle under its effect.[pg]Giving them a glimpse, the first thing that becomes obvious if that your " + cockDescript(cock) + " becames a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. ";
+						desc += "Your nethers tingle under its effect.[pg]Giving them a glimpse, the first thing that becomes obvious is that your " + cockDescript(cock) + " becomes a bit thicker, but albeit it retained its avian, tapered shape; its slightly wavy form became more straight. ";
 						desc += "It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how’ they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.";
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "your cock becames a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. " +
+						desc += "your cock becomes a bit thicker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. " +
 								"It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.";
 						player.createCock();
 					}
