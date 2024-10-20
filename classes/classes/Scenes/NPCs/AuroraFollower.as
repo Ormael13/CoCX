@@ -228,7 +228,7 @@ private function sendToFishery():void
 private function backFromFishery():void
 {
 	clearOutput();
-	outputText("Information Noone reminds your gargoyle servant no longer work at fishery.");
+	outputText("Information no one reminds your gargoyle servant no longer work at fishery.");
 	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "";

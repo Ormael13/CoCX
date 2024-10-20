@@ -426,7 +426,7 @@ import classes.lists.Gender;
 			outputText("\n\nYou roll your eyes and ask... Joy... if she's feeling fine or if there's anything you can do to help her?");
 			outputText("\n\nJoy giggles. \"<i>I feel, like, super-duper, cutie/sweetie! Right now, I just wanna go and get to know the new me... figure out what I can do with these new bits of mine.</i>\" She jiggles her breasts again. \"<i>Wow, lookit 'em bounce!</i>\" She turns and starts walking over to the stream, blissfully naked except for her bead necklace around her neck. \"<i>But, after I've had some, like, me time, well, then maybe you and the new me can get acquainted, huh, sexy?</i>\" She purrs, shaking her lusciously rounded rump at you, then sashaying off, tail waving luxuriantly from side to side.");
 			if (player.cor <= 33) outputText("\n\nYou roll your eyes, oh gods... what should you do now... you rub your temples and figure you should at least fetch some new clothes for her...");
-			else if (player.cor <= 66) outputText("\n\nYou wonder if you should go after her or not... well for the meantime you'd best fetch her some new clothes...");
+			else if (player.cor <= 66) outputText("\n\nYou wonder if you should go after her or not... well, for the meantime you'd best fetch her some new clothes...");
 			else outputText("\n\nYou're liking this new Jojo... you make a mental note to get acquainted to the new Jojo as soon as possible... for now though, you'd best fetch her some new clothes...");
 			if (silly()) outputText("\n\n<b>(Congratulations! Your Jojo has evolved into Joy. Bust size increased, Lust increased, Intelligence decreased. Joy is trying to learn how to use Sex, but Joy can't learn more than 4 moves. Should Joy forget an old move and learn Sex? Yes! 1...2...3... Poof! Joy forgot Chastity and learned Sex.)</b>");
 			else outputText("\n\n<b>(Jojo is now Joy.)</b>");
@@ -892,7 +892,7 @@ import classes.lists.Gender;
 			clearOutput();
 			outputText("You tell Joy that training your strength sounds good, and ask her how does she intend to help you with that?");
 			outputText("\n\n\"<i>Like, lemme think a moment...</i>\" She tells you, tapping her lip thoughtfully. Then she grins. \"<i>Okay; the best way to train your muscles is, like, to lift stuff? So, try lifting me.</i>\" She declares proudly.");
-			outputText("\n\nAt first you think she's joking but a second look at her makes it clear that she's serious... well it might be worth a try right? You walk towards her and loops one arm behind her back, the other one hooking behind her legs, and then you sweep her off her feet and lift her onto your arms. Joy is not that heavy to begin with, but you can see how it might be strenuous to lift her about.");
+			outputText("\n\nAt first you think she's joking but a second look at her makes it clear that she's serious... well, it might be worth a try right? You walk towards her and loops one arm behind her back, the other one hooking behind her legs, and then you sweep her off her feet and lift her onto your arms. Joy is not that heavy to begin with, but you can see how it might be strenuous to lift her about.");
 			outputText("\n\n\"<i>Eep! Be gentle, [name]!</i>\" She insists, squirming instinctively in your grip.");
 			outputText("\n\nYou smirk at her, telling her this is her idea, so you hope she won't regret this.");
 			outputText("\n\n\"<i>Like, don't worry about me. You just took me by surprise.</i>\" The bimbo mouse says, repositioning herself to be more comfortable in yours. \"<i>Okey-dokey, lift away!</i>\" She commands.");
@@ -1006,7 +1006,7 @@ import classes.lists.Gender;
 				outputText("\n\n\"<i>Oh, [name]. I do want to, like, have fun with you. But, like, I also have to give you a reason to train again. Like, I had so much fun groping and rubbing you all over,</i>\" she confesses with a sheepish grin.");
 				outputText("\n\nYou can't help but pout and call her a tease, then playfully flick her on the nose.");
 				outputText("\n\nJoy giggles and says, \"<i>Like, come train with me again [name].</i>\" Then she gives you a little peck on the cheek and skips away.");
-				outputText("\n\nWatching her go, you redress yourself and then head your seperate ways.");
+				outputText("\n\nWatching her go, you redress yourself and then head your separate ways.");
 			}
 			//Increase toughness
 			player.trainStat("tou", +1, player.trainStatCap("tou",50));
@@ -1028,7 +1028,7 @@ import classes.lists.Gender;
 				outputText("\n\nYou try your hardest, but as the surprisingly graceful mouse swings you and dips you and takes you through steps you've only heard of in stories back in Ingnam, it's no surprise that you end up accidentally dropping the entire cup onto the ground underfoot.");
 				outputText("\n\nJoy stops to gaze at the cup on the floor. \"<i>Awww... you, like, dropped the whole cup?</i>\" she asks with a pout.");
 				outputText("\n\nYou apologise, but point out you were expecting to run with her, not dance with her.");
-				outputText("\n\n\"<i>You're, like, supposed to be ready for anything... well we can always try again right?</i>\" she says with a smile.");
+				outputText("\n\n\"<i>You're, like, supposed to be ready for anything... well, we can always try again right?</i>\" she says with a smile.");
 				outputText("\n\nYou tell her that's true, and promise her you'll try and be better prepared the next time.");
 				outputText("\n\nShe giggles and gives you a little peck on the cheek for encouragement.");
 			}

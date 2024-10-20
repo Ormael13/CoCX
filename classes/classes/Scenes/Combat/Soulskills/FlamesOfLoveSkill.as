@@ -13,7 +13,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
     public function FlamesOfLoveSkill() {
         super(
             "Flames of Love",
-            "Enfuse your magic with your burning lust, transfering it to your enemy as a barrage of flames.",
+            "Enfuse your magic with your burning lust, transferring it to your enemy as a barrage of flames.",
             TARGET_ENEMY,
             TIMING_INSTANT,
             [TAG_DAMAGING, TAG_FIRE, TAG_RECOVERY, TAG_MAGICAL],
@@ -136,7 +136,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 		player.lust -= lustRestore;
 		var damage:Number = calcDamage(monster, lustRestore);
 		if (display) {
-			outputText("You concentrate on the lust flowing in your body, your veins heating up rapidly. With every beat of your heart, the heat rises, the heat in your groin transfering to the palm of your hands. \n\n");
+			outputText("You concentrate on the lust flowing in your body, your veins heating up rapidly. With every beat of your heart, the heat rises, the heat in your groin transferring to the palm of your hands. \n\n");
 			outputText("With almost orgasmic joy, you send a wave of flames toward [themonster]. ");
 		}
 		doFireDamage(damage, true, display);

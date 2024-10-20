@@ -204,7 +204,7 @@ public class Lethice extends Monster
 			// Append status effect immmunity and make Lethice immune to adapted debuff
 			for(var i:int=0; i < _statusEffects.length;i++){
 				// outputText( statusEffects[i].stype.id + " "+ statusEffects[i].value1 + " \n");
-				// Good job if you didnt use value1 for duration check
+				// Good job if you didn't use value1 for duration check
 				// Check for Shell becuz fucking
 				if(_statusEffects[i].stype.id!="Shell"){
 					var _index:int = dictOrder.indexOf(_statusEffects[i].stype.id);

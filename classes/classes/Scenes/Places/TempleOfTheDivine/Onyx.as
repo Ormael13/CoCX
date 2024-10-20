@@ -124,7 +124,7 @@ use namespace CoC;
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
 			outputText("The moment you made [onyx name]'s perfectly defined shaft you knew you would use it! You begin to slide your hand against [onyx ey] perfect pillar of maleness in order to wake it up. [onyx name]'s reaction is immediate as [onyx ey] cock grows erect within seconds, as hard as diamond and ready for your use");
-			if (!player.isGargoyle()) outputText(". Well not so ready yet... there's still the need for lubrication");
+			if (!player.isGargoyle()) outputText(". Well, not so ready yet... there's still the need for lubrication");
 			outputText(". You lower your head and proceed to suck on [onyx name]'s perfect cock");
 			if (!player.isGargoyle()) outputText(", liberally coating the entire length with your saliva");
 			outputText(". [onyx name] shivers in delight at your expert cocksucking, but you’re not done yet. You move yourself into position and slowly begin to insert the hard tool inside your [cunt] ");

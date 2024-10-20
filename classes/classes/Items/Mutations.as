@@ -1684,7 +1684,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         player.slimeFeed();
         clearOutput();
-        outputText("The pepper taste and feels like trying to eat snow and ice. However you eat it anyway still feeling a cold tingling in your mouth.");
+        outputText("The pepper taste and feels like trying to eat snow and ice. However, you eat it anyway still feeling a cold tingling in your mouth.");
         if (rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
             outputText("[pg]You feel raw bestial power coursing through you.");
             changes++;
@@ -3923,7 +3923,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.horns.type == Horns.COW_MINOTAUR) {
                     if (player.horns.count < 5) {
                         //Fems horns don't get bigger.
-                        outputText("[pg]Your small horns get a bit bigger, stopping as medium sized nubs.");
+                        outputText("[pg]Your small horns get a bit bigger, stopping as medium-sized nubs.");
                         player.horns.count += 1 + rand(2);
                         changes++;
                     }
@@ -4627,7 +4627,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         if (type == 0) outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your [skin.type] slowly.");
-        if (type == 2) outputText("Well here goes nothing, you gulp down the thing and sure enough, you begin to feel strange as you ingest the jelly. Well at least it tastes like grapes.");
+        if (type == 2) outputText("Well here goes nothing, you gulp down the thing and sure enough, you begin to feel strange as you ingest the jelly. Well, at least it tastes like grapes.");
         //Stat changes
         //libido up to 80
         if (changes < changeLimit && MutagenBonus("lib", 3)) {
@@ -6088,7 +6088,7 @@ public final class Mutations extends MutationsHelper {
                 //temp3 stores how many rows are changed
                 temp3 = 0;
                 for (var k:Number = 0; k < player.breastRows.length; k++) {
-                    //If this row is over threshhold
+                    //If this row is over threshold
                     if (player.breastRows[k].breastRating > temp2) {
                         //Big change
                         if (player.breastRows[k].breastRating > 10) {
@@ -6426,7 +6426,7 @@ public final class Mutations extends MutationsHelper {
                 //temp3 stores how many rows are changed
                 temp3 = 0;
                 for (var k:Number = 0; k < player.breastRows.length; k++) {
-                    //If this row is over threshhold
+                    //If this row is over threshold
                     if (player.breastRows[k].breastRating > temp2) {
                         //Big change
                         if (player.breastRows[k].breastRating > 10) {
@@ -6685,7 +6685,7 @@ public final class Mutations extends MutationsHelper {
                 //temp3 stores how many rows are changed
                 temp3 = 0;
                 for (var k:Number = 0; k < player.breastRows.length; k++) {
-                    //If this row is over threshhold
+                    //If this row is over threshold
                     if (player.breastRows[k].breastRating > temp2) {
                         //Big change
                         if (player.breastRows[k].breastRating > 10) {
@@ -6907,7 +6907,7 @@ public final class Mutations extends MutationsHelper {
         //Text go!
         clearOutput();
 
-        outputText("As you close your eyes and savor the fruit you feel somewhat weird. Looking around you realise you unconsciously moved 10 feet from your original location. Well you have seen weirder things.");
+        outputText("As you close your eyes and savor the fruit you feel somewhat weird. Looking around you realise you unconsciously moved 10 feet from your original location. Well, you have seen weirder things.");
 
         //Speed raises up to 75
         if (rand(3) == 0 && changes < changeLimit && transformations.MutagenSpdCat.isPossible()) {
@@ -6974,7 +6974,7 @@ public final class Mutations extends MutationsHelper {
                 //temp3 stores how many rows are changed
                 temp3 = 0;
                 for (var k:Number = 0; k < player.breastRows.length; k++) {
-                    //If this row is over threshhold
+                    //If this row is over threshold
                     if (player.breastRows[k].breastRating > temp2) {
                         //Big change
                         if (player.breastRows[k].breastRating > 10) {
@@ -7424,7 +7424,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
-        outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
+        outputText("You uncork the hip flask and drink it down.  The taste is actually quite good, like alcohol but with a little fire within.  Just as you expected, it makes you feel all hot and ready to take the whole world head-on.");
 		DrunkenPowerEmpowerIfPossible();
 		AelfwineEmpowerIfPossible();
         //Statistical changes:
@@ -7814,7 +7814,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
-        outputText("You uncork the bottle and drink it down.  The taste is actualy quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?");
+        outputText("You uncork the bottle and drink it down.  The taste is actually quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?");
 		DrunkenPowerEmpowerIfPossible();
 		AelfwineEmpowerIfPossible();
         //Statistical changes:
@@ -10719,7 +10719,7 @@ public final class Mutations extends MutationsHelper {
             if (rand(2) == 0) changeLimit++;
             if (rand(2) == 0) changeLimit++;
             changeLimit += player.additionalTransformationChances;
-            outputText("As you admire the shiny jewel, the wind around you suddenly becomes stronger on sending debris around, before a sudden blade of winds runs through your body leaving a bleeding cut! Rather then pain the fresh wound begins to throb with increasing pleasure. You let out a howling moan, the jewel crumbles to dust before the feeling slowly subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
+            outputText("As you admire the shiny jewel, the wind around you suddenly becomes stronger on sending debris around, before a sudden blade of winds runs through your body leaving a bleeding cut! Rather than pain the fresh wound begins to throb with increasing pleasure. You let out a howling moan, the jewel crumbles to dust before the feeling slowly subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
         //Stats
         if (rand(4) == 0 && changes < changeLimit && MutagenBonus("lib", 3)) {
@@ -13415,7 +13415,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-Decrease muscle tone toward 30
         if (player.tone >= 30 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]Your muscle start to vanish but strangely you didn't lose strength or gain any weight. Well that was weird.");
+            outputText("[pg]Your muscle start to vanish but strangely you didn't lose strength or gain any weight. Well, that was weird.");
             player.tone -= 3;
             changes++;
         }
@@ -13789,7 +13789,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-Decrease muscle tone toward 30
         if (player.tone >= 30 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]Your muscle start to vanish but strangely you didn't lose strength or gain any weight. Well that was weird.");
+            outputText("[pg]Your muscle start to vanish but strangely you didn't lose strength or gain any weight. Well, that was weird.");
             player.tone -= 3;
             changes++;
         }
@@ -14467,7 +14467,7 @@ public final class Mutations extends MutationsHelper {
         //Read body + Wings slot
         if (player.hairType == Hair.SNOWY && player.faceType == Face.YUKI_ONNA && player.arms.type == Arms.YUKI_ONNA && player.lowerBody == LowerBody.YUKI_ONNA && player.rearBody.type != RearBody.GLACIAL_AURA && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]Cold… so cold! You ball yourself up, trying to get some heat but no matter how much you try it gets colder and colder. Just as you think you are about to freeze to death it stops. You look around you in confusion. The air is chilling yet you don't feel it. The ice at your feet covered up with snow and somehow you know deep down if you wanted you could conjure out a blizzard. ");
-            outputText("Furthermore you feel lighter then the air now and, as if to demonstrate your new powers, you allow yourself to be carried by the icy wind achieving a form of levitation. Well it seems you are full Yuki Onna now. <b>You gained a Glacial aura and the ability to levitate!</b>");
+            outputText("Furthermore you feel lighter then the air now and, as if to demonstrate your new powers, you allow yourself to be carried by the icy wind achieving a form of levitation. Well, it seems you are full Yuki Onna now. <b>You gained a Glacial aura and the ability to levitate!</b>");
             transformations.WingsLevitation.applyEffect(false);
             transformations.RearBodyGlacialAura.applyEffect(false);
             changes++;
@@ -14790,7 +14790,7 @@ public final class Mutations extends MutationsHelper {
         }
         //BREATH WEAPON
         if (player.isRace(Races.SEA_DRAGON, 1, false) && changes < changeLimit && !player.hasPerk(PerkLib.DragonWaterBreath)) {
-            outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself accompanyed by a geyser of steaming water... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small steaming crater you have literally blasted into the landscape with a mixture of awe and surprise.");
+            outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself accompanied by a geyser of steaming water... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small steaming crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("[pg]It seems some kind of power has awakened within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon Water breath!</b>)");
             player.createPerk(PerkLib.DragonWaterBreath, 0, 0, 0, 0);
             changes++;
@@ -15064,7 +15064,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
-        outputText("You prepare the tea using grass you acquired and then drinks it. Its sharp taste fires up your palate and in moments, you find yourself more mentaly and physicaly sharp, just like a blade.");
+        outputText("You prepare the tea using grass you acquired and then drink it. Its sharp taste fires up your palate, and in moments, you find yourself more mentally and physically sharp, just like a blade.");
 
         //Statistical changes:
         //-Raises speed to 100.
@@ -15746,7 +15746,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
         else transformations.EyesChangeColor(["pure blue"]).applyEffect(false);
         if (!player.hasPerk(PerkLib.Phylactery)) {
-            outputText("Finaly your soul begins to resonate with your next form, its power coalescing into a large gem that manifests on your toso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina's own gem come to think of it.\n\n");
+            outputText("Finally your soul begins to resonate with your next form, its power coalescing into a large gem that manifests on your torso. Well, you didn't have a phylactery before, but I guess that's a thing now? It reminds you of Alvina's own gem, come to think of it.\n\n");
             player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
         }
         outputText("As Alvina herself declared, Want becomes so much more when used not for oneself but others.");
@@ -17130,7 +17130,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You eat the kelp and a deep chill runs across your body as something in you begins to change.");
         if (player.blockingBodyTransformations()) {
-            outputText("[pg]Or rather normaly it would but since you are seldom immunised to transformatives nothing happens.");
+            outputText("[pg]Or rather normally it would, but since you are seldom immunized to transformatives, nothing happens.");
         }
         if (!player.blockingBodyTransformations()) {
             //spe change
@@ -17347,7 +17347,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You bite into the candy, your mouth foaming small sweet bubbles. Your body seems to react to it as you begin to change.");
         if (player.blockingBodyTransformations()) {
-            outputText("[pg]Or rather normaly it would but since you are seldom immunised to transformatives nothing happens.");
+            outputText("[pg]Or rather normally it would, but since you are seldom immunized to transformatives, nothing happens.");
         }
         if (!player.blockingBodyTransformations()) {
             //str change
@@ -17513,7 +17513,7 @@ public final class Mutations extends MutationsHelper {
 
     public function calamariSteak(player:Player):void {
         clearOutput();
-        outputText("Munching down on the cooked squid, you find it to be tender and slimy. However it fills your stomach quite well.");
+        outputText("Munching down on the cooked squid, you find it to be tender and slimy. However, it fills your stomach quite well.");
         player.refillHunger(45);
     }
 

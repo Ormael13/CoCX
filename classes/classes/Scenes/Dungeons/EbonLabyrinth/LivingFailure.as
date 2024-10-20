@@ -19,7 +19,7 @@ use namespace CoC;
 	public class LivingFailure extends Monster
 	{
 		private function livingFailureLustTransferance():void {
-			outputText("The thing waves a sign at you and you realise to your horror that it opened an arcane connection to your mind, some of its overflowing lust transfering straith into your body!\n\n");
+			outputText("The thing waves a sign at you and you realise to your horror that it opened an arcane connection to your mind, some of its overflowing lust transferring straight into your body!\n\n");
 			var bonus:int = 0;
 			if (player.hasCock()) bonus++;
 			if (player.hasVagina()) bonus++;
@@ -44,7 +44,7 @@ use namespace CoC;
 		}
 		
 		private function livingFailurePrimalDemonfire():void {
-			outputText("The demon four hands wave this sign as his cocks and vaginas erupts in a real deluge of black cum, the unholy fluid floating in the air and forming a massive ball of black liquid corruption which ignites like oil into a black flame flying straiths at you.\n\n");
+			outputText("The demon four hands wave this sign as his cocks and vaginas erupts in a real deluge of black cum, the unholy fluid floating in the air and forming a massive ball of black liquid corruption which ignites like oil into a black flame flying straight at you.\n\n");
 			if (!player.getEvasionRoll()) {
 				var damage:Number = eBaseIntelligenceDamage();
 				damage += eBaseWisdomDamage();

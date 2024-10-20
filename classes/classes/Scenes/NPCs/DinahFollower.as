@@ -92,7 +92,7 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (rand(2) == 0) _roulette3 = rand(5);
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {// && !flags[kFLAGS.DINAH_ATTACKED_TODAY]
-				outputText("\"<i>The coin told me to <b>cuddle</b> you.</i>\" her smile becomes even wider. You've got a <b>very</b> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
+				outputText("\"<i>The coin told me to <b>cuddle</b> you.</i>\" Her smile becomes even wider. You've got a <b>very</b> bad feeling about this. It looks like there is no other choice. You've gotta beat some sense into her before getting back to business.");
 				//flags[kFLAGS.DINAH_ATTACKED_TODAY] = 1;
 				startCombat(new Dinah());
 			}
@@ -105,7 +105,7 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			var atCamp:Boolean = (flags[kFLAGS.DINAH_LVL_UP] > 0.5);
 			var weather_choice:Array = ["sunny", "rainy", "snowy", "windy", "dankest", "reeking with undistilled lust"];
 			clearOutput();
-			if (atCamp) outputText("\"<i>What can I do for you, [name], this " + randomChoice(weather_choice) + " day?</i>\" Dinha asks you with a disturbingly wide and briliant smile on her face.");
+			if (atCamp) outputText("\"<i>What can I do for you, [name], this " + randomChoice(weather_choice) + " day?</i>\" Dinha asks you with a disturbingly wide and brilliant smile on her face.");
 			else outputText("\"<i>Will you gaze at me the whole day or will you buy something?</i>\" They grumble to themselves.");
 			menu();
 			addButton(2, "Shop", DinahShopMainMenu);

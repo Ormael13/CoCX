@@ -16,7 +16,7 @@ package classes.Scenes.Monsters
 		private function angelReactsToLustiness():void {
 			outputText("Angeloid stops their actions clearly overflowing with lust.");
 			outputText("\n\n\"<i>Sinner!!! We.Must.Contact.Supreviser.</i>\"");
-			outputText("\n\nThe angeloid starts to burn more and more intense causing you to temporaly avert your gaze. When you look again at spot it was you could only see a bit of ashes.");
+			outputText("\n\nThe angeloid starts to burn more and more intense causing you to temporarily avert your gaze. When you look again at spot it was you could only see a bit of ashes.");
 			gems = 0;
 			XP = 0;
 			HP = minHP() - 1;

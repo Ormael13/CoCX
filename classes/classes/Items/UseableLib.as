@@ -25,10 +25,10 @@ use namespace CoC;
 			"You look over the perfect diamond. Likely worth a lot of gems.");
 		public const G_INGOT:SimpleUseable = new SimpleUseable("G.Ingot", "Gold ingot", "a Gold ingot", 800,
 			"A Gold ingot.",//weight around 11-13 kg
-			"You look over the Gold ingot. Likely useful for making some accesories.");
+			"You look over the Gold ingot. Likely useful for making some accessories.");
 		public const S_INGOT:SimpleUseable = new SimpleUseable("S.Ingot", "Silver ingot", "a Silver ingot", 200,
 			"A Silver ingot.",//weight around 3-3,2 kg
-			"You look over the Silver ingot. Likely useful for making some accesories.");
+			"You look over the Silver ingot. Likely useful for making some accessories.");
 		public const COP_ORE:SimpleUseable = new SimpleUseable("Cop.Ore", "Copper ore", "a Copper ore", 40,
 			"A Copper ore.",
 			"You look over the chunk of Copper ore. Likely useful for making some equipment.");

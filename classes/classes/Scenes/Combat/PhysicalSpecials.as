@@ -45,7 +45,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
 			if (player.isFlying() == monster.isFlying()) {
 				if (player.hasPerk(PerkLib.PowerAttack)) {
-					bd = buttons.add("PowerAttack", powerAttack).hint("Do a single way more powerfull wrath-enhanced melee strike.");
+					bd = buttons.add("PowerAttack", powerAttack).hint("Do a single way more powerful wrath-enhanced melee strike.");
 					if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Attack (below 1%)");
 					else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
@@ -428,7 +428,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			}
 			if (player.hasPerk(PerkLib.PowerShot)) {
-				bd = buttons.add("Power Shoot", powerShoot).hint("Do a single way more powerfull wrath-enhanced range strike.");
+				bd = buttons.add("Power Shoot", powerShoot).hint("Do a single way more powerful wrath-enhanced range strike.");
 				if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Shot (below 1%)");
 				else if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Crossbow" && player.weaponRangePerk != "Throwing") {
 					bd.disable("<b>You need to use bow, crossbow or throwing weapon before you can use Power Shoot.</b>\n\n");
@@ -461,7 +461,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			//Drink
 			if (player.countMiscJewelry(miscjewelries.ONI_GOURD) > 0) {
-				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
+				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additional effects on an oni.");
 			}
 			//Whip Grapple
 			if (player.hasPerk(PerkLib.PrestigeJobBindmaster) && (player.isWeaponsForWhipping() || player.weapon == weapons.D_FLAIL)) {
@@ -731,7 +731,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.requireMana(spellCost(80));
 			}
 			if (player.hasPerk(PerkLib.PowerShot)) {
-				bd = buttons.add("Power Shoot", powerShoot).hint("Do a single way more powerfull wrath-enhanced range strike.");
+				bd = buttons.add("Power Shoot", powerShoot).hint("Do a single way more powerful wrath-enhanced range strike.");
 				if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Shot (below 1%)");
 				else if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Crossbow" && player.weaponRangePerk != "Throwing") {
 					bd.disable("<b>You need to use bow, crossbow or throwing weapon before you can use Power Shoot.</b>\n\n");
@@ -762,7 +762,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.shieldName == "Battle Net") {
-				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. Enemies flying using wings would temporaly be grounded. (cooldown of 5 rounds before it can be used again)");
+				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. Enemies flying using wings would temporarily be grounded. (cooldown of 5 rounds before it can be used again)");
 				if (player.hasStatusEffect(StatusEffects.CooldownNet)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
 				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -3824,10 +3824,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//WRAP IT UPPP
 		if((40 + rand(player.spe) > monster.spe) || player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 3) {
 			if(monster.plural) {
-				outputText("Thinking for a moment you proceed to rush for the mob grappling as many as you can in your eight powerfull tentacle as you prepare to squeeze them.");
+				outputText("Thinking for a moment you proceed to rush for the mob grappling as many as you can in your eight powerful tentacle as you prepare to squeeze them.");
 			}
 			else {
-				outputText("You grab your foe with your powerfull tentacle entangling legs and arms in order to immobilize it.");
+				outputText("You grab your foe with your powerful tentacle entangling legs and arms in order to immobilize it.");
 			}
 			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) monster.createStatusEffect(StatusEffects.ConstrictedScylla, 4 + rand(3),0,0,0);
 			else monster.createStatusEffect(StatusEffects.ConstrictedScylla, 3 + rand(3),0,0,0);
@@ -5812,7 +5812,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
 		if (CoC.instance.mutations.CanDrunkenPowerEmpower()) {
-			outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+			outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alcoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
 			CoC.instance.mutations.DrunkenPowerEmpower();
 		}
 		enemyAI();

@@ -193,12 +193,12 @@ public class NightmareScene extends BaseContent
 			else if (player.blockingBodyTransformations() && player.hasVagina()){
 				if (player.isGargoyle())
 					outputText("The centauress trots around you then humph in frustration." +
-					"\n\n\"<i>Doesnt mather if you have a cunt, with a body like that there's no way I could properly impregnate you!</i>\"\n\n" +
+					"\n\n\"<i>Doesn't matter if you have a cunt, with a body like that there's no way I could properly impregnate you!</i>\"\n\n" +
 					"Can't impregnate a stone slab eh? though luck." +
-					"\n\nAs if reading your thought the centaur ram a hoof into your stomach brutaly pinning you on the ground. \"<i>You think your womb is the only thing that mather here? I said I can't impregnate you, I never said I couldn't FUCK you silly, and fuck you silly I will!</i>\"\n\n");
+					"\n\nAs if reading your thought the centaur ram a hoof into your stomach brutaly pinning you on the ground. \"<i>You think your womb is the only thing that matter here? I said I can't impregnate you, I never said I couldn't FUCK you silly, and fuck you silly I will!</i>\"\n\n");
 				else
 					outputText("The centauress trots around you then shrugs." +
-					"\n\n\"<i>Immune to transformation are you? Doesn't mather to me, your body won't change from it but any contact with my cum will make you just right. Just because you can't be changed doesn't mean you can't be properly corrupted, and I need a corrupted vessel for bearing my offsprings. About that... you got a pussy already wich is very conveniant seeing as I wouldn't be able to grow you a new one if you didn't.</i>\"\n\n");
+					"\n\n\"<i>Immune to transformation are you? Doesn't matter to me, your body won't change from it but any contact with my cum will make you just right. Just because you can't be changed doesn't mean you can't be properly corrupted, and I need a corrupted vessel for bearing my offsprings. About that... you got a pussy already wich is very conveniant seeing as I wouldn't be able to grow you a new one if you didn't.</i>\"\n\n");
 				outputText(" You try to meekly crawl away, but the centauress is too fast for you. She has you easily pinned to the ground by her hoof as she lowers herself on your prone body aligning her meat with your hole. You try to scream for help, but she cuts the air out with a swift blow now squeezing you between her horse body and the grass. You can only beg her as you feel her flare prod for the entrance of your cunt, smearing pre on your slit, she's clearly going to break you. ");
 				outputText("You ready a scream as her cock forces your lips apart but to your complete surprise her massive monster seamlessly slide in without further resistance. She begins to buck in and out filling you way past the cervix and, to your dismay, you actually realise you’re enjoying this.\n\n");
 				outputText("\"<i>My horn can penetrate anything, from the tightest pussy to the loosest hole. Leave it to me, and I will turn you into a mess of pleasure.</i>\"\n\n");

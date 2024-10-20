@@ -137,7 +137,7 @@ private function hairDresserGreeting():void {
 	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText(images.showImage("location-salon"));
-	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling, and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling impliments.  It reminds you of the hair-cutter's shop in your hometown.");
+	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling, and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling implements.  It reminds you of the hair-cutter's shop in your hometown.");
 	outputText("\n\nThere are a few chairs along the wall and goblins with latex dresses and gloves looking bored.  At the sight of you they perk up and clamor around you excitedly, until one with a gravity-defying chest pushes them apart and greets you.");
 	outputText("   \"<i>I apologize for my daughters,</i>\" she says as she presses herself against you.  \"<i>They're a bunch of brainless hussies for the most part.  My name is Lynnette, and welcome to my salon!  You want your hair cut or lengthened?  We've got you covered, and we don't ask for much - just a shot of cum.");
 	if(player.cockTotal() == 0) {
@@ -285,7 +285,7 @@ private function gloryholeDoggie():void {
 		dynStats("lus", 25, "cor", .25);
 	}
 	else {
-		outputText("You throw yourself onto the swollen dog-cock and easily engulf the whole thing, spreading your lips wide around the thick knot.  You can feel it bouncing the uvula in your throat around, but you manage to supress your gag reflex like a good slut while you work the sweaty dick, giving it a thorough tongue bath.  You wrap your lips around the base of the knot, feeling it start to stretch your jaws apart.  You pull back before it can lock you like that, and squeeze the knot in your hands.  It cums, unloading thick wads of gooey cum into your mouth.\n\n");
+		outputText("You throw yourself onto the swollen dog-cock and easily engulf the whole thing, spreading your lips wide around the thick knot.  You can feel it bouncing the uvula in your throat around, but you manage to suppress your gag reflex like a good slut while you work the sweaty dick, giving it a thorough tongue bath.  You wrap your lips around the base of the knot, feeling it start to stretch your jaws apart.  You pull back before it can lock you like that, and squeeze the knot in your hands.  It cums, unloading thick wads of gooey cum into your mouth.\n\n");
 		dynStats("lus", 30, "cor", .3);
 	}
 	player.refillHunger(10);
@@ -496,18 +496,18 @@ private function changeHairStyle():void {
 	outputText("What hairstyle would you like?");
 	menu();
 
-	addButton(0, "Normal", chooseHairStyleFinalize, 0).hint("The standard straith cut.");
+	addButton(0, "Normal", chooseHairStyleFinalize, 0).hint("The standard straight cut.");
 	addButton(1, "Wild", chooseHairStyleFinalize, 1).hint("Ruffle and shuffle this hair some.");
 	addButton(2, "Ponytail", chooseHairStyleFinalize, 2).hint("The basic ponytail, a classic.");
 	addButton(3, "G.Tress", chooseHairStyleFinalize, 3).hint("A very long tress that reach all the way to ground level, favored by martial artist all around Mareth.");
 	addButton(4, "Twintails", chooseHairStyleFinalize, 4).hint("What's cuter then twintails realy?");
-	addButton(5, "Dwarven", chooseHairStyleFinalize, 5).hint("A traditionnal dwarven female haircut.");
+	addButton(5, "Dwarven", chooseHairStyleFinalize, 5).hint("A traditional dwarven female haircut.");
 	addButton(6, "Snow Lily", chooseHairStyleFinalize, 6).hint("A nowaday rare haircut mostly seen amonst people of the long-lost snow kingdom.");
 	addButton(7, "Wind Braid", chooseHairStyleFinalize, 7).hint("The four wind braid seen almost seldomly amonst student of the now near extinct four wind school.");
 	addButton(8, "Wind Long", chooseHairStyleFinalize, 8).hint("The four wind long hair cut seen almost seldomly amonst student of the now near extinct four wind school.");
 	addButton(9, "Taur Tail", chooseHairStyleFinalize, 9).hint("A haircut favored by centaur maidens. Hairs are tied into a single long ponytail not unlike a horse tail itself");
 	addButton(10, "Twin Ribbon", chooseHairStyleFinalize, 10).hint("An haircut which apparently was very popular amonst less masculine mens from the old kingdom before lethice became the current ruler. It has a feminine touch that works on either a man or a woman.");
-	addButton(11, "Desert Grace", chooseHairStyleFinalize, 11).hint("A common haircut favored by the denisen of the desert. It is well known for its two long straith bangs.");
+	addButton(11, "Desert Grace", chooseHairStyleFinalize, 11).hint("A common haircut favored by the denisen of the desert. It is well known for its two long straight bangs.");
 
 	addButton(14, "Back", salonPurchaseMenu);
 }

@@ -229,7 +229,7 @@ use namespace CoC;
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "Your fighting a… Just what the actual fuck are you fighting actualy! This thing is a nightmarish combo between a giant spider and a tentacle beast except it lacks the dick and pussy instead settling for a tentacled face barely hiding two fangs dripping with venom. ";
+			str += "Your fighting a… Just what the actual fuck are you fighting actually! This thing is a nightmarish combo between a giant spider and a tentacle beast except it lacks the dick and pussy instead settling for a tentacled face barely hiding two fangs dripping with venom. ";
 			str += "The creature black carapace seems to be covered in blinking red eyes watching and blinking. Everything about this horror screams madness and a terrible end should it manage to overpower you, the many silk cocoons in the chamber can attest to that!";
 			return str;
 		}

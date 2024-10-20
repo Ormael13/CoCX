@@ -241,7 +241,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			flags[kFLAGS.TIFA_FOLLOWER] = 6;
 			flags[kFLAGS.TIFA_AFFECTION] = 1;
 			outputText("As you put an end to the life of the fallen bee queen, the princesses and the remaining guards fill the room, looking at the scene with grief. Bridgess talks first.\n\n");
-			outputText("\"<i>Mother izzz dead, thizzz izzz a terrible day for all of uzzz. However azzz the eldezzzt it izzz my rezzzponsability to take up to the tazzzk of queen in her zzztead.</i>\"\n\n");
+			outputText("\"<i>Mother izzz dead, thizzz izzz a terrible day for all of uzzz. However, azzz the eldezzzt it izzz my rezzzponsability to take up to the tazzzk of queen in her zzztead.</i>\"\n\n");
 			outputText("She walks up to you and does a formal gesture.\n\n");
 			outputText("\"<i>You have our thankzzz for zzzaving our hive from corruption and azzz zzzuch I will give you permizzzion to have free pazzzage into the Hive and trade with my honeybrewerzzz for our zzzpecializzzed goodzzz. For now, pleazzze leave, I need zzzome time to mourn my motherzzz death.</i>\"\n\n");
 			outputText("You are escorted out of the Hive but just as you are about to go back to camp, Tifa grabs your arm.\n\n");

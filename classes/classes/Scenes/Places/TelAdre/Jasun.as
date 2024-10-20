@@ -263,7 +263,7 @@ private function notSteal():void {
 
 private function jasunGachi():void {
     clearOutput();
-    outputText("Jasun is sitting on the bench facing you, dressed in leather pants. Noticing your bizzare clothing, he scowls and rises up from the bench abruptly:");
+    outputText("Jasun is sitting on the bench facing you, dressed in leather pants. Noticing your bizarre clothing, he scowls and rises up from the bench abruptly:");
     outputText("\n\"<i>Hey buddy, I think you've got the wrong door, the leather club is two blocks down.</i>\"");
 
     outputText("\n\nDisgruntled by your sudden rudeness, you respond: \"<i>Fuck you!.</i>\"");

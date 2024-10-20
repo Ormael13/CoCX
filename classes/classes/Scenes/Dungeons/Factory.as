@@ -1029,7 +1029,7 @@ use namespace CoC;
 			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			outputText("The demon pouts at you. <i>Fiiiiine. All I've got on me is some processed lethicite. You'll need my help to absorb it.</i> The demoness reaches into her incredible skimpy chest band and pulls out a vial she had somehow managed to conceal there.\n\nShe unscrews the top, and then holds it before her and blows across it. A cloud of sparkling purplish black powder burst from the vial, flying right at you!");
-			outputText("\n\nYou stumble back in surprise, as the demoness makes a quick arcane gesture. The cloud glows, and then flies at your face, flowing into your mouth and nose before you can react.\n\n Your vision flashes purple, and a burning heat seems to spread through both your body and soul.\n\nThe heat in your body quickly turns into arousal, but the heat in your soul mostly dissapears - though what remains makes it feel like your soul is aroused! You realize that <b>your sex drive is increasing your soulforce, and you feel more demonic!</b>\n(Perk Gained - Demonic Lethicite - Soulforce increased and you are permanently slightly demonic!)");
+			outputText("\n\nYou stumble back in surprise, as the demoness makes a quick arcane gesture. The cloud glows, and then flies at your face, flowing into your mouth and nose before you can react.\n\n Your vision flashes purple, and a burning heat seems to spread through both your body and soul.\n\nThe heat in your body quickly turns into arousal, but the heat in your soul mostly disappears - though what remains makes it feel like your soul is aroused! You realize that <b>your sex drive is increasing your soulforce, and you feel more demonic!</b>\n(Perk Gained - Demonic Lethicite - Soulforce increased and you are permanently slightly demonic!)");
 			dynStats("lus",player.maxLust);
 			player.createPerk(PerkLib.DemonicLethicite,0,0,0,0);
 			postOmnibusBoon();
@@ -1376,7 +1376,7 @@ use namespace CoC;
 			//Tits – regular
 			if(player.biggestLactation() < 1) outputText("Your " + nippleDescript(0)  + "s begin prodding painfully against your [armor], every touch serving to make them harder and more erect.  ");
 			//Tits – lactating
-			if(player.biggestLactation() >= 1 && player.biggestLactation() < 3) outputText("Your " + nippleDescript(0) + "s get painfully hard as you feel milk begin backing up inside your [allbreasts].   The succubus glances down mischieviously as her hands begin to grope you through your [armor], squeezing out a few drops of milk.  ");
+			if(player.biggestLactation() >= 1 && player.biggestLactation() < 3) outputText("Your " + nippleDescript(0) + "s get painfully hard as you feel milk begin backing up inside your [allbreasts].   The succubus glances down mischievously as her hands begin to grope you through your [armor], squeezing out a few drops of milk.  ");
 			//Tits – megalactating
 			if(player.biggestLactation() >= 3) outputText("Your " + nippleDescript(0) + "s get painfully hard as milk begins drooling down your over-productive chest, making your [armor] slide across your leaky milk-spouts in an agonizingly pleasurable way.  ");
 			//Cock – single
@@ -1810,7 +1810,7 @@ use namespace CoC;
 				}
 			}
 			if (!player.hasKeyItem("Cock Milker: Anal Attachment") && player.hasKeyItem("Cock Milker - Installed At Whitney's Farm")) {
-				outputText("You see a box in the bottom of the cupboard you didnt notice before and go to open it up. Inside you find a strange device that looks like it may be part of a Cock Milker.\n\nDo you take the Cock Milker: Anal Attachment?\n\n");
+				outputText("You see a box in the bottom of the cupboard you didn't notice before and go to open it up. Inside you find a strange device that looks like it may be part of a Cock Milker.\n\nDo you take the Cock Milker: Anal Attachment?\n\n");
 				addButton(1, "Anal Attachment", takeAnalAttachment);
 			}
 			outputText("The only exit is back to the south.");

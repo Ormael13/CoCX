@@ -195,7 +195,7 @@ public class AlrauneScene extends BaseContent
 				+ "\n"
 				+ "“<i>Ahhhn... Yesss!! Delicious!… it's my turn .. AAAAhhh!... to use your parts.</i>”\n"
 				+ "\n"
-				+ "True to her word, you soon feel a vine prodding up your [butt]. You vividly recall that bees drink and use the nectars of flowers and in exchange help those same flowers reproduce by spreading their pollen around. Well you don’t care anymore, you are too busy lapping on the Alraune’s juicy snatch and delicious nectar to bother when her vine forcefully penetrates your ass.");
+				+ "True to her word, you soon feel a vine prodding up your [butt]. You vividly recall that bees drink and use the nectars of flowers and in exchange help those same flowers reproduce by spreading their pollen around. Well, you don’t care anymore, you are too busy lapping on the Alraune’s juicy snatch and delicious nectar to bother when her vine forcefully penetrates your ass.");
 			player.buttChange(30, true);
 			outputText("You moan in delight in the pleasured Alraune pussy as you both get each other off. The plant woman has a dreamy stare as she both fucks your ass and gets licked at the same time, her mouth drooling mindlessly. While you are in your nectar haze you do not notice a second vine seeking out for your pussy and going in. One is fine but two is way too much and you swiftly lose yourself to your lust as the Alraune fucks you full of liquid pollen. You both pass out exhausted a few minutes later.\n"
 				+ "\n"

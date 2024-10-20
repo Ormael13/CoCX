@@ -208,7 +208,7 @@ private function futaTentacleEpilogue():void {
 
 	private function alrauneLoss():void {
 		clearOutput();
-		outputText("The tentacle beast at first is confused, mainly because it’s body fails to detect an actual mammal. It occurs to you that you both, are in theory, plants. Well there's no such thing as incest amongst flowers, what’s this moron waiting for?");
+		outputText("The tentacle beast at first is confused, mainly because it’s body fails to detect an actual mammal. It occurs to you that you both, are in theory, plants. Well, there's no such thing as incest amongst flowers, what’s this moron waiting for?");
 		if (player.isLiliraune()){
 			outputText("You and your twin both agree this guy has to man up and take charge.\n\n" +
 				"\"<i>What are you waiting for you degenerate?</i>\"\n\n" +

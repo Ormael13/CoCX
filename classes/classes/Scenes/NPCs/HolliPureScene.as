@@ -135,7 +135,7 @@ public function plantGrowsToLevel2():void {
 	outputText("\n\nYour skin flushes as you react to the view.");
 	if(player.gender == 0) outputText("  Sucks to be it!  You don't waste time with stupid shit.");
 	outputText("  Is this really Marae's gift?");
-	if(player.gender > 0) outputText("  Well, you could make use of this build up arousal on someone... just being around it seems to slowly turn you on.");
+	if(player.gender > 0) outputText("  Well, you could make use of this built-up arousal on someone... just being around it seems to slowly turn you on.");
 	outputText("  Of course, destroying it would be the safest option.");
 	dynStats("lus", 33, "scale", false);
 	if(silly()) outputText("\n\n<b>What do?</b>");

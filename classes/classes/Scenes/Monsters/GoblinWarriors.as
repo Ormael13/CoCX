@@ -132,7 +132,7 @@ public class GoblinWarriors extends Goblin
 			this.imageName = "goblinwarrior";
 			this.long= "The group is composed of roughly eighteen goblins before you that are slightly taller than most of the goblins and their hair are a deep red hue. Unlike most goblins you've seen, this ones are well armed. The small group wearing a metal breastplate and wielding a shortsword in right hand and a wooden shield in left hand. Between them there is one female goblin that is much taller then rest been almost as tall as typical human, wearing what appears to be snakeskin across her shoulders. You spot an odd patch that reads, \"<i>31st South Warriors Company: Breeding Studs</i>\" on her shoulder.";
 			this.plural = true;
-			if (player.hasCock()) this.long += "\n\n  They are clearly intent on beating you up just so they can forcibly make you impregnate them, begining with their leader.";
+			if (player.hasCock()) this.long += "\n\n  They are clearly intent on beating you up just so they can forcibly make you impregnate them, beginning with their leader.";
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));

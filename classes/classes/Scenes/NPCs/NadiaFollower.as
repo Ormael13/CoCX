@@ -556,7 +556,7 @@ public function wonOverNadiaSpare():void {
 	if (flags[kFLAGS.NADIA_LVL_UP] == 8 && flags[kFLAGS.NADIA_FOLLOWER] < 3) {
 		outputText("You tell the girl you will let her go. You have no business with her. The horse morph however doesn't leave right away.\n\n");
 		outputText("\"<i>Thank you. I may have been too hasty to judge you and I think it’s high time we truly get acquainted. I just wanted you to know that my name's Nadia.</i>\"\n\n");
-		outputText("Well Nadia, that’s one name you don't plan to forget. still, she'd better be off on her way now. She nods and runs off disappearing in the forest.\n\n");
+		outputText("Well Nadia, that’s one name you don't plan to forget. Still, she'd better be off on her way now. She nods and runs off disappearing in the forest.\n\n");
 	}
 	else {
 		outputText("You tell the girl you will let her go. You have no business with her.\n\n");
@@ -969,7 +969,7 @@ public function SexMenuAnal():void {
 		outputText("You suck on one of your fingers, getting it nice and wet, before bringing it down and pushing it into her rear, making her let out a little happy moan as your finger surprisingly, or maybe not, easily slips in.\n\n");
 		outputText("\"<i>Your fingers are in my butt!</i>\" Nadia moans, looking over her shoulder at you.\n\n");
 		outputText("\"<i>Not yet,</i>\" you reply, before suddenly shoving another finger into her, making her gasp in surprise, \"<i>Now they are!</i>\"\n\n");
-		outputText("Nadia moans loudly as your two fingers stretch open, rub, and thrust into her hot ass, loosing her up further. Although the finger fucking seems already too much for the alicorn, whose front arms have already folded. Her face falls to the ground, leaving her inviting ass stuck up into the air.\n\n");
+		outputText("Nadia moans loudly as your two fingers stretch open, rub, and thrust into her hot ass, loosening her up further. Although the finger fucking seems already too much for the alicorn, whose front arms have already folded. Her face falls to the ground, leaving her inviting ass stuck up into the air.\n\n");
 		outputText("Seeing this, you bring your spare hand down on her thick asscheek, smacking it hard, making her moan and straighten up in surprise.\n\n");
 		outputText("\"<i>Hey don’t go enjoying too much,</i>\" you say, your fingers stick playing with her hot hole.\n\n");
 		outputText("\"<i>Sorry, but your fingers feel so good!</i>\" she moans, moving a hand down to her pussy, but you slap it away.\n\n");

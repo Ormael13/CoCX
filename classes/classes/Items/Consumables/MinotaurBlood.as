@@ -287,7 +287,7 @@ public class MinotaurBlood extends Consumable {
 							dynStats("lus", 20, "scale", false);
 						}
 						else {
-							outputText("\n\nYour small horns get a bit bigger, stopping as medium sized nubs.");
+							outputText("\n\nYour small horns get a bit bigger, stopping as medium-sized nubs.");
 							player.horns.count += 3;
 						}
 						changes++;

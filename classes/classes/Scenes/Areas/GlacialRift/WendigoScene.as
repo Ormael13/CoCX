@@ -89,7 +89,7 @@ package classes.Scenes.Areas.GlacialRift
 		public function winAgainstWendigo():void {
 			clearOutput();
 			outputText("The wendigo falls to the ground too weak to keep on floating.\n\n");
-			outputText("You approach the monster intent on making it regret attacking you but suddenly the blizzard increases in intensity again. You close your eyes for a mere second but when you open them again the wendigo is gone. Well of all things you didn't expect getting your victory stolen away from you by the weather.\n\n");
+			outputText("You approach the monster intent on making it regret attacking you but suddenly the blizzard increases in intensity again. You close your eyes for a mere second but when you open them again the wendigo is gone. Well, of all things you didn't expect getting your victory stolen away from you by the weather.\n\n");
 			outputText("Unable to find the monster anymore, you decide to head back to camp still feeling the unsettling sensation of two hungry eyes fixating you from the depths of the blizzard until the magic of the realm spirits you away.\n\n");
 			cleanupAfterCombat();
 		}

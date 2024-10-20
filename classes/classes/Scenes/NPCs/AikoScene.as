@@ -736,7 +736,7 @@ private function aikoSexE2():void {
 private function aikoApologize1():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
-	outputText("You put your hands up slowly, trying to look as non-threatning as possible. You’re just here to talk, you explain.\n\n"
+	outputText("You put your hands up slowly, trying to look as non-threatening as possible. You’re just here to talk, you explain.\n\n"
 	+"She keeps her arrow trained on you, but seems to soften just a little bit. Obviously, she’s a little taken aback. <i>\"Talk? What could you possibly have to talk about with me?\"</i> she says, frowning.\n\n"
 	+"You tell her that you want to apologize for what you did. You’ve had a little time to reflect on it and you feel terrible about "+(flags[kFLAGS.AIKO_RAPE] <=0 ? "attacking her":"your brutal rape")+". There’s no way mere words could make up for your shameful actions, so you understand if she can’t forgive you; you just needed to tell her you’re sorry.\n\n"
 	+"<i>\"You’re damn right you’re sorry!\"</i> she says indignantly, starting to lash out a little before reining herself in. She takes in a deep breath and lets it out slowly, relaxing her harsh stance just a bit and hesitantly lowering her bow.\n\n"
@@ -1031,7 +1031,7 @@ private function  talkMansionSisters():void {
 	+"<i>\"Th-that’s different! I’m the guardian, I HAVE to be out here to protect the village! I... It’s my responsibility to act as a liaison!\"</i> she says, blushing terribly.\n\n"
 	+"<i>\"A-anyway, at least I don’t go overboard like they do.\"</i>\n\n"
 	+"You ask what she means by \"overboard.\"\n\n"
-	+"<i>\"Those three just don’t know when enough is enough. They lure travelers to that mansion of theirs, and... well once you’re past the threshold, you’re already a part of the illusion. If they wanted to keep you there, there’s nothing you can do about it. You wouldn’t be the first hapless traveler to get spirited away by amorous kitsune, you know. We’re not all as nice as I am.\"</i>\n\n"
+	+"<i>\"Those three just don’t know when enough is enough. They lure travelers to that mansion of theirs, and... Well, once you’re past the threshold, you’re already a part of the illusion. If they wanted to keep you there, there’s nothing you can do about it. You wouldn’t be the first hapless traveler to get spirited away by amorous kitsune, you know. We’re not all as nice as I am.\"</i>\n\n"
 	+"You chuckle a bit, thanking Aiko for the warning. It seems you still have a lot to learn when it comes to kitsune."); //#NTMel Perhaps if PC is kitsune of higher rank than the three, PC can escape mansion/ safely proc mansion scene?
 	if (talkAndSex) {
 		outputText("You tell her that you might be in the mood for some mischief yourself and remind her of your other proposition.");

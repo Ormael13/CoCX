@@ -29,7 +29,7 @@ public function defeatedTed():void {
 	outputText(". Despite situation he start to muttering seemly to himself but with his voice volume it seems he want you to hear it.\n\n");
 	outputText("\"<i>I lost? No...I just feel gratious today to not show this mortal my limitless divine powers and should...</i>\" he paused as if thinking over next words to say \"<i>make a grand strategical retreat for now.</i>\"\n\n");
 	outputText("When you start to moving closer to him all of sudden he stands up and before you even react crushing some sort of talisman laughing loud. \"<i>I need to attend to other maters so I letting you off the hook today.</i>\" He utters when the brighting light blinds you for a long moment to let him make this 'grand stategical retreat'.");
-	outputText("\"<i>Repent on your sins and worship me properly when we meet again or my bam hammer won't be so forgving then,</i>\" his last words echoes in room as your blindness receding. Seems he used some sort of teleport item to escape and it seems it may be not the last time you will meet this slight delusional dragon-boy.");
+	outputText("\"<i>Repent on your sins and worship me properly when we meet again or my bam hammer won't be so forgving then,</i>\" his last words echoes in room as your blindness receding. Seems he used some sort of teleport item to escape and it seems it may not be the last time you will meet this slight delusional dragon-boy.");
 	flags[kFLAGS.TED_DEFEATS_COUNTER] = 1;
 	flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 1;
 	flags[kFLAGS.TED_LVL_UP] = 1;

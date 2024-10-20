@@ -2444,7 +2444,7 @@ public class KitsuneScene extends BaseContent
 			outputText("\n\nYou laugh and reply that her sphere will be perfectly safe in your hands, so long as she serves you with unwavering loyalty that is.");
 			outputText("\n\n\"<i>You...you're a monster! Why would you go so far to...? Gah, I don’t want to know. Just let me pack up my things [master]...</i>\"");
 			outputText("\n\nShe looks at you, and gives you a hateful glares, but there’s little the fox can do as long as you hold the very source of her power within the palm of your hand. You both head back to camp, Ayane maintaining a submissive attitude.");
-			outputText("\n\n<b>Aquired Ayane Star Sphere.</b>");
+			outputText("\n\n<b>Acquired Ayane Star Sphere.</b>");
 			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");
 			player.createKeyItem("Ayane Star Sphere", 0, 0, 0, 0);
 			//dynStats("cor", 10); - dodawać czy nie to?

@@ -519,7 +519,7 @@ import classes.Scenes.SceneLib;
 		//Stage 11 - Build cabin part 4 - Install flooring.
 		private function buildCabinPart4():void {
 			clearOutput();
-			outputText("You can continue working on your cabin. Do you start work on installing flooring for your cabin? (Cost: 200 nails and 50 wood.)\n"); //What about adding few stones here additionaly? 50 maybe?
+			outputText("You can continue working on your cabin. Do you start work on installing flooring for your cabin? (Cost: 200 nails and 50 wood.)\n"); //What about adding a few stones here Additionally? 50 maybe?
 			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
