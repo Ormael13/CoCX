@@ -133,7 +133,6 @@ package classes.GlobalFlags
 		public static const REALISTIC_YOU_NOT_GONNA_EAT_THOSE_RIBS:int	= 107;
 		public static const REALISTIC_LEGENDARY_GLUTTON:int				= 108;
 		public static const REALISTIC_DINNER_FOR_FOUR:int				= 109;
-
 		
 		//General Achievements (110+)
 		public static const GENERAL_PORTAL_DEFENDER:int			= 110; //Defeat 25 demons and sleep 10 times.
@@ -207,7 +206,6 @@ package classes.GlobalFlags
 		public static const GENERAL_UMBER_PERKY:int				= 178;
 		public static const TIME_QUARTER:int					= 179; //90 days
 		
-		
 		//Epic Achievements (180-188)
 		public static const EPIC_ACHIEVEMENTCEPTION:int					= 180;
 		public static const EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT:int		= 181;
@@ -218,7 +216,6 @@ package classes.GlobalFlags
 		public static const EPIC_XXX2_THE_NEXT_LEVEL:int				= 186;
 		public static const EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION:int	= 187;
 		public static const EPIC_XXX_4:int								= 188;
-		
 		
 		public static const GENERAL_PERKY_BEAST_OF_DEATH:int		= 189;
 		public static const COMBAT_REITERPALLASCH:int				= 190;
@@ -252,19 +249,17 @@ package classes.GlobalFlags
 		public static const GENERAL_RIDICULOUS_PERKY_KING:int		= 218;
 		public static const GENERAL_LUDICROUS_PERKY_KING:int		= 219;
 		
-		
 		//Shadow Slave Achievements (220-229)
-		public static const SHADOW_INITIATE:int			= 220;
-		public static const SHADOW_SQUIRE:int			= 221;
-		public static const SHADOW_KNIGHT:int			= 222;
-		public static const SHADOW_PALADIN:int			= 223;
-		public static const SHADOW_GENERAL:int			= 224;
-		public static const UNKNOWN_ACHIEVEMENT_225:int			= 225;
-		public static const UNKNOWN_ACHIEVEMENT_226:int			= 226;
+		public static const SHADOW_INITIATE:int				= 220;
+		public static const SHADOW_SQUIRE:int				= 221;
+		public static const SHADOW_KNIGHT:int				= 222;
+		public static const SHADOW_PALADIN:int				= 223;
+		public static const SHADOW_GENERAL:int				= 224;
+		public static const SHADOW_LIEUTENANT_GENERAL:int	= 225;
+		public static const SHADOW_MAJOR_GENERAL:int		= 226;
 		public static const UNKNOWN_ACHIEVEMENT_227:int			= 227;
 		public static const UNKNOWN_ACHIEVEMENT_228:int			= 228;
 		public static const UNKNOWN_ACHIEVEMENT_229:int			= 229;
-		
 		
 		//Epic Achievements (230-239)
 		public static const EPIC_XXX5_MARETHS_JUDGMENT_DAY:int	= 230;
@@ -277,7 +272,6 @@ package classes.GlobalFlags
 		public static const UNKNOWN_ACHIEVEMENT_237:int			= 237;
 		public static const EPIC_GUARDIAN_OF_NOTRE_DAME:int		= 238;
 		public static const EPIC_THE_DEVIL_WEARS_PRADA:int		= 239;
-		
 		
 		public static const GENERAL_JUST_TO_SPITE_YOU:int							= 240;
 		public static const GENERAL_JUST_TO_SPITE_YOU_2_SPITE_HARDER:int			= 241;
@@ -454,13 +448,50 @@ package classes.GlobalFlags
 		public static const COMBAT_MY_NAME_IS_BRUCE_BRUCE_WOOD:int		= 407;
 		public static const DUNGEON_WEEDING_OUT:int						= 408;
 		public static const UNKNOWN_ACHIEVEMENT_409:int					= 409;
-		public static const UNKNOWN_ACHIEVEMENT_410:int					= 410;
-		public static const UNKNOWN_ACHIEVEMENT_411:int					= 411;
-		public static const UNKNOWN_ACHIEVEMENT_412:int					= 412;
-		public static const UNKNOWN_ACHIEVEMENT_413:int					= 413;
-		public static const UNKNOWN_ACHIEVEMENT_414:int					= 414;
-		public static const UNKNOWN_ACHIEVEMENT_415:int					= 415;
-		public static const UNKNOWN_ACHIEVEMENT_416:int					= 416;
+		
+		//Epic Achievements (410-439)
+		public static const EPIC_XXX10_THE_PHANTOM_DEMON_MENACE:int			= 410;
+		public static const EPIC_XXX11_ATTACK_OF_THE_IMPS:int				= 411;
+		public static const EPIC_XXX12_REVENGE_OF_THE_LETHICE:int			= 412;
+		public static const EPIC_XXX13_A_NEW_HOPE:int						= 413;
+		public static const EPIC_XXX14_THE_DEMON_EMPIRE_STRIKES_BACK:int	= 414;
+		public static const EPIC_XXX15_RETURN_OF_THE_CHAMPION:int			= 415;
+		public static const UNKNOWN_ACHIEVEMENT_416:int						= 416;
+		public static const UNKNOWN_ACHIEVEMENT_417:int						= 417;
+		public static const UNKNOWN_ACHIEVEMENT_418:int						= 418;
+		public static const UNKNOWN_ACHIEVEMENT_419:int						= 419;
+		public static const UNKNOWN_ACHIEVEMENT_420:int						= 420;
+		public static const UNKNOWN_ACHIEVEMENT_421:int						= 421;
+		public static const UNKNOWN_ACHIEVEMENT_422:int						= 422;
+		public static const UNKNOWN_ACHIEVEMENT_423:int						= 423;
+		public static const UNKNOWN_ACHIEVEMENT_424:int						= 424;
+		public static const UNKNOWN_ACHIEVEMENT_425:int						= 425;
+		public static const UNKNOWN_ACHIEVEMENT_426:int						= 426;
+		public static const UNKNOWN_ACHIEVEMENT_427:int						= 427;
+		public static const UNKNOWN_ACHIEVEMENT_428:int						= 428;
+		public static const UNKNOWN_ACHIEVEMENT_429:int						= 429;
+		public static const UNKNOWN_ACHIEVEMENT_430:int						= 430;//all ng+ achievs until here?
+		public static const UNKNOWN_ACHIEVEMENT_431:int						= 431;
+		public static const UNKNOWN_ACHIEVEMENT_432:int						= 432;
+		public static const UNKNOWN_ACHIEVEMENT_433:int						= 433;
+		public static const UNKNOWN_ACHIEVEMENT_434:int						= 434;
+		public static const UNKNOWN_ACHIEVEMENT_435:int						= 435;
+		public static const UNKNOWN_ACHIEVEMENT_436:int						= 436;
+		public static const UNKNOWN_ACHIEVEMENT_437:int						= 437;
+		public static const UNKNOWN_ACHIEVEMENT_438:int						= 438;
+		public static const UNKNOWN_ACHIEVEMENT_439:int						= 439;
+		
+		public static const UNKNOWN_ACHIEVEMENT_440:int					= 440;
+		public static const UNKNOWN_ACHIEVEMENT_441:int					= 441;
+		public static const UNKNOWN_ACHIEVEMENT_442:int					= 442;
+		public static const UNKNOWN_ACHIEVEMENT_443:int					= 443;
+		public static const UNKNOWN_ACHIEVEMENT_444:int					= 444;
+		public static const UNKNOWN_ACHIEVEMENT_445:int					= 445;
+		public static const UNKNOWN_ACHIEVEMENT_446:int					= 446;
+		public static const UNKNOWN_ACHIEVEMENT_447:int					= 447;
+		public static const UNKNOWN_ACHIEVEMENT_448:int					= 448;
+		public static const UNKNOWN_ACHIEVEMENT_449:int					= 449;
+		public static const UNKNOWN_ACHIEVEMENT_450:int					= 450;
 		
 	}
 }
