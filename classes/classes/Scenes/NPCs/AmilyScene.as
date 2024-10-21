@@ -2444,7 +2444,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				amilyEggStuff();
 				return;
 			}
-			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] == 10 * 24 && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
+			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] >= 10 * 24 && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 				amilyIncest();
 				return;
 			}
