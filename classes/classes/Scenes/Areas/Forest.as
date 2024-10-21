@@ -427,7 +427,7 @@ use namespace CoC;
 						call  : SceneLib.woodElves.findElves,
 						chance: 0.5,
 						when  : function ():Boolean {
-							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED && !player.blockingBodyTransformations()
+							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED && !player.blockingBodyTransformations() && !player.hasPerk(PerkLib.Soulless)
 						}
 					}, {
 						name  : "WoodElfRematch",
@@ -438,7 +438,7 @@ use namespace CoC;
 						call  : SceneLib.woodElves.findElvesRematch,
 						chance: 0.75,
 						when  : function ():Boolean {
-							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELFSANDEVENBEATSTHEM && !player.blockingBodyTransformations()
+							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELFSANDEVENBEATSTHEM && !player.blockingBodyTransformations() && !player.hasPerk(PerkLib.Soulless)
 						}
 					}, {
 						name  : "chitin",
