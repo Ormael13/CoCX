@@ -339,7 +339,7 @@ public final class ConsumableLib extends AlchemyLib
 		
 		//TRANSFORMATIVE ITEMS
 		
-		public const ABYSSIN: Consumable = mk("AbyssIn", "AbyssalInk", "a vial of abyssal ink", 20, "Black abyssal ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.krakenInk, 0), ItemConstants.U_TF)
+		public const ABYSSIN: Consumable = mk("AbyssIn", "AbyssalInk", "a vial of abyssal ink", 20, "Black abyssal ink normally used for writing, consuming this doesn't seem like the best idea.", curry(m.krakenInk, 0), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						MULTIRACE_ESSENCE_DROP_TABLE(
@@ -349,7 +349,7 @@ public final class ConsumableLib extends AlchemyLib
 								[1, AR_INT],
 								[1, AR_STR]
 						], ["ghostly white"]);
-		public const ABYSGIN: Consumable = mk("AbysGIn", "AbyssalGreyInk", "a vial of grey abyssal ink", 40, "Grey abyssal ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.krakenInk, 1), ItemConstants.U_TF)
+		public const ABYSGIN: Consumable = mk("AbysGIn", "AbyssalGreyInk", "a vial of grey abyssal ink", 40, "Grey abyssal ink normally used for writing, consuming this doesn't seem like the best idea.", curry(m.krakenInk, 1), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						MULTIRACE_ESSENCE_DROP_TABLE(
@@ -359,7 +359,7 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_INT],
 							[1, AR_STR]
 						], ["ghostly white"]);
-		public const ABYSWIN: Consumable = mk("AbysWIn", "AbyssalWhiteInk", "a vial of white abyssal ink", 60, "White abyssal ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.krakenInk, 2), ItemConstants.U_TF)
+		public const ABYSWIN: Consumable = mk("AbysWIn", "AbyssalWhiteInk", "a vial of white abyssal ink", 60, "White abyssal ink normally used for writing, consuming this doesn't seem like the best idea.", curry(m.krakenInk, 2), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						MULTIRACE_ESSENCE_DROP_TABLE(
@@ -407,7 +407,7 @@ public final class ConsumableLib extends AlchemyLib
 						]
 				);
 		public const BEEHONY:BeeHoney         = new BeeHoney(false, false);
-		public const BLACKIN: Consumable = mk("BlackIn", "BlackInk", "a vial of black ink", 10, "Pitch black ink normaly used for writing. Consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 0), ItemConstants.U_TF)
+		public const BLACKIN: Consumable = mk("BlackIn", "BlackInk", "a vial of black ink", 10, "Pitch black ink normally used for writing. Consuming this doesn't seem like the best idea.", curry(m.scyllaInk, 0), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						DEFAULT_ESSENCE_DROP_TABLE(AE_SCYLLA),
@@ -428,7 +428,7 @@ public final class ConsumableLib extends AlchemyLib
 								[1, AR_TOU]
 						]
 				);
-		public const BLADEGR: Consumable = mk("BladeGr", "BladeGrass", "a blade shaped grass", 6, "A form of herb normaly infused in samurai and other warrior tea.  You think infusing this unprocessed item in your tea could result in interesting result.", m.bladeGrass, ItemConstants.U_TF)
+		public const BLADEGR: Consumable = mk("BladeGr", "BladeGrass", "a blade shaped grass", 6, "A form of herb normally infused in samurai and other warrior tea.  You think infusing this unprocessed item in your tea could result in interesting result.", m.bladeGrass, ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						DEFAULT_ESSENCE_DROP_TABLE(AE_MANTIS),
@@ -666,7 +666,7 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_LIB]
 						]
 				);
-		public const GREYINK: Consumable = mk("GreyInk", "GreyInk", "a vial of grey ink", 30, "Ash grey ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 1), ItemConstants.U_TF)
+		public const GREYINK: Consumable = mk("GreyInk", "GreyInk", "a vial of grey ink", 30, "Ash grey ink normally used for writing, consuming this doesn't seem like the best idea.", curry(m.scyllaInk, 1), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						DEFAULT_ESSENCE_DROP_TABLE(AE_SCYLLA),
@@ -1183,7 +1183,7 @@ public final class ConsumableLib extends AlchemyLib
 						],
 						SlimeRace.SlimeSkinColors
 				);
-		public const WHITEIN: Consumable = mk("WhiteIn", "WhiteInk", "a vial of white ink", 50, "Pearly white ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 2), ItemConstants.U_TF)
+		public const WHITEIN: Consumable = mk("WhiteIn", "WhiteInk", "a vial of white ink", 50, "Pearly white ink normally used for writing, consuming this doesn't seem like the best idea.", curry(m.scyllaInk, 2), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						DEFAULT_ESSENCE_DROP_TABLE(AE_SCYLLA),

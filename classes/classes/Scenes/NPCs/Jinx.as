@@ -123,7 +123,7 @@ use namespace CoC;
 			this.a = "the ";
 			this.short = "ayotech maniac";
 			this.imageName = "ayotech maniac";
-			this.long = "You're currently fighting gremlin ayotech maniac. For some weird reason she wears alot more belts than you would expect.";//change Jinx to Minx???
+			this.long = "You're currently fighting a gremlin ayotech maniac. For some weird reason, she wears a lot more belts than you would expect.";//change Jinx to Minx???
 			this.plural = false;
 			createBreastRow(Appearance.breastCupInverse("A"));
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);

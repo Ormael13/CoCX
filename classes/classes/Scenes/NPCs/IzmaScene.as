@@ -1305,7 +1305,7 @@ private function submitToLakeIzma():void {
 		outputText("\n\nPulling her fingers free, Izma quickly flips your nude body over, leaving you on your back and staring up at her.  Izma's hands are resting on her hips and she seems to be puffing her large chest out proudly. Her foot-long cock is fully erect, hot beads of pre-cum occasionally dripping onto the sands.  She takes the time to examine your own cock, grinning with her fangs bared.  \"<i>Let's see what you've got, weakling.</i>\"\n\n");
 		var x:Number = player.biggestCockIndex();
 		//(1-10 inch penis)
-		if(player.cocks[x].cockLength <= 10) outputText("Izma manages to supress a snort of laughter at the sight of your cock.  \"<i>Um... wow?  It's simply... heh, huge...</i>\"");
+		if(player.cocks[x].cockLength <= 10) outputText("Izma manages to suppress a snort of laughter at the sight of your cock.  \"<i>Um... wow?  It's simply... heh, huge...</i>\"");
 		//(10-19 inches)
 		else if(player.cocks[x].cockLength <= 19) outputText("\"<i>Not bad, I'm actually impressed,</i>\" Izma says, nodding slightly in approval.");
 		//(20+ inches)
@@ -1475,7 +1475,7 @@ private function backFromFishery():void
 {
 	clearOutput();
 	izmaSprite();
-	outputText("Information Noone reminds your sub tigershark no longer work at fishery.");
+	outputText("Information no one reminds your sub tigershark no longer work at fishery.");
 	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "";

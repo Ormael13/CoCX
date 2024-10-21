@@ -690,7 +690,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 			outputText("Urta pouts, clearly not too happy at having her thunder stolen, while Kath rolls her eyes.  \"<i>Corny much, [name]?</i>\"  Still, there’s a twinkle in her eyes that makes you feel you really have bolstered her spirits.  \"<i>So, what does this training consist of, anyway?</i>\"\n\n");
 			outputText("Upon hearing that, you grin evilly at Urta and ask her if you should get the package?\n\n");
 			outputText("Urta shakes her head and passes you the key, indicating silently that you should lock the front door instead.  Nodding in agreement, you concur that this is probably a good idea, there’s no telling how Kath will react.\n\n");
-			outputText("The cat-morph watches nervously as you and Urta head your seperate ways.  As the fox rummages amongst the junk on the side, she audibly professes, \"<i>Why do I think I’m not going to like this?</i>\"\n\n");
+			outputText("The cat-morph watches nervously as you and Urta head your separate ways.  As the fox rummages amongst the junk on the side, she audibly professes, \"<i>Why do I think I’m not going to like this?</i>\"\n\n");
 			outputText("You tell Kath to relax, this will all be over soon...\n\n");
 			outputText("\"<i>Okay, now I’m really worried,</i>\" she retorts, eyes flicking nervously between you and Urta.\n\n");
 			outputText("\"<i>Before we begin, you should put this on,</i>\" Urta says, holding the chastity belt towards Kath.\n\n");
@@ -966,7 +966,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 			outputText("Urta nods her head sagely.  \"<i>[name], perhaps you’d be willing to help us?  Having somebody else to act as the civilian would probably work better than just the two of us going back and forth,</i>\" she suggests.  Kath nods her head, making it clear that she agrees to Urta’s suggestion.\n\n");
 			outputText("Considering Urta’s demeanor, it’s more likely that she’s the one doing the intimidating in their exchange, you joke.\n\n");
 			outputText("\"<i>Well that may be true, but she’s actually pretty good at standing up to me... most of the time,</i>\" Urta concedes.  \"<i>It’s getting her to be more assertive herself that’s the tricky part.</i>\"\n\n");
-			outputText("Hmm... well Urta is the specialist, so you’ll leave things in her hands.  Adjusting your [armor] you ask what you should do?\n\n");
+			outputText("Hmm... well, Urta is the specialist, so you’ll leave things in her hands.  Adjusting your [armor] you ask what you should do?\n\n");
 			outputText("The fox shrugs.  \"<i>Just act like a defiant, disrespectful citizen - refuse to listen to her, try to make her back down, just generally encourage her to make you respect her.</i>\"\n\n");
 			outputText("You nod in understanding, telling her you’ll try.\n\n");
 			outputText("\"<i>Here, let’s have a demonstration; give you both an idea of what needs to be done.</i>\"  The fox declares, then clears her throat.  \"<i>Citizen, you are in a restricted area; please leave now.</i>\"\n\n");

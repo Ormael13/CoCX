@@ -106,7 +106,7 @@ public class TestMenu extends BaseContent
 		bd.add("QuestItBag", AddMaxBackpack2, "Giving missing Quest Items Bag as part of Adventure Guild welcome/promotion package.");
 		bd.add("ClickItOnce", AddMaxBackpack3, "Fixing Lover Zenji missing one status effect needed for his sex scenes menu.").disableIf(!player.hasStatusEffect(StatusEffects.ZenjiZList));
 		bd.add("BeliConfFix", belisatest2, "Belisa Confession Fix").disableIf(TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed);
-		bd.add("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
+		bd.add("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so believe ppl will be reasonable to not click like mad this)");
 		bd.add("ClickItTwice", golemArmy, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
 		bd.add("FixClones", fixClones, "If you have messed up clones or negative levels or related outdated data this will clear it all away.");
 		submenu(bd, SoulforceCheats, 0, false);
@@ -126,7 +126,7 @@ public class TestMenu extends BaseContent
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		bd.add("Neko Items", giveNekoItems, "All new neko items from Nekobake Inn doc");
-		bd.add("DantianPhylactery", dantianPhylacteryTest, "Getting or loosing Dantian Phylactery.");
+		bd.add("DantianPhylactery", dantianPhylacteryTest, "Getting or losing Dantian Phylactery.");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 	
@@ -1732,7 +1732,7 @@ public class TestMenu extends BaseContent
 			//5
 			//6
 			addButton(7, "BerserkerSet", AddTheBBS).hint("Add set of items for Berserker set.");//7
-			addButton(8, "CheckWeapon", TestWeaponType).hint("Detect Weapon Type Equiped for sprite and battle testing.");
+			addButton(8, "CheckWeapon", TestWeaponType).hint("Detect Weapon Type Equipped for sprite and battle testing.");
 			addButton(9, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(10, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
 			addButton(11, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
@@ -2286,7 +2286,7 @@ public class TestMenu extends BaseContent
 	}
 	public function EarlyAscension():void {
 		if (flags[kFLAGS.LETHICE_DEFEATED] == 1) {
-			outputText("\n\n<b>You already used this cheat code!</b>");
+			outputText("\n\n<b>You've already used this cheat code!</b>");
 		}
 		else {
 			flags[kFLAGS.LETHICE_DEFEATED] = 1;

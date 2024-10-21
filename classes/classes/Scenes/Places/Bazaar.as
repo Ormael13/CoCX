@@ -141,7 +141,7 @@ private function eventLiquidDiamond():void {
 	outputText("\"<i>It could be yours! For only 7000 gems.</i>\"\n\n");
 	outputText("7000 gems? That’s 2000 more than he originally offered!\n\n");
 	outputText("\"<i>It’s very obvious this is something you want, and you react uniquely to it, so it’s 7000 gems or nothing.</i>\"\n\n");
-	outputText("Well, it seems like you have a choice to make here; you could either pay him the required amount or tell him you don’t have that many gems on you. However he doesn’t look particularly strong, and you could easily overpower him and flee the scene with the bottle, but you feel like this may come to bite you back later.\n\n");
+	outputText("Well, it seems like you have a choice to make here; you could either pay him the required amount or tell him you don’t have that many gems on you. However, he doesn’t look particularly strong, and you could easily overpower him and flee the scene with the bottle, but you feel like this may come to bite you back later.\n\n");
 	menu();
 	addButtonIfTrue(1, "Pay", eventLiquidDiamondPay, "You need 7,000 gems!", player.gems >= 7000);
 	addButton(2, "Don’t Pay", eventLiquidDiamondDontPay);
@@ -952,7 +952,7 @@ private function eggsInButt(dickVagAss:int):void {
 	outputText(", and with his free hand he leans forward, tweaking a [nipple] softly.");
 
 	outputText("\n\nUnder his skilled hand, you're soon bucking and twitching, your candy-coated body aching for release.  \"<i>Let's... just... get all of this... naughty... tension... out,</i>\" he pants, emphasizing each word even though his voice barely rises above a whisper.  With one final twist of his fingers, you're sent over the edge.  Your body arches, lifting Joey up into the air with a gleeful shout, while ");
-	if(dickVagAss == 0) outputText("[eachCock] pulses and spasms, loosing rope after rope of white jizz through the air, splattering against the wall and floor messily");
+	if(dickVagAss == 0) outputText("[eachCock] pulses and spasms, letting loose rope after rope of white jizz through the air, splattering against the wall and floor messily");
 	else if(dickVagAss == 1) outputText("your pussy tightens around his fingers, suddenly releasing a flood of femcum that splatters messily against the table");
 	else outputText("your asshole twitches and spasms, unable to do much more than grant you a vague half-orgasm");
 	outputText(".  Your entire body tingles as you slowly descend back to the table, practically melting into it as if you were nothing more than the bunny-spunk covering your skin.");

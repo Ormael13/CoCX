@@ -806,7 +806,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside, but inside, the floors are still bare earth.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of [camp].\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("Halfway between the portal and the edge of your [camp] is a place where you will store piles of wood or stones for construction. ");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("Halfway between the portal and the edge of your [camp] rests a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("Halfway between the portal and the edge of your [camp] rests a medium-sized wood platform, which you use to store wood and next to it is place for storing stones. ");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("Halfway between the portal and the edge of your [camp] rests a long and wide wood platform with protective barriers at the edges. Inside it, you can safely store large amounts of wood"+(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 5?", nails":"")+" and stones. ");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's a warehouse located in the east section of your campsite.\n\n");
@@ -2080,7 +2080,7 @@ public class Camp extends NPCAwareContent{
 			//Konstantin
 			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) {
 				if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Konstantin has dragged out of his [camp] a mat, and is doing some flexing postures under the early morning light. He’s not particularly good at it, so most of times he ends up in awkward positions.");
-				else if (model.time.hours <= 12) outputText("You ursine smith is currently at work, sharpening and polishing blades.");
+				else if (model.time.hours <= 12) outputText("Your ursine smith is currently at work, sharpening and polishing blades.");
 				else if (model.time.hours <= 15) outputText("Konstantin has stopped his work to have a meal, and quite an abundant one. From where you are, you can smell the cooked meat and spice from his plate.");
 				else if (model.time.hours <= 18) outputText("The sound of metal on metal is heard, and you easily find the source. The bear smith is currently shaping some plates, polishing them each now and then and putting them aside once he satisfied with how they look.");
 				else if (model.time.hours <= 20) outputText("Your local smith, Konstantin isn’t working right now. He has gone to his tent to rest and relax for awhile.");
@@ -2307,7 +2307,7 @@ public class Camp extends NPCAwareContent{
 		menu();
 		var weaponList: Array = weapons.SingleDualPairList.concat(weaponsrange.SingleDualPairList);
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
-		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)
+		addButton(4, "Separate Weapons", menuSeperateStaging, weaponList)
 		addButton(14, "Back", campMiscActions);
 	}
 
@@ -2803,7 +2803,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "Make", SceneLib.campMakeWinions.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
 		else addButtonDisabled(0, "Make", "You need to learn Golemancer job to use this option.");player.hasPerk(PerkLib.JobElementalConjurer)
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", SceneLib.campMakeWinions.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
-		else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this OR you not yet learned Elemental Conjurer job.");
+		else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this OR you have not yet learned the Elemental Conjurer job.");
 		if (player.hasPerk(PerkLib.JobTamer)) addButton(2, "Tame", SceneLib.campMakeWinions.accessTamedWinionsMainMenu).hint("Check your options for tamed minions.");
 		else addButtonDisabled(2, "Tame", "You need to learn Tamer job to use this option.");
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(5, "Skeletons", SceneLib.campMakeWinions.accessMakeSkeletonWinionsMainMenu).hint("Check your options for making some skeletons.");
@@ -2815,7 +2815,7 @@ public class Camp extends NPCAwareContent{
 	private function druidMenu():void {
 		clearOutput();
 		outputText("Would you like to fuse with an elemental and if so which?");
-		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) outputText("\n\n+"+player.perkv1(PerkLib.SharedPower)+"0% multi bonus to health and damage when in an infused state");//temporaly to check if perk working as intended
+		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) outputText("\n\n+"+player.perkv1(PerkLib.SharedPower)+"0% multi bonus to health and damage when in an infused state");//temporarily to check if perk working as intended
 		menu();
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			addButtonDisabled(0, "Air", "You need to unfuse first before trying to use this fusion option.");
@@ -3392,7 +3392,7 @@ public class Camp extends NPCAwareContent{
 		}*/
 		outputText(" (Efficiency of Attacks: "+combat.comfoll.increasedEfficiencyOfAttacks()*100+" %)");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
-			outputText("\n\nPlaceholder text about deciding if sparrable npc's in [camp] should train or relax (train mean rising in lvl after enough time loosing to PC in sparrings).");
+			outputText("\n\nPlaceholder text about deciding if sparrable npc's in [camp] should train or relax (train mean rising in lvl after enough time losing to PC in sparrings).");
 			outputText("\n\nPlaceholder text about current mode [camp] combat NPC's are in: ");
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) outputText("Training Mode\n");
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode\n");
@@ -4703,11 +4703,11 @@ public class Camp extends NPCAwareContent{
 		addButtonIfTrue(0, "Visit", SceneLib.boat.marae.visitSelector, "You can't do that currently.", SceneLib.boat.marae.canVisit(), "Normal visit.");
 		addButtonIfTrue(1, "Minerva", SceneLib.boat.marae.talkToMaraeAboutMinervaPurification, "",
 			flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1,
-			"Visit godess island to talk about help for Minerva.");
+			"Visit goddess island to talk about help for Minerva.");
 		addButtonIfTrue(2, "Alraune", SceneLib.boat.marae.alraunezeMe, "Req. to have a fully grown Holli and to have high Alraune racial score. Also, don't kill Marae please.",
 			(Races.PLANT.basicScore(player.bodyData()) >= 7) && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 &&
 			(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0,
-			"Visit godess island to turn yourself into Alraune.");
+			"Visit goddess island to turn yourself into Alraune.");
 		addButton(4, "Back", places);
 	}
 

@@ -274,7 +274,7 @@ private function edrynOffer():void {
 			return;
 		}
 		//Big enough
-		outputText("Oh my, you're hot to trot, aren't you?  I can feel just how tight and full it is, practically ready to explode. Well I've got good news for you " + player.mf("stud","Miss Hot-And-Bulgy") + ", I'm the best kind of mercenary – one that does ANYTHING for money, even satisfying horny equine " + player.mf("studs","breeders") + ".</i>\"\n\n");
+		outputText("Oh my, you're hot to trot, aren't you?  I can feel just how tight and full it is, practically ready to explode. Well, I've got good news for you " + player.mf("stud","Miss Hot-And-Bulgy") + ", I'm the best kind of mercenary – one that does ANYTHING for money, even satisfying horny equine " + player.mf("studs","breeders") + ".</i>\"\n\n");
 		outputText("You groan, more turned on than ever by being fondled openly in public.  The centaur whore winks at you and offers, \"<i>So what do you say, is a roll in the hay with me worth ");
 		if(cost > 0) outputText(num2Text(cost) + " gems?");
 		else outputText("an hour of your time?");

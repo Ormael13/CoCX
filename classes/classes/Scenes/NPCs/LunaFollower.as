@@ -852,7 +852,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 					"You assure her you’re fine, just a little tired and sore, though the opponents you've faced and the very environment of this tainted land have left you pent-up as well. Still, perhaps some simple rest would be better after all...\n\n" +
 					"Before you can finish your thought Luna pulls herself up into a kiss, starting gently to quiet your murmered complains, then deepening into a passionate, lover's kiss. You return it, and your tongues intertwine, passionately but gently, as she winds one arm around your back while the other softly massages the nape of your neck.\n\n" +
 					"When she finally breaks the kiss and her soft, golden eyes meet yours ");
-			if (player.cor < 50) outputText("you begin to thank her for the care and affection she alwyas shows you,");
+			if (player.cor < 50) outputText("you begin to thank her for the care and affection she always shows you,");
 			else outputText("you are about to tell her to strip for you,");
 			outputText(" but she places a finger gently on your lips, still wet from your mixed saliva, and quietly, soothingly shushes you. " +
 					"\"<i>Shhh. No more words, [Master]. I already understand everything. Just let your cute maid Luna take care of you now. I'll handle everything for you, so just relax.</i>\"\n\n" +
@@ -1024,7 +1024,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 			outputText("and when she sees your meaty pole already exposed she smiles excitedly, and her crazed eyes begin glowing a familiar, phosphorescent green as her lust begins to boil over. " +
 					"\"<i>Oh no,</i>\"" +
 					" she says, " +
-					"\"<i>I'm already tranforming... need to get the rest off before- EEEEEEEP!</i>\"" +
+					"\"<i>I'm already transforming... need to get the rest off before- EEEEEEEP!</i>\"" +
 					" She cuts her muttering off with a surprised, horny shriek as you take the initiative by grabbing her legs, in their cute white stockings, just above the ankles and pulling them from under her, causing her to pitch forward and catch herself on her hands. You quickly peel the stockings off for her, taking the opportunity to shift yourself closer to her palpably warm crotch in the process. Already fur is sprouting from her legs and arms.\n\n" +
 					"\"<i>Ahhh... nnnhhh... haa... h-hurry, [Master], I... I'm almost... I don't ha-have many spare pantiEEEEEEEEEE-</i>\"" +
 					" Again she cuts off in a horny scream as you kneel between her legs and grab the sides of her panties to yank them down her hips, which are already visibly swelling from her transformation. She lifts her rear off the ground to ease your task, and as you yank them down you see a string of clear, slimy drool stretch between them and her dripping snatch, thick and drooping until it finally snaps and splashes in drops to the ground to join the trickles already running down her thighs and pubis. The hot, musky smell of a bitch in heat causes a nearly crazed reaction in your body - ");
@@ -1116,7 +1116,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 					"Whoa, since when did these two get so competitive?! You decide the best way to stop their argument is to order them both to pleasure your [cock] at the same time.\n\n" +
 					"They both turn over at the same time yelling " +
 					"\"<i>Can do!</i>\"" +
-					" before throwing off their clothes in one swift motion and getting into position; Ayane under and Luna on top, their pussy and ass aligned together to perfectly sandwich your prick between them. Well now this is a hole you cannot refuse! Your [cock] hardens at the prospect of fucking this new hole just as you finish undressing. While you were busy, you didn’t notice the pair drooling in anticipation of your incoming pole" + (player.cocks.length == 1 ? "" : "s") + ". Foxes and wolves, you guess they're all canid after all. " +
+					" before throwing off their clothes in one swift motion and getting into position; Ayane under and Luna on top, their pussy and ass aligned together to perfectly sandwich your prick between them. Well, now this is a hole you cannot refuse! Your [cock] hardens at the prospect of fucking this new hole just as you finish undressing. While you were busy, you didn’t notice the pair drooling in anticipation of your incoming pole" + (player.cocks.length == 1 ? "" : "s") + ". Foxes and wolves, you guess they're all canid after all. " +
 					"You start to slide your tool" + (player.cocks.length == 1 ? "" : "s") + " between their waiting holes, their joined pussies having done an excellent job of lubricating the whole thing; the two of them moaning as your " + (player.cocks.length == 1 ? "cock grinds" : "cocks grind") + " on their puffed up vaginal flesh. ");
 			if (player.cocks.length == 1) outputText("You pump your cock in and out of the duo. Sometime sliding in either hole before coming back in between. ");
 			if (player.cocks.length == 2 || player.cocks.length == 3) outputText("Why fuck only one girl when you can fuck both! Having more than one penis has its advantages and you gladly insert yourself into their two well aligned pussies, fucking Ayane and Luna at the same time. ");

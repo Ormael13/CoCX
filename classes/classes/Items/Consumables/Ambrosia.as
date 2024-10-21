@@ -54,7 +54,7 @@ package classes.Items.Consumables
             }
 
             if (player.cor >= 80){
-                outputText("\n\nNot long after the fluid touched your tongue did pain start to erupt through your body. You fall to your knees screaming as the numbing cold, yet burning hot sensation spread through your body, nearly feeling as if somebody was ripping the skin from your form. Miraculously you pass out. \n\nOnce you eventually regain conciousness, the mist that clouded your thoughts has lifted somewhat.");
+                outputText("\n\nNot long after the fluid touched your tongue did pain start to erupt through your body. You fall to your knees screaming as the numbing cold, yet burning hot sensation spreads through your body, nearly feeling as if somebody was ripping the skin from your form. Miraculously, you pass out. \n\nOnce you eventually regain consciousness, the mist that clouded your thoughts has lifted somewhat.");
             }
 
             //Remove corruption

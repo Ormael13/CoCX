@@ -388,7 +388,7 @@ private function bootHelOutForBimboSophie():void {
 	
 	outputText("\n\n<i>\"Yeah.  Now get the fuck out.\"</i>");
 	
-	outputText("\n\n<i>\"I... well fine!  Fuck you anyway, [name].  Fuck you!\"</i>");
+	outputText("\n\n<i>\"I... Well, fine!  Fuck you anyway, [name].  Fuck you!\"</i>");
 	
 	outputText("\n\nHel grabs her shit and leaves.  She scowls over her shoulder as she disappears over the horizon.");
 	
@@ -850,7 +850,7 @@ private function talkToHel():void {
 private function shutUpHelTalks():void {
 	clearOutput();
 	outputText("Quickly you interject before Helia can continue with the story; you've heard quite enough.  <i>\"Whaaaat?  We were just getting to the good part...\"</i>  Hel whines, rolling her eyes.  <i>\"Hey, you're the one who asked!\"</i>");
-	outputText("\n\nYes... yes you did.  And you're regretting every moment of it.  Crossing her arms, the salamander folds her arms and huffs, <i>\"Oh you big baby!  Can't handle the thought of a thousand cocks eagerly thrusting... Oh, never mind.\"</i>");
+	outputText("\n\nYes.. yes, you did.  And you're regretting every moment of it.  Crossing her arms, the salamander folds her arms and huffs, <i>\"Oh you big baby!  Can't handle the thought of a thousand cocks eagerly thrusting... Oh, never mind.\"</i>");
 	
 	//{If PC has cock: 
 	if(player.hasCock()) {

@@ -120,7 +120,7 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
         switch(ElementalRace.getElement(player)) {
             case ElementalRace.ELEMENT_GNOME:   if (display) outputText("You smash both of your fists into the ground, causing vegetation to grow at an accelerated rate. [Themonster] is punched out of nowhere as a grown tree suddenly sprouts from beneath! ");
                                                 break;
-            case ElementalRace.ELEMENT_IGNIS:   if (display) outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
+            case ElementalRace.ELEMENT_IGNIS:   if (display) outputText("You gather energy in your mouth before spitting a pyroclastic matter at your opponent, searing their flesh and setting [themonster] on fire. ");
                                                 break;
             case ElementalRace.ELEMENT_SYLPH:   if (display) outputText("You rub your palms together before unleashing the energy in the form of razor sharp winds. [Themonster] eyes grow wide in surprise as your attack leaves deep bleeding cuts in its flesh! ");
                                                 break;

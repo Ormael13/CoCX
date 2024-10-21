@@ -77,7 +77,7 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
 
     override public function doEffect(display:Boolean = true):void {
 		if (display) outputText("You point a finger at your opponent condemning [monster his] soul as you call on to the power of death to claim a part of [monster him] early!"
-			+ " A ghastly claw appears and pierce through [themonster] body tearing [monster his] soul appart.  ");
+			+ " A ghastly claw appears and pierces through [themonster] body tearing [monster his] soul apart.  ");
 		combat.darkRitualCheckDamage();
 
 		var damage:Number = calcDamage(monster, true);

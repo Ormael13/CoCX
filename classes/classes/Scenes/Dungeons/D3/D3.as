@@ -485,7 +485,7 @@ import classes.room;
 		{
 			clearOutput();
 			outputText("You head down the stairs into the hall proper to inspect the ramble hoard of eggs the basilisks collected. They’re mostly unfertilised harpy ovum, but you quickly pick out a number of differently coloured transformative eggs stolen from Gods know who.");
-			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) outputText(" When searching you even finds something that looks like scythe. Where does it come frome among all those eggs?");
+			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) outputText(" When searching you even finds something that looks like scythe. Where does it come from among all those eggs?");
 			menu();
 			
 			var flagNum:int = flags[kFLAGS.D3_EGGS_AVAILABLE];

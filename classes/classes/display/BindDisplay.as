@@ -6,7 +6,7 @@ import coc.view.CoCButton;
 import flash.text.TextField;
 
 /**
-	 * Defines a composite display object of all the seperate components required to display a
+	 * Defines a composite display object of all the separate components required to display a
 	 * single BoundControlMethod, its associated primary and secondary bindings with the buttons
 	 * used to bind methods to new keys.
 	 * @author Gedan

@@ -20,7 +20,7 @@ public class EasterBunnyEggBagMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round";
+                descS += "Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more than one egg per round";
             }
             if (pTier >= 2){
                 descS += ", Raise libido by a percentage based on current balls size";

@@ -520,7 +520,7 @@ public class WingsTransformations extends MutationsHelper {
 				var desc: String = "";
 
 				desc += "Winds begin to amass around you as if the prelude to a gathering storm. At first you think you are about to be attacked before you realise it’s all your doing. Merely by thinking about it the wind suddenly blows into a raging tornado carrying you up before you seize control and give it just enough strength to uplift you into its currents. "+
-						"It would seem you have gained the infamous wind control power of the kamaitachi achieving mastery over it. Well this is going to be fun to play with. <b>You now have the ability to control winds as the Kamaitachi do using your windy aura!</b>";
+						"It would seem you have gained the infamous wind control power of the kamaitachi achieving mastery over it. Well, this is going to be fun to play with. <b>You now have the ability to control winds as the Kamaitachi do using your windy aura!</b>";
 
 				player.wings.type = Wings.WINDY_AURA;
 				if (doOutput) outputText(desc);
@@ -665,7 +665,7 @@ public class WingsTransformations extends MutationsHelper {
 				var desc: String = "";
 				if ((player.wings.type == Wings.NONE)) {
 					desc += "You keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you.\n\nAs you examine the fleshy appendage, you realize it's covered in bug like cells. "+
-							"It seems your wings are a mix between butterfly and dragon. The insides display several small dots and is segmented like that of a bug yet the shape is definitively draconic. Just like those of a jabberwock actualy. <b>You can now fly at great speed with your brand new jabberwocky wings!</b>";
+							"It seems your wings are a mix between butterfly and dragon. The insides display several small dots and are segmented like that of a bug, yet the shape is definitively draconic. Just like those of a jabberwock, actually. <b>You can now fly at great speed with your brand new jabberwocky wings!</b>";
 				}
 				else {
 					desc += "You ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>jabberwocky wings.</b>";

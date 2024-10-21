@@ -1,4 +1,4 @@
-// The extra folder is to let the package namespacing seperate out the statics from the classes.* space.
+// The extra folder is to let the package namespacing separate out the statics from the classes.* space.
 // Global flags can now be brought into the main program by "import classes.GlobalFlags.*"
 
 package classes.GlobalFlags
@@ -2439,7 +2439,7 @@ public static const RANGIKU_LVL_UP:int                                   			= 24
 public static const RANGIKU_DEFEATS_COUNTER:int                                   	= 2431;	//Not Yet Used Flag
 public static const RANGIKU_02432:int                                               = 2432;	//Not Yet Used Flag
 public static const RANGIKU_02433:int                                               = 2433;	//Not Yet Used Flag
-public static const RYUBI_AFFECTION:int                              		        = 2434;	//Dragon Godess Lover (start)	//Not Yet Used Flag
+public static const RYUBI_AFFECTION:int                              		        = 2434;	//Dragon Goddess Lover (start)	//Not Yet Used Flag
 public static const RYUBI_FOLLOWER:int         			                            = 2435;									//Not Yet Used Flag
 public static const RYUBI_LVL_UP:int                    			                = 2436;									//Not Yet Used Flag
 public static const RYUBI_DEFEATS_COUNTER:int                                   	= 2437;									//Not Yet Used Flag
@@ -2447,7 +2447,7 @@ public static const RYUBI_02438:int                                             
 public static const RYUBI_02439:int                                                 = 2439;								//Not Yet Used Flag
 public static const RYUBI_02440:int                                                 = 2440;								//Not Yet Used Flag
 public static const RYUBI_02441:int                                                 = 2441;								//Not Yet Used Flag
-public static const RYUBI_02442:int                                                 = 2442; //Dragon Godess Lover (end)	//Not Yet Used Flag
+public static const RYUBI_02442:int                                                 = 2442; //Dragon Goddess Lover (end)	//Not Yet Used Flag
 public static const FOUND_TEMPLE_OF_THE_DIVINE:int                                  = 2443;
 public static const SAPPHIRE_AFFECTION:int                           		        = 2444;
 public static const SAPPHIRE_TALKS:int                       			            = 2445;

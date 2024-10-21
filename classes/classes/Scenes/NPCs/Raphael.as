@@ -130,7 +130,7 @@ public function meetRaphael():void {
 	}
 	else{
 		outputText("You are doing your things across then camp when you suddenly hear a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot.");
-		outputText(" Concerned with who might be toying with your stuffs you rush out throught the camp to check on your stash.\n\n");
+		outputText(" Concerned with who might be toying with your stuffs you rush out through the camp to check on your stash.\n\n");
 		outputText("\"<i>Hey!</i>\" you call out as, indeed, a strange red being is rummaging through your belongings. It has its front body in your storage chest, throwing junk about in search of valuables while its bright red tail wags in the air. The moment it notices you, it jumps up and runs off so fast it turns into a red blur. Only at the outskirts of your camp, on top of a small crumbled wall, does it take the time to introduce itself.\n\n");
 	}
 	outputText("\"<i>Ha-hah!</i>\" it exclaims boastfully with a sharp, young, dashing voice while standing tall and proud on top of its perch. \"<i>Another daring caper committed by...</i>\"  The being takes the time to strike a pose. \"<i>...the Russet Rogue!</i>\"\n\n");
@@ -413,7 +413,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 		outputText("You clench your jaw as he vanishes, more than a bit offended.");
 
 		sceneHunter.print("Okay, now you have 7 days to fix everything or he leaves... Better hurry, huh?");
-		//{Game removal untill the PC complies with the requirements again.})
+		//{Game removal until the PC complies with the requirements again.})
 		doNext(playerMenu);
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 1;
 		//7 days to fix or done with!
@@ -1164,7 +1164,7 @@ private function quiksilverFawkesEndGame():void {
 
 	outputText("You don't have the chance to respond before the sounds of snapping branches and rustling leaves near camp.  Raphael jumps up and dives into the barrel you keep in camp for the storage of water, hiding himself and leaving you to face the oncoming threats by yourself.\n\n");
 
-	outputText("In the hazy distance, you spot a massive shadow rushing through the mist and it dissapears before you get a good look.  An eerie silence follows and you sharpen your eyes and hearing to the danger.  When you look up, your heart sinks as the massive shape has jumped up and now descends on you from above.  It happens so fast that you barely realize what's going on.  Before you know it, you're sent sliding across the floor with the dark shape on top of you, pinning you down to the ground with its weight.\n\n");
+	outputText("In the hazy distance, you spot a massive shadow rushing through the mist and it disappears before you get a good look.  An eerie silence follows and you sharpen your eyes and hearing to the danger.  When you look up, your heart sinks as the massive shape has jumped up and now descends on you from above.  It happens so fast that you barely realize what's going on.  Before you know it, you're sent sliding across the floor with the dark shape on top of you, pinning you down to the ground with its weight.\n\n");
 
 	outputText("<i>\"Smelled of elderberries, huh?\"</i> it snarls.  <i>\"And what was that about my mother?\"</i> When you open your eyes again, you're greeted by a row of razor-sharp white teeth, set in a pitch-black face. Above them, two smoldering yellow eyes stare down on you, infuriated.\n\n");
 
@@ -1443,7 +1443,7 @@ private function kissRaphaelFirstTimeOrphanage():void {
 
 	outputText("\n\nWhile Raphael might indeed not be the most endowed lover, he is very skilled.  The wicked fox keeps eye contact, often grinning and snarling at you as in an attempt to keep you aware of just what predicament you're in.  He whispers you little words in an indecipherable language, running his paws across your [butt] or [hips].  Whatever he does bring to bear, he does well.");
 
-	outputText("\n\nYou begin to notice how his smooth tip nudges repeatedly into your cervix, massaging you deep from within.  Then you begin to notice how his pelvic bone and the soft fur on top rubs into your " + clitDescript() + " at just the right angle.  The sensations are seperate at first, but Raphael keeps the steady rhythm steady enough to concentrate.  When you finally manage to focus and truly enjoy them both, it's like a subtle spark that grows into a relentless bolt of energy.  The pleasurable pinch at your cervix, always followed by the nod on your clitoris.  It builds.");
+	outputText("\n\nYou begin to notice how his smooth tip nudges repeatedly into your cervix, massaging you deep from within.  Then you begin to notice how his pelvic bone and the soft fur on top rubs into your " + clitDescript() + " at just the right angle.  The sensations are separate at first, but Raphael keeps the steady rhythm steady enough to concentrate.  When you finally manage to focus and truly enjoy them both, it's like a subtle spark that grows into a relentless bolt of energy.  The pleasurable pinch at your cervix, always followed by the nod on your clitoris.  It builds.");
 
 	outputText("\n\nFinally, you beg of him to stop as the growing crescendo and steady rhythm becomes too much, not by pulling out, but by jamming into you one last time and simply keeping his wonderful cock in the magic spot for long enough to ride the sensation to a climax.");
 	player.sexReward("cum","Vaginal");

@@ -265,10 +265,10 @@ public class PerkMenu extends BaseContent {
 		}
 		//build the buttondatalist
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.isRace(Races.JIANGSHI)) {
-			outputText("\n\nYou can choose between fighting feral or normaly with your fists. (Requires natural attacks or a gauntlet-type weapon with claws to enable feral mode)");
+			outputText("\n\nYou can choose between fighting feral or normally with your fists. (Requires natural attacks or a gauntlet-type weapon with claws to enable feral mode)");
 			outputText("\nFighting Style: <b>" + (flags[kFLAGS.FERAL_COMBAT_MODE] ? "Feral" : "Normal") + "</b>");
 			bd.add("Normal/Feral", curry(toggleFlagMelee, kFLAGS.FERAL_COMBAT_MODE))
-				.disableIf(!player.hasAllRizzForFeral(), "You need to be unarmed and possess a natural weapon OR to have equipped gaunlets with any type of artifical claws OR have any other natural weapons like tail/wings/sharp teeth.");
+				.disableIf(!player.hasAllRizzForFeral(), "You need to be unarmed and possess a natural weapon OR to have equipped gaunlets with any type of artificial claws OR have any other natural weapons like tail/wings/sharp teeth.");
 		}
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) {
 			outputText("\n\nYou can choose between starting fight with berserker, lustzerker, both or none.");
@@ -855,7 +855,7 @@ public class PerkMenu extends BaseContent {
 		outputText("\n<b>Flying Sword behaviour:</b>\n");
 		if (flags[kFLAGS.FLYING_SWORD] == 0) outputText("Your flying sword will not attack");
 		if (flags[kFLAGS.FLYING_SWORD] == 1) {
-			outputText("Your flying sword will attack at the begining of each turn.");
+			outputText("Your flying sword will attack at the beginning of each turn.");
 			if ((player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) || flags[kFLAGS.AUTO_FLIGHT] == 2) {
 				outputText("\n<b>Since you are using your flying sword to fly, ");
 				var flyingSwordCount:int = player.weaponFlyingSwords.count;
@@ -880,7 +880,7 @@ public class PerkMenu extends BaseContent {
 		outputText("You can choose how your mummies will behave during each fight.\n\n");
 		outputText("\n<b>Mummy behaviour:</b>\n");
 		if (flags[kFLAGS.MUMMY_ATTACK] == 0) outputText("Your mummies will not attack.");
-		if (flags[kFLAGS.MUMMY_ATTACK] == 1) outputText("Your mummies will attack at the begining of each turn.");
+		if (flags[kFLAGS.MUMMY_ATTACK] == 1) outputText("Your mummies will attack at the beginning of each turn.");
 		addButton(10, "Disable", toggleFlag, mummyBehaviourOptions, kFLAGS.MUMMY_ATTACK)
 			.disableIf(flags[kFLAGS.MUMMY_ATTACK] == 0);
 		addButton(11, "Enable", toggleFlag, mummyBehaviourOptions, kFLAGS.MUMMY_ATTACK)

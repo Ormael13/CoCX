@@ -2414,7 +2414,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 60) {
 					if (player.hasPerk(PerkLib.AsuraToughness)) addButtonDisabled(5, "AT", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButton(5, "AT", perkAsuraToughness).hint("Choose the 'Asura Toughness' super perk. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)");
+						if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButton(5, "AT", perkAsuraToughness).hint("Choose the 'Asura Toughness' super perk. If you can use Warrior's Rage, it would have an increased boost and even could activate it with Asura Form for no additional cost. (+10% of OverMax Wrath/Base TOU Cap, +0.5% Wrath generated))");
 						else addButtonDisabled(5, "AT", "You need to first have the 'Like A-sura Boss' super perk.");
 					}
 				}

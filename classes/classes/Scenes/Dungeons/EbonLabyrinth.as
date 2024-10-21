@@ -546,10 +546,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
             return;
         }
-        outputText("Defeated you fall to the ground and look up just in time to see a mace coming for your head. When you wake up, you're standing on a podium somewhere else. There's demon everywhere around you screaming numbers. Those demons are brandishing gems around for some reasons.\n\n");
-        outputText("\"<i>One hundred did I hear one hundred for this " + (player.gender == 3 ? "herm" : player.gender == 1 ? "man" : "woman") + "? One hundred one?!</i>\"\n\n");
-        outputText("You realise what's going on now, they're actually auctioning you at the slave market! You try and break free but your bonds are too tight. Eventually you're sold to an Omnibus who just so happen to be collecting human pets. As time passes she eventually sells you to a new master and then you're sold again to another. It never ends. ");
-        outputText("Guess you will spend the rest of your life in bondage pleasing some demon until it gets bored and sell you off. Maybe, if your lucky, one will fuck you hard enough that you will cum your soul out and you will actualy get to enjoy rather than loath your slave status.\n\n");
+        outputText("Defeated, you fall to the ground and look up just in time to see a mace coming for your head. When you wake up, you're standing on a podium somewhere else. There are demons everywhere around you, screaming numbers. Those demons are brandishing gems for some reason.\n\n");
+        outputText("\"<i>One hundred! Did I hear one hundred for this " + (player.gender == 3 ? "herm" : player.gender == 1 ? "man" : "woman") + "? One hundred one?!</i>\"\n\n");
+        outputText("You realize what's going on now; they're actually auctioning you at the slave market! You try to break free, but your bonds are too tight. Eventually, you're sold to an Omnibus who just happens to be collecting human pets. As time passes, she eventually sells you to a new master, and then you're sold again to another. It never ends.");
+        outputText("Guess you will spend the rest of your life in bondage pleasing some demon until it gets bored and sells you off. Maybe, if you're lucky, one will fuck you hard enough that you will cum your soul out and you will actually get to enjoy rather than loathe your slave status.\n\n");
         EventParser.gameOver();
     }
 }

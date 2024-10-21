@@ -112,7 +112,7 @@ public class TempleOfTheDivine extends BaseContent {
 				//addButtonDisabled(3, "E.e.ie.", "You haven't restored this altar yet.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(4, "Fenrir", PlayerPrayAtTempleFenrirAltar).hint("Pray to the god sharing your body for an increase to your might.");
 				else addButtonDisabled(4, "Fenrir", "You haven't restored this altar yet.");//FUCK, STOP WRITING NYI OPTIONS, IT'S MISLEADING
-				/*addButtonDisabled(5, "???", "You not yet restored this altar.");//life godess
+				/*addButtonDisabled(5, "???", "You not yet restored this altar.");//life goddess
 				addButtonDisabled(6, "Krat..", "You not yet restored this altar.");
 				addButtonDisabled(7, "???", "You not yet restored this altar.");*///magic god
 				//Remove curses

@@ -736,7 +736,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
-					desc += "You have trouble standing as multiple flashes of sensation run across your [legs]. Sitting down before you accidently hurt yourself, you watch with apprehension as your [legs] begin to shift, fluffy patches of fur traveling up your [legs] until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>";
+					desc += "You have trouble standing as multiple flashes of sensation run across your [legs]. Sitting down before you accidentally hurt yourself, you watch with apprehension as your [legs] begin to shift, fluffy patches of fur traveling up your [legs] until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>";
 				}
 				// Case 2: Bipedal TF
 				else if (legCount === 2) {
@@ -744,7 +744,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 					// Display TF text if the player is obtaining this part instead of only changing leg count
 					if (player.lowerBody !== LowerBody.RAIJU) {
-						desc += "You have trouble standing as multiple flashes of sensation run across your [legs]. Sitting down before you accidently hurt yourself, you watch with apprehension as your [legs] begin to shift, fluffy patches of fur traveling up your [legs] until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>";
+						desc += "You have trouble standing as multiple flashes of sensation run across your [legs]. Sitting down before you accidentally hurt yourself, you watch with apprehension as your [legs] begin to shift, fluffy patches of fur traveling up your [legs] until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>";
 					}
 				}
 				// Case 3: Taur TF
@@ -1332,7 +1332,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
 
-			desc += "The skin on your legs feels like it's burning as a whole set of intricate warlike tattoos covers them. Furthermore, your toenails become increasingly pointed turning black just like a set of claws. Well it seems you will have get used to your <b>war tattooed legs and feet topped with sharp nails.</b>";
+			desc += "The skin on your legs feels like it's burning as a whole set of intricate warlike tattoos covers them. Furthermore, your toenails become increasingly pointed turning black just like a set of claws. Well, it seems you will have get used to your <b>war tattooed legs and feet topped with sharp nails.</b>";
 
 			if (doOutput) outputText(desc);
 			player.legCount = 2;
@@ -1776,7 +1776,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyMouse, doOutput);
 
-			desc += "Your legs grow increasingly hot until suddenly they light up and start blazing, just like your tail. Well wow! Kicking with these is sure to pack an extra punch. The fur under your fiery coat doesn’t seem to burn either, but you're pretty sure anything that gets a kick from your legs is in for a painful experience. <b>You now have blazing mouse legs!</b>";
+			desc += "Your legs grow increasingly hot until suddenly they light up and start blazing, just like your tail. Well, wow! Kicking with these is sure to pack an extra punch. The fur under your fiery coat doesn’t seem to burn either, but you're pretty sure anything that gets a kick from your legs is in for a painful experience. <b>You now have blazing mouse legs!</b>";
 
 			if (doOutput) outputText(desc);
 			player.legCount = 2;

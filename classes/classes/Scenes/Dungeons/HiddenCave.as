@@ -349,7 +349,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>Ted's Lair</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 4) {
-				outputText("\n\n\"<i>You come to worship me mortal?</i>\" A dommering, neither masculine nor feminine voice reached your ears the very moment you enter the room. Suprised you stopped to look around to find its source.");
+				outputText("\n\n\"<i>You come to worship me mortal?</i>\" A dommering, neither masculine nor feminine voice reached your ears the very moment you enter the room. Surprised, you stopped to look around to find its source.");
 				outputText("\n\n\"<i>So you're not my worshiper YET... but my BAM HAMMER will make sure you will be!!!</i>\"");
 				startCombat(new Ted(), true);
 				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] = 5;
@@ -509,7 +509,7 @@ public class HiddenCave extends DungeonAbstractContent
 		private function putInTheJadeTalisman2():void {
 			outputText("Wait, she thinks you're her master? But wouldn't that be that weird and arrogant dragon boy?\n\n");
 			outputText("\"<i>No. He ran away like a coward</i>\" you speak the truth. Hearing this she seems stay silent for a longer moment before speaking again. \"<i>Are you my new master?</i>\"\n\n");
-			outputText("New master? Confused, you ask her what she means. She straightforwardly replies. \"<i>Since you came here, which required Master’s jade talisman, Master wouldn't give it to noone not his servant, so that makes you my new master, right?</i>\"\n\n");
+			outputText("New master? Confused, you ask her what she means. She straightforwardly replies. \"<i>Since you came here, which required Master’s jade talisman, Master wouldn't give it to no one, not his servant, so that makes you my new master, right?</i>\"\n\n");
 			outputText("You think for a moment. She looks like some sort of golem so having one in camp wouldn't be harmful. \"<i>Yes I’m your new Master</i>\" you reply with a confident voice.\n\n");
 			outputText("\"<i>Then would you set me free? Or should I stay chained here?</i>\" she asks. And that makes you realize you had no idea that she was chained here.\n\n");
 			outputText("\"<i>Stay here for a bit longer, I need to do few things first before I can take you with me</i>\" having said this, you turn around and start walking toward the exit of the room.\n\n");

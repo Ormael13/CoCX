@@ -34,7 +34,7 @@ public class SandWormScene extends BaseContent
 	}
 
 	private function loseAsTallPerson():void {
-		outputText("As you fall over to the ground defeated, the sand worm looms over you. Well clearly you just wouldn't fit in that gaping mouth of his so it can't exactly eat you. To your absolute surprise instead a tiny human sized pink woman slides out of its mouth and starts yelling angrily at you.[pg]");
+		outputText("As you fall over to the ground defeated, the sand worm looms over you. Well, clearly you just wouldn't fit in that gaping mouth of his so it can't exactly eat you. To your absolute surprise instead a tiny human sized pink woman slides out of its mouth and starts yelling angrily at you.[pg]");
 		outputText("\"<i>My territory you biggy no welcome you leave! You're scaring away mates!</i>\"[pg]");
 		outputText("You do try and clear the misunderstanding but the not so bright pink woman does not seem to care for your reasoning. In an effort to kick you out she begins to push your prone form across the desert. A few minutes later you're at the limit of her territory and she digs back underground heading back to whence she came. Beaten up you head back to camp.[pg]");
 		cleanupAfterCombat();

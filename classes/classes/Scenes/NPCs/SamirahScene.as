@@ -278,7 +278,7 @@ public function samirahTalkHer():void {
 public function samirahTalkHomeworld():void {
 	clearOutput();
 	outputText("So what does the naga homeworld look like exactly?\n\n");
-	outputText("\"<i>I’m from Gobis, a world of sun and sand. Well it’s a large land of sandy dunes with an oasis every now and then. We travel between sandstorms for sustenance and resources, as not to despoil the land of everything. Even then, a naga can survive alone in the Gobis desert for several weeks before running out of water or food.</i>\"\n\n");
+	outputText("\"<i>I’m from Gobis, a world of sun and sand. Well, it’s a large land of sandy dunes with an oasis every now and then. We travel between sandstorms for sustenance and resources, as not to despoil the land of everything. Even then, a naga can survive alone in the Gobis desert for several weeks before running out of water or food.</i>\"\n\n");
 	outputText("So, wait, they never experienced any cold weather there?\n\n");
 	outputText("\"<i>Of course not! Else we would spend our days hibernating. Nights in the world of Gobis are cold and us naga spend all of it sleeping, otherwise, we would be hunting night and day.</i>\"\n\n");
 	advanceMinutes(10);
@@ -305,7 +305,7 @@ public function samirahTalkHypnosis():void {
 public function samirahTalkClothes():void {
 	clearOutput();
 	outputText("You inquire on the clothes most naga wear back in her homeworld.\n\n");
-	outputText("\"<i>Truthfully, while I normally wouldn’t go naked, this land quickly teaches you it's easier to not wear anything rather than being dressed when it comes down to finding prey. However I still have some clothes from my homeland in my stash at what's left of the caravan. Let me get them for you.</i>\"\n\n");
+	outputText("\"<i>Truthfully, while I normally wouldn’t go naked, this land quickly teaches you it's easier to not wear anything rather than being dressed when it comes down to finding prey. However, I still have some clothes from my homeland in my stash at what's left of the caravan. Let me get them for you.</i>\"\n\n");
 	outputText("She heads out and comes back an hour later with a large chest. She pulls out several lascivious and colorful dresses clearly made for a naga. The top piece consists of a collar and a black silk bikini connected with a pink veil at the breast intersection. It is accompanied by two sleeves, embellished with golden trim and golden bangles. As you expected it seems to be what you would see on a desert seductress. ");
 	outputText("The bottom is similar to a panty of the same design save that it has but a single hole and is made to hang around a naga waist. Around the length of the panty is a pink veil that goes down to what would be the knee on a human body.");
 	if (player.isFemale()) {

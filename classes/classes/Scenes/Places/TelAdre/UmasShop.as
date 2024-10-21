@@ -111,7 +111,7 @@ import classes.Scenes.SceneLib;
 			outputText("Loppe looks at you with disdain, then adds, \"<i>Yes, [he]'s a friend alright.</i>\"  Loppe clears her throat.  \"<i>Mom, I would like to introduce you to [name], my [boyfriend].</i>\"\n\n");
 
 			// Tempted to add in some variance shit here for corrupt/times-sexed stuff, like low corrupt/low sex count;
-			// Loppe's revelation about your apparant relationship comes as something of a shock to you, but you try - and fail - to hide the suprise from your face." etc
+			// Loppe's revelation about your apparant relationship comes as something of a shock to you, but you try - and fail - to hide the surprise from your face." etc
 
 			outputText("Uma looks between the two of you with interest.  \"<i>[Boyfriend] huh?  So it's you whom I have to thank for the broken springs in Loppe's bed?</i>\" Uma says with a smile, offering you a hand.\n\n");
 			outputText("You give her a winning smile back and accept it, wondering if you should prepare yourself for a macho-type squeezing match.  Even as you shake her hand, you apologize, telling her it wasn't your intention to make Loppe's bed need replacement springs.\n\n");
@@ -456,7 +456,7 @@ import classes.Scenes.SceneLib;
 			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed.  It might hurt again, but be brave, ok?</i>\"  You nod as best as you can and prepare yourself.\n\n");
 			outputText("By the time Uma is finished you feel sore all over, the pain on your back seemingly bringing back the pain on your front.\n\n");
 			outputText("\"<i>It will be a little while before the flow of chi inside your body stabilizes, dear.  But by the time you're out of this clinic, you should feel much better,</i>\" Uma explains.\n\n");
-			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, true to her words, you start to feel better... in fact you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
+			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, true to her words, you start to feel better... in fact, you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
 
 			// Apply bonus & back to camp!
 			applyMassageBonus(selectedMassage);
@@ -1317,7 +1317,7 @@ import classes.Scenes.SceneLib;
 			outputText("Wordlessly the laquine nods and begins to rise up and down, moaning and hissing as she truly loses her feminine virginity, riding her feline lover clumsily, but enthusiastically.  \"<i>This, oh... this feels so good, Hyou!</i>\"\n\n");
 			outputText("The feline moans.  \"<i>Yeah!  So good.</i>\"\n\n");
 			outputText("Addled as she is by pleasure, Loppe can still hear the reaction.  \"<i>Hey, what's wrong?  Aren't you enjoying this?  I know I am!</i>\"\n\n");
-			outputText("\"<i>No!  I mean yes!  Of course I'm enjoying it... wow this feels great!</i>\"  He says, trying to save face.\n\n");
+			outputText("\"<i>No!  I mean yes!  Of course I'm enjoying it... wow, this feels great!</i>\"  He says, trying to save face.\n\n");
 			outputText("\"<i>Well, you don't sound too happy, what's wrong?  You just not like this position?</i>\"  Loppe asks, trying to be understanding.\n\n");
 			outputText("\"<i>I'm sorry Loppe... I don't know what's gotten into me... it does feel nice, but I'm just not feeling... y'know.  Maybe it is the position... try turning around?</i>\"  He suggests.\n\n");
 			outputText("With a moan as the action stretches her in just the right way, the laquine awkwardly spins around, leaving her pre-dribbling dick and balls slapping against her feline lover and her breasts positioned right in front of his eyes.  \"<i>I'll try not to give you a facial when we really get going, okay?</i>\"  She promises.\n\n");
