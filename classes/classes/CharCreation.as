@@ -2727,7 +2727,7 @@ import classes.Scenes.Combat.CombatAbility;
 		}
 
 		private function perkAOMXCheck(tier:int, btn:int):void {
-			var NGPL:Array = [1, 3, 5, 7];
+			var NGPL:Array = [1, 3, 5, 7, 9];
 			var pCost:int = 20;
 			if (tier > 5) {
 				addButtonDisabled(btn, "A.O.M. Rank "+ (tier-1).toString(),"You have the highest tier already.");
@@ -2987,8 +2987,8 @@ import classes.Scenes.Combat.CombatAbility;
 					else if (whichNewGameAreYouOn() < tier){
 						addButtonDisabled(btn, "Gen. Memory", "You have not ascended enough times yet.");
 					}
-					else if (tier > 10){
-						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");//150/~550 (add new asc perk to 2x then 3x and 4x amount of slots - each 2 ascennsions)
+					else if (tier > 12){
+						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");//180/~550 (add new asc perk to 2x then 3x and 4x amount of slots - each 2 ascennsions)
 					}
 					else {
 						if (tier == 1){

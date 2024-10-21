@@ -267,7 +267,7 @@ public class Achievements extends BaseContent
 			addAchievement("Will You Be My Valentine?", kACHIEVEMENTS.HOLIDAY_VALENTINE, "Visit the Wet Bitch during Valentine's day. (Valentine)", "", true);
 			addAchievement("Year of the Goat", kACHIEVEMENTS.HOLIDAY_YEAR_OF_THE_GOAT, "Visit the He'Xin'Dao during Lunar New Year. (Winter)", "", true);
 
-			titleAchievementSection("Survival/Realistic Mode"); //15 achievements
+			titleAchievementSection("Survival/Realistic Mode"); //17 achievements
 			addAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN, "Refill your hunger for the first time.");
 			addAchievement("Champion Needs Food Badly (1)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 100 in one go.");
 			addAchievement("Champion Needs Food Badly (2)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_2, "Instantly refill your hunger from 0 to 250 in one go.");
@@ -299,15 +299,21 @@ public class Achievements extends BaseContent
 			//eat 50 pts over max hunger without gaining weight
 			//eat 75 pts over max hunger without gaining weight (perki muszą dać zwiekszenie limitu przejedzenia sie bez przyrostu wagi ^^)
 
-			titleAchievementSection("Epic"); //16 achievements
+			titleAchievementSection("Epic"); //29 achievements
 			addAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL, "Start NG+ (or higher) game.", "", true);
 			addAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION, "Start NG++ (or higher) game.", "", true);
 			addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4, "Start NG+++ (or higher) game.", "", true);
 			addAchievement("xXx 5: Mareth's Judgment_Day", kACHIEVEMENTS.EPIC_XXX5_MARETHS_JUDGMENT_DAY, "Start NG 4+ (or higher) game.", "", true);
 			addAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS, "Start NG 5+ (or higher) game.", "", true);
 			addAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION, "Start NG 6+ (or higher) game.", "", true);
-			//addAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS, "Start NG 7+ (or higher) game.", "", true);
-			//addAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE, "Start NG 8+ (or higher) game.", "", true);
+			addAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS, "Start NG 7+ (or higher) game.", "", true);
+			addAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE, "Start NG 8+ (or higher) game.", "", true);
+			addAchievement("xXx 10: The Phantom Demon Menace", kACHIEVEMENTS.EPIC_XXX10_THE_PHANTOM_DEMON_MENACE, "Start NG 9+ (or higher) game.", "", true);
+			addAchievement("xXx 11: Attack of the Imps", kACHIEVEMENTS.EPIC_XXX10_THE_PHANTOM_DEMON_MENACE, "Start NG 10+ (or higher) game.", "", true);
+			addAchievement("xXx 12: Revenge of the Lethice", kACHIEVEMENTS.EPIC_XXX10_THE_PHANTOM_DEMON_MENACE, "Start NG 11+ (or higher) game.", "", true);
+			addAchievement("xXx 13: A New Hope", kACHIEVEMENTS.EPIC_XXX10_THE_PHANTOM_DEMON_MENACE, "Start NG 12+ (or higher) game.", "", true);
+			addAchievement("xXx 14: The Demon Empire Strikes Back", kACHIEVEMENTS.EPIC_XXX10_THE_PHANTOM_DEMON_MENACE, "Start NG 13+ (or higher) game.", "", true);
+			addAchievement("xXx 15: Return of the Champion", kACHIEVEMENTS.EPIC_XXX10_THE_PHANTOM_DEMON_MENACE, "Start NG 14+ (or higher) game.", "", true);
 			addAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME, "Become Gargoyle.", "", true);
 			addAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA, "Became Devil.", "", true);
 			addAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER, "Became Jiangshi.", "", true);
@@ -334,13 +340,15 @@ public class Achievements extends BaseContent
 			addAchievement("Achievements - Going Deeper (3rd layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_3L, "Unlocking 300 achievements.", "", true);
 			addAchievement("Achievements Limbo", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_LIMBO, "Unlocking 600 achievements.", "", true);
 
-			titleAchievementSection("Shadow Slave"); //5 achievements
+			titleAchievementSection("Shadow Slave"); //6 achievements
 			addAchievement("Shadow Initiate", kACHIEVEMENTS.SHADOW_INITIATE, "Unlock first shadow achievement.", "", true);
 			addAchievement("Shadow Squire", kACHIEVEMENTS.SHADOW_SQUIRE, "Unlock 10 shadow achievements.", "", true);
 			addAchievement("Shadow Knight", kACHIEVEMENTS.SHADOW_KNIGHT, "Unlock 25 shadow achievements.", "", true);
 			addAchievement("Shadow Paladin", kACHIEVEMENTS.SHADOW_PALADIN, "Unlock 45 shadow achievements.", "", true);
 			addAchievement("Shadow General", kACHIEVEMENTS.SHADOW_GENERAL, "Unlock 70 shadow achievements.", "", true);
-			//addAchievement("Shadow ", kACHIEVEMENTS., "Unlock 100 shadow achievements.", "", true); 
+			addAchievement("Shadow Lieutenant General", kACHIEVEMENTS.SHADOW_LIEUTENANT_GENERAL, "Unlock 100 shadow achievements.", "", true);
+			//addAchievement("Shadow Major General", kACHIEVEMENTS.SHADOW_MAJOR_GENERAL, "Unlock 140 shadow achievements.", "", true); 
+			//addAchievement("Shadow ", kACHIEVEMENTS.SHADOW_, "Unlock 200 shadow achievements.", "", true);
 
 			titleAchievementSection("General");
 			addAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER, "Defeat 20 demons and sleep 10 times.");

@@ -405,6 +405,12 @@ public class SaveUpdater extends NPCAwareContent {
 			["xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION, player.newGamePlusMod() >= 6],
 			["xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS, player.newGamePlusMod() >= 7],
 			["xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE, player.newGamePlusMod() >= 8],
+			["xXx 10: The Phantom Demon Menace", kACHIEVEMENTS.EPIC_XXX10_THE_PHANTOM_DEMON_MENACE, player.newGamePlusMod() >= 9],
+			["xXx 11: Attack of the Imps", kACHIEVEMENTS.EPIC_XXX11_ATTACK_OF_THE_IMPS, player.newGamePlusMod() >= 10],
+			["xXx 12: Revenge of the Lethice", kACHIEVEMENTS.EPIC_XXX12_REVENGE_OF_THE_LETHICE, player.newGamePlusMod() >= 11],
+			["xXx 13: A New Hope", kACHIEVEMENTS.EPIC_XXX13_A_NEW_HOPE, player.newGamePlusMod() >= 12],
+			["xXx 14: The Demon Empire Strikes Back", kACHIEVEMENTS.EPIC_XXX14_THE_DEMON_EMPIRE_STRIKES_BACK, player.newGamePlusMod() >= 13],
+			["xXx 15: Return of the Champion", kACHIEVEMENTS.EPIC_XXX15_RETURN_OF_THE_CHAMPION, player.newGamePlusMod() >= 14],
 			["My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON, flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0],
 			["Me Evolve", kACHIEVEMENTS.EPIC_ME_EVOLVE, EvolvingItems >= 1],
 			["Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE, EvolvingItems >= 2],
@@ -433,6 +439,7 @@ public class SaveUpdater extends NPCAwareContent {
 		if (achStat.achievementsShadowEarned >= 25) awardAchievement("Shadow Knight", kACHIEVEMENTS.SHADOW_KNIGHT);
 		if (achStat.achievementsShadowEarned >= 45) awardAchievement("Shadow Paladin", kACHIEVEMENTS.SHADOW_PALADIN);
 		if (achStat.achievementsShadowEarned >= 70) awardAchievement("Shadow General", kACHIEVEMENTS.SHADOW_GENERAL);
+		if (achStat.achievementsShadowEarned >= 100) awardAchievement("Shadow Lieutenant General", kACHIEVEMENTS.SHADOW_LIEUTENANT_GENERAL);
 		//Epic
 		if (achStat.achievementsTotalCurrentlyUnlocked >= 10) awardAchievement("Achievementception", kACHIEVEMENTS.EPIC_ACHIEVEMENTCEPTION);
 		if (achStat.achievementsTotalCurrentlyUnlocked >= 30) awardAchievement("Achievement within Achievement", kACHIEVEMENTS.EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT);
