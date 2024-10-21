@@ -3533,7 +3533,7 @@ private function giveArianReptilum():void {
 
 		outputText("\n\nYou smile and nod your head; does [arian ey] like them?");
 
-		outputText("\n\n\"<i>Like them?  I love them!  You have no idea how much I longed to... to... to actually have two dicks like most of my people.  Thank you so much for this wonderful suprise [name]!</i>\"  [arian Ey] grins happily at you.");
+		outputText("\n\n\"<i>Like them?  I love them!  You have no idea how much I longed to... to... to actually have two dicks like most of my people.  Thank you so much for this wonderful surprise [name]!</i>\"  [arian Ey] grins happily at you.");
 		flags[kFLAGS.ARIAN_DOUBLE_COCK] = 1;
 	}
 	else {

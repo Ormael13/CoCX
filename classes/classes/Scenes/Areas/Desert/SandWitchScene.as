@@ -157,7 +157,7 @@ internal function sandwitchRape():void {
 				var index:int = player.breastRows.length;
 				while(index > 0) {
 					index--;
-					//If that breast didnt have nipples reset length
+					//If that breast didn't have nipples reset length
 					if(player.breastRows[0].nipplesPerBreast < 1) player.nippleLength = .2;
 					player.breastRows[0].nipplesPerBreast = 1;
 				}
@@ -624,7 +624,7 @@ public function sexMenu():void {
 	addButtonIfTrue(5, "Dildo Rape", sandwitchGetsDildoed, "Req. Deluxe Dildo", player.hasKeyItem("Deluxe Dildo") >= 0);
     if (SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff))
         addButtonIfTrue(6, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly, "Not for genderless...", player.gender != 0);
-    else addButtonDisabled(6, "???", "Req. to be posessed by some ghost");
+    else addButtonDisabled(6, "???", "Req. to be possessed by some ghost");
     addButtonIfTrue(7, "Ride", centaurRide, "Req. low corruption and centaur lower body", lowCor && player.isTaur());
     addButtonIfTrue(8, "Taur Rape", centaurRape, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
 	addButtonIfTrue(9, "Lay Eggs", ovipositSandWitches, "Req. oviposition", player.gender > 0 && player.canOviposit());

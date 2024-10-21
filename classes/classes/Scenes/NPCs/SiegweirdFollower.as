@@ -50,7 +50,7 @@ public function siegweirdFirstEncounterPostFight():void
     clearOutput();
 	spriteSelect(SpriteDb.s_siegweird);
 	outputText("You kick the imp away and take the sword. You can only hope he’s still near where you last saw him.\n\n");
-	outputText("You eventually find him not too far from where you first met him. He notices you and quickly approaches, the heavy sound of his geaves smash against the ground until he halts before you.\n\n");
+	outputText("You eventually find him not too far from where you first met him. He notices you and quickly approaches, the heavy sound of his greaves smash against the ground until he halts before you.\n\n");
 	outputText("\"<i>My sword! Thank you, you have a paladin’s deepest gratitude.</i>\" \n\n He removes his helmet, revealing a purely white ursine face, he appears to be a polar bear. \n\n\"<i>You may call me Siegweird, friend…</i>\" his voice trails off slightly before his eyes regain focus onto you, \"");
 	outputText("\"<i>And you are?</i> \n\n You state your name. \n\n\"<i>Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.</i>\"");
 	cleanupAfterCombat();
@@ -294,7 +294,7 @@ public function siegweirdCampSoup():void
 		advanceMinutes(15);
 	}
 	else {
-		outputText("The smell of Siegwierd’s soup is amazing. He did offer to share it with you, so perhaps now isn’t a bad time?\n\nYou decide to approach him.\n\n");
+		outputText("The smell of Siegweird’s soup is amazing. He did offer to share it with you, so perhaps now isn’t a bad time?\n\nYou decide to approach him.\n\n");
 		outputText("He looks at you with gleams of hope in his eyes, \"<i> [name]! Come here for my famous home cooked soup? More than just a hearty meal, it will help ease off the stress of the day and maybe give you a little edge in combat. I’ll only allow you one servering per day though… I don’t want to go broke making soup every day for myself and everyone else you know.</i>\"\n\n");
 		outputText("Is it possible to improve the soup? It smells wonderful already.\n\n");
 		outputText("\"<i>I mean, sure if you find some special ingredients across Mareth. I suppose it wouldn't be an issue..?</i>\"\n\n");
@@ -383,7 +383,7 @@ public function siegweirdAdvancedStudy_0():void {
 
 public function siegweirdAdvancedStudy_1_choose():void {
     clearOutput();
-    outputText("You recall that Siegweird mentioned too options - the symbol can be made of Marae's divine bark, or a regular wood and a pure pearl. Which do you want to use?");
+    outputText("You recall that Siegweird mentioned two options - the symbol can be made of Marae's divine bark, or a regular wood and a pure pearl. Which do you want to use?");
     if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2)
         outputText("\n\n<b>Marae is corrupted - you can't get anything 'pure' from her anymore.</b>");
     else

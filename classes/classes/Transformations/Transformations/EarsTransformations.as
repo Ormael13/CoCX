@@ -479,7 +479,7 @@ public class EarsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "Whoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in [haircolor] fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>";
+				desc += "Whoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in [haircolor] fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well, these sure will give you a cute look. <b>You now have gremlin ears!</b>";
 				player.ears.type = Ears.GREMLIN;
 				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.GREMLIN));

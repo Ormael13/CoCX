@@ -1216,7 +1216,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
     //This scene only appears if Ember is male or herm and PC is pregnant and showing (ie: pregnancy has progressed as much as stage 2, at least.)
     //PC must be pregnant with something besides Ember's child/egg to get this scene.
     //Occurs once per pregnancy.
-    //To be implimented once preggers is set up.
+    //To be implemented once preggers is set up.
     private function manEmberBitchesAboutPCPregnancy():void {
         clearOutput();
         flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] = 1;
@@ -1231,7 +1231,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
     //Scene appears when selecting [Talk]
     //This scene only appears if the PC is pregnant with Ember's child.
     //Occurs only once.
-    //To be implimented once preggers is set up.
+    //To be implemented once preggers is set up.
     private function emberTalksToPCAboutPCDragoNPregnancy():void {
         clearOutput();
         flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] = 1;
@@ -3064,7 +3064,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
     //Bred by Ember
     //Only available to Medium/High Affection Ember.
     //Only occurs if the PC has a pussy and is in heat; Ember must have a dick; both must not be pregnant.
-    //In case Ember and the PC are herms, both being able to impregnate and be impregnated. One of the scenes will be randomly choosen.
+    //In case Ember and the PC are herms, both being able to impregnate and be impregnated. One of the scenes will be randomly hosen.
     //Ember never fails to impregnate the PC or be impregnated - unless the player is on contraceptives.
     private function getKnockedUpByEmbrahBroBaby():void {
         clearOutput();

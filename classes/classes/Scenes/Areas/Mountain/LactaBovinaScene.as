@@ -53,7 +53,7 @@ public function lactaBovinaVictorySittingBoobjob():void {
 	spriteSelect(SpriteDb.s_LactaBovine_16bit);
 	outputText("Determined to make use of the cow's greatest asset, you force the milky slut on her back and sit on her belly ordering her to get to work!\n\n");
 	if (player.longestCockLength() >= 18) outputText("The cow eyes go wide in surprise at your [cock], but she gets to work wrapping her pillows like breasts around your towering erection. ");
-	outputText("You watch patiently as the cow uses her massive tits to pleasure aching cock, bitch must be used to treating minotaurs on a daily basis because she's very good at this. "+(player.horseCocks() > 0?"That your cock is equine in shape probably helps put her in the mood. ":"")+"You moan as the cow slowly edges you toward the inevitable climax, her jiggly orbs moving across your lenght. ");
+	outputText("You watch patiently as the cow uses her massive tits to pleasure aching cock, bitch must be used to treating minotaurs on a daily basis because she's very good at this. "+(player.horseCocks() > 0?"That your cock is equine in shape probably helps put her in the mood. ":"")+"You moan as the cow slowly edges you toward the inevitable climax, her jiggly orbs moving across your length. ");
 	outputText("You almost feel the bump of fresh cum move along the length of you prick as you finally explode painting the cow face with your seed.\n\n");
 	outputText("Satisfied you stand up and redress leaving the pleading needy cow behind heading back to your camp.");
 	player.sexReward("no", "Dick");

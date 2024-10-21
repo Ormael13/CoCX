@@ -118,7 +118,7 @@ public function winEvangelineImpFight():void
 	outputText("As she talks you realize something, did she mention her hiding place is near here? Isn’t that dangerous? Someone you don’t know practically admitted that she is living very close to the portal that you said you would defend. What if she is a demon? Wishing to make things clear you wait till she’s finished talking and ask her directly where she lives. First she seems to be surprised, then becomes confused, and then after that a slight hint of fear before finally answering.\n\n");
 	outputText("\"<i>It’s just moment away from your...</i>\" she casts a glance over your shoulder \"<i>...camp. Suprising that anyone wish to stay here as i heard it's a cursed piece of land that anyone even demons avoids, but for someone like me it gives a good cover and scares off potential scavengers. Still I've been reconsidering moving myself somewhere else, maybe to that desert city or to a different place, as those lil assholes been recently more active around this area. But...moving all my stuff would take a lot of time. ");
 	outputText("Especially all my alchemical equipment that those little red devils didn’t find or smash.</i>\"\n\nAlchemical equipment? Looking at her you wouldn’t have guessed she was an alchemist. You ask her about this and she seems to brighten up and starts talking happily about various experiments she made in the past for no discernible reason. And just when you start to ponder about how to interrupt her she suddenly ceases talking, but only for a short moment.\n\n");
-	outputText("\"<i>I know you don’t know me and likely don’t trust me, but could you let me live near your camp? Since you're here it may be bit safer to stay here unless you also belive in that cursed land rumors. I could help you in case you somehow...transform too much or in some way you don't want to, return to your previous form, or grant you new ones, stronger and more fitted to survive here,</i>\" for a moment you seem to see a gleam in her eye, \"<i>so what do you think? By the way my name’s Evangeline.</i>\"");
+	outputText("\"<i>I know you don’t know me and likely don’t trust me, but could you let me live near your camp? Since you're here it may be bit safer to stay here, unless you also believe in that cursed land rumors. I could help you in case you somehow...transform too much or in some way you don't want to, return to your previous form, or grant you new ones, stronger and more fitted to survive here,</i>\" for a moment you seem to see a gleam in her eye, \"<i>so what do you think? By the way, my name’s Evangeline.</i>\"");
 	cleanupAfterCombat();
 	menu();
 	addButton(0, "Move In", Tak);
@@ -198,7 +198,7 @@ public function meetEvangeline():void {
 	menu();
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
-	if (EvangelineAffectionMeter >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//godess
+	if (EvangelineAffectionMeter >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//goddess
 	if (EvangelineAffectionMeter >= 5) {
 		addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!")
 			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
@@ -256,7 +256,7 @@ private function evangelineAppearance():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 8) outputText("a skimpy chain bikini that barely qualifies as armor. The chain is made from links much finer and lighter than normal, so fine that it feels almost silken under fingertips. A simple seal in the g-string-like undergarment states, \"Virgins only.\"");
 	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3) outputText("a suit of steel 'armor' which have two round disks that barely cover her nipples, a tight chainmail bikini, and circular butt-plates.");
 	else outputText("a simple peasant’s robe that’s torn and frayed in a few places.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3) outputText("\n\nBetween collarbones there is a medium sized purple crystal sticking out of her skin that sometimes gently glows.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3) outputText("\n\nBetween collarbones there is a medium-sized purple crystal sticking out of her skin that sometimes gently glows.");
 	doNext(meetEvangeline);
 }
 
@@ -284,7 +284,7 @@ private function TalkYourEyes():void {
 	if (EvangelineTalks >= 1) outputText("\"<i>So you once again want talk about it? Let it be,</i>\"");
 	else outputText("\"<i>I was kinda expecting that you would ask about them eventually,</i>\"");
 	outputText(" she laughs, her gaze casting toward the ground for a moment. \"<i>Most people ask me the same question sooner or later. To tell you the truth I believe I inherited them from my father, since he had the same eyes too.</i>\" There is a clear sadness in her eyes as she says this.\n\n");
-	outputText("\"<i>They are not giving me any benefit I know about, beside making me look like a freak. Well at least all the humans I met before told me this. And some even felt constantly uneasy around me thinking I'm some kind of abomination. Well at least until...</i>\" suddenly she stops and when you question the reason she giving you a gaze saying 'I don't wanna talk about it'. Well looks like they are just a rare trait. But she mentioned something about her father. Changing subject you ask about him.\n\n");
+	outputText("\"<i>They are not giving me any benefit I know about, beside making me look like a freak. Well, at least all the humans I met before told me this. And some even felt constantly uneasy around me thinking I'm some kind of abomination. Well, at least until...</i>\" suddenly she stops and when you question the reason she giving you a gaze saying 'I don't wanna talk about it'. Well, looks like they are just a rare trait. But she mentioned something about her father. Changing subject you ask about him.\n\n");
 	outputText("\"<i>My father...</i>\" she pauses for a moment before shaking her head. \"<i>No I do not want to talk about him now either. Sorry can you leave me alone for a while?</i>\"");
 	evangelineAffection(1);
 	if (EvangelineTalks == 0) EvangelineTalks = 1;
@@ -992,7 +992,7 @@ private function curingArigean1():void {
 		outputText("\"<i>WHAT IN MARAE IS THAT!</i>\" She yelps while making sure there's more than enough distance from your new hitchhikers and herself.\n\n");
 		outputText("\"<i>Those popped up overnight, I don’t have any control over them.</i>\"\n\n");
 		outputText("She wearily takes a few curious steps forward with her eyes never leaving your new ‘friends’.\n\n");
-		outputText("\"<i>It seems you have some sort of parasite attached to you. However due to it not being on you for too long it should be relatively easy to remove.</i>\" She grabs a paper and quill and starts writing a list down on it.\n\n");
+		outputText("\"<i>It seems you have some sort of parasite attached to you. However, due to it not being on you for too long it should be relatively easy to remove.</i>\" She grabs a paper and quill and starts writing a list down on it.\n\n");
 	}
 	else {
 		outputText("\"<i>What’s this black spot right here?</i>\" you feel her press into a spot on your spine just above your [butt], earning a hiss from the soreness it causes. She grabs the instrument giving it a look before a frown appears on her face.\n\n");
@@ -1573,7 +1573,7 @@ private function InternalMutations():void {
 	else if (EvangelinePeepTalkOnInternalMutations == 1) {
 		outputText("Your confused look annoys Evangeline to no end.\n\n");
 		outputText("\"<i>Gosh how did human civilization even become a serious thing out of Mareth when it's made out of people like you. As I just said It's possible to further improve yourself through internal mutations however doing so will cause your body to endure an ever increasing amount of stress due to degeneration. While there are ways to fully become one's race to do so will make you cease to be human. ");
-		outputText("For you chimerism is the safest route even if it forces you to constantly seek out the assistance of a skilled medic or daily healing magic treatment. And don't you just try poping those mutations naturaly by eating a hundred of ingrediants the only thing you will get is fat. You need a specialised transformative or straith out primal magic to transform your insides and I can only craft the first. Was this simple enough for you?</i>\"");
+		outputText("For you chimerism is the safest route even if it forces you to constantly seek out the assistance of a skilled medic or daily healing magic treatment. And don't you just try poping those mutations naturaly by eating a hundred of ingrediants the only thing you will get is fat. You need a specialised transformative or straight out primal magic to transform your insides and I can only craft the first. Was this simple enough for you?</i>\"");
 		menu();
 		addButton(1, "No", IMutationsYN, false);
 		addButton(3, "Yes", IMutationsYN);

@@ -443,7 +443,7 @@ public function rapeZeVapula():void {
 		if(player.cockTotal() > 1) outputText(" and her love-tunnel");
 		outputText(".");
 		//[if massive cum production]
-		if(player.cumQ() > 1000) outputText("  Some of it spurts by little jets outside of her, even as she instinctively contracts her muscles to keep as much spooge as possible and her belly accomodates by bloating out absurdly.");
+		if(player.cumQ() > 1000) outputText("  Some of it spurts by little jets outside of her, even as she instinctively contracts her muscles to keep as much spooge as possible and her belly accommodates by bloating out absurdly.");
 		outputText("  Needless to say, watching this rough ");
 		if(player.cockTotal() == 1) outputText("anal");
 		else outputText("double-penetration");

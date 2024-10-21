@@ -143,7 +143,7 @@ public class GnollScene extends BaseContent
 			var x:Number = player.longestCock();
 			//(if biggestCockLength()>9)
 			if (player.cocks[x].cockLength > 9) outputText("Finally, you can feel your cockhead push free into a deeper, wetter place.  You look down at her strange anatomy, the entire length of her tube bulging thicker to accommodate your " + cockDescript(x) + ".  You've made it all the way to her vagina!\n\n");
-			else outputText("Soon you feel the end of her clitoral tunnel butting up against your crotch.  You are as far in as you'll get.  You look down the length of her strange anatomy, the tube bulging thicker to accomodate your " + cockDescript(x) + ".  There are still inches between your cockhead and the end of her clit-dick.\n\n");
+			else outputText("Soon you feel the end of her clitoral tunnel butting up against your crotch.  You are as far in as you'll get.  You look down the length of her strange anatomy, the tube bulging thicker to accommodate your " + cockDescript(x) + ".  There are still inches between your cockhead and the end of her clit-dick.\n\n");
 
 			outputText("Now you begin to roll your hips in a steady rhythm, running your dick up and down her long clitoral tunnel.  It's like the deepest, tightest cunt you've ever had, gripping every inch of you.");
 			//(if balls>0)
@@ -197,7 +197,7 @@ public class GnollScene extends BaseContent
 			if (tenta >= 0)
 				outputText("\n\nYou can't afford waste this opportunity. Your [cock "+(tenta+1)+"] slithers around the gnoll, filling her mouth and going deeper into her throat. The gnoll sputters and tries to pull it back, but you ram it even deeper, choking her as a punishment for this  poor behavior.")
 			if (findNext())
-				outputText("\n\nYou still have some dicks left, so why should you hold back? The next moment, all of your [cocks] are inside her wide-spread ass. The gnoll arches her back, trying to accomodate your tools, but fails and just falls face-first in the dirt, crying quietly" + (tenta >= 0 ? " while your [cock "+(tenta+1)+"] continues to throatfuck her." : ""));
+				outputText("\n\nYou still have some dicks left, so why should you hold back? The next moment, all of your [cocks] are inside her wide-spread ass. The gnoll arches her back, trying to accommodate your tools, but fails and just falls face-first in the dirt, crying quietly" + (tenta >= 0 ? " while your [cock "+(tenta+1)+"] continues to throatfuck her." : ""));
 			}
 
 			outputText("\"<i>So how do you like it?</i>\" you grunt, \"<i>when a little too much is shoved up a hole that's a little too small?</i>\"  You pound away, hard and rough, until her cries turn into squeals and then into moans.  Finally, she simply passes out.  You slap your hips against her bony ass for a few more thrusts and cum, long and hard, into her rectum.\n\n");

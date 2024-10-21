@@ -370,7 +370,7 @@ public class Pregnancy extends NPCAwareContent {
                         if (player.hasPerk(PerkLib.UnicornBlessing)) EngineCore.outputText("Seems like she did actually manage to impregnate you without taking your virginity, doesn’t it?");
                         if (player.hasPerk(PerkLib.BicornBlessing)) {
                             EngineCore.outputText("As corrupt this child might be you still intend to bring her into the world.");
-                            if (player.cor <= 10) EngineCore.outputText(" Perhaps you could actualy raise her as a pure being?");
+                            if (player.cor <= 10) EngineCore.outputText(" Perhaps you could actually raise her as a pure being?");
                         }
                         EngineCore.outputText("</b>\n");
                         displayedUpdate = true;

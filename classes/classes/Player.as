@@ -1273,7 +1273,7 @@ use namespace CoC;
 		public function isPartiallyStaffTypeWeapon():Boolean {
 			return (weapon.isStaffPart()) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
-		//Weapons for Sneak Attack (Meele and Range)
+		//Weapons for Sneak Attack (Melee and Range)
 		public function haveWeaponForSneakAttack():Boolean
 		{
 			return weapon.isSingleSmall() || weapon.isDualSmall() || weaponOff.isSingleSmall() || weaponOff.isDualSmall();
@@ -1323,7 +1323,7 @@ use namespace CoC;
 		{
 			return weapon == game.weapons.RIPPER1 ||  weapon == game.weapons.TRIPPER1 || weapon == game.weapons.RIPPER2 || weapon == game.weapons.TRIPPER2 || weapon == game.weapons.MACGRSW || weapon == game.weapons.TMACGRSW || weapon == game.weapons.MACSPEA;
 		}
-		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
+		//Is in medium-sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
 		public function isInNonGoblinMech():Boolean
 		{
 			return vehicles == game.vehicles.HB_MECH;// || vehicles == game.vehicles.GOBMPRI
@@ -7979,7 +7979,7 @@ use namespace CoC;
 		public function displayFinalGameDifficulty():void {
 			outputText("<b>Final game difficulty:</b>");
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) outputText("\n[font-olive]Anal-easy that even every Fursona out there can play (Easy)[/font]");
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("\n[font-olive]Normaly it's should be Normal here so... it's N.O.R.M.A.L. (Normal)[/font]");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("\n[font-olive]Normally it's should be Normal here so... it's N.O.R.M.A.L. (Normal)[/font]");
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) outputText("\n[font-dred]As in far far away galaxys they say: That where the fun begins (Hard)[/font]");
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) outputText("\n[font-red]They see Hard'in They Hatin (Nightmare)[/font]");
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) outputText("\n[font-red]So now... neither death from starving, accumulated wrath inhibiting spellcasting nor internal mutations will stop you? Now, let's take things to the next level. (Extreme)[/font]");

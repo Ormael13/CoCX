@@ -639,7 +639,7 @@ public function loseMale():void {
 		+ "\n"
 		+ "\"<i>Fighting for so long must've been making all that delicious soul force of yours slosh about." + (player.hasBalls() ? " I can practically hear the bubbling sound of the energy in churning your balls." : "") + " Don't worry I'm going to relieve you of most of it.</i>\" She licks her lips hungrily before unravelling her kimono as four of her tails wraps around your arms and limb to hold you in place. \n"
 		+ "\n"
-		+ "You try to break out of the kitsune embrace but she proves to be deceptively stronger than she looks or perhaps it's you that has become weaker. Just as you think you are finaly about to untie yourself her hands leaves a trail of blue flame of foxfire across your chest leaving you weak and gasping from the surprisingly pleasurable caress.\n"
+		+ "You try to break out of the kitsune's embrace, but she proves to be deceptively stronger than she looks, or perhaps it's you that has become weaker. Just as you think you are finally about to untie yourself, her hands leave a trail of blue flame of foxfire across your chest, leaving you weak and gasping from the surprisingly pleasurable caress.\n"
 		+ "\n"
 		+ "Mocking your helplessness the vixen adds \"<i>Don't you worry, I am not leaving until I've had my fill. Just let me work my magic, it'll be fun for you and me.</i>\" before slowly mounting you're now erect [cock], already aroused by the abusive caresses. Her movement starts slow and methodical as her pussy wraps your member like a glove slowly edging you on with no chance for you to stop it. Mid-sex though the kitsune makes a devlish grin, she clearly has an idea and you're about to find out what it is.\n"
 		+ "\n"

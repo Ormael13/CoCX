@@ -55,7 +55,7 @@ public class RaisuneRace extends Race {
 				.skinBaseType(NOT(Skin.GOO), 0, -3)
 				.cockOrVaginaOfType(CockTypesEnum.RAIJU, VaginaClass.RAIJU, +1);
 		addScoresAfter(5)
-				.customRequirement("skin", "fur or magical tatoo",
+				.customRequirement("skin", "fur or magical tattoo",
 						function (body:BodyData):Boolean {
 							return body.skinCoatType == Skin.FUR
 									|| body.skinBasePattern == Skin.PATTERN_MAGICAL_TATTOO

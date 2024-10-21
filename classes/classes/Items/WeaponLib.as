@@ -367,7 +367,7 @@ public final class WeaponLib extends ItemConstants
 				.withEffect(IELib.AttackBonus_Cor, 1/2) as Weapon;
 		public const DSWORD_:Weapon = new Weapon(
 				"DSwords", "DualSwords", "dual swords", "a pair of swords", "slashes", 10, 800,
-				"A pair of swords made of the finest steel, usefull for fight groups of enemies.",
+				"A pair of swords made of the finest steel,usefulfor fight groups of enemies.",
 				WT_SWORD, WSZ_MEDIUM, true);
 		public const DSSPEAR:Weapon = new Weapon(
 				"DSSpear", "Demon Sn Spear", "demon snake spear", "a demon snake spear", "piercing stab", 60, 4800,

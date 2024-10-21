@@ -21,7 +21,7 @@ import classes.IMutationPerkType;
  * First, .withBuffs is not used here, instead, buffs are created in a pBuffs function within the mutation file itself, and must return an object.
  *
  * Requirements, as seen below compared to PerkLib/MutationsLib, are also not handled below, and are instead dynamically created, via pReqs function, also stored within the mutations file itself.
- * These can be checked seperately, or when sent to createDynamicPerks, will handle it as well.
+ * These can be checked separately, or when sent to createDynamicPerks, will handle it as well.
  *
  * Mutations are themselves handling their iterations via v1 checks.
  * V2 is used for the Mutations to track any special conditions for upgrading, as in cases such as HellHoundFireBalls.

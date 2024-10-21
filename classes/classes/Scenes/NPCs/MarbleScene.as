@@ -341,7 +341,7 @@ public function timeChangeLarge():Boolean {
             //Marble is still available at farm
             if (!player.hasStatusEffect(StatusEffects.NoMoreMarble)) {
                 postAddictionFarmMornings();
-                CoC.instance.timeQ++; //We can get rid of this: threshhold--;
+                CoC.instance.timeQ++; //We can get rid of this: threshold--;
             }
         }
         doNext(camp.returnToCampUseOneHour);
@@ -2353,7 +2353,7 @@ private function marbleCampSexNew():void {
 				else outputText("  Her thighs are gently rubbing beneath you, and you feel something hard poking you in the back.  You smile around the nipple you have in your mouth.");
 				if(player.hasBalls()) outputText("  As her hand reaches the base of your cock, she stops stroking it to take a moment and gently roll your [balls] with her fingers.  \"<i>Are these ready to shoot out for me soon, sweetie?</i>\"");
 				if(player.hasVagina()) outputText("  From the base of your cock, her hand moves even lower, gently rubbing your " + clitDescript() + ".  \"<i>This seems to also require some attention...  Maybe later, sweetie, if you do a good job nursing from me.  But right now, I want to see you shoot off,</i>\" she says, as her hand moves back to your [cocks].");
-				outputText("\n\nShe starts tugging at and stroking your [cock], eager to make you cum now.  You buck your hips again and she responds more agressively this time, pushing you back down with her breasts as her touch starts to become unbearable.  \"<i>You're close, aren't you, sweetie?  It's okay, I want to see you cum.</i>\"");
+				outputText("\n\nShe starts tugging at and stroking your [cock], eager to make you cum now.  You buck your hips again and she responds more aggressively this time, pushing you back down with her breasts as her touch starts to become unbearable.  \"<i>You're close, aren't you, sweetie?  It's okay, I want to see you cum.</i>\"");
 				outputText("\n\nWith that said, her stroking becomes unrelenting and you decide to simply give in to the pleasure.  The repeated feeling of her hand moving up and down your shaft, teasing the head and stimulating all along the length, has you shivering, and soon you feel a tingling at the base of your spine.  Her milk flows richly into your mouth, and the comforting taste relaxes you completely and makes it impossible not to give in to the pleasure.");
 				outputText("\n\nMoments later, Marble's rapid strokes cause you to ejaculate.  \"<i>There you go!  You've done great, sweetie!</i>\"  Your bottom shakes, causing your member to bob in her grasp as she squeezes out more and more of your cum onto her slimy hand.  You grab her breasts harder from the sudden sensations, causing her to yelp and moan.");
 				if(player.cumQ() < 500) outputText("  You cover her hand as she keeps jerking you off, squeezing out tiny little droplets once you're done ejaculating.");
@@ -2453,7 +2453,7 @@ private function marbleCampSexNew():void {
 		function breastsF():void {
 			clearOutput();
 			outputText("\"<i>You feeling antsy, sweetie?</i>\" Marble asks as you walk up to her.  \"<i>Don't worry; I'm ready and able to help.</i>\"  ");
-			//Select one option based on the sum of the player's and Marble's Corr, similar to the one in regular masterbation
+			//Select one option based on the sum of the player's and Marble's Corr, similar to the one in regular masturbation
 			if(player.cor + player.statusEffectv4(StatusEffects.Marble) < 66)
 				outputText("The two of you find a secluded place in the camp and slip off your clothes.\n\n");
 			else if (player.cor + player.statusEffectv4(StatusEffects.Marble) < 132)

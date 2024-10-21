@@ -28,10 +28,10 @@ public class PotionType {
 
     // you'll be initializing items in library like this:
     /*public static var POULTICE:PotionType = new PotionType("POULTICE", "Poultice", "Apply a healing salve to your wounds in order to recover health.",[], SceneLib.combat.Poultice);
-    public static var ENERGYDRINK:PotionType = new PotionType("E.DRNK", "Energy drink", "Use an energy drink to recover your ressources.",[], SceneLib.combat.EnergyDrink);
+    public static var ENERGYDRINK:PotionType = new PotionType("E.DRNK", "Energy drink", "Use an energy drink to recover your resources.",[], SceneLib.combat.EnergyDrink);
     public static var CURE:PotionType = new PotionType("CURE", "Cure", "Negate status ailments.",[], SceneLib.combat.Cure);
     public static var PAINKILLER:PotionType = new PotionType("P.KILL", "Painkiller", "Greatly reduce damage taken.",[], SceneLib.combat.Painkiller);
     public static var STIMULANT:PotionType = new PotionType("STIM", "Stimulant", "Increase physical attack power.",[], SceneLib.combat.Stimulant);
-    public static var PERFUME:PotionType = new PotionType("PERFUME", "Perfume", "Empower teases throught scent components.",[], SceneLib.combat.Perfume);*/
+    public static var PERFUME:PotionType = new PotionType("PERFUME", "Perfume", "Empower teases through scent components.",[], SceneLib.combat.Perfume);*/
 }
 }

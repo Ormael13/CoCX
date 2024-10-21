@@ -320,7 +320,7 @@ import classes.CoC;
 		}
 		private function corruptTGHaveARestVIPBuyItBuyItNowBeforeItPriceRise():void {
 			clearOutput();
-			outputText("You pay Aster 500 gems in order to aquire a VIP pass and the satyr gladly oblige you will now be able to use the grove for free at all time!\n\n");
+			outputText("You pay Aster 500 gems in order to acquire a VIP pass, and the satyr gladly obliges. You will now be able to use the grove for free at all times!\n\n");
 			player.gems -= 500;
 			flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] = 3;
 			menu();

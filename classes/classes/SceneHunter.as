@@ -336,7 +336,7 @@ public class SceneHunter extends BaseContent {
         }
         //Dialogue
         var beforeText:String = CoC.instance.currentText;
-        outputText("\n\n<b>Will you use a big" + (smallProvided ? ", medium" : "") + " or small sized dick?</b>");
+        outputText("\n\n<b>Will you use a big" + (smallProvided ? ", medium" : "") + " or small-sized dick?</b>");
         menu();
         //big cocks
         if (player.findCock(1, bigMin, totalMax, compareBy) >= 0)

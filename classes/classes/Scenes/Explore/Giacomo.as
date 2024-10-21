@@ -1286,7 +1286,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 
 			function dickF():void {
 				sceneHunter.selectPureCor(["Succumb", pureF, "Let her have her way with you"],
-													["Agressive", corF, "Fuck the succubus like a slut she is"], 66);
+													["Aggressive", corF, "Fuck the succubus like the slut she is"], 66);
 				//=======================================
 				function pureF():void {
 					outputText("\nAgainst your better judgment, you've again partaken of the cerulean elixir and fallen asleep. You are quickly awakened by a thick nipple being thrust into your mouth and torrents of breast milk gushing down your throat as the succubus returns to have her way with you. Looking up, your eyes meet hers as a hungry manipulative grin stretches across her blue face. Unable to control your lust, your prick jumps to attention, which prompts the demoness to ");

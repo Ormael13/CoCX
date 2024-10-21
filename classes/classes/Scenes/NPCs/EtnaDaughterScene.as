@@ -216,7 +216,7 @@ private function incestWithEtnaDaughterToggle():void {
 	clearOutput();
 	if (!EtnaDaughterIncestEnabled) {
 		outputText("You cup [etnakidname]'s cheek, turning her to you... only to have her leap you, straddling your [legs] as her powerful arms wrap around your neck.  Her thin lips press hard to yours, tongue probing against yours as her body presses against you.  " +
-				"You respond in kind, grabbing her big ass and squeezing, kneading the delicious curves as she starts to grind against you, breath hot and heavy on your [skin].  \"<i>I said I love you, " + championRef() + ",</i>\" she grins, as her tail slips between your legs and grinds agains your crotch.  \"<i>Glad to know you feel the same way.</i>\"");
+				"You respond in kind, grabbing her big ass and squeezing, kneading the delicious curves as she starts to grind against you, breath hot and heavy on your [skin].  \"<i>I said I love you, " + championRef() + ",</i>\" she grins, as her tail slips between your legs and grinds againstyour crotch.  \"<i>Glad to know you feel the same way.</i>\"");
 		outputText("\n\nYou kiss her again and send her on her way with a sharp swat on the ass.  She gives it a sexy wiggle as she walks, winking back at you as she saunters off, het tail drooling behind her.");
 		dynStats("lus", player.sens/10+5, "scale", false);
 	} else {

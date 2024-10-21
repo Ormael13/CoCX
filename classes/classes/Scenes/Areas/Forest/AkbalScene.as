@@ -767,7 +767,7 @@ public class AkbalScene extends BaseContent {
 				player.sexReward("cum", "Anal");
 				//[Chance of butt growth]
 				if (player.butt.type < 8) {
-					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...");
+					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...");
 					player.butt.type++;
 				}
 				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
@@ -841,7 +841,7 @@ public class AkbalScene extends BaseContent {
 				player.sexReward("cum", "Anal");
 				//[Chance of butt growth]
 				if (player.butt.type < 8) {
-					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...");
+					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...");
 					player.butt.type++;
 				}
 				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
@@ -916,7 +916,7 @@ public class AkbalScene extends BaseContent {
 			player.sexReward("cum", "Anal");
 			//[Chance of butt growth]
 			if (player.butt.type < 8) {
-				outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...");
+				outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...");
 				player.butt.type++;
 			}
 			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);

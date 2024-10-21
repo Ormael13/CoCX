@@ -902,7 +902,7 @@ public class Combat extends BaseContent {
 
     internal function buildOtherActions(buttons:ButtonDataList, backFunc:Function, aspectButtons:ButtonDataList = null):void {
         var bd:ButtonData;
-		buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending youself. You'll take a hell of a beating. Why would you do this?");
+		buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending yourself. You'll take a hell of a beating. Why would you do this?");
         buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust. You'll end up getting raped...But is it rape if you get what you want?");
         buttons.add("Minions", CoC.instance.perkMenu.minionOptions, "You can adjust the behaviour of your minions during combat.");
         buttons.add("F.S. Opt", CoC.instance.perkMenu.flyingSwordBehaviourOptions, "You can adjust the behaviour of your flying sword during combat.");
@@ -1421,7 +1421,7 @@ public class Combat extends BaseContent {
         fatigue(-power);
         player.mana += power;
         player.soulforce += power;
-        outputText("You chug your energy drink, and as you toss the container aside, you feel your body loosen, your mind fizzing with sudden mana. Your soul feels much better, power whirling through you. Recovered "+power+" ressources.");
+        outputText("You chug your energy drink, and as you toss the container aside, you feel your body loosen, your mind fizzing with sudden mana. Your soul feels much better, power whirling through you. Recovered "+power+" resources.");
     }
     public function Cure():void {
         clearOutput();
@@ -1508,7 +1508,7 @@ public class Combat extends BaseContent {
             player.createStatusEffect(StatusEffects.ArousalPotion,power,duration,0,0);
         }
         else {
-            outputText("You grab your bottle of Alraune perfume and almost spray yourself before remembering that you actualy already produce your own perfume, heck you are bathing into it! You slap yourself before puting back the item in your bag... what a dummy.");
+            outputText("You grab your bottle of Alraune perfume and almost spray yourself before remembering that you actually already produce your own perfume, heck you are bathing in it! You slap yourself before putting back the item in your bag... what a dummy.");
             //player.changeNumberOfPotions(PotionType.PERFUME, +1);
         }
     }
@@ -5468,7 +5468,7 @@ public class Combat extends BaseContent {
                                 //Natural weapon Full attack list
                                 if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
                                     IsFeralCombat = true;
-                                    resolveFeralCombatAdditionnalAttacks();
+                                    resolveFeralCombatAdditionalAttacks();
                                 }
                                 // Do all other attacks
                                 meleeDamageAcc1(IsFeralCombat);
@@ -5553,7 +5553,7 @@ public class Combat extends BaseContent {
                                 //Natural weapon Full attack list
                                 if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
                                     IsFeralCombat = true;
-                                    resolveFeralCombatAdditionnalAttacks();
+                                    resolveFeralCombatAdditionalAttacks();
                                 }
                                 // Do all other attacks
                                 meleeDamageAcc2(IsFeralCombat);
@@ -5591,7 +5591,7 @@ public class Combat extends BaseContent {
      * 10. Sea dragon lightning
      * 11. TENTACLE TIME!!!
      */
-    public function resolveFeralCombatAdditionnalAttacks():void {
+    public function resolveFeralCombatAdditionalAttacks():void {
         ExtraNaturalWeaponPrep();
         var pLibHellFireCoat:Boolean = player.hasPerk(PerkLib.HellfireCoat);
         var pFoxFlamePelt:Boolean = player.statStore.hasBuff("FoxflamePelt");
@@ -8699,7 +8699,7 @@ public class Combat extends BaseContent {
     }
 
     /**
-     * Remember to call ExtraNaturalWeaponPrep() at the beginning of all ExtraNaturalWeaponAttack call if you want to add it outside resolveFeralCombatAdditionnalAttacks() e.g. see devastatingBiteAttack() physical special
+     * Remember to call ExtraNaturalWeaponPrep() at the beginning of all ExtraNaturalWeaponAttack call if you want to add it outside resolveFeralCombatAdditionalAttacks() e.g. see devastatingBiteAttack() physical special
      * @param FeraldamageMultiplier
      * @param SpecialEffect
      * @param isClawAttack
@@ -8760,7 +8760,7 @@ public class Combat extends BaseContent {
                     }
                     return;
                 }
-                // Stunning the doppleganger should now "buy" you another round.
+                // Stunning the doppelganger should now "buy" you another round.
             }
             //Lab Guard tanking
             if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -11313,7 +11313,7 @@ public class Combat extends BaseContent {
         }
         //Apophis Unholy Aura
         if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && !flags[kFLAGS.DISABLE_AURAS]) {
-            outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your charms.\n\n");
+            outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resilience to your charms.\n\n");
             monster.lustVuln += 0.1;
 			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
         }
@@ -11584,7 +11584,7 @@ public class Combat extends BaseContent {
         }
         //Sing
         if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
-            outputText("[Themonster] slowly succumbs to [monster his] basest desires as your continous singing compels [monster him] toward increasingly lustful thoughts.");
+            outputText("[Themonster] slowly succumbs to [monster his] basest desires as your continuous singing compels [monster him] toward increasingly lustful thoughts.");
             var LustDamage:int = combat.teases.teaseBaseLustDamage();
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
@@ -14429,7 +14429,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             else outputText("Yamata seems to be fairly calm and collected, in spite of her obviously deranged nature. A barely-restrained psychosis swims just under the surface, threatening to boil over at any moment." + (monster.lust100 > 10 ? " Is she getting stronger?" : "") + "  ");
         } else if (monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.Sentience)) {
 			if (monster.lust100 >= 85) {
-				outputText("Your action causes visible chunks of [themonster] to fall appart as lust ravage its magical structure just a little more and the construct" + (monster.plural ? "s" : "") + " will break down into rubbles! ");
+				outputText("Your action causes visible chunks of [themonster] to fall apart as lust ravage its magical structure just a little more and the construct" + (monster.plural ? "s" : "") + " will break down into rubbles! ");
 				outputText("At time the construct" + (monster.plural ? "s" : "") + " movement seems to stop or freeze causing it to eraticaly halt and resume " + (monster.plural ? "their" : "its") + " action at random.  ");
 			}
             else if (monster.lust100 >= 70) outputText("Your action causes the already visible crack in [themonster] structure to expend as lust clash with whatever magic is making the golem"+(monster.plural ? "s" : "")+" function ravaging "+(monster.plural ? "their" : "its")+" body from the inside.  ");
@@ -15646,7 +15646,7 @@ public function randomTeaseSlimeInsert(straddleDamage:Number, randomcrit:Boolean
 
 public function straddleLeggoMyEggo():void {
     clearOutput();
-    outputText("You let [themonster] go, prefering to continue the fight normally.");
+    outputText("You let [themonster] go, preferring to continue the fight normally.");
     monster.removeStatusEffect(StatusEffects.Straddle);
     player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
     outputText("[monster He] catches [monster his] breath before [monster he] stands back up, apparently prepared to fight some more. ");
@@ -17738,7 +17738,7 @@ public function assumeAsuraForm():void {
     player.wrath -= asuraformCost();
     outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.hasFourArms() ? "":"two ") + "additional pair" + (player.hasFourArms() ? "":"s") + " of arms grows under your " + (player.hasFourArms() ? "second":"first") + " pair" + (player.hasFourArms() ? "s":"") + " of arms. ");
     if (player.hasPerk(PerkLib.AsuraStrength)) {
-        outputText("Additionaly from your back emerge ");
+        outputText("Additionally from your back emerge ");
 		if (player.hasPerk(PerkLib.ItsZerkingTime)) outputText("three ");
 		else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) outputText("two ");
         outputText("pair ");

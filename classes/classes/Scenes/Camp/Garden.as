@@ -1207,7 +1207,7 @@ import classes.Scenes.SceneLib;
 		clearOutput();
 		outputText("You spend the better part of the next hour refining the "+Ingredient+" into a "+CraftingResult+" adding it to your potion bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
-			outputText("Your natural knowledge of herbalism allowed you to craft two additionnal " + CraftingResult + ".");
+			outputText("Your natural knowledge of herbalism allowed you to craft two additional " + CraftingResult + ".");
 			count *= 3;
 		}
 		var HE:Number = 20 + player.level;

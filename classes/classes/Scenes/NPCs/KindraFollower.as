@@ -113,7 +113,7 @@ public function meet2Kindra():void {
 public function kindraAppearance():void
 {
 	clearOutput();
-	outputText("Kindra is a sheep morph or so you believe. Her white hair flow on the back of her head like a mace. Her cyan pupils have something ominous about them through you cannot guess what. Her long sheep ears are alert to sound and she uses them alot when hunting. She doesn't wear any clothing letting her natural sheep wool grow wherever it is necessary to cover her privates. ");
+	outputText("Kindra is a sheep morph, or so you believe. Her white hair flows on the back of her head like a mace. Her cyan pupils have something ominous about them, though you cannot guess what. Her long sheep ears are alert to sound, and she uses them a lot when hunting. She doesn't wear any clothing, letting her natural sheep wool grow wherever it is necessary to cover her privates. ");
 	outputText("While it doesn't cover her body, she carries around a strange and ominous mask on her head in the shape of some beast.\n\n");
 	outputText("Her arms look about human albeit for the wool but her legs are shaped like those of a sheep ending in a pair of small hooves. Her lunar white skin is covered in strange tattoo design that seems to glow at time. From her well shaped ass grow a small sheep tail.\n\n");
 	outputText("Surprisingly for a sheep morph her breast almost reach C cup.\n\n");

@@ -164,7 +164,7 @@ public class CancerAttackScene extends BaseContent
 
 		public function defeat():void {
 			clearOutput();
-			outputText("The cancer, defeated, escapes by digging [monster his] way underground. Wow what a sore loser!");
+			outputText("The cancer, defeated, escapes by digging [monster his] way underground. Wow, what a sore loser!");
 			if (silly()) outputText("You ought to tell this stupid show producer miss Liadri about how her crabs dig their escapes instead of calmly letting themselves be raped!");
 			cleanupAfterCombat();
 		}

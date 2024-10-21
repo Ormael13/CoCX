@@ -674,7 +674,7 @@ public function aethertwinsFollowersMorphMain():void {
 }
 public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
 	clearOutput();
-	outputText("\"<i>So you liked our Human-tier gauntlets form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become larger than a pair of medium-sized gauntlets that coversr your hands and forearms with sharp claws.");
+	outputText("\"<i>So you liked our Human-tier gauntlets form? It may not be as much fun as other forms but we can assume this one,</i>\" they reply. After a moment, both of their shapes become less defined and more fluid. Slowly, they become larger than a pair of medium-sized gauntlets that cover your hands and forearms with sharp claws.");
 	AetherTwinsShape = "Human-tier Gaunlets";
 	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 0) {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);
@@ -689,7 +689,7 @@ public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
 }
 public function aethertwinsFollowersMorphMainSkyTierGaunlets():void {
 	clearOutput();
-	outputText("\"<i>So you liked our Sky-tier gauntlets form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a bit larger than BF gauntelrs with much sharper claws and spiked similar to those on spiked shield growing all over upper section of gauntlets.\n\n");
+	outputText("\"<i>So you liked our Sky-tier gauntlets form? It may not be as much fun as other forms but we can assume this one,</i>\" they reply. After a moment, both of their shapes become less defined and more fluid. Slowly they become a bit larger than BF gauntelrs with much sharper claws and spiked similar to those on spiked shield growing all over upper section of gauntlets.\n\n");
 	AetherTwinsShape = "Sky-tier Gaunlets";
 	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 0) {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);
@@ -704,7 +704,7 @@ public function aethertwinsFollowersMorphMainSkyTierGaunlets():void {
 }
 public function aethertwinsFollowersMorphMainHumanTierSmallWeapons():void {
 	clearOutput();
-	outputText("\"<i>So you liked our Human-tier dagger and shield form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a medium sized dagger and small shield.\n\n");
+	outputText("\"<i>So you liked our Human-tier dagger and shield form? It may not be as much fun as other forms but we can assume this one,</i>\" they reply. After a moment, both of their shapes become less defined and more fluid. Slowly they become a medium-sized dagger and small shield.\n\n");
 	AetherTwinsShape = "Human-tier Dagger and Shield";
 	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 20) {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);
@@ -719,7 +719,7 @@ public function aethertwinsFollowersMorphMainHumanTierSmallWeapons():void {
 }
 public function aethertwinsFollowersMorphMainHumanTierDualSmallWeapons():void {
 	clearOutput();
-	outputText("\"<i>So you liked our Human-tier dual dagger form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a pair of medium sized daggers.\n\n");
+	outputText("\"<i>So you liked our Human-tier dual dagger form? It may not be as much fun as other forms but we can assume this one,</i>\" they reply. After a moment, both of their shapes become less defined and more fluid. Slowly they become a pair of medium-sized daggers.\n\n");
 	AetherTwinsShape = "Human-tier Dual Daggers";
 	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 20) {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);

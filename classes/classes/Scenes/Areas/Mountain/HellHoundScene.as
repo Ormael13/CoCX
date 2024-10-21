@@ -474,7 +474,7 @@ public class HellHoundScene extends BaseContent
 				if (ptier > 1 && (LunaFollower.HellhoundPackMember < (ptier > 3 ? (Math.floor(2.5*ptier)) : ptier))) {
 					outputText("With his ass thoroughly bred the hellhound got two choices right now, either to yield to your overwhelming supremacy and maleness or go back to his old pack in shame. The hellhound hesitates for a moment before ");
 					if (rand(2) == 0) {
-						outputText("following you back to your camp, betraying his old pack to join yours as your subservient new member. Well you didn't expect him to be a subby bitch but so long as he's willing to take you in once in a while you don't mind keeping him around.");
+						outputText("following you back to your camp, betraying his old pack to join yours as your subservient new member. Well, you didn't expect him to be a subby bitch but so long as he's willing to take you in once in a while you don't mind keeping him around.");
 						LunaFollower.HellhoundPackMember++;
 					} else outputText("running off in shame back to his old pack. The poor guy is going to be chastised by his alpha, you would pity him if not for the fact that you don't care in the first place, he will inevitably meet you again and the next time you will make sure to fuck subserviance into his subby ass properly.");
 				}

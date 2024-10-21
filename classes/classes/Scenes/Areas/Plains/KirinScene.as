@@ -183,12 +183,12 @@ private function kirin_FriendlyDischarge():void{
 			string += "You sigh and return to camp, leaving an ankle-deep puddles behind and your \"victims\" utterly caked.\n\n";
 		}
 		else{
-			string += "kirin shocked in mix of terror and arousal as your load instantly filled and inflate the satyr and her balls alike to the size of a beachball, and drenching them both under piles of fluid with mere leakage of your load. However that's merely a fraction of your orgasm as you really erupted,";
+			string += "kirin shocked in mix of terror and arousal as your load instantly filled and inflate the satyr and her balls alike to the size of a beachball, and drenching them both under piles of fluid with mere leakage of your load. However, that's merely a fraction of your orgasm as you really erupted,";
 			string += (pCannon?" blasting kirin feets away":" expelling you and kirin");
 			string += " with the sheer force of your orgasm alone, your firehose of a cock continues to flex pillar after pillars worth of plasma utterly drowned out Kirin's pathetic orgasm in comparison, and everyone and everything in vicinity and feets away.\n\n";
 			
 			string += milkString;
-			string += "By the time you finished, you look around and find yourself stood within an inches-deep pool of your creation and everything in sight so utterly drenched, it'd probably scare off gnolls and satyrs for days to come, unaware of what kind of monstrosity has passed by could come this much.\n\nAfter spending some time looking around, you managed to dig out your latest victims buried under your prodigious production quickly enough, with both of them unconcious, understandably so, before returning to camp.\n\n";
+			string += "By the time you finished, you look around and find yourself stood within an inches-deep pool of your creation and everything in sight so utterly drenched, it'd probably scare off gnolls and satyrs for days to come, unaware of what kind of monstrosity has passed by that could create this much.\n\nAfter spending some time looking around, you managed to dig out your latest victims buried under your prodigious production quickly enough, with both of them unconscious, understandably so, before returning to camp.\n\n";
 		}
 	}
 	else{
@@ -206,7 +206,7 @@ private function kirin_FriendlyDischarge():void{
 				string += " geysers of plasma spewing out of your tits, you get up and shove one of your nipples into satyr's mouth in time before they tapped out as he shudders throughout your feeding session. You ended up bloating his belly even further and some of it inevitably spilled back as his belly ran out of room.\n\n";
 			}
 			else{
-				string += " small rivers of plasma come forth from your tits, you lamented a little as you lactate enough to feed a village for a lifetime, luckily right now there is a mouth to feed, shoving one of your nipples into satyr's mouth as he shudders from the voltage and gargles from the size of your lactation, case in point as you washed over his body with it from your spare tit, how nice of you! You utterly bloated his belly and system with plasma and the flow is so strong that it doesnt spill back but come forth of his butt! You continue until him and the surrounding is utterly drenched by your sweet-scented produce.\n\n";
+				string += " small rivers of plasma come forth from your tits, you lament a little as you lactate enough to feed a village for a lifetime. Luckily, right now there is a mouth to feed, shoving one of your nipples into the satyr's mouth as he shudders from the voltage and gargles from the size of your lactation. Case in point, as you wash over his body with it from your spare tit, how nice of you! You utterly bloat his belly and system with plasma, and the flow is so strong that it doesn't spill back but comes forth from his butt! You continue until he and the surroundings are utterly drenched by your sweet-scented produce.\n\n";
 			}
 		}
 		

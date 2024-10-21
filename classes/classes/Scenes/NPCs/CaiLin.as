@@ -143,7 +143,7 @@ public class CaiLin extends Monster
 		}
 		
 		public function petrify():void {
-			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ");
+			outputText("With a moment of concentration she awakens normally dormant snake hair that starts to hiss and then casual glance at you. Much to your surprise you notice your fingers then hands starting to petrify... ");
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.PlayerBoundPhysical)) player.removeStatusEffect(StatusEffects.PlayerBoundPhysical);

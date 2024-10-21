@@ -180,7 +180,7 @@ public function etnaRapesPlayer2():void
 	function dickF():void {
 		outputText("You fall down, defeated, and the manticore advances towards you with sadistic glee:\n\n\"<i>So that's all? I guess dinner is served, then. You can resist me all you want, it'll only be funnier when you break.</i>\"\n\nShe kicks you in the face making you roll on your back. You're still seeing stars as you feel her feet brutally stepping on your crotch the touch, for some reason, arousing you.\n\n");
 		outputText("\"<i>Oh? So someone likes being brutalized, huh? You sure are a complete sicko and that's exactly how I like it.</i>\"\n\nHer toe plays with your [cock], molesting you through the fabric of your clothes and, against your better judgment, you moan from this, amusing her further.\n\n\"<i>Aren't you pathetic? Are you seriously getting off from being stepped on?!</i>\"\n\n");
-		outputText("She proceeds to sit on your legs and holds your arms to the ground with her powerful paws. She looks terrifying as she towers over you and you can’t help but gulp as she moves her tail towards your body. She stings you and you feel all your resistance go away as you don't even have the energy to move. However your [cock] grows erect as if all of your blood is being concentrated into it.  She forcefully strips you and eyes your now painfully erect cock, licking her lips. To your horror, you see her tail tip open into a flower-like shape, except the inside of her ‘flower’ looks like a nightmarish fleshy hole constantly drooling god knows what. ");
+		outputText("She proceeds to sit on your legs and holds your arms to the ground with her powerful paws. She looks terrifying as she towers over you and you can’t help but gulp as she moves her tail towards your body. She stings you and you feel all your resistance go away as you don't even have the energy to move. However, your [cock] grows erect as if all of your blood is being concentrated into it.  She forcefully strips you and eyes your now painfully erect cock, licking her lips. To your horror, you see her tail tip open into a flower-like shape, except the inside of her ‘flower’ looks like a nightmarish fleshy hole constantly drooling god knows what. ");
 		outputText("She forcefully shoves her tail on your mouth, commanding you to lick it. You try to refuse, but she scratches your chest with her claw, leaving bleeding marks to make her statement.\n\nYou obey, too terrified of her to refuse and she nearly chokes you in the process. Still, the venom in your body is driving you mad with lust and soon you're willingly eating her out, making her coo with pleasure.\n\n\"<i>Aah! Are you getting off from being dominated? Or maybe you were born to eat pussy. What kind of trash are you? I bet you’re so horny now, you'd even fuck a pile of shit if there was a hole in it.</i>\"\n\n");
 		outputText("Overwhelmed by your lust, you nod to her every word. You only want her to make you cum so you can finally get this massive erection of yours to calm down.\n\n");
 		outputText("\"<i>Well, aren't you in luck, you perverted masochist. I will grant you exactly what you want.</i>\" She removes her tail from your mouth leaving you dazed and pulls it over your dick. \"<i>Beg!... Beg me to get you off, you disgusting piece of shit!</i>\"\n\n");
@@ -265,7 +265,7 @@ public function etnaRapeIntro():void
 	else outputText("too horny to fight back");
 	outputText(". She looks at you with a hopeful expression as she holds her tail with one hand.\n\n\"<i>So strong... so powerful! If you would only let me taste you, I promise I will make it feel sooooo good.</i>\"\n\n");
 	if (player.lust < 33) {
-		outputText("Sadly, you're not aroused enough to fullfill her wish.");
+		outputText("Sadly, you're not aroused enough to fulfill her wish.");
 		doNext(etnaRapeNo);
 		return;
 	}
@@ -376,7 +376,7 @@ public function EtnaFillHerUp():void
 			" the flower-like bulb petals blossoming out in anticipation heck It not only looks like a flower it also smells like one… It’s so inviting…\n\n" +
 			"Flowers are plant pussy and cocks to begin with");
 	if(player.isAlraune())outputText(", so aren't you, in theory, bathing in a giant sexual organ? The thought only arouses you all the more");
-	outputText(". Focusing your mind back to the fun, you coil and twist all of your vines together merging them into a single thick composite stamen about as twelve time ticker then each of your individual members." +
+	outputText(". Focusing your mind back to the fun, you coil and twist all of your vines together, merging them into a single thick composite stamen about twelve times thicker than each of your individual members." +
 			"The rubbing of your many vines against one another is a delightful feeling and it only gets better as you dive into ");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 	else outputText("the manticore");

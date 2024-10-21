@@ -187,7 +187,7 @@ public function ElectraRecruiting():void {
 	outputText(". I'm kind of sorry for coming up to you like that all the time. Don't worry, I already discharged myself, this isn't what I wanted to see you for. See uh as it is I've been considering...us. you've been helping me out so often by now I've become dependent on your touch. ");
 	outputText("When I see you I can feel the surge running down my spine, the fondness of every attention you gave me imprinted in my mind and I… can I have your name please?</i>\"\n\n");
 	outputText("You tell her your name and that you are the Champion of Ignam, sent to protect your realm from demon invasion.\n\n");
-	outputText("\"<i>Ah… With a noble goal too. Well I can't delay it anymore, I need to spell it out, I'm in love with you. I'd like to ask you...Would you be okay with a girlfriend? It doesn't matter to me if you have someone else... I'm sure someone as nice as you must have someone else by now... But I want you. </i>\"\n\n");
+	outputText("\"<i>Ah… With a noble goal too. Well, I can't delay it anymore, I need to spell it out, I'm in love with you. I'd like to ask you...Would you be okay with a girlfriend? It doesn't matter to me if you have someone else... I'm sure someone as nice as you must have someone else by now... But I want you. </i>\"\n\n");
 	outputText("Well that declaration sure fell down like thunder. What do you say?\n\n");
 	menu();
 	addButton(1, "Sure", ElectraRecruitingSure);
