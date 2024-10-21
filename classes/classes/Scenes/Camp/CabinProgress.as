@@ -149,7 +149,7 @@ import classes.Scenes.SceneLib;
 				}
 			}
 			if (player.isInGoblinMech()) {
-				outputText("You’re in a goblin mech equipped with a sawblades as melee weapons.\n");
+				outputText("You’re in a goblin mech equipped with sawblades as melee weapons.\n");
 				addButton(4, "Sawblade", cutTreeMechTIMBER);
 			}
 			if (!(buttonIsVisible(0) || buttonIsVisible(1) || buttonIsVisible(2) || buttonIsVisible(3) || buttonIsVisible(4))) {
@@ -430,7 +430,7 @@ import classes.Scenes.SceneLib;
 			if (camp.marbleFollower()) outputText("\"<i>Sweetie, you're building a cabin? That's nice,</i>\" Marble says. \n\n");
 			if (camp.companionsCount() > 0) outputText("You announce with confidence that, yes, you're building a cabin.\n\n");
 			outputText("You nail the frames together and finally secure them to the foundation.\n\n");
-			outputText("Finally, you construct a wooden frame for the roof, which takes few hours.\n\n");
+			outputText("Finally, you construct a wooden frame for the roof, which takes a few hours.\n\n");
 			if (player.canFly() && player.str >= 80) outputText("Using your wings, you lift the roof frame and carefully place it on the structure. ");
 			else outputText("You construct a temporary ramp to push the roof frame into place. ");
 			outputText("You then hammer nails in place to secure the roof frame.\n\n");

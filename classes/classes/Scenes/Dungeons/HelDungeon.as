@@ -931,7 +931,7 @@ use namespace CoC;
 
 			outputText("\n\nShe grins.  \"<i>So, what's the plan, lover mine?  Teach this bitch a lesson she'll never forget?</i>\"");
 			//(Display Options: [Hakon](if PC knows this) [Kiri] [Queen](If not dead/gone))
-			if (flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] > 0) addButton(0, "Hakon", heliaHakonTalk).hint("Ask Helia about Hakon, the salamander you've found in the dungeon.");
+			if (flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] > 0) addButton(0, "Hakon", heliaHakonTalk).hint("Ask Helia about Hakon, the salamander you found in the dungeon.");
 			addButton(1, "Kiri", heliaKiriTalk).hint("Ask Helia about Kiri, the half-breed girl.");
 			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) addButton(2, "Queen", heliaQueenTalk).hint("Ask Helia about the Harpy Queen.");
 			addButton(4, "Back", playerMenu);

@@ -1727,7 +1727,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) dungeons.setDungeonButtonsRD(roomC33, roomC31, null, roomC28);
 			else {
 				dungeons.setDungeonButtonsRD(roomC33, null, null, roomC28);
-				addButtonDisabled(11, "South", "There are massive doors with a simple keyhole in middle of it. Maybe you should look for a key? It should be still somehwere on this floor, right?");
+				addButtonDisabled(11, "South", "There are massive doors with a simple keyhole in the middle of it. Maybe you should look for a key? It should be still somehwere on this floor, right?");
 				if (player.hasKeyItem("Key Of Darkness") >= 0) addButton(0, "Insert Key", insertTheKey).hint("Now you have the key. Do you open the double door?");
 				else addButtonDisabled(0, "Insert Key", "Would you kindly find the key first?");
 			}

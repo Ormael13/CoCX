@@ -108,32 +108,32 @@ public class CampUpgrades extends BaseContent {
     */
     public function buildmisc1Menu():void {
         menu();
-        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) addButton(0, "Wood Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more wood at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
-        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) addButton(0, "Stone Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more stones at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
-        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 4) addButton(0, "Nails Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more nails at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
+        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) addButton(0, "Wood Storage", materialgatheringstorageupgrade).hint("Build storage to gather more wood at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
+        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) addButton(0, "Stone Storage", materialgatheringstorageupgrade).hint("Build storage to gather more stones at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
+        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 4) addButton(0, "Nails Storage", materialgatheringstorageupgrade).hint("Build storage to gather more nails at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) addButton(1, "1st Warehouse", warehousegranary).hint("Build 1st part of the Warehouse to expand your storage space. (Req. "+usedFatigue(250, true)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) addButton(1, "Granary", warehousegranary).hint("Build Granary to expand your food space. (Req. "+usedFatigue(250, true)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) addButton(1, "2nd Warehouse", warehousegranary).hint("Build 2nd part of the Warehouse to expand your storage space. (Req. "+usedFatigue(250, true)+" fatigue)");
-        if ((player.isRace(Races.KITSUNE, 1, false) || player.isRace(Races.KITSHOO, 1, false)) && (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2)) addButton(2, "Shrine", kitsuneshrine).hint("Build up kitsune shrine at the camp. (Req. "+usedFatigue(200)+"~"+usedFatigue(300)+" fatigue)");
+        if ((player.isRace(Races.KITSUNE, 1, false) || player.isRace(Races.KITSHOO, 1, false)) && (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2)) addButton(2, "Shrine", kitsuneshrine).hint("Build a kitsune shrine at the camp. (Req. "+usedFatigue(200)+"~"+usedFatigue(300)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 3) {
             if (!(player.hasItem(useables.GLDSTAT))) addButtonDisabled(2, "Shrine", "You need to have Kitsune Statue and your own Star Sphere to finish the shrine!");
             if (!player.hasPerk(PerkLib.StarSphereMastery)) addButtonDisabled(2, "Shrine", "You need to have Kitsune Statue and your own Star Sphere to finish the shrine!");
-            if (player.hasPerk(PerkLib.StarSphereMastery) && player.hasItem(useables.GLDSTAT)) addButton(2, "Shrine", kitsuneshrine2).hint("Finish up kitsune shrine at the camp.");
+            if (player.hasPerk(PerkLib.StarSphereMastery) && player.hasItem(useables.GLDSTAT)) addButton(2, "Shrine", kitsuneshrine2).hint("Finish the kitsune shrine at the camp.");
         }
-        if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build up hot spring at the camp. (Req. "+usedFatigue(100, true)+" fatigue)");
+        if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build a hot spring at the camp. (Req. "+usedFatigue(100, true)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 0) {
-            //if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 7) addButton(4, "Sparring Ring", sparringRing).hint("Expand your stone sparing ring to collosal size. (Decrease npc's training time by 1/2 and increase exp from using training dummy by 500% more (1500% of base amount))(Req. "+usedFatigue(12150, true)+" fatigue)");
+            //if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 7) addButton(4, "Sparring Ring", sparringRing).hint("Expand your stone sparring ring to collosal size. (Decrease npc's training time by 1/2 and increase exp from using training dummy by 500% more (1500% of base amount))(Req. "+usedFatigue(12150, true)+" fatigue)");
             //if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 6) addButton(4, "Sparring Ring", sparringRing).hint("Replace wood with stone. (Decrease npc's training time by 1/3 and increase exp from using training dummy by 300% more (1000% of base amount))(Req. "+usedFatigue(4050, true)+" fatigue)");
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5) addButton(4, "Sparring Ring", sparringRing).hint("Add wood floor to sparring ring for better training experience. (Decrease npc's training time by 1/4 and increase exp from using training dummy by 250% more (700% of base amount))(Req. "+usedFatigue(1350, true)+" fatigue)");
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 4) addButton(4, "Sparring Ring", sparringRing).hint("Expand sparring ring to massive size. (Decrease npc's training time by 1/5 and increase exp from using training dummy by another 200% (450% of base amount))(Req. "+usedFatigue(450, true)+" fatigue)");
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3) addButton(4, "Sparring Ring", sparringRing).hint("Expand sparring ring to large size. (Decrease npc's training time by 1/6 and increase exp from using training dummy by 150% (250% of base amount))(Req. "+usedFatigue(150, true)+" fatigue)");
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. "+usedFatigue(50, true)+" fatigue)");
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5) addButton(4, "Sparring Ring", sparringRing).hint("Add wood floor to the sparring ring for better training experience. (Decrease npc's training time by 1/4 and increase exp from using training dummy by 250% more (700% of base amount))(Req. "+usedFatigue(1350, true)+" fatigue)");
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 4) addButton(4, "Sparring Ring", sparringRing).hint("Expand the sparring ring to massive size. (Decrease npc's training time by 1/5 and increase exp from using training dummy by another 200% (450% of base amount))(Req. "+usedFatigue(450, true)+" fatigue)");
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3) addButton(4, "Sparring Ring", sparringRing).hint("Expand the sparring ring to large size. (Decrease npc's training time by 1/6 and increase exp from using training dummy by 150% (250% of base amount))(Req. "+usedFatigue(150, true)+" fatigue)");
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2) addButton(4, "Sparring Ring", sparringRing).hint("Build the sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. "+usedFatigue(50, true)+" fatigue)");
         }
-        if (player.hasPerk(PerkLib.JobElementalConjurer) && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp OR add another circle to it. (Unlock elementals summons/rank up related options)(Req. 50 fatigue, enough stones, mana and blood)");
-        if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) addButton(6, "Elemental E. C.", arcaneCircleUpgrade).hint("Add Elemental Energy Conduits to your arcane circle to store in them elemental energy stored in elementals shards for more easy use. (Allowing to replace mana and reduce fatigue usage when summoning/ranking up normal tier elementals. Allowing to rank up elementals of tiers above normal tier.)(Req. 50 fatigue, enough stones, mana and elemental shards)");
+        if (player.hasPerk(PerkLib.JobElementalConjurer) && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp OR add another circle to it. (Unlocks elemental summoning/ranking up related options)(Req. 50 fatigue, enough stones, mana and blood)");
+        if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) addButton(6, "Elemental E. C.", arcaneCircleUpgrade).hint("Add Elemental Energy Conduits to your arcane circle to store in them elemental energy stored in elementals shards for more easy use. (Allows replacing mana and reduce fatigue usage when summoning/ranking up normal tier elementals. Allowing you to rank up elementals of tiers above normal tier.)(Req. 50 fatigue, enough stones, mana and elemental shards)");
         if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(7, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
-        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 3) addButton(8, "Dam", dam).hint("Build up a dam on the stream next to the camp. (Req. "+usedFatigue(200, true)+" fatigue * tier of built dam)");
-        if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 2) addButton(9, "Fishery", fishery).hint("Build up a fishery on the stream next to the camp. (Req. "+usedFatigue(200, true)+" fatigue)");
+        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 3) addButton(8, "Dam", dam).hint("Build a dam on the stream next to the camp. (Req. "+usedFatigue(200, true)+" fatigue * tier of built dam)");
+        if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 2) addButton(9, "Fishery", fishery).hint("Build a fishery on the stream next to the camp. (Req. "+usedFatigue(200, true)+" fatigue)");
         addButton(14, "Back", camp.campBuildingSim);
     }
 
@@ -206,10 +206,10 @@ public class CampUpgrades extends BaseContent {
             outputText(" " + (helpers.count == 1 ? "assists" : "assist") + " you, helping to speed up the process and make it less fatiguing.");
         }
         if (helpers.count >= 2) {
-            outputText("\n\nThanks to your assistants, the construction takes only " + formatTime(timeWithMore) + "!");
+            outputText("\n\nThanks to your assistants, the construction only takes " + formatTime(timeWithMore) + "!");
             doNext(camp.returnToCamp, timeWithMore);
         } else if (helpers.count == 1) {
-            outputText("\n\nThanks to your assistant, the construction takes only " + formatTime(timeWithOne) + ".");
+            outputText("\n\nThanks to your assistant, the construction only takes " + formatTime(timeWithOne) + ".");
             doNext(camp.returnToCamp, timeWithOne);
         } else {
             outputText("\n\nIt's a daunting task but you eventually manage to finish it in " + formatTime(timeWithout) + ".");
@@ -266,12 +266,12 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function neednailsbox():void {
-        outputText("When you opening book from your toolbox on the page describing how to build properly storage for wood you realize amount of nails that will be needed is much more than your toolbox can keep.  Damn if you would like to build this structure you would spend much of the time on walking to the carpenter shop in Tel'Adre to buy missing nails unless... there is some way to be able to store more than 250 nails.  With thoughts that maybe carpenter shopkeeper will help with this issue, you put back book.");
+        outputText("When you open the book from your toolbox to the page describing how to properly build storage for wood, you realize the amount of nails needed is much more than your toolbox can hold. Damn, if you want to build this structure, you'd spend most of your time walking to the carpenter shop in Tel'Adre to buy the missing nails. Unless... there's a way to store more than 250 nails. With the thought that maybe the carpenter shopkeeper could help with this issue, you put the book back.");
         doNext(playerMenu);
     }
 
     public function startWoodStorage():void {
-        outputText("Do you start work on building wood storage? (Cost: 250 nails, 250 wood and 100 stones.)\n");
+        outputText("Do you start work on building the wood storage? (Cost: 250 nails, 250 wood and 100 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 250 && CampStatsAndResources.WoodResc >= 250 && CampStatsAndResources.StonesResc >= 100) {
             doYesNo(doWoodStorageWork, noThanks);
@@ -286,14 +286,14 @@ public class CampUpgrades extends BaseContent {
         CampStatsAndResources.WoodResc -= 250;
         CampStatsAndResources.StonesResc -= 100;
         clearOutput();
-        outputText("You pull out \"Carpenter's Guide\" and flip pages until you come across instructions on how to build storage for woods. You spend few minutes looking at the instructions.");
+        outputText("You pull out the \"Carpenter's Guide\" and flip through the pages until you come across the instructions on how to build a storage for wood. You spend a few minutes looking over the instructions.");
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
-        outputText("\n\nYou take the wood, saw it and then cut into planks. You put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. After that last part of building is to put all rest wood planks on prepared base and nail them in place.");
+        outputText("\n\nYou take the wood, saw it, and cut it into planks. You place four long, thick wooden posts as the base, then connect them with nails. Next, you cut a few posts into shorter pieces and secure them at the edges. Inside the prepared frame, you place several large wooden logs, fixing them in place with a few short wooden planks and stones. The final step is to lay the remaining wooden planks on the base and nail them in place.");
         buildWithHelpers(150, true);
     }
 
     public function startStoneStorage():void {
-        outputText("Do you start work on building stone storage? (Cost: 350 nails, 400 wood and 200 stones.)\n");
+        outputText("Do you start work on building the stone storage? (Cost: 350 nails, 400 wood and 200 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 350 && CampStatsAndResources.WoodResc >= 400 && CampStatsAndResources.StonesResc >= 200) {
             doYesNo(doStoneStorageWork, noThanks);
@@ -308,16 +308,16 @@ public class CampUpgrades extends BaseContent {
         CampStatsAndResources.WoodResc -= 400;
         CampStatsAndResources.StonesResc -= 200;
         clearOutput();
-        outputText("You pull out \"Carpenter's Guide\" and flip pages until you come across instructions on how to build storage for stones. You spend few minutes looking at the instructions.");
+        outputText("You pull out the \"Carpenter's Guide\" and flip through the pages until you come across the instructions on how to build a storage for stones. You spend a few minutes looking over the instructions.");
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
-        outputText("\n\nYou take the wood, saw it and then cut into planks. Like before you put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. Rest of the stones fill the space inside due to need in future support weight of stones stored above. After that prelast part of building is to put all most of remaining wood planks on prepared base and nail them in place. Final thing to do is use remain wood and nails to make protective barrier around the whole storage.");
+        outputText("\n\nYou take the wood, saw it, and cut it into planks. You place four long, thick wooden posts as the base, then connect them with nails. Next, you cut a few posts into shorter pieces and secure them at the edges. Inside the prepared frame, you place several large wooden logs, fixing them in place with a few short wooden planks and stones. The remaining stones are used to fill the space inside to provide future support for the weight of stones stored above. After that, the second-to-last step is to place most of the remaining wooden planks on the prepared base and nail them in place. The final task is to use the remaining wood and nails to build a protective barrier around the entire storage.");
         buildWithHelpers(150, true);
         outputText("\n\nNow you can safely store a larger amount of stones!");
         flushOutputTextToGUI();
     }
 
     public function startNailsStorage():void {
-        outputText("Do you start work on building nails storage? (Cost: 50 nails, 100 wood and 50 stones.)\n");
+        outputText("Do you start work on building the nail storage? (Cost: 50 nails, 100 wood and 50 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 50 && CampStatsAndResources.WoodResc >= 100 && CampStatsAndResources.StonesResc >= 50) {
             doYesNo(doNailsStorageWork, noThanks);
@@ -332,9 +332,9 @@ public class CampUpgrades extends BaseContent {
         CampStatsAndResources.WoodResc -= 100;
         CampStatsAndResources.StonesResc -= 50;
         clearOutput();
-        outputText("You pull out \"Carpenter's Guide\" and flip pages until you come across instructions on how to build storage for nails. You spend few minutes looking at the instructions.");
+        outputText("You pull out the \"Carpenter's Guide\" and flip through the pages until you come across the instructions on how to build a storage for nails. You spend a few minutes looking over the instructions.");
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
-        outputText("\n\nYou take the wood, saw it and then cut into planks. You put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. After that last part of building is to put all rest wood planks on prepared base and nail them in place.");
+        outputText("\n\nYou take the wood, saw it, and cut it into planks. You place four long, thick wooden posts as the base, then connect them with nails. Next, you cut a few posts into short fragments and secure them at the edges. Inside the prepared frame, you place several large wooden logs, fixing them in place with a few short wooden planks and stones. The final part of the construction is to lay the remaining wooden planks on the base and nail them in place.");
         buildWithHelpers(150, true);
         outputText("\n\nNow you can safely store a larger amount of nails!");
         flushOutputTextToGUI();
@@ -357,7 +357,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function start1stWarehouse1():void {
-        outputText("Do you start work on building warehouse frame and walls? (Cost: 200 nails, 100 wood and 40 stones.)\n");
+        outputText("Do you start work on building the warehouse frame and walls? (Cost: 200 nails, 100 wood and 40 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 100 && CampStatsAndResources.StonesResc >= 40) {
             doYesNo(doWarehouse1Work, noThanks);
@@ -368,11 +368,11 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function printLazyWriting(building:String):void {
-        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build a "+building+". You spend few minutes looking at the instructions.");
-        outputText("\n\nYou pick up a log from a nearby pile and saw it into a rectangular plank, fit to be used for the base of your future "+building+".  You lay out the foundation, rooting in planks, and leaving open corners for the thick logs that will be the corners of the building.");
-        outputText("\nAs you begin to connect their tops to make the floor the real work begins, nailing planks together, fitting everything into place.  After a few hours of hard labor the foundation is complete and you wipe the sweat off your brow, tapping a foot on your work and letting out a breath of air.");
-        outputText("\nFor the last bit of work you get the frame of the building itself into place with a lot of elbow grease and brute strength, they don't call you the champion for nothing!");
-        outputText("\nRapping a knuckle against the walls you're filled with pride of your hard work, though it still needs a roof and actual flooring, but that can wait until tomorrow, you're pretty beat…");
+        outputText("You pull out the \"Carpenter's Guide\" and find instructions on how to build a "+building+". You spend a few minutes looking over the instructions.");
+        outputText("\n\nYou pick up a log from a nearby pile and saw it into a rectangular plank, fitting it to be used as the base of your future "+building+".  You lay out the foundation, securing the planks and leaving open corners for the thick logs that will form the building's corners.");
+        outputText("\nAs you begin connecting the tops to form the floor, the real work begins: nailing planks together and fitting everything into place. After a few hours of hard labor, the foundation is complete. You wipe the sweat from your brow, tap a foot on your work, and let out a breath of relief.");
+        outputText("\nFor the final part of the job, you get the building’s frame into place with plenty of elbow grease and brute strength. They don't call you a champion for nothing!");
+        outputText("\nRapping your knuckles against the walls, you're filled with pride at your hard work. It still needs a roof and proper flooring, but that can wait until tomorrow — you're pretty beat…");
     }
 
     private function doWarehouse1Work():void {
@@ -386,7 +386,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function startWarehouse2():void {
-        outputText("Do you start work on building warehouse roof and floor? (Cost: 400 nails, 300 wood and 140 stones.)\n");
+        outputText("Do you start work on building the warehouse roof and floor? (Cost: 400 nails, 300 wood and 140 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 400 && CampStatsAndResources.WoodResc >= 300 && CampStatsAndResources.StonesResc >= 140) {
             doYesNo(doWarehouse2Work, noThanks);
@@ -397,8 +397,8 @@ public class CampUpgrades extends BaseContent {
     }
     
     private function printLazyWriting2(building:String):void {
-        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build a "+building+". You spend a few minutes looking at the instructions.");
-        outputText("As before, you prepare some wood planks. Constructing temporally ladder, you use it to get on top of the construction. Here, one by one, you nail the prepared wood pieces to form a simple roof. After it's finished, you get down and entering inside. Putting wood logs in places, you fill rest of the space with stones to make sure that floor will be able to deal with heavy weight. At last, you use the leftover planks to make a floor. After the work, you go out to look at your brand-new "+building+".");
+        outputText("You pull out the \"Carpenter's Guide\" and find instructions on how to build a "+building+". You spend a few minutes looking at the instructions.");
+        outputText("As before, you prepare some wooden planks. Constructing a temporary ladder, you use it to climb to the top of the structure. One by one, you nail the prepared wood pieces to form a simple roof. Once it's finished, you climb down and head inside. Placing wooden logs in position, you fill the remaining space with stones to ensure the floor can support heavy weight. Finally, you use the leftover planks to complete the floor. After your work is done, you step outside to admire your brand-new "+building+".");
     }
 
     private function doWarehouse2Work():void {
@@ -409,12 +409,12 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         printLazyWriting2("warehouse");
         buildWithHelpers(250, true);
-        outputText("\n\n<b>You've built the " + (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1 ? "first" : "second") + " warehouse and gained 12 inventory slots.</b>");
+        outputText("\n\n<b>You've built the " + (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1 ? "first" : "second") + " warehouse and gained 12 more inventory slots!</b>");
         flushOutputTextToGUI();
     }
 
     public function startGranary1():void {
-        outputText("Do you start work on building granary frame and walls? (Cost: 200 nails, 125 wood and 30 stones.)\n");
+        outputText("Do you start work on building the granary frame and walls? (Cost: 200 nails, 125 wood and 30 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 125 && CampStatsAndResources.StonesResc >= 30) {
             doYesNo(doGranary1Work, noThanks);
@@ -435,7 +435,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function startGranary2():void {
-        outputText("Do you start work on building granary roof and floor? (Cost: 300 nails, 225 wood and 105 stones.)\n");
+        outputText("Do you start work on building the granary roof and floor? (Cost: 300 nails, 225 wood and 105 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.WoodResc >= 225 && CampStatsAndResources.StonesResc >= 105) {
             doYesNo(doGranary2Work, noThanks);
@@ -453,12 +453,12 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         printLazyWriting2("granary");
         buildWithHelpers(250, true);
-        outputText("\n\n<b>You've built a granary and gained 9 inventory slots for consumable items.</b>");
+        outputText("\n\n<b>You've built a granary and gained 9 more inventory slots for consumable items!</b>");
         flushOutputTextToGUI();
     }
 
     public function start2ndWarehouse1():void {
-        outputText("Do you start work on building warehouse frame and walls? (Cost: 250 nails, 150 wood and 40 stones.)\n");
+        outputText("Do you start work on building the warehouse frame and walls? (Cost: 250 nails, 150 wood and 40 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 250 && CampStatsAndResources.WoodResc >= 150 && CampStatsAndResources.StonesResc >= 40) {
             doYesNo(doWarehouse1Work, noThanks);
@@ -475,13 +475,13 @@ public class CampUpgrades extends BaseContent {
         else if (player.fatigue <= player.maxOverFatigue() - usedFatigue(300) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) buildStructure();
         else if (player.fatigue <= player.maxOverFatigue() - usedFatigue(200) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) buildAltar();
         else {
-            outputText("You are too exhausted to work on constructing shrine!");
+            outputText("You are too exhausted to work on constructing the shrine!");
             doNext(playerMenu);
         }
     }
 
     public function findSpotForShrine():void {
-        outputText("Unsatisfied with having to go up to the Deepwoods to offer your prayers, you decide to build a shrine next to your camp. You look for a spot and mark it, planning to come back later with the materials.");
+        outputText("Unsatisfied with having to travel to the Deepwoods to offer your prayers, you decide to build a shrine next to your camp. You find a suitable spot and mark it, planning to return later with the necessary materials.");
         flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] = 1;
         doNext(camp.returnToCampUseOneHour);
     }
@@ -502,7 +502,7 @@ public class CampUpgrades extends BaseContent {
         CampStatsAndResources.WoodResc -= 500;
         CampStatsAndResources.StonesResc -= 100;
         clearOutput();
-        outputText("You proceed to build the structure of the shrine. You lose track of time as you work at building Taoth a proper place of prayer. ");
+        outputText("You begin constructing the shrine, losing track of time as you work to give Taoth a proper place of prayer. ");
         flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] += 1;
         outputText("\n\nSeveral hours later the building is finally ready, although you are completely exhausted.");
         buildWithHelpers(300, false, 8, 4, 2);
@@ -543,7 +543,7 @@ public class CampUpgrades extends BaseContent {
             if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2) digApool();
             else if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addAWoodenWalls();
         } else {
-            outputText("You are too exhausted to work on hot spring!");
+            outputText("You are too exhausted to work on the hot spring!");
             doNext(playerMenu);
         }
     }
@@ -562,9 +562,9 @@ public class CampUpgrades extends BaseContent {
     private function doDigAPoolWork():void {
         CampStatsAndResources.StonesResc -= 500;
         clearOutput();
-        outputText("You proceed to dig a proper pool and line it and the border with rocks.");
+        outputText("You proceed to dig a proper pool and line both the interior and the border with rocks.");
         flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] += 1;
-        outputText("\n\nA few hour later the bathing area is steamy and ready for use.");
+        outputText("\n\nA few hour later, the bathing area is steamy and ready for use.");
         buildWithHelpers(100, true);
         outputText("\n\nThe bathing area is steamy and ready for use.");
         flushOutputTextToGUI();
@@ -597,13 +597,13 @@ public class CampUpgrades extends BaseContent {
         else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxOverFatigue() - usedFatigue(450, true)) buildMassiveRing();
         else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4 && player.fatigue <= player.maxOverFatigue() - usedFatigue(1350, true)) buildRingWoodFloor();
         else {
-            outputText("You are too exhausted to work on sparring ring!");
+            outputText("You are too exhausted to work on the sparring ring!");
             doNext(playerMenu);
         }
     }
 
     public function buildSmallRing():void {
-        outputText("Do you start work on making sparring ring? (Cost: 50 wood.)\n");
+        outputText("Do you start work on making the sparring ring? (Cost: 50 wood.)\n");
         checkMaterials();
         if (CampStatsAndResources.WoodResc >= 50) {
             doYesNo(doBuildSmallRing, noThanks);
@@ -616,15 +616,15 @@ public class CampUpgrades extends BaseContent {
     private function doBuildSmallRing():void {
         CampStatsAndResources.WoodResc -= 50;
         clearOutput();
-        outputText("You consider the many people who reside in the camp and realise you could spar with them if you had a ring for it. You proceed to get a rope and some wooden sticks, then build a small provisory ring for your daily sparring matches.");
+        outputText("You consider the many people residing in the camp and realize you could spar with them if you had a proper ring. You gather some rope and wooden sticks, then build a small makeshift ring for your daily sparring matches.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
-        outputText("\n\nYou even moved to its border that training dummy you've found in camp upon your arrival.");
+        outputText("\n\nYou even moved the training dummy you found upon your arrival to the edge of the ring.");
         player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
         buildWithHelpers(50, true, 1, 1, 1);
     }
 
     public function buildLargeRing():void {
-        outputText("Do you start work on expanding sparring ring? (Cost: 150 wood.)\n");
+        outputText("Do you start work on expanding the sparring ring? (Cost: 150 wood.)\n");
         checkMaterials();
         if (CampStatsAndResources.WoodResc >= 150) {
             doYesNo(doBuildLargeRing, noThanks);
@@ -637,9 +637,9 @@ public class CampUpgrades extends BaseContent {
     private function doBuildLargeRing():void {
         CampStatsAndResources.WoodResc -= 150;
         clearOutput();
-        outputText("Looking at your sparing ring seems a bit small for your and your camp members use, so you decide to make it larger. Getting more ropes than last time and many wooden sticks, you start to work on making sparing place bigger and better prepared to handle larger groups of fighters using it at once. And not forgetting about make the training dummy better and more durable.");
+        outputText("Looking at your sparring ring, it seems a bit small for you and your camp members, so you decide to make it larger. Gathering more rope than last time and plenty of wooden sticks, you begin working on expanding the ring and making it better suited for larger groups of fighters. You also make sure to improve the training dummy, making it stronger and more durable.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
-        outputText("\n\nYou work without rest on this project but by the end the ring is expanded to large size!");
+        outputText("\n\nYou work tirelessly on the project, and by the end, the ring is expanded to a large size!");
         player.addStatusValue(StatusEffects.TrainingNPCsTimersReduction, 1, -1);
 		buildWithHelpers(150, true, 2, 1, 1);
     }
@@ -658,15 +658,15 @@ public class CampUpgrades extends BaseContent {
     private function doBuildMassiveRing():void {
         CampStatsAndResources.WoodResc -= 450;
         clearOutput();
-        outputText("That large sparing ring looks for some reason... too small for your settlement needs. Letting out a barely heard sigh you proceed to go fetch many wooden stick and lots of ropes. Now it will be no longer called merely large ring. With even more durable looking training dummies and small stand on one of the sides it will serve it purpose on much grander scale.");
+        outputText("For some reason, the large sparring ring still seems too small for your settlement’s needs. Letting out a barely audible sigh, you go fetch more wooden sticks and plenty of rope. This time, it won't just be called a large ring. With even more durable training dummies and a small stand on one side, it will serve its purpose on a much grander scale.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
-        outputText("\n\nYou work without rest on this project but by the end the ring is expanded to massive size!");
+        outputText("\n\nYou work tirelessly on this project, and by the end, the ring has been expanded to a massive size!");
         player.addStatusValue(StatusEffects.TrainingNPCsTimersReduction, 1, -1);
         buildWithHelpers(450, true);
     }
 
     public function buildRingWoodFloor():void {
-        outputText("Do you start work on adding wood floor to your sparring ring? (Cost: 1200 wood.)\n");
+        outputText("Do you start work on adding wooden floor to your sparring ring? (Cost: 1200 wood.)\n");
         checkMaterials();
         if (CampStatsAndResources.WoodResc >= 1200) {
             doYesNo(doBuildRingWoodFloor, noThanks);
@@ -679,9 +679,9 @@ public class CampUpgrades extends BaseContent {
     private function doBuildRingWoodFloor():void {
         CampStatsAndResources.WoodResc -= 1200;
         clearOutput();
-        outputText("Your massive sparing ring looks pretty fine but you feel it still lacking... floor, that is. Without proper wood floor it only allow fight comfortably only when weeather is good. Letting out a barely heard sigh you proceed to go fetch many wooden planks. While you work on cover whole area with wood you also turn attention to lonely dummy. Maybe it would be mroe use if there will be more of them.");
+        outputText("Your massive sparring ring looks great, but you feel it’s still lacking... a floor, that is. Without a proper wooden floor, it only allows for comfortable fighting when the weather is good. Letting out a barely audible sigh, you go to fetch many wooden planks. While you work to cover the entire area with wood, you also turn your attention to the lonely dummy. Maybe it would be more useful if there were more of them.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
-        outputText("\n\nYou work without rest on this project but by the end the ring get it floor made of wood planks and on one side around previosly lone dummy stands four more similar looking dummies.");
+        outputText("\n\nYou work tirelessly on this project, and by the end, the ring has a floor made of wooden planks. On one side, around the previously lone dummy, stand four more similar-looking dummies.");
         player.addStatusValue(StatusEffects.TrainingNPCsTimersReduction, 1, -1);
         buildWithHelpers(1350, true, 6, 4, 2);
     }
@@ -695,11 +695,11 @@ public class CampUpgrades extends BaseContent {
             else if (player.statusEffectv1(StatusEffects.ArcaneCircle) > (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] - 1))
                 buildArcaneCircle(flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] + 1);
             else {
-                outputText("You lack the proper knowledge and skill to work on the new ritual circle yet!");
+                outputText("You lack the proper knowledge and skill to work on the new ritual circle!");
                 doNext(playerMenu);
             }
         } else {
-            outputText("You are too exhausted to work on the new ritual circle yet!");
+            outputText("You are too exhausted to work on the new ritual circle!");
             doNext(playerMenu);
         }
     }
@@ -722,11 +722,11 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         if (newTier == 1) {
 			player.createStatusEffect(StatusEffects.ArcaneCircle, 0, 0, 0, 0);
-            outputText("You get to building your arcane circle. You set a stone at each of the four cardinal points and draw a perfect circle with the blood. That done, you inscribe the runes meant to facilitate the chosen entity passage to Mareth, punctuating each scribing with a word of power. After several hours of hard work, your arcane circle is finally done, ready to be used to summon various entities to Mareth.");
+            outputText("You begin constructing your arcane circle by placing a stone at each of the four cardinal points and drawing a perfect circle with blood. Once that is done, you inscribe the runes meant to facilitate the chosen entity's passage to Mareth, punctuating each inscription with a word of power. After several hours of hard work, your arcane circle is finally complete, ready to be used to summon various entities to Mareth.");
 		}
         else
-            outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw the " + NUMBER_WORDS_POSITIONAL[newTier] + " larger circle, inscribing additional protections and wards. As you finish, you look them over, checking for any imperfections in the writing. Satisfied. you nod at the result."
-                + "\n\n<b>You can now perform the rituals to release more of your minions powers!</b>");
+            outputText("You decide to upgrade your circle to contain a stronger being, should the binding ritual fail. You draw the " + NUMBER_WORDS_POSITIONAL[newTier] + " larger circle, inscribing additional protections and wards. As you finish, you review them, checking for any imperfections in the writing. Satisfied, you nod at the result."
+                + "\n\n<b>You can now perform the rituals to release more of your minions' powers!</b>");
         flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] = newTier;
         CampStatsAndResources.StonesResc -= 4 * newTier;
         useFatigue(50);
@@ -749,11 +749,11 @@ public class CampUpgrades extends BaseContent {
                     doNext(playerMenu);
                 } else buildOrUpgradeElementalEnergyConduit(currentTier, upgrade);
             } else {
-                outputText("You can't add a new elemental energy conduit! (Due to having all arcane circles having them or reaching the last possible conduit.)");
+                outputText("You can't add a new elemental energy conduit! (This is because all arcane circles already have them, or you have reached the maximum number of conduits.)");
                 doNext(playerMenu);
             }
         } else {
-            outputText("You are too exhausted to work on ritual circle elemental energy conduits!");
+            outputText("You are too exhausted to work on the ritual circle elemental energy conduits!");
             doNext(playerMenu);
         }
     }
@@ -777,14 +777,14 @@ public class CampUpgrades extends BaseContent {
         var capacityIncrease:int = 900 + currentTier * 300;
         clearOutput();
         if (currentTier == 0) {
-            outputText("You decide to upgrade your first arcane circle in order to better utilise elemental shards. You reach to the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed in a triangular formation inside your circle, runes lining up to form veins of magic, conduits pulsing with elemental energy. Each stone is now an elemental node! You can feel that the power is now directly stored in the arcane circle, ready to use.");
+            outputText("You decide to upgrade your first arcane circle to better utilize elemental shards. You reach for the shards, infusing them with your mana and transforming them from the inside. You liquefy the crystals, pouring the liquid into a stone bowl. Then, you engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings to make them shine with power. All three stones are placed in a triangular formation inside your circle, with the runes aligning to form veins of magic, conduits pulsing with elemental energy. Each stone is now an elemental node! You can feel that the power is now directly stored in the arcane circle, ready for use.");
             player.createStatusEffect(StatusEffects.ElementalEnergyConduits, 0, capacityIncrease, 1, 0);
             outputText("\n\n<b>You can now convert elemental shards into pure elemental energy.</b>");
         } else {
-            outputText("You decide to engrave conduict in second circle. You draw complicated engraving on prepared stones using liquidified elemental shards. Then you place all " + NUMBER_WORDS_NORMAL[stoneShardCost] + " prepared nodes in the " + NUMBER_WORDS_POSITIONAL[currentTier + 1] + " circle, forming a basic elemental conduit in it.");
+            outputText("You decide to engrave a conduit in the second circle. You draw intricate engravings on the prepared stones using liquefied elemental shards. Then, you place all " + NUMBER_WORDS_NORMAL[stoneShardCost] + " prepared nodes in the " + NUMBER_WORDS_POSITIONAL[currentTier + 1] + " circle, forming a basic elemental conduit within it.");
             player.addStatusValue(StatusEffects.ElementalEnergyConduits, 2, capacityIncrease);
             player.addStatusValue(StatusEffects.ElementalEnergyConduits, 3, 1);
-            outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+" + capacityIncrease + ")</b>");
+            outputText("\n\n<b>Your arcane circles can now store more elemental energy! (+" + capacityIncrease + ")</b>");
         }
         CampStatsAndResources.StonesResc -= stoneShardCost;
         useFatigue(50);
@@ -799,12 +799,12 @@ public class CampUpgrades extends BaseContent {
         var capacityIncrease:int = 900 + currentTier * 300;
         clearOutput();
         if (currentTier == 0)
-            outputText("You decide that you need more elemental energy on hand, and for that, you need to expand your first energy conduit. You reach to the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto " + NUMBER_WORDS_NORMAL[stoneShardCost] + " flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All " + NUMBER_WORDS_NORMAL[stoneShardCost] + " stones are then placed around one of your pre-existing nodes, runes lining up to form veins of magic, conduits pulsing with elemental energy. One of your basic nodes has been enhanced, and can now store more power.");
+            outputText("You decide that you need more elemental energy on hand, so you set out to expand your first energy conduit. You reach for the shards, infusing them with your mana and transforming them from the inside. You liquefy the crystals, pouring them into a stone bowl. Then, you engrave an intricate series of runes onto " + NUMBER_WORDS_NORMAL[stoneShardCost] + " flat stones, carefully pouring the liquid crystal into the engravings to make them shine with power. All " + NUMBER_WORDS_NORMAL[stoneShardCost] + " stones are placed around one of your pre-existing nodes, with the runes aligning to form veins of magic, conduits pulsing with elemental energy. One of your basic nodes has been enhanced and can now store more power.");
         else
             outputText("You decide to expand your " + NUMBER_WORDS_POSITIONAL[currentTier + 1] + " energy conduit in order to store more elemental energy in circle until it will be needed. You draw a complicated engraving on prepared stones using liquidified elemental shards. Then you place all " + NUMBER_WORDS_NORMAL[stoneShardCost] + " prepared nodes in the " + NUMBER_WORDS_POSITIONAL[currentTier + 1] + " circle, upgrading one of your elemental conduits.");
         player.addStatusValue(StatusEffects.ElementalEnergyConduits, 2, capacityIncrease);
         player.addStatusValue(StatusEffects.ElementalEnergyConduits, 3, 1);
-        outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+" + capacityIncrease + ")</b>");
+        outputText("\n\n<b>Your arcane circles can now store more elemental energy! (+" + capacityIncrease + ")</b>");
         CampStatsAndResources.StonesResc -= stoneShardCost;
         useFatigue(50);
         useMana(manaCost);
@@ -817,13 +817,13 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         if (player.fatigue <= player.maxOverFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) setUpMagicWard();
         else {
-            outputText("You are too exhausted to work on magic ward!");
+            outputText("You are too exhausted to work on the magic ward!");
             doNext(playerMenu);
         }
     }
 
     public function setUpMagicWard():void {
-        outputText("You’re confident that with the warding tome as reference, you could build a ward to help keep your camp safe from lesser threats, possibly even demons.  Shall you construct the ward? (Cost: 30 stones.)\n");
+        outputText("You’re confident that, with the warding tome as a reference, you could build a ward to help keep your camp safe from lesser threats, possibly even demons. Do you construct the ward? (Cost: 30 stones.)\n");
         checkMaterials();
         if (CampStatsAndResources.StonesResc >= 30) {
             doYesNo(setUpMagicWard2, noThanks);
@@ -839,11 +839,11 @@ public class CampUpgrades extends BaseContent {
         outputText("You flip through the tome, and begin to sketch copies of the required glyphs in the dirt.  Yes, this is definitely possible.  You have something ");
         if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("Tel’Adre doesn’t;");
         else outputText("most mages wouldn’t;");
-        outputText(" the portal.  The ambient energy radiating from it could power the ward, as long as you get the web of magic working properly.  It takes hours, a great deal of stress and a lot of channeling to get the stones to their positions, carved into shape and infused with the requisite runes.  ");
+        outputText(" the portal.  The ambient energy radiating from it could power the ward, as long as you get the web of magic working properly.  It takes hours, a great deal of stress and a lot of channeling to get the stones to their positions, carved into shape and infused with the prerequisite runes.  ");
         flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] += 1;
         if (model.time.hours >= 12) outputText("By the time you’re done, it's already dark.");
         else outputText("By the time you’re done, the sun is beginning to droop in the sky.");
-        outputText("  But with these warding stones up and running, nothing should chance upon your camp unless it has business there.");
+        outputText("  But with these warding stones up and running, nothing should stumble upon your camp unless it has business there.");
         player.removeKeyItem("Warding Tome");
         //Gain fatigue.
         useFatigue(200);
@@ -858,13 +858,13 @@ public class CampUpgrades extends BaseContent {
         else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxOverFatigue() - usedFatigue(600, true)) buildUpMajorWoodDam();
         //else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxOverFatigue() - usedFatigue(800, true)) buildUpMinorStoneDam();
         else {
-            outputText("You are too exhausted to work on dam!");
+            outputText("You are too exhausted to work on the dam!");
             doNext(playerMenu);
         }
     }
 
     public function buildUpMinorWoodDam():void {
-        outputText("Do you start work on building small wood dam? (Cost: 200 nails, 300 wood.)\n");
+        outputText("Do you start work on building a small wooden dam? (Cost: 200 nails, 300 wood.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 300) {
             doYesNo(buildUpMinorWoodDam2, noThanks);
@@ -878,13 +878,13 @@ public class CampUpgrades extends BaseContent {
         CampStatsAndResources.NailsResc -= 200;
         CampStatsAndResources.WoodResc -= 300;
         clearOutput();
-        outputText("You get down to work building the dam plank by plank. At first, it proves to be a challenge, given the running water. But you eventually manage to build the structure in full your dam allowing to increase the stream size.");
+        outputText("You get down to work building the dam plank by plank. At first, it proves to be a challenge due to the flowing water. However, you eventually manage to complete the structure, allowing you to increase the size of the stream.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 1;
         buildWithHelpers(200, true, 8, 4, 2);
     }
 	
     public function buildUpWoodDam():void {
-        outputText("Do you start work on upgrading your small wood dam? (Cost: 250 nails, 375 wood.)\n");
+        outputText("Do you start work on upgrading your small wooden dam? (Cost: 250 nails, 375 wood.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 250 && CampStatsAndResources.WoodResc >= 375)
         {
@@ -901,13 +901,13 @@ public class CampUpgrades extends BaseContent {
         CampStatsAndResources.NailsResc -= 250;
         CampStatsAndResources.WoodResc -= 375;
         clearOutput();
-        outputText("You get down to work expanding the dam plank by plank starting from sides. At first, it goes slowly, but you eventualy speed up, to slow down again near end of the work. New taller and wider dam starts to accumulative water to form something between stream and miniature narrow shaped lake.");
+        outputText("You get down to work expanding the dam plank by plank, starting from the sides. At first, it goes slowly, but you eventually speed up, only to slow down again near the end of the work. The new, taller, and wider dam begins to accumulate water, forming something between a stream and a miniature, narrow-shaped lake.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 2;
         buildWithHelpers(400, true, 8, 4, 2);
     }
 	
     public function buildUpMajorWoodDam():void {
-        outputText("Do you start work on upgrading your wood dam? (Cost: 300 nails, 450 wood.)\n");
+        outputText("Do you start work on upgrading your wooden dam? (Cost: 300 nails, 450 wood.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.WoodResc >= 450)
         {
@@ -923,7 +923,7 @@ public class CampUpgrades extends BaseContent {
         CampStatsAndResources.NailsResc -= 300;
         CampStatsAndResources.WoodResc -= 450;
         clearOutput();
-        outputText("You get down to work on expanding the dam for the second time like the last time putting planks on the sides first. It progress slowly until you put last ones on the top of dam. Tired but satisfied with your work you look how previous widened stream due to higher water accumulation turn into proper miniature yet very narrow mini lake.");
+        outputText("You get down to work expanding the dam for the second time, just as you did before, putting the planks on the sides first. It progresses slowly until you place the last ones on top of the dam. Tired but satisfied with your work, you look at how the previously widened stream, due to higher water accumulation, has turned into a proper miniature yet very narrow lake.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 3;
         buildWithHelpers(600, true, 8, 4, 2);
     }
@@ -945,13 +945,13 @@ public class CampUpgrades extends BaseContent {
             }
             //3 stopień rozbudowy na 5 stopniu tamy (2 st. kamiennej tamy) a 4 stopień na 7 stopniu tamy (4 st. kamiennej)
         } else {
-            outputText("You are too exhausted to work on fishery!");
+            outputText("You are too exhausted to work on the fishery!");
             doNext(playerMenu);
         }
     }
 
     public function buildUpFishery1():void {
-        outputText("Do you start work on building fishery? (Cost: 200 nails, 300 wood.)\n");
+        outputText("Do you start work on building the fishery? (Cost: 200 nails, 300 wood.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 300) {
             doYesNo(buildUpFishery1Yes, noThanks);
@@ -972,7 +972,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function buildUpFishery2():void {
-        outputText("Do you start work on building fishery? (Cost: 300 nails, 450 wood.)\n");
+        outputText("Do you start work on building the fishery? (Cost: 300 nails, 450 wood.)\n");
         checkMaterials();
         if (CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.WoodResc >= 450) {
             doYesNo(buildUpFishery2Yes, noThanks);
@@ -992,7 +992,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function errorNotEnough():void {
-        outputText("\n\n<b>You do not have sufficient resources. You may buy more nails, wood, stones from the carpentry shop in Tel'Adre or find other sources of these materials. It's also possible you lack some of more exotic things.</b>")
+        outputText("\n\n<b>You do not have sufficient resources. You may buy more nails, wood, and stones from the carpentry shop in Tel'Adre or find other sources for these materials. It's also possible that you lack some more exotic items.</b>")
     }
 
     public function noThanks():void {

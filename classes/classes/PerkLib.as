@@ -2373,7 +2373,7 @@ public class PerkLib
 				"Allows you to start combat already flying. (as long PC have any options to fly)",
 				"You've chosen the 'Lift Off' perk, allowing you to start combat already flying. (as long PC have any options to fly)");
 		public static const LightningReload:PerkType = mk("Lightning Reload", "Lightning Reload",
-				"Allows you to reload in middle of shooting as long PC have enough fatigue for that without ending turn and decrease reload fatigue cost by 50%.",
+				"Allows you to reload in the middle of shooting as long PC have enough fatigue for that without ending turn and decrease reload fatigue cost by 50%.",
 				"You've chosen the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols and decrease reload fatigue cost by 50%.")
 				.withBuffs({'maxfatigue_base':+60});
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
@@ -4513,7 +4513,7 @@ public class PerkLib
 		public static const TrollResistance:PerkType = mk("Troll Resistance", "Troll Resistance",
 				"Your troll hide grants you protection from magical effects. (Increases magic resist by 15% (fire resist by 7,5%))");
 		public static const Undeath:PerkType = mk("Undeath", "Undeath",
-				"With a body that lacks a heartbeat, breath or working digestive system you are unable to gain benefit from transformative items. You're bodily functions are pretty much dead for lack of a better word (it reduce the odds of getting a body part tf'd to 0%). Furthermore you have unlimited fatigue.");
+				"With a body that lacks a heartbeat, breath or working digestive system you are unable to gain benefit from transformative items. You're bodily functions are pretty much dead for lack of a better word (it reduce the odds of getting a body part tf'd to 0%). Furthermore, you have unlimited fatigue.");
 		public static const UnicornBlessing:PerkType = mk("Unicorn Blessing", "Unicorn Blessing",
 				"You are blessed with the power of a unicorn and while below 20 corruption all white magic spells are 20% stronger and lust resistance increased by 10%.");
 		public static const Venomancy:PerkType = mk("Venomancy", "Venomancy",
