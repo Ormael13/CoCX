@@ -2757,9 +2757,11 @@ private function fuckIzmasPussyDominate():void {
 		outputText("Will you tend to her dick?");
 		//[Goo job]    [Leave it, leads to [Spanking scene])
 		simpleChoices("Goo Job", gooJob, "Leave It", radarIzmaSpanking, "", null, "", null, "", null);
-	} else sceneHunter.print("Check failed: Goo body!");
-	outputText("\n\n");
-	radarIzmaGasm();
+	} else {
+		sceneHunter.print("Check failed: Goo body!");
+		outputText("\n\n");
+		radarIzmaGasm();
+	}
 }
 
 //[Goo Job]
