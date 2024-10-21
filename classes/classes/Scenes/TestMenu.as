@@ -2286,7 +2286,7 @@ public class TestMenu extends BaseContent
 	}
 	public function EarlyAscension():void {
 		if (flags[kFLAGS.LETHICE_DEFEATED] == 1) {
-			outputText("\n\n<b>You already used this cheat code!</b>");
+			outputText("\n\n<b>You've already used this cheat code!</b>");
 		}
 		else {
 			flags[kFLAGS.LETHICE_DEFEATED] = 1;

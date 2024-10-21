@@ -239,7 +239,7 @@ outputText("Several bat-like gargoyles stand between you and the door inside, wi
 				outputText("Several scantily clad demons filter through the crowd, carrying drinks on trays. Swiftly, they’re mobbed by the crowd on the floor, who begin grabbing drinks from them. Not even a minute later, the trays are empty, and the party resumes, at a slightly increased pitch.\n\n");
 					break;
 				case 1:
-					outputText("You catch sight of a few succubi with rabbit ears and puffy tails sauntering through the crowd, wearing little more than tit-sthickers and sheer panties. One looks at you, biting her lip, before following the odd procession eastward. \n\n");
+					outputText("You catch sight of a few succubi with rabbit ears and puffy tails sauntering through the crowd, wearing little more than tit-stickers and sheer panties. One looks at you, biting her lip, before following the odd procession eastward. \n\n");
 					break;
 
 			}

@@ -2420,8 +2420,8 @@ public class PerkLib
 				"You've chosen the 'Limit Breaker: Soul (2nd stage)' perk, breaking your limits for 'soul' for the second time. (+10% max Mana and Soulforce)")
 				.withBuffs({'maxmana_mult':+0.1});
 		public static const LockAndLoad:PerkType = mk("Lock and load", "Lock and load",
-				"You gained decreased accuracy penalty (-5%) for multi attacks and a slightly increased firerate (+1 attack per 2 attacks).",
-				"You've chosen the 'Lock and load' perk, gaining decreased accuracy penalty (-5%) for multi attacks and a slightly increased firerate (+1 attack per 2 attacks).");
+				"You gained decreased accuracy penalty (-5%) for multi-attacks and a slightly increased firerate (+1 attack per 2 attacks).",
+				"You've chosen the 'Lock and load' perk, gaining decreased accuracy penalty (-5%) for multi-attacks and a slightly increased firerate (+1 attack per 2 attacks).");
 		public static const LongerLastingBuffsI:PerkType = mk("Long(er) Lasting Buffs I", "Long(er) Lasting Buffs I",
 				"Buff spells last 1 turn longer.",
 				"You've chosen the 'Long(er) Lasting Buffs I' perk. Constant use of buffs allowed you to optimize them a little bit.");
