@@ -2815,7 +2815,7 @@ import classes.Scenes.Combat.CombatAbility;
 		}
 
 		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int, RPP:int = 1):void{
-			player.ascensionPerkPoints -= pCost* tier;
+			player.ascensionPerkPoints -= pCost * tier;
 			if (tier == 1) player.createPerk(perk,1,0,0,1);
 			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
 			clearOutput();
@@ -2875,6 +2875,16 @@ import classes.Scenes.Combat.CombatAbility;
 			var btn:int = 0;
 			perkMetamorphAscCheck(btn);
 			btn++
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) {
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryExStageX)){
+					perkTGMEXCheck(player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryExStageX) + 1, btn);
+				} else {
+					perkTGMEXCheck(1, btn);
+				}
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) addButtonDisabled(btn, "T.G.M.Ex", "You need to buy Transcendental Genetic Memory perk first.");
+			else addButtonDisabled(btn, "T.G.M.Ex", "You need ascend more times to buy this perk.");
+			btn++ 
 			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing you to double base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus is in effect will still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "Underdog", "You already bought Underdog perk.");
@@ -2988,14 +2998,15 @@ import classes.Scenes.Combat.CombatAbility;
 						addButtonDisabled(btn, "Gen. Memory", "You have not ascended enough times yet.");
 					}
 					else if (tier > 12){
-						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");//180/~550 (add new asc perk to 2x then 3x and 4x amount of slots - each 2 ascennsions)
+						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");//180x5=900/~550 current bodypart unlocks (20.10.2024)
 					}
 					else {
 						if (tier == 1){
 							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 						}
 						else{
-							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, (15*(tier-1)*(tier)/2));
+							var TGMEX:Number = (1 + player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryExStageX));
+							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, (15*TGMEX*(tier-1)*(tier)/2));
 						}
 						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost, 2))
 							.hint("Increases the maximum number of permed metamorphs."
@@ -3003,6 +3014,35 @@ import classes.Scenes.Combat.CombatAbility;
 					}
 				}
 			}
+		}
+		private function perkTGMEXCheck(tier:int, btn:int):void {
+			var NGPL:Array = [1, 3, 5, 7];
+			var pCost:int = 20;
+			var tier:int = player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryExStageX) + 1;
+			if (tier > 4) {
+				addButtonDisabled(btn, "T.G.M.Ex Rank "+ (tier-1).toString(),"You have the highest tier already.");
+			}
+			else if (whichNewGameAreYouOn() < NGPL[tier - 1]) {
+				addButtonDisabled(btn, "T.G.M.Ex Rank "+ tier.toString(),"You need to ascend a few more times.");
+			}
+			else if (player.ascensionPerkPoints < pCost * tier) {
+				addButtonDisabled(btn, "T.G.M.Ex Rank "+ tier.toString(),"You do not have enough points.");
+			}
+			else {
+				addButton(btn, "T.G.M.Ex Tier " + tier.toString(), curry(perkRPConfirm0, tier, PerkLib.AscensionTrancendentalGeneticMemoryExStageX, pCost))
+					.hint("Acquire T.G.M.Ex Prestige Rank " + tier.toString()
+						+ "Cost: " + pCost * tier + " points.");
+			}
+		}
+		private function perkRPConfirm0(tier:int, perk:PerkType, pCost:int):void{
+			player.ascensionPerkPoints -= pCost * tier;
+			if (tier == 1) player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryExStageX,1,0,0,1);
+			else player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryExStageX, 1, player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryExStageX) + 1);
+			var hah:Number = player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)/player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryExStageX);
+			player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, hah);
+			clearOutput();
+			outputText("You have acquired " + perk.name() + "!\n\n" + perk.desc());
+			doNext(rarePerks2);
 		}
 		private function perkUnderdog():void {
 			player.ascensionPerkPoints -= 5;

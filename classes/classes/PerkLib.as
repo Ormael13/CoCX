@@ -84,6 +84,7 @@ public class PerkLib
 		public static const AscensionAdditionalOrganMutationX:PerkType = new AscensionOrganMutationX();
 		public static const AscensionBuildingPrestigeX:PerkType = new AscensionBuildPrestigeX();
 		public static const AscensionTrancendentalGeneticMemoryStageX:PerkType = new AscensionTrancendentGenMemX();
+		public static const AscensionTrancendentalGeneticMemoryExStageX:PerkType = new AscensionTrancendentGenMemExX();
 		public static const AscensionOneRaceToRuleThemAllX:PerkType = new AscensionOneRaceToRuleThemX();
 		public static const AscensionHerosBirthrightRankX:PerkType = new AscensionHerosBirthrightX();
 		public static const AscensionAdvTrainingX:PerkType = new AscensionAdvancedTrainingX();
