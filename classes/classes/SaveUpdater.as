@@ -2560,7 +2560,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.19) {
-				outputText("\n\nPerks are no longer needed for ranged multi attacks");
+				outputText("\n\nPerks are no longer needed for ranged multi-attacks");
 				refundPerk(PerkLib.Multishot);
 				refundPerk(PerkLib.WildQuiver);
 				refundPerk(PerkLib.Manyshot);

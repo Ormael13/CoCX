@@ -895,23 +895,23 @@ public class WoodElves extends BaseContent implements SaveableState {
 			clearOutput();
 			outputText("You may choose a different sturdier string for your bow. What would you use?");
 			menu();
-			if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "SpiderSilk", "You already used this for improving bow string.");
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "SpiderSilk", "You've already used this to improve your bowstring.");
 			else {
 				if (player.hasItem(useables.T_SSILK, 1)) addButton(0, "SpiderSilk", FletchingAdjustString2, useables.T_SSILK);
 				else addButtonDisabled(0, "SpiderSilk", "You need spider silk.");
 			}
-			if (player.statusEffectv2(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Ebonbloom", "You already used this for improving bow string.");
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Ebonbloom", "You've already used this to improve your bowstring.");
 			else {
 				if (player.hasItem(useables.EBONBLO, 1)) {
-					if (player.statusEffectv2(StatusEffects.FletchingTable) < 1) addButtonDisabled(1, "Ebonbloom", "You need to improve string with spider silk first.");
+					if (player.statusEffectv2(StatusEffects.FletchingTable) < 1) addButtonDisabled(1, "Ebonbloom", "You need to improve the bowstring with spider silk first.");
 					else addButton(1, "Ebonbloom", FletchingAdjustString2, useables.EBONBLO);
 				}
 				else addButtonDisabled(1, "Ebonbloom", "You need ebonbloom.");
 			}
-			if (player.statusEffectv2(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "UnicornHair", "You already used this for improving bow string.");
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "UnicornHair", "You've already used this to improve your bowstring.");
 			else {
 				if (player.hasItem(useables.UNICORNH, 1)) {
-					if (player.statusEffectv2(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "UnicornHair", "You need to improve string with ebonbloom first.");
+					if (player.statusEffectv2(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "UnicornHair", "You need to improve the bowstring with ebonbloom first.");
 					else addButton(2, "UnicornHair", FletchingAdjustString2, useables.UNICORNH);
 				}
 				else addButtonDisabled(2, "UnicornHair", "You need unicron hair.");
@@ -931,31 +931,31 @@ public class WoodElves extends BaseContent implements SaveableState {
 			clearOutput();
 			outputText("You may choose to reinforce your bow using various materials. What would you use?");
 			menu();
-			if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "Bronze", "You already used this for reinforcing bow.");
+			if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "Bronze", "You've already used this to reinforce your bow.");
 			else {
 				if (player.hasItem(useables.BRONZEB, 1) || Crafting.BagSlot03 > 0) addButton(0, "Bronze", FletchingReinforce2, useables.BRONZEB, 1);
 				else addButtonDisabled(0, "Bronze", "You need bronze bar.");
 			}
-			if (player.statusEffectv1(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Iron", "You already used this for reinforcing bow.");
+			if (player.statusEffectv1(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Iron", "You've already used this to reinforce your bow.");
 			else {
 				if (player.hasItem(useables.IRONORE, 1) || Crafting.BagSlot04 > 0) {
-					if (player.statusEffectv1(StatusEffects.FletchingTable) < 1) addButtonDisabled(1, "Iron", "You need to reinforce bow with bronze first.");
+					if (player.statusEffectv1(StatusEffects.FletchingTable) < 1) addButtonDisabled(1, "Iron", "You need to reinforce your bow with bronze first.");
 					else addButton(1, "Iron", FletchingReinforce2, useables.IRONORE, 2);
 				}
 				else addButtonDisabled(1, "Iron", "You need iron ore.");
 			}
-			if (player.statusEffectv1(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "Moonstone", "You already used this for reinforcing bow.");
+			if (player.statusEffectv1(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "Moonstone", "You've already used this to reinforce your bow.");
 			else {
 				if (player.hasItem(useables.MOONSTO, 1) || Crafting.BagSlot07 > 0) {
-					if (player.statusEffectv1(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "Moonstone", "You need to reinforce bow with iron first.");
+					if (player.statusEffectv1(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "Moonstone", "You need to reinforce your bow with iron first.");
 					else addButton(2, "Moonstone", FletchingReinforce2, useables.MOONSTO, 3);
 				}
 				else addButtonDisabled(2, "Moonstone", "You need moonstone.");
 			}
-			if (player.statusEffectv1(StatusEffects.FletchingTable) > 3) addButtonDisabled(3, "EbonIng", "You already used this for reinforcing bow.");
+			if (player.statusEffectv1(StatusEffects.FletchingTable) > 3) addButtonDisabled(3, "EbonIng", "You've already used this to reinforce your bow.");
 			else {
 				if (player.hasItem(useables.EBONING, 1) || Crafting.BagSlot06 > 0) {
-					if (player.statusEffectv1(StatusEffects.FletchingTable) < 3) addButtonDisabled(3, "EbonIng", "You need to reinforce bow with moonstone first.");
+					if (player.statusEffectv1(StatusEffects.FletchingTable) < 3) addButtonDisabled(3, "EbonIng", "You need to reinforce your bow with moonstone first.");
 					else addButton(3, "EbonIng", FletchingReinforce2, useables.EBONING, 4);
 				}
 				else addButtonDisabled(3, "EbonIng", "You need ebon ingot.");
