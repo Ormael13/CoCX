@@ -122,6 +122,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Disables Zenji vs Celess freakout. Stupid troll shouldn't ask you to kill your daughter.");
         outputText("\n- Disables Sand Witch bad-end when boobs are big and lactation is high. Too annoying.");
         outputText("\n- Disables (not very logical) transition from bee girl to huntress in the forest. Let nothing distract you from buzz.");
+        outputText("\n- Disables Chi-Chi training check if Jojo's corrupt already.");
         outputText("\n<i>Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
 
