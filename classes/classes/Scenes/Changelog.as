@@ -272,9 +272,9 @@ public class Changelog extends BaseContent
 			outputText("-Added 1 additional rank to Ascension: Additional Organ Mutation and 2 additional ranks to Ascension: Transcendental Genetic Memory perks.\n");
 			outputText("-New Ascension perk: Ascension: Transcendental Genetic Memory (Ex). Your body capacity to retain metamorphic adaptations increased by (1+perk rank) times. Max Rank: 4.\n");
 			outputText("-Proof reading of all cabin building scenes and systems, all minion/elementals/golem/skeleton scenes and systems. Many common typos across all game files fixed, more perk adjustments. (Agentfunfun)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-SceneHunter:Other - allows to skip ChiChi's check if Jojo's corrupt already (Svalkash)\n");
+			outputText("-SkinOil can now dye slimes too! (Svalkash)\n");
+			outputText("-Fixed: Amily incest scene and made it more accessible, Izma domVag goo scene (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
