@@ -15,21 +15,25 @@ public final class KitsuneGift extends Consumable {
 			clearOutput();
 			outputText("Curiosity gets the best of you, and you decide to open the package.  After all, what's the worst that could happen?\n\n");
 			//Opening the gift randomly results in one of the following:
-			switch (Utils.rand(12)) {
+			switch (Utils.rand(16)) {
 			//[Fox Jewel]
-				case 0: 
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
+				case 0:
+				case 12:
+				case 13:
+				case 14:
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
 				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
 				SceneLib.inventory.takeItem(game.consumables.FOXJEWL, SceneLib.inventory.inventoryMenu);
-				return(true);
+				return true;
 
 			//[Fox Berries]
 				case 1:
+				case 15:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, there is a small cluster of orange-colored berries sitting in the center!");
 				outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
 				//add Fox Berries to inventory
 				SceneLib.inventory.takeItem(game.consumables.FOXBERY, SceneLib.inventory.inventoryMenu);
-				return(true);
+				return true;
 
 			//[Gems]
 				case 2:
