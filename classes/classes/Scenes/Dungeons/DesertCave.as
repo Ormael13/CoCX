@@ -2129,7 +2129,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function slavesDiscussion():void {
 			menu();
 			if(canFreeEssy()) addButton(0,"Essrayle",SceneLib.forest.essrayle.askMotherToReleaseEssy).hint("Request the Sand Mother to release Essrayle.");
-			if(canFreeMilkSlave()) addButton(1,"Milk-Slave",freeSlaves).hint("Request the Sand Mother to release the milk slave you've found in the bathroom.");
+			if(canFreeMilkSlave()) addButton(1,"Milk-Slave",freeSlaves).hint("Request the Sand Mother to release the milk slave you found in the bathroom.");
 		}
 		//Getting a Milk Slut, Purity Style
 		//{Having beat the Sammiches, and made Momma Witch your friend, add a button labeled [Free Slaves] to Momma's menu. Needs to have met Milk Slut.}
@@ -2274,7 +2274,7 @@ public class DesertCave extends DungeonAbstractContent
 				addButton(4,"Get Lactaid",takeLaBovaOrLactaid, true, null, null, consumables.LACTAID.description);
 			}
 			if(canFreeEssy()) addButton(5,"Essrayle",SceneLib.forest.essrayle.askMotherToReleaseEssy).hint("Request the Sand Mother to release Essrayle.");
-			if (canFreeMilkSlave()) addButton(6, "Milk-Slave", talkToEnemySMaboutMilk).hint("Request the Sand Mother to release the milk slave you've found in the bathroom.");
+			if (canFreeMilkSlave()) addButton(6, "Milk-Slave", talkToEnemySMaboutMilk).hint("Request the Sand Mother to release the milk slave you found in the bathroom.");
 			addButton(14,"Leave",playerMenu);
 		}
 

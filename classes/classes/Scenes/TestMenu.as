@@ -1209,9 +1209,9 @@ public class TestMenu extends BaseContent
 	}
 	public function StatsAscensionMenu2():void {
 		menu();
-		addButton(0, "EarlyAscension", EarlyAscension).hint("Allowing to premature ascension.");
-		addButton(1, "NG tier ++", IncreaseAscensionCounter).hint("Allowing to increase ascension counter.");
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) addButton(2, "NG tier --", DecreaseAscensionCounter).hint("Allowing to decrease ascension counter.");
+		addButton(0, "EarlyAscension", EarlyAscension).hint("Allowing premature ascension.");
+		addButton(1, "NG tier ++", IncreaseAscensionCounter).hint("Allowing you to increase ascension counter.");
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) addButton(2, "NG tier --", DecreaseAscensionCounter).hint("Allowing you to decrease ascension counter.");
 		addButton(5, "AscenPerks01", AddAscenionPerkPoints, 1).hint("Add 1 ascension perk point for use during ascending to the next NG+ tier.");
 		addButton(6, "AscenPerks05", AddAscenionPerkPoints, 5).hint("Add 5 ascension perk points for use during ascending to the next NG+ tier.");
 		addButton(7, "AscenPerks10", AddAscenionPerkPoints, 10).hint("Add 10 ascension perk points for use during ascending to the next NG+ tier.");

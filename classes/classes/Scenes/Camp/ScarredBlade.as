@@ -26,7 +26,7 @@ public class ScarredBlade extends Monster
 			this.ballSize = 0;
 			this.tallness = 36;
 			this.bodyColor = "metallic";
-			this.long = "The sword you're fighting is a no ordinary sword. It's a lethicite-infused metal curved saber etched with scars. It seems to eagerly seek flesh.";
+			this.long = "The sword you're fighting is no ordinary blade. It's a lethicite-infused, curved saber etched with battle scars. The weapon seems to eagerly seek flesh.";
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";

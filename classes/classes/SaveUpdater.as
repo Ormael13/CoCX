@@ -1857,7 +1857,7 @@ public class SaveUpdater extends NPCAwareContent {
 				//Reclaimed flag cleanup. Just leaving it here until the next save update.
 				flags[kFLAGS.HELSPAWN_HADSEX] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.013;
-				outputText("<b>SceneHunter - new feature, 'Mock Fights', allowing to replay win/lose rape scenes with camp NPCs. Also, Loss Select wasn't properly saving its value outside of the save - fixed now.</b>")
+				outputText("<b>SceneHunter - new feature, 'Mock Fights', allowing you to replay win/lose rape scenes with camp NPCs. Also, Loss Select wasn't properly saving its value outside of the save - fixed now.</b>")
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.014) {
 				// Reorder SPP (Old slot unlock order: 56-69, 0-55, 70-97; new is 0-97)

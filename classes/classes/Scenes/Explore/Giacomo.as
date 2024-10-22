@@ -217,7 +217,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				if (player.farmingLevel >= 5) addButton(7, "Herb Bag (LowG)", pitchLHerbsBag).hint("Herbs Bag (Low Grade)");
 				else addButtonDisabled(7, "Herb Bag (LowG)", "Herbs Bag (Low Grade) Req. lvl 5 in Farming.");
 			}
-			if (Garden.PotionsBagSlot01Cap == 0) addButton(8, "Pot Bag (LowG)", pitchPotionsBag).hint("Potions Bag (Lowest Grade)");
+			if (Garden.PotionsBagSlot01Cap == 0) addButton(8, "Pot Bag (LowG)", pitchPotionsBag).hint("Potion Bag (Lowest Grade)");
 			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
@@ -660,9 +660,9 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(miscMenu);
 			}
 			else {
-				outputText("\n\nYou decided to buy the bag. <b>You acquired Potions Bag (Lowest grade).</b>");
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Potion Bag (Lowest grade).</b>");
 				player.gems -= 300;
-				player.createKeyItem("Potions Bag (Lowest grade)", 0, 0, 0, 0);
+				player.createKeyItem("Potion Bag (Lowest grade)", 0, 0, 0, 0);
 				Garden.PotionsBagSlot01Cap = 5;
 				Garden.PotionsBagSlot02Cap = 5;
 				Garden.PotionsBagSlot03Cap = 5;

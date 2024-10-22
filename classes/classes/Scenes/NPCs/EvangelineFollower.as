@@ -1573,7 +1573,7 @@ private function InternalMutations():void {
 	else if (EvangelinePeepTalkOnInternalMutations == 1) {
 		outputText("Your confused look annoys Evangeline to no end.\n\n");
 		outputText("\"<i>Gosh how did human civilization even become a serious thing out of Mareth when it's made out of people like you. As I just said It's possible to further improve yourself through internal mutations however doing so will cause your body to endure an ever increasing amount of stress due to degeneration. While there are ways to fully become one's race to do so will make you cease to be human. ");
-		outputText("For you chimerism is the safest route even if it forces you to constantly seek out the assistance of a skilled medic or daily healing magic treatment. And don't you just try poping those mutations naturaly by eating a hundred of ingrediants the only thing you will get is fat. You need a specialised transformative or straight out primal magic to transform your insides and I can only craft the first. Was this simple enough for you?</i>\"");
+		outputText("For you chimerism is the safest route even if it forces you to constantly seek out the assistance of a skilled medic or daily healing magic treatment. And don't you just try poping those mutations naturaly by eating a hundred of ingredients the only thing you will get is fat. You need a specialised transformative or straight out primal magic to transform your insides and I can only craft the first. Was this simple enough for you?</i>\"");
 		menu();
 		addButton(1, "No", IMutationsYN, false);
 		addButton(3, "Yes", IMutationsYN);
