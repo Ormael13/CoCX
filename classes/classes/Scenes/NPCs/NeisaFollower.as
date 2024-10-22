@@ -65,11 +65,7 @@ public function neisaMorningPaycheckCall():void {
 		else {
 			outputText("Neisa sighs in disappointment when she realises you are short "+(10 - flags[kFLAGS.SPIRIT_STONES])+" spirit stones.\n\n");
 			outputText("\"<i>Why now, you forgot to go change gems for spirit stones? That's fine but until you pay the debt you owe me I'm staying back at the inn.</i>\"\n\n");
-			outputText("(<b>Neisa has been removed from Followers menu!</b>)\n\n");
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") flags[kFLAGS.PLAYER_COMPANION_1] = "";
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") flags[kFLAGS.PLAYER_COMPANION_2] = "";
-			flags[kFLAGS.NEISA_AFFECTION] = 0;
-			flags[kFLAGS.NEISA_FOLLOWER] = 6;
+			setNeisaDismissed();
 		}
 	}
 	else if (flags[kFLAGS.NEISA_FOLLOWER] == 16) {
@@ -125,12 +121,28 @@ public function neisaCampMenu():void {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa" || flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") addButtonDisabled(1, "Spar", "You can't fight against her as long she's in your team.");
 		else addButton(1, "Spar", neisaSpar).hint("Do a quick battle with Neisa!");
 	}
-	//addButton(2, "Talk", talkWithValeria).hint("Discuss with Valeria.");
+	addButton(2, "Dismiss", neisaDismiss).hint("Tell Neisa to go back to the inn.");
 	//if (player.lust >= 33) addButton(3, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", neisaHenchmanOption);
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	if (flags[kFLAGS.NEISA_FOLLOWER] >= 14) addButton(13, "Paycheck", neisaMorningPaycheckCall2).hint("Pay Neisa due payment (make sure to not lack spirit stones for it)");
 	addButton(14, "Back", camp.campFollowers);
+}
+
+private function setNeisaDismissed():void {
+	outputText("(<b>Neisa has been removed from Followers menu!</b>)\n\n");
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") flags[kFLAGS.PLAYER_COMPANION_1] = "";
+	if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+	flags[kFLAGS.NEISA_AFFECTION] = 0;
+	flags[kFLAGS.NEISA_FOLLOWER] = 6;
+}
+
+public function neisaDismiss():void {
+	clearOutput();
+	outputText("You tell Neisa you don't want her services anymore. She looks annoyed, but tries not to show it.\n\n");
+	outputText("After a few minutes, Neisa is gone already, along with her stuff. You breathe a sigh of relief knowing that your spirit stones won't be drained every morning.");
+	setNeisaDismissed();
+	doNext(playerMenu);
 }
 
 public function neisaAppearance():void {
