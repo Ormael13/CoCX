@@ -31,7 +31,7 @@ public function manageyourgarden():void
 public function wateryourgarden():void
 {
 	clearOutput();
-	outputText("You water your sprouts, then spend some time tending their garden. Weeding, pruning and fertilizing, you do it all. Nothing will harm your private garden\n\n");
+	outputText("You water your sprouts and then spend some time tending to the garden. Weeding, pruning, and fertilizing, you do it all. Nothing will harm your private garden.\n\n");
 	flags[kFLAGS.ALRAUNE_DAILY_WATERING] = 1;
 	if (flags[kFLAGS.ALRAUNE_GROWING] < 22) flags[kFLAGS.ALRAUNE_GROWING]++;
 	doNext(camp.returnToCampUseOneHour);
@@ -41,7 +41,7 @@ public function playwithyourplantdaughters():void
 {
 	clearOutput();
 	outputText("You decide to set some time aside to play with your sprouts. You tell them as much, and with a flourish, you pull water toys you bought in Tel'Adre out of your pack. The happiness on their little faces warms your heart.\n\n");
-	outputText("\"<i>Wow, really mom? You are the best!</i>\"\n\n");
+	outputText("\"<i>Wow, really mom? You're the best!</i>\"\n\n");
 	outputText("Your daughters all cheer up as they pick up the toys and rush to the rivers to fill them up. Soon you’re all splashing each other. The experience is refreshing and soothing. You never thought you would appreciate having children this much. Perhaps parenting comes included in the whole \"being a child of a fertility goddess\" deal, you ponder, before being splashed in the face by one of your daughters, breaking you out of your reverie, and dragging you back into the game.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -50,10 +50,10 @@ public function playsRathazulAndSoulgemScene():void
 {
 	clearOutput();
 	spriteSelect(SpriteDb.s_rathazul);
-	outputText("As you pass by Rathazul considers you, then asks \"<i>May I ask what you’re planning to do with that soul gem of yours?</i>\" as you look at the elder in surprise, he shakes his head at you.  <i> \" Yes, [name], I know what that dangerous crystal is</i>\"\n\n");
+	outputText("As you pass by, Rathazul considers you and then asks \"<i>May I ask what you’re planning to do with that soul gem of yours?</i>\" as you look at the elder in surprise, he shakes his head at you.  <i> \" Yes, [name], I know what that dangerous crystal is</i>\"\n\n");
 	outputText("When you mention you want to create a golem, Rathazul seems to lose himself in thought, as if trying to remember something.\n\n");
-	outputText("\"<i>Years ago, when I was younger, I knew a woman who specialised in such constructs. She was obsessed with creating the perfect servant. However, when the demons came, hungry for power, she embraced them instead of fleeing and became one of those aberrations. Her laboratory is likely still located in the same area as before - hidden somewhere in the place now called the blighted ridges. If you go there, be careful. ");
-	outputText("Losing her humanity likely didn't do any good to her already fragile sanity. None can say  what you will find.</i>\"\n\n");
+	outputText("\"<i>Years ago, when I was younger, I knew a woman who specialized in such constructs. She was obsessed with creating the perfect servant. However, when the demons came, hungry for power, she embraced them instead of fleeing and became one of those aberrations. Her laboratory is likely still located in the same area as before - hidden somewhere in the place now called the blighted ridges. If you go there, be careful. ");
+	outputText("Losing her humanity likely didn't do any good to her already fragile sanity. None can say what you will find.</i>\"\n\n");
 	outputText("You thank Rathazul for telling you this as this might just be the information you need.");
 	flags[kFLAGS.DEN_OF_DESIRE_QUEST] = 1;
 	doNext(camp.returnToCampUseOneHour);
@@ -67,12 +67,12 @@ public function droppingToZeroSatietyAsGargoyle():void
 		doNext(camp.returnToCampUseEightHours);
 	}
 	else {
-		outputText("Your reserves are running low. Your body begins to shake. you are unable to control yourself. you need sex NOW!\n\n");
+		outputText("Your reserves are running low, and your body begins to shake. You are unable to control yourself; you need sex, NOW!\n\n");
 		if (player.hasVagina()) {
 			outputText("You rush into the mountain starved for energy and seduce the first minotaur you can find putting your drooling pussy on display. The minotaur, used to having to fight for a hole to fuck, does not complain and lies down for you to take him in.  Your eyes zero in as a dollop of pre escapes his ribbed horse-like member, locating the source of the scent.\n\n");
 			//Too small
 			if(player.vaginalCapacity() < monster.cockArea(0)) {
-				outputText("Restraint evaporates as you lower yourself, your aching " + vaginaDescript(0) + " desperate for contact.  Your thighs quiver as you touch his wobbling column of maleness, the slick pre-cum soaking into your engorged clitty, filling it with tingling warmth.  Oblivious to the apparent size difference, your body pushes downwards, your knees giving out, forcing his flared head against your " + vaginaDescript(0) + " roughly.  The need to be speared on the beast's meat is overwhelming urged on by the constantly leaking pre-cum currently pumping into your love-canal.  With strength born of unnatural lust, you grip his flanks and drive yourself downwards, feeling yourself stretch painfully as you take in his length.  ");
+				outputText("Restraint evaporates as you lower yourself, your aching " + vaginaDescript(0) + " desperate for contact.  Your thighs quiver as you touch his wobbling column of maleness, the slick pre-cum soaking into your engorged clitty, filling it with tingling warmth.  Oblivious to the apparent size difference, your body pushes downwards, your knees giving out, forcing his flared head against your " + vaginaDescript(0) + " roughly.  The need to be speared on the beast's meat is overwhelming, urged on by the constantly leaking pre-cum currently pumping into your love-canal.  With strength born of unnatural lust, you grip his flanks and drive yourself downwards, feeling yourself stretch painfully as you take in his length.  ");
 			}
 			//Good match
 			if(player.vaginalCapacity() >= monster.cockArea(0) && player.vaginalCapacity() < monster.cockArea(0) * 1.5) {
@@ -80,7 +80,7 @@ public function droppingToZeroSatietyAsGargoyle():void
 			}
 			//Bigger than he is
 			if(player.vaginalCapacity() >= monster.cockArea(0) *1.5) {
-				outputText("Restraint evaporates as you lower yourself, your aching " + vaginaDescript(0) + " desperate for contact.  Your thighs quiver as you touch his wobbling column of maleness, the slick pre-cum soaking into your engorged clitty, filling it with tingling warmth.  With a lusty giggle you slip his head inside your " + vaginaDescript(0) + ", allowing him to drool his musky pre-seed deep inside your wide love-canal.  Sinking down slowly, you easily encompass all of his equine-like member, enjoying the feeling of his three thick cock-ridges as they slip through your lips.  Eventually you take all of him, wishing he was just a bit bigger...");
+				outputText("Restraint evaporates as you lower yourself, your aching " + vaginaDescript(0) + " desperate for contact.  Your thighs quiver as you touch his wobbling column of maleness, the slick pre-cum soaking into your engorged clitty, filling it with tingling warmth.  With a lusty giggle you slip his head inside your " + vaginaDescript(0) + ", allowing him to drool his musky pre-seed deep inside your wide love-canal.  Sinking down slowly, you easily encompass all of his equine-like member, enjoying the feeling of his three thick cock-ridges as they slip through your lips.  Eventually you take all of him, wishing he was just a little bit bigger...");
 			}
 			//Resume sexings, p2
 			outputText("\n\nAt last you feel the minotaur's meaty hands grab you by the " + hipDescript() + ", forcefully grinding up and down his length like a cheap sex-toy.  ");
@@ -126,7 +126,7 @@ public function badendManticoreOuroboros():void {
 
 public function hellhoundCapture():void {
 	clearOutput();
-	outputText("You wake up, your [hands] and [feet] bound by metal chains. You glance around warily as you shake yourself from the unconscious stupor; it seems like you're trapped in a holding pen. You notice a succubus several feet away from you, blocked off by a large glass observation window. She's jotting down notes on a piece of parchment before slowly approaching you like you're stir awake.[pg]");
+	outputText("You wake up, your [hands] and [feet] bound by metal chains. You glance around warily as you shake yourself from the unconscious stupor; it seems like you're trapped in a holding pen. You notice a succubus several feet away from you, blocked off by a large glass observation window. She's jotting down notes on a piece of parchment before slowly approaching you like you're stirred awake.[pg]");
 	outputText("She stands right next to the window, glowering at you intently, \"<i>So, you're the so-called 'champion' who ruined our factory?</i>\" She scoffs, \"<i>You don't look like much of a threat. I suppose those workers were simply slacking off.</i>\" She shakes her head softly, \"<i>You may call me Minuvi</i>\"[pg]");
 	outputText("She gives a small laugh, pressing her fingertips to her full lips before speaking, \"<i>Since you've caused so much trouble, I think perhaps we should have you... let's say pay for it in a very special way.</i>\"[pg]");
 	outputText("You glare at her questioningly as she chuckles once more, \"<i>Don't be silly, fucking the experiments is so beneath me. Not to mention dirty... I suppose some of my less-than-stellar colleagues aren't against such a concept.</i>\"[pg]");
@@ -193,7 +193,7 @@ private function hellhoundCaptureFuckEveryone():void {
 
 public function impTomeScene():void {
 	clearOutput();
-	outputText("You moan as you spontanously cum. Your impish body has absorbed so much energy from the many victims you violated that it’s ready to be expunged. [pg]");
+	outputText("You moan as you spontaneously cum. Your impish body has absorbed so much energy from the many victims you violated that it’s ready to be expunged. [pg]");
 	outputText("Thanks to the tome your tiny body feels almost bathed in unholy power but as a result of it your arousal has reached inhuman levels. An idea comes to you out of nowhere. Fuck… the book? You should just fuck the book! It would be so simple to give in to your deviant urges but who's to tell what might happen if you use the cursed tome to pleasure yourself?![pg]");
 	menu();
 	addButton(0, "Give In", impTomeGiveIn);

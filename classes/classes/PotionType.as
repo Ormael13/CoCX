@@ -32,6 +32,6 @@ public class PotionType {
     public static var CURE:PotionType = new PotionType("CURE", "Cure", "Negate status ailments.",[], SceneLib.combat.Cure);
     public static var PAINKILLER:PotionType = new PotionType("P.KILL", "Painkiller", "Greatly reduce damage taken.",[], SceneLib.combat.Painkiller);
     public static var STIMULANT:PotionType = new PotionType("STIM", "Stimulant", "Increase physical attack power.",[], SceneLib.combat.Stimulant);
-    public static var PERFUME:PotionType = new PotionType("PERFUME", "Perfume", "Empower teases through scent components.",[], SceneLib.combat.Perfume);*/
+    public static var PERFUME:PotionType = new PotionType("PERFUME", "Perfume", "Empower tease through scent components.",[], SceneLib.combat.Perfume);*/
 }
 }

@@ -14,9 +14,9 @@ package classes.Scenes.Camp
 		
 		public function tribulationThunderStrike():void {
 			var ThDa:Number = player.statusEffectv2(StatusEffects.HeavenTribulationCR);
-			outputText("A bolt of crimson lightning lances down towards you, burning the very air as it travels.");
-			if (hasStatusEffect(StatusEffects.Dig)) outputText("It strikes the ground above you, and you feel a slight tingle as the power disperses into the ground around you.");
-			else if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere) || player.hasStatusEffect(StatusEffects.ShadowTeleport)) outputText("But due to your current state it's unable to even touch you.");
+			outputText("A bolt of crimson lightning lances down toward you, burning the very air as it streaks through the sky.");
+			if (hasStatusEffect(StatusEffects.Dig)) outputText("It strikes the ground near you, and you feel a slight tingle as the power disperses into the earth around you.");
+			else if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere) || player.hasStatusEffect(StatusEffects.ShadowTeleport)) outputText("But due to your current state, it's unable to touch you.");
 			else {// || player.hasStatusEffect(StatusEffects.Displacement) || hasStatusEffect(StatusEffects.InvisibleOrStealth)
 				var THUNDER:Number = (750 * player.statusEffectv2(StatusEffects.HeavenTribulationCR));
 				var body_choice:Array = ["head", "arm", "[leg]", "[face]"];//, "[wings]", "[tail]"
@@ -62,7 +62,7 @@ package classes.Scenes.Camp
 			this.a = "the ";
 			this.short = "H class Heaven Tribulation";
 			this.imageName = "H class Heaven Tribulation";
-			this.long = "You're currently facing the H class Heaven Tribulation. A gathering of jet black clouds that sends down lightning to test any soul cultivator dreaming to break to Soul Sprite stage.";
+			this.long = "You're currently facing the H-class Heaven Tribulation: a gathering of jet-black clouds that sends down lightning to test any soul cultivator daring to break through to the Soul Sprite stage.";
 			this.plural = false;
 			initStrTouSpeInte(10, 150, 10, 10);
 			initWisLibSensCor(10, 10, 10, 0);
