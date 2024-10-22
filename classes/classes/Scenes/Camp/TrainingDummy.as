@@ -59,11 +59,11 @@ package classes.Scenes.Camp
 			}
 			if (isGroup) {
 				this.short = "training dummies";
-				this.long = "You're currently facing training dummies. Maybe they can't harm a fly (too much) but still could take a beating before they would fall apart....";
+				this.long = "You're currently facing training dummies. Maybe they can't harm a fly (too much), but they can still take quite a beating before falling apart...";
 			}
 			else {
 				this.short = "training dummy";
-				this.long = "You're currently facing training dummy. Can't harm a fly (too much) but still can take a beating before it would fall apart....";
+				this.long = "You're currently facing a training dummy. It can't harm a fly (too much), but it can still take a beating before it falls apart...";
 			}
 			this.a = "the ";
 			this.imageName = "trainingdummy";

@@ -2496,7 +2496,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			clearOutput();
 			outputText("You decide that you don't want to work yourself before getting a good night's sleep with your lover. You tell Zenji that you just want to feel his embrace for now and relax in his arms.\n\n");
 			outputText("Zenji gives you a toothy smile as he moves the covers over, sliding into bed as you join him. You press up against his toned frame, his powerful body encompassing you as he wraps his fuzzy arms over you, ardently pulling you close into the warmth of his fur.");
-			if (player.tailType != Tail.NONE) outputText(" You feel his tail coil around you, you reflexively bring your [tail] to tangle with his, the two of you locking tails with each other.");
+			if (player.tailType != Tail.NONE) outputText(" You feel his tail coil around you, you instinctively bring your [tail] to tangle with his, the two of you locking tails with each other.");
 			else outputText(" You can feel his tail fondly stroke your body with tender caresses.");
 			if (player.tailType == Tail.FOX) outputText(" You hate to admit it, but Zenji’s tail just might almost kind of rival yours in terms of how soft and cuddly it is.");
 			outputText("\n\nHis erection is pressed up against you, but he doesn't press the matter further, seemingly content on sniffing you from time to time. The world becomes hazy and your consciousness drifts as you fall asleep in Zenji's soft embrace.\n\n");

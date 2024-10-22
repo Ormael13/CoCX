@@ -13,9 +13,9 @@ package classes.Scenes.Camp
 		public function tribulationLustfullThunderStrike():void {
 			var ThDa:Number = player.statusEffectv2(StatusEffects.HeavenTribulationCR);
 			var ThLu:Number = player.statusEffectv3(StatusEffects.HeavenTribulationCR);
-			outputText("The clouds above you writhe, a brilliant pinkish and crimson light building...With a roar, red and pink bolts of lightning lance down towards you, burning the very air as it travels.");
-			if (hasStatusEffect(StatusEffects.Dig)) outputText("It strikes the ground above you, and you feel a slight tingle as the power disperses into the ground around you.");
-			else if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere) || player.hasStatusEffect(StatusEffects.ShadowTeleport)) outputText("But due to your current state it's unable to even touch you.");
+			outputText("The clouds above you writhe as brilliant pink and crimson light builds. With a roar, red and pink bolts of lightning lance down toward you, burning the very air as they travel.");
+			if (hasStatusEffect(StatusEffects.Dig)) outputText("It strikes the ground near you, and you feel a slight tingle as the power disperses into the earth around you.");
+			else if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere) || player.hasStatusEffect(StatusEffects.ShadowTeleport)) outputText("But due to your current state, it's unable to touch you.");
 			else {// || player.hasStatusEffect(StatusEffects.Displacement) || hasStatusEffect(StatusEffects.InvisibleOrStealth)
 				var THUNDER:Number = (750 * player.statusEffectv2(StatusEffects.HeavenTribulationCR));
 				var LUSTFULL:Number = (125 * player.statusEffectv3(StatusEffects.HeavenTribulationCR));
@@ -55,7 +55,7 @@ package classes.Scenes.Camp
 			this.a = "the ";
 			this.short = "G class Heaven Tribulation";
 			this.imageName = "G class Heaven Tribulation";
-			this.long = "You're currently facing the G class Heaven Tribulation: A gathering of jet black clouds that sends down a heavenly storm to test any soul cultivator dreaming to break to Soul Elder stage.";
+			this.long = "You're currently facing the G-class Heaven Tribulation: a gathering of jet-black clouds that unleashes a heavenly storm to test any soul cultivator daring to break through to the Soul Elder stage.";
 			this.plural = false;
 			initStrTouSpeInte(10, 300, 10, 10);
 			initWisLibSensCor(10, 10, 10, 0);

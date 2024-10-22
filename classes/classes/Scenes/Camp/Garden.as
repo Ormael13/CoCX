@@ -671,7 +671,7 @@ import classes.Scenes.SceneLib;
 		if (player.farmingLevel >= 50) outputText("\n-12-: "+(GardenSlot12 != "" ? ""+GardenSlot12+" (Time until harvest: "+GardenSlot12Time+" hours)":"empty")+"");
 		addButton(0, "Put Herb In", putInHerbIntoHerbBag0);
 		addButton(1, "Put Herb Out", putOutHerbFromHerbBag0);
-		addButton(3, "Seed", Seed).hint("Plant down some seeds sacrificing an ingredients.");
+		addButton(3, "Seed", Seed).hint("Plant down some seeds, sacrificing an ingredients.");
 		addButton(4, "Harvest", Harvest).hint("Check your harvests.")
 		addButton(14, "Back", camp.campActions);
 	}
@@ -679,38 +679,38 @@ import classes.Scenes.SceneLib;
 	private function putInHerbIntoHerbBag0():void {
 		menu();
 		if (player.hasItem(consumables.HEALHERB)) {
-			if (IngrediantBagSlot01 >= IngrediantBagSlot01Cap) addButtonDisabled(0, "Healing herb", "You not have space to put in another healing herb.");
+			if (IngrediantBagSlot01 >= IngrediantBagSlot01Cap) addButtonDisabled(0, "Healing herb", "You do not have enough space to put in another healing herb.");
 			else addButton(0, "Healing herb", putInHerbIntoHerbBag, CoC.instance.consumables.HEALHERB);
 		}
 		if (player.hasItem(consumables.MOONGRASS)) {
-			if (IngrediantBagSlot02 >= IngrediantBagSlot02Cap) addButtonDisabled(1, "Moon grass", "You not have space to put in another moon grass.");
+			if (IngrediantBagSlot02 >= IngrediantBagSlot02Cap) addButtonDisabled(1, "Moon grass", "You do not have enough space to put in another moon grass.");
 			else addButton(1, "Moon grass", putInHerbIntoHerbBag, CoC.instance.consumables.MOONGRASS);
 		}
 		if (player.hasItem(consumables.SNAKEBANE)) {
-			if (IngrediantBagSlot03 >= IngrediantBagSlot03Cap) addButtonDisabled(2, "Snakebane", "You not have space to put in another snakebane flower.");
+			if (IngrediantBagSlot03 >= IngrediantBagSlot03Cap) addButtonDisabled(2, "Snakebane", "You do not have enough space to put in another snakebane flower.");
 			else addButton(2, "Snakebane", putInHerbIntoHerbBag, CoC.instance.consumables.SNAKEBANE);
 		}
 		if (player.hasItem(consumables.IRONWEED)) {
-			if (IngrediantBagSlot04 >= IngrediantBagSlot04Cap) addButtonDisabled(3, "Ironweed", "You not have space to put in another ironweed.");
+			if (IngrediantBagSlot04 >= IngrediantBagSlot04Cap) addButtonDisabled(3, "Ironweed", "You do not have enough space to put in another ironweed.");
 			else addButton(3, "Ironweed", putInHerbIntoHerbBag, CoC.instance.consumables.IRONWEED);
 		}
 		if (player.hasItem(consumables.BLADEFERN)) {
-			if (IngrediantBagSlot05 >= IngrediantBagSlot05Cap) addButtonDisabled(4, "Blade fern", "You not have space to put in another blade fern.");
+			if (IngrediantBagSlot05 >= IngrediantBagSlot05Cap) addButtonDisabled(4, "Blade fern", "You do not have enough space to put in another blade fern.");
 			else addButton(4, "Blade fern", putInHerbIntoHerbBag, CoC.instance.consumables.BLADEFERN);
 		}
 		if (player.hasItem(consumables.RAUNENECT)) {
-			if (IngrediantBagSlot06 >= IngrediantBagSlot06Cap) addButtonDisabled(5, "Alraune nectar", "You not have space to put in another bottle of alraune nectar.");
+			if (IngrediantBagSlot06 >= IngrediantBagSlot06Cap) addButtonDisabled(5, "Alraune nectar", "You do not have enough space to put in another bottle of alraune nectar.");
 			else addButton(5, "Alraune nectar", putInHerbIntoHerbBag, CoC.instance.consumables.RAUNENECT);
 		}
 		if (player.hasItem(consumables.GINSENG) && IngrediantBagSlot07Cap > 0) {
-			if (IngrediantBagSlot07 >= IngrediantBagSlot07Cap) addButtonDisabled(6, "Ginseng", "You not have space to put in another ginseng.");
+			if (IngrediantBagSlot07 >= IngrediantBagSlot07Cap) addButtonDisabled(6, "Ginseng", "You do not have enough space to put in another ginseng.");
 			else addButton(6, "Ginseng", putInHerbIntoHerbBag, CoC.instance.consumables.GINSENG);
 		}
 		addButton(14, "Back", accessGarden);
 	}
 	private function putInHerbIntoHerbBag(ItemID:SimpleConsumable):void {
 		clearOutput();
-		outputText("In order to have some free space in your backpack you put one of the herbs into your bag.\n\n");
+		outputText("In order to have some free space in your backpack, you put one of the herbs into your bag.\n\n");
 		player.destroyItems(ItemID, 1);
 		if (ItemID == CoC.instance.consumables.HEALHERB) IngrediantBagSlot01++;
 		if (ItemID == CoC.instance.consumables.MOONGRASS) IngrediantBagSlot02++;
@@ -724,27 +724,27 @@ import classes.Scenes.SceneLib;
 	
 	private function putOutHerbFromHerbBag0():void {
 		menu();
-		if (IngrediantBagSlot01 > 0) addButton(0, "Healing herb", putOutHerbFromHerbBag, CoC.instance.consumables.HEALHERB).hint("Make sure to have free space in backapck to put it in or it would be lost.");
-		else addButtonDisabled(0, "Healing herb", "You not have any herb of this type in herb bag.");
-		if (IngrediantBagSlot02 > 0) addButton(1, "Moon grass", putOutHerbFromHerbBag, CoC.instance.consumables.MOONGRASS).hint("Make sure to have free space in backapck to put it in or it would be lost.");
-		else addButtonDisabled(1, "Moon grass", "You not have any herb of this type in herb bag.");
-		if (IngrediantBagSlot03 > 0) addButton(2, "Snakebane", putOutHerbFromHerbBag, CoC.instance.consumables.SNAKEBANE).hint("Make sure to have free space in backapck to put it in or it would be lost.");
-		else addButtonDisabled(2, "Snakebane", "You not have any herb of this type in herb bag.");
-		if (IngrediantBagSlot04 > 0) addButton(3, "Ironweed", putOutHerbFromHerbBag, CoC.instance.consumables.IRONWEED).hint("Make sure to have free space in backapck to put it in or it would be lost.");
-		else addButtonDisabled(3, "Ironweed", "You not have any herb of this type in herb bag.");
-		if (IngrediantBagSlot05 > 0) addButton(4, "Blade fern", putOutHerbFromHerbBag, CoC.instance.consumables.BLADEFERN).hint("Make sure to have free space in backapck to put it in or it would be lost.");
-		else addButtonDisabled(4, "Blade fern", "You not have any herb of this type in herb bag.");
-		if (IngrediantBagSlot06 > 0) addButton(5, "Alraune nectar", putOutHerbFromHerbBag, CoC.instance.consumables.RAUNENECT).hint("Make sure to have free space in backapck to put it in or it would be lost.");
-		else addButtonDisabled(5, "Alraune nectar", "You not have any herb of this type in herb bag.");
+		if (IngrediantBagSlot01 > 0) addButton(0, "Healing herb", putOutHerbFromHerbBag, CoC.instance.consumables.HEALHERB).hint("Make sure to have free space in your backpack to put it in, else it will be lost.");
+		else addButtonDisabled(0, "Healing herb", "You do not have any herbs of this type in your herb bag.");
+		if (IngrediantBagSlot02 > 0) addButton(1, "Moon grass", putOutHerbFromHerbBag, CoC.instance.consumables.MOONGRASS).hint("Make sure to have free space in your backpack to put it in, else it will be lost.");
+		else addButtonDisabled(1, "Moon grass", "You do not have any herbs of this type in your herb bag.");
+		if (IngrediantBagSlot03 > 0) addButton(2, "Snakebane", putOutHerbFromHerbBag, CoC.instance.consumables.SNAKEBANE).hint("Make sure to have free space in your backpack to put it in, else it will be lost.");
+		else addButtonDisabled(2, "Snakebane", "You do not have any herbs of this type in your herb bag.");
+		if (IngrediantBagSlot04 > 0) addButton(3, "Ironweed", putOutHerbFromHerbBag, CoC.instance.consumables.IRONWEED).hint("Make sure to have free space in your backpack to put it in, else it will be lost.");
+		else addButtonDisabled(3, "Ironweed", "You do not have any herbs of this type in your herb bag.");
+		if (IngrediantBagSlot05 > 0) addButton(4, "Blade fern", putOutHerbFromHerbBag, CoC.instance.consumables.BLADEFERN).hint("Make sure to have free space in your backpack to put it in, else it will be lost.");
+		else addButtonDisabled(4, "Blade fern", "You do not have any herbs of this type in your herb bag.");
+		if (IngrediantBagSlot06 > 0) addButton(5, "Alraune nectar", putOutHerbFromHerbBag, CoC.instance.consumables.RAUNENECT).hint("Make sure to have free space in your backpack to put it in, else it will be lost.");
+		else addButtonDisabled(5, "Alraune nectar", "You do not have any herbs of this type in your herb bag.");
 		if (IngrediantBagSlot07Cap > 0) {
-			if (IngrediantBagSlot07 > 0) addButton(6, "Ginseng", putOutHerbFromHerbBag, CoC.instance.consumables.GINSENG).hint("Make sure to have free space in backapck to put it in or it would be lost.");
-			else addButtonDisabled(6, "Ginseng", "You not have any herb of this type in herb bag.");
+			if (IngrediantBagSlot07 > 0) addButton(6, "Ginseng", putOutHerbFromHerbBag, CoC.instance.consumables.GINSENG).hint("Make sure to have free space in your backpack to put it in, else it will be lost.");
+			else addButtonDisabled(6, "Ginseng", "You do not have any herbs of this type in your herb bag.");
 		}
 		addButton(14, "Back", accessGarden);
 	}
 	private function putOutHerbFromHerbBag(ItemID:SimpleConsumable):void {
 		clearOutput();
-		outputText("In order to have some free space in your bag you put one of the herbs into your backpack.\n\n");
+		outputText("In order to have some free space in your bag, you put one of the herbs into your backpack.\n\n");
 		if (ItemID == CoC.instance.consumables.HEALHERB) IngrediantBagSlot01--;
 		if (ItemID == CoC.instance.consumables.MOONGRASS) IngrediantBagSlot02--;
 		if (ItemID == CoC.instance.consumables.SNAKEBANE) IngrediantBagSlot03--;
@@ -775,77 +775,77 @@ import classes.Scenes.SceneLib;
 		clearOutput();
 		menu();
 		outputText("What kind of herb would you like to grow?");
-		if (IngrediantBagSlot01 == 0) addButtonDisabled(0, "Healing herb", "You lack a plant sample in ingredient bag to get seeds from.");
+		if (IngrediantBagSlot01 == 0) addButtonDisabled(0, "Healing herb", "You lack a plant sample in your ingredient bag to obtain seeds from.");
 		else addButton(0, "Healing herb", Seed1, 1).hint("Plant new seeds.");
-		if (IngrediantBagSlot02 == 0) addButtonDisabled(1, "Moon grass", "You lack a plant sample in ingredient bag to get seeds from.");
+		if (IngrediantBagSlot02 == 0) addButtonDisabled(1, "Moon grass", "You lack a plant sample in your ingredient bag to obtain seeds from.");
 		else addButton(1, "Moon grass", Seed1, 2).hint("Plant new seeds.");
-		if (IngrediantBagSlot03 == 0) addButtonDisabled(2, "Snakebane", "You lack a plant sample in ingredient bag to get seeds from.");
+		if (IngrediantBagSlot03 == 0) addButtonDisabled(2, "Snakebane", "You lack a plant sample in your ingredient bag to obtain seeds from.");
 		else addButton(2, "Snakebane", Seed1, 3).hint("Plant new seeds.");
-		if (IngrediantBagSlot04 == 0) addButtonDisabled(3, "Ironweed", "You lack a plant sample in ingredient bag to get seeds from.");
+		if (IngrediantBagSlot04 == 0) addButtonDisabled(3, "Ironweed", "You lack a plant sample in your ingredient bag to obtain seeds from.");
 		else addButton(3, "Ironweed", Seed1, 4).hint("Plant new seeds.");
-		if (IngrediantBagSlot05 == 0) addButtonDisabled(4, "Blade fern", "You lack a plant sample in ingredient bag to get seeds from.");
+		if (IngrediantBagSlot05 == 0) addButtonDisabled(4, "Blade fern", "You lack a plant sample in your ingredient bag to obtain seeds from.");
 		else addButton(4, "Blade fern", Seed1, 5).hint("Plant new seeds.");
 		if (IngrediantBagSlot07Cap > 0) {
-			if (IngrediantBagSlot07 == 0) addButtonDisabled(5, "Ginseng", "You lack a plant sample in ingredient bag to get seeds from.");
+			if (IngrediantBagSlot07 == 0) addButtonDisabled(5, "Ginseng", "You lack a plant sample in your ingredient bag to obtain seeds from.");
 			else addButton(5, "Ginseng", Seed1, 6).hint("Plant new seeds.");
 		}
-		addButton(14, "Back", accessGarden).hint("Go back to garden menu.");
+		addButton(14, "Back", accessGarden).hint("Go back to the garden menu.");
 	}
 	private function Seed1(Item:Number):void {
 		hideMenus();
 		clearOutput();
 		menu();
 		outputText("Which plot would you like to use?");
-		if (GardenSlot01 != "") addButtonDisabled(0, "-01-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+		if (GardenSlot01 != "") addButtonDisabled(0, "-01-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 		else addButton(0, "-01-", curry(Seed2, Item, 1));
-		if (GardenSlot02 != "") addButtonDisabled(1, "-02-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+		if (GardenSlot02 != "") addButtonDisabled(1, "-02-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 		else addButton(1, "-02-", curry(Seed2, Item, 2));
 		if (player.farmingLevel >= 5) {
-			if (GardenSlot03 != "") addButtonDisabled(2, "-03-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot03 != "") addButtonDisabled(2, "-03-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(2, "-03-", curry(Seed2, Item, 3));
 		}
 		if (player.farmingLevel >= 10) {
-			if (GardenSlot04 != "") addButtonDisabled(3, "-04-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot04 != "") addButtonDisabled(3, "-04-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(3, "-04-", curry(Seed2, Item, 4));
 		}
 		if (player.farmingLevel >= 15) {
-			if (GardenSlot05 != "") addButtonDisabled(4, "-05-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot05 != "") addButtonDisabled(4, "-05-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(4, "-05-", curry(Seed2, Item, 5));
 		}
 		if (player.farmingLevel >= 20) {
-			if (GardenSlot06 != "") addButtonDisabled(5, "-06-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot06 != "") addButtonDisabled(5, "-06-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(5, "-06-", curry(Seed2, Item, 6));
 		}
 		if (player.farmingLevel >= 25) {
-			if (GardenSlot07 != "") addButtonDisabled(6, "-07-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot07 != "") addButtonDisabled(6, "-07-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(6, "-07-", curry(Seed2, Item, 7));
 		}
 		if (player.farmingLevel >= 30) {
-			if (GardenSlot08 != "") addButtonDisabled(7, "-08-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot08 != "") addButtonDisabled(7, "-08-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(7, "-08-", curry(Seed2, Item, 8));
 		}
 		if (player.farmingLevel >= 35) {
-			if (GardenSlot09 != "") addButtonDisabled(8, "-09-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot09 != "") addButtonDisabled(8, "-09-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(8, "-09-", curry(Seed2, Item, 9));
 		}
 		if (player.farmingLevel >= 40) {
-			if (GardenSlot10 != "") addButtonDisabled(9, "-10-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot10 != "") addButtonDisabled(9, "-10-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(9, "-10-", curry(Seed2, Item, 10));
 		}
 		if (player.farmingLevel >= 45) {
-			if (GardenSlot11 != "") addButtonDisabled(10, "-11-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot11 != "") addButtonDisabled(10, "-11-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(10, "-11-", curry(Seed2, Item, 11));
 		}
 		if (player.farmingLevel >= 50) {
-			if (GardenSlot12 != "") addButtonDisabled(11, "-12-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			if (GardenSlot12 != "") addButtonDisabled(11, "-12-", "This plot is already occupied. Wait until the crops are ready for harvest before planting anything here.");
 			else addButton(11, "-12-", curry(Seed2, Item, 12));
 		}
-		addButton(14, "Back", Seed).hint("Go back to plot choice menu.");
+		addButton(14, "Back", Seed).hint("Go back to the plot choice menu.");
 	}
 	private function Seed2(Item:Number, plot:Number):void {
 		hideMenus();
 		clearOutput();
-		outputText("Planting a new herb will consume one of your herb items, proceed anyway?");
+		outputText("Planting a new herb will consume one of your herbs, proceed anyway?");
 		doYesNo(curry(Seed3,Item,plot), Seed);
 	}
 	private function Seed3(Item:Number, plot:Number):void {
@@ -938,7 +938,7 @@ import classes.Scenes.SceneLib;
 			outputText("ginseng");
 			IngrediantBagSlot07 -= 1;
 		}
-		outputText("into the fertile soil. It should grow back into several or more plants within a few days. Sometime you ponder if you shouldve just became a farmer back home you definitively have a knack for this.");
+		outputText("into the fertile soil. It should grow back into several plants within a few days. Sometimes, you ponder if you should have just become a farmer back home; you definitely have a knack for this.");
 		var FE:Number = 20 + player.level;
 		FE *= player.FarmingMulti();
 		player.farmXP(FE);
@@ -1048,7 +1048,7 @@ import classes.Scenes.SceneLib;
 		}
 		switch (plot) {
 			case 0:
-				outputText("<b>You can't store all seeds in bag. Harvest this plot when you have enough space for storing this herb.</b>");
+				outputText("<b>You can't store all the seeds in your bag. Harvest this plot when you have enough space to store this herb.</b>");
 				break;
 			case 1:
 				GardenSlot01 = "";
@@ -1103,7 +1103,7 @@ import classes.Scenes.SceneLib;
 		hideMenus();
 		clearOutput();
 		menu();
-		outputText("You move to Rathazul’s side alchemy equipment. Using these tools you can process raw natural materials into poultices and medicines.\n\nWhat would you like to craft?\n\n");
+		outputText("You move to Rathazul’s alchemy equipment. Using these tools, you can process raw natural materials into poultices and medicines.\n\nWhat would you like to craft?\n\n");
 		outputText("<b><u>Available potions:</u></b>\n");
 		if (PotionsBagSlot01Cap > 0) outputText("Slot 1 - "+(PotionsBagSlot01Potion == "" ? "EMPTY":""+PotionsBagSlot01Potion+" "+PotionsBagSlot01+" / "+PotionsBagSlot01Cap+"")+"\n");
 		if (PotionsBagSlot02Cap > 0) outputText("Slot 2 - "+(PotionsBagSlot02Potion == "" ? "EMPTY":""+PotionsBagSlot02Potion+" "+PotionsBagSlot02+" / "+PotionsBagSlot02Cap+"")+"\n");
@@ -1117,27 +1117,27 @@ import classes.Scenes.SceneLib;
 		//if (PotionsBagSlot10Cap > 0) outputText("Slot 10 - "+(PotionsBagSlot10Potion == "" ? "EMPTY":""+PotionsBagSlot10Potion+" "+PotionsBagSlot10+" / "+PotionsBagSlot10Cap+"")+"\n");
 		//Poultice
 		addButton(0, "Poultice", HerbalismCraftItem, 1, "healing herb", "Poultice").hint("Craft a Poultice using healing herb.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"")
-			.disableIf(IngrediantBagSlot01 == 0, "You lack the ingrediants to craft this item.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"");
+			.disableIf(IngrediantBagSlot01 == 0, "You lack the ingredients to craft this item.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"");
 		//Energy drink
 		addButton(1, "Energy drink", HerbalismCraftItem, 2, "moon grass", "Energy drink").hint("Craft a Energy drink using moon grass.\n\nMoon grass currently in Ingredient Bag "+IngrediantBagSlot02+"");
 		if (player.herbalismLevel < 2) button(1).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 2");
-		if (IngrediantBagSlot02 == 0) button(1).disable("You lack the ingrediants to craft this item. \n\nMoon grass currently in Ingredient Bag "+IngrediantBagSlot02+"");
+		if (IngrediantBagSlot02 == 0) button(1).disable("You lack the ingredients to craft this item. \n\nMoon grass currently in Ingredient Bag "+IngrediantBagSlot02+"");
 		//Cure
 		addButton(2, "Cure", HerbalismCraftItem, 3, "snakebane flower", "Cure").hint("Craft a Cure using snakebane flower.\n\nSnakebane flower currently in Ingredient Bag "+IngrediantBagSlot03+"");
 		if (player.herbalismLevel < 4) button(2).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 4");
-		if (IngrediantBagSlot03 == 0) button(2).disable("You lack the ingrediants to craft this item. \n\nSnakebane flower currently in Ingredient Bag "+IngrediantBagSlot03+"");
+		if (IngrediantBagSlot03 == 0) button(2).disable("You lack the ingredients to craft this item. \n\nSnakebane flower currently in Ingredient Bag "+IngrediantBagSlot03+"");
 		//Painkiller
 		addButton(3, "Painkiller", HerbalismCraftItem, 4, "ironweed", "Painkiller").hint("Craft a Painkiller using ironweed.\n\nIronweed currently in Ingredient Bag "+IngrediantBagSlot04+"");
 		if (player.herbalismLevel < 6) button(3).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 6");
-		if (IngrediantBagSlot04 == 0) button(3).disable("You lack the ingrediants to craft this item. \n\nIronweed currently in Ingredient Bag "+IngrediantBagSlot04+"");
+		if (IngrediantBagSlot04 == 0) button(3).disable("You lack the ingredients to craft this item. \n\nIronweed currently in Ingredient Bag "+IngrediantBagSlot04+"");
 		//Stimulant
 		addButton(4, "Stimulant", HerbalismCraftItem, 5, "blade ferns", "Stimulant").hint("Craft a Stimulant using a handfull of blade ferns.\n\nBlade ferns currently in Ingredient Bag "+IngrediantBagSlot05+"");
 		if (player.herbalismLevel < 8) button(4).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 8");
-		if (IngrediantBagSlot05 == 0) button(4).disable("You lack the ingrediants to craft this item. \n\nBlade ferns currently in Ingredient Bag "+IngrediantBagSlot05+"");
+		if (IngrediantBagSlot05 == 0) button(4).disable("You lack the ingredients to craft this item. \n\nBlade ferns currently in Ingredient Bag "+IngrediantBagSlot05+"");
 		//Perfume
 		addButton(5, "Perfume", HerbalismCraftItem, 6, "alraune nectar", "Perfume").hint("Craft a Perfume using Alraune nectar.\n\nAlraune nectar currently in Ingredient Bag "+IngrediantBagSlot06+"");
 		if (player.herbalismLevel < 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
-		if (IngrediantBagSlot06 == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently in Ingredient Bag "+IngrediantBagSlot06+"");
+		if (IngrediantBagSlot06 == 0) button(5).disable("You lack the ingredients to craft this item. \n\nAlraune nectar currently in Ingredient Bag "+IngrediantBagSlot06+"");
 		addButton(14, "Back", camp.campActions);
 	}
 	private function HerbalismCraftItem(Item:Number, IngrediantName:String, CraftingResult:String):void {
@@ -1150,26 +1150,26 @@ import classes.Scenes.SceneLib;
 	}
 	private function HerbalismCraftItem2(Item:Number, IngrediantName:String, CraftingResult:String):void {
 		clearOutput();
-		outputText("In which slot you want to store crafted potion?");
+		outputText("In which slot do you want to store the crafted potion?");
 		menu();
-		addButton(0, "-01-", HerbalismCraftItem2a, Item, 1, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf((PotionsBagSlot01Potion != CraftingResult && PotionsBagSlot01Potion != ""), "You already keep different type of the potion in this slot.")
-			.disableIf((PotionsBagSlot01 + 1 > PotionsBagSlot01Cap), "You not have left any space to store crafted potion in this potions bag slot.");
-		addButton(1, "-02-", HerbalismCraftItem2a, Item, 2, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf((PotionsBagSlot02Potion != CraftingResult && PotionsBagSlot02Potion != ""), "You already keep different type of the potion in this slot.")
-			.disableIf((PotionsBagSlot02 + 1 > PotionsBagSlot02Cap), "You not have left any space to store crafted potion in this potions bag slot.");
-		addButton(2, "-03-", HerbalismCraftItem2a, Item, 3, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf((PotionsBagSlot03Potion != CraftingResult && PotionsBagSlot03Potion != ""), "You already keep different type of the potion in this slot.")
-			.disableIf((PotionsBagSlot03 + 1 > PotionsBagSlot03Cap), "You not have left any space to store crafted potion in this potions bag slot.");
-		addButton(3, "-04-", HerbalismCraftItem2a, Item, 4, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf((PotionsBagSlot04Potion != CraftingResult && PotionsBagSlot04Potion != ""), "You already keep different type of the potion in this slot.")
-			.disableIf((PotionsBagSlot04 + 1 > PotionsBagSlot04Cap), "You not have left any space to store crafted potion in this potions bag slot.");
-		addButton(4, "-05-", HerbalismCraftItem2a, Item, 5, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf((PotionsBagSlot05Potion != CraftingResult && PotionsBagSlot05Potion != ""), "You already keep different type of the potion in this slot.")
-			.disableIf((PotionsBagSlot05 + 1 > PotionsBagSlot05Cap), "You not have left any space to store crafted potion in this potions bag slot.");
-		addButton(5, "-06-", HerbalismCraftItem2a, Item, 6, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf((PotionsBagSlot06Potion != CraftingResult && PotionsBagSlot06Potion != ""), "You already keep different type of the potion in this slot.")
-			.disableIf((PotionsBagSlot06 + 1 > PotionsBagSlot06Cap), "You not have left any space to store crafted potion in this potions bag slot.");
+		addButton(0, "-01-", HerbalismCraftItem2a, Item, 1, CraftingResult).hint("Put crafted potion in the first slot of potion bag.")
+			.disableIf((PotionsBagSlot01Potion != CraftingResult && PotionsBagSlot01Potion != ""), "You already keep a different type of the potion in this slot.")
+			.disableIf((PotionsBagSlot01 + 1 > PotionsBagSlot01Cap), "You do not have any space left to store the crafted potion in this potion bag slot.");
+		addButton(1, "-02-", HerbalismCraftItem2a, Item, 2, CraftingResult).hint("Put crafted potion in the first slot of potion bag.")
+			.disableIf((PotionsBagSlot02Potion != CraftingResult && PotionsBagSlot02Potion != ""), "You already keep a different type of the potion in this slot.")
+			.disableIf((PotionsBagSlot02 + 1 > PotionsBagSlot02Cap), "You do not have any space left to store the crafted potion in this potion bag slot.");
+		addButton(2, "-03-", HerbalismCraftItem2a, Item, 3, CraftingResult).hint("Put crafted potion in the first slot of potion bag.")
+			.disableIf((PotionsBagSlot03Potion != CraftingResult && PotionsBagSlot03Potion != ""), "You already keep a different type of the potion in this slot.")
+			.disableIf((PotionsBagSlot03 + 1 > PotionsBagSlot03Cap), "You do not have any space left to store the crafted potion in this potion bag slot.");
+		addButton(3, "-04-", HerbalismCraftItem2a, Item, 4, CraftingResult).hint("Put crafted potion in the first slot of potion bag.")
+			.disableIf((PotionsBagSlot04Potion != CraftingResult && PotionsBagSlot04Potion != ""), "You already keep a different type of the potion in this slot.")
+			.disableIf((PotionsBagSlot04 + 1 > PotionsBagSlot04Cap), "You do not have any space left to store the crafted potion in this potion bag slot.");
+		addButton(4, "-05-", HerbalismCraftItem2a, Item, 5, CraftingResult).hint("Put crafted potion in the first slot of potion bag.")
+			.disableIf((PotionsBagSlot05Potion != CraftingResult && PotionsBagSlot05Potion != ""), "You already keep a different type of the potion in this slot.")
+			.disableIf((PotionsBagSlot05 + 1 > PotionsBagSlot05Cap), "You do not have any space left to store the crafted potion in this potion bag slot.");
+		addButton(5, "-06-", HerbalismCraftItem2a, Item, 6, CraftingResult).hint("Put crafted potion in the first slot of potion bag.")
+			.disableIf((PotionsBagSlot06Potion != CraftingResult && PotionsBagSlot06Potion != ""), "You already keep a different type of the potion in this slot.")
+			.disableIf((PotionsBagSlot06 + 1 > PotionsBagSlot06Cap), "You do not have any space left to store the crafted potion in this potion bag slot.");
 		addButton(14, "Back", herbalismMenu);
 	}
 	private function HerbalismCraftItem2a(Item:Number, Item2:Number, CraftingResult:String):void {
@@ -1217,7 +1217,7 @@ import classes.Scenes.SceneLib;
 	}
 	private function HerbalismCraftItem3(Item:Number, IngrediantName:String, CraftingResult:String):void {
 		clearOutput();
-		outputText("In which slot you want to store crafted potion?");
+		outputText("In which slot do you want to store the crafted potion?");
 		var amount:Number = 0;
 		switch (IngrediantName) {
 			case "healing herb":
@@ -1244,27 +1244,27 @@ import classes.Scenes.SceneLib;
 		}
 		menu();
 		if (amount >= 5) {
-			addButton(0, "-01-", HerbalismCraftItem3a, Item, 1, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
+			addButton(0, "-01-", HerbalismCraftItem3a, Item, 1, CraftingResult).hint("Put crafted potions in first slot of potion bag.")
 				.disableIf((PotionsBagSlot01Potion != CraftingResult && PotionsBagSlot01Potion != ""), "You already keep different type of the potions in this slot.")
-				.disableIf((PotionsBagSlot01 + 5 > PotionsBagSlot01Cap), "You not have left any space to store crafted potions in this potions bag slot.");
-			addButton(1, "-02-", HerbalismCraftItem3a, Item, 2, CraftingResult).hint("Put crafted potions in second slot of potions bag.")
+				.disableIf((PotionsBagSlot01 + 5 > PotionsBagSlot01Cap), "You not have left any space to store crafted potions in this potion bag slot.");
+			addButton(1, "-02-", HerbalismCraftItem3a, Item, 2, CraftingResult).hint("Put crafted potions in second slot of potion bag.")
 				.disableIf((PotionsBagSlot02Potion != CraftingResult && PotionsBagSlot02Potion != ""), "You already keep different type of the potions in this slot.")
-				.disableIf((PotionsBagSlot02 + 5 > PotionsBagSlot02Cap), "You not have left any space to store crafted potions in this potions bag slot.");
-			addButton(2, "-03-", HerbalismCraftItem3a, Item, 3, CraftingResult).hint("Put crafted potions in third slot of potions bag.")
+				.disableIf((PotionsBagSlot02 + 5 > PotionsBagSlot02Cap), "You not have left any space to store crafted potions in this potion bag slot.");
+			addButton(2, "-03-", HerbalismCraftItem3a, Item, 3, CraftingResult).hint("Put crafted potions in third slot of potion bag.")
 				.disableIf((PotionsBagSlot03Potion != CraftingResult && PotionsBagSlot03Potion != ""), "You already keep different type of the potions in this slot.")
-				.disableIf((PotionsBagSlot03 + 5 > PotionsBagSlot03Cap), "You not have left any space to store crafted potions in this potions bag slot.");
-			addButton(3, "-04-", HerbalismCraftItem3a, Item, 4, CraftingResult).hint("Put crafted potions in fourth slot of potions bag.")
+				.disableIf((PotionsBagSlot03 + 5 > PotionsBagSlot03Cap), "You not have left any space to store crafted potions in this potion bag slot.");
+			addButton(3, "-04-", HerbalismCraftItem3a, Item, 4, CraftingResult).hint("Put crafted potions in fourth slot of potion bag.")
 				.disableIf((PotionsBagSlot04Potion != CraftingResult && PotionsBagSlot04Potion != ""), "You already keep different type of the potions in this slot.")
-				.disableIf((PotionsBagSlot04 + 5 > PotionsBagSlot04Cap), "You not have left any space to store crafted potions in this potions bag slot.");
-			addButton(4, "-05-", HerbalismCraftItem3a, Item, 5, CraftingResult).hint("Put crafted potions in fifth slot of potions bag.")
+				.disableIf((PotionsBagSlot04 + 5 > PotionsBagSlot04Cap), "You not have left any space to store crafted potions in this potion bag slot.");
+			addButton(4, "-05-", HerbalismCraftItem3a, Item, 5, CraftingResult).hint("Put crafted potions in fifth slot of potion bag.")
 				.disableIf((PotionsBagSlot05Potion != CraftingResult && PotionsBagSlot05Potion != ""), "You already keep different type of the potions in this slot.")
-				.disableIf((PotionsBagSlot05 + 5 > PotionsBagSlot05Cap), "You not have left any space to store crafted potions in this potions bag slot.");
-			addButton(5, "-06-", HerbalismCraftItem3a, Item, 6, CraftingResult).hint("Put crafted potions in sixth slot of potions bag.")
+				.disableIf((PotionsBagSlot05 + 5 > PotionsBagSlot05Cap), "You not have left any space to store crafted potions in this potion bag slot.");
+			addButton(5, "-06-", HerbalismCraftItem3a, Item, 6, CraftingResult).hint("Put crafted potions in sixth slot of potion bag.")
 				.disableIf((PotionsBagSlot06Potion != CraftingResult && PotionsBagSlot06Potion != ""), "You already keep different type of the potions in this slot.")
-				.disableIf((PotionsBagSlot06 + 5 > PotionsBagSlot06Cap), "You not have left any space to store crafted potions in this potions bag slot.");
+				.disableIf((PotionsBagSlot06 + 5 > PotionsBagSlot06Cap), "You not have left any space to store crafted potions in this potion bag slot.");
 		}
 		else {
-			outputText("\n\n<b>You not have enough ingrediants to make this potions!!!</b>");
+			outputText("\n\n<b>You do not have enough ingredients to make this potion!</b>");
 		}
 		addButton(14, "Back", herbalismMenu);
 	}
@@ -1303,7 +1303,7 @@ import classes.Scenes.SceneLib;
 		clearOutput();
 		outputText("You spend the better part of the next hour refining the "+Ingredient+" into multiple "+CraftingResult+" adding them to your bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
-			outputText("Your natural knowledge of herbalism allowed you to craft thrice as many "+CraftingResult+".");
+			outputText("Your natural knowledge of herbalism allowed you to craft three times as many "+CraftingResult+".");
 			count *= 3;
 		}
 		var HE:Number = (20 + player.level)*5;
@@ -1383,7 +1383,7 @@ import classes.Scenes.SceneLib;
 				IngrediantBagSlot06Cap = 5;
 			}
 			if (PotionsBagSlot01Cap == 3 && player.gems >= 150) {
-				outputText("Potions Bag Expansion COMPLETED!!!");
+				outputText("Potion Bag Expansion COMPLETED!!!");
 				player.gems -= 150;
 				PotionsBagSlot01Cap = 5;
 				PotionsBagSlot02Cap = 5;
@@ -1414,7 +1414,7 @@ import classes.Scenes.SceneLib;
 		outputText("\nCure - Negate status ailments");
 		outputText("\nPainkiller - Greatly reduce damage taken");
 		outputText("\nStimulant - Increase physical attack power");
-		outputText("\nPerfume - Empower teases through scent components");
+		outputText("\nPerfume - Empower tease through scent components");
 		outputText("\n\nWhich item will you use?");
 		menu();
 		if (PotionsBagSlot01 > 0) addButton(0, ""+PotionsBagSlot01Potion+"", PotionMenuUse, PotionsBagSlot01Potion, 1);
