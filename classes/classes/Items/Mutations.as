@@ -11877,7 +11877,7 @@ public final class Mutations extends MutationsHelper {
         //**********************
         var gotBasic:Boolean = false;
         //[increase Intelligence, Libido and Sensitivity]
-        gotBasic |= mutationStep(!gotBasic, mystic ? 8 : 4, function ():void {
+        gotBasic ||= mutationStep(!gotBasic, mystic ? 8 : 4, function ():void {
             outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
             //Raise INT, WIS, Lib, Sens. and +10 LUST
             dynStats("sen", 1, "lus", 10);
@@ -11886,7 +11886,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 1);
         });
         //[decrease Strength toward 15]
-        gotBasic |= mutationStep(!gotBasic && player.str > 15, mystic ? 8 : 4, function ():void {
+        gotBasic ||= mutationStep(!gotBasic && player.str > 15, mystic ? 8 : 4, function ():void {
             outputText("[pg]You can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
             player.addCurse("str", 1, 1);
             if (player.str > 70) player.addCurse("str", 1, 1);
@@ -11894,7 +11894,7 @@ public final class Mutations extends MutationsHelper {
             if (player.str > 30) player.addCurse("str", 1, 1);
         });
         //[decrease Toughness toward 20]
-        gotBasic |= mutationStep(!gotBasic && player.tou > 20, mystic ? 8 : 4, function ():void {
+        gotBasic ||= mutationStep(!gotBasic && player.tou > 20, mystic ? 8 : 4, function ():void {
             //from 66 or less toughness
             if (player.tou <= 66) outputText("[pg]You feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your " + player.skinFurScales() + " won't offer you much protection.");
             //from 66 or greater toughness
@@ -11902,7 +11902,7 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("tou", 1, 1);
             if (player.tou > 66) player.addCurse("tou", 1, 1);
         });
-        gotBasic |= mutationStep(!gotBasic && mystic && player.cor < 100, 2, function ():void {
+        gotBasic ||= mutationStep(!gotBasic && mystic && player.cor < 100, 2, function ():void {
             if (player.cor < 33) outputText("[pg]A sense of dirtiness comes over you, like the magic of this gem is doing some perverse impropriety to you.");
             else if (player.cor < 66) outputText("[pg]A tingling wave of sensation rolls through you, but you have no idea what exactly just changed.  It must not have been that important.");
             else outputText("[pg]Thoughts of mischief roll across your consciousness, unbounded by your conscience or any concern for others.  You should really have some fun - who cares who it hurts, right?");
