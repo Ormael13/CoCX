@@ -23,10 +23,7 @@ import classes.Items.Alchemy.AlchemyLib;
 	 */
 	protected function mutationStart(name:String, maxChanges:int):int {
 		changes     = 0;
-		changeLimit = 1;
-		for (var i:int = 2; i <= maxChanges; i++) {
-			if (rand(i) == 0) changeLimit++;
-		}
+		changeLimit = 1 + rand(maxChanges);
 		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
 		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
 		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
