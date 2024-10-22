@@ -1221,7 +1221,7 @@ public class TailTransformations extends MutationsHelper {
 					TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
 
 					if (player.tailType !== Tail.FOX) {
-						transformations.TailNone.applyEffect();
+						TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
 						desc += "You feel a strange sensation on your backside. When you touch the area, you discover a strange nodule growing there that seems to be getting larger by the second. With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it had a mind of its own. <b>You now have a fox's tail!</b>";
 
@@ -1334,8 +1334,7 @@ public class TailTransformations extends MutationsHelper {
 					TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
 
 					if (player.tailType !== Tail.KITSHOO) {
-						transformations.TailNone.applyEffect();
-
+						TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 						desc += "You feel a strange sensation on your backside. When you touch the area, you discover a strange nodule growing there that seems to be getting larger by the second. With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, sending hot embers around. <b>You now have a cinder fox's tail!</b>";
 
 						player.tailVenom = 0;
