@@ -842,7 +842,7 @@ public class CeraphScene extends NPCAwareContent
 		 MOAR CERAPH.
 		 Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch them and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick, demonic shaft sprouting from where a clit should be.
 
-		 1. Remove fetish if PC trades her bimbo liquer.
+		 1. Remove fetish if PC trades her bimbo liqueur.
 		 2. Will remove your fetishes if she can take your genitals!
 
 		 (Chance of encountering 'Friendly' Ceraph even when PC is awaiting trapped armor.
@@ -954,7 +954,7 @@ public class CeraphScene extends NPCAwareContent
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_ceraph);
-			outputText("Ceraph grins as wide as the Cheshire Cat, groaning with happiness as she pulls her dripping tail from her snatch.  The pungent scent of her lusty, tainted puss hangs in the air while her tail extends towards you, looping around the liquer's top and pulling it from your pouch.  Ceraph plucks the bottle from her lust-drenched tail with great care and undoes the top.  She gives the liquer a tiny sniff, but it rocks her back on her heels all the same.  The demon starts giggling as she corks it, smiling with a slightly dopy look.  \"<i>Wheeeeeewww... heheheheee.. that stuff has got some kick!</i>\"\n\n");
+			outputText("Ceraph grins as wide as the Cheshire Cat, groaning with happiness as she pulls her dripping tail from her snatch.  The pungent scent of her lusty, tainted puss hangs in the air while her tail extends towards you, looping around the liqueur's top and pulling it from your pouch.  Ceraph plucks the bottle from her lust-drenched tail with great care and undoes the top.  She gives the liqueur a tiny sniff, but it rocks her back on her heels all the same.  The demon starts giggling as she corks it, smiling with a slightly dopy look.  \"<i>Wheeeeeewww... heheheheee.. that stuff has got some kick!</i>\"\n\n");
 
 			outputText("You mention the deal and she glares back at you in irritation.  Her beautiful features curl with anger, a hand coming out of nowhere to slap you squarely on the side of the temple.  \"<i>Don't interrupt me, pet.</i>\"  Ears ringing, you stagger back, clutching at your head in surprise.  By the time you glare back at her, she's walking away.  You briefly consider giving her payback, but you realize your head feels clearer, more normal.  The artificial fetishes are gone!  While you catalogue lewd acts in your head and marvel at how little they affect you, Ceraph makes good on her escape.");
 			player.consumeItem(consumables.BIMBOLQ);

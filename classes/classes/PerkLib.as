@@ -445,8 +445,8 @@ public class PerkLib
 				"You've chosen the 'Door Knob' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const EnchancedWarriorsRage:PerkType = mk("Enchanced Warrior's Rage", "Enhanced Warrior's Rage",
-				"Warrior's Rage will be automatically recast when it ends as long as the PC has enough wrath. Its effects are also increased. (+1 per 5 pts of core stat value)",
-				"You've chosen the 'Enhanced Warrior's Rage' perk. Warrior's Rage will be automatically recast when it ends as long as the PC has enough wrath. Its effects are also increased.");
+				"Warrior's Rage automatically recasts when it ends, as long as you have enough wrath. While active, instead of 10%, it now grants a 20% boost to your core Strength, Toughness, and Speed.",
+				"You've chosen the 'Enhanced Warrior's Rage' perk. Warrior's Rage automatically recasts when it ends, as long as you have enough wrath. While active, instead of 10%, it now grants a 20% boost to your core Strength, Toughness, and Speed.");
 		public static const Fellowship:PerkType = mk("Fellowship", "Fellowship",
 				". (+10% minions/pets damage)",
 				"You've chosen the 'Fellowship' perk. (+10% minions/pets damage)");
@@ -1035,7 +1035,7 @@ public class PerkLib
 				"You've chosen the 'Brothel Owner' perk, gaining +15% tease dmg.");
 		public static const BrutalBlows:PerkType = mk("Brutal Blows", "Brutal Blows",
 				"[if(player.str>=75)" +
-						"Reduces enemy armor with each hit. (+5% melee physical attacks multiplier)" +
+						"Reduces enemy armor with each hit. Each strike strips 10% + 5 of the enemy's current armor. (+5% melee physical attacks multiplier)" +
 						"|" +
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
 						"]",
@@ -1895,11 +1895,11 @@ public class PerkLib
 				.withBuffs({'maxlust_base':+80});
 		public static const GreyMage:PerkType = mk("Grey Mage", "Grey Mage",
 				"[if (player.inte>=125)" +
-						"Increases grey spell strength by 20%, mana pool by 300, lust bar by 40, regain it 50% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
+						"Increases grey spell strength by 20%, mana pool by 300, lust bar by 40, regain it 50% faster, threshold for Black Magic is 30 lust and for White 30 lust below current max." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grey Mage' perk. Your grey spell power, mana pool, lust bar and mana recovery are greatly increased, treshold for White Magic raised and for Black lowered.")
+				"You've chosen the 'Grey Mage' perk. Your grey spell power, mana pool, lust bar and mana recovery are greatly increased, threshold for White Magic raised and for Black lowered.")
 				.withBuffs({'maxlust_base':+40});
 		public static const GreyMageApprentice:PerkType = mk("Grey Mage Apprentice", "Grey Mage Apprentice",
 				"[if (player.inte>=75)" +
@@ -2973,7 +2973,7 @@ public class PerkLib
 				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +2% alchemy/mutagen boost.",
 				"You've chosen the 'Saturation' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const SecondRing:PerkType = mk("Second Ring", "Second Ring",
-				"Your basic understanding of magic pools allows you to equip second ring.",
+				"Your basic understanding of magic pools allows you to equip a second ring.",
 				"You've chosen the 'Second Ring' perk, reaching a basic understanding of magic pools to allow you equip second ring.");
 		public static const SecondWind:PerkType = mk("Second Wind", "Second Wind",
 				"Using half remaining fatigue increase by 5% regeneration in combat for 10 turns.",
@@ -3489,7 +3489,7 @@ public class PerkLib
 				"You've chosen the 'War Mage ( Master )' perk, increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.")
 				.withBuffs({'maxwrath_base':+250});
 		public static const WayOfTheWarrior:PerkType = mk("Way of the Warrior", "Way of the Warrior",
-				"Enable autocast of Warrior's rage and boost it based on the PC's current stats. (+1 per 10 pts of core stat value)",
+				"Enable autocast of Warrior's rage and boost it based on the PC's current stats. (+10% core strength while active)",
 				"You've chosen the 'Way of the Warrior' perk, allowing you to enable autocast of Warrior's rage and boost it based on the PC's current stats.");
 		public static const Weap0n:PerkType = mk("Weapon", "Weapon",
 				"Now that you've forged your first weapon, you have a better handling on how they work, allowing you to forge even better armor. Once again, your proficiency in armors increase! (+5% phys/mag resistance)",
@@ -3961,7 +3961,7 @@ public class PerkLib
 				"Gives the body of a bimbo.  Tits will never stay below a 'DD' cup, libido is raised, lust resistance is raised, and upgrades tease.")
 				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60,'minlustx':0.2});
 		public static const BimboBrains:PerkType = mk("Bimbo Brains", "Bimbo Brains",
-				"Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!").withBuffs({'int.mult':-0.50});
+				"Now that you've drank bimbo liqueur, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!").withBuffs({'int.mult':-0.50});
 		public static const BloodAffinity:PerkType = mk("Blood Affinity", "Blood Affinity",
 				"Increase all damage dealt with blood spells/soulskills or amount of damage blood shield can absorb by 100%.");
 		public static const BouncyBody:PerkType = mk("Bouncy body", "Bouncy body",
@@ -4701,7 +4701,7 @@ public class PerkLib
 		public static const HiddenJobAsura:PerkType = mk("Hidden Job: Asura", "Job ( Hidden ): Asura",
 				"You've trained in Way of Asura. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath)");
 		public static const AbsoluteStrength:PerkType = mk("Absolute Strength", "Absolute Strength",
-				"Increase strength based on current amount of wrath as long wrath is above 50% (1:2 ratio). Also wrath outside of combat will not decay and even with correct perks can slowly raise. (+10% of OverMax Wrath)");
+				"Increase strength based on current amount of wrath as long wrath is above 50% (1:2 ratio). Also wrath outside of combat will not decay, and with correct perks, can even slowly rise. (+10% of OverMax Wrath)");
 		public static const AsuraStrength:PerkType = mk("Asura Strength", "Asura Strength",
 				"Gain Asura Strength. Asura Form increase to physical might raise to 120%/60%/40% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath/Base STR Cap, +0,5% Wrath generated)");
 		public static const ICastAsuraFist:PerkType = mk("I Cast (Asura) Fist", "I Cast (Asura) Fist",
@@ -4710,7 +4710,7 @@ public class PerkLib
 		public static const LikeAnAsuraBoss:PerkType = mk("Like A-sura Boss", "Like A-sura Boss",
 				"Adds to toggle starting in Asura Form at combat start, increase to physical might raise to 180%/90%/60% of core str/tou/spe and generate two additional pairs of semi-transparent arms. (+10% of OverMax Wrath)");
 		public static const AsuraToughness:PerkType = mk("Asura Toughness", "Asura Toughness",
-				"Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additional cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)");
+				"Gain Asura Toughness. If you can use Warrior's Rage, it will have an increased boost and will even activate along with Asura Form for no additional cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)");
 		public static const ItsZerkingTime:PerkType = mk("It's Zerking Time!!!", "It's Zerking Time!!!",
 				"If you can use Berzerker or Lustzerker they would be activated with Asura Form for no additional cost (with Prestige Job: Berserker will be activated G2). Asura Form increase to physical might raise to 240%/120%/80% of core str/tou/spe and generate five pairs of semi-transparent arms. (+10% of OverMax Wrath)");
 		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Job ( Hidden ): Blood Demon",

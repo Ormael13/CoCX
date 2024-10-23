@@ -20,10 +20,10 @@ public class HumanVersatilityMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Mastery gains increased by 1 point or in case of multiplier +1 to multiplier";
+                descS += "Mastery gains increased by 1 point, or in the case of multiplier +1 to multiplier. ";
             }
             if (pTier >= 2){
-                descS += "Mastery gains increased by "+pTier+" points or in case of multiplier +"+pTier+" to multiplier";
+                descS += "Mastery gains increased by "+pTier+" points or in case of multiplier +"+pTier+" to multiplier. ";
             }
             if (pTier == 2){
                 descS += ". Decrease a bit needed exp to lvl up weapon/lifeskill masteries";

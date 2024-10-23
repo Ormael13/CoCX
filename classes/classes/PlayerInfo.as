@@ -664,8 +664,8 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier() * 0.1) + " / 5 minutes\n";
 		combatStats += "\n";
 		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
-		combatStats += "<b>Maximum Safe Wrath I (treshold after which spells are unaccesable):</b> " + player.maxSafeWrathSpellcasting() + "\n";
-		combatStats += "<b>Maximum Safe Wrath II (treshold after which magic soulskills are unaccesable):</b> " + player.maxSafeWrathMagicalAbilities() + "\n";
+		combatStats += "<b>Maximum Safe Wrath I (threshold after which spells are unaccesable):</b> " + player.maxSafeWrathSpellcasting() + "\n";
+		combatStats += "<b>Maximum Safe Wrath II (threshold after which magic soulskills are unaccesable):</b> " + player.maxSafeWrathMagicalAbilities() + "\n";
 		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
 		combatStats += "<b>Over Lust (Lust amount that can be reached beyond default 100% of Lust bar):</b> " + (player.maxOverLust() - player.maxLust()) + "\n";
 		combatStats += "<b>Over Fatigue (Fatigue amount that can be reached beyond default 100% of Fatigue bar):</b> " + (player.maxOverFatigue() - player.maxFatigue()) + "\n";
@@ -2398,7 +2398,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 40) {
 					if (player.hasPerk(PerkLib.ICastAsuraFist)) addButtonDisabled(3, "ICAF", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.AsuraStrength)) addButton(3, "ICAF", perkICastAsuraFist).hint("Choose the 'I Cast (Asura) Fist' super perk. Safe treshold for magic/m.specials is magic/m.specials is calculated based on overmax wrath not max wrath, +100% of base max wrath. (+10% of OverMax Wrath)");
+						if (player.hasPerk(PerkLib.AsuraStrength)) addButton(3, "ICAF", perkICastAsuraFist).hint("Choose the 'I Cast (Asura) Fist' super perk. Safe threshold for magic/m.specials is magic/m.specials is calculated based on overmax wrath not max wrath, +100% of base max wrath. (+10% of OverMax Wrath)");
 						else addButtonDisabled(3, "ICAF", "You need to first have the 'Asura Strength' super perk.");
 					}
 				}

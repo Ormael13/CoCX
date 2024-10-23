@@ -70,8 +70,8 @@ public function tifaMainMenuTalkReturn():void {
 public function tifaMainMenuTalkHer():void {
 	clearOutput();
 	outputText("So can she talk about herself, starting with why her sister said she was rebellious?\n\n");
-	outputText("\"<i>Thatzzz becauzzze I refuzzze to become a queen. I want to zzzee the world outside of a hive and a constantly pregnant abdomen won’t allow zzzuch a thing. You could zzzay I dezzzerted my functionzzz in the hive. Once I have zzzeen enough I will take my place azzz a queen and form a hive.</i>\"\n\n");
-	outputText("So wait she was scorned by the other bees for actually refusing to become a queen?\n\n");
+	outputText("\"<i>Thatzzz becauzzze I refuzzze to become a queen. I want to zzzee the world outside the hive, and a constantly pregnant abdomen won’t allow zzzuch a thing. You could zzzay I dezzzerted my functionzzz in the hive. Once I’ve zzzeen enough, I’ll take my place azzz a queen and form a hive.</i>\"\n\n");
+	outputText("So wait, she was scorned by the other bees for actually refusing to become a queen?\n\n");
 	outputText("\"<i>You could zzzay it’zzz like that, yezzz.</i>\"\n\n");
 	if (flags[kFLAGS.TIFA_FOLLOWER] == 6) flags[kFLAGS.TIFA_FOLLOWER]++;
 	tifaAffection(10);
@@ -197,7 +197,7 @@ public function tifaMainMenuSexRepeatAfterMe():void {
 	outputText("You gasp as her honey covered lower fingers quickly slip inside your [pussy] and start to wriggle around. You try to focus on matching her stimulations. While you can hear her gasp in enjoyment from your ministrations, you can barely keep your mind straight, let alone match her expert movements. Tifa however, goes one step further sending one hand to your chest to cup your [breasts]. ");
 	outputText("You follow the movement, putting your hand to her own set as she gently starts tweaking your nipples. You both moan in delight as your nipples go hard from the delicious ministrations, your pussy only feeling even better. Keeping your brain from becoming mush becomes especially difficult when she brings her thumb and index finger to your little pleasure-buzzer.\n\n");
 	outputText("Still, you manage to hold on against the sensations and continue to run your fingers through her honey coated lower lips and left breast while hers play with yours. It is actually a pretty fun bonding experience, and you feel closer to Tifa at the end when both of you cum over each others fingers together.\n\n");
-	outputText("\"<i>I hope you liked it [name]</i>\"\n\n");
+	outputText("\"<i>I hope you liked it, [name]</i>\"\n\n");
 	outputText("You sure did and would look forward to doing it again in the future.\n\n");
 	player.sexReward("vaginalFluids", "Vaginal");
 	tifaAffection(10);

@@ -23,7 +23,7 @@ public class MightyLowerHalfMutation extends IMutationPerkType
                 descS += "Tentacle and tail attacks deals " + 25 * pTier + "% more damage. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
             }
             if (pTier >= 2){
-                descS += ". Grapple damage gains " + ((5 * pTier) - 5) + "0% more bonus from your strength.";
+                descS += ". Grapple damage gains " + ((5 * pTier) - 5) + "0% more bonus from your strength";
             }
             if (pTier >= 3){
                 descS += ". Kick stun lasts 1 round longer";

@@ -205,7 +205,7 @@ public class Evangeline3 extends Monster
 			this.short = "Evangeline";
 			this.imageName = "evangeline";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 12) {
-				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
+				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus hybryd with traces of taking in the past bimbo liqueur. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
@@ -228,7 +228,7 @@ public class Evangeline3 extends Monster
 				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) {
-				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
+				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus hybryd with traces of taking in the past bimbo liqueur. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
@@ -252,7 +252,7 @@ public class Evangeline3 extends Monster
 				//this.createPerk(PerkLib., 0, 0, 0, 0);//pewnie perk dla demonów albo odzyskała jego efekt kiedy użyła succubus milk 2 lvl wcześniej a tu coś innego dać... ^^
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 14) {
-				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus-kitsune hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
+				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus-kitsune hybryd with traces of taking in the past bimbo liqueur. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
@@ -278,7 +278,7 @@ public class Evangeline3 extends Monster
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 15) {
-				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus-kitsune hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
+				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus-kitsune hybryd with traces of taking in the past bimbo liqueur. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
@@ -305,7 +305,7 @@ public class Evangeline3 extends Monster
 				//this.createPerk(PerkLib., 0, 0, 0, 0);//pewnie perk dla kitsune albo odzyskała jego efekt kiedy użyła fox jewel 2 lvl wcześniej a tu coś innego dać... ^^
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 16) {
-				this.long = "You are currently fighting Evangeline, which is a eight feet tall multiracial chimera with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
+				this.long = "You are currently fighting Evangeline, which is a eight feet tall multiracial chimera with traces of taking in the past bimbo liqueur. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
@@ -334,7 +334,7 @@ public class Evangeline3 extends Monster
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 17) {
-				this.long = "You are currently fighting Evangeline, which is a eight feet tall multiracial chimera with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
+				this.long = "You are currently fighting Evangeline, which is a eight feet tall multiracial chimera with traces of taking in the past bimbo liqueur. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
 				this.skin.setBaseOnly({});

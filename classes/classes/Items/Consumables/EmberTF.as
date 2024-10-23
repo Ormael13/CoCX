@@ -237,7 +237,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	//grow up to 11 feet tall
 	if (changes < changeLimit && rand(2) == 0 && player.basetallness < 132) {
 		temp = rand(5) + 3;
-		//Slow rate of growth after some tresholds
+		//Slow rate of growth after some thresholds
 		if (player.basetallness >= 120) temp = Math.floor(temp / 3.5);
 		if (player.basetallness >= 96 && player.basetallness < 120) temp = Math.floor(temp / 2);
 		//Never 0

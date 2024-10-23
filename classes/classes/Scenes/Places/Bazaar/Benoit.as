@@ -1423,7 +1423,7 @@ public function femoitFirstTimeNo():void
 	clearOutput();
 	outputText("You let her down as kindly as you can.");
 	outputText("\n\n\"<i>No, you are right,</i>\" she says in a casual tone, although the color is still very high in her scales. \"<i>It would be way too weird zat, wouldn’t it? I will find someone though, never fear.  As I said before...</i>\" Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. \"<i>I ‘ave a purpose now.</i>\"");
-	outputText("\n\nCatching a subtle tone of dissapointment in Benoite's voice, you bid her a quick farewell and head back to camp, deciding to give her some time to recover.");
+	outputText("\n\nCatching a subtle tone of disappointment in Benoite's voice, you bid her a quick farewell and head back to camp, deciding to give her some time to recover.");
 	doNext(camp.returnToCampUseOneHour);
 }
 

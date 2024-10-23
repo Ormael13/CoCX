@@ -670,8 +670,8 @@ import classes.Scenes.SceneLib;
 		if (player.farmingLevel >= 45) outputText("\n-11-: "+(GardenSlot11 != "" ? ""+GardenSlot11+" (Time until harvest: "+GardenSlot11Time+" hours)":"empty")+"");
 		if (player.farmingLevel >= 50) outputText("\n-12-: "+(GardenSlot12 != "" ? ""+GardenSlot12+" (Time until harvest: "+GardenSlot12Time+" hours)":"empty")+"");
 		addButton(0, "Put Herb In", putInHerbIntoHerbBag0);
-		addButton(1, "Put Herb Out", putOutHerbFromHerbBag0);
-		addButton(3, "Seed", Seed).hint("Plant down some seeds, sacrificing an ingredients.");
+		addButton(1, "Take Herb Out", putOutHerbFromHerbBag0);
+		addButton(3, "Seed", Seed).hint("Plant some seeds, sacrificing an ingredient.");
 		addButton(4, "Harvest", Harvest).hint("Check your harvests.")
 		addButton(14, "Back", camp.campActions);
 	}
@@ -950,7 +950,7 @@ import classes.Scenes.SceneLib;
 		clearOutput();
 		menu();
 		outputText("You take a tour of your garden and survey your crops for readied harvests.");
-		if (GardenSlot01 == "" && GardenSlot02 == "" && GardenSlot03 == "" && GardenSlot04 == "" && GardenSlot05 == "" && GardenSlot06 == "" && GardenSlot07 == "" && GardenSlot08 == "" && GardenSlot09 == "" && GardenSlot10 == "" && GardenSlot11 == "" && GardenSlot12 == "") outputText("\n\n There is no crops left to harvest you will need to plan new seeds.");
+		if (GardenSlot01 == "" && GardenSlot02 == "" && GardenSlot03 == "" && GardenSlot04 == "" && GardenSlot05 == "" && GardenSlot06 == "" && GardenSlot07 == "" && GardenSlot08 == "" && GardenSlot09 == "" && GardenSlot10 == "" && GardenSlot11 == "" && GardenSlot12 == "") outputText("\n\nThere are no crops left to harvest. You will need to plant new seeds.");
 		if (GardenSlot01 != "") {
 			addButton(0, "-01-", Harvest2,GardenSlot01, 1).hint("Harvest your ingredients.");
 			if (GardenSlot01Time > 0) addButtonDisabled(0,"-01-","Your crops are still growing.");

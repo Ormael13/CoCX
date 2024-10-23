@@ -370,9 +370,9 @@ public class CampUpgrades extends BaseContent {
     private function printLazyWriting(building:String):void {
         outputText("You pull out the \"Carpenter's Guide\" and find instructions on how to build a "+building+". You spend a few minutes looking over the instructions.");
         outputText("\n\nYou pick up a log from a nearby pile and saw it into a rectangular plank, fitting it to be used as the base of your future "+building+".  You lay out the foundation, securing the planks and leaving open corners for the thick logs that will form the building's corners.");
-        outputText("\nAs you begin connecting the tops to form the floor, the real work begins: nailing planks together and fitting everything into place. After a few hours of hard labor, the foundation is complete. You wipe the sweat from your brow, tap a foot on your work, and let out a breath of relief.");
+        outputText("\n\nAs you begin connecting the tops to form the floor, the real work begins: nailing planks together and fitting everything into place. After a few hours of hard labor, the foundation is complete. You wipe the sweat from your brow, tap a foot on your work, and let out a breath of relief.");
         outputText("\nFor the final part of the job, you get the building’s frame into place with plenty of elbow grease and brute strength. They don't call you a champion for nothing!");
-        outputText("\nRapping your knuckles against the walls, you're filled with pride at your hard work. It still needs a roof and proper flooring, but that can wait until tomorrow — you're pretty beat…");
+        outputText("\n\nRapping your knuckles against the walls, you're filled with pride at your hard work. It still needs a roof and proper flooring, but that can wait until tomorrow — you're pretty beat…");
     }
 
     private function doWarehouse1Work():void {
@@ -597,7 +597,7 @@ public class CampUpgrades extends BaseContent {
         else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxOverFatigue() - usedFatigue(450, true)) buildMassiveRing();
         else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4 && player.fatigue <= player.maxOverFatigue() - usedFatigue(1350, true)) buildRingWoodFloor();
         else {
-            outputText("You are too exhausted to work on the sparring ring!");
+            outputText("You don't have enough energy to work on the sparring ring! You are either too exhausted or lack the stamina required for the task.");
             doNext(playerMenu);
         }
     }
@@ -858,7 +858,7 @@ public class CampUpgrades extends BaseContent {
         else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxOverFatigue() - usedFatigue(600, true)) buildUpMajorWoodDam();
         //else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxOverFatigue() - usedFatigue(800, true)) buildUpMinorStoneDam();
         else {
-            outputText("You are too exhausted to work on the dam!");
+            outputText("You don't have enough energy to work on the dam! You are either too exhausted or lack the stamina required for the task.");
             doNext(playerMenu);
         }
     }

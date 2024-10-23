@@ -24,7 +24,7 @@ package classes.Items.Necklaces
 			if (!CoC.instance.player.hasPerk(PerkLib.Soulless)) {
 				if (doOutput) {
 					outputText("<b>You realize, to your horror, that the chain of the necklace somehow shrunk to the point where you can no longer get the item off your neck. ");
-					outputText(""+(CoC.instance.player.hasStatusEffect(StatusEffects.MeetXuviel) && CoC.instance.player.statusEffectv1(StatusEffects.MeetXuviel) > 0?"Obviously, Xuviel wouldn’t want his target to escape his clutches so easily.":"Just what is going on!?")+" You need to find a way to remove this necklace!</b>");
+					outputText(""+(CoC.instance.player.hasStatusEffect(StatusEffects.MeetXuviel) && CoC.instance.player.statusEffectv1(StatusEffects.MeetXuviel) > 0?"Obviously, Xuviel wouldn’t want his target to escape his clutches so easily.":"Just what is going on!?")+" You need to find a way to remove this necklace! </b>");
 				}
 				return false;
 			}
