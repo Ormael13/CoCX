@@ -677,7 +677,7 @@ public class CampMakeWinions extends BaseContent
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) var impMC:Number = player.statusEffectv2(StatusEffects.GolemUpgrades1);
-			outputText("You take out the "Golems, Animations, and You" manual from your bag and open it to the index. Which upgrade should you apply to your golems?\n\n");
+			outputText("You take out the 'Golems, Animations, and You' manual from your bag and open it to the index. Which upgrade should you apply to your golems?\n\n");
 			outputText("<b>Stones:</b> " + CampStatsAndResources.StonesResc + "\n");
 			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + CampStatsAndResources.MetalPieces + "\n");
 			outputText("\n<u>Index of upgrades:</u>\n");

@@ -9165,6 +9165,7 @@ public class Combat extends BaseContent {
             lust0damage *= 0.14;
             if (player.armor == armors.ELFDRES && player.isElf()) lust0damage *= 2;
             if (player.armor == armors.FMDRESS && player.isWoodElf()) lust0damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll6)) lust0damage *= 2;
             monster.teased(Math.round(monster.lustVuln * lust0damage));
             monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
