@@ -255,18 +255,18 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			outputText("You begin to browse Dinah shop inventory.");
 			menu();
 			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] >= 1) addButton(0, consumables.JABBERS.shortName, buyItem4, 23).hint("Buy a Jabberwocky Scale.");
-			else addButtonDisabled(0, "???", "Req. to beat one of bosses in Wonderland to have access to this TF item.");
+			else addButtonDisabled(0, "???", "Req. to beat one of the bosses in Wonderland to have access to this TF item.");
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
 				if (player.statusEffectv2(StatusEffects.TFDealer1) > 0) addButton(1, consumables.HYDRASC.shortName, buyItem4, 21).hint("Buy a Hydra Scale.");
-				else addButtonDisabled(1, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				else addButtonDisabled(1, "???", "Req. to beat one of the bosses in Ebon Labyrinth to have access to this TF item.");
 				if (player.statusEffectv3(StatusEffects.TFDealer1) > 0) addButton(2, consumables.FSNAILS.shortName, buyItem4, 22).hint("Buy a Fire Snail Saliva.");
-				else addButtonDisabled(2, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				else addButtonDisabled(2, "???", "Req. to beat one of the bosses in Ebon Labyrinth to have access to this TF item.");
 				if (player.statusEffectv1(StatusEffects.TFDealer1) > 0) addButton(3, consumables.DSLIMEJ.shortName, buyItem4, 20).hint("Buy a Dark Slime Jelly.");
-				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				else addButtonDisabled(3, "???", "Req. to beat one of the bosses in Ebon Labyrinth to have access to this TF item.");
 				if (player.statusEffectv1(StatusEffects.TFDealer2) > 0) addButton(4, consumables.ME_DROP.shortName, buyItem4, 24).hint("Buy a Magic Eye Drop.");
-				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				else addButtonDisabled(3, "???", "Req. to beat one of the bosses in Ebon Labyrinth to have access to this TF item.");
 				if (player.statusEffectv2(StatusEffects.TFDealer2) > 0) addButton(5, consumables.M_GOSSR.shortName, buyItem4, 25).hint("Buy a Midnight Black Glossamer.");
-				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				else addButtonDisabled(3, "???", "Req. to beat one of the bosses in Ebon Labyrinth to have access to this TF item.");
 			}
 			addButton(14, "Back", DinahShopMainMenu);
 		}

@@ -2774,7 +2774,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.createVagina();
 					if (player.hasPerk(PerkLib.FutaFaculties))
 						outputText("\n<b>Your crotch is like, all itchy an' stuff.  Damn!  There's a wet little slit opening up, and it's all tingly!  It feels so good, why would you have ever gotten rid of it?</b>\n");
-					else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your [legs] fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n");
+					else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your [legs] fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liqueur.</b>\n");
 					player.dynStats("int", -1, "sen", 10, "lus", 15);
 					needNext = true;
 				}
@@ -2792,7 +2792,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.createVagina();
 					if (player.hasPerk(PerkLib.BimboBrains) || player.hasStatusEffect(StatusEffects.BimboChampagne))
 						outputText("\n<b>Your crotch is like, all itchy an' stuff.  Omigawsh!  There's a wet little slit opening up, and it's all tingly!  It feels so good, maybe like, someone could put something inside there!</b>\n");
-					else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your [legs] fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n");
+					else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your [legs] fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liqueur.</b>\n");
 					needNext = true;
 				}
 				if (player.hips.type < 12) {

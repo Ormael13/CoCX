@@ -249,7 +249,7 @@ private function evangelineAppearance():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("crimson platinum ");
 	else outputText("red ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 10) outputText("hair are ass-length along with breats that could easily fill a F-cup bra, expansive ass and fertile hips.\n\n");
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liqueur personaly modified by her.\n\n");
 	else outputText("hair short along with breasts not bigger than A cup, almost non-existent butt and boyish hips cause her to look quite tomboyish.\n\n");
 	//outputText(".\n\n");
 	outputText("She's wearing ");
@@ -940,7 +940,7 @@ private function JustDoIt():void {
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 4;//12 lub 18 lub 24 z powodu wypicia zmodyf bimbo liquer bo musi kupic itemy na modyf jego też
+		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 4;//12 lub 18 lub 24 z powodu wypicia zmodyf bimbo liqueur bo musi kupic itemy na modyf jego też
 		EvangelineGemsPurse -= 1250;
 	}*/
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {

@@ -902,7 +902,7 @@ public final class ConsumableLib extends AlchemyLib
 								KitsuneRace.ElderKitsuneColors
 						)
 				);
-		public const NOCELIQ: Consumable = mk("NoceLiq", "NocelloLiq", "a bottle of Nocello Liquer", 20, "This bottle contain sweet liquer called 'Nocello', which one sip can makes your stomach feel warm even in the middle of the glacial rift.  It looks to be just hazelnut flavored alcohol or there is more to it?", m.nocelloliquer, ItemConstants.U_TF)
+		public const NOCELIQ: Consumable = mk("NoceLiq", "NocelloLiq", "a bottle of Nocello Liquer", 20, "This bottle contains a sweet liqueur called 'Nocello,' which with just one sip can make your stomach feel warm, even in the middle of the glacial rift.  Is it simply hazelnut-flavored alcohol, or is there more to it?", m.nocelloliquer, ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						MULTIRACE_ESSENCE_DROP_TABLE(AE_PHOENIX,AE_PHOENIX,AE_SALAMANDER,AE_HARPY),

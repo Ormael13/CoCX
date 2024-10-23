@@ -1884,8 +1884,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("In this room, the stone appears to have been worn away, and more of the pulsing, purple structures are laid bare. They pulsate visibly now, the light ebbing and flowing as they move. You feel your [skin] crawling with each pulse, an involuntary shiver running up your spine. At the end of this room, there appears to be some kind of circular structure, grown into the wall from the pulsing purple...stuff. The circle itself writhes with each pulse, sending the light from before out...It emits a squishing, wet sound with each pulse, not unlike a heartbeat.");
 			dungeons.setDungeonButtonsRD(null, roomD16, null, null);
 			if (anvilMaterialsCheck()) addButton(0, "Anvil", anvilUncrafting).hint("Now you have needed materials. Do you uncraft them?");
-			else addButtonDisabled(0, "Anvil", "Would you kindly find the materials first?");
-			addButton(1, "BP's", anvilMaterialsList).hint("Can't be more obvious what it's does it?");
+			else addButtonDisabled(0, "Anvil", "You'll need to find the materials before proceeding!");
+			addButton(1, "Materials List", anvilMaterialsList).hint("Displays the list of required materials.");
 		}
 		public function roomD13():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_13;
