@@ -5810,11 +5810,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function Drink():void {
 		clearOutput();
-		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
+		outputText("You merrily chug from the gourd quenching your thirst for sake.");
 		if (CoC.instance.mutations.CanDrunkenPowerEmpower()) {
-			outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alcoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+			outputText("\n\nOOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alcoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.");
 			CoC.instance.mutations.DrunkenPowerEmpower();
 		}
+		if (CoC.instance.mutations.CanAelfwineEmpower()) CoC.instance.mutations.AelfwineEmpower();
+		outputText("\n\n");
 		enemyAI();
 	}
 

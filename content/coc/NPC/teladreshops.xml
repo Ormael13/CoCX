@@ -48,7 +48,7 @@
                 <else>
                     The merchant stares at your hands as you point out the item with an almost
                     palpable excitement. "<i>Ah, excellent choice!</i>" He scoops up the accessory and hefts it a couple times in
-                    his palm, "<i>Keheh, I'd be willing to part with it for, ssay, <output>itype.value</output> gems?</i>"
+                    his palm, "<i>Keheh, I'd be willing to part with it for, say, <output>itype.value</output> gems?</i>"
                 </else>
             </if>
         </text>

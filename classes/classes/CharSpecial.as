@@ -1441,7 +1441,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 		}
 
 		private function customSolaria():void {
-			//Character Creation	Female,virgin	A human with salamander bloodline	Solaria
+			//Character Creation	Female	A human with salamander bloodline	Solaria
 			player.createPerk(PerkLib.Lustzerker,0,0,0,1);
 			player.createPerk(PerkLib.BloodlineSalamander,0,0,0,0);
 			player.createBreastRow();

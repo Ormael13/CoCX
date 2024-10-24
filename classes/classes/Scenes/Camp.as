@@ -791,7 +791,7 @@ public class Camp extends NPCAwareContent{
 		//Live in-ness
 		else {
 			if (model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.  ");
-			if (model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to take on a very 'lived-in' look.  he fire pit is well-defined with some rocks you've arranged around it, and your bedroll and tent are set up in the area most sheltered by the rocks.  ");
+			if (model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to take on a very 'lived-in' look. The fire pit is well-defined with some rocks you've arranged around it, and your bedroll and tent are set up in the area most sheltered by the rocks.  ");
 			if (model.time.days >= 20) {
 				if (!isabellaFollower()) outputText("Your new home is as comfy as a campsite can be.  ");
 				outputText("The fire-pit ");
@@ -822,7 +822,7 @@ public class Camp extends NPCAwareContent{
 			outputText(" ring");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 5) outputText(" with wooden floor");
 			outputText(" toward the side of your [camp].");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Given how large the sparring ring, maybe it's a little excessive for even the largest of people around.");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Given how large the sparring ring is, maybe it's a little excessive for even the largest of people around.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) outputText(" A small stand rests adjacent, allowing spectators to cheer on any duels taking place.");
 			outputText("\n\n");
 		}
@@ -843,7 +843,7 @@ public class Camp extends NPCAwareContent{
 			else outputText("Small wooden dam drapes across the stream, slowing the passage of water");
 			outputText(".\n\n");
 			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
-				outputText("Not so far from it is your ");
+				outputText("Not far from it is your ");
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("small");
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
@@ -992,7 +992,7 @@ public class Camp extends NPCAwareContent{
 		//Night
 		if (model.time.hours < 6 || model.time.hours > 20) {
 			if (flags[kFLAGS.D3_GARDENER_DEFEATED] <= 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] <= 0 && flags[kFLAGS.D3_STATUE_DEFEATED] <= 0) outputText("It's' dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave the [camp].\n\n");
-			else outputText("It's' dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave the [camp].\n\n");
+			else outputText("It's dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave the [camp].\n\n");
 			if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
 				outputText("Your [camp] is silent as your companions are sleeping right now.\n");
 			}
@@ -1818,9 +1818,9 @@ public class Camp extends NPCAwareContent{
 			}
 			//Galia Slave
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 1 && EvangelineFollower.EvangelineFollowerStage >= 1) {
-				if (flags[kFLAGS.GALIA_AFFECTION] < 2) outputText("Near the [camp] edge, nearly next to Evangeline's bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite being one of those more feral she spends most of the time sitting motionlessly and gazing into the horizon.\n\n");
+				if (flags[kFLAGS.GALIA_AFFECTION] < 2) outputText("Near the [camp] edge, nearly next to Evangeline's bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite being one of those more feral, she spends most of the time sitting motionlessly and gazing into the horizon.\n\n");
 				else {
-					outputText("Near the [camp] edge, nearly next to Evangeline's bedroll sits a large wooden cage for keeping Galia. Despite being one of those more feral she spends most of the time sitting motionlessly and gazing into the horizon.\n\n");
+					outputText("Near the [camp] edge, nearly next to Evangeline's bedroll sits a large wooden cage for keeping Galia. Despite being one of those more feral, she spends most of the time sitting motionlessly and gazing into the horizon.\n\n");
 					buttons.add("Galia", SceneLib.galiaFollower.GaliaCampMainMenuSlave).hint("Visit Galia.");
 				}
 			}
@@ -2149,7 +2149,7 @@ public class Camp extends NPCAwareContent{
 				outputText("Luna is taking a break, sitting on a nearby rock to watch the full moon. She's clearly heating up with the desire to mate with you, but out of respect for her, she is letting you make the first move.");
 			}
 			else {
-				outputText("Luna is taking a break siting on a nearby rock to watch over the moon.");
+				outputText("Luna is taking a break, siting on a nearby rock to watch over the moon.");
 			}
 			if (flags[kFLAGS.LUNA_JEALOUSY] >= 100) outputText(" She looks at you from time to time, as if expecting you to notice her.");
 			outputText("\n\n");
@@ -2182,14 +2182,14 @@ public class Camp extends NPCAwareContent{
 		addButton(5, "Crafting", SceneLib.crafting.craftingMain).hint("Craft some items.");
 		//addButtonDisabled(6, "Garden", "Local Committee of Alraunes took over this place for re-nationalization.");
 		if (SceneLib.garden.canAccessGarden()) addButton(6, "Garden", SceneLib.garden.accessGarden).hint("Manage your garden of medicinal plants.");
-		else addButtonDisabled(6, "Garden", "Req. to have an Herb bag of any sort.");
-		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingredients to craft poultice and battle medicines.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
+		else addButtonDisabled(6, "Garden", "You need an herb bag before you can start gardening. For some reason, the traveling merchant Giacomo comes to mind...");
+		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingredients to craft poultice and battle medicines.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"You’ll need an alchemist in your camp to help with this. Perhaps Rathazul could teach you the basics of herbalism?");
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(!AdventurerGuild.playerInGuild, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events that happened during your adventure.");
 		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", dummyTraining).hint("Train your mastery level on this dummy.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark for that!");
 		if (player.hasPerk(PerkLib.Soulless)) addButton(13, "Dark Ascension", promptDarkAscend).hint("Perform an ascension? This will restart your adventures. The game, depending on your choice, could also get harder.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
-		else addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game, depending on your choice, could also get harder. If you have a Sky Poison Pearl, you could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
+		else addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game, depending on your choice, could also get harder. If you have a Sky Poison Pearl, you could carry over some items to your new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -2264,7 +2264,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(2, "Kitsune Shrine", "Would you kindly build it first?");
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(3, "Hot Spring", campScenes.HotSpring).hint("Visit the Hot Spring.").disableIf(isNightTime,"It's not safe to take a dip in the hotsprings at night.");
 		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
-		if (player.hasPerk(PerkLib.CursedTag)) addButton(4, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY, aka, modify your cursed tag").disableIf(isNightTime, "It's too dark to modify your scroll.");
+		if (player.hasPerk(PerkLib.CursedTag)) addButton(4, "Alter Binding Scroll", AlterBindScroll).hint("Alter Binding Scroll - DIY, aka, modify your cursed tag").disableIf(isNightTime, "It's too dark to modify your scroll.");
 		else addButtonDisabled(4, "Alter Bind Scroll", "Req. you to be a Jiangshi and having the Cursed Tag perk.");
 		var bottles:Array = [
 			[consumables.LG_SFRP, consumables.LGSFRPB, "low"],
@@ -3098,12 +3098,13 @@ public class Camp extends NPCAwareContent{
 			[StatusEffects.AlterBindScroll3, "Undead Resistance"],
 			[StatusEffects.AlterBindScroll4, "Vital Sense"],
 			[StatusEffects.AlterBindScroll5, "Zombified"],
+			[StatusEffects.AlterBindScroll6, "Greater drain"],
 		];
 		var i:int;
 		clearOutput();
 		var limitOnAltering:Number = 1;
 		if (player.hasPerk(PerkLib.ImprovedCursedTag)) limitOnAltering += 1;
-		if (player.hasPerk(PerkLib.GreaterCursedTag)) limitOnAltering += 3;
+		if (player.hasPerk(PerkLib.GreaterCursedTag)) limitOnAltering += 4;
 		var currentAltering:Number = 0;
 		for (i = 0; i < statusNames.length; ++i) {
 			if (player.hasStatusEffect(statusNames[i][0])) ++currentAltering;
@@ -3120,6 +3121,7 @@ public class Camp extends NPCAwareContent{
 		outputText("Undead Resistance -> <i>Gain Immunity to Cold, Poison, and Fatigue damage.</i>\n");
 		outputText("Vital Sense -> <i>You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1.</i>\n");
 		outputText("Zombified -> <i>You are immune to mental attacks that would affect living, sane beings. Furthermore, you have unlimited fatigue.</i>\n");
+		outputText("Greater drain -> <i>Lust damage inflicted on your opponent through physical contact is twice as effective. (Effects straddle and melee attack)</i>\n");
 		menu();
 		for (i = 0; i < statusNames.length; ++i) {
 			addButton(i, statusNames[i][1], alterBindScrollToggle, statusNames[i][0]);
@@ -4912,7 +4914,7 @@ public function rebirthFromBadEnd():void {
 			doNext(camp.returnToCampUseFourHours);
 		}
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 10) {
-			outputText("\n\n<b>Well done! You have finished your first section of the walls! Now you can decorate it with imp skulls to further deter whoever might try to come and rape you.</b>");
+			outputText("\n\n<b>Well done! You have finished the first section of the walls! Now you can decorate it with imp skulls to further deter whoever might try to come and rape you.</b>");
 			flushOutputTextToGUI();
 		}
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
