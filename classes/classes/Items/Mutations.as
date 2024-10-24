@@ -11875,8 +11875,9 @@ public final class Mutations extends MutationsHelper {
         //**********************
         //BASIC STATS
         //**********************
+        var gotBasic:Boolean = false;
         //[increase Intelligence, Libido and Sensitivity]
-        mutationStep(1 == 1, mystic ? 2 : 4, function ():void {
+        gotBasic ||= mutationStep(!gotBasic, mystic ? 8 : 4, function ():void {
             outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
             //Raise INT, WIS, Lib, Sens. and +10 LUST
             dynStats("sen", 1, "lus", 10);
@@ -11885,7 +11886,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 1);
         });
         //[decrease Strength toward 15]
-        mutationStep(player.str > 15, mystic ? 2 : 3, function ():void {
+        gotBasic ||= mutationStep(!gotBasic && player.str > 15, mystic ? 8 : 4, function ():void {
             outputText("[pg]You can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
             player.addCurse("str", 1, 1);
             if (player.str > 70) player.addCurse("str", 1, 1);
@@ -11893,7 +11894,7 @@ public final class Mutations extends MutationsHelper {
             if (player.str > 30) player.addCurse("str", 1, 1);
         });
         //[decrease Toughness toward 20]
-        mutationStep(player.tou > 20, mystic ? 2 : 3, function ():void {
+        gotBasic ||= mutationStep(!gotBasic && player.tou > 20, mystic ? 8 : 4, function ():void {
             //from 66 or less toughness
             if (player.tou <= 66) outputText("[pg]You feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your " + player.skinFurScales() + " won't offer you much protection.");
             //from 66 or greater toughness
@@ -11901,7 +11902,7 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("tou", 1, 1);
             if (player.tou > 66) player.addCurse("tou", 1, 1);
         });
-        mutationStep(mystic && player.cor < 100, 2, function ():void {
+        gotBasic ||= mutationStep(!gotBasic && mystic && player.cor < 100, 2, function ():void {
             if (player.cor < 33) outputText("[pg]A sense of dirtiness comes over you, like the magic of this gem is doing some perverse impropriety to you.");
             else if (player.cor < 66) outputText("[pg]A tingling wave of sensation rolls through you, but you have no idea what exactly just changed.  It must not have been that important.");
             else outputText("[pg]Thoughts of mischief roll across your consciousness, unbounded by your conscience or any concern for others.  You should really have some fun - who cares who it hurts, right?");
@@ -11913,39 +11914,39 @@ public final class Mutations extends MutationsHelper {
         //**********************
         //MEDIUM/SEXUAL CHANGES
         //**********************
+        var medCnt:int = 0;
+        var medMax:int = mystic ? 3 : 2;
         //[adjust Femininity toward 50]
         //from low to high
         //Your facial features soften as your body becomes more androgynous.
-        //from high to low
-        //Your facial features harden as your body becomes more androgynous.
-        mutationStep(player.femininity != 50, mystic ? 2 : 4, function ():void {
+        if (mutationStep(medCnt < medMax && player.femininity < 50, mystic ? 3 : 4, function ():void {
             outputText(player.modFem(50, 2));
-        });
+        })) ++medCnt;
         //[decrease muscle tone toward 40]
-        mutationStep(player.tone >= 40, mystic ? 2 : 4, function ():void {
+        if (mutationStep(medCnt < medMax && player.tone >= 40, mystic ? 3 : 4, function ():void {
             outputText("[pg]Moving brings with it a little more jiggle than you're used to.  You don't seem to have gained weight, but your muscles seem less visible, and various parts of you are pleasantly softer.");
             player.tone -= 2 + rand(3);
-        });
+        })) ++medCnt;
 
         //[Adjust hips toward 10 – wide/curvy/flared]
         //from narrow to wide
-        mutationStep(player.hips.type < 10, mystic ? 2 : 3, function ():void {
+        if (mutationStep(medCnt < medMax && player.hips.type < 10, mystic ? 3 : 4, function ():void {
             player.hips.type++;
             if (player.hips.type < 7) player.hips.type++;
             if (player.hips.type < 4) player.hips.type++;
             outputText("[pg]You stumble a bit as the bones in your pelvis rearrange themselves painfully.  Your hips have widened nicely!");
-        });
+        })) ++medCnt;
         //from wide to narrower
-        mutationStep(player.hips.type > 10, mystic ? 2 : 3, function ():void {
+        if (mutationStep(medCnt < medMax && player.hips.type > 10, mystic ? 3 : 4, function ():void {
             player.hips.type--;
             if (player.hips.type > 14) player.hips.type--;
             if (player.hips.type > 19) player.hips.type--;
             if (player.hips.type > 24) player.hips.type--;
             outputText("[pg]You stumble a bit as the bones in your pelvis rearrange themselves painfully.  Your hips have narrowed.");
-        });
+        })) ++medCnt;
 
         //[Adjust hair length toward range of 16-26 – very long to ass-length]
-        mutationStep((player.hairLength < 16 || player.hairLength > 26), mystic ? 2 : 3, function ():void {
+        if (mutationStep(medCnt < medMax && (player.hairLength < 16 || player.hairLength > 26), mystic ? 3 : 4, function ():void {
             //from short to long
             if (player.hairLength < 16) {
                 player.hairLength += 3 + rand(3);
@@ -11956,15 +11957,15 @@ public final class Mutations extends MutationsHelper {
                 player.hairLength -= 3 + rand(3);
                 outputText("[pg]You experience a tingling sensation in your scalp.  Feeling a bit off-balance, you discover your hair has shed a bit of its length, becoming [hair].");
             }
-        });
+        })) ++medCnt;
         //[Increase Vaginal Capacity] - requires vagina, of course
-        mutationStep(player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200, mystic ? 2 : 3, function ():void {
+        if (mutationStep(medCnt < medMax && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200, mystic ? 3 : 4, function ():void {
             outputText("[pg]A gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your [vagina] is a bit deeper than it was before.");
             if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
                 player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
             }
             player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
-        });
+        })) ++medCnt;
 
 
         //**********************

@@ -23,10 +23,7 @@ import classes.Items.Alchemy.AlchemyLib;
 	 */
 	protected function mutationStart(name:String, maxChanges:int):int {
 		changes     = 0;
-		changeLimit = 1;
-		for (var i:int = 2; i <= maxChanges; i++) {
-			if (rand(i) == 0) changeLimit++;
-		}
+		changeLimit = 1 + rand(maxChanges);
 		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
 		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
 		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
@@ -37,7 +34,7 @@ import classes.Items.Alchemy.AlchemyLib;
 		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
 		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
 		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
-		if (player.hasPerk(PerkLib.TransformationAcclimation)) changeLimit*2;
+		if (player.hasPerk(PerkLib.TransformationAcclimation)) changeLimit *= 2;
 		return changes;
 	}
 	/**
