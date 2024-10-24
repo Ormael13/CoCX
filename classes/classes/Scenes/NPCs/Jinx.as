@@ -139,7 +139,7 @@ use namespace CoC;
 			this.hairLength = 20;
 			initStrTouSpeInte(50, 50, 40, 40);
 			initWisLibSensCor(40, 20, 10, 50);
-			this.weaponName = "ayotech gaunlets";
+			this.weaponName = "ayotech gauntlets";
 			this.weaponVerb = "smash";
 			this.weaponAttack = 16;
 			if (EngineCore.silly()) this.weaponRangeName = "Pow-Pow";

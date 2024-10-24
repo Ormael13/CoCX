@@ -32,6 +32,6 @@ package classes.Scenes.NPCs
 			outputText("\"<i></i>\"\n\n");
 		}
 		*/
-		//female nekomata kept as slave in HXD arena and possible to win in one of gaunlets - potential candidate to be new war god herald
+		//female nekomata kept as slave in HXD arena and possible to win in one of gauntlets - potential candidate to be new war god herald
 	}
 }

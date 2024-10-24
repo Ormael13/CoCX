@@ -329,13 +329,13 @@ public function aethertwinsFollowersTalk():void {
 }
 public function aethertwinsFollowersTalkThem():void {
 	clearOutput();
-	outputText("\"<i>Oh, so you're interested in "+(AetherTwinsCount > 1 ? "us" : "me")+"? "+(AetherTwinsCount > 1 ? "We're just" : "I'm just an")+" ordinary sentient weapon"+(AetherTwinsCount > 1 ? "s" : "")+" crafted by some gifted blacksmith. Maybe even a very 'gifted' blacksmith, if you know what "+(AetherTwinsCount > 1 ? "we" : "I")+" mean.</i>\"\n\n");
-	outputText("No, you don't know—or at least you react in a way that makes them think you don't. With a light reminder to return to the subject, "+(AetherTwinsCount > 1 ? "they" : "she")+" continue"+(AetherTwinsCount > 1 ? "" : "s")+".\n\n");
-	outputText("\"<i>Maybe you think "+(AetherTwinsCount > 1 ? "we're" : "I'm")+" weak, but that's all relative. Just give "+(AetherTwinsCount > 1 ? "us" : "me")+" some snacks and "+(AetherTwinsCount > 1 ? "we" : "I")+"'ll get stronger in no time.</i>\"\n\n");
-	outputText("Giving "+(AetherTwinsCount > 1 ? "them" : "her")+" snacks? Like some food? Aren't "+(AetherTwinsCount > 1 ? "they" : "she")+" a weapon? How would "+(AetherTwinsCount > 1 ? "they" : "she")+" eat all that food?\n\n");
-	outputText("\"<i>Hella no. "+(AetherTwinsCount > 1 ? "We are" : "I am")+" not interested in food your kind eats. Bring "+(AetherTwinsCount > 1 ? "us" : "me")+" all those tasty metals or equipment like gloves, claws, and shields. That should be enough.</i>\"\n\n");
-	outputText("That certainly would make things easier... or harder? As long as "+(AetherTwinsCount > 1 ? "their" : "her")+" 'appetite' isn't bottomless.\n\n");
-	outputText("\"<i>So then ummm.. did you bring us some snacks?</i>\" "+(AetherTwinsCount > 1 ? "Their" : "Her")+" voice sounds like "+(AetherTwinsCount > 1 ? "they are" : "she is")+" expecting to get some 'food' now. You make an excuse like 'you need to go' and bring an end to the conversation.\n\n");
+	outputText("\"<i>Oh, so you're interested in "+(AetherTwinsCount > 1 ? "us":"me")+"? "+(AetherTwinsCount > 1 ? "We're just" :"I'm just an")+" ordinary sentient weapon"+(AetherTwinsCount > 1 ? "s":"")+" crafted by some gifted blacksmith. Maybe even a very 'gifted' blacksmith, if you know what "+(AetherTwinsCount > 1 ? "we":"I")+" mean.</i>\"\n\n");
+	outputText("No, you don't know—or at least you react in a way that makes them think you don't. With a light reminder to return to the subject, "+(AetherTwinsCount > 1 ? "they":"she")+" continue"+(AetherTwinsCount > 1 ? "":"s")+".\n\n");
+	outputText("\"<i>Maybe you think "+(AetherTwinsCount > 1 ? "we're":"I'm")+" weak, but that's all relative. Just give "+(AetherTwinsCount > 1 ? "us":"me")+" some snacks and "+(AetherTwinsCount > 1 ? "we":"I")+"'ll get stronger in no time.</i>\"\n\n");
+	outputText("Giving "+(AetherTwinsCount > 1 ? "them":"her")+" snacks? Like some food? Aren't "+(AetherTwinsCount > 1 ? "they":"she")+" a weapon? How would "+(AetherTwinsCount > 1 ? "they":"she")+" eat all that food?\n\n");
+	outputText("\"<i>Hella no. "+(AetherTwinsCount > 1 ? "We are":"I am")+" not interested in food your kind eats. Bring "+(AetherTwinsCount > 1 ? "us":"me")+" all those tasty metals or equipment like gloves, claws, and shields. That should be enough.</i>\"\n\n");
+	outputText("That certainly would make things easier... or harder? As long as "+(AetherTwinsCount > 1 ? "their":"her")+" 'appetite' isn't bottomless.\n\n");
+	outputText("\"<i>So then ummm.. did you bring us some snacks?</i>\" "+(AetherTwinsCount > 1 ? "Their":"Her")+" voice sounds like "+(AetherTwinsCount > 1 ? "they are":"she is")+" expecting to get some 'food' now. You make an excuse like 'you need to go' and bring an end to the conversation.\n\n");
 	if (!AetherTwinsFoodMenu && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] >= 1 && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] >= 1) {
 		outputText("<b>Feed Option has been unlocked!!!</b>\n\n");
 		AetherTwinsFoodMenu = true;
@@ -654,9 +654,9 @@ public function aethertwinsFollowersMorphMain():void {
 	outputText("\"<i>You want us to change into a different form? Wasn't the one we currently have good enough? Ahh, well... what other form do you want us to assume?</i>\"\n\n");
 	menu();
 	if (AetherTwinsShape == "Human-tier Gauntlets") addButtonDisabled(0, "HtGauntl", "They are currently in Human-tier Gauntlets form.");
-	else addButton(0, "HtGauntl", aethertwinsFollowersMorphMainHumanTierGaunlets);
+	else addButton(0, "HtGauntl", aethertwinsFollowersMorphMainHumanTierGauntlets);
 	if (AetherTwinsShape == "Sky-tier Gauntlets") addButtonDisabled(1, "StGauntl", "They are currently in Sky-tier Gauntlets form.");
-	else addButton(1, "StGauntl", aethertwinsFollowersMorphMainSkyTierGaunlets);
+	else addButton(1, "StGauntl", aethertwinsFollowersMorphMainSkyTierGauntlets);
 	if (AetherTwinsFoodMenu2) {
 		if (AetherTwinsShape == "Human-tier Dagger and Shield") addButtonDisabled(2, "HtDagger&Shield", "They are currently in Human-tier Dagger and Shield form.");
 		else addButton(2, "HtDagger&Shield", aethertwinsFollowersMorphMainHumanTierSmallWeapons);
@@ -672,7 +672,7 @@ public function aethertwinsFollowersMorphMain():void {
 	}
 	addButton(14, "Back", aethertwinsFollowers);
 }
-public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
+public function aethertwinsFollowersMorphMainHumanTierGauntlets():void {
 	clearOutput();
 	outputText("\"<i>So, you like our Human-tier gauntlets form? It may not be as much fun as the other forms, but we can assume this one,</i>\" they reply. After a moment, both of their shapes become less defined and more fluid. Slowly, they reform into a pair of medium-sized gauntlets that cover your hands and forearms, complete with sharp claws.");
 	AetherTwinsShape = "Human-tier Gauntlets";
@@ -687,7 +687,7 @@ public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
 }
-public function aethertwinsFollowersMorphMainSkyTierGaunlets():void {
+public function aethertwinsFollowersMorphMainSkyTierGauntlets():void {
 	clearOutput();
 	outputText("\"<i>So, you like our Sky-tier gauntlets form? It may not be as much fun as the other forms, but we can assume this one,</i>\" they reply. After a moment, both of their shapes become less defined and more fluid. Slowly, they reform into a larger version of BF gauntlets, with much sharper claws and spikes similar to those on a spiked shield growing all over the upper sections of the gauntlets.\n\n");
 	AetherTwinsShape = "Sky-tier Gauntlets";
@@ -735,10 +735,10 @@ public function aethertwinsFollowersMorphMainHumanTierDualSmallWeapons():void {
 
 public function aethertwinsFollowersEvolutionsMain():void {
 	menu();
-	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuClaws && AetherTwinsTalkMenu < 1) addButton(0, "HtGauntl", aethertwinsFollowersEvolutionsToHumanTierGaunlets);
+	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuClaws && AetherTwinsTalkMenu < 1) addButton(0, "HtGauntl", aethertwinsFollowersEvolutionsToHumanTierGauntlets);
 	else if (AetherTwinsTalkMenu > 0) addButtonDisabled(0, "HtGauntl", "They have already unlocked the Human-tier Gauntlets form.");
 	else addButtonDisabled(0, "HtGauntl", "They haven't consumed enough materials to evolve into this form yet.");
-	if (AetherTwinsFoodMenuSpikeLShield && AetherTwinsFoodMenuHGaunt && AetherTwinsFoodMenuBFGauntlets && AetherTwinsFoodMenuLustyClaws && AetherTwinsFoodMenuTin == 2 && AetherTwinsFoodMenuCopper == 2 && AetherTwinsFoodMenuIron == 2 && AetherTwinsFoodMenuSilver == 2 && AetherTwinsFoodMenuGold == 2 && !AetherTwinsFoodMenu1) addButton(1, "StGauntl", aethertwinsFollowersEvolutionsToSkyTierGaunlets);
+	if (AetherTwinsFoodMenuSpikeLShield && AetherTwinsFoodMenuHGaunt && AetherTwinsFoodMenuBFGauntlets && AetherTwinsFoodMenuLustyClaws && AetherTwinsFoodMenuTin == 2 && AetherTwinsFoodMenuCopper == 2 && AetherTwinsFoodMenuIron == 2 && AetherTwinsFoodMenuSilver == 2 && AetherTwinsFoodMenuGold == 2 && !AetherTwinsFoodMenu1) addButton(1, "StGauntl", aethertwinsFollowersEvolutionsToSkyTierGauntlets);
 	else if (AetherTwinsFoodMenu1) addButtonDisabled(1, "StGauntl", "They have already unlocked the Sky-tier Gauntlets form.");
 	else addButtonDisabled(1, "StGauntl", "They haven't consumed enough materials to evolve into this form yet.");
 	if (AetherTwinsFoodMenuManaBracer && AetherTwinsFoodMenuDualDaggers && AetherTwinsFoodMenuThrowingDagger && AetherTwinsFoodMenuTriDagger && AetherTwinsFoodMenuLustyDagger && AetherTwinsFoodMenuWitchDagger && AetherTwinsFoodMenuAngstDagger
@@ -747,12 +747,12 @@ public function aethertwinsFollowersEvolutionsMain():void {
 	else addButtonDisabled(2, "HtDagger&Shield", "They haven't consumed enough materials to evolve into this form yet.");
 	addButton(14, "Back", aethertwinsFollowers);
 }
-private function aethertwinsFollowersEvolutionsToHumanTierGaunlets():void {
+private function aethertwinsFollowersEvolutionsToHumanTierGauntlets():void {
 	clearOutput();
 	outputText("\"<i>Woohoo, we're evolving!</i>\" they exclaim. \"<i>We're going Faster, Harder, Better, Stronger... Curvier!!!</i>\"\n\n");
 	outputText("<b>The Aether Twins' base form has evolved, unlocking some of their sealed memories.</b>\n\n");
 	player.createStatusEffect(StatusEffects.AetherTwins1, 0, 5, 0, 0);
-	AetherTwinsShape = "Human-tier Gaunlets";
+	AetherTwinsShape = "Human-tier Gauntlets";
 	AetherTwinsFoodMenuTin = 0;
 	AetherTwinsFoodMenuTinCap = 2;
 	AetherTwinsFoodMenuCopper = 0;
@@ -767,12 +767,12 @@ private function aethertwinsFollowersEvolutionsToHumanTierGaunlets():void {
 	doNext(aethertwinsFollowers);
 	cheatTime(1/6);
 }
-private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
+private function aethertwinsFollowersEvolutionsToSkyTierGauntlets():void {
 	clearOutput();
 	outputText("\"<i>Woohoo, it's that feeling again... We're evolving again...</i>\" they exclaim. \"<i>We're going Faster, Harder, Better, Stronger!!!</i>\"\n\n");
 	outputText("<b>The Aether Twins' base form has evolved a second time, unlocking the option to switch between their current form and their pre-evolution form.</b>\n\n");
 	player.addStatusValue(StatusEffects.AetherTwins1, 2, 10);
-	AetherTwinsShape = "Sky-tier Gaunlets";
+	AetherTwinsShape = "Sky-tier Gauntlets";
 	AetherTwinsFoodMenu1 = true;
 	AetherTwinsFoodMenuTin -= 2;
 	AetherTwinsFoodMenuTinCap += 2;
@@ -823,7 +823,7 @@ private function aethertwinsFollowersEvolutionsToHumanTierSmallWeapons():void {
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
 }/*
-private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
+private function aethertwinsFollowersEvolutionsToSkyTierGauntlets():void {
 	clearOutput();
 	outputText("\"<i>Woohoo it's happening feeling again... We're evolving once more...</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Sharper Bigger!!!</i>\"\n\n");
 	evo to normal sized weapon(s) form(s)
@@ -831,14 +831,14 @@ private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
 }
-private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
+private function aethertwinsFollowersEvolutionsToSkyTierGauntlets():void {
 	clearOutput();
 	outputText("\"<i>Woohoo it's happening feeling again... We're evolving once more...</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Sharper Bigger Curvier!!!</i>\"\n\n");
 	evo to large sized weapon(s) form(s)
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
 }
-private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
+private function aethertwinsFollowersEvolutionsToSkyTierGauntlets():void {
 	clearOutput();
 	outputText("\"<i>Woohoo it's happening feeling again... We're evolving once more...</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Sharper Bigger Curvier Sexier!!!</i>\"\n\n");
 	evo to massive sized weapon(s) form(s)

@@ -1464,7 +1464,7 @@ private function sendToFishery():void
 {
 	clearOutput();
 	izmaSprite();
-	outputText("Information Noona here: So you bossy today and asked Izma to work at fishery.... very clever.");
+	outputText("Seems like you're feeling bossy today, getting Izma to work at the fishery... very clever.");
 	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "Izma";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "Izma";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "Izma";
@@ -1475,7 +1475,7 @@ private function backFromFishery():void
 {
 	clearOutput();
 	izmaSprite();
-	outputText("Information no one reminds your sub tigershark no longer work at fishery.");
+	outputText("Your sub tigershark no longer works at the fishery.");
 	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "";

@@ -1286,10 +1286,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.hasStatusEffect(StatusEffects.MitziIzmaDaughters)) player.removeStatusEffect(StatusEffects.MitziIzmaDaughters);
 				if (flags[kFLAGS.SAMIRAH_HYPNOSIS] == 4 || flags[kFLAGS.SAMIRAH_HYPNOSIS] == 2) flags[kFLAGS.SAMIRAH_HYPNOSIS]++;
-				//Soul Arena Gaunlet reset
-				if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) {
-					if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 1) player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 1, -1);
-					if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) > 1) player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 2, -1);
+				//Soul Arena Gauntlet reset
+				if (player.hasStatusEffect(StatusEffects.SoulArenaGauntlets1)) {
+					if (player.statusEffectv1(StatusEffects.SoulArenaGauntlets1) > 1) player.addStatusValue(StatusEffects.SoulArenaGauntlets1, 1, -1);
+					if (player.statusEffectv2(StatusEffects.SoulArenaGauntlets1) > 1) player.addStatusValue(StatusEffects.SoulArenaGauntlets1, 2, -1);
 				}
 				//Adventure Quild daily quests reset
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) {

@@ -184,7 +184,7 @@ public class MainMenu extends BaseContent {
 		outputText("<b>Supplementary Events:</b>");
 		outputText("<ul>");
 		outputText("<li> Liadri (Etna, Manticore Venom (TF item), Black Ink - female scylla TF item, female scylla exclusive masturbation scene, texts and name for Mantis TF - Blade Grass, Kindra (writing part and some of ideas for few secenes), Archery Overhaul (main designer for it), various TF's: Yeti, Orca, Raiju, Manticore, Hinezumi, Alraune, Werewolf, Winter Wolf, Fenrir, Gargoyle, Cheshire Cat, Hellcat, Jabberwock, Cave Wyrm, Devil, Bicorn, Nightmare, Elf, Melkie; Ceani the Orca girl, Electra the Raiju, Chi Chi the fire mouse, Luna the werewolf maid, Patchouli, Celess, Electra, Winter Wolf enemy, Sabbat event, Pinchou merchant and all items in her shop, ");
-		outputText("Adventure Guild, underwater sharkgirls sex scenes, Kaiba the tanuki merchant, Den of Desire dungeon, most of writing for 1st floor of River Dungeon, Erma archery training, Gaunlet 1 and 2, Jiangshi TF, part of Michiko)</li>");
+		outputText("Adventure Guild, underwater sharkgirls sex scenes, Kaiba the tanuki merchant, Den of Desire dungeon, most of writing for 1st floor of River Dungeon, Erma archery training, Gauntlet 1 and 2, Jiangshi TF, part of Michiko)</li>");
 		outputText("<li> Zevos (Spider-silk shirt, Dragonscale vest, Eldritch Ribbon, Ascensus, Depravation, Puritas items, Ebonbloom crafting material and all items made from it, Ignis)</li>");
 		outputText("<li> Coalsack (Anzu the Avian Deity, Arian App desc, option to change his/her scales color)</li>");
 		outputText("<li> Lord Snakebite (Centipede TF, part of Ghost TF rework, Mitzi & Excellia X-packs)</li>");

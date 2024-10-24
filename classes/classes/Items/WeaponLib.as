@@ -13,7 +13,7 @@ public final class WeaponLib extends ItemConstants
 	{
 		//1 atk for dual weapons = 80 lub 160 jeśli z dodatkowym perkiem lub 240 jeśli z dwoma dodatkowymi perkami
 		//40 za 1 atk normalnie lub za wrath weapon lub 80 za 1 atk broni z perkiem/dod. efektem lub 120 za 1 atk broni z 2 perki/dod. efekty itd.
-		//200 za 1 atk broni typu gaunlet (bo każda ma jakiś efekt lub perk dodany) lub 400 za 1 atk jeśli ma 2 efekty/perki lub 600 jak ma 3 itd.
+		//200 za 1 atk broni typu gauntlet (bo każda ma jakiś efekt lub perk dodany) lub 400 za 1 atk jeśli ma 2 efekty/perki lub 600 jak ma 3 itd.
 		
 		/** @paam subtypeId key in DynamicWeapon.Subtypes */
 		private static function findCommonDynamicWeapon(subtypeId:String):DynamicWeapon {

@@ -19,8 +19,8 @@ public class LightElfs extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
-				SceneLib.hexindao.gaunletchallange1postfight();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGauntlet)) {
+				SceneLib.hexindao.gauntletchallange1postfight();
 			}
 			else lightelf.wonWithLightElf();
 		}

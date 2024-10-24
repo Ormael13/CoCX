@@ -927,7 +927,7 @@ public class Changelog extends BaseContent
 			outputText("-Curse of Desire now cannot increase the lust vulnerability of lust immune enemies. Standardized tease damage for feed specials. Can now see bonus damage tease level gives tease damage in stat menu.\n");
 			outputText("-Removed duplicate damage bonus application from Drider-Weave Sheer Robe effect. Fixed encounter bug in mountains. Fixed bug where Pixie Dust magic special does not produce any effects.  Meteor Shower Spell now no longer procs Inferno Mod multiple times with one cast.\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
-			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
+			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGauntlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes, Library not teaching all curretly existing tier 1 white and black spells, ");
 			outputText("Werewolf pity system not working with FemDom post fight option, cow score req. both fur and plain skin\n\n");
 			outputText("<b>Version 0.8v2 (Few new merged perks, more Arigean content, Increasing lvl cap, Madam and Tempress minor changes and bugfixes):</b>\n\n");
@@ -1748,7 +1748,7 @@ public class Changelog extends BaseContent
 			outputText("-Unarmed attacks using fists (not feral) have now separate mastery tracker of Unarmed mastery.\n");
 			outputText("-Power Attack / Shoot damage is now boosted by bonus to dmg from masteries.\n");
 			outputText("-Brutal Blows perk armor reduction is now: 10% of enemy current armor value + 5.\n");
-			outputText("-BF Gaunlets (Aether Twins 2nd evo) unarmed dmg bonus decreased from 4x to 2x.\n");
+			outputText("-BF Gauntlets (Aether Twins 2nd evo) unarmed dmg bonus decreased from 4x to 2x.\n");
 			outputText("-Patchouli now lead PC lvl 30+ to Wonderland insterad of after having all areas explored. Still it's 50% chance to visit Wonderland over any other area.\n");
 			outputText("-Added option to pay Neisa her waged outside early morning scene.\n");
 			outputText("-Erma shop menu divided into two subpages for bows/crossbows and other range weapons.\n");
@@ -3556,7 +3556,7 @@ public class Changelog extends BaseContent
 			outputText("-Added similary to wisdom/intelligence scaling setting in game menu options to choose strength and speed scalings too. Either less randomn or with larger margin to be randomn.\n");
 			outputText("-Removed recommended level from tooltips in exploration menu.\n");
 			outputText("-13 new achievments (4 shadow ones). Dungeon achiev for 8 dungeons cleared is now possible to attain.\n");
-			outputText("-New melee weapon (by Ormael): Aether (Dex) - obtained by beating one of bosses on 1st floor of River Dungeon. Cost 0 gems. Base atk is 0. When weared with Aether (Sin) shield will have 20% chance to stun and will get all benefits of gaunlet type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Aether (Dex) - obtained by beating one of bosses on 1st floor of River Dungeon. Cost 0 gems. Base atk is 0. When weared with Aether (Sin) shield will have 20% chance to stun and will get all benefits of gauntlet type weapon.\n");
 			outputText("-New shield (by Ormael): Aether (Sin) - obtained by beating one of bosses on 1st floor of River Dungeon. Cost 0 gems. Block chance is 0. When weared with Aether (Dex) block chance will rise by 1.\n");
 			outputText("-Jade Talisman now have use - in one of Hidden Caves rooms is possible to use it. The following event with few steps to be done in order would req. having membership in Adventures Guild and waiting 5+ days to complete successfully.\n");
 			outputText("-New PC camp npc's. Some of them can spar in camp, help with constructing structures, and even assist in one or another way in fight (like you use them directly to beat enemies or have them help as henchman).\n");
@@ -4414,7 +4414,7 @@ public class Changelog extends BaseContent
 			menu();
 			outputText("(Part 1/2) <b>Version 0.8j (Gargoyle TF (end choice), Huge Bug Hunt, Perk-o-calipse 3 (~150 new ones of diff types), Job: Rogue line, Magical Resistance, 2 new item slots, Aerial Combat changes and many other small/QoL changes):</b>\n\n");
 			outputText("-Human score bonuses changed form bonuses to stats into bonuses to EXP gains after fight - 1-5 pts * PC level (the less human PC became, the lower bonus till it reach 0 at 29 pts and below in human score)\n");
-			outputText("-Fatigue cost reduction by half when using multi attacks removed. Soulforce costs mutiplier when using melee multittacks (with fists or gaunlets) lowered from 5x to 3x.\n");
+			outputText("-Fatigue cost reduction by half when using multi attacks removed. Soulforce costs mutiplier when using melee multittacks (with fists or gauntlets) lowered from 5x to 3x.\n");
 			outputText("-Diana chance to use healing or restoring mana actions was lowered at her low and medium levels from 50% to 33% and 25%.\n");
 			outputText("-PC starts with max stats caps of 40 that rise 5 pts each lvl up till lvl 12. Additionaly on each lvl-up till lvl 6 will gain 1 more perk point and 5 stat points. Also each PC now start on lvl 0 and have 1 more perk point than before to spend. (From 0 to Hero right? xD) ((also that 1 more perk point mean either Job perk + 1 more or just 2 perk points to match 2 perk points per lvl-up till 6))\n");
 			outputText("-A bit more weakened base version of imps and goblins + thief enc in Ignam prologue.\n");
@@ -4436,7 +4436,7 @@ public class Changelog extends BaseContent
 			outputText("-Terror special now would additionaly debuff enemy speed for 20 pts or down to 1 if it was below 21 already. Star Sphere Mastery perk fatigue regen was lowered from 2x rank to 1x rank. Each Fox Fire cost in fatigue was switched to mana cost.\n");
 			outputText("-PC with perk Draconic Lungs and 10+ points in dragon score can use new M. Special: True Dragon Breath. It takes one turn to prepare, costs 200 fatigue, deal around 8-10x more dmg that others dragon breaths and could be used only once per day. With perk Draconic Lungs (Final Form) req. for having at least 10+ pts in dragon score is removed.\n");
 			outputText("-Ember, Kiha, Chi Chi and Etna buttons in menu would be now have two diff reasons for been unaccesable - or Luna made something to them to force PC to look for Luna or those npc's are training to get stronger.\n");
-			outputText("-Gaunlet challanges on Soul Arena are now only once per day for each.\n");
+			outputText("-Gauntlet challanges on Soul Arena are now only once per day for each.\n");
 			outputText("-Removed need to have perk Agility to pick perk Unhindered.\n");
 			outputText("-PC with Alraune lower body would be gaining bonuses like PC's with Taur/Drider/Naga lower bodies, which is bonus given on top of racial scores, +15 to max Tou and Lib (scalable).\n");
 			outputText("-Added to cow/minotaur score calculation point for having human arms (since both TF items turns arms into human ones) so now it's possible in NG game getting enough race points to pick all three racial mutation perks. (missing point in cow score to get 3rd racial mutation perk may be effect of not having fur coat or from other tf item or from Pro Bova)\n");
@@ -4502,7 +4502,7 @@ public class Changelog extends BaseContent
 			outputText("-Half-step-to Mythical Endurance / Self-Control / Spirituality / Tranquilness perks was moved 2 tiers higher. Req. stats was increased by 60 for main stat and 40(20) for secondary stat(s). Effects was increased to +8k/+4k/+12k/+4k to max resource bar matching each perk.\n");
 			outputText("-Mythical Endurance / Self-Control / Spirituality / Tranquilness perks was moved 2 tiers higher. Req. stats was increased by 60 for main stat and 40(20) for secondary stat(s). Effects was increased to +10k/+5k/+15k/+5k to max resource bar matching each perk.\n");
 			outputText("-Bimbo Shirt now also count for compatible armors with Unhindered perk.\n");
-			outputText("-Fixed bugs: Struggle/Climb option in Alraune/Sand Trap fights, reseting PC skin in Drider fight, unrepeatable Gaunlet 2, post ascension perk related issue, demon TF wing effects not triggering on others than bee wings, missing unlock for fox face in metamorph menu, HP above max HP after working on Ignam farm, glitched switch for autocasting Blink, missing setting option to choose Hard mode ");
+			outputText("-Fixed bugs: Struggle/Climb option in Alraune/Sand Trap fights, reseting PC skin in Drider fight, unrepeatable Gauntlet 2, post ascension perk related issue, demon TF wing effects not triggering on others than bee wings, missing unlock for fox face in metamorph menu, HP above max HP after working on Ignam farm, glitched switch for autocasting Blink, missing setting option to choose Hard mode ");
 			outputText("on chara creation, Francisca throwing axe and Zweihander been sold in wrong places (they were both switched for place where PC could buy them), missing lvl req. on Deadly Throw, Dual and Dual Large weapons capped at 1 attack per turn even with multi attack perks, missing lvl req. on few racial mutation perks, possibility of picking both Peacock and Griffon Statues in 2 visits, ");
 			outputText("range/melee weapons applying armor ignoring/armor lowering effect regardless of used type (melee/range) of attack, min Sens gained form racial scores not scaling with NG tiers, been locked out from progressing on chara creation if PC have already all History perks made perm into Past Life perks, dragon race bonuses been nearly duplicated");
 			addButton(0, "Next", Changelog20);
@@ -4544,8 +4544,8 @@ public class Changelog extends BaseContent
 			outputText("-New tier 5 misc lvl-up perk: Natural healing (Legendary). Req. 120+ wis, 30+ int and Natural healing (Epic) perk. Effect: +60% healing power and -25% healing spells costs\n");
 			outputText("-Having natural claws add toggle in combat menu to switch between normal or feral combat style. Only when PC not use any weapon (after few special exceptions) can benefit from feral combat style - when PC can attack more than once a turn fatigue costs will be halfed.\n");
 			outputText("-New melee weapon: Claws - obtainable by buying in weapon shop in He'Xin'Dao. 0 atk, 10% to cause bleed, 100 gems, is one of special exception weapons, which could be used without loosing benefits from using feral combat style.\n");
-			outputText("-All bleed effects not req. to lower enemy armor below 10. Also previous 50% chance for bleed effect was lowered to 25% for hooked gaunlets.\n");
-			outputText("-First gaunlet repeatable reward was lowered to 15 spirit stones to keep in theme of 5 SS for each enemy defeated in gaunlet challanges.\n");
+			outputText("-All bleed effects not req. to lower enemy armor below 10. Also previous 50% chance for bleed effect was lowered to 25% for hooked gauntlets.\n");
+			outputText("-First gauntlet repeatable reward was lowered to 15 spirit stones to keep in theme of 5 SS for each enemy defeated in gauntlet challanges.\n");
 			outputText("-Perk Rage give 50 more to max wrath and perk Anger 100 more to max wrath. To perk Job: Warlord req. was added option to use perk Feral Whirlwind instead of Whirlwind or Whipping. Other req. stay the same.\n");
 			outputText("-Beast Warrior PC's can use their own version of Whirlwind that req. only to have natural claws or weapons that can substitude natural claws. Almost all rest is similar to Whirlwind performed with any non-large/large weapon.\n");
 			outputText("-Healing spells will have it own spellpower and cost reduction meter. Items like Mana Bracer, Nocturnal/Unicorn Staff or all 3 Marae Bark enhanced wizard staffs, rings, perks on weapons or armors or ascension one perk would boost heal power meter too in addition to normal spellpower. Similary perks on equipment + spell affinity perk would lower costs of heal spells.\n");
@@ -4582,11 +4582,11 @@ public class Changelog extends BaseContent
 			outputText("<b>Version 0.8i2 (Bugfixing):</b>\n\n");
 			outputText("-Diana later stages stats adjusted. Also added req. of min. lvl 3 to meet her at lake, lowered encounter chance.\n");
 			outputText("-Luna can be spared when PC accept her (by loosing in fight or just accepting). In case of simple accepting there would be new option showing up in talk menu after talking with her on Lycantrophy after accpting her that allow voluntary been biten by her. After sparing she can lvl up up to lvl 27.\n");
-			outputText("-Ice Fist and Fire Punch req. using bare first or gaunlets. Punishing Kick req. to have bipedal or taur lower body.\n");
+			outputText("-Ice Fist and Fire Punch req. using bare first or gauntlets. Punishing Kick req. to have bipedal or taur lower body.\n");
 			outputText("-Visiting Journey to the East inn after 5 pm give 25% to encounter drunk Chi Chi that may lead to drunken sex.\n");
 			outputText("-Added new info when PC have Luna in camp: Moon Cycle. Will show which day of it is currently and when night of full moon will be approaching will be red colored instead of normal black. Also cycle changed to 8 days instead of 7.\n");
-			outputText("-New Gaunlet challange on Soul Arena. Containt 4 fights that will or reward with Sceptre of Command or 20 spirit stones after winning. Req. finishing at least once Gaunlet 1 on soul arena.\n");
-			outputText("-New melee weapon: Sceptre of Command - won as reward for first time beating Gaunlet 2 on Soul Arena. Cost 600 gems and base atk 4. Increase by 50% damage of elementals and golems.\n");
+			outputText("-New Gauntlet challange on Soul Arena. Containt 4 fights that will or reward with Sceptre of Command or 20 spirit stones after winning. Req. finishing at least once Gauntlet 1 on soul arena.\n");
+			outputText("-New melee weapon: Sceptre of Command - won as reward for first time beating Gauntlet 2 on Soul Arena. Cost 600 gems and base atk 4. Increase by 50% damage of elementals and golems.\n");
 			outputText("-Beast Warrior Crinos Shape bonuses was increased from 5/10/15/20% of current str/tou/spe to 20/40/80/160%.\n");
 			outputText("-Metamorph perk would grant increase max soulforce by 50 and grant access to Metamorph option even if PC not yet have perk Job: Soul Cultivator.\n");
 			outputText("-Starting mana cap rised from 100 to 200 and starting fatigue cap from 100 to 150. Feral Whirlwind base dmg increased by 50%. Archery base accuracy increased from 30% to 40%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not just any item in shield slot like mana bracer.\n");
@@ -4782,7 +4782,7 @@ public class Changelog extends BaseContent
 			outputText("-New item (by Zavos): Warding Tome - can be found in one of factory rooms by intelligent enough PC. Reading it can teach PC how to make magic wards and Charge Armor spell if it still not learned. It would open option to build such ward in camp. It function like any camp guarding npc.\n");
 			outputText("-Switched Carpenter and Clinic button in Shop submenu in Tel'Adre. Also Carpenter no longer req. starting work on Cabin to be accesable.\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Sense Wrath. Req. 25+ sens. Effect: Show in combat enemy current wrath\n");
-			outputText("-New event perk: Mighty Fist. Gained form finishing second part of training sessions with Chi Chi. Increase fists and gaunlets atk value by 5 (scalable) and allow them to have 20% chance to stun enemy with each hit.\n");
+			outputText("-New event perk: Mighty Fist. Gained form finishing second part of training sessions with Chi Chi. Increase fists and gauntlets atk value by 5 (scalable) and allow them to have 20% chance to stun enemy with each hit.\n");
 			outputText("-Seeing current enemy mana will req. now having Job: Sorcerer perk (non-mage PC's can't feel how much mana enemy body hold ^^) and for enemy soulforce is required Soul Sense perk (same reason as with enemy mana).\n");
 			outputText("-Process of sculpting gargoyle body in basement of Temple of divine can be finished. Description of finished statue can be a little...off in some areas but all choices will be properly carried over to new PC body at time last step in quest would be added (it 'may be' in 0.8h if all went good).\n");
 			outputText("-Naming nameless Gargoyle from Cathedral will give small chance to discover new dungeon in Blight Ridge. Chances for that rise to around 50% when PC is on quest to become gargoyle aka Gargoyle TF Quest (actualy it's only needed to proceed to around 50-70% of whole Gargoyle TF quest to trigger scene in camp with Rathazul that is need for that increased dicover chance).\n");
@@ -5351,7 +5351,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 4 speed lvl-up perk: Job: Soul Archer. Req. Job: Arcane Archer and Soul Apprentice perks. Effects: +25 to spe (scalable with NG tiers), +100 to max fatigue, +300 to max soulforce.\n");
 			outputText("-New tier 3 speed lvl-up perk: Cupid. Req. Job: Arcane Archer and knowing spell Arouse. Allows to apply weaker version of Arouse spell to arrows/bolts tip.\n");
 			outputText("-New tier 3 strength lvl-up perk: Weapon Grandmastery. Req. Weapon Mastery and 120+ str, effect: increase atk value of Large type weapons from 2x to 3x.\n");
-			outputText("-Job: Brawler and Iron Fists affect now also atk value of hooked gauntlets and spiked gauntlet. Hooked Gaunlets atk value rised from 9 to 21.\n");
+			outputText("-Job: Brawler and Iron Fists affect now also atk value of hooked gauntlets and spiked gauntlet. Hooked Gauntlets atk value rised from 9 to 21.\n");
 			outputText("-Perk Staff Channeling now unlocks new magical special called Magic Bolt instead changing staffs into bolt shooting melee weapons.\n");
 			outputText("-Added new stall with Coal, Dry Tentacle, Ectoplasm and Trap Oil to Moga Hen shop.\n");
 			outputText("-Builing Cabin (furniture inside not counted) add 10 ascension points, completing camp walls with gate reward with 11 points, building wood or stone storage grants 2 ascension point, builing each warehouse and granary add each another two ascension points.\n");
