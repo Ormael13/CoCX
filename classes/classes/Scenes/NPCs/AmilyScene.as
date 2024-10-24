@@ -85,7 +85,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		{
 			pregnancy.pregnancyAdvance();
 			if (flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] > 0) flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO]--;
-			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] > 0 && flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] < 30 * 24) flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER]++;
+			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] > 0 && flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] < 10 * 24) flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER]++;
 			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && model.time.hours == 6 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_SKULLS] < 100 && rand(3) == 0)
 				flags[kFLAGS.CAMP_WALL_SKULLS]++;
 			if (model.time.hours > 23 && flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] > 0) flags[kFLAGS.AMILY_X_JOJO_COOLDOWN]--;
@@ -2444,7 +2444,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				amilyEggStuff();
 				return;
 			}
-			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] == 30 * 24 && flags[kFLAGS.AMILY_FOLLOWER] == 2 && (model.time.hours >= 11 && model.time.hours <= 13)) {
+			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] >= 10 * 24 && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 				amilyIncest();
 				return;
 			}
@@ -7520,6 +7520,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		private function amilyIncest():void {
 			clearOutput();
 			amilySprite();
+			flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] = 0; //reset timer
 			//AKA:
 			//outputText(Fen gets donated to write something that makes him moderately uncomfortable.)
 			outputText("When you go looking for Amily, you find her on the edge of camp, talking with three of her offspring.  The purple-");
@@ -7579,7 +7580,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nSweaty arms cling and rub over all three bodies, until you lose track of whose limbs belong to whom.  Instead, you focus on the pounding rhythm you're hammering through your [legs], the wet squish of your member plowing through your own offspring's naughty folds.  The nagging thought that you're moments away from impregnating your own offspring surfaces but only manages to excite you that much more, the taboo of the act filling your loins with the burgeoning warmth of a fast-approaching orgasm.  The mouse in the middle begs, \"<i>Fuck yes!  Give it to me!</i>\" and squeezes your shaft affectionately with her tail as she cums, the tip waving wildly in Amily's asshole.");
 			outputText("\n\nYou grab the closest pair of hips and ram your cock hilt-deep inside her as you cum.  She wails through her climax, her cunny clenching nice and tight to squeeze the first rope of jism from you.  It surges through you to spatter against her cervix, and as the next jet erupts, you're sure that some of her own must be flooding through her urethra.[if (cumQuantity > 500)   You just keep cumming and cumming, and you almost wish you could see the cum filling her belly and flooding from her nethers.][if (cumQuantity >= 1500)   Even so, her belly pudges out a bit, and you realize she must look extraordinarily pregnant from any other angle.]");
 
-			outputText("\n\nAmily gasps, \"<i>Gods,</i>\" and rolls to the side, the still-inflated knot in her cooch taking your daughter with her.  Now that you've been freed from the extra weight, you catch your breath and sigh as the mousy fluids soaking your body start to dry.  You glance to the side, and see Amily and your daughter ass-to-ass on all fours.  [if (cumQuantity > 500) \"The younger girl's belly is wonderfully filled with cum, hanging nice and low.  \"]Amily's belly appears to be slowly growing and ballooning.  She's nervously trying to pull away, but your daughter's knot holds her there, trapped and unable to do anything as the sticky animal-sperm floods her once-pure womb.");
+			outputText("\n\nAmily gasps, \"<i>Gods,</i>\" and rolls to the side, the still-inflated knot in her cooch taking your daughter with her.  Now that you've been freed from the extra weight, you catch your breath and sigh as the mousy fluids soaking your body start to dry.  You glance to the side, and see Amily and your daughter ass-to-ass on all fours.  [if (cumQuantity > 500) The younger girl's belly is wonderfully filled with cum, hanging nice and low. ]Amily's belly appears to be slowly growing and ballooning.  She's nervously trying to pull away, but your daughter's knot holds her there, trapped and unable to do anything as the sticky animal-sperm floods her once-pure womb.");
 			//{Phimosis boy buttfuck optional)
 			if(all) {
 				outputText("\n\nYou realize you haven't been entirely drained, and you beckon for the male mouse.  His hole ought to be tight enough to milk the last of your seed from your [balls].  He looks at you hopefully, but you sit up and point at him, then your slightly-flagging dick.  The recently-of-age male sighs and kneels between your legs and gets to work.  Though he clearly wants nothing better than to masturbate or start fucking you, he proves as obedient as his mother and slurps his sister's filth from your dick.  A trickle of boy-slime dribbles onto your leg as he bobs up and down, his purple hair obscuring most of his ");

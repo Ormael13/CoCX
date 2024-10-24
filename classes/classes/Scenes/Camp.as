@@ -2264,7 +2264,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(2, "Kitsune Shrine", "Would you kindly build it first?");
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(3, "Hot Spring", campScenes.HotSpring).hint("Visit the Hot Spring.").disableIf(isNightTime,"It's not safe to take a dip in the hotsprings at night.");
 		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
-		if (player.hasPerk(PerkLib.CursedTag)) addButton(4, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY, aka, modify your cursed tag").disableIf(isNightTime, "It's too dark to modify your scroll.");
+		if (player.hasPerk(PerkLib.CursedTag)) addButton(4, "Alter Binding Scroll", AlterBindScroll).hint("Alter Binding Scroll - DIY, aka, modify your cursed tag").disableIf(isNightTime, "It's too dark to modify your scroll.");
 		else addButtonDisabled(4, "Alter Bind Scroll", "Req. you to be a Jiangshi and having the Cursed Tag perk.");
 		var bottles:Array = [
 			[consumables.LG_SFRP, consumables.LGSFRPB, "low"],
@@ -3098,12 +3098,13 @@ public class Camp extends NPCAwareContent{
 			[StatusEffects.AlterBindScroll3, "Undead Resistance"],
 			[StatusEffects.AlterBindScroll4, "Vital Sense"],
 			[StatusEffects.AlterBindScroll5, "Zombified"],
+			[StatusEffects.AlterBindScroll6, "Greater drain"],
 		];
 		var i:int;
 		clearOutput();
 		var limitOnAltering:Number = 1;
 		if (player.hasPerk(PerkLib.ImprovedCursedTag)) limitOnAltering += 1;
-		if (player.hasPerk(PerkLib.GreaterCursedTag)) limitOnAltering += 3;
+		if (player.hasPerk(PerkLib.GreaterCursedTag)) limitOnAltering += 4;
 		var currentAltering:Number = 0;
 		for (i = 0; i < statusNames.length; ++i) {
 			if (player.hasStatusEffect(statusNames[i][0])) ++currentAltering;
@@ -3120,6 +3121,7 @@ public class Camp extends NPCAwareContent{
 		outputText("Undead Resistance -> <i>Gain Immunity to Cold, Poison, and Fatigue damage.</i>\n");
 		outputText("Vital Sense -> <i>You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1.</i>\n");
 		outputText("Zombified -> <i>You are immune to mental attacks that would affect living, sane beings. Furthermore, you have unlimited fatigue.</i>\n");
+		outputText("Greater drain -> <i>Lust damage inflicted on your opponent through physical contact is twice as effective. (Effects straddle and melee attack)</i>\n");
 		menu();
 		for (i = 0; i < statusNames.length; ++i) {
 			addButton(i, statusNames[i][1], alterBindScrollToggle, statusNames[i][0]);

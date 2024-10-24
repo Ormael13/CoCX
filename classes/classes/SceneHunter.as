@@ -122,6 +122,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Disables Zenji vs Celess freakout. Stupid troll shouldn't ask you to kill your daughter.");
         outputText("\n- Disables Sand Witch bad-end when boobs are big and lactation is high. Too annoying.");
         outputText("\n- Disables (not very logical) transition from bee girl to huntress in the forest. Let nothing distract you from buzz.");
+        outputText("\n- Disables Chi-Chi training check if Jojo's corrupt already.");
         outputText("\n<i>Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
 
@@ -139,13 +140,7 @@ public class SceneHunter extends BaseContent {
             outputText("\nYou can marry only one person, like in a <i>completely normal</i> world which Mareth is.");
         }
 
-        addButton(10, "Scene List", openURL, "https://cocxianxia.fandom.com/wiki/Conditional_Scenes");
-        outputText("\n\n<b>Conditional Scenes list:</b> <u><a href='https://cocxianxia.fandom.com/wiki/Conditional_Scenes'>https://cocxianxia.fandom.com/wiki/Conditional_Scenes</a></u>");
-        outputText("\n<i>This list contains minor spoilers for the entirety of the game. You've been warned.</i>");
-
-        addButton(11, "Reference", openURL, "https://cocxianxia.fandom.com/wiki/Scene_Reference");
-        outputText("\n\n<b>Scene Reference:</b> <u><a href='https://cocxianxia.fandom.com/wiki/Scene_Reference'>https://cocxianxia.fandom.com/wiki/Scene_Reference</a></u>");
-        outputText("\n<i>This list contains <b>major</b> spoilers for the entirety of the game. You've been warned.</i>");
+        outputText("\n\n<b> NOTE: Check #realm_of_time channel in discord for the wiki backup. Here you can find scene reference and the list of conditional scenes (depending on race, cocktype, etc.). Both are <i>slightly</i> outdated.</b>");
 
         addButton(14, "Back", CoC.instance.gameSettings.settingsScreenMain);
     }

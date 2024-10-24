@@ -229,6 +229,7 @@ public class TestMenu extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) player.removeStatusEffect(StatusEffects.AlterBindScroll3);
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll6)) player.removeStatusEffect(StatusEffects.AlterBindScroll6);
 		}
 		doNext(SoulforceCheats);
 	}
