@@ -47,7 +47,7 @@ public final class ShieldLib extends ItemConstants
 				"Magic").withBuff('spellpower', +0.5) as Shield;
 		public const NECROSH:NecroShield = new NecroShield();
 		public const SPI_FOC:SpiritFocus = new SpiritFocus();
-		public const TRASBUC:Shield = new Shield("TraSBuc", "TrainSBuckler", "training soul buckler", "a training soul buckler", 3, 300, "A simple rounded shield made of soulmetal, used to train soulforce by soul cultivator novices.");
+		public const TRASBUC:Shield = new Shield("TraSBuc", "TrainSBuckler", "soul training buckler", "a soul training buckler", 3, 300, "A simple rounded shield made of soulmetal, used to train soulforce by soul cultivator novices.");
 		public const TOWERSH:Shield = new TowerShield();
 		public const SANCTYN:SanctuaryN = new SanctuaryN();
 		public const SANCTYL:Sanctuary = new Sanctuary();

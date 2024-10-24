@@ -1985,7 +1985,7 @@ public class Camp extends NPCAwareContent{
 				else {
 					if (rand(3) == 0) outputText("Zenji is around your [camp], you see him resting on his bedroll.");
 					else {
-						if (rand(2) == 0) outputText("Zenji is around your [camp], he is coating his fur in some ashes as he grooms himself.");
+						if (rand(2) == 0) outputText("Zenji is around your [camp], he's coating his fur in some ashes as he grooms himself.");
 						else outputText("Zenji is around your [camp], it looks like he’s polishing his tusks and brushing his teeth with something.");
 					}
 				}
@@ -2195,8 +2195,8 @@ public class Camp extends NPCAwareContent{
 
 	private function campSpendTimeActions():void {
 		menu();
-		addButton(0, "SwimInStream", swimInStream).hint("Swim in stream and relax to pass time.", "Swim In Stream");
-		addButton(1, "ExaminePortal", examinePortal).hint("Examine the portal. This scene is placeholder.", "Examine Portal"); //Examine portal.
+		addButton(0, "SwimInStream", swimInStream).hint("Swim in the stream and relax to pass time.", "Swim in the Stream");
+		addButton(1, "ExaminePortal", examinePortal).hint("Examine the portal. This scene is placeholder.", "Examine the Portal"); //Examine portal.
 		if (model.time.hours == 19) {
 			addButton(2, "Watch Sunset", watchSunset).hint("Watch the sunset and relax."); //Relax and watch at the sunset.
 		} else if ((model.time.hours >= 20 || model.time.hours <= 5) && flags[kFLAGS.LETHICE_DEFEATED] > 0) {
