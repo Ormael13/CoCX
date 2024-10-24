@@ -179,7 +179,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("(<b>Konstantin has been added to the Followers menu!</b>)\n\n");
 			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 			else player.createKeyItem("Radiant shard", 1,0,0,0);
-			outputText("\n\n<b>Before fully settling in your camp as if remembering something Konstantin pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+			outputText("\n\n<b>Before fully settling in your camp, as if remembering something, Konstantin pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 2;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);

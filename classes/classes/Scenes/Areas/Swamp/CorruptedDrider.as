@@ -98,7 +98,7 @@ import classes.internals.*;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2fight4();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGauntlet)) SceneLib.hexindao.gauntletchallange2fight4();
 			else SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
 		}
 
@@ -146,7 +146,7 @@ import classes.internals.*;
 			this.armorMDef = 60;
 			this.armorPerk = "";
 			this.armorValue = 70;
-			if (pierced && !player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
+			if (pierced && !player.hasStatusEffect(StatusEffects.SoulArenaGauntlet)) {
 				this.nipplesPierced = 1;
 				this.bonusHP = 800;
 				this.bonusLust = 430;

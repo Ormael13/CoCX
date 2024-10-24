@@ -1292,7 +1292,7 @@ package classes.Scenes {
 		private function metamorphHeight1U():void {
 			clearOutput();
 			player.soulforce -= 300;
-			outputText("\n\nWhoa wait did you just gain some height!? You indeed notice you've grown by an inch.");
+			outputText("\n\nWhoa, wait, did you just gain some height!? You indeed notice you've grown by an inch.");
 			player.tallness += 1;
 			if (player.basetallness >= 132) player.tallness = 132;
 			doNext(accessPageEx1MetamorphMenu);
@@ -1300,7 +1300,7 @@ package classes.Scenes {
 		private function metamorphHeight2U():void {
 			clearOutput();
 			player.soulforce -= 700;
-			outputText("\n\nWhoa wait did you just gain some height!? You indeed notice you've grown by two inches.");
+			outputText("\n\nWhoa, wait, did you just gain some height!? You indeed notice you've grown by two inches.");
 			player.tallness += 2;
 			if (player.basetallness >= 132) player.tallness = 132;
 			doNext(accessPageEx1MetamorphMenu);
@@ -1308,7 +1308,7 @@ package classes.Scenes {
 		private function metamorphHeight1D():void {
 			clearOutput();
 			player.soulforce -= 100;
-			outputText("\n\nWhoa wait did you just lost some height!? You indeed notice you've shrunk by an inch.");
+			outputText("\n\nWhoa, wait, did you just lost some height!? You indeed notice you've shrunk by an inch.");
 			player.tallness -= 1;
 			if (player.basetallness < 42) player.tallness = 42;
 			doNext(accessPageEx1MetamorphMenu);
@@ -1316,7 +1316,7 @@ package classes.Scenes {
 		private function metamorphHeight2D():void {
 			clearOutput();
 			player.soulforce -= 300;
-			outputText("\n\nWhoa wait did you just lost some height!? You indeed notice you've shrunk by two inches.");
+			outputText("\n\nWhoa, wait, did you just lost some height!? You indeed notice you've shrunk by two inches.");
 			player.tallness -= 2;
 			if (player.basetallness < 42) player.tallness = 42;
 			doNext(accessPageEx1MetamorphMenu);

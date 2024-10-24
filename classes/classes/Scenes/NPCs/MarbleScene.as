@@ -355,7 +355,7 @@ public function timeChangeLarge():Boolean {
 private function marbleFollowerInit():void {
     if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
     else player.createKeyItem("Radiant shard", 1,0,0,0);
-    outputText("\n\n<b>Before fully settling in your camp, as if remembering something, Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+    outputText("\n\n<b>Before fully settling in your camp, as if remembering something, Marble pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
     player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
     player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
     flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;

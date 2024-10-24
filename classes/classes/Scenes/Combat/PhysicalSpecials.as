@@ -540,7 +540,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.canFly() && !player.hasPerk(PerkLib.ElementalBody)) {
-				bd = buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + combat.flightDurationNatural() + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+				bd = buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + combat.flightDurationNatural() + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to mention for non-spear users to attack in melee range.");
 			}
 			if (player.shieldName == "Battle Net") {
 				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. (cooldown of 5 rounds before it can be used again)");
@@ -6107,7 +6107,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else monster.addStatusValue(StatusEffects.TimesBashed, 1, dismishing);
 		}
 		checkAchievementDamage(damage);
-		if ((player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) && !monster.isImmuneToBleed()) {
+		if ((player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gauntlets")) && !monster.isImmuneToBleed()) {
 			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else {
 				monster.createStatusEffect(StatusEffects.Hemorrhage, 3, 0.02, 0, 0);

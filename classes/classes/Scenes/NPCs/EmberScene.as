@@ -822,7 +822,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\n(<b>Ember has been gained as a follower! Mysterious Egg quest is now complete.</b>)");
         if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard", 1, +1);
         else player.createKeyItem("Radiant shard", 1, 0, 0, 0);
-        outputText("\n\n<b>Before fully settling in your camp as if remembering something Ember pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+        outputText("\n\n<b>Before fully settling in your camp, as if remembering something, Ember pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
         flags[kFLAGS.EMBER_HATCHED] = 1;
         player.removeKeyItem("Dragon Egg");
         endEncounter();

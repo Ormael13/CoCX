@@ -29,7 +29,7 @@ public function putInTheJadeTalismanEpilogue():void {
 	flags[kFLAGS.AURORA_LVL] = 1;
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
-	outputText("\n\n<b>Before fully settling in your camp as if remembering something Aurora pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Aurora pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -218,7 +218,7 @@ public function auroraHenchmanOption2(slot:Number = 1):void
 private function sendToFishery():void
 {
 	clearOutput();
-	outputText("Information Noona here: So you bossy today and asked gargoyle servant to work at fishery.... very clever.");
+outputText("So you're bossy today and asked the gargoyle servant to work at the fishery... very clever.");
 	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "Aurora";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "Aurora";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "Aurora";
@@ -228,7 +228,7 @@ private function sendToFishery():void
 private function backFromFishery():void
 {
 	clearOutput();
-	outputText("Information no one reminds your gargoyle servant no longer work at fishery.");
+	outputText("Your gargoyle servant no longer works at the fishery.");
 	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "";
 	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "";

@@ -17019,7 +17019,7 @@ public final class Mutations extends MutationsHelper {
 			}
 			if (type == 0) {
 				if (player.basetallness < 94) {
-					outputText("[pg]Whoa wait did you just gain some height!? You indeed notice you've grown by a few inches.");
+					outputText("[pg]Whoa, wait, did you just gain some height!? You indeed notice you've grown by a few inches.");
 					player.tallness += 1 + rand(3);
 				}
 				if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && transformations.EyesChangeColor(["green"]).isPossible()) {
@@ -17065,7 +17065,7 @@ public final class Mutations extends MutationsHelper {
 			}
 			if (type == 1) {
 				if (player.basetallness < 98) {
-					outputText("[pg]Whoa wait did you just gain some height!? You indeed notice you've grown by a few inches.");
+					outputText("[pg]Whoa, wait, did you just gain some height!? You indeed notice you've grown by a few inches.");
 					player.tallness += 1 + rand(3);
 				}
 				if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && transformations.EyesChangeColor(["blue"]).isPossible()) {

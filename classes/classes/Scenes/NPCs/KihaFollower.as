@@ -1706,7 +1706,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("[pg]Kiha sniffles softly and continues, \"<i>I almost feel bad for Lethice to have you as an enemy.  Do me a favor and kick her in the twat for me when you find her, okay?</i>\"  You both share a nervous laugh at that and slowly end the hug.  Dabbing at one of her tears, you suggest, \"<i>Come on, let's carry your stuff over and get you moved in.</i>\"  Kiha's tail wags happily, and the two of you begin gathering her things.");
         outputText("[pg]<b>(Kiha has joined your camp as a lover!)</b>");
         flags[kFLAGS.KIHA_FOLLOWER] = 1;
-        outputText("\n\n<b>As if remembering something Kiha pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+        outputText("\n\n<b>As if remembering something Kiha pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
         if (player.hasKeyItem("Radiant shard") >= 0) {
             player.addKeyValue("Radiant shard", 1, +1);
         } else player.createKeyItem("Radiant shard", 1, 0, 0, 0);

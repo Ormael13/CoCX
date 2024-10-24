@@ -1022,17 +1022,17 @@ public function soularena():void {
 	private function soularenaChallengeSubpages(page:int = 1):void {
 		menu();
 		if (page == 1) {
-			if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(0, "Gaunlet 1", "You already won this gauntlet today. Come back tomorrow.");
-			else addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-			if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 0) {
-				if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(1, "Gaunlet 2", "You already won this gauntlet today. Come back tomorrow.");
-				else addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
+			if (player.statusEffectv1(StatusEffects.SoulArenaGauntlets1) > 1) addButtonDisabled(0, "Gauntlet 1", "You already won this gauntlet today. Come back tomorrow.");
+			else addButton(0, "Gauntlet 1", gauntletchallange1fight1).hint("Fight 3 diff enemies one after another.");
+			if (player.statusEffectv1(StatusEffects.SoulArenaGauntlets1) > 0) {
+				if (player.statusEffectv2(StatusEffects.SoulArenaGauntlets1) > 1) addButtonDisabled(1, "Gauntlet 2", "You already won this gauntlet today. Come back tomorrow.");
+				else addButton(1, "Gauntlet 2", gauntletchallange2fight1).hint("Fight 4 diff enemies one after another.");
 			}
-			else addButtonDisabled(1, "Gaunlet 2", "You need to finish Gauntlet 1 first.");
-			//addButton(2, "Gauntlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
-			//addButton(3, "Gauntlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
-			//addButton(4, "Gauntlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");
+			else addButtonDisabled(1, "Gauntlet 2", "You need to finish Gauntlet 1 first.");
+			//addButton(2, "Gauntlet 3", gauntletchallange3).hint("Fight 5 diff enemies one after another.");
+			//addButton(3, "Gauntlet 4", gauntletchallange4).hint("Fight 6 diff enemies one after another.");
+			//addButton(4, "Gauntlet 5", gauntletchallange5).hint("Fight 7 diff enemies one after another.");
+			//addButton(5, "Gauntlet 6", gauntletchallange6).hint("Fight 8 diff enemies one after another.");
 			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection1,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
 			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection1,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
 			addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
@@ -1075,7 +1075,7 @@ public function soularena():void {
 	public function soularenafightsbetween():void {
 		cleanupAfterCombat();
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
-		player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.SoulArenaGauntlet, 0, 0, 0, 0);
 	}
 	public function intermediateleadershipfight1():void {
 		clearOutput();
@@ -1341,7 +1341,7 @@ public function soularena():void {
 		}
 		SceneLib.combat.enemyAIImpl();
     }
-    public function gaunletchallange1fight1():void {
+    public function gauntletchallange1fight1():void {
         clearOutput();
         outputText("You register for the gauntlet challenge, and wait patiently until you are called. You're motioned forward quickly, and move out beyond the arena gate to face your opponent. The crowd is big, you certainly have quite the audience! A man with a necktie and a weird stick screams across the area.\n\n");
         outputText("\"<i>Ladies and gentlemen! Today a new gladiator enters the arena seeking the glory of the gauntlet! A triple battle for gems and fame!</i>\"\n\n");
@@ -1349,13 +1349,13 @@ public function soularena():void {
         outputText("\"<i>We're starting out with an old timer. Even if this is only the warm up, don't count these statues out! Beware... the Dummy golems!!!</i>\"\n\n");
         outputText("A set of walking stone statues enter the arena, ready for battle. It seems you are to fight these first.\n\n");
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
-        player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.SoulArenaGauntlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         flags[kFLAGS.GOLEM_ENEMY_TYPE] = 1;
 		startCombat(new GolemsDummy());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
-    public function gaunletchallange1fight2():void {
+    public function gauntletchallange1fight2():void {
         clearOutput();
 		soularenafightsbetween();
 		outputText("\n\nAs the last of the golems fall down, the commentator resumes.\n\n");
@@ -1364,7 +1364,7 @@ public function soularena():void {
         startCombat(new TentacleBeast());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
-    public function gaunletchallange1fight3():void {
+    public function gauntletchallange1fight3():void {
         clearOutput();
 		soularenafightsbetween();
 		outputText("\n\nAs the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
@@ -1374,35 +1374,35 @@ public function soularena():void {
 		startCombat(new LightElfs());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
-    public function gaunletchallange1postfight():void {
+    public function gauntletchallange1postfight():void {
         clearOutput();
         outputText("You exit the arena, victorious, basking in the cheering of the crowd and go to the prize counter for your reward. A woman greets you.\n\n");
-        if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) == 1) {
+        if (player.statusEffectv1(StatusEffects.SoulArenaGauntlets1) == 1) {
             outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 15 spirit stones. Please do come back again. Might I suggest a harder gauntlet, to test your skills?</i>\"\n\n");
-            player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 1, 1);
+            player.addStatusValue(StatusEffects.SoulArenaGauntlets1, 1, 1);
 			flags[kFLAGS.SPIRIT_STONES] += 15;
             cleanupAfterCombat();
         }
         else {
             outputText("\"<i>Good show, champion. As a reward for your performance, please accept this magical bow. Please do come back again. Might I suggest a harder gauntlet, to test your skills?</i>\"\n\n");
-            if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 1, 2);
-			else player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 0, 0, 0);
+            if (player.hasStatusEffect(StatusEffects.SoulArenaGauntlets1)) player.addStatusValue(StatusEffects.SoulArenaGauntlets1, 1, 2);
+			else player.createStatusEffect(StatusEffects.SoulArenaGauntlets1, 2, 0, 0, 0);
             inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
         }
     }
-	public function gaunletchallange2fight1():void {
+	public function gauntletchallange2fight1():void {
 		clearOutput();
 		outputText("As you enter the arena you spot your opponent at the other edge of the battlefield. She's a goblin, not unlike those you've met in the wilderness, however she’s armed with a set of throwing knives and other gear you don’t see normally on those critters.\n\n");
         outputText("The voice of the announcer rings across the stadium.\n\n");
         outputText("\"<i>Ladies and gentlemans, this champion from another world has risen to challenge our second gladiatorial gauntlet! Can this would be hero defeat all three opponents? It's not just bragging rights on the line here, but also a sack full of fine gems, right from our coffers!  LET'S RUMBLE!</i>\"\n\n");
         outputText("The gates open and the goblin charges at you, weapon at the ready.\n\n");
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
-        player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.SoulArenaGauntlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         startCombat(new GoblinAssassin());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
-	public function gaunletchallange2fight2():void {
+	public function gauntletchallange2fight2():void {
 		clearOutput();
 		soularenafightsbetween();
 		outputText("\n\nAs the goblin falls unconscious to the ground the crowd cheers you on.\n\n");
@@ -1411,7 +1411,7 @@ public function soularena():void {
         startCombat(new HellHound());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
-	public function gaunletchallange2fight3():void {
+	public function gauntletchallange2fight3():void {
 		clearOutput();
 		soularenafightsbetween();
 		outputText("\n\nThe mutt falls to the floor as the crowd screams your name. The announcer announces the next contestant.\n\n");
@@ -1421,7 +1421,7 @@ public function soularena():void {
         startCombat(new CorruptedDrider());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
-	public function gaunletchallange2fight4():void {
+	public function gauntletchallange2fight4():void {
 		clearOutput();
 		soularenafightsbetween();
 		outputText("\n\nAs the drider falls defeated, the crowd cheers. That said the battle is far from over yet. A large number of shadows mass behind the opposite gate and already you can guess what's coming for you.\n\n");
@@ -1430,21 +1430,21 @@ public function soularena():void {
         startCombat(new BossGolems());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
-	public function gaunletchallange2postfight():void {
+	public function gauntletchallange2postfight():void {
 		clearOutput();
 		outputText("The last gargoyle crumbles to rubble and you hold its head up toward the stands, flexing your victory. The crowd roars, and the announcer takes his stand once again.\n\n");
         outputText("\"<i>The challenger defeated all of their opponents, what a miracle! Challenger, you may now exit the arena and claim your prize, well done!</i>\"\n\n");
         outputText("You make your way towards the exit and to your surprise meet face to face with the town golemancer. She grudgingly hands you your reward.\n\n");
         outputText("\"<i>I’m supposed to reward you ");
-        if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) == 1) {
+        if (player.statusEffectv2(StatusEffects.SoulArenaGauntlets1) == 1) {
 			outputText("a full chest of spirit stones. Tsk, I guess my golems were not ready yet. My future creations won't make the same mistakes.</i>\"\n\n");
-			player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 2, 1);
+			player.addStatusValue(StatusEffects.SoulArenaGauntlets1, 2, 1);
 			flags[kFLAGS.SPIRIT_STONES] += 20;
             cleanupAfterCombat();
 		}
 		else {
 			outputText("with this scepter. Tsk, I guess my golems were not ready yet. My future creations won't make the same mistakes.</i>\"\n\n");
-			player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 2, 2);
+			player.addStatusValue(StatusEffects.SoulArenaGauntlets1, 2, 2);
 			inventory.takeItem(weapons.SCECOMM, cleanupAfterCombat);
 		}
 	}

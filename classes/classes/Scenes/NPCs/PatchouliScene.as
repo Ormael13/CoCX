@@ -351,7 +351,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("\"<i>Oh but that's where you're wrong [name], I never was sane to begin with. Everyone from my homeland is mad one way or another and if I may be honest I’m one of the craziest. Now I’m not only crazy, I’m literally crazy for you so lets go mad together!</i>\"\n\n");
 		if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 		else player.createKeyItem("Radiant shard", 1,0,0,0);
-		outputText("<b>As if remembering something she pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>\n\n");
+		outputText("<b>As if remembering something she pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>\n\n");
 		flags[kFLAGS.PATCHOULI_FOLLOWER]      = BIMBO;
 		flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] = 0;
 		flags[kFLAGS.PATCHOULI_CUP_SIZE]      = 5;

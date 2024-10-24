@@ -96,7 +96,7 @@ public class GoblinAssassin extends Monster
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2fight2();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGauntlet)) SceneLib.hexindao.gauntletchallange2fight2();
 			else SceneLib.goblinScene.gobboRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -107,7 +107,7 @@ public class GoblinAssassin extends Monster
 		{
 			if (noInit) return;
 			this.a = "the ";
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGauntlet)) {
 				this.short = "goblin adventurer";
 				this.level = 9;
 				this.bonusHP = 70;

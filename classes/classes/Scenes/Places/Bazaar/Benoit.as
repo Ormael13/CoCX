@@ -538,7 +538,7 @@ public function updateBenoitInventory():void {
 
 private function buyAlarmClock():void {
 	clearOutput();
-	outputText("You wander [benoit name]'s shop for a good while as you're searching for something interesting until you spot something interesting.");
+	outputText("You wander [benoit name]'s shop for a good while, searching through the clutter, until you finally spot something interesting.");
 	outputText("\n\nIt's a mechanical clock.  It has a flip display and there are buttons on top of the clock for the purpose of setting time and alarm.  You wind up the clock and the display flips, indicating that the clock works.  Whoever constructed this clock must have been a genius, you would have even guessed a goblin constructed it before the corruption.  You pick up the clock and show it to [benoit name].");
 	outputText("\n\n\"<i>It works?  I have no need for zis.  500 gems,</i>\" [benoit Ey] says.");
 	outputText("\n\nDo you buy the clock?");
@@ -552,7 +552,7 @@ private function buyAlarmClockConfirmation():void {
 		return;
 	}
 	outputText("\"<i>Here you go.  I have no need for zis,</i>\" [benoit name] says.");
-	outputText("\n\n<b>You can now set alarm. Go to your cabin to set the alarm. (And change the time when you'll wake up.)</b>");
+	outputText("\n\n<b>You can now set alarms. Go to your cabin to set the alarm. (And change the time when you'll wake up.)</b>");
 	player.gems -= 500;
 	statScreenRefresh();
 	flags[kFLAGS.BENOIT_CLOCK_BOUGHT]++;

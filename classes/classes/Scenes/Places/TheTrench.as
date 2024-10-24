@@ -740,7 +740,7 @@ private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart2():void {
 	outputText("\"<i>Thank you, my Princess. Now if you don’t mind, I'm going to start unpacking.</i>\"\n\n");
 	outputText("You take that as your cue to leave and give her a small wave before attending to your other duties for the day.\n\n");
 	outputText("\n\n(<b>Grayda has been added to the Followers menu!</b>)\n\n");
-	outputText("\n\n<b>As if remembering something Grayda pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	outputText("\n\n<b>As if remembering something Grayda pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
 	if (player.hasKeyItem("Radiant shard") >= 0){
 		player.addKeyValue("Radiant shard",1,+1);
 	}

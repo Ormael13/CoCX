@@ -56,7 +56,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		
 		override public function get size():int {
 			if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield") return WSZ_SMALL;
-			else if (AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") return WSZ_LARGE;
+			else if (AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gauntlets") return WSZ_LARGE;
 			else return WSZ_MEDIUM;
 		}
 		

@@ -70,8 +70,8 @@ public class TentacleBeast extends Monster
 			} else {
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
-				SceneLib.hexindao.gaunletchallange1fight3();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGauntlet)) {
+				SceneLib.hexindao.gauntletchallange1fight3();
 			}
 			else if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);

@@ -76,7 +76,7 @@ public function siegweirdFirstEncounterPostFightJoinYes():void
 	outputText("\n\n<b>Siegweird has joined you as a follower.</b>\n\n");
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
-	outputText("\n\n<b>Before fully settling in your camp as if remembering something Siegweird pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	outputText("\n\n<b>Before fully settling in your camp, as if remembering something, Siegweird pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	if (!SceneLib.alvinaFollower.AlvinaPurified)
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5) {

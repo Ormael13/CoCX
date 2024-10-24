@@ -2415,7 +2415,7 @@ public class KitsuneScene extends BaseContent
 			Ayane9tailsPCMMfix();
 			outputText("\n\nAyane packs her belongings in a weird bag that seems to never be fuller or emptier and starts to follow you around.");
 			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");
-			outputText("\n\n<b>As if remembering something Ayane pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+			outputText("\n\n<b>As if remembering something Ayane pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
 			if (player.hasKeyItem("Radiant shard") >= 0){
 				player.addKeyValue("Radiant shard",1,+1);
 			}

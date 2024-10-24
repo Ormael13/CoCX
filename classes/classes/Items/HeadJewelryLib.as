@@ -47,7 +47,7 @@ public final class HeadJewelryLib extends ItemConstants
 		public const SKIGOGG:HeadJewelry = new HeadJewelry("SkiGogg", "Ski goggles", "Ski goggles", "a Ski goggles", 0, 0, 400, "These goggles help shield your eyes against the snowstorms of the glacial rift, allowing you to see correctly in a blizzard like the denizens of the rift.",HJT_HELMET);
 		public const SNOWFH:SnowflakeHairpin = new SnowflakeHairpin();
 		public const SPHINXAS:SphinxAccessorySet = new SphinxAccessorySet();
-		public const TSHAIR :HeadJewelry = new HeadJewelry("TSHair", "T.S.Hairpin", "training soul hairpin", "training soul hairpin", 0, 0, 200, "This hairpin, made from soulmetal helps to train soulforce to the uttermost limit for novice soul cultivator. ",HJT_HAIRPIN);
+		public const TSHAIR :HeadJewelry = new HeadJewelry("TSHair", "T.S.Hairpin", "soul training hairpin", "soul training hairpin", 0, 0, 200, "This hairpin, made from soulmetal helps to train soulforce to the uttermost limit for novice soul cultivator. ",HJT_HAIRPIN);
 		public const FIRECRO:HeadJewelry = new HeadJewelry("FireCro", "Fire Crown", "crown of fire protection", "an enchanted crown of fire protection", MODIFIER_FIRE_R, 20, 3200, "This crown is topped with ruby gemstones. It is said that this will make you protected from fire.",HJT_CROWN);
 		public const ICECROW:HeadJewelry = new HeadJewelry("IceCrow", "Ice Crown", "crown of ice protection", "an enchanted crown of ice protection", MODIFIER_ICE_R, 20, 3200, "This crown is topped with sapphire gemstones. It is said that this will make you protected from ice.",HJT_CROWN);
 		public const LIGHCRO:HeadJewelry = new HeadJewelry("LighCro", "Ligh Crown", "crown of lightning protection", "an enchanted crown of lightning protection", MODIFIER_LIGH_R, 20, 3200, "This crown is topped with lapis lazuli gemstones. It is said that this will make you protected from lightning.",HJT_CROWN);
@@ -65,8 +65,8 @@ public final class HeadJewelryLib extends ItemConstants
 		public const CROWSTR:HeadJewelry = new HeadJewelry("CrowStr", "CrownOfStrength", "Crown of Strength", "a Crown of Strength", 0, 0, 3200, "A simple crown to boost strength.",HJT_CROWN).withBuffs({"str.mult":+0.20}) as HeadJewelry;
 		public const CROWTOU:HeadJewelry = new HeadJewelry("CrowTou", "CrownOfToughness", "Crown of Toughness", "a Crown of Toughness", 0, 0, 3200, "A simple crown to boost toughness.",HJT_CROWN).withBuffs({"tou.mult":+0.20}) as HeadJewelry;
 		public const CROWWIS:HeadJewelry = new HeadJewelry("CrowWis", "CrownOfWisdom", "Crown of Wisdom", "a Crown of Wisdom", 0, 0, 3200, "A simple crown to boost Wisdom.",HJT_CROWN).withBuffs({"wis.mult":+0.20}) as HeadJewelry;
-		public const EZEKIELC:HeadJewelry = new HeadJewelry("EzekielC", "EzekielCrown", "Ezekiel's Crown", "an Ezekiel's Crown", 0, 0, 400, "A crown rumored to be blessed by the Ezekiel himself. Is that real one or just another fake crown merchant sold you? (-4 to internal chimerical disposition)",HJT_CROWN);
-		public const JIANGCT:HeadJewelry = new HeadJewelry("JiangCT", "JiangshiCurseTag", "Jiangshi Curse Tag", "a Jiangshi Curse Tag", 0, 0, 400, "This item controls and alter your bodily function.", HJT_HELMET);
+		public const EZEKIELC:HeadJewelry = new HeadJewelry("EzekielC", "EzekielCrown", "Ezekiel's Crown", "an Ezekiel's Crown", 0, 0, 400, "A crown rumored to be blessed by the Ezekiel himself. Is this the real one or just another fake crown the merchant sold you? (-4 to internal chimerical disposition)",HJT_CROWN);
+		public const JIANGCT:HeadJewelry = new HeadJewelry("JiangCT", "JiangshiCurseTag", "Jiangshi Curse Tag", "a Jiangshi Curse Tag", 0, 0, 400, "This item controls and alters your bodily functions.", HJT_HELMET);
 		public const SKULLCR:SkullCrown = new SkullCrown();
 		public const TREELCR:TreeOfLifeCrown = new TreeOfLifeCrown();
 		public const GHORNAM:GoldenHornOrnament = new GoldenHornOrnament();

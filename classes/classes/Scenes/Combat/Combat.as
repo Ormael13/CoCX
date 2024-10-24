@@ -569,7 +569,7 @@ public class Combat extends BaseContent {
                 }
                 inCombat = false;
                 if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
-                if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) player.removeStatusEffect(StatusEffects.SoulArenaGaunlet);
+                if (player.hasStatusEffect(StatusEffects.SoulArenaGauntlet)) player.removeStatusEffect(StatusEffects.SoulArenaGauntlet);
                 if (player.hasStatusEffect(StatusEffects.LockingCurse)) player.removeStatusEffect(StatusEffects.LockingCurse);
                 //BUNUS XPZ
                 if (flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
@@ -940,16 +940,16 @@ public class Combat extends BaseContent {
         }
         if (!player.isFlying()) {
             if (player.canFly()) buttons.add("Take Flight", takeFlightWings)
-                .hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
+                .hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to mention for non-spear users to attack in melee range.")
                 .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
 			if (player.weaponFlyingSwordsName != "nothing" && player.canFlyOnFlyingSwords()) buttons.add("Take Flight", takeFlightByFlyingSword)
-                .hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
+                .hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to mention for non-spear users to attack in melee range.")
                 .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings)
-                .hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
+                .hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to mention for non-spear users to attack in melee range.")
                 .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
 			if (player.statStore.hasBuff("FoxflamePelt") && player.tailCount >= 9) buttons.add("Take Flight", takeFlightFoxflamePelt)
-                .hint("Use your own foxflame pelt to take flight into the air. \n\nSoulforce cost per turn: "+Math.round(25 * soulskillCost() * soulskillcostmulti())+"\nMana cost per turn: "+spellCost(50 * combat.mspecials.kitsuneskill2Cost())+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
+                .hint("Use your own foxflame pelt to take flight into the air. \n\nSoulforce cost per turn: "+Math.round(25 * soulskillCost() * soulskillcostmulti())+"\nMana cost per turn: "+spellCost(50 * combat.mspecials.kitsuneskill2Cost())+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to mention for non-spear users to attack in melee range.")
                 .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
         }
 		if (player.isFlying()) {

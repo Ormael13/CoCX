@@ -42,7 +42,7 @@ public class Questlog extends BaseContent
 		
 		public function accessQuestlogMainMenu():void {
 			clearOutput();
-			outputText("List of all not-started, not yet completed and completed quests. After finishing each of them PC could pick reward but... <i>You only need to click once fool</i>");
+			outputText("List of all unstarted, ongoing, and completed quests. After finishing each, you can claim a reward, but... <i>You only need to click once, fool</i>");
 			
 			outputText("\n\n<u><b>Main Quests</b></u>\n");
 			printQuestGroup(QuestLib.QGRP_MAIN);
@@ -54,7 +54,7 @@ public class Questlog extends BaseContent
 			outputText("\n<b>End of Reign:</b> ");
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 1) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkLethiceStrongholdClear()) outputText("Completed");
-			else if (flags[kFLAGS.D3_DISCOVERED] > 0) outputText("In Progress (to complete this quest PC must beat either Basilisk Boss or Mirror Demon)");
+			else if (flags[kFLAGS.D3_DISCOVERED] > 0) outputText("In Progress (to complete this quest, you must defeat either the Basilisk Boss or the Mirror Demon)");
 			else outputText("Not Started");
 			
 			outputText("\n\n<u><b>Side Quests</b></u>\n");
@@ -180,14 +180,14 @@ public class Questlog extends BaseContent
 
         public function reward(perkPoints:int = 0, statPoints:int = 0, bonusReward:Boolean = false):void {
 			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("Your contribution in changing Mareth has been noticed.\n\n");
 			outputText("<b>Gained");
             if (perkPoints > 0) outputText(" " + perkPoints + " perk point" + (perkPoints > 1 ? "s" : ""));
             if (perkPoints > 0 && statPoints > 0) outputText(" and");
             if (statPoints > 0) outputText(" " + statPoints + " stat point" + (statPoints > 1 ? "s" : ""));
             outputText((perkPoints == 0 && statPoints == 0) ? " nothing.</b>" : ".</b>");
 			if (bonusReward) {
-				outputText("\n\n<b>Additional reward for progressing main storyline - 1 super perk point</b>");
+				outputText("\n\n<b>Additional reward for progressing the main storyline - 1 super perk point</b>");
 				player.superPerkPoints++;
 			}
             player.perkPoints += perkPoints;

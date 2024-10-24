@@ -994,10 +994,10 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (player.level > 6) player.perkPoints += 7;
 			else player.perkPoints += player.level + 1;
-			if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] > 0) {
-				if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 0, 0, 0);
-				else player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 2, 0, 0);
-				flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 0;
+			if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNTLETS] > 0) {
+				if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNTLETS] == 1) player.createStatusEffect(StatusEffects.SoulArenaGauntlets1, 2, 0, 0, 0);
+				else player.createStatusEffect(StatusEffects.SoulArenaGauntlets1, 2, 2, 0, 0);
+				flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNTLETS] = 0;
 			}
 			refundPerk(PerkLib.SenseCorruption);
 			refundPerk(PerkLib.SenseWrath);
