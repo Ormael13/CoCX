@@ -15355,7 +15355,7 @@ public function randomTeaseButtfuckTail(straddleDamage:Number, randomcrit:Boolea
 }
 
 public function randomTeaseViolateOpponentBreast(straddleDamage:Number, randomcrit:Boolean):void {
-    outputText("You begin to groppe [themonster] [monster breasts] with both hands, licking the areola and smirking knowingly as the tips hardens in reaction. " +
+    outputText("You begin to grope [themonster] [monster breasts] with both hands, licking the areola and smirking knowingly as the tips hardens in reaction. " +
             "[themonster] moans coax you in doubling up the attention your tongue circling a nipple then moving to the other. " +
             "It takes great effort from [themonster] to snap out and force you off [monster his] tormented chest but the blush you see on [monster his] cheeks was worth it.");
     monster.teased(straddleDamage, false);
@@ -16120,7 +16120,7 @@ public function WebTease():void {
 
         //Land the hit!
         if (rand(100) <= chance) {
-            outputText("You giggle and run your hands against your helpless victim's flesh, their naughty bits purposely left exposed out of your web for you to groppe and play with.")
+            outputText("You giggle and run your hands against your helpless victim's flesh, their naughty bits purposely left exposed out of your web for you to grope and play with.")
             
             var damagemultiplier:Number = 1;
             if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
