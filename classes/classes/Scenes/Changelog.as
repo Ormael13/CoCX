@@ -278,9 +278,9 @@ public class Changelog extends BaseContent
 			outputText("-All camp scenes and related systems proofread and corrected. (Agentfunfun)\n");
 			outputText("-New option in Alteration of Cursed Tag: Greater drain -> Lust damage inflicted on your opponent through physical contact is twice as effective (Effects straddle and melee attack)\n");
 			outputText("-More proof reading: Miscellaneous changes to various scenes, perks and some buttons for clarity. (Agentfunfun)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Urta goo scene now changes hair color. Increased the chance of transformatives from Kitsune's Gift. Bazaar rape less annoying now. (Svalkash)\n");
+			outputText("-You can now (finally) dismiss Neisa from the camp! (Svalkash)\n");
+			outputText("-Fixed: Fox/Mystic Jewel transformation chances, transform. acclimation not working (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

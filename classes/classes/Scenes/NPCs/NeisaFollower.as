@@ -121,10 +121,11 @@ public function neisaCampMenu():void {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa" || flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") addButtonDisabled(1, "Spar", "You can't fight against her as long she's in your team.");
 		else addButton(1, "Spar", neisaSpar).hint("Do a quick battle with Neisa!");
 	}
-	addButton(2, "Dismiss", neisaDismiss).hint("Tell Neisa to go back to the inn.");
-	//if (player.lust >= 33) addButton(3, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
+	//addButton(2, "Talk", neisaTalkMenuMain);
+	//if (player.lust >= 33) addButton(3, "Sex", neisaSexMenuMain);
 	if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", neisaHenchmanOption);
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
+	addButton(12, "Dismiss", neisaDismiss).hint("Tell Neisa to go back to the inn.");
 	if (flags[kFLAGS.NEISA_FOLLOWER] >= 14) addButton(13, "Paycheck", neisaMorningPaycheckCall2).hint("Pay Neisa due payment (make sure to not lack spirit stones for it)");
 	addButton(14, "Back", camp.campFollowers);
 }
