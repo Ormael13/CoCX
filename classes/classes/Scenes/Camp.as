@@ -838,8 +838,8 @@ public class Camp extends NPCAwareContent{
 			outputText(" written at the edge of your [camp]. Their runes regularly glow with impulse of power.\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1) {
-			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("Big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to the camp.");
-			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("Wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
+			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("Your big wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to the camp.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("Your wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
 			else outputText("Small wooden dam drapes across the stream, slowing the passage of water");
 			outputText(".\n\n");
 			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {

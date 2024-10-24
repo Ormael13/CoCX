@@ -58,7 +58,7 @@ public function firstMeetingMichiko():void {
 	outputText("(<b>Michiko has been added to the Followers menu!</b>)\n\n");
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
-	outputText("\n\n<b>Before fully settling in your camp as if remembering something Michiko pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	outputText("\n\n<b>Before fully settling in your camp, as if remembering something, Michiko pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.MICHIKO_FOLLOWER] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }

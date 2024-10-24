@@ -3225,7 +3225,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function berzerkG2():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention savage fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
@@ -3233,7 +3233,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function berzerkG2and3():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain() * 2);
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -4);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 2);
@@ -3241,7 +3241,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function berzerkG3():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
@@ -3249,7 +3249,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function berzerkG3and4():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 4."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention savage fury reaching Grade 4."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain() * 2);
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -4);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 2);
@@ -3257,7 +3257,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function berzerkG4():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 4. +1 large/massive weapon atk. - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention savage fury reaching Grade 4. +1 large/massive weapon atk. - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
@@ -3316,7 +3316,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function lustzerkG2():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention lusty fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
@@ -3324,7 +3324,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function lustzerkG2and3():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain() * 2);
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -4);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 2);
@@ -3332,7 +3332,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function lustzerkG3():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
@@ -3340,7 +3340,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function lustzerkG3and4():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 4."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention lusty fury reaching Grade 4."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain() * 2);
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -4);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 2);
@@ -3348,7 +3348,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function lustzerkG4():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 4. +1 large/massive weapon atk. - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		outputText("Placeholder text that only mention lusty fury reaching Grade 4. +1 large/massive weapon atk. - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);

@@ -2830,9 +2830,9 @@ public class PerkLib
 		public static const PrimedClipWarp:PerkType = mk("Primed Clip Warp", "Primed Clip Warp",
 				"Triples max ammo (600% of base ammo count) and gives a 25% chance to not use ammo after each single attack.",
 				"You've chosen the 'Primed Clip Warp' perk. Triples max ammo (600% of base ammo count) and gives a 25% chance to not use ammo after each single attack.");
-		public static const Principle:PerkType = mk("Principle", "Principle",
+		public static const Principle:PerkType = mk("Principle", "Principal",
 				"You oversee the day to day actions inside the school, your studious nature increasing max mana by 10%.",
-				"You've chosen the 'Principle' perk, gaining +10% max Mana.")
+				"You've chosen the 'Principal' perk, gaining +10% max Mana.")
 				.withBuffs({'maxmana_mult':+0.1});
 		public static const Professor:PerkType = mk("Professor", "Professor",
 				"You're more important than the standard teacher, and your paycheck reflects that. You're hired for your knowledge which increases max mana by 10%.",

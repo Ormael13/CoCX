@@ -5028,7 +5028,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You stare at her in surprise. Then, you take hold of her hands and smile at her. You tell her that nothing would make you happier than to have her here, living with you, being with her. Amily squeaks loudly with joy and passionately embraces you, kissing you as deeply as she can. When she finally lets you go for lack of air, she takes a good long look around the camp, as if she's seeing it for the first time.\n\n");
 
 			outputText("\"<i>Well, I better start moving in, huh?</i>\" she jokes. She then flops down on your sleeping roll beside you, \"<i>There we are, I'm moved in.</i>\" She grins at you, and you can't help but laugh.\n\n");
-			outputText("\n\n<b>As if remembering something Amily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+			outputText("\n\n<b>As if remembering something Amily pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
 			if (player.hasKeyItem("Radiant shard") >= 0){
 				player.addKeyValue("Radiant shard",1,+1);
 			}
@@ -6717,7 +6717,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if (player.hasKeyItem("Radiant shard") >= 0) {
 					player.addKeyValue("Radiant shard", 1, +1);
 				} else player.createKeyItem("Radiant shard", 1, 0, 0, 0);
-				outputText("\n\n<b>Before heading for your camp as if remembering something Amily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+				outputText("\n\n<b>Before heading for your camp as if remembering something Amily pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
 				//Add corrupted amily flag here
 				flags[kFLAGS.AMILY_FOLLOWER] = 2;
 				//Switch to less lovey pregnancy!

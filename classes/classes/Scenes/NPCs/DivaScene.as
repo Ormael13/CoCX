@@ -478,7 +478,7 @@ public class DivaScene extends XXCNPC {
                 + "\"<i>I bid thee a good day for I must rest now. Should thou want to see me just wake me up or call my name after sunset.</i>\"\n"
                 + "\n"
                 + "On these words she enters the tent and heads to sleep.");
-            outputText("\n\n<b>Before leaving for your camp, as if remembering something, Diva pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+            outputText("\n\n<b>Before leaving for your camp, as if remembering something, Diva pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
             if (player.hasKeyItem("Radiant shard") >= 0) {
                 player.addKeyValue("Radiant shard", 1, +1);
             }

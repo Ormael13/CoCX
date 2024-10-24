@@ -106,7 +106,7 @@ private function moveTheBitchIn():void {
 	outputText("\n\n(<b>Isabella now available in the lovers menu.</b>)");
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
-	outputText("\n\n<b>Before fully settling in your camp as if remembering something Isabella pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	outputText("\n\n<b>Before fully settling in your camp, as if remembering something, Isabella pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] = 240;
 	flags[kFLAGS.ISABELLA_AFFECTION] = 100;
 	flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;

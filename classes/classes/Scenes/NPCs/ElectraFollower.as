@@ -217,7 +217,7 @@ public function ElectraRecruitingSure():void {
 		outputText("Electra responds with clear annoyance.\n\n");
 		outputText("\"<i>Nothing about taming here Etna, I'm not some wild beast you can hold on a leash. [name] just happened to be on my path when I needed "+player.mf("him","her")+" the most, willing to help of "+player.mf("his","her")+" own volition.</i>\"\n\n");
 	}
-	outputText("<b>Before setting in, as if remembering something, Electra pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	outputText("<b>Before setting in, as if remembering something, Electra pulls a shining shard from her inventory and hands it over to you as a gift. You acquired a Radiant shard!</b>");
 	if (player.hasKeyItem("Radiant shard") >= 0){
 		player.addKeyValue("Radiant shard",1,+1);
 	}
