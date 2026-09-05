@@ -27,7 +27,10 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0 && flags[kFLAGS.ANT_KIDS] < (250 * (1 + flags[kFLAGS.ANTHILL_EXPANSION]))) flags[kFLAGS.ANT_KIDS] += (1 + rand(2));//5000
+			if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0 && flags[kFLAGS.ANT_KIDS] < (250 * (1 + flags[kFLAGS.ANTHILL_EXPANSION]))) {
+				flags[kFLAGS.ANT_KIDS] += (1 + rand(2));//5000
+				if (flags[kFLAGS.ANT_KIDS] > (250 * (1 + flags[kFLAGS.ANTHILL_EXPANSION]))) flags[kFLAGS.ANT_KIDS] = (250 * (1 + flags[kFLAGS.ANTHILL_EXPANSION]));
+			}
 			if (model.time.hours > 23) {
 				//The pregnancyStore doesn't handle Phylla's ant eggs because they are continuous. The regular egg production is all handled here.
 				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;

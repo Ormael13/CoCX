@@ -1139,8 +1139,8 @@ public class PerkLib
 				"Your senses adapted to overload caused by your mental power awakening. (decreasing negative effects of sensitivity by 10%)",
 				"You've chosen the 'Sensory overload adaptation' perk. Your senses adapted to overload caused by your mental power awakening. (decreasing negative effects of sensitivity by 10%)").withBuffs({'sens':200});
 		public static const PowerOverwhelming:PerkType = mk("Power Overwhelming", "Power Overwhelming",
-				".",
-				"You've chosen the 'Power Overwhelming' perk. .").withBuffs({'sens':2000});
+				"Your psionic powers becomes overwhelming. (Each 200 sens giving +1x psychic attacks dmg multi)",
+				"You've chosen the 'Power Overwhelming' perk. Your psionic powers becomes overwhelming. (Each 200 sens giving +1x psychic attacks dmg multi)").withBuffs({'sens':2000});
 		public static const UnlimitedPower:PerkType = mk("Unlimited Power!", "Unlimited Power!",
 				"An unlimited mental power at your fingertips. (Recover 5%/round or 10%/hr max stamina; lower mental energy using actions cost by 50%)",
 				"You've chosen the 'Unlimited Power!' perk. An unlimited mental power at your fingertips. (Recover 5%/round or 10%/hr max stamina; lower mental energy using actions cost by 50%)").withBuffs({'sens':1000});
@@ -1154,8 +1154,8 @@ public class PerkLib
 				"Superior version of Psychic Barrier that additionaly boost phys/magic resistance by 20% and giving very minor (2%) boost to toughness. (cost of activation/sustain increased by 50% of base cost)",
 				"You've chosen the 'Superior Psychic Barrier' perk. Superior version of Psychic Barrier that additionaly boost phys/magic resistance by 20% and giving very minor (2%) boost to toughness. (cost of activation/sustain increased by 50% of base cost)");
 		public static const SuperiorPsychicShield:PerkType = mk("Superior Psychic Shield", "Superior Psychic Shield",
-				". (+80% to psychic resistance and cost of activation/sustain is increased by 100% of base cost)",
-				"You've chosen the 'Superior Psychic Shield' perk. . (+80% to psychic resistance and cost of activation/sustain is increased by 100% of base cost)");
+				"With Superior Shield resistance to psychic attacks when using Psychic Barrier. (+80% to psychic resistance and cost of activation/sustain is increased by 100% of base cost)",
+				"You've chosen the 'Superior Psychic Shield' perk. With Superior Shield resistance to psychic attacks when using Psychic Barrier. (+80% to psychic resistance and cost of activation/sustain is increased by 100% of base cost)");
 		public static const AbsolutePsychicBarrier:PerkType = mk("Absolute Psychic Barrier", "Absolute Psychic Barrier",
 				".",
 				"You've chosen the 'Absolute Psychic Barrier' perk. .");
@@ -8441,7 +8441,10 @@ public class PerkLib
 			EpicSensitivity.requireSen(10)
                     .requireLevel(36);
             //Tier 7 Sensitivity Perks
-            Vitakinesis.requireSen(175)
+            //.requireSen(175)		esper perk - progress from Stop Hitting Yourself
+			//		.requirePerk(StopHittingYourself)
+			//		.requireLevel(42);
+			Vitakinesis.requireSen(175)
                     .requirePerk(PsionicRegeneration)
                     .requireLevel(42);
             SpiritualAlignment.requireSen(175)
@@ -8454,18 +8457,15 @@ public class PerkLib
                     .requirePerk(EyesOfTheHunterEx)
                     .requireLevel(42);
             //Tier 8 Sensitivity Perks
-			//.requireSen(150)		esper perk - progress from ???
-			//		.requirePerk()
-			//		.requireLevel(48);
-			//.requireSen(200)		esper perk - progress from Stop Hitting Yourself
-			//		.requirePerk()
-			//		.requireLevel(48);
+			SuperiorPsychicShield.requireSen(200)
+					.requirePerk(SuperiorPsychicBarrier)
+					.requireLevel(48);
 			//.requireSen(200)		psionic perk - progress from ???
 			//		.requirePerk()
 			//		.requireLevel(48);
-			//PowerOverwhelming.requireSen(200)
-			//		.requireAnyPerk(SpiritualAlignment, MentalAttunement)
-			//		.requireLevel(48);
+			PowerOverwhelming.requireSen(200)
+					.requireAnyPerk(SpiritualAlignment, MentalAttunement)
+					.requireLevel(48);
             //Tier 9 Sensitivity Perks
             VitakinesisEx.requireSen(240)
                     .requirePerk(Vitakinesis)
