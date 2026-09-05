@@ -360,7 +360,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 6 sensitivty lvl-up perk: Superior Psychic Barrier. Req. Psychic Shield perk and 150+ sens. Effect: Superior version of Psychic Barrier that additionaly boost phys/magic resistance by 20% and giving very minor (2%) boost to toughness. (cost of activation/sustain increased by 50% of base cost)\n");
 			outputText("-New tier 8 sensitivity lvl-up perk: Superior Psychic Shield. Req. Superior Psychic Barrier perk and 200+ sens. Effect: With Superior Shield resistance to psychic attacks when using Psychic Barrier. (+80% to psychic resistance and cost of activation/sustain is increased by 100% of base cost)\n");
 			outputText("-New tier 8 sensitivity lvl-up perk: Power Overwhelming. Req. Spiritual Alignment or Mental Attunement perk and 200+ sens. Effect: Your psionic powers becomes overwhelming. (Each 200 sens giving +1x psychic attacks dmg multi) (+2000 sens)\n");
-			outputText("-\n");
+			outputText("-New armor (ported from Revamp/UEE): Forest Gown - obtained by beating Corrupt Dryad. Cost 25 gems, 1 armor, 1 magic resistance, light type armor. Wearing it would slowly change user into dryad. (slight adjusted item to fit X with 1-2 extra tf effects to reach lowest tier of dryad race and compensate for possible lack of mandatory sleep periods)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

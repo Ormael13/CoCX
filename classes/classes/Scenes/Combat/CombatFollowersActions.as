@@ -183,7 +183,7 @@ import classes.StatusEffects.VampireThirstEffect;
 					if (rand(100) == 0) neisaCombatActions0();
 					else {
 						if (!player.hasStatusEffect(StatusEffects.TearsOfDenial)) nadiaCombatActions3();
-						else if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || rand(5) == 0) nadiaCombatActions2();
+						else if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || CombatAbilities.Cure.curableDebuffs()) nadiaCombatActions2();
 						else if (player.HP < player.maxOverHP()) nadiaCombatActions1();
 						else nadiaCombatActions4();
 					}
@@ -192,7 +192,7 @@ import classes.StatusEffects.VampireThirstEffect;
 					if (choice2 < 4) nadiaCombatActions0();
 					else {
 						if (!player.hasStatusEffect(StatusEffects.TearsOfDenial)) nadiaCombatActions3();
-						else if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || rand(5) == 0) nadiaCombatActions2();
+						else if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || CombatAbilities.Cure.curableDebuffs()) nadiaCombatActions2();
 						else if (player.HP < player.maxOverHP()) nadiaCombatActions1();
 						else nadiaCombatActions4();
 					}
@@ -201,7 +201,7 @@ import classes.StatusEffects.VampireThirstEffect;
 					if (choice2 < 10) nadiaCombatActions0();
 					else {
 						if (!player.hasStatusEffect(StatusEffects.TearsOfDenial)) nadiaCombatActions3();
-						else if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || rand(5) == 0) nadiaCombatActions2();
+						else if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || CombatAbilities.Cure.curableDebuffs()) nadiaCombatActions2();
 						else if (player.HP < player.maxOverHP()) nadiaCombatActions1();
 						else nadiaCombatActions4();
 					}

@@ -134,7 +134,7 @@ public class WorldTree extends BaseContent
 			if (rand(2) == 0) changeLimit++;
 			//staman/tentacle cock
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
-				if (player.cor >= 66) {
+				if (player.cor >= 33) {
 					if (player.cockTotal() > player.tentacleCocks()) {
 						var choices:Array = [];
 						var i:int = 0;
@@ -148,7 +148,7 @@ public class WorldTree extends BaseContent
 						changes++;
 					}
 				}
-				if (player.cor >= 33 && player.cor < 66) {
+				if (player.cor >= -33 && player.cor < 33) {
 					if (rand(2) == 0) {
 						if (player.cockTotal() > player.tentacleCocks()) {
 							var choices2:Array = [];
@@ -178,7 +178,7 @@ public class WorldTree extends BaseContent
 						}
 					}
 				}
-				if (player.cor < 33) {
+				if (player.cor < -33) {
 					if (player.cockTotal() > player.stamenCocks()) {
 						var choices4:Array = [];
 						i = 0;

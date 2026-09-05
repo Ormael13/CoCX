@@ -77,9 +77,8 @@ public class Dryad extends Monster {
         this.lustVuln = 0.4;
         this.level = 27;
         this.gems = rand(15) + 25;
-        this.drop = new WeightedDrop()/*.
-						add(armors.FRSGOWN, 1)*/;
-        //armor is not added (yet?), but has nice texts in UEE. Maybe...?
+        this.drop = new WeightedDrop().
+						add(armors.FRSGOWN, 1);
         this.special1 = slash;
         this.special2 = pollen;
 		this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

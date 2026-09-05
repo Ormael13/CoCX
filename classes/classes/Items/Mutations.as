@@ -3160,6 +3160,155 @@ public final class Mutations extends MutationsHelper {
 		if (changes < changeLimit) consumables.CENTARI.centaurTFEffects(true);
 		if (!player.inRut) player.goIntoRut(true);
 	}
+	
+	public function forestGownChanges(player:Player):void {
+		var changes:Number = 0;
+		var changeLimit:Number = 1;;
+		//Temporary storage
+		var temp:Number = 0;
+		var temp2:Number = 0;
+		var temp3:Number = 0;
+		//display a random dream
+		var verb:String; 
+		var text:String;
+		var changed:Boolean = false;
+		var tfChoice:Array = [];
+		var dryadDreams:Array = [
+			"In your dream you find yourself in a lush forest standing next to a tree. The tree seems like your best friend and You give it a hug before sitting down next to it. Looking around, there is grass and flowers all about. You can’t help but hum a cheery tune enjoying nature as a bright butterfly flutters nearby, holding out your hand the butterfly lands softly on your finger and smile sweetly to it.",
+			"You walk through a meadow and down towards a swift running brook, It looks like some clean water.   You sit down, pull up your gown and admire your feet. They are brown, the color of bark.   You place your feet in the cool water of the brook and soak up the water through your feet,  a cool refreshing feeling fills your body. Ah, being a Dryad is so nice.",
+			"Your imagination runs a bit wild and you picture yourself dressed in your nice forest gown eyeing a satyr you stumble across in a grove.   You can't help but smirk as you consider all the fun you could have with him.",
+			"You imagine running into a waterfall. You dance around playfully while torrents of water splash against your body.  Your soaked gown scandalously clings to your frame.",
+			"You dream about tending to plants in a meadow. Some fairies are following you.  One of them buzzes around your head playfully and kisses you on the cheek.",
+			"In your dream you are laying out in a lush glade soaking up the sun. You inspect your leafy hair and find that here are some buds forming. You can't help but wonder what the flowers will look like. ",
+			"You dream of a starlight dance in the meadow. Several satyrs, nymphs and dryads are gathered together to celebrate the full moon. You take your gown off and gather around the fairy circle. The half dozen naked revelers dance the night away in the pale moonlight.",
+			"You dream of skipping joyfully through a flowered meadow. After a while you kneel down and pick several budding flowers, placing them in your hair  you find that they merge with the leafy vines. They will bloom in a day or so.  It will be so lovely.",
+			"In your dream, you and another dryad dance for a reed playing satyr. The dance is very intimate and you can't help wonder how excited the satyr will become from watching. ",
+			"You dream of being in a lush grove watching a satyr sleeping. He is leaning up against a tree that you are very fond of! Some mischief is in order. You politely ask the tree for help and it lowers several vines that lift you up and move you above him. The vine lowers you mere inches away from his body. You can practically hear him breathing and his chest rising and falling slowly.  Leaning forward, you nibble on his ear, jolting him awake with a surprised look in his eyes just in time to see the vines recede back into the tree.   Chuckling to yourself, you watch the satry try to figure out what just happened from a branch above him. ",
+			"You dream of being in a field surrounded by butterflies. There are blue ones, yellow ones, and pink ones, buthich ones are your favorite?   You spin around in your gown and laugh as you decide they are all your favorite!",
+			"You dream about wandering around in the mountains. There is snow everywhere, and you notice something off in the distance digging its way out from under the snow. It’s a big bear and two smaller ones pawing their way out! You gleefully saunter up and say, 'Hello Mrs.bear, did you and your children enjoy your nap?'   You awake shortly after the strange dream, feeling confused. Was that really you?",
+			"You dream about sitting on a tree branch in your lovely gown. You freely hang off the large oak, dangling over the side while your legs hold you up.   Your gown falls down to your arms and hangs over your head. You get excited, pondering if someone might be watching and just got flashed.   You sit back up and straighten out your gown,  coy smile playing across your face.",
+		];
+		clearOutput();
+		outputText(""+(SceneLib.camp.IsSleeping?"":"Feeling sleepy you decide to take a short nap. ")+"" + dryadDreams[rand(dryadDreams.length)] + "");
+		if (changes < changeLimit && player.hips.type != 5) {
+			outputText("\n\nYou wiggle around in your gown, the pleasant feeling of flower petals rubbing against your skin washes over you. The feeling settles on your [hips].");
+			if (player.hips.type < 5) {
+				verb = "enlarge";
+				player.hips.type++;
+			} else {
+				verb = "shrink";
+				player.hips.type--;
+			}
+			outputText(" You feel them slowly " + verb + ".<b>  You now have [hips].</b>");
+			changes++;
+		}
+		if (changes < changeLimit && player.butt.type != 5) {
+			outputText("\n\nYou wiggle around in your gown, the pleasant feeling of flower petals rubbing against your skin washes over you. The feeling settles on your [butt].");
+			if (player.butt.type < 5) {
+				verb = "enlarge";
+				player.butt.type++;
+			} else {
+				verb = "shrink";
+				player.butt.type--;
+			} 
+			outputText(" You feel them slowly " + verb + ". <b>You now have a [butt].</b>");
+			changes++;
+		}
+		if (changes < changeLimit && player.hasCock()) {
+			//single cock
+			if (player.cocks.length == 1) {
+				temp2 = player.growCock(0, -1);
+				temp = 0;
+				dynStats("lus", 10, "scale", false);
+				player.addCurse("sen", 1, 1);
+			}
+			//Multicock
+			else {
+				//Find smallest cock
+				//Temp2 = smallness size
+				//temp = current smallest
+				temp3 = player.cocks.length;
+				temp = 0;
+				while (temp3 > 0) {
+					temp3--;
+					//If current cock is smaller than saved, switch values.
+					if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
+						temp2 = player.cocks[temp3].cockLength;
+						temp = temp3;
+					}
+				}
+				//Grow smallest cock!
+				//temp2 changes to growth amount
+				temp2 = player.growCock(temp, -1);
+				dynStats("lus", 10, "scale", false);
+				player.addCurse("sen", 1, 1);
+			}
+			outputText("\n\nYour [cock] feels strange as it brushes against the fabric of your gown.");
+			changes++;
+		}
+		if (changes < changeLimit && (player.breastRows[0].breastRating != 4 || player.bRows() > 1)) {
+			outputText("\n\nYou feel like a beautful flower in your gown. Dawn approaches and you place your hands on your chest as if expecting your nipples to bloom to greet the rising sun.");
+			if (player.bRows() > 1) {
+				outputText(" Some of your breasts shrink back into your body leaving you with just two.");
+				player.breastRows.length = 1;
+			}
+			if (player.breastRows[0].breastRating != 4) {
+				if (player.breastRows[0].breastRating > 4) outputText(" A chill runs against your chest and your boobs become smaller.");
+				else outputText(" Heat builds in chest and your boobs become bigger.");
+				outputText(" <b>You now have [breasts]</b>");
+				player.breastRows[0].breastRating = 4;
+			}
+			changes++;
+		}
+		if (changes < changeLimit && player.ears.type != Ears.ELFIN) {
+			outputText("\n\nThere is a tingling on the sides of your head as your ears change to pointed elfin ears.");
+			transformations.EarsElfin.applyEffect(false);
+			changes++;
+		}
+		if (changes < changeLimit && !player.isBarkSkin()) {
+			outputText("Your skin hardens and becomes the consistency of tree’s bark.");
+			transformations.SkinBark(Skin.COVERAGE_COMPLETE, {colors: "woodly brown"}).applyEffect(false);
+			changes++;
+		}
+		if (changes < changeLimit && player.lowerBody != LowerBody.PLANT_HIGH_HEELS) {
+			transformations.LowerBodyPlantHighHeels.applyEffect();
+			changes++;
+		}
+		if (changes < changeLimit && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.PLANT, Arms.PLANT2)) {
+			if (player.cor >= 0) transformations.ArmsPlant2.applyEffect();
+			else transformations.ArmsPlant.applyEffect();
+			changes++;
+		}
+		if (changes < changeLimit && player.faceType != Face.HUMAN) {
+			outputText("\n\nYour face twitches a few times and slowly morphs itself back to a normal human face.");
+			transformations.FaceHuman.applyEffect(false);
+			changes++;
+		}
+		if (changes < changeLimit && player.hairType != Hair.LEAF) {
+			outputText("\n\nMuch to your shock, your hair begins falling out in tuffs onto the ground. Moments later, your scalp sprouts vines all about that extend down and bloom into leafy hair.");
+			transformations.HairLeaf.applyEffect(false);
+			changes++;
+		}
+		if (player.hairColor != "green" && !player.isGargoyle() && changes < changeLimit) {
+			outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
+			player.hairColor = "green";
+		}
+		if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {
+			//Males/genderless get oak horns
+			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+				outputText("\n\n");
+				CoC.instance.transformations.HornsOak.applyEffect();
+			}
+			//Females/futa get orchid flowers
+			else {
+				outputText("\n\n");
+				CoC.instance.transformations.HornsOrchid.applyEffect();
+			}
+			changes++;
+		}
+		outputText(player.modFem(70, 2));
+		flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+	}
 
     public function succubisDelight(tainted:Boolean, player:Player):void {
         player.slimeFeed();

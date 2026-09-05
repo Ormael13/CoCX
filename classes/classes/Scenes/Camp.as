@@ -5861,7 +5861,14 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePointsPredictionCampStructures += 2;
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePointsPredictionCampStructures += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);//obecnie +3*2
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPredictionCampStructures += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);//obecnie +2*2
+		if (flags[kFLAGS.ANTHILL_EXPANSION] > 0) performancePointsPredictionCampStructures += flags[kFLAGS.ANTHILL_EXPANSION];//obecnie +1*0
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPredictionCampStructures += 2;
+		if (SceneLib.ruinedTown.housesAscensionPoints() > 0) performancePointsPredictionCampStructures += SceneLib.ruinedTown.housesAscensionPoints();//nie wliczane do statycznej liczby na player info
+		if (RuinedTownRebuilt.YourHouse) performancePointsPredictionCampStructures += 1;
+		if (RuinedTownRebuilt.WellBuilt) performancePointsPredictionCampStructures += 1;
+		if (RuinedTownRebuilt.ShopBuilt > 0) performancePointsPredictionCampStructures += RuinedTownRebuilt.ShopBuilt;//+7
+		if (RuinedTownRebuilt.SmithBuilt) performancePointsPredictionCampStructures += 1;
+		if (RuinedTownRebuilt.TrainingGroundsBuilt) performancePointsPredictionCampStructures += 1;
 		return performancePointsPredictionCampStructures;
 	}
 	public function possibleToGainAscensionPointsChildren():Number {

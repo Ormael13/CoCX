@@ -228,7 +228,7 @@ public class MaraFruit extends Consumable{
 		//Arms
 		if ((player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.PLANT_ROOT_CLAWS) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.PLANT, Arms.PLANT2) && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.cor >= 50) CoC.instance.transformations.ArmsPlant2.applyEffect();
+			if (player.cor >= 0) CoC.instance.transformations.ArmsPlant2.applyEffect();
 			else CoC.instance.transformations.ArmsPlant.applyEffect();
 			changes++;
 		}

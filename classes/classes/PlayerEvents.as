@@ -1171,7 +1171,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					player.statStore.replaceBuffObject({ 'str.mult': changeV1*0.01*ngMultLM,'tou.mult': changeV1*0.01*ngMultLM}, 'Lunatic mind', { text: 'Lunatic mind'});
 				}
-
+				//Forest Gown
+				if (player.armor == armors.FRSGOWN && !player.blockingBodyTransformations()) {
+					if (!player.hasStatusEffect(StatusEffects.SlowTFingItems2) && player.racialScore(Races.PLANT) < 7 && rand(3) < 2) {
+						player.createStatusEffect(StatusEffects.SlowTFingItems2, 5, 0, 0, 0);
+						CoC.instance.mutations.forestGownChanges(player);
+						needNext = true;
+					}
+					else {
+						if (player.statusEffectv1(StatusEffects.SlowTFingItems2) <= 0) player.removeStatusEffect(StatusEffects.SlowTFingItems2);
+						else player.addStatusValue(StatusEffects.SlowTFingItems2, 1, -1);
+					}
+				}
 				for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
 					if (pPerks.trueMutation){
 						pPerks.pReqs();
@@ -3642,4 +3653,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

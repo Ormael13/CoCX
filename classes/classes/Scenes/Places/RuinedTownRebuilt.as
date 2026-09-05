@@ -1213,14 +1213,31 @@ public function MouseTownBuild():void {
 	clearOutput();
 	outputText("You can build some buildings to improve the town. Houses, defenses...what will you make?\n\n");
 	menu();
-	addButton(0, "House", BuildHouse);
+	addButtonIfTrue(0, "House", BuildHouse, "You must additional walls to be able build more houses", HouseNumber < housesUpperLimit());
 	addButton(1, "Wall", BuildWall);
 	if (ShopBuilt < 7) addButton(2, "Shop", BuildShop);
+	else addButtonDisabled(2, "Shop", "You already built all possible shops.");
 	if (!TrainingGroundsBuilt && SmithBuilt) addButton(3, "TrainGrounds", BuildTrainGrounds);
+	else addButtonDisabled(3, "TrainGrounds", "Mousetown already have this built.");
 	if (!SmithBuilt) addButton(4, "Smith", BuildSmith);
+	else addButtonDisabled(4, "Smith", "Mousetown already have this built.");
 	if (!logbuilt) addButton(5, "Logging", BuildLogging);
+	else addButtonDisabled(5, "Logging", "Mousetown already have this built.");
 	if (!WellBuilt) addButton(6, "Well", BuildWell);
+	else addButtonDisabled(6, "Well", "Mousetown already have this built.");
 	addButton(14, "Back", enterVillage);
+}
+public function housesUpperLimit():Number {
+	var hUL:Number = 20;
+	if (WallNumber > 0) hUL += (WallNumber * 2);
+	return hUL;
+}
+public function housesAscensionPoints():Number {
+	var hAP:Number = 0;
+	if (Housecap > 24) hAP += ((Housecap - 22) / 5);
+	if (Housecap > 19) hAP += 1;
+	if (Housecap > 9) hAP += 1;
+	return hAP;
 }
 public function BuildHouse():void {
 	clearOutput();

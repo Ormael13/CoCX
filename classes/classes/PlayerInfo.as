@@ -226,6 +226,7 @@ public class PlayerInfo extends BaseContent {
 		if (RuinedTownRebuilt.RebuildState == 3) {
 			campStats += "<b>Mousetown Population:</b> " + RuinedTownRebuilt.MousetownPopulation + " (" + RuinedTownRebuilt.MouseTownPopCap + ")\n";
 			campStats += "<b>Mousetown Prosperity:</b> " + RuinedTownRebuilt.prosperityvar + "\n";
+			campStats += "<b>Mousetown Houses (current / cap):</b> " + RuinedTownRebuilt.HouseNumber + " / " + SceneLib.ruinedTown.housesUpperLimit() + "\n";
 		}
 		campStats += "<b>Nails:</b> " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "\n";
 		campStats += "<b>Wood:</b> " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "\n";
@@ -326,7 +327,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
 		miscStats += "<i>Ascension points - Dungeons Edition:</i> " + camp.possibleToGainAscensionPointsDungeons() + " / 22\n";
 		miscStats += "<i>Ascension points - Quests Edition:</i> " + camp.possibleToGainAscensionPointsQuests() + " / 32\n";
-		miscStats += "<i>Ascension points - Camp Structures Edition:</i> " + camp.possibleToGainAscensionPointsCampStructures() + " / 69\n";
+		miscStats += "<i>Ascension points - Camp Structures Edition:</i> " + camp.possibleToGainAscensionPointsCampStructures() + " / " + (82 + SceneLib.ruinedTown.housesAscensionPoints()) + "\n";
 		miscStats += "<i>Ascension points - Masteries Edition:</i> " + Math.round(camp.possibleToGainAscensionPointsMasteries()) + " (Dao of Elements: " + camp.possibleToGainAscensionPointsDaoOfElements() + " / 125)\n";
 		miscStats += "<i>Ascension points - Kids Edition:</i> ~" + Math.round(camp.possibleToGainAscensionPointsChildren()) + " (" + camp.possibleToGainAscensionPointsChildren() + ")\n";
 		miscStats += "<b>Ascensions:</b> " + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + "\n";

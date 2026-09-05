@@ -1162,9 +1162,18 @@ public class PerkLib
 		public static const AbsolutePsychicShield:PerkType = mk("Absolute Psychic Shield", "Absolute Psychic Shield",
 				".",
 				"You've chosen the 'Absolute Psychic Shield' perk. .");
+		public static const MoreApes:PerkType = mk("More Apes", "More Apes",
+				"You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat too.",
+				"You've chosen the 'More Apes' perk. You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat too.");
+		public static const EvenMoreApes:PerkType = mk("Even More Apes", "Even More Apes",
+				"You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 1 extra monster.",
+				"You've chosen the 'Even More Apes' perk. You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 1 extra monster.");
+		public static const FromWhereYouGettingAllThoseApes:PerkType = mk("From where you getting all those Apes?", "From where you getting all those Apes?",
+				"You can have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more ap...monsters AND you can make extra group because why not make it even more crazy, right?",
+				"You've chosen the 'From where you getting all those Apes?' perk. You can have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more ap...monsters AND you can make extra group because why not make it even more crazy, right?");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
-				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
+				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of the traditional four.");
 		/*
 		public static const :PerkType = mk("", "",
@@ -1179,15 +1188,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");

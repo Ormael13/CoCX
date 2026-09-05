@@ -52,6 +52,15 @@ public class CureSpell extends AbstractWhiteSpell{
 		StatusEffects.NecrosisDoT,
 	];
 	
+	public function curableDebuffs():Boolean {
+		return (player.statStore.hasBuff("LightningArrowStr") || player.statStore.hasBuff("LightningArrowSpe") || player.statStore.hasBuff("FireArrow") || player.statStore.hasBuff("IceArrow") || player.statStore.hasBuff("Illusion") || player.statStore.hasBuff("Fear") || player.statStore.hasBuff("CombatDebuffStr") || 
+				player.statStore.hasBuff("CombatDebuffSpe") || player.statStore.hasBuff("BasiliskGaze") || player.statStore.hasBuff("LightningArrow") || player.statStore.hasBuff("AkbalDebuff") || player.statStore.hasBuff("FrostGiantDebuff") || player.statStore.hasBuff("GnollSpearThrowerDebuff") || 
+				player.statStore.hasBuff("YoungFrostGiantDebuff") || player.statStore.hasBuff("PoisonedArrow") || player.statStore.hasBuff("MalikoreVenom") || player.statStore.hasBuff("ManticoreVenom") || player.statStore.hasBuff("Nightmare") || player.statStore.hasBuff("Entwine") || player.statStore.hasBuff("Poison") || 
+				player.hasStatusEffect(StatusEffects.BurnDoT) || player.hasStatusEffect(StatusEffects.AcidSlap) || player.hasStatusEffect(StatusEffects.DriderKiss) || player.hasStatusEffect(StatusEffects.AikoLightningArrow) || player.hasStatusEffect(StatusEffects.NagaVenom) || 
+				player.hasStatusEffect(StatusEffects.MedusaVenom) || player.hasStatusEffect(StatusEffects.DriderIncubusVenom) || player.hasStatusEffect(StatusEffects.Poison) || player.hasStatusEffect(StatusEffects.AcidDoT) || player.hasStatusEffect(StatusEffects.FrostburnDoT) || 
+				player.hasStatusEffect(StatusEffects.FrozenLung) || player.hasStatusEffect(StatusEffects.Blind) || player.hasStatusEffect(StatusEffects.ElectrocutionDoT) || player.hasStatusEffect(StatusEffects.NecrosisDoT));
+	}
+	
 	public function CureSpell() {
 		super(
 			"Cure",

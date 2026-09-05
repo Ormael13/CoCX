@@ -145,6 +145,7 @@ public final class ArmorLib extends ItemConstants
 				})
 				.withPerk(PerkLib.FairyQueenRegalia, 0, 0, 0, 0)
 				.withTag(A_AGILE) as Armor;
+		public const FRSGOWN:ForestGown = new ForestGown();
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,0,320,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,0,1260,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.","Heavy");
 		public const FUNERSH:Armor = new Armor("FunerSh","FuneraryShroud","Funerary Shroud","a Funerary Shroud",0,20,1600,"An old set of ragged decaying clothes worn by wraiths and other ghosts. This item has been corrupted by the wraith soulforce for god knows how long. While worn by a ghost or something of that ilk it fully immunizes to the threat of defeat by mundane wounds but also makes one more susceptible to arousal. Furthermore, the shroud is very conductive to ghostly powers improving the user's ability to siphon their victims energies.","Light", false, false)
@@ -213,6 +214,7 @@ public final class ArmorLib extends ItemConstants
 				.withBuffs({'teasedmg': 10})
 				.withTag(A_REVEALING)
 				.withTag(A_AGILE) as Armor;
+		//public const NAGASLK:NagaSilkDress = new NagaSilkDress();
 		public const NURSECL:Armor = new Armor("NurseCl","NurseCl","skimpy nurse's outfit","a nurse's outfit",0,0,100,"This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.  It would grant a small regeneration to your HP.","Light")
 				.withBuffs({'teasedmg': 8}) as Armor;
 		public const OVERALL:Armor = new Armor("Overall", "Overalls", "white shirt and overalls", "a white shirt and overalls", 0, 0, 25, "A simple white shirt and overalls.", "Light", true);
