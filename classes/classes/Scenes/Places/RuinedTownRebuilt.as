@@ -1595,4 +1595,4 @@ public function AmilyAfterSex():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 }
-}
+}

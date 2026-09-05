@@ -6060,4 +6060,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

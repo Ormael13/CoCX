@@ -338,7 +338,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 13 strength lvl-up perk: Yatagan Vortex. Req. Vital Strike perk. Effect: Yatagan slash becomes Yatagan Vortex allowing you to now strike four times. For each successful critical hit from Yatagan Vortex you gain doubled damage on the next Yatagan Vortex strike. This bonus stacks upon itself lasting for up to two rounds if not refreshed by itself.\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Psionic Regeneration. Req. Psionic Mending perk and 140+ sensitivity. Effect: You can use your mental power to cure your body. (10%/20%/30% fatigue > 20%/40%/60% hp)\n");
 			outputText("-New tier 14 strength lvl-up perk: Tempest Trance. Req. Yatagan Vortex perk. Effect: Power attack now only spends half the amount of wrath despite dealing damage as if all wrath was spent. Using power attack stops all ongoing cost of wrath other than Yatagan Vortex for the during of Yatagan vortex ongoing buff.\n");
-			outputText("-New tier 7 sensitivity lvl-up perk: Vitakinesis. Req. Psionic Regeneration perk and 190+ sensitivity. Effect: You can use vitakinesis to cure your body. (5%/10%/15%/20%/25%/30% > 15%/30%/45%/60%/75%/90%)\n");
+			outputText("-New tier 7 sensitivity lvl-up perk: Vitakinesis. Req. Psionic Regeneration perk and 175+ sensitivity. Effect: You can use vitakinesis to cure your body. (5%/10%/15%/20%/25%/30% > 15%/30%/45%/60%/75%/90%)\n");
 			outputText("-New tier 14 speed lvl-up perk: Arrow of death. Req. Phantom Arrow perk. Effect: Each arrow deals 1% of the enemy total health per shot as additional damage.\n");
 			outputText("-New tier 9 sensitivity lvl-up perk: Vitakinesis (Ex). Req. Vitakinesis perk and 240+ sensitivity. Effect: Using Vitakinesis won't take whole turn and healing effect could be increased by factors like perks or equipemnt that affect other healing effects.\n");
 			outputText("-Neisa affection now have some effect (finaly?) that makes her weekly payment lower by 1 spirit stone per 25% affection (up to 6 SS less at max affection). Also her loyalty/affection would be gained 2x faster then before.\n");
@@ -356,17 +356,17 @@ public class Changelog extends BaseContent
 			outputText("-New tier 4 sensitivty lvl-up perk: Psychic Shield. Req. Psychic Barrier perk and 115+ sens. Effect: When using Psychic Barrier resistance to psychic attacks is increased. (+40% to psychic resistance and cost of activation/sustain is increased by 200% of base cost)\n");
 			outputText("-When PC lack materials to do some of the camp upgrades game would stop sending back to main camp menu. It would be so kind to only return to one menu earlier so PC can check another option faster with less clicks.\n");
 			outputText("-Herbs Bag (Lowest/Low Grade) have their capacity slight changed: 5 > 25 / 10 > 50. Herbs Bag (Low Grade) have it cost slight changed: 500 > 800. Potions Bag (Lowest Grade) have it capacity slight changed: 10 > 20.\n");
+			outputText("-New tier 5 sensitivty lvl-up perk: Stop hitting yourself. Req. Telekinetic Grapple perk and 125+ sens. Effect: New m. special: Stop hitting yourself - Take control of an enemy's limb with your mental powers. (Deal damage to the foe based on their level, str and spe)\n");
+			outputText("-New tier 6 sensitivty lvl-up perk: Superior Psychic Barrier. Req. Psychic Shield perk and 150+ sens. Effect: Superior version of Psychic Barrier that additionaly boost phys/magic resistance by 20% and giving very minor (2%) boost to toughness. (cost of activation/sustain increased by 50% of base cost)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier 8 sensitivity lvl-up perk: Power Overwhelming. Req. Spiritual Alignment or Mental Attunement perk and 200+ sens. Effect: .each 200 sens giving +1x psychic attacks dmg multi (+2000 sens)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New tier x sensitivity lvl-up perk: Superior Psychic Shield. Req. Superior Psychic Barrier perk and xxx+ sens. Effect: . (+80% to psychic resistance and cost of activation/sustain is increased by 100% of base cost)
 			outputText("-\n");
 			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Strong Together (Ave) - max 9 tamed monsters in group and 600% and max 6 groups
 			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 

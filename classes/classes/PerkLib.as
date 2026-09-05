@@ -1145,11 +1145,23 @@ public class PerkLib
 				"An unlimited mental power at your fingertips. (Recover 5%/round or 10%/hr max stamina; lower mental energy using actions cost by 50%)",
 				"You've chosen the 'Unlimited Power!' perk. An unlimited mental power at your fingertips. (Recover 5%/round or 10%/hr max stamina; lower mental energy using actions cost by 50%)").withBuffs({'sens':1000});
 		public static const StopHittingYourself:PerkType = mk("Stop hitting yourself", "Stop hitting yourself",
-				"Take control of an enemy's limb with your mental powers. (Deal damage to the foe based on their level, STR and SPD)",
-				"You've chosen the 'Stop hitting yourself' perk. Take control of an enemy's limb with your mental powers. (Deal damage to the foe based on their level, STR and SPD)");
+				"New m. special: Stop hitting yourself - Take control of an enemy's limb with your mental powers. (Deal damage to the foe based on their level, str and spe)",
+				"You've chosen the 'Stop hitting yourself' perk. New m. special: Stop hitting yourself - Take control of an enemy's limb with your mental powers. (Deal damage to the foe based on their level, str and spe)");
 		public static const PsychicShield:PerkType = mk("Psychic Shield", "Psychic Shield",
 				"When using Psychic Barrier resistance to psychic attacks is increased. (+40% to psychic resistance and cost of activation/sustain is increased by 200% of base cost)",
 				"You've chosen the 'Psychic Shield' perk. When using Psychic Barrier resistance to psychic attacks is increased. (+40% to psychic resistance and cost of activation/sustain is increased by 200% of base cost)");
+		public static const SuperiorPsychicBarrier:PerkType = mk("Superior Psychic Barrier", "Superior Psychic Barrier",
+				"Superior version of Psychic Barrier that additionaly boost phys/magic resistance by 20% and giving very minor (2%) boost to toughness. (cost of activation/sustain increased by 50% of base cost)",
+				"You've chosen the 'Superior Psychic Barrier' perk. Superior version of Psychic Barrier that additionaly boost phys/magic resistance by 20% and giving very minor (2%) boost to toughness. (cost of activation/sustain increased by 50% of base cost)");
+		public static const SuperiorPsychicShield:PerkType = mk("Superior Psychic Shield", "Superior Psychic Shield",
+				". (+80% to psychic resistance and cost of activation/sustain is increased by 100% of base cost)",
+				"You've chosen the 'Superior Psychic Shield' perk. . (+80% to psychic resistance and cost of activation/sustain is increased by 100% of base cost)");
+		public static const AbsolutePsychicBarrier:PerkType = mk("Absolute Psychic Barrier", "Absolute Psychic Barrier",
+				".",
+				"You've chosen the 'Absolute Psychic Barrier' perk. .");
+		public static const AbsolutePsychicShield:PerkType = mk("Absolute Psychic Shield", "Absolute Psychic Shield",
+				".",
+				"You've chosen the 'Absolute Psychic Shield' perk. .");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -1167,6 +1179,9 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -8389,9 +8404,9 @@ public class PerkLib
                     .requirePerk(EyesOfTheHunterMaster)
                     .requireLevel(24);
             //Tier 5 Sensitivity Perks
-			//StopHittingYourself.requireSen(125)
-			//		.requirePerk(TelekineticGrapple)
-			//		.requireLevel(30);
+			StopHittingYourself.requireSen(125)
+					.requirePerk(TelekineticGrapple)
+					.requireLevel(30);
             PsionicRegeneration.requireSen(140)
                     .requirePerk(PsionicMending)
                     .requireLevel(30);
@@ -8411,9 +8426,9 @@ public class PerkLib
                     .requirePerk(Desensitization)
                     .requireLevel(30);
             //Tier 6 Sensitivity Perks
-            //.requireSen(150)		esper perk - progress from Psychic Barrier
-			//		.requirePerk()
-			//		.requireLevel(36);
+            SuperiorPsychicBarrier.requireSen(150)
+					.requirePerk(PsychicShield)
+					.requireLevel(36);
 			Ionikinesis.requireSen(160)
                     .requirePerks(Pyrokinesis, Electrokinesis)
                     .requireLevel(36);
@@ -8426,7 +8441,7 @@ public class PerkLib
 			EpicSensitivity.requireSen(10)
                     .requireLevel(36);
             //Tier 7 Sensitivity Perks
-            Vitakinesis.requireSen(190)
+            Vitakinesis.requireSen(175)
                     .requirePerk(PsionicRegeneration)
                     .requireLevel(42);
             SpiritualAlignment.requireSen(175)
@@ -8439,6 +8454,12 @@ public class PerkLib
                     .requirePerk(EyesOfTheHunterEx)
                     .requireLevel(42);
             //Tier 8 Sensitivity Perks
+			//.requireSen(150)		esper perk - progress from ???
+			//		.requirePerk()
+			//		.requireLevel(48);
+			//.requireSen(200)		esper perk - progress from Stop Hitting Yourself
+			//		.requirePerk()
+			//		.requireLevel(48);
 			//.requireSen(200)		psionic perk - progress from ???
 			//		.requirePerk()
 			//		.requireLevel(48);
@@ -8453,11 +8474,20 @@ public class PerkLib
 			//		.requirePerk()
 			//		.requireLevel(54);
             //Tier 10 Sensitivity Perks
-            EpicDesensitization.requireSen(50)
+            //.requireSen(250)		esper perk - progress from ???
+			//		.requirePerk()
+			//		.requireLevel(60);
+			//.requireSen(250)		psionic perk - progress from ???
+			//		.requirePerk()
+			//		.requireLevel(60);
+			EpicDesensitization.requireSen(50)
                     .requirePerk(GreaterDesensitization)
                     .requireLevel(60);
             //Tier 11 Sensitivity Perks
-            LegendarySensitivity.requireSen(15)
+            //.requireSen(275)		esper perk - progress from ???
+			//		.requirePerk()
+			//		.requireLevel(66);
+			LegendarySensitivity.requireSen(15)
                     .requirePerk(EpicSensitivity)
                     .requireLevel(66);
             //Tier 12 Sensitivity Perks

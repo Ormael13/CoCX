@@ -231,6 +231,12 @@ public class MagicSpecials extends BaseCombatContent {
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			favbd(bd, "Telekinetic Grab");
 		}
+		if (player.hasPerk(PerkLib.StopHittingYourself)) {
+			bd = buttons.add("Stop Hitting Yourself", StopHittingYourself, "Take control of an enemy's limb with your mental powers. (Deal damage to the foe based on their level, str and spe)");
+			bd.requireMana(spellCost(combat.psionicAttacksCostChange(100)));
+			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			favbd(bd, "Stop Hitting Yourself");
+		}
 		if (player.hasPerk(PerkLib.Pyrokinesis)) {
 			bd = buttons.add("Pyrokinesis", combat.usePyrokinesis, "Attempt to attack the enemy with fire ball. Damage done is determined by your sensitivity.\n");
 			bd.requireFatigue(combat.psionicAttacksCostChange(20));
@@ -5892,6 +5898,18 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.TelekineticGrab, 4 + rand(2), 0, 0, 0);
 		if (player.hasPerk(PerkLib.TelekineticGrapple)) player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 8, 0, 0, 0);
 		else player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 10, 0, 0, 0);
+		enemyAI();
+	}
+	
+	public function StopHittingYourself():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(combat.psionicAttacksCostChange(100), USEFATG_MAGIC_NOBM);
+		outputText("Information Noona informs we still working on amazing text how enemy hitting itself xD ")
+		var damage:Number = monster.level;
+		damage += monster.str;
+		damage += monster.spe;
+		doPlayerPhysDamage(damage, true, true);
 		enemyAI();
 	}
 

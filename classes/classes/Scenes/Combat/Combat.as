@@ -1192,6 +1192,12 @@ public class Combat extends BaseContent {
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			favbd(bd, "Telekinetic Grapple");
 		}
+		if (player.hasPerk(PerkLib.StopHittingYourself)) {
+			bd = buttons.add("Stop Hitting Yourself", mspecials.StopHittingYourself, "Take control of an enemy's limb with your mental powers. (Deal damage to the foe based on their level, str and spe)");
+			bd.requireMana(spellCost(psionicAttacksCostChange(100)));
+			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			favbd(bd, "Stop Hitting Yourself");
+		}
 		if (player.hasPerk(PerkLib.Pyrokinesis)) {
 			bd = buttons.add("Pyrokinesis", usePyrokinesis, "Attempt to attack the enemy with fire ball. Damage done is determined by your sensitivity.\n");
 			bd.requireFatigue(psionicAttacksCostChange(20));
@@ -19422,6 +19428,7 @@ public function activatePsychoBarrier():void {
 	var temp1:Number = 0;
 	var temp2:Number = 0.01;
 	var tempTou:Number;
+	if (player.hasPerk(PerkLib.SuperiorPsychicBarrier)) temp2 += 0.02;
 	temp1 += player.touStat.core.value * temp2;
 	temp1 = Math.round(temp1);
 	var oldHPratio:Number = player.hp100/100;
@@ -19441,6 +19448,8 @@ public function deactivatePsychoBarrier():void {
 public function costOfPsychoBarrier():Number {
 	var PBCost:Number = 20;
 	if (player.hasPerk(PerkLib.PsychicShield)) PBCost += 40;
+	if (player.hasPerk(PerkLib.SuperiorPsychicBarrier)) PBCost += 10;
+	if (player.hasPerk(PerkLib.SuperiorPsychicShield)) PBCost += 20;
 	PBCost *= psionicAttacksCostDecrease();
 	return PBCost;
 }
