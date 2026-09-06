@@ -2567,13 +2567,13 @@ public class Camp extends NPCAwareContent{
 				if (flags[kFLAGS.CAMP_WALL_GATE] > 0) addButtonDisabled(1, "Build Gate", "Already built.");
 				else addButton(1, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your [camp] defense.");
 			}
-			//addButton(3, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
+			addButton(3, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
 			addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your [camp].");
-			//addButton(6, "Build Misc(O)", campUpgrades.).hint("Other structures than walls or cabins for your camp.");
+			//addButton(6, "Build Misc(O)", campUpgrades.buildmisc2Menu).hint("Other structures than walls or cabins for your [camp].");
 		}
 		else {
 			addButtonDisabled(0, "Build Wall", "Req. Carpenter's Toolbox.");
-			//addButtonDisabled(2, "Build Cabin(O)", "Req. Carpenter's Toolbox.");
+			addButtonDisabled(3, "Build Cabin(O)", "Req. Carpenter's Toolbox.");
 			addButtonDisabled(5, "Build Misc", "Req. Carpenter's Toolbox.");
 			//addButtonDisabled(6, "Build Misc(O)", "Req. Carpenter's Toolbox.");
 		}
@@ -5861,7 +5861,7 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePointsPredictionCampStructures += 2;
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePointsPredictionCampStructures += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);//obecnie +3*2
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPredictionCampStructures += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);//obecnie +2*2
-		if (flags[kFLAGS.ANTHILL_EXPANSION] > 0) performancePointsPredictionCampStructures += flags[kFLAGS.ANTHILL_EXPANSION];//obecnie +1*0
+		if (flags[kFLAGS.ANTHILL_EXPANSION] > 0) performancePointsPredictionCampStructures += flags[kFLAGS.ANTHILL_EXPANSION];//obecnie +1*2
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPredictionCampStructures += 2;
 		if (SceneLib.ruinedTown.housesAscensionPoints() > 0) performancePointsPredictionCampStructures += SceneLib.ruinedTown.housesAscensionPoints();//nie wliczane do statycznej liczby na player info
 		if (RuinedTownRebuilt.YourHouse) performancePointsPredictionCampStructures += 1;

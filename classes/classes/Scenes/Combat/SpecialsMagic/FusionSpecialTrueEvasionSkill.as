@@ -36,7 +36,9 @@ public class FusionSpecialTrueEvasionSkill extends AbstractMagicSpecial {
     }
 
     override public function calcDuration():int {
-        return 3;
+        var duration:Number = 3;
+		if (player.hasPerk(PerkLib.ElementalMajesty)) duration *= 2;
+		return duration;
     }
 
     override public function durationEnd(display:Boolean = true):void {

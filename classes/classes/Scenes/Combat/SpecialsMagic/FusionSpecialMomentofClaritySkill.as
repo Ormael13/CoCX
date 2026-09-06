@@ -52,7 +52,10 @@ public class FusionSpecialMomentofClaritySkill extends AbstractMagicSpecial {
     }
 
     override public function advance(display:Boolean):void {
-        if (isActive()) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
+        if (isActive()) {
+			if (player.hasPerk(PerkLib.ElementalMajesty)) dynStats("lus", -(Math.round(player.maxLust() * 0.1)));
+			else dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
+		}
         super.advance(display);
     }
 

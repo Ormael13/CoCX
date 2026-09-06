@@ -320,6 +320,50 @@ import classes.Scenes.SceneLib;
 			}
 		}
 
+		public function makingNewAnthilRoom():void {
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += 50;
+			incrementStoneSupply(50);
+			if (rand(4) == 0 || player.miscJewelry1 == miscjewelries.MINPBAG || player.miscJewelry2 == miscjewelries.MINPBAG) {
+				var itype:ItemType;
+				var ore:Number = 2; //0 = copper, 1 = tin, 2 = iron, 3 = moonstone, 4 = mithral, 5 = adamantine
+				var mining:Number = player.miningLevel;
+				if (player.hasKeyItem("Moonstone Pickaxe") >= 0) mining += 7;
+				if (player.hasKeyItem("Mithril Pickaxe") >= 0) mining += 2;
+				if (player.hasKeyItem("Orichalcum Pickaxe") >= 0) mining += 3;
+				if (player.hasKeyItem("Adamantine Pickaxe") >= 0) mining += 3;
+				if (player.hasKeyItem("Skymetal Pickaxe") >= 0) mining += 5;
+				if (mining > 4) ore += 1;
+				if (mining > 9) ore += 1;
+				if (mining > 14) ore += 1;
+				if (mining > 24) ore += 1;
+				var choice:Number = rand(ore);
+				switch(choice) {
+					case 0:
+						itype = useables.TIN_ORE;
+						break;
+					case 1:
+						itype = useables.COP_ORE;
+						break;
+					case 2:
+						itype = useables.IRONORE;
+						break;
+					case 3:
+						itype = useables.MOONSTO;
+						break;
+					case 4:
+						itype = useables.MITHRAL;
+						break;
+					case 5:
+						itype = useables.ADAMANT;
+						break;
+					default:
+						outputText("Something's bugged! Please report this bug to Ormael/Aimozg.");
+				}
+				inventory.takeItem(itype, camp.returnToCampUseOneHour);
+			}
+			else doNext(camp.returnToCampUseOneHour);
+		}
+
 		private function checkToolbox():void {
 			if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] == 4)
 			{

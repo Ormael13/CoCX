@@ -100,6 +100,7 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
+		if (player.hasPerk(PerkLib.ElementalMajesty)) damage *= 2;
 
         switch(ElementalRace.getElement(player)) {
             case ElementalRace.ELEMENT_GNOME:   damage *= combat.earthDamageBoostedByDao();
@@ -148,7 +149,8 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
 
         switch(ElementalRace.getElement(player)) {
             case ElementalRace.ELEMENT_GNOME:   damage = calcQuakeMod(damage, true);
-                                                doPlayerEarthDamage(damage, true, display);
+												if (player.hasPerk(PerkLib.ElementalMajesty)) damage = combat.earthTypeDamageBonus(damage);
+												doPlayerEarthDamage(damage, true, display);
                                                 if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
                                                     if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
                                                         monster.addStatusValue(StatusEffects.AcidDoT,1,1);
@@ -158,6 +160,7 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
                                                 }
                                                 break;
             case ElementalRace.ELEMENT_IGNIS:   damage = calcInfernoMod(damage, true);
+												if (player.hasPerk(PerkLib.ElementalMajesty)) damage = combat.fireTypeDamageBonus(damage);
                                                 doPlayerFireDamage(damage, true, display);
                                                 if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
                                                     if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
@@ -165,6 +168,7 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
                                                 }
                                                 break;
             case ElementalRace.ELEMENT_SYLPH:   damage = calcGaleMod(damage, true);
+												if (player.hasPerk(PerkLib.ElementalMajesty)) damage = combat.windTypeDamageBonus(damage);
                                                 doPlayerWindDamage(damage, true, display);
                                                 if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
                                                     if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
@@ -172,6 +176,7 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
                                                 }
                                                 break;
             case ElementalRace.ELEMENT_UNDINE:  damage = calcTideMod(damage, true);
+												if (player.hasPerk(PerkLib.ElementalMajesty)) damage = combat.waterTypeDamageBonus(damage);
                                                 doPlayerWaterDamage(damage, true, display);
                                                 if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
                                                     monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});

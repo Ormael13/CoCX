@@ -9377,7 +9377,11 @@ public class Combat extends BaseContent {
 
     public function statusEffectBonusDamage(damage:Number):Number {
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (CombatAbilities.Overlimit.isActive() || CombatAbilities.FieryRage.isActive()) damage *= 2;
+        if (CombatAbilities.Overlimit.isActive()) damage *= 2;
+        if (CombatAbilities.FieryRage.isActive()) {
+			if (player.hasPerk(PerkLib.ElementalMajesty)) damage *= 3;
+			else damage *= 2;
+		}
         if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         return damage;
     }

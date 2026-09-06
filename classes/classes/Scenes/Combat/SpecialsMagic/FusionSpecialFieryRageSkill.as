@@ -28,7 +28,7 @@ public class FusionSpecialFieryRageSkill extends AbstractMagicSpecial {
     }
 
     override public function describeEffectVs(target:Monster):String {
-		return "Double physical damage at the cost of " + " soulforce per turn.";
+		return "" + (player.hasPerk(PerkLib.ElementalMajesty)?"Triple":"Double") + " physical damage at the cost of " + sfCost() + " soulforce per turn.";
     }
 
     override public function sfCost():int {

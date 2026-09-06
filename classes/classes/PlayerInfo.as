@@ -327,7 +327,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
 		miscStats += "<i>Ascension points - Dungeons Edition:</i> " + camp.possibleToGainAscensionPointsDungeons() + " / 22\n";
 		miscStats += "<i>Ascension points - Quests Edition:</i> " + camp.possibleToGainAscensionPointsQuests() + " / 32\n";
-		miscStats += "<i>Ascension points - Camp Structures Edition:</i> " + camp.possibleToGainAscensionPointsCampStructures() + " / " + (82 + SceneLib.ruinedTown.housesAscensionPoints()) + "\n";
+		miscStats += "<i>Ascension points - Camp Structures Edition:</i> " + camp.possibleToGainAscensionPointsCampStructures() + " / " + (84 + SceneLib.ruinedTown.housesAscensionPoints()) + "\n";
 		miscStats += "<i>Ascension points - Masteries Edition:</i> " + Math.round(camp.possibleToGainAscensionPointsMasteries()) + " (Dao of Elements: " + camp.possibleToGainAscensionPointsDaoOfElements() + " / 125)\n";
 		miscStats += "<i>Ascension points - Kids Edition:</i> ~" + Math.round(camp.possibleToGainAscensionPointsChildren()) + " (" + camp.possibleToGainAscensionPointsChildren() + ")\n";
 		miscStats += "<b>Ascensions:</b> " + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + "\n";

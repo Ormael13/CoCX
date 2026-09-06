@@ -12,12 +12,17 @@ public class CampUpgrades extends BaseContent {
 
     public static function builtAnything():Boolean {
         return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10
+            || flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100
             || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3
             || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2
-            || flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1
-            || flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100
+			|| flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 2
             || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4
-            || flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2;
+            || flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2
+			|| flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1
+			|| flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2
+			|| flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1
+            || flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1
+			|| flags[kFLAGS.ANTHILL_EXPANSION] >= 1;
     }
 
     /*
@@ -109,6 +114,9 @@ public class CampUpgrades extends BaseContent {
 
     flags[kFLAGS.CAMP_UPGRADES_]:
     1 -
+	
+	flags[kFLAGS.ANTHILL_EXPANSION]:
+	1 to 19 - increase colony population cap by 250
 
     flagi na przyszłościowe surowce co by nie zapomnieć iż je już wpisałem do kodu w kFLAGS
     CAMP_CABIN_SAND_RESOURCES
@@ -977,7 +985,7 @@ public class CampUpgrades extends BaseContent {
                     doNext(buildmisc1Menu);
                 }
             }
-            //3 stopień rozbudowy na 5 stopniu tamy (2 st. kamiennej tamy) a 4 stopień na 7 stopniu tamy (4 st. kamiennej)
+            //3 stopień rozbudowy na 5 stopniu tamy (1 st. kamiennej tamy) a 4 stopień na 7 stopniu tamy (3 st. kamiennej)
         } else {
             outputText("You are too exhausted to work on the fishery!");
             doNext(playerMenu);
@@ -1033,6 +1041,52 @@ public class CampUpgrades extends BaseContent {
     public function noThanks():void {
         outputText("Deciding not to work on building a new structure right now, you return to the center of your camp.");
         doNext(playerMenu);
+    }
+	
+	public function buildmisc2Menu():void {
+        clearOutput();
+		outputText("What you want to construct today?");
+		menu();
+        addButton(14, "Back", camp.campBuildingSim);
+    }
+	
+	public function buildCampMembersCabinsMenu():void {
+        clearOutput();
+		outputText("What you want to construct today?");
+		menu();
+		if (flags[kFLAGS.ANTHILL_EXPANSION] < 2) addButton(5, "Anthill", anthillExpansion).hint("Help your ant colony to expand living chambers. (Req. "+usedFatigue(50, true)+" fatigue)");
+        addButton(14, "Back", camp.campBuildingSim);
+    }
+	
+	//Anthill Expansion
+    public function anthillExpansion():void {
+        clearOutput();
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(50, true)) addNewRoom();
+        else {
+            outputText("You are too exhausted to work on the anthill!");
+            doNext(playerMenu);
+        }
+    }
+
+    public function addNewRoom():void {
+        outputText("Do you start work on adding new room to colony? (Cost: 10 nails, 100 wood.) ((Would gain 50 stones from excavation work.))\n");
+        checkMaterials();
+        if (CampStatsAndResources.NailsResc >= 10 && CampStatsAndResources.WoodResc >= 100) {
+            doYesNo(addNewRoomYes, noThanks);
+        } else {
+            errorNotEnough();
+            doNext(buildmisc1Menu);
+        }
+    }
+
+    private function addNewRoomYes():void {
+        CampStatsAndResources.NailsResc -= 10;
+        CampStatsAndResources.WoodResc -= 100;
+        clearOutput();
+        outputText("Information Noona informs that there is very cool text in progress (of writing)\n\n");
+		flags[kFLAGS.ANTHILL_EXPANSION] += 1;
+		useFatigue(50, 0);
+		camp.cabinProgress.makingNewAnthilRoom();
     }
 
 // Page 1

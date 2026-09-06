@@ -2962,7 +2962,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PureAndLoving)) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-			if (CombatAbilities.Overlimit.isActive() || CombatAbilities.FieryRage.isActive()) lust *= 0.9;
+			if (CombatAbilities.Overlimit.isActive()) lust *= 0.9;
+			if (CombatAbilities.FieryRage.isActive()) {
+				if (hasPerk(PerkLib.ElementalMajesty)) lust *= 0.8;
+				else lust *= 0.9;
+			}
 			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				if (lust100 >= 100) lust *= 0.3;
 				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));
@@ -3323,7 +3327,10 @@ use namespace CoC;
 				}
 				// Resource consuming damage reduction abilities and setup array of damage number
 				var afterShieldMult:Number = 1;
-				if (CombatAbilities.AdamantineShell.isActive()) afterShieldMult = afterShieldMult * 0.25;
+				if (CombatAbilities.AdamantineShell.isActive()) {
+					if (hasPerk(PerkLib.ElementalMajesty)) afterShieldMult = afterShieldMult * 0.5;
+					else afterShieldMult = afterShieldMult * 0.25;
+				}
 				if (hasStatusEffect(StatusEffects.BoneArmor)) afterShieldMult = afterShieldMult * 0.5;
 
 				for(i = 0; i < hit; i++){

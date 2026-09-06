@@ -1171,6 +1171,9 @@ public class PerkLib
 		public static const FromWhereYouGettingAllThoseApes:PerkType = mk("From where you getting all those Apes?", "From where you getting all those Apes?",
 				"You can have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more ap...monsters AND you can make extra group because why not make it even more crazy, right?",
 				"You've chosen the 'From where you getting all those Apes?' perk. You can have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more ap...monsters AND you can make extra group because why not make it even more crazy, right?");
+		public static const ElementalMajesty:PerkType = mk("Elemental Majesty", "Elemental Majesty",
+				"Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.",
+				"You've chosen the 'Elemental Majesty' perk. Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -1188,9 +1191,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7977,6 +7977,8 @@ public class PerkLib
             EclipticInfusion.requireLevel(78)
                     .requirePerk(GreaterSharedPower);
             //Tier 15 Wisdom perks
+            ElementalMajesty.requireLevel(84)
+                    .requirePerk(EclipticInfusion);
 			UnlockSpirit4thStage.requirePerk(UnlockSpirit3rdStage)
                     .requireWis(335)
                     .requireLevel(90);
