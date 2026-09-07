@@ -362,7 +362,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 8 sensitivity lvl-up perk: Power Overwhelming. Req. Spiritual Alignment or Mental Attunement perk and 200+ sens. Effect: Your psionic powers becomes overwhelming. (Each 200 sens giving +1x psychic attacks dmg multi) (+2000 sens)\n");
 			outputText("-New armor (ported from Revamp/UEE): Forest Gown - obtained by beating Corrupt Dryad. Cost 25 gems, 1 armor, 1 magic resistance, light type armor. Wearing it would slowly change user into dryad. (slight adjusted item to fit X with 1-2 extra tf effects to reach lowest tier of dryad race and compensate for possible lack of mandatory sleep periods)\n");
 			outputText("-New tier 15 wisdom lvl-up perk: Elemental Majesty. Req. Ecliptic Infusion perk. Effect: Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.\n");
-			outputText("-\n");
+			outputText("-New tier 1 wisdom lvl-up perk: More Apes. Req. Apes Together Strong perk and 60+ wisdom. Effect: You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -390,7 +390,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
 			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
 			outputText("-\n");
-			outputText("-\n");//
+			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
 			outputText("-\n");
 			outputText("-\n");//New tier ? wisdom lvl-up perk: ???. Req. ??? perk and ???+ wisdom. Effect: 
 			outputText("-\n");//New tier ? sensitivity lvl-up perk: Domain Kineses. Req. ?Quasi Domain Kineses? perk and ???+ sensitivity. Effect: ??? aura effects like psychic aura dealing specific elemetal damage ^^ ???

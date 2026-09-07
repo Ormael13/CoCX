@@ -1163,8 +1163,8 @@ public class PerkLib
 				".",
 				"You've chosen the 'Absolute Psychic Shield' perk. .");
 		public static const MoreApes:PerkType = mk("More Apes", "More Apes",
-				"You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat too.",
-				"You've chosen the 'More Apes' perk. You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat too.");
+				"You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.",
+				"You've chosen the 'More Apes' perk. You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.");
 		public static const EvenMoreApes:PerkType = mk("Even More Apes", "Even More Apes",
 				"You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 1 extra monster.",
 				"You've chosen the 'Even More Apes' perk. You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 1 extra monster.");
@@ -7597,6 +7597,9 @@ public class PerkLib
             StrongerTamedMosters.requireLevel(6)
                     .requirePerk(HighStakesTamer)
                     .requireWis(55);
+            MoreApes.requireLevel(6)
+                    .requirePerk(ApesTogetherStrong)
+                    .requireWis(60);
 			InsightfulResourcesI.requireLevel(6)
                     .requireWis(50)
                     .requirePerk(JobSoulCultivator);

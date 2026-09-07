@@ -161,9 +161,9 @@ public class TestMenu extends BaseContent
 			player.addStatusValue(StatusEffects.SoulEaterCounters1, 1, flags[kFLAGS.ANTHILL_EXPANSION]);
 			flags[kFLAGS.ANTHILL_EXPANSION] = 0;
 		}
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02292] > 0) {
-			player.addStatusValue(StatusEffects.SoulEaterCounters1, 2, flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02292]);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02292] = 0;
+		if (flags[kFLAGS.TAMED_11_NAME] > 0) {
+			player.addStatusValue(StatusEffects.SoulEaterCounters1, 2, flags[kFLAGS.TAMED_11_NAME]);
+			flags[kFLAGS.TAMED_11_NAME] = 0;
 		}
 		doNext(SoulforceCheats);
 	}
