@@ -275,7 +275,7 @@ public class SwordInStone extends AbstractLakeContent
 			outputText("On the other hand you reckon if you were strong enough, you could dislodge the titanic weapon and wield it.\n\n");
 			menu();
 			addButton(1, "Leave", findVolcanicGravehammerLeave);
-			addButtonIfTrue(2, "Dislodge", findVolcanicGravehammerDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 600+ fatigue, 100+ in core / train str part and 400+ total str)", (player.fatigue <= player.maxOverFatigue() - 600), "Req. 600+ fatigue, 100+ in core / train str part and 400+ total str");
+			addButtonIfTrue(2, "Dislodge", findVolcanicGravehammerDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 500+ fatigue, 100+ in core / train str part and 400+ total str)", (player.fatigue <= player.maxOverFatigue() - 500), "Req. 500+ fatigue, 100+ in core / train str part and 400+ total str");
 			addButton(3, "Never", findVolcanicGravehammerNever);
 		}
 		private function findVolcanicGravehammerLeave():void {
@@ -286,7 +286,7 @@ public class SwordInStone extends AbstractLakeContent
 		private function findVolcanicGravehammerDislodge():void {
 			clearOutput();
 			outputText("Ignoring the foreboding feeling, you approach the behemoth of a hammer. Firmly planting yourself and getting a good grip, you pull…\n\n");
-			fatigue(600);
+			fatigue(500);
 			if (player.str >= 400 && player.strStat.core.value >= 100 && player.strStat.train.value >= 100) {
 				outputText("The hammer shifts a bit, emboldened by this you redouble your efforts. With a primal shout and one last heave, the hammer breaks loose! You take a moment to catch your breath and admire your prize. As you gaze on the titanic warhammer, you feel the shrine rumble as the sound of distant falling stones echo through the cave. Spurred on by instinct, you rush into the cave, to see a stalactite fall right in front of you, crashing to the floor and sending shards of stone every which way. You ignore the sting of the rock shards, rushing towards the exit.\n\n");
 				outputText("As you push through a fallen rock, making your way back into the light of day, you feel your back trembling, sweat pouring from your spine. As you begin to make your way back to camp, you can hear a faint hiss and pop, like flowing magma. You turn towards the noise each time, but there’s never anything there. You move further and further from that now-collapsed shrine, and the frequency of the sounds gets less and less, fainter and fainter. By the time you get back to camp, you’ve stopped hearing them entirely.\n\n");
@@ -315,7 +315,7 @@ public class SwordInStone extends AbstractLakeContent
 			outputText("On the other hand, you could dislodge the titanic weapon and wield it… If you’re strong enough.\n\n");
 			menu();
 			addButton(1, "Leave", findGlacialGraveaxeLeave);
-			addButtonIfTrue(2, "Dislodge", findGlacialGraveaxeDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 600+ fatigue, 100+ in core / train str part and 400+ total str)", (player.fatigue <= player.maxOverFatigue() - 600), "Req. 600+ fatigue, 100+ in core / train str part and 400+ total str");
+			addButtonIfTrue(2, "Dislodge", findGlacialGraveaxeDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 500+ fatigue, 100+ in core / train str part and 400+ total str)", (player.fatigue <= player.maxOverFatigue() - 500), "Req. 500+ fatigue, 100+ in core / train str part and 400+ total str");
 			addButton(3, "Never", findGlacialGraveaxeNever);
 		}
 		private function findGlacialGraveaxeLeave():void {
@@ -326,7 +326,7 @@ public class SwordInStone extends AbstractLakeContent
 		private function findGlacialGraveaxeDislodge():void {
 			clearOutput();
 			outputText("Ignoring the foreboding feeling, you approach the behemoth of an axe. Firmly planting yourself and getting a good grip, you pull…\n\n");
-			fatigue(600);
+			fatigue(500);
 			if (player.str >= 400 && player.strStat.core.value >= 100 && player.strStat.train.value >= 100) {
 				outputText("The axe shifts a bit as the ice cracks under your feet. Emboldened by this, you redouble your efforts. With a primal shout and one last heave, the axe breaks loose, sending cracks shooting through the icy ground beneath you. You take a moment to catch your breath and admire your prize. Seeing there's nothing left to do here, you stow the weapon and begin making your way to camp.\n\n");
 				outputText("Suddenly, it hits you. This feeling of being watched, it’s like something’s breathing down your neck! You whirl, readying yourself for a fight. Mentally, you kick yourself, of course this weapon would have some sort of guardian…\n\n");
@@ -357,7 +357,7 @@ public class SwordInStone extends AbstractLakeContent
 			outputText("On the other hand, that spear looks like it could kill a lot of demons. Surely any noble warrior would rather their weapon be used to save Mareth, right?\n\n");
 			menu();
 			addButton(1, "Leave", findStormcallerGravespearLeave);
-			addButtonIfTrue(2, "Dislodge", findStormcallerGravespearDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 600+ fatigue, 100+ in core / train str part and 400+ total str)", (player.fatigue <= player.maxOverFatigue() - 600), "Req. 600+ fatigue, 100+ in core / train str part and 400+ total str");
+			addButtonIfTrue(2, "Dislodge", findStormcallerGravespearDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 500+ fatigue, 100+ in core / train str part and 400+ total str)", (player.fatigue <= player.maxOverFatigue() - 500), "Req. 500+ fatigue, 100+ in core / train str part and 400+ total str");
 			addButton(3, "Never", findStormcallerGravespearNever);
 		}
 		private function findStormcallerGravespearLeave():void {
@@ -368,7 +368,7 @@ public class SwordInStone extends AbstractLakeContent
 		private function findStormcallerGravespearDislodge():void {
 			clearOutput();
 			outputText("Ignoring the foreboding feeling, you approach the behemoth of a spear. Firmly planting yourself and getting a good grip, you pull…\n\n");
-			fatigue(600);
+			fatigue(500);
 			if (player.str >= 400 && player.strStat.core.value >= 100 && player.strStat.train.value >= 100) {
 				outputText("The spear rises from the stone about a half-inch. You release it as the lightning falls once more, shocking the weapon, but you’ve proven you can move it! Emboldened, you wait for the energy to fade, then redouble your efforts. With a primal shout and one last heave, the spear is pulled from its stone prison! You take a moment to catch your breath and admire your prize.\n\n");
 				outputText("Lightning strikes the shrine again, this time sending its charge through the spot where the spear had once stood. The stone shakes, and the stone wings around the shrine shudder, sloughing off stone as the lightning arcs towards the most conductive thing in the temple…The spear in your hands! With an undignified yelp, you rush towards the exit, narrowly evading the sparks as the odd shrine begins to shudder. Another bolt strikes it, stonework shuddering, nearly throwing you from your [legs] as you flee.\n\n");
@@ -399,7 +399,7 @@ public class SwordInStone extends AbstractLakeContent
 			outputText("On the other hand, you could just be paranoid. You don't come across a blade like this every day… You figure if you were strong enough, you could dislodge the titanic weapon and put it to good use on your quest, after all, slaying demons with a giant slab of bedrock that you can barely call a sword would just feel so right!\n\n");
 			menu();
 			addButton(1, "Leave", findUmbralGraveswordLeave);
-			addButtonIfTrue(2, "Dislodge", findUmbralGraveswordDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 600+ fatigue, 100+ in core / train str part and 400+ total str)", (player.fatigue <= player.maxOverFatigue() - 600), "Req. 600+ fatigue, 100+ in core / train str part and 400+ total str");
+			addButtonIfTrue(2, "Dislodge", findUmbralGraveswordDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 500+ fatigue, 100+ in core / train str part and 400+ total str)", (player.fatigue <= player.maxOverFatigue() - 500), "Req. 500+ fatigue, 100+ in core / train str part and 400+ total str");
 			addButton(3, "Never", findUmbralGraveswordNever);
 		}
 		private function findUmbralGraveswordLeave():void {
@@ -410,7 +410,7 @@ public class SwordInStone extends AbstractLakeContent
 		private function findUmbralGraveswordDislodge():void {
 			clearOutput();
 			outputText("Ignoring the foreboding feeling, you approach the behemoth of a sword. Firmly planting yourself and getting a good grip, you pull…\n\n");
-			fatigue(600);
+			fatigue(500);
 			if (player.str >= 400 && player.strStat.core.value >= 100 && player.strStat.train.value >= 100) {
 				outputText("The sword shifts a bit, causing the ground below you to crack and deform slightly, shattering any silence the still cave once carried. The onslaught of echoing sound hits you like a wall, stunning you momentarily. Regaining your composure, you return to your task with renewed vigor. You put your whole body into it, and with a primal shout and a mighty heave the sword breaks loose!\n\n");
 				outputText("You take a moment to catch your breath and admire your prize, but your reprieve is short lived, the platform shatters with a thunderous crack, sending chunks of debris in all directions. You manage to block the worst of it with the flat of your newly-claimed sword.\n\n");

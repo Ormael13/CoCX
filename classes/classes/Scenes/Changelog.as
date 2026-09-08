@@ -321,7 +321,7 @@ public class Changelog extends BaseContent
 			outputText("-Golemancers may been bit strugling in their early phase with only weak and not withstanding strain of just attacking once temporal golems so... they now golemancers can convert up to 3 temporal golems into semi-temporal golems that have 24 hours until they fall apart on their own. ");
 			outputText("Each of Golemancer perks from Beginer to Expert would add additional 24 hours (not affecting already converted golems at the time of getitng next golemancer perk). Timer till each of those golems fall apart is showed on golems managment page in camp actions.\n");
 			outputText("-New tier 9 strength lvl-up perk: Prestige Job: Dreadnought. Req. Job: Warrior and Warlord perks, 150+ str/spe. Effect: You've trained in prestige art of obliterates his foes through overwhelming violence. +60% str multi and +60% spe multi (scalable with NG tiers), power attack now strikes twice.\n");
-			outputText("-Apes Together Strong, Apes Together Stronger and Stronger Tamed Mosters was moved to lower tiers (5 > 1, 7 > 5, 3 > 1) with matching change of req. stats. Additionaly Apes Strong Together allowing only forming 1 group of monsters.\n");
+			outputText("-Apes Together Strong, Apes Together Stronger and Stronger Tamed Mosters was moved to lower tiers (5 > 1, 7 > 5, 3 > 1) with matching change of req. stats. Additionaly Apes Together Strong allowing only forming 1 group of monsters.\n");
 			outputText("-New tier 3 wisdom lvl-up perk: Apes Together Strong (Ex). Req. Apes Together Strong perk and 105+ wisdom. Effect: Your group of tamed monsters can have one extra monster of the same type and you can control one additional group.\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Apes Together Strong (Su). Req. Apes Together Stronger and 205+ wisdom. Effect: Your group of tamed monsters can have two extra monsters of the same type and together they would be 150% stronger.\n");
 			outputText("-New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters (Ex). Req. Stronger Tamed Mosters perk and 105+ wisdom. Effect: Using your link with tamed monster you empower them. The stronger you became the bigger increase to tamed monster stats. (increase by 10% base tamed monster stats per player level)\n");
@@ -363,12 +363,12 @@ public class Changelog extends BaseContent
 			outputText("-New armor (ported from Revamp/UEE): Forest Gown - obtained by beating Corrupt Dryad. Cost 25 gems, 1 armor, 1 magic resistance, light type armor. Wearing it would slowly change user into dryad. (slight adjusted item to fit X with 1-2 extra tf effects to reach lowest tier of dryad race and compensate for possible lack of mandatory sleep periods)\n");
 			outputText("-New tier 15 wisdom lvl-up perk: Elemental Majesty. Req. Ecliptic Infusion perk. Effect: Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.\n");
 			outputText("-New tier 1 wisdom lvl-up perk: More Apes. Req. Apes Together Strong perk and 60+ wisdom. Effect: You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.\n");
+			outputText("-Lowered Fatigue req. to pull out Gravestone weapons from 600 to 500.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Strong Together (Ave) - max 9 tamed monsters in group and 600% and max 6 groups
+			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Together Strong (Ave) - max 9 tamed monsters in group and 600% and max 6 groups
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -476,8 +476,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -508,6 +514,9 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
