@@ -1166,8 +1166,8 @@ public class PerkLib
 				"You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.",
 				"You've chosen the 'More Apes' perk. You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.");
 		public static const EvenMoreApes:PerkType = mk("Even More Apes", "Even More Apes",
-				"You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 1 extra monster.",
-				"You've chosen the 'Even More Apes' perk. You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 1 extra monster.");
+				"You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monster.",
+				"You've chosen the 'Even More Apes' perk. You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monster.");
 		public static const FromWhereYouGettingAllThoseApes:PerkType = mk("From where you getting all those Apes?", "From where you getting all those Apes?",
 				"You can have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more ap...monsters AND you can make extra group because why not make it even more crazy, right?",
 				"You've chosen the 'From where you getting all those Apes?' perk. You can have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more ap...monsters AND you can make extra group because why not make it even more crazy, right?");
@@ -7830,6 +7830,9 @@ public class PerkLib
             ApesTogetherStronger.requireLevel(30)
                     .requirePerk(ApesTogetherStrongEx)
                     .requireWis(155);
+            EvenMoreApes.requireLevel(36)
+                    .requirePerks(MoreApes, ApesTogetherStrongEx)
+                    .requireWis(160);
             UnlockSpirit2ndStage.requirePerk(UnlockSpirit)
                     .requireWis(125)
                     .requireLevel(30);
