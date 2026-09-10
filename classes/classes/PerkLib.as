@@ -1166,11 +1166,14 @@ public class PerkLib
 				"You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.",
 				"You've chosen the 'More Apes' perk. You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.");
 		public static const EvenMoreApes:PerkType = mk("Even More Apes", "Even More Apes",
-				"You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monster.",
-				"You've chosen the 'Even More Apes' perk. You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monster.");
-		public static const FromWhereYouGettingAllThoseApes:PerkType = mk("From where you getting all those Apes?", "From where you getting all those Apes?",
-				"You can have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more ap...monsters AND you can make extra group because why not make it even more crazy, right?",
-				"You've chosen the 'From where you getting all those Apes?' perk. You can have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more ap...monsters AND you can make extra group because why not make it even more crazy, right?");
+				"You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monsters.",
+				"You've chosen the 'Even More Apes' perk. You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monsters.");
+		public static const WhereAreYouGettingAllTheseApesFrom:PerkType = mk("Where are you getting all these Apes from?", "Where are you getting all these Apes from?",
+				"You have up to 6 extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more apes. One extra monster group is barely worth the meantion.",
+				"You've chosen the 'Where are you getting all these Apes from?' perk. You have 6 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more apes. One extra monster group is barely worth the meantion.");
+		public static const ThatsEnoughApes:PerkType = mk("That's enough Apes!", "That's enough Apes!",
+				"You can have 9 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group have +1 more ap...monsters then doubled it on top of it. AND you can make extra two group because why not make it even more crazy, right?",
+				"You've chosen the 'That's enough Apes!' perk. You can have 9 more extra tamed monsters that only use is to expand existing groups of monsters you control. Each group have +1 more ap...monsters then doubled it on top of it. AND you can make extra two group because why not make it even more crazy, right?");
 		public static const ElementalMajesty:PerkType = mk("Elemental Majesty", "Elemental Majesty",
 				"Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.",
 				"You've chosen the 'Elemental Majesty' perk. Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.");
@@ -1191,9 +1194,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7830,7 +7830,7 @@ public class PerkLib
             ApesTogetherStronger.requireLevel(30)
                     .requirePerk(ApesTogetherStrongEx)
                     .requireWis(155);
-            EvenMoreApes.requireLevel(36)
+            EvenMoreApes.requireLevel(30)
                     .requirePerks(MoreApes, ApesTogetherStrongEx)
                     .requireWis(160);
             UnlockSpirit2ndStage.requirePerk(UnlockSpirit)
@@ -7903,6 +7903,9 @@ public class PerkLib
             ApesTogetherStrongSu.requireLevel(42)
                     .requirePerk(ApesTogetherStronger)
                     .requireWis(205);
+            WhereAreYouGettingAllTheseApesFrom.requireLevel(36)
+                    .requirePerks(EvenMoreApes, ApesTogetherStronger)
+                    .requireWis(210);
 			ElementalConjurerKnowledgeSu.requirePerk(ElementalConjurerKnowledgeEx)
 					.requireWis(200)
                     .requireLevel(42)
@@ -7947,7 +7950,7 @@ public class PerkLib
                         return player.hasPerk(PerkLib.ElementalContractRank10) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 3);
                     }, "Having Elemental Contract Rank 10 or Dao of the Elements (layer 3 or higher) perks");
             ApesTogetherStrongest.requireLevel(54)
-                    .requirePerk(ApesTogetherStrongSu)
+                    .requirePerks(ApesTogetherStrongSu, WhereAreYouGettingAllTheseApesFrom)
                     .requireWis(255);
             //Tier 10 Wisdom perks
             PerfectStrike.requireLevel(60)

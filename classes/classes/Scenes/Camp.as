@@ -3211,7 +3211,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(1, "Summon", "You should build an Arcane Circle and learn Elemental Conjurer job to use this option. Without some tools from the carpenter's toolbox, it would be near impossible to make Arcane Circle.");
 		if (player.hasPerk(PerkLib.JobHaruspex)) addButton(2, "Skeletons", SceneLib.campMakeWinions.accessMakeSkeletonWinionsMainMenu).hint("Check your options for making some skeletons.");
 		else addButtonDisabled(2, "Skeletons", "You need to learn the Haruspex job to use this option.");
-		if (player.hasPerk(PerkLib.JobTamer)) addButton(5, "Tame", SceneLib.campMakeWinions.accessTamedWinionsMainMenu).hint("Check your options for tamed minions.");
+		if (player.hasPerk(PerkLib.JobTamer)) addButton(5, "Tame", SceneLib.campMakeWinions.accessTamedWinionsMainMenu, 1).hint("Check your options for tamed minions.");
 		else addButtonDisabled(5, "Tame", "You need to learn the Tamer job to use this option.");
 		if (player.hasPerk(PerkLib.PrestigeJobDruid)) addButton(6, "Fusions", druidMenu);
 		else addButtonDisabled(6, "Fusions", "You need to learn the Druid job to use this option.");

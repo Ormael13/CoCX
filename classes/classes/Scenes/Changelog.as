@@ -365,7 +365,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 1 wisdom lvl-up perk: More Apes. Req. Apes Together Strong perk and 60+ wisdom. Effect: You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.\n");
 			outputText("-Lowered Fatigue req. to pull out Gravestone weapons from 600 to 500.\n");
 			outputText("-New tier 5 wisdom lvl-up perk: Even More Apes. Req. More Apes and Apes Together Strong (Ex) perks and 160+ wis. Effect: You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monster.\n");
-			outputText("-\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Where are you getting all these Apes from? Req. Even More Apes and Apes Together Stronger perks and 210+ wis. Effect: You have up to 6 extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more apes. One extra monster group is barely worth the meantion.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -1452,7 +1452,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 9 misc lvl-up perk: Utility Skills: Professional. Req. Utility Skills: Skilled & any non combat skill at lvl 10. Effect: Increasing mastery gains in non-combat skills by 400% of base and decreasing a bit req. exp to level up.\n");
 			outputText("-New tier 9 misc lvl-up perk: Absolute Bash. Req. Prestige Job: Sentinel & Shield Slam perks. Effect: Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.\n");
 			outputText("-New tier 9 misc lvl-up perk: All-Rounder Education ( Grand Master ). Req. All-Rounder Education ( Master ) perk. Effect: Limit of advanced job you can learn is increased by 3.\n");
-			outputText("-New tier 9 wisdom lvl-up perk: Apes Together Strongest. Req. Apes Together Stronger perk and 255+ wisdom. Effect: You could now group tamed monsters in groups of four of the same type. Together they would be 250% stronger and you can only control max 4 groups of tamed monsters.\n");
+			outputText("-New tier 9 wisdom lvl-up perk: Apes Together Strongest. Req. Apes Together Stronger, Where are you getting all these Apes from? perks and 255+ wisdom. Effect: You could now group tamed monsters in groups of four of the same type. Together they would be 250% stronger and you can only control max 4 groups of tamed monsters.\n");
 			outputText("-New tier 10 libido lvl-up perk: Corrupt the mind. Req. Corrupt the heart perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -300%.\n");
 			outputText("-New tier 10 misc lvl-up perk: All-Rounder Training ( Expert ). Req. All-Rounder Training ( Advanced ) perk. Effect: Limit of train caps for stats is increased by 5.\n");
 			outputText("-New tier 10 misc lvl-up perk: Natural Oath. Req. Arcane Venom perk, Intelligence 220+, Libido 220+, Corruption 50+. Effect: Green magic is twice as more powerful so long as you wear no armor, shields or weapons made mostly of metal.\n");
