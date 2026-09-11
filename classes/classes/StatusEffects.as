@@ -762,12 +762,18 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TamedMonster10:StatusEffectType                 = mk("TamedMonster10");
 		public static const TamedMonster10a:StatusEffectType                = mk("TamedMonster10a");
 		public static const TamedMonster10b:StatusEffectType                = mk("TamedMonster10b");
+		public static const TamedMonster11:StatusEffectType                 = mk("TamedMonster11");
+		public static const TamedMonster11a:StatusEffectType                = mk("TamedMonster11a");
+		public static const TamedMonster11b:StatusEffectType                = mk("TamedMonster11b");
 		public static const TamedMonster51:StatusEffectType                 = mk("TamedMonster51");
 		public static const TamedMonster52:StatusEffectType                 = mk("TamedMonster52");
 		public static const TamedMonster53:StatusEffectType                 = mk("TamedMonster53");
 		public static const TamedMonster54:StatusEffectType                 = mk("TamedMonster54");
 		public static const TamedMonster55:StatusEffectType                 = mk("TamedMonster55");
 		public static const TamedMonster56:StatusEffectType                 = mk("TamedMonster56");
+		public static const TamedMonster57:StatusEffectType                 = mk("TamedMonster57");
+		public static const TamedMonster58:StatusEffectType                 = mk("TamedMonster58");
+		public static const TamedMonster59:StatusEffectType                 = mk("TamedMonster59");
 		public static const TelAdre:StatusEffectType                        = mk("Tel'Adre");
 		public static const TelAdreTripxi:StatusEffectType                  = mk("Tel'Adre Tripxi");
 		public static const TelAdreTripxiGuns1:StatusEffectType             = mk("Tel'Adre Tripxi Guns 1");
@@ -1595,4 +1601,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 
-}
+}

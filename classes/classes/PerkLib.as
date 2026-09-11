@@ -7959,6 +7959,9 @@ public class PerkLib
                     .requirePerk(PrestigeJobNecromancer);
             SharedPower.requireLevel(60)
                     .requirePerk(PrestigeJobDruid);
+            ThatsEnoughApes.requireLevel(60)
+                    .requirePerks(WhereAreYouGettingAllTheseApesFrom, ApesTogetherStrongest)
+                    .requireWis(280);
             UnlockSpirit3rdStage.requirePerk(UnlockSpirit2ndStage)
                     .requireWis(230)
                     .requireLevel(60);
@@ -7985,9 +7988,10 @@ public class PerkLib
                     .requirePerk(FlurryOfBlows);
             EclipticInfusion.requireLevel(78)
                     .requirePerk(GreaterSharedPower);
-            //Tier 15 Wisdom perks
+            //Tier 14 Wisdom perks
             ElementalMajesty.requireLevel(84)
                     .requirePerk(EclipticInfusion);
+            //Tier 15 Wisdom perks
 			UnlockSpirit4thStage.requirePerk(UnlockSpirit3rdStage)
                     .requireWis(335)
                     .requireLevel(90);

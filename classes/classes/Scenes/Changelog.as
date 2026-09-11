@@ -364,9 +364,10 @@ public class Changelog extends BaseContent
 			outputText("-New tier 15 wisdom lvl-up perk: Elemental Majesty. Req. Ecliptic Infusion perk. Effect: Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.\n");
 			outputText("-New tier 1 wisdom lvl-up perk: More Apes. Req. Apes Together Strong perk and 60+ wisdom. Effect: You can now tame 2 more monsters but they can only be used for adding to other monster creating or expanding group. They won't be controlled in combat but they count for 'Working Together' perk effect.\n");
 			outputText("-Lowered Fatigue req. to pull out Gravestone weapons from 600 to 500.\n");
-			outputText("-New tier 5 wisdom lvl-up perk: Even More Apes. Req. More Apes and Apes Together Strong (Ex) perks and 160+ wis. Effect: You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monster.\n");
-			outputText("-New tier 7 wisdom lvl-up perk: Where are you getting all these Apes from? Req. Even More Apes and Apes Together Stronger perks and 210+ wis. Effect: You have up to 6 extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more apes. One extra monster group is barely worth the meantion.\n");
-			outputText("-\n");
+			outputText("-New tier 5 wisdom lvl-up perk: Even More Apes. Req. More Apes and Apes Together Strong (Ex) perks; 160+ wis. Effect: You can have up to 4 extra tamed monsters that only use is to expand existing groups of monsters you control. Additionaly groups can have 2 extra monster.\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Where are you getting all these Apes from? Req. Even More Apes and Apes Together Stronger perks; 210+ wis. Effect: You have up to 6 extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more apes. One extra monster group is barely worth the meantion.\n");
+			outputText("-New tier 10 wisdom lvl-up perk: That's enough Apes! Req. Where are you getting all these Apes from? and Apes Together Strongest perks; 280+ wis. Effect: You can have 9 more extra tamed monsters that only use is to expand existing groups of monsters you control. ");
+			outputText("Each group have +1 more ap...monsters then doubled it on top of it. AND you can make extra two group because why not make it even more crazy, right?\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
