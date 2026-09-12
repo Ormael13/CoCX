@@ -1177,6 +1177,12 @@ public class PerkLib
 		public static const ElementalMajesty:PerkType = mk("Elemental Majesty", "Elemental Majesty",
 				"Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.",
 				"You've chosen the 'Elemental Majesty' perk. Double all elemental ability damage and further double the efficiency of effect against enemies weak to your element.");
+		public static const CloudNumber9:PerkType = mk("Cloud Number 9", "Cloud Number 9",
+				"After taming ninth monster you're literaly on cloud number 9.",
+				"You've chosen the 'Cloud Number 9' perk. After taming ninth monster you're literaly on cloud number 9.");
+		public static const ThereIs10TypesOfTamedMonsters:PerkType = mk("There is 10 types of tamed monsters", "There is 10 types of tamed monsters",
+				"There is 10 types of tamed monsters: those that bend and those that don't.",
+				"You've chosen the 'There is 10 types of tamed monsters' perk. There is 10 types of tamed monsters: those that bend and those that don't.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -1194,12 +1200,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7914,6 +7914,9 @@ public class PerkLib
                         return player.hasPerk(PerkLib.ElementalContractRank6) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 6 or Dao of the Elements (layer 2 or higher) perks");
             //Tier 8 Wisdom perks
+            CloudNumber9.requireLevel(48)
+                    .requirePerk(KaijuNo8)
+                    .requireWis(225);
             ElementalConjurerSacrifice.requireAnyPerk(ElementalConjurerMindAndBodyDedication, ElementalConjurerMindAndBodyDedicationEx)
 					.requireNotThosePerks(ElementalConjurerMindAndBodyResolveEx, ElementalConjurerMindAndBodySacrificeEx)
 					.requireOrPerks(ElementalContractRank8, DaoOfTheElements, 2)

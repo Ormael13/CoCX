@@ -459,15 +459,16 @@ public function enterVillage():void {
 	}
 	if (YourHouse) outputText("The tower-house your mouselets built for you stands in the middle of town, offering a solid vantage point for the town’s guards.\n\n");
 	if (WellBuilt) outputText("A solidly built well sits near the middle of town. It evidently sees a lot of traffic, judging by the line-up around it.\n\n");
-	if (ShopBuilt > 0) outputText(" "+ShopBuilt+" Shops line the main road of the town, with a loud mouse morph hawking their wares in each.\n\n");
-	if (SmithBuilt) outputText("The loud ringing of iron fills the air, and two mouselets operate stalls nearby the smithery. They’re hawking their wares to anyone around to hear, weapons and armor made by your children. You wonder how their gear compares to that of Tel’adre.\n\n");
+	if (ShopBuilt > 0) outputText(" "+ShopBuilt+" shop"+(ShopBuilt > 1  ? "s":"")+" line the main road of the town, with a loud mouse morph hawking their wares in each.\n\n");
+	if (SmithBuilt) outputText("The loud ringing of iron fills the air, and two mouselets operate stalls nearby the smithery. They’re hawking their wares to anyone around to hear, weapons and armour made by your children. You wonder how their gear compares to that of Tel’adre.\n\n");
 	if (TrainingGroundsBuilt) {
-		outputText("The sounds of combat rise up periodically from the west side of town. Your mouse children have started their own...guard? Army? You’re not sure which. There seem to be a number of mouselings drilling with simple spears. Some appear to have gotten pieces of gel armor, and others wear shields of simple wood on their left arms.\n\n");
-		outputText("Still more have somehow obtained their own ranged weapons.")
+		outputText("The sounds of combat rise up periodically from the west side of town. Your mouse children have started their own...guard? Army? You’re not sure which. There seem to be a number of mouselings drilling with simple spears. Some appear to have gotten pieces of gel armour, and others wear shields of simple wood on their left arms.\n\n");
+		outputText("Others appear to be training simple magic, levitating old paving stones.\n\n");
+		outputText("The occasional *whizz* of arrows or sling bullets can be heard, usually followed by a *thunk*. Several mice appear to be training with ranged weapons of varying descriptions.\n\n");
 	}
 	if (TelAdreScouts == 2) outputText("A single wolfman, out of place among the mice, sits on a makeshift chair outside the wall. He nods once at you, but makes no motion to leave his chair. Your kids on watch seem to be used to him, but they still watch him out of the corners of their eyes.\n\n");
 	outputText("Your oldest mouse-children seem to be everywhere. Some stand guard, and as you walk by, a few break from their watch. Some are content to nod respectfully at you, while a few others seem to take more after their mother, bounding up to you and wrapping their arms around you. Shooing the more affectionate of your children away, you enter the village, a small smile on your face.\n\n");
-	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] !=3 && flags[kFLAGS.JOJO_BIMBO_STATE] !=5 ) {
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3 && flags[kFLAGS.JOJO_BIMBO_STATE] != 5) {
 		outputText("On the outskirts of the training grounds, you see a familiar mousey monk leading a small group of your children in meditation.\n\n");
 	}
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] ==3) {
@@ -514,9 +515,9 @@ public function enterVillage():void {
 	else addButtonDisabled(0, "???", "The Town isn't prosperous enough for this, yet.");
 	addButton(1, "Visit", MouseTownVisit);
 	/*if (TrainingGroundsBuilt) addButton(2, "Train", MouseTrainField);
-	else */addButtonDisabled(2, "N/A", "You Must build the training grounds first");
-	/*if (ShopBuilt > 0) addButton(3, "Shop", MouseShopArea);
-	else */addButtonDisabled(3, "N/A", "You must build a shop first.");
+	else */addButtonDisabled(2, "N/A", "You Must build the training grounds first.");
+	if (ShopBuilt > 0) addButton(3, "Shop", MouseShopArea);
+	else addButtonDisabled(3, "N/A", "You must build a shop first.");
 	if (WellBuilt) addButton(4, "Well", MouseWell);
 	else addButtonDisabled(4, "N/A", "You must rebuild the well first.");
 	if (model.time.hours >= 20) addButton(5, "Dinner", EveningMeal);
@@ -638,186 +639,150 @@ public function AmilyTownie():void {
 }
 	//---------SHOPS AND SERVICES-----------
 
-	public function MouseShopArea():void {
-		clearOutput();
-		if (ShopBuilt >= 1) {
-			outputText(" One of your mouselets sits behind a kiosk, the sign above it saying \"Heart and Soul Bakery\" in bright blue lettering. Around the stand, there\'s a wide variety of chairs and tables, and a few of your kids are sitting around, enjoying a meal.\n\n");
-		}
-		if (ShopBuilt >= 2) {
-			outputText("One of your mouselets, a beige-furred male with a wide-brimmed leather hat, has his feet up on a stand, labelled \"Exotic Materials\"\n\n");
-		}
-		if (ShopBuilt >= 3) {
-			outputText("One of your mouselets, a female with wide yellow eyes and burly arms, rests her forearms on her stand. A sign with a stylized pickaxe hangs above it.\n\n");
-		}
-		if (ShopBuilt >= 4) {
-			outputText("Several of your children sit in some chairs around a simple stand, ran by a single, lithe mouselet. He pours drinks, talking quickly and warmly. He sees you, giving you a roguish smile.\n\n");
-		}
-		if (SmithBuilt && ShopBuilt >= 5) {
-			outputText("Outside the smithery is a single,  snow-white, mouse-girl sitting at a stand. Daggers and various small weapons sit on the stand, and she smiles brightly at anyone who approaches.\n\n");
-			if (prosperityvar >= 14) outputText("To the left of the stand is a weapon rack with a variety of spears on it.\n\n");
-			if (prosperityvar >= 18) outputText("To the right of the stand, several axes and swords hang from a framed rack.\n\n");
-			if (prosperityvar >= 20) outputText("\n\n");
-			if (prosperityvar >= 30 && ShouldraSeenTown == 4 && !ReapercheepBought) outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily\'s head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That is my Daddy\'s finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i>\n\n");
-		}
-		if (SmithBuilt && ShopBuilt >= 6) {
-			outputText("Outside the smithery is a single mouse-boy with coal-black fur. Steel glimmers in his eyes and on his stand, shields leaning against the wooden stand.\n\n");
-			if 	(prosperityvar >= 14) outputText("Hanging from racks are a variety of different pieces of armor, made from simple materials.\n\n");
-			if (prosperityvar >= 18) outputText("Behind the stall are several rows of heavier armors, more intricately built than before.\n\n");
-			if (prosperityvar >= 20) outputText("You notice several new-looking armors, made from fine steel.\n\n");
-			if (prosperityvar >=30) outputText(" A single set of mail, thin yet strikingly strong-looking, hangs from the front of the stall. As you look, the silvery metal darkens, casting the stall around it in shadow for a single moment. The shoulders are inlaid with copper and gold, thin \'whiskers\' of metal poking out to the sides. <i>\"Ah, of course you\'d notice my mother\'s magnum opus.</i>\" The boy says proudly. <i>\"Lighter than a feather, yet stronger than plate. Each ring is a mixture of Starmetal and Silversteel, ground down with stones taken from the ancient wizard\'s tower then forged in Foxfire, tempered in paper-talisman-fuelled WhiteFire and quenched in Purity Philter, enchanted by our Guardian Spirit Shouldra, this is the Sentinel mail, ShǔRato. It\'s one of a kind armor, magically bound to our town and its people.\"\n\n");
-		}
-		menu();
-		if (ShopBuilt >= 1) addButton(1, "Bakery", MouseTownBakery);
-		else addButtonDisabled(1, "???", "Haven't Built Enough (1) Stores.");
-		if (ShopBuilt >= 2) addButton(2, "Rare Goods", MouseTownRareGoods);
-		else addButtonDisabled(2, "???", "Haven't Built Enough (2) Stores.");
-		if (ShopBuilt >= 3) addButton(3, "Gatherer", MouseTownMining);
-		else addButtonDisabled(3, "???", "Haven't Built Enough (3) Stores.");
-		if (ShopBuilt >= 4) addButton(4, "Bar", MouseTownBar);
-		else addButtonDisabled(4, "???", "Haven't Built Enough (4) Stores.");
-		if (SmithBuilt && ShopBuilt >= 5) addButton(5, "Weaponshop", MouseTownWeaponry);
-		else if (SmithBuilt && ShopBuilt < 5) addButtonDisabled(5, "???", "Haven't Built Enough (5) Stores.");
-		else if (!SmithBuilt) addButtonDisabled(5, "???", "This shop needs a Smithery.");
-		if (SmithBuilt && ShopBuilt >= 6) addButton(6, "Armor Shop", MouseTownArmor);
-		else if (ShopBuilt < 6) addButtonDisabled(6, "???", "Haven't Built Enough (6) Stores.");
-		else if (!SmithBuilt) addButtonDisabled(6, "???", "This shop needs a Smithery.");
-		addButton(14, "Back", enterVillage);
+public function MouseShopArea():void {
+	clearOutput();
+	if (ShopBuilt >= 1) outputText(" One of your mouselets sits behind a kiosk, the sign above it saying \"Heart and Soul Bakery\" in bright blue lettering. Around the stand, there's a wide variety of chairs and tables, and a few of your kids are sitting around, enjoying a meal.\n\n");
+	if (ShopBuilt >= 2) outputText("One of your mouselets, a beige-furred male with a wide-brimmed leather hat, has his feet up on a stand, labelled \"Exotic Materials\"\n\n");
+	if (ShopBuilt >= 3) outputText("One of your mouselets, a female with wide yellow eyes and burly arms, rests her forearms on her stand. A sign with a stylized pickaxe hangs above it.\n\n");
+	if (ShopBuilt >= 4) outputText("Several of your children sit in some chairs around a simple stand, ran by a single, lithe mouselet. He pours drinks, talking quickly and warmly. He sees you, giving you a roguish smile.\n\n");
+	if (SmithBuilt && ShopBuilt >= 5) {
+		outputText("Outside the smithery is a single, snow-white, mouse-girl sitting at a stand. Daggers and various small weapons sit on the stand, and she smiles brightly at anyone who approaches.\n\n");
+		if (prosperityvar >= 14) outputText("To the left of the stand is a weapon rack with a variety of spears on it.\n\n");
+		if (prosperityvar >= 20) outputText("To the right of the stand, several axes and swords hang from a framed rack.\n\n");
+		if (prosperityvar >= 30 && ShouldraSeenTown == 4 && !ReapercheepBought) outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily's head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i>\"That is my Daddy's finest work yet.</i>\" She's uncharacteristically somber. <i>\"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who's blood pumps within our hearts.</i>\" She looks up at you, eyes shining. <i>\"It would be fitting, then, for you.</i>\"\n\n");
 	}
+	if (SmithBuilt && ShopBuilt >= 6) {
+		outputText("Outside the smithery is a single mouse-boy with coal-black fur. Steel glimmers in his eyes and on his stand, shields leaning against the wooden stand.\n\n");
+		if (prosperityvar >= 14) outputText("Hanging from racks are a variety of different pieces of armor, made from simple materials.\n\n");
+		if (prosperityvar >= 18) outputText("Behind the stall are several rows of heavier armors, more intricately built than before.\n\n");
+		if (prosperityvar >= 20) outputText("You notice several new-looking armors, made from fine steel.\n\n");
+		if (prosperityvar >= 30) outputText("A single set of mail, thin yet strikingly strong-looking, hangs from the front of the stall. As you look, the silvery metal darkens, casting the stall around it in shadow for a single moment. The shoulders are inlaid with copper and gold, thin 'whiskers' of metal poking out to the sides. <i>\"Ah, of course you'd notice my mother's magnum opus.</i>\" The boy says proudly. <i>\"Lighter than a feather, yet stronger than plate. Each ring is a mixture of Starmetal and Silversteel, ground down with stones taken from the ancient wizard's tower then forged in Foxfire, tempered in paper-talisman-fuelled WhiteFire and quenched in Purity Philter, enchanted by our Guardian Spirit Shouldra, this is the Sentinel mail, ShǔRato. It's one of a kind armor, magically bound to our town and its people.</i>\"\n\n");
+	}
+	menu();
+	//if (ShopBuilt >= 1) addButton(1, "Bakery", MouseTownBakery);
+	//else addButtonDisabled(1, "???", "Haven't Built Enough (1) Stores.");
+	if (ShopBuilt >= 2) addButton(2, "Rare Goods", MouseTownRareGoods);
+	else addButtonDisabled(2, "???", "Haven't Built Enough (2) Stores.");
+	//if (ShopBuilt >= 3) addButton(3, "Gatherer", MouseTownMining);
+	//else addButtonDisabled(3, "???", "Haven't Built Enough (3) Stores.");
+	//if (ShopBuilt >= 4) addButton(4, "Bar", MouseTownBar);
+	//else addButtonDisabled(4, "???", "Haven't Built Enough (4) Stores.");
+	//if (SmithBuilt && ShopBuilt >= 5) addButton(5, "Weaponshop", MouseTownWeaponry);
+	//else if (SmithBuilt && ShopBuilt < 5) addButtonDisabled(5, "???", "Haven't Built Enough (5) Stores.");
+	//else if (!SmithBuilt) addButtonDisabled(5, "???", "This shop needs a Smithery.");
+	//if (SmithBuilt && ShopBuilt >= 6) addButton(6, "Armor Shop", MouseTownArmor);
+	//else if (ShopBuilt < 6) addButtonDisabled(6, "???", "Haven't Built Enough (6) Stores.");
+	//else if (!SmithBuilt) addButtonDisabled(6, "???", "This shop needs a Smithery.");
+	addButton(14, "Back", enterVillage);
+}
 
 public function MouseTownBakery():void {
-clearOutput();
-outputText("Nothing is here yet. Bug Snas about it\n\n");
-outputText("\n\n");
-outputText("\n\n");
-outputText("\n\n");
-outputText("\n\n");
-outputText("\n\n");
-menu();
-addButton(1, "Back", enterVillage);
+	clearOutput();
+	outputText("Nothing is here yet. Bug Snas about it\n\n");
+	outputText("\n\n");
+	outputText("\n\n");
+	outputText("\n\n");
+	outputText("\n\n");
+	outputText("\n\n");
+	menu();
+	addButton(1, "Back", enterVillage);
 }
-public function MouseTownBar():void {
-clearOutput();
-outputText("You stride up to the outdoor bar, and a single mouse-woman in a black dress greets you. <i>“H-hey "+player.mf ("Dad", "Mom")+", welcome to the Sunlit Streaker.</i>” She brings you over to a seat, and you look at the menu. For now, the menu is pretty barren, all it says is ALE in letters large enough to cover the menu. You look up, slightly annoyed, but also amused. \"Do you want a drink? We don't have different types of drink, for now. Just ale. 3 gems a pop.\n\n");
-menu();
-addButton(1, "Ale", MouseTownDrink);
-addButton(2, "Back", MouseShopArea);
-}
-
-public function MouseTownDrink():void {
-outputText("You nod, and your odd daughter skips off, coming back with a crude clay mug full of amber ale. Despite the town's recent revival, the ale is sweet, the work of a competent brewer.\n\n");
-//Make the PC slightly Drunk
-doNext(enterVillage);
-}
-
-
 public function MouseTownRareGoods():void {
-clearOutput();
-if (SeenMatShop) {
-    outputText("Rum-Runner smiles as you return. <i>“Welcome back, "+player.mf ("Pa", "Ma")+". What's your pleasure today? Bee Chitin always sells, but perhaps something...rarer suits your taste?</i>”\n\n");
+	clearOutput();
+	if (SeenMatShop) outputText("Rum-Runner smiles as you return. <i>“Welcome back, "+player.mf ("Pa", "Ma")+". What's your pleasure today? Bee Chitin always sells, but perhaps something...rarer suits your taste?</i>”\n\n");
+	if (!SeenMatShop) {
+		outputText("As you approach, the beige-furred mouselet takes his feet off the stand, giving you a doff of his hat.\n\n");
+		outputText("<i>“"+player.mf ("Pa", "Ma")+", what brings you to my stall?</i>” He grins, only slightly sarcastically. <i>“Name’s Rum-Runner, and welcome to Rum-Runner's Rarities. I sell…Shall we say, materials outside of the usual metal and stone. I go it...A little more primal. These things can be harder to get nowadays, but are findable with a little bit of legwork…and maybe a little bladework.</i>” He puts a hand to the thin blade at his side. <i>“Honestly, I’d expect a veteran adventurer like you to have little need of my services…but what would I know?</i>” He takes his hat off, bowing theatrically\n\n");
+		SeenMatShop = true;
+	}
+	outputText("<i>“What can I do ya for?</i>”\n\n");
+	menu();
+	addButton(0, "GrnGel", BuyGel);
+	addButton(1, "Chitin", BuyChitin);
+	if (prosperityvar > 10) addButton(2, "Silk", BuySilk);
+	else addButtonDisabled(2, "???", "Req. 10+ prosperity.");
+	if (prosperityvar > 15) addButton(3, "Ebonbloom", BuyEbonbloom);
+	else addButtonDisabled(3, "???", "Req. 15+ prosperity.");
+	//if (prosperityvar > 20) addButton(5, "ImpSkull", BuyImpSkull);
+	//else addButtonDisabled(5, "???", "Req. 20+ prosperity.");
+	//if (prosperityvar > 30) addButton(6, "D.Skull", BuyDemonSkull);
+	//else addButtonDisabled(6, "???", "Req. 30+ prosperity.");
+	//if (prosperityvar > 30 && SceneLib.dungeons.checkDemonLaboratoryClear()) addButton(7, "D.Scale", BuyDragonscale);
+	//else addButtonDisabled(7, "???", "Req. 30+ prosperity and finished Demon Lab.");
+	addButton(8, "Back", MouseShopArea);
 }
-if (!SeenMatShop) {
-outputText("As you approach, the beige-furred mouselet takes his feet off the stand, giving you a doff of his hat.\n\n");
-    outputText("<i>“"+player.mf ("Pa", "Ma")+", what brings you to my stall?</i>” He grins, only slightly sarcastically. <i>“Name’s Rum-Runner, and welcome to Rum-Runner's Rarities. I sell…Shall we say, materials outside of the usual metal and stone. I go it...A little more primal. These things can be harder to get nowadays, but are findable with a little bit of legwork…and maybe a little bladework.</i>” He puts a hand to the thin blade at his side. <i>“Honestly, I’d expect a veteran adventurer like you to have little need of my services…but what would I know?</i>” He takes his hat off, bowing theatrically\n\n");
-SeenMatShop = true;
-}
-outputText("<i>“What can I do ya for?</i>”\n\n");
-menu();
-addButton(1, "GrnGel", BuyGel);
-addButton(2, "Chitin", BuyChitin);
-if (prosperityvar > 10) {
-    addButton(3, "Silk", BuySilk);
-}
-if (prosperityvar > 16) {
-    addButton(4, "Ebonbloom", BuyEbonbloom);
-}
-if (prosperityvar > 30)  { //Add the qualifier, must complete the demon lab dungeon.
-    addButton(5, "D.Scale", BuyDragonscale);
-}
-if (prosperityvar > 20) {
-    addButton(6, "ImpSkull", BuyImpSkull);
-}
-if (prosperityvar > 30) {
-    addButton(7, "D.Skull", BuyDemonSkull);
-}
-addButton(8, "Back", MouseShopArea);
-}
-
 public function BuyGel():void {
-clearOutput();
-if(player.gems < 50) {
-    outputText("You don't have enough gems.");
-    menu();
-    addButton(0,"Next", MouseTownRareGoods);
-    return;
+	clearOutput();
+	if (player.gems < 50) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("Your roguish son grins. <i>\"These are popular with the town guard. Comfortable, but protective. Hope ya get some good use out of it.</i>\" He hands you the gel. <i>\"Anything else?</i>\n\n");
+	player.gems -= 50;
+	statScreenRefresh();
+	inventory.takeItem(useables.GREENGL, MouseTownRareGoods);
 }
-outputText("Your roguish son grins. <i>\"These are popular with the town guard. Comfortable, but protective. Hope ya get some good use out of it.</i>\" He hands you the gel. <i>\"Anything else?</i>\n\n");
-player.gems -= 50;
-statScreenRefresh();
-inventory.takeItem(useables.GREENGL, MouseTownRareGoods);
-}
-
-public function BuyDemonSkull():void {
-menu();
-addButton(0,"Next", MouseTownRareGoods);
-}
-
-public function BuyImpSkull():void {
-menu();
-addButton(0,"Next", MouseTownRareGoods);
-}
-
 public function BuyChitin():void {
-clearOutput();
-if(player.gems < 100) {
-    outputText("You don't have enough gems.");
-    menu();
-    addButton(0,"Next", MouseTownRareGoods);
-    return;
-}
-outputText("Your son doffs his hat. <i>\" These ones aren't the hardest to get, but them bee folk need some...Buttering up to part with larger chunks voluntarily. Needless to say, I enjoy getting my hands on these.</i>\" He hands you a decent-sized chunk of bee chitin. <i>\"Anything else?</i>\n\n");
-player.gems -= 100;
-statScreenRefresh();
-inventory.takeItem(useables.B_CHITN, curry(MouseTownRareGoods));
+	clearOutput();
+	if (player.gems < 100) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("Your son doffs his hat. <i>\" These ones aren't the hardest to get, but them bee folk need some...Buttering up to part with larger chunks voluntarily. Needless to say, I enjoy getting my hands on these.</i>\" He hands you a decent-sized chunk of bee chitin. <i>\"Anything else?</i>\n\n");
+	player.gems -= 100;
+	statScreenRefresh();
+	inventory.takeItem(useables.B_CHITN, curry(MouseTownRareGoods));
 }
 public function BuySilk():void {
-clearOutput();
-if(player.gems < 200) {
-    outputText("You don't have enough gems.");
-    menu();
-    addButton(0,"Next", MouseTownRareGoods);
-    return;
-}
-outputText("RumRunner sighs. <i>\"Restocking these...It's hit and miss. Some o' them Spider-folk aint so bad, once you get to know em...But it's always a risk, if ya run into them Driders.</i>\" He hands you a spool of tough silk. <i>\"Anything else?</i> >n\n");
-player.gems -= 200;
-statScreenRefresh();
-inventory.takeItem(useables.T_SSILK, curry(MouseTownRareGoods));
-}
-
-public function BuyDragonscale():void {
-clearOutput();
-if(player.gems < 300) {
-    outputText("You don't have enough gems.");
-    menu();
-    addButton(0,"Next", MouseTownRareGoods);
-    return;
-}
-outputText("Your son gives you a smile. <i>\"Oh, I can't take complete credit for these ones.</i>\" He leans back. <i>\" Went into Tel'Adre with the runts, and found out some Dragon-folk had taken up residence there. Got to talkin' with some of em, and they mentioned that you'd freed 'em from the demons.</i>\" He gives you a conspiratorial grin. <i>\"I may have let it slip that you're my"+player.mf ("Pa", "Ma")+", and bam, that opened em up like nothing else.\"</i>\" He gives you a curt nod. \"<i>So anyways, apparently those scales of theirs are not only extremely hard, but also fall off pretty regularly. So they've taken to sellin' 'em. They'd normally sell for a bit more, but I got a pretty big discount, considering what you did for 'em. Give that old scales my regards, would ya?\"</i>\n\n");
-player.gems -= 300;
-statScreenRefresh();
-inventory.takeItem(useables.D_SCALE, curry(MouseTownRareGoods));
+	clearOutput();
+	if (player.gems < 200) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("RumRunner sighs. <i>\"Restocking these...It's hit and miss. Some o' them Spider-folk aint so bad, once you get to know em...But it's always a risk, if ya run into them Driders.</i>\" He hands you a spool of tough silk. <i>\"Anything else?</i> >n\n");
+	player.gems -= 200;
+	statScreenRefresh();
+	inventory.takeItem(useables.T_SSILK, curry(MouseTownRareGoods));
 }
 public function BuyEbonbloom():void {
-clearOutput();
-if(player.gems < 500) {
-    outputText("You don't have enough gems.");
-    menu();
-    addButton(0,"Next", MouseTownRareGoods);
-    return;
+	clearOutput();
+	if (player.gems < 600) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("Rum-Runner winces as you look at the Ebonblooms. <i>\"Those are without a doubt one of the most annoying plants I've encountered. Worth a pretty gem, but those caves are crawling with all kinds of nasty buggers, most of em best avoided.\"\n\n");
+	player.gems -= 600;
+	statScreenRefresh();
+	inventory.takeItem(useables.EBONBLO, curry(MouseTownRareGoods));
 }
-outputText("Rum-Runner winces as you look at the Ebonblooms. <i>\"Those are without a doubt one of the most annoying plants I've encountered. Worth a pretty gem, but those caves are crawling with all kinds of nasty buggers, most of em best avoided.\"\n\n");
-player.gems -= 500;
-statScreenRefresh();
-inventory.takeItem(useables.EBONBLO, curry(MouseTownRareGoods));
+public function BuyDemonSkull():void {
+	menu();
+	addButton(0,"Next", MouseTownRareGoods);
+}
+public function BuyImpSkull():void {
+	menu();
+	addButton(0,"Next", MouseTownRareGoods);
+}
+public function BuyDragonscale():void {
+	clearOutput();
+	if(player.gems < 300) {
+		outputText("You don't have enough gems.");
+		menu();
+		addButton(0,"Next", MouseTownRareGoods);
+		return;
+	}
+	outputText("Your son gives you a smile. <i>\"Oh, I can't take complete credit for these ones.</i>\" He leans back. <i>\" Went into Tel'Adre with the runts, and found out some Dragon-folk had taken up residence there. Got to talkin' with some of em, and they mentioned that you'd freed 'em from the demons.</i>\" He gives you a conspiratorial grin. <i>\"I may have let it slip that you're my"+player.mf ("Pa", "Ma")+", and bam, that opened em up like nothing else.\"</i>\" He gives you a curt nod. \"<i>So anyways, apparently those scales of theirs are not only extremely hard, but also fall off pretty regularly. So they've taken to sellin' 'em. They'd normally sell for a bit more, but I got a pretty big discount, considering what you did for 'em. Give that old scales my regards, would ya?\"</i>\n\n");
+	player.gems -= 300;
+	statScreenRefresh();
+	inventory.takeItem(useables.D_SCALE, curry(MouseTownRareGoods));
 }
 
 public function MouseTownMining():void {
@@ -1021,6 +986,19 @@ switch (choice0) {
 Intown = false;
 doNext(camp.returnToCampUseFourHours);
 }
+public function MouseTownBar():void {
+	clearOutput();
+	outputText("You stride up to the outdoor bar, and a single mouse-woman in a black dress greets you. <i>“H-hey "+player.mf ("Dad", "Mom")+", welcome to the Sunlit Streaker.</i>” She brings you over to a seat, and you look at the menu. For now, the menu is pretty barren, all it says is ALE in letters large enough to cover the menu. You look up, slightly annoyed, but also amused. \"Do you want a drink? We don't have different types of drink, for now. Just ale. 3 gems a pop.\n\n");
+	menu();
+	addButton(1, "Ale", MouseTownDrink);
+	addButton(2, "Back", MouseShopArea);
+}
+public function MouseTownDrink():void {
+	outputText("You nod, and your odd daughter skips off, coming back with a crude clay mug full of amber ale. Despite the town's recent revival, the ale is sweet, the work of a competent brewer.\n\n");
+	//Make the PC slightly Drunk
+	doNext(enterVillage);
+}
+
 public function MouseTownWeaponry():void {
 clearOutput();
 outputText("As you approach, the cute little mouselet behind the wooden stall stands, her tail whipping around. Her eyes light up when she sees you, and she hops up and down on her little stool.\n\n");
@@ -1032,7 +1010,7 @@ if (SeenMMelee) {
     outputText("As you approach, the cute little mouselet behind the wooden stall stands, her tail whipping around. Her eyes light up when she sees you, and she hops up and down on her little stool. <i>“Hi again! Do you need a stabber?</i>” She seems far too excited for her job.\n\n");
 }
 if (prosperityvar >= 30 && ShouldraSeenTown == 4 && !ReapercheepBought) {
-    outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily's head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That's my Daddy's finest work yet.</i> She\'s uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who\'s blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i>\n\n");
+    outputText("The stand seems to be glowing, and the girl behind the stand grins wickedly. In front of the stand sits several rapiers. In the middle, nestled in black velvet, sits the source of the glow, an intricately engraved rapier. The blade ripples, folded metal reflecting its own light. The handguard is large, carved steel brushed with gold, and as you turn it over, you realise that its guard is shaped like Amily's head, with Sapphires for eyes. As you look at it, the girl nods solemnly. <i> \"That's my Daddy's finest work yet.</i> She's uncharacteristically somber. <i> \"ReaperCheep: Forged from starmetal, slathered in the sap of Marae, enchanted by our Guardian Spirit Shouldra, embued with SoulForce from the Race-Mother, Amily, and quenched in the donated blood of our people. This sword speaks to our will...And is only to be wielded by those who's blood pumps within our hearts. </i>\" She looks up at you, eyes shining. <i> \"It would be fitting, then, for you. </i>\n\n");
 }
 
 menu();

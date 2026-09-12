@@ -368,7 +368,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 7 wisdom lvl-up perk: Where are you getting all these Apes from? Req. Even More Apes and Apes Together Stronger perks; 210+ wis. Effect: You have up to 6 extra tamed monsters that only use is to expand existing groups of monsters you control. Each group you made could have 3 more apes. One extra monster group is barely worth the meantion.\n");
 			outputText("-New tier 10 wisdom lvl-up perk: That's enough Apes! Req. Where are you getting all these Apes from? and Apes Together Strongest perks; 280+ wis. Effect: You can have 9 more extra tamed monsters that only use is to expand existing groups of monsters you control. ");
 			outputText("Each group have +1 more ap...monsters then doubled it on top of it. AND you can make extra two group because why not make it even more crazy, right?\n");
-			outputText("-\n");
+			outputText("-New tier 8 wisdom lvl-up perk: Cloud Number 9. Req. Kaiju No8 perk and 225+ wisdom. Effect: After taming ninth monster you're literaly on cloud number 9.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
