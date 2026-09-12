@@ -590,7 +590,7 @@ public class DomsDomain extends BaseContent implements SaveableState, TimeAwareI
         outputText("Soon enough, you’ve finished your meal. You decide to take your leave, and explore the Dom’s Domain a bit more.\n\n");
         outputText("");
         var gain:Number = player.maxHunger();
-		gain -= player.hunger;
+		gain -= (player.hunger + 1);
 		player.refillHunger(gain);
         pc.HPChange(Math.round(player.maxHP() * .05), false, true);
         pc.ManaChange(player.maxMana() * 0.05);
@@ -605,7 +605,7 @@ public class DomsDomain extends BaseContent implements SaveableState, TimeAwareI
         outputText("Soon enough, you’ve finished your meal. You decide to take your leave, and explore the Dom’s Domain a bit more.\n\n");
         //increase food, virility and cum production
         var gain:Number = player.maxHunger();
-		gain -= player.hunger;
+		gain -= (player.hunger + 1);
 		player.refillHunger(gain);
         pc.HPChange(Math.round(player.maxHP() * .05), false,true);
         pc.ManaChange(player.maxMana() * 0.05);

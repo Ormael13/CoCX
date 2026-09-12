@@ -164,7 +164,7 @@ import classes.Scenes.SceneLib;
 			else outputText("Who needs axes when you've got pure strength? Bracing yourself, you crack your knuckles and punch the tree with all your strength. It takes effort, and as you keep punching, a crack begins to form. The crack grows bigger with each hit. When it’s large enough, the log breaks off, and it strangely floats in the air. ");
 			outputText("You shrug and pick up the wood block when you suddenly hear a crashing sound as the tree falls over and splits into several wooden blocks! Surprisingly, they clump together into a single bunch. You pick up the bunch of wood, noting how easy it is to carry, and return to your camp. \n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + ((player.strStat.core.value + player.strStat.train.value) * 4));
-			incrementWoodSupply(10 + ((player.strStat.core.value + player.strStat.train.value) * 4));
+			camp.campUpgrades.incrementWoodSupply(10 + ((player.strStat.core.value + player.strStat.train.value) * 4));
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			endEncounter();
@@ -179,7 +179,7 @@ import classes.Scenes.SceneLib;
 			var cTT:Number = (10 + ((player.strStat.core.value + player.strStat.train.value) * 4));
 			if (player.weapon == weapons.DL_AXE_) cTT = Math.round(cTT*1.5);
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += cTT;
-			incrementWoodSupply(cTT);
+			camp.campUpgrades.incrementWoodSupply(cTT);
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			endEncounter(120);
 		}
@@ -202,14 +202,14 @@ import classes.Scenes.SceneLib;
 			outputText("the blade into the trunk of the tree, watching it cut straight through as wood chips fly all over the place. Eventually you reach the other side of the trunk, and the tree falls over with a mighty thud. You then proceed to cut the trunk into smaller pieces and haul them back to your camp.\n\n");
 			if (player.isInGoblinMech()) {
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (22 + ((player.strStat.core.value + player.strStat.train.value) * 5));
-				incrementWoodSupply(22 + ((player.strStat.core.value + player.strStat.train.value) * 5));
+				camp.campUpgrades.incrementWoodSupply(22 + ((player.strStat.core.value + player.strStat.train.value) * 5));
 				endEncounter();
 			}
 			else {
 				var cTMT:Number = (13 + ((player.strStat.core.value + player.strStat.train.value) * 4));
 				if (player.weapon == weapons.TMACGRSW || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.TRIPPER2) cTMT = Math.round(cTMT*1.5);
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += cTMT;
-				incrementWoodSupply(cTMT);
+				camp.campUpgrades.incrementWoodSupply(cTMT);
 				fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 				endEncounter(120);
 			}
@@ -267,7 +267,7 @@ import classes.Scenes.SceneLib;
 			var minedStones:Number = 13 + ((player.strStat.core.value + player.strStat.train.value) * player.miningLevel);
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
-			incrementStoneSupply(minedStones);
+			camp.campUpgrades.incrementStoneSupply(minedStones);
 			var mineEXP:Number = player.MiningMulti();
 			player.mineXP(mineEXP);
 			if (rand(10) == 0) {
@@ -322,7 +322,7 @@ import classes.Scenes.SceneLib;
 
 		public function makingNewAnthilRoom():void {
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += 50;
-			incrementStoneSupply(50);
+			camp.campUpgrades.incrementStoneSupply(50);
 			if (rand(4) == 0 || player.miscJewelry1 == miscjewelries.MINPBAG || player.miscJewelry2 == miscjewelries.MINPBAG) {
 				var itype:ItemType;
 				var ore:Number = 2; //0 = copper, 1 = tin, 2 = iron, 3 = moonstone, 4 = mithral, 5 = adamantine
@@ -388,7 +388,7 @@ import classes.Scenes.SceneLib;
 			if (player.str >= 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five logs at a time!");
 			outputText("\n\nIt takes some time, but you eventually bring the last of the wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + ((player.strStat.core.value + player.strStat.train.value) * 8));
-			incrementWoodSupply(20 + ((player.strStat.core.value + player.strStat.train.value) * 8));
+			camp.campUpgrades.incrementWoodSupply(20 + ((player.strStat.core.value + player.strStat.train.value) * 8));
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			endEncounter(120);
 		}
@@ -400,26 +400,6 @@ import classes.Scenes.SceneLib;
 		private function noThanks2():void {
 			outputText("Deciding not to work on your cabin right now, you return to the center of your camp.");
 			doNext(playerMenu);
-		}
-
-		public function incrementWoodSupply(amount:int):void {
-			CampStatsAndResources.WoodResc += amount;
-			outputText("<b>(+" + amount + " wood! "+CampStatsAndResources.WoodResc+"/"+SceneLib.campUpgrades.checkMaterialsCapWood()+" total!");
-			if (CampStatsAndResources.WoodResc >= SceneLib.campUpgrades.checkMaterialsCapWood()) {
-				CampStatsAndResources.WoodResc = SceneLib.campUpgrades.checkMaterialsCapWood();
-				outputText(" Your wood capacity is full.")
-			}
-			outputText(")</b>");
-		}
-
-		public function incrementStoneSupply(amount:int):void {
-			CampStatsAndResources.StonesResc += amount;
-			outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"! "+CampStatsAndResources.StonesResc+"/"+SceneLib.campUpgrades.checkMaterialsCapStones()+" total!");
-			if (CampStatsAndResources.StonesResc >= SceneLib.campUpgrades.checkMaterialsCapStones()) {
-				CampStatsAndResources.StonesResc = SceneLib.campUpgrades.checkMaterialsCapStones();
-				outputText(" Your stone capacity is full.")
-			}
-			outputText(")</b>");
 		}
 
 		private function noMoreSrt():Number {

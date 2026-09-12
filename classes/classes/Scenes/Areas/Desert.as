@@ -576,13 +576,11 @@ use namespace CoC;
 			clearOutput();
 			var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
-			CampStatsAndResources.NailsResc += extractedNail;
 			outputText("While exploring the desert, you find the wreckage of a building. Judging from the debris, it's the remains of the library that was destroyed by the fire.\n"
 				+ "\n"
 				+ "You circle the wreckage for a good while and you can't seem to find anything to salvage until something shiny catches your eye. There are exposed nails! You take your hammer out of your toolbox and you spend time extracting "+extractedNail+" nails. Some of them are bent but others are in incredibly good condition. You could use these for construction.");
 			outputText("\n\nNails: ");
-			if (CampStatsAndResources.NailsResc > SceneLib.campUpgrades.checkMaterialsCapNails()) CampStatsAndResources.NailsResc = SceneLib.campUpgrades.checkMaterialsCapNails();
-			outputText(CampStatsAndResources.NailsResc+"/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+			camp.campUpgrades.incrementStoneSupply(extractedNail);
 			endEncounter();
 		}
 

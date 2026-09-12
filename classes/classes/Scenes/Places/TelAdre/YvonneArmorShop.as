@@ -22,18 +22,18 @@ public class YvonneArmorShop extends Shop {
     protected override function inside():void {
         super.inside();
         menu();
-        addButton(0,    armors.CHBIKNI.shortName,   confirmBuy, armors.CHBIKNI);
-        addButton(1,    armors.FULLCHN.shortName,   confirmBuy, armors.FULLCHN);
-        addButton(2,    armors.FULLPLT.shortName,   confirmBuy, armors.FULLPLT);
-        addButton(3,    armors.INDECST.shortName,   confirmBuy, armors.INDECST);
-        addButton(4,    armors.SCALEML.shortName,   confirmBuy, armors.SCALEML);
-        addButton(5,    shields.BUCKLER.shortName,  confirmBuy, shields.BUCKLER);
-        addButton(6,    shields.KITE_SH.shortName,  confirmBuy, shields.KITE_SH);
-        addButton(7,   	shields.SPIL_SH.shortName,  confirmBuy, shields.SPIL_SH);
-        addButton(8,    shields.GREATSH.shortName,  confirmBuy, shields.GREATSH);
-        addButton(9,    shields.TOWERSH.shortName,  confirmBuy, shields.TOWERSH);
-        addButton(10,   armors.SAMUARM.shortName,   confirmBuy, armors.SAMUARM);
-        addButton(11,   headjewelries.KABUMEMP.shortName,   confirmBuy, headjewelries.KABUMEMP);
+        addButton(0, armors.CHBIKNI.shortName, confirmBuy, armors.CHBIKNI);
+        addButton(1, armors.FULLCHN.shortName, confirmBuy, armors.FULLCHN);
+        addButton(2, armors.FULLPLT.shortName, confirmBuy, armors.FULLPLT);
+        addButton(3, armors.INDECST.shortName, confirmBuy, armors.INDECST);
+        addButton(4, armors.SCALEML.shortName, confirmBuy, armors.SCALEML);
+        addButton(5, shields.BUCKLER.shortName, confirmBuy, shields.BUCKLER);
+        addButton(6, shields.KITE_SH.shortName, confirmBuy, shields.KITE_SH);
+        addButton(7, shields.SPIL_SH.shortName, confirmBuy, shields.SPIL_SH);
+        addButton(8, shields.GREATSH.shortName, confirmBuy, shields.GREATSH);
+        addButton(9, shields.TOWERSH.shortName, confirmBuy, shields.TOWERSH);
+        addButton(10, armors.SAMUARM.shortName, confirmBuy, armors.SAMUARM);
+        addButton(11, headjewelries.KABUMEMP.shortName, confirmBuy, headjewelries.KABUMEMP);
         addButton(13, "Misc", yvonnaMisc);
         addButton(14, "Leave", telAdre.telAdreMenu);
     }

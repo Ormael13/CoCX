@@ -159,7 +159,7 @@ public class CampUpgrades extends BaseContent {
         outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + checkMaterialsCapNails() + "\n");
         outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + checkMaterialsCapWood() + "\n");
         outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + checkMaterialsCapStones() + "\n");
-        outputText("Metal Plates: " + CampStatsAndResources.MetalPieces + "/200\n");//" + checkMaterialsCapStones() + "
+        outputText("Metal Plates: " + CampStatsAndResources.MetalPieces + "/" + checkMaterialsCapMetalPieces() + "\n");
     }
 	
 	public function checkMaterialsCapNails():Number {
@@ -169,14 +169,56 @@ public class CampUpgrades extends BaseContent {
 		return cMC1;
 	}
 	public function checkMaterialsCapWood():Number {
-		var cMC1:Number = 400;
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) cMC1 += 1200;
+		var cMC1:Number = 500;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) cMC1 += 1500;
 		return cMC1;
 	}
 	public function checkMaterialsCapStones():Number {
-		var cMC1:Number = 400;
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 1200;
+		var cMC1:Number = 500;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 1500;
 		return cMC1;
+	}
+	public function checkMaterialsCapMetalPieces():Number {
+		var cMC1:Number = 200;
+		//if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 1500;
+		return cMC1;
+	}
+
+	public function incrementNailSupply(amount:int):void {
+		CampStatsAndResources.NailsResc += amount;
+		outputText("<b>(+" + amount + " nail"+(amount>1?"s":"")+"! "+CampStatsAndResources.NailsResc+"/"+checkMaterialsCapNails()+" total!");
+		if (CampStatsAndResources.NailsResc >= checkMaterialsCapNails()) {
+			CampStatsAndResources.NailsResc = checkMaterialsCapNails();
+			outputText(" Your nails capacity is full.")
+		}
+		outputText(")</b>");
+	}
+	public function incrementWoodSupply(amount:int):void {
+		CampStatsAndResources.WoodResc += amount;
+		outputText("<b>(+" + amount + " wood! "+CampStatsAndResources.WoodResc+"/"+checkMaterialsCapWood()+" total!");
+		if (CampStatsAndResources.WoodResc >= checkMaterialsCapWood()) {
+			CampStatsAndResources.WoodResc = checkMaterialsCapWood();
+			outputText(" Your wood capacity is full.")
+		}
+		outputText(")</b>");
+	}
+	public function incrementStoneSupply(amount:int):void {
+		CampStatsAndResources.StonesResc += amount;
+		outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"! "+CampStatsAndResources.StonesResc+"/"+checkMaterialsCapStones()+" total!");
+		if (CampStatsAndResources.StonesResc >= checkMaterialsCapStones()) {
+			CampStatsAndResources.StonesResc = checkMaterialsCapStones();
+			outputText(" Your stone capacity is full.")
+		}
+		outputText(")</b>");
+	}
+	public function incrementMetalPiecesSupply(amount:int):void {
+		CampStatsAndResources.MetalPieces += amount;
+		outputText("<b>(+" + amount + " metal plate"+(amount>1?"s":"")+"! "+CampStatsAndResources.MetalPieces+"/"+checkMaterialsCapMetalPieces()+" total!");
+		if (CampStatsAndResources.MetalPieces >= checkMaterialsCapMetalPieces()) {
+			CampStatsAndResources.MetalPieces = checkMaterialsCapMetalPieces();
+			outputText(" Your metal plates capacity is full.")
+		}
+		outputText(")</b>");
 	}
 
     private function getHelpers():Object {

@@ -77,6 +77,10 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.KaijuNo8)) cTC += 1;
 			if (player.hasPerk(PerkLib.CloudNumber9)) cTC += 1;
 			if (player.hasPerk(PerkLib.ThereIs10TypesOfTamedMonsters)) cTC += 1;
+			if (player.hasPerk(PerkLib.MoreApes)) cTC += 2;
+			if (player.hasPerk(PerkLib.EvenMoreApes)) cTC += 2;
+			if (player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom)) cTC += 2;
+			if (player.hasPerk(PerkLib.ThatsEnoughApes)) cTC += 3;
 			return cTC;
 		}
 		private function currentGroupCap():Number {
@@ -351,16 +355,15 @@ public class CampMakeWinions extends BaseContent
 				if (player.hasPerk(PerkLib.SicEmSix)) addButtonIfTrue(7, "Release 06", curry(tamingAttemptRelease, 6), "You do not have any tamed monster No.6", player.hasStatusEffect(StatusEffects.TamedMonster06), "Release Monster No.6");
 				if (player.hasPerk(PerkLib.LuckyNumberTamer)) addButtonIfTrue(8, "Release 07", curry(tamingAttemptRelease, 7), "You do not have any tamed monster No.7", player.hasStatusEffect(StatusEffects.TamedMonster07), "Release Monster No.7");
 				if (player.hasPerk(PerkLib.KaijuNo8)) addButtonIfTrue(9, "Release 08", curry(tamingAttemptRelease, 8), "You do not have any tamed monster No.8", player.hasStatusEffect(StatusEffects.TamedMonster08), "Release Monster No.8");
-				if (player.hasPerk(PerkLib.CloudNumber9)) addButtonIfTrue(9, "Release 09", curry(tamingAttemptRelease, 9), "You do not have any tamed monster No.9", player.hasStatusEffect(StatusEffects.TamedMonster09), "Release Monster No.9");
-				addButton(14, "Next", tamingAttempt2, page + 2);
+				addButton(14, "Next", tamingAttempt2, page + 1);
 			}
 			if (page == 2) {
-				//"Release 09"
+				if (player.hasPerk(PerkLib.CloudNumber9)) addButtonIfTrue(2, "Release 09", curry(tamingAttemptRelease, 9), "You do not have any tamed monster No.9", player.hasStatusEffect(StatusEffects.TamedMonster09), "Release Monster No.9");
 				//"Release 10"
 				//"Release 11"
 				//"Release 12"
-				addButton(11, "Next", tamingAttempt2, page + 1);
-				addButton(12, "Prev", tamingAttempt2, page - 1);
+				addButton(13, "Next", tamingAttempt2, page + 1);
+				addButton(14, "Prev", tamingAttempt2, page - 1);
 			}
 			if (page == 3) {
 				if (player.hasPerk(PerkLib.MoreApes)) {
@@ -380,7 +383,7 @@ public class CampMakeWinions extends BaseContent
 					addButtonIfTrue(9, "Release A8", curry(tamingAttemptRelease, 58), "You do not have any tamed monster No.A8", player.hasStatusEffect(StatusEffects.TamedMonster58), "Release Monster No.A8");
 					addButtonIfTrue(10, "Release A9", curry(tamingAttemptRelease, 59), "You do not have any tamed monster No.A9", player.hasStatusEffect(StatusEffects.TamedMonster59), "Release Monster No.A9");
 				}
-				addButton(14, "Prev", tamingAttempt2, page - 2);
+				addButton(14, "Prev", tamingAttempt2, page - 1);
 			}
 		}
 		public function tamingAttemptYes():void {
@@ -792,7 +795,7 @@ public class CampMakeWinions extends BaseContent
 			if (tameMonA == 5) player.addStatusValue(StatusEffects.TamedMonster05, 4, 1);
 			if (tameMonA == 6) player.addStatusValue(StatusEffects.TamedMonster06, 4, 1);
 			if (tameMonA == 7) player.addStatusValue(StatusEffects.TamedMonster07, 4, 1);
-			clearingTamedMonsterSlot(tameMonB, true);
+			clearingTamedMonsterSlot(tameMonB);
 			doNext(accessTamedWinionsMainMenu, 1);
 		}
 		public function groupUpTamedMonstersFail():void {
@@ -3011,4 +3014,4 @@ public class CampMakeWinions extends BaseContent
 			player.addPerkValue(PerkLib.BoneGiants, 1, +bonesUsedToMakeLargeSkeleton());
 		}
 	}
-}
+}

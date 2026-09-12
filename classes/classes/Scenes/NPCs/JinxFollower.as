@@ -148,7 +148,7 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>That will be... perhaps... " + cost + " spirit stones, yes definitely! It's how valuable they are. Show me da stones, baby!</i>\"\n\n");
 			menu();
 			if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
-			else if (CampStatsAndResources.MetalPieces >= (201 - amt)) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+			else if (CampStatsAndResources.MetalPieces >= (camp.campUpgrades.checkMaterialsCapMetalPieces() + 1 - amt)) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
 			else addButton(1, "Buy", curry(buyItemMetalPlatesYes, cost, amt));
 			if (flags[kFLAGS.JINX_LVL_UP] >= 1) addButton(3, "Don't Buy", campJinxMenuMain);
 			else addButton(3, "Don't Buy", bazaarEncounters);
@@ -158,7 +158,7 @@ import classes.Scenes.SceneLib;
 			statScreenRefresh();
 			outputText("She counts the stones carefully, putting them away before handing your purchase over.\n\n");
 			outputText("\"<i>Always happy to do business! Anything else you want to buy, [name]?</i>\"\n\n");
-			CampStatsAndResources.MetalPieces += amt;
+			camp.campUpgrades.incrementMetalPiecesSupply(amt);
 			if (flags[kFLAGS.JINX_LVL_UP] >= 1) doNext(campJinxMenuMain);
 			else doNext(bazaarEncounters);
 		}

@@ -470,7 +470,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState, Time
 						"You nod and Luna comes back with your tea, and then in a moment your meal. You have no idea where she's finding the ingredients, but so great is her culinary skill even with your crude mess kit and a campfire that you doubt most of Tel'Andre is eating so well. You finish with gusto, feeling fully satisfied, and thank Luna for the magnificent meal. She nods, blushing endearingly with honest, innocent pride at your praise.\n\n" +
 						"\"<i>It is my pride and my pleasure to serve you, [Master]. Your praise is all I could desire and more.</i>\"\n\n");
 				var gain:Number = player.maxHunger();
-				gain -= player.hunger;
+				gain -= (player.hunger + 1);
 				player.refillHunger(gain);
 				pc.HPChange(Math.round(player.maxHP() * .05), true, false);
 				pc.ManaChange(player.maxMana() * 0.05);

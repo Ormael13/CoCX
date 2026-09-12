@@ -313,7 +313,7 @@ public class SidonieFollower extends NPCAwareContent
 				if (player.weapon == weapons.DL_AXE_) cTT = Math.round(cTT*1.5);
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += cTT;
 				cTT += 400 + rand(100);
-				camp.cabinProgress.incrementWoodSupply(cTT);
+				camp.campUpgrades.incrementWoodSupply(cTT);
 				explorer.stopExploring();
 				doNext(camp.returnToCampUseFourHours);
 			}

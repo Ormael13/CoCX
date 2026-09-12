@@ -448,7 +448,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
             case 3: //Axe
                 outputText("You grab an axe from your toolbox and hack away at the plants without mercy. Eventually, you manage to chop down every perverted plant in the glade save for some of the trees. They gradually wither away. ");
                 outputText("Finally, you chop down the trees with all your strength, making wedge-shaped cuts. With one last almighty swing, the tree falls and lands on the ground with a loud THUD. It looks like they would make fine wood. You chop the tree into several pieces and haul the wood to your camp. ");
-                camp.cabinProgress.incrementWoodSupply(10);
+                camp.campUpgrades.incrementWoodSupply(10);
                 var minlimit1:Number = 40 - (player.str / 10);
                 if (minlimit1 < 5) minlimit1 = 5;
                 fatigue(minlimit1);
