@@ -648,7 +648,7 @@ public function PCGoblinDaughtersBuilingWorkshopSpareParts():void {
 	if (player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) outputText(", "+player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts)+" mechanism");
 	if (player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) outputText(", "+player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts)+" energy core");
 	outputText("</b>");
-	camp.campUpgrades.incrementStoneSupply(player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts));
+	camp.campUpgrades.incrementNailSupply(player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts));
 	camp.campUpgrades.incrementMetalPiecesSupply(player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts));
 	CampStatsAndResources.MechanismResc += player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts);
 	CampStatsAndResources.EnergyCoreResc += player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts);

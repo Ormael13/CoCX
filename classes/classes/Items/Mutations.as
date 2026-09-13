@@ -962,7 +962,7 @@ public final class Mutations extends MutationsHelper {
         if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
         if (CampStatsAndResources.NailsResc > SceneLib.campUpgrades.checkMaterialsCapNails()) CampStatsAndResources.NailsResc = SceneLib.campUpgrades.checkMaterialsCapNails();
         outputText("You open the pack to find " + nails + " nails inside. ");
-		camp.campUpgrades.incrementStoneSupply(nails);
+		camp.campUpgrades.incrementNailSupply(nails);
     }
 
     public function packOfDemonBones(player:Player):void {

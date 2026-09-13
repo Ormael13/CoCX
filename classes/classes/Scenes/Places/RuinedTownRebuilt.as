@@ -742,7 +742,7 @@ public function BuySilk():void {
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("Rum-Runner sighs. <i>\"Restocking these...It's hit and miss. Some o' them Spider-folk aint so bad, once you get to know em...But it's always a risk, if ya run into them Driders.</i>\" He hands you a spool of tough silk. <i>\"Anything else?</i> >n\n");
+	outputText("Rum-Runner sighs. <i>\"Restocking these...It's hit and miss. Some o' them Spider-folk aint so bad, once you get to know em...But it's always a risk, if ya run into them Driders.</i>\" He hands you a spool of tough silk. <i>\"Anything else?</i>\"\n\n");
 	player.gems -= 200;
 	statScreenRefresh();
 	inventory.takeItem(useables.T_SSILK, MouseTownRareGoods);
@@ -755,7 +755,7 @@ public function BuyEbonbloom():void {
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("Rum-Runner winces as you look at the Ebonblooms. <i>\"Those are without a doubt one of the most annoying plants I've encountered. Worth a pretty gem, but those caves are crawling with all kinds of nasty buggers, most of em best avoided.\"\n\n");
+	outputText("Rum-Runner winces as you look at the Ebonblooms. <i>\"Those are without a doubt one of the most annoying plants I've encountered. Worth a pretty gem, but those caves are crawling with all kinds of nasty buggers, most of em best avoided.</i>\"\n\n");
 	player.gems -= 600;
 	statScreenRefresh();
 	inventory.takeItem(useables.EBONBLO, MouseTownRareGoods);
@@ -768,7 +768,7 @@ public function BuyImpSkull():void {
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("Rum-Runner loudly complains he not get script for this scene from 'Snas'.");
+	outputText("Rum-Runner seems confused as you request the imp skull. <i>\"Really, "+player.mf ("Pa", "Ma")+"? I would have thought these easy enough for you. It’s dirty work, but simple enough for me, after all…I guess you’re too busy with bigger prey.</i>\" You shrug, and he shakes himself. <i>\"Ah…None of my business. Your gems are as good as any other. 25 gems.</i>\"\n\n");
 	player.gems -= 25;
 	statScreenRefresh();
 	inventory.takeItem(useables.IMPSKLL, MouseTownRareGoods);
@@ -781,7 +781,7 @@ public function BuyDemonSkull():void {
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("Rum-Runner loudly complains he not get script for this scene from 'Snas'.");
+	outputText("Rum-Runner’s surprise is obvious as you ask for a demon skull. <i>\"With…All respect, "+player.mf ("Pa", "Ma")+", I would’ve thought you’d be rolling in these. I only get my hands on them when I mess up, and it’s usually risky sticking around long enough to take them.</i>\" He sighs. <i>\"50 Gems.</i>\"\n\n");
 	player.gems -= 50;
 	statScreenRefresh();
 	inventory.takeItem(useables.DEMSKLL, MouseTownRareGoods);
@@ -867,25 +867,25 @@ public function DoNailsRun():void {
 			outputText("You catch sight of a large set of buildings, but on your way there, several of your children vanish into the sands, shifting sands pulling them in towards androgynous people in the middle. You and your kin leap into action, leaping into the sandtrap's funnels en masse, forcing the egg-laying rapists to flee. Once you get everyone back up, your children are shaken, tired by the struggle.\n\n");
 			outputText("Your children, despite their fatigue, pull together and get to work. You pull nails from the buildings, until a small group of demons appear. You haven't gotten much, but the Quarry corps aren't fighters. You decide to get out of the desert before more demons show up.\n\n");
 			outputText("You found " + nails + " usable nails in the old wood.\n\n");
-			camp.campUpgrades.incrementStoneSupply(nails);
+			camp.campUpgrades.incrementNailSupply(nails);
 			break;
 		case 1:
 			nails = 10 * prosperityvar;
 			outputText("You come upon an old wooden structure, half-buried in the desert. You notice the telltale signs of the desert traps, and your children are easily able to avoid them. You begin to extract the nails from the structure, but are called away to deal with a few sand witches, who are eyeing your group. The women don't approach, but begin to giggle, making out with each other in full display. Several of your mice stop working altogether, and as several more sand witches appear, walking towards your group, you bring everyone in, heading back to town before the conniving cow-bitches can become even more of an annoyance.\n\n");
 			outputText("You found " + nails + " usable nails in the old wood.\n\n");
-			camp.campUpgrades.incrementStoneSupply(nails);
+			camp.campUpgrades.incrementNailSupply(nails);
 			break;
 		case 2:
 			nails = 15 * prosperityvar;
 			outputText("You run into a group of sand witches unleashing their magics on a group of demons. You take advantage of the chaos, heading past with your mouselets. Both groups are still fighting several hours later, when you finish. You and yours pack up and leave, the two groups still fighting.\n\n");
 			outputText("You found " + nails + " usable nails in the old wood.\n\n");
-			camp.campUpgrades.incrementStoneSupply(nails);
+			camp.campUpgrades.incrementNailSupply(nails);
 			break;
 		case 3:
 			nails = 20 * prosperityvar;
 			outputText("While heading to some ruins, you run into some of Tel'Adre's outriders. They nod respectfully, and take a rest beside your mouse children as you work. You think you see a sand witch or two, but between Tel'Adre's guards and your own, they think better of it.\n\n");
 			outputText("You found " + nails + " usable nails in the old wood.\n\n");
-			camp.campUpgrades.incrementStoneSupply(nails);
+			camp.campUpgrades.incrementNailSupply(nails);
 			break;
 		default:
 	}
@@ -935,19 +935,22 @@ public function DoScrapRun():void {
 	switch (choice0) {
 		case 0:
 			metal = 5 * prosperityvar;
-			outputText("Mouse kids loudly complains they not get script for this scene from 'Snas'.");
+			outputText("As you enter the junkyard, almost immediately you see a large group of goblins, heavily armed. They let you pass at first, but as you pass, they launch a volley of their poisoned darts at your kids. You beat them down and chase the goblins away, but within a minute, a good half of your kids are either paralyzed or feverishly masturbating. You put the incapacitated mice into the cart, but as a feral-looking Raiju enters the scrapyard from the far side, eyeing the cart hungrily, you decide to cut your losses, taking what you can and getting out.\n\n");
 			outputText("You and your kids bring " + metal + " metal back from your expedition.\n\n");
 			camp.campUpgrades.incrementMetalPiecesSupply(metal);
 			break;
 		case 1:
 			metal = 7 * prosperityvar;
-			outputText("Mouse kids loudly complains they not get script for this scene from 'Snas'.");
+			outputText("You get into the scrapyard without much fuss, but as your kids spread out, one of them steps on a concealed trap, hitting him and two more kids with lust gas. As if on cue, several goblins poke their heads out from concealed positions. Your kids are too spread out for the ambush to take out any more, but the goblins still cause a significant delay. Catching sight of a male Raiju stalking towards your kids, you think fast, grabbing two of the goblins and chucking them in his general direction. Despite the crazed look in his eyes, he looks up after pinning one down, giving you a nod, as if in thanks, before putting the goblin in a headlock and taking her away to “plug”.\n\n");
 			outputText("You and your kids bring " + metal + " metal back from your expedition.\n\n");
 			camp.campUpgrades.incrementMetalPiecesSupply(metal);
 			break;
 		case 2:
 			metal = 10 * prosperityvar;
-			outputText("Mouse kids loudly complains they not get script for this scene from 'Snas'.");
+			outputText("The scrapyard is oddly calm, almost completely silent. You’re suspicious, but as your kids spread out, taking choice pieces of metal and bringing it back to the cart, nobody even sets off any traps. You find yourself a perch on top of a large scrap pile, and in the distance, you can see why. Several Raiju are standing around a single goblin, taking turns. ");
+			outputText("Currently the greenskin is getting her ass fucked by a particularly muscular Raiju, while a second, lithe female has her legs around the goblin’s head, forcing her to lick her cunt. A third and fourth male stand on either side, both of their hands around each of the goblin’s, forcing her hands up and down their shafts in a crude, forced handjob.\n\n");
+			outputText("The female notices you first, and she just waves casually, a smug, content smirk on her face. The males look, and just shrug, more interested in their gangbang than figuring out what’s going on with you.\n\n");
+			outputText("Your kids fill the cart, and while you’re leaving, you catch sight of the four Raiju, leaving the other way. They also see you, giving you a nod as you leave.\n\n");
 			outputText("You and your kids bring " + metal + " metal back from your expedition.\n\n");
 			camp.campUpgrades.incrementMetalPiecesSupply(metal);
 			break;
@@ -1547,4 +1550,4 @@ public function AmilyAfterSex():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 }
-}
+}

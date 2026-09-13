@@ -357,7 +357,7 @@ public class CampMakeWinions extends BaseContent
 				}
 				addButton(11, "Prev", accessTamedWinionsMainMenu, page - 2);
 			}
-			//addButtonIfTrue(12, "Move", curry(groupUpTamedMonsters, 1), "You do not have Apes Together Strong perk.", player.hasPerk(PerkLib.ApesTogetherStrong), "Move your tamed monsters from main roster to one for monsters intended to group with other monsters.");
+			//addButtonIfTrue(12, "Move", curry(moveTamedMonsters, 1), "You do not have Apes Together Strong perk.", player.hasPerk(PerkLib.ApesTogetherStrong), "Move your tamed monsters from main roster to one for monsters intended to group with other monsters.");
 			addButtonIfTrue(13, "Group", curry(groupUpTamedMonsters, 1), "You do not have Apes Together Strong perk.", player.hasPerk(PerkLib.ApesTogetherStrong), "Group your tamed monsters.");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
