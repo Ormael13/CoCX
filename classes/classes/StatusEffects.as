@@ -765,6 +765,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TamedMonster11:StatusEffectType                 = mk("TamedMonster11");
 		public static const TamedMonster11a:StatusEffectType                = mk("TamedMonster11a");
 		public static const TamedMonster11b:StatusEffectType                = mk("TamedMonster11b");
+		public static const TamedMonster12:StatusEffectType                 = mk("TamedMonster12");
 		public static const TamedMonster51:StatusEffectType                 = mk("TamedMonster51");
 		public static const TamedMonster52:StatusEffectType                 = mk("TamedMonster52");
 		public static const TamedMonster53:StatusEffectType                 = mk("TamedMonster53");
@@ -1601,4 +1602,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 
-}
+}

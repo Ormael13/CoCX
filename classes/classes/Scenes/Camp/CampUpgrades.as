@@ -171,16 +171,19 @@ public class CampUpgrades extends BaseContent {
 	public function checkMaterialsCapWood():Number {
 		var cMC1:Number = 500;
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) cMC1 += 1500;
+		//if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 8000;
 		return cMC1;
 	}
 	public function checkMaterialsCapStones():Number {
 		var cMC1:Number = 500;
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 1500;
+		//if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 8000;
 		return cMC1;
 	}
 	public function checkMaterialsCapMetalPieces():Number {
 		var cMC1:Number = 200;
-		//if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 1500;
+		//if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 600;
+		//if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 3200;
 		return cMC1;
 	}
 
