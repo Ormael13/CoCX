@@ -1186,6 +1186,12 @@ public class PerkLib
 		public static const ApesTogetherStrongerEx:PerkType = mk("Apes Together Stronger (Ex)", "Apes Together Stronger (Ex)",
 				"You could now group tamed monsters in groups of four of the same type. Together they would be 250% stronger and you can only control max 4 groups of tamed monsters.",
 				"You've chosen the 'Apes Together Stronger (Ex)' perk. You could now group tamed monsters in groups of four of the same type. Together they would be 250% stronger and you can only control max 4 groups of tamed monsters.");
+		public static const UpToEleven:PerkType = mk("Up to eleven", "Up to eleven",
+				"Tamed monsters slots now goes up to eleven.",
+				"You've chosen the 'Up to eleven' perk. Tamed monsters slots now goes up to eleven.");
+		public static const DirtyDozen:PerkType = mk("Dirty Dozen", "Dirty Dozen",
+				"Now you can make dirty dozen form your tamed monsters.",
+				"You've chosen the 'Dirty Dozen' perk. Now you can make dirty dozen form your tamed monsters.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -7945,6 +7951,12 @@ public class PerkLib
                         return (player.hasPerk(PerkLib.ElementalContractRank7) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2)) && !player.hasPerk(PerkLib.PrestigeJobDruid);
                     }, "Having Elemental Contract Rank 7 or Dao of the Elements (layer 2 or higher) perks");
 			//This perk below (with others as well) for some reason stack overflows when using requirePerks.
+            ThereIs10TypesOfTamedMonsters.requireLevel(54)
+                    .requirePerk(CloudNumber9)
+                    .requireWis(250);
+            ApesTogetherStrongerEx.requireLevel(54)
+                    .requirePerks(ApesTogetherStrongSu, WhereAreYouGettingAllTheseApesFrom)
+                    .requireWis(255);
             StrongerElementalBond.requirePerk(StrongElementalBondSu)
                     .requireWis(250)
                     .requireLevel(54)
@@ -7952,9 +7964,6 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank10) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 3);
                     }, "Having Elemental Contract Rank 10 or Dao of the Elements (layer 3 or higher) perks");
-            ApesTogetherStrongerEx.requireLevel(54)
-                    .requirePerks(ApesTogetherStrongSu, WhereAreYouGettingAllTheseApesFrom)
-                    .requireWis(255);
             //Tier 10 Wisdom perks
             PerfectStrike.requireLevel(60)
                     .requirePerk(PrestigeJobSoulArtMaster);
@@ -7962,6 +7971,9 @@ public class PerkLib
                     .requirePerk(PrestigeJobNecromancer);
             SharedPower.requireLevel(60)
                     .requirePerk(PrestigeJobDruid);
+            //.requireLevel(60)
+            //        .requirePerk(ThereIs10TypesOfTamedMonsters)
+            //        .requireWis(275);
             ThatsEnoughApes.requireLevel(60)
                     .requirePerks(WhereAreYouGettingAllTheseApesFrom, ApesTogetherStrongerEx)
                     .requireWis(280);
