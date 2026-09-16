@@ -371,13 +371,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 8 wisdom lvl-up perk: Cloud Number 9. Req. Kaiju No8 perk and 225+ wisdom. Effect: After taming ninth monster you're literaly on cloud number 9.\n");
 			outputText("-New tier 13 wisdom lvl-up perk: Apes Together Strongest. Req. Apes Together Stronger (Ex), That's enough Apes! perks and 305+ wisdom. Effect: You could now group tamed monsters in groups of six of the same type. Together they would be 450% stronger and you can only control max 6 groups of tamed monsters.\n");
 			outputText("-New tier 9 wisdom lvl-up perk: There is 10 types of tamed monsters. Req. Cloud Number 9 perk and 250+ wisdom. Effect: There is 10 types of tamed monsters: those that bend and those that don't.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Together Strong (Ave) - max 9 tamed monsters in group and 900% and max 9 groups
-			outputText("-\n");//New tier 18 sensitivity lvl-up perk: . Req. Vitakinesis (Ex) perk and 465+ sensitivity. Effect: 
+			outputText("-New tier 10 wisdom lvl-up perk: Up to eleven. Req. There is 10 types of tamed monsters perk and 275+ wisdom. Effect: Tamed monsters slots now goes up to eleven.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -388,10 +382,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
-			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
 			outputText("-\n");
-			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New tier 11 wisdom lvl-up perk: Dirty Dozen. Req. Up to eleven perk and 300+ wisdom. Effect: .
+			outputText("-\n");//New tier 12 wisdom lvl-up perk: Friday 13th. Req. Dirty Dozen perk and 325+ wisdom. Effect: .
+			outputText("-\n");//New tier 13 wisdom lvl-up perk: Lucky 14. Req. Friday 13th perk and 350+ wisdom. Effect: .
+			outputText("-\n");//New tier 14 wisdom lvl-up perk: . Req. Lucky 14 perk and 375+ wisdom. Effect: .
 			outputText("-\n");
 			outputText("-\n");//New tier ? wisdom lvl-up perk: ???. Req. ??? perk and ???+ wisdom. Effect: 
 			outputText("-\n");//New tier ? sensitivity lvl-up perk: Domain Kineses. Req. ?Quasi Domain Kineses? perk and ???+ sensitivity. Effect: ??? aura effects like psychic aura dealing specific elemetal damage ^^ ???
@@ -405,13 +405,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Player gained damage reduction based on sum of toughness core and trained stat values. Each point increase it by +1 starting from 1/2 when sum of core and trained values is above 1.
 			outputText("-\n");//Gained by cultivating 'Hall of the Mirrors' cultivation manual
 			outputText("-\n");
+			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Together Strong (Ave) - max 9 tamed monsters in group and 900% and max 9 groups
+			outputText("-\n");//New tier 18 sensitivity lvl-up perk: . Req. Vitakinesis (Ex) perk and 465+ sensitivity. Effect: 
 			outputText("-\n");
+			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
+			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");

@@ -1190,8 +1190,14 @@ public class PerkLib
 				"Tamed monsters slots now goes up to eleven.",
 				"You've chosen the 'Up to eleven' perk. Tamed monsters slots now goes up to eleven.");
 		public static const DirtyDozen:PerkType = mk("Dirty Dozen", "Dirty Dozen",
-				"Now you can make dirty dozen form your tamed monsters.",
-				"You've chosen the 'Dirty Dozen' perk. Now you can make dirty dozen form your tamed monsters.");
+				"Now you can make dirty dozen from your tamed monsters.",
+				"You've chosen the 'Dirty Dozen' perk. Now you can make dirty dozen from your tamed monsters.");
+		public static const Friday13th:PerkType = mk("Friday 13th", "Friday 13th",
+				".",
+				"You've chosen the 'Friday 13th' perk. .");
+		public static const Lucky14:PerkType = mk("Lucky 14", "Lucky 14",
+				".",
+				"You've chosen the 'Lucky 14' perk. .");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -7971,9 +7977,9 @@ public class PerkLib
                     .requirePerk(PrestigeJobNecromancer);
             SharedPower.requireLevel(60)
                     .requirePerk(PrestigeJobDruid);
-            //.requireLevel(60)
-            //        .requirePerk(ThereIs10TypesOfTamedMonsters)
-            //        .requireWis(275);
+            UpToEleven.requireLevel(60)
+                    .requirePerk(ThereIs10TypesOfTamedMonsters)
+                    .requireWis(275);
             ThatsEnoughApes.requireLevel(60)
                     .requirePerks(WhereAreYouGettingAllTheseApesFrom, ApesTogetherStrongerEx)
                     .requireWis(280);
