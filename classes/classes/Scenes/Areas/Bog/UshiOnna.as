@@ -15,6 +15,11 @@ import classes.internals.*;
 	 */
 	public class UshiOnna extends AbstractBullSpider 
 	{
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.bullSpidersScene.defeatBullSpider();
+		}
+		
 		override protected function performCombatAction():void
 		{
 			if(player.spe >= 2 && rand(2) == 0) {
@@ -40,6 +45,7 @@ import classes.internals.*;
 			this.imageName = "ushi onna";
 			this.long = "The ushi onna is completely nude, save for her thigh-high stockings and forearm-length gloves, which upon closer inspection, appear to be actually be part of her body - her exoskeleton.  Her exposed skin is pale as the full moon, save for the dusky skin of her nipples and the black-skinned delta of her sex.  Her breasts and ass are both full and well-rounded, and just above her ass-cheeks there's a bulbous spider-abdomen.  The ushi onna is currently eyeing you with a strange expression and her fangs bared.";
 			// this.plural = false;
+			this.magicuser = true;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E+"));

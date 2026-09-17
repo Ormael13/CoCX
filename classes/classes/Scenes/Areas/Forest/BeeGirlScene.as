@@ -515,16 +515,14 @@ public class BeeGirlScene extends BaseContent
 
 		public function afterfightoptionswithBeeGirl(hpVictory:Boolean):void {
 			outputText("You smile in satisfaction as the " + monster.short);
-			if (hpVictory)
-				outputText(" collapses, unable to continue fighting.");
-			else
-				outputText(" spreads her legs and starts frigging her honey-soaked cunt.");
+			if (hpVictory) outputText(" collapses, unable to continue fighting.");
+			else outputText(" spreads her legs and starts frigging her honey-soaked cunt.");
 			outputText("  The sweet scent oozing from between her legs is too much to bear, arousing you painfully...  What do you do to her?");
 			player.dynStats("lus", 33, "scale", false); //that means PC always has enough lust
-
 			menu();
 			addButton(0, "Rape", rapeTheBeeGirl);
-			addButton(14, "Leave", leaveAfterDefeating);
+			addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
+			addButton(4, "Leave", leaveAfterDefeating);
 		}
 
 		private function leaveAfterDefeating(fromRape:Boolean = false):void {

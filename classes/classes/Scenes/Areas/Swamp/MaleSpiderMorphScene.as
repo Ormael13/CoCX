@@ -83,6 +83,7 @@ public class MaleSpiderMorphScene extends BaseContent
 						"Req. dick with area smaller than " + monster.analCapacity(),
 						player.findCock(1, monster.analCapacity(), -1) >= 0);
 				LustyMaidensArmor.addTitfuckButton(3);
+				addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
 			}

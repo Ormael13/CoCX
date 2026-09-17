@@ -4,6 +4,7 @@ import classes.Items.ItemSetChecks;
 import classes.Scenes.API.ExplorationEngine;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
+import classes.Scenes.Areas.Bog.BullSpiderScene;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.*;
 import classes.Scenes.Areas.DeepSea.AbyssalSharkScene;
@@ -382,6 +383,8 @@ public class SceneLib {
     public static var ivorySuccubusScene:IvorySuccubusScene = new IvorySuccubusScene();
 
     public static var holidays:Holidays = new Holidays();
+
+    public static var bullSpidersScene:BullSpiderScene = new BullSpiderScene();
 
     public static var werewolfFemaleScene:WerewolfFemaleScene = new WerewolfFemaleScene();
 

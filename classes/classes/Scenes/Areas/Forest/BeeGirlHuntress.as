@@ -12,9 +12,23 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 
 	public class BeeGirlHuntress extends BeeGirl {
 		
+		override public function defeated(hpVictory:Boolean):void {
+			if (inDungeon) SceneLib.combat.cleanupAfterCombatImpl();
+			else SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl(hpVictory);
+		}
+
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.riverdungeon.defeatedByStingerWomen();
+			if (inDungeon) SceneLib.dungeons.riverdungeon.defeatedByStingerWomen();
+			else {
+				if (pcCameWorms) {
+					outputText("\n\nThe bee-girl goes white and backs away with a disgusted look on her face.\n\n");
+					SceneLib.combat.cleanupAfterCombatImpl();
+				}
+				else {
+					SceneLib.forest.beeGirlScene.beeRapesYou();
+				}
+			}
 		}
 		
 		public function BeeGirlHuntress() 

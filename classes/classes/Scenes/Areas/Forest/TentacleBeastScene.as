@@ -122,7 +122,7 @@ private function startTentacleBeastCombat():void {
 		outputText("  Perhaps you could use it to sate yourself?");
 		addButtonIfTrue(0, "Dick Rape", dickRape, "Req. a dick", player.hasCock());
 		addButtonIfTrue(1, "MilkTentacle", milkTent, "Req. a vagina", player.hasVagina());
-		addButtonIfTrue(2, "Brutal Fuck", brutalFuck, "Req. a vagina and high corruption", player.hasVagina() && player.cor >= 66 - player.corruptionTolerance);
+		addButtonIfTrue(2, "Brutal Fuck", brutalFuck, "Req. a vagina and high corruption", player.hasVagina() && player.cor >= 33 - player.corruptionTolerance);
 		addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 		addButton(4, "Leave", cleanupAfterCombat);
 	}

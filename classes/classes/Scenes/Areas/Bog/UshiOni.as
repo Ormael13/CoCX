@@ -15,6 +15,11 @@ import classes.internals.*;
 	 */
 	public class UshiOni extends AbstractBullSpider
 	{
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.bullSpidersScene.defeatBullSpider();
+		}
+		
 		override protected function performCombatAction():void
 		{
 			if(player.spe >= 2 && rand(2) == 0) {
@@ -40,6 +45,7 @@ import classes.internals.*;
 			this.imageName = "ushi oni";
 			this.long = "The ushi oni is completely nude, save for his thigh-high stockings and forearm-length gloves, which upon closer inspection, appear to be actually be part of his body - his exoskeleton.  His exposed skin is pale as the full moon, save for the dusk of his nipples and a patch of jet-black that spreads out over his groin, glossing the male's foreskinned cock and dangling sack in glistening ebon.  His ass is small but well-rounded, with a weighty spider-abdomen hanging from just above.  The ushi oni is currently eyeing you with a strange expression and his fangs bared.";
 			// this.plural = false;
+			this.magicuser = true;
 			this.createCock(6,2);
 			this.balls = 2;
 			this.ballSize = 2;

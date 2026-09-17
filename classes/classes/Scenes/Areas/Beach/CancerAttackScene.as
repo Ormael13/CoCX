@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Beach
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class CancerAttackScene extends BaseContent
@@ -164,6 +165,14 @@ public class CancerAttackScene extends BaseContent
 
 		public function defeat():void {
 			clearOutput();
+			if (player.hasPerk(PerkLib.HighStakesTamer)) {
+				menu();
+				addButton(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt);
+				addButton(4, "Next", defeat2);
+			}
+			else defeat2();
+		}
+		private function defeat2():void {
 			outputText("The cancer, defeated, escapes by digging [monster his] way underground. Wow, what a sore loser!");
 			if (silly()) outputText("You ought to tell this stupid show producer miss Liadri about how her crabs dig their escapes instead of calmly letting themselves be raped!");
 			cleanupAfterCombat();

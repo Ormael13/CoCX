@@ -237,5 +237,6 @@ public class Bog extends BaseContent
 			outputText("As you are wandering through the bog you are suddenly halted by a noise very near. You turn around and see a large ushi oni leaping towards you. You barely have enough time to dodge him as he tumbles in front of you, quickly springing up to his feet.\n\n");
 			startCombat(new UshiOni());
 		}
+		
 	}
 }

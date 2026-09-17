@@ -486,6 +486,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 					"<b>You don't have a dick small enough to fuck her vagina.</b>  Req. a cock with area smaller than " + monster.vaginalCapacity(),
 					player.cockThatFits(monster.vaginalCapacity()) >= 0);
 				addButtonIfTrue(2, "Scissor", fSpiderMorphRape, "Req. a vagina", player.hasVagina());
+				addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
 				addButton(14, "Leave", cleanupAfterCombat);
                 SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASpiderBitch);
 			}
