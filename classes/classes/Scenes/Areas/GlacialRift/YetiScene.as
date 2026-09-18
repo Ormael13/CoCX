@@ -103,6 +103,7 @@ public class YetiScene extends BaseContent
 			else outputText("The beast looks at you with a hungry gaze, his hot thick member sliding from the sheath between his legs. Unable to fight it any longer, the yeti wraps his hands around his long hot prick, protecting it from the cold as he pleasures the slick, stiff flesh. You lower your guard as you realize the monster is no longer willing to fight, content to just touch himself while looking warily at you. So, what do you do now?");
 			//Options
 			menu();
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			if (player.lust >= 33) {
 				addButtonIfTrue(0, "Buttfuck", fuckYetiInTheAss, "Req. a cock", player.hasCock());
 				addButtonIfTrue(1, "RideHisCock", rideYetisCock, "Req. a vagina", player.hasVagina());
@@ -112,7 +113,7 @@ public class YetiScene extends BaseContent
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti); //MUST BE CALLED AT THE END!!
 			}
 			else {
-				outputText("You're not aroused enough to rape him.")
+				outputText("You're not aroused enough to rape him.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 		}

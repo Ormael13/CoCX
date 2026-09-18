@@ -69,9 +69,10 @@ public class SharkGirlScene extends AbstractBoatContent {
             outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.\n\n");
             dynStats("lus", 15, "scale", false);
         }
+        menu();
+		addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
         if (player.lust >= 33 && player.gender > 0) {
             outputText("Do you have your way with her or leave?");
-            menu();
             addButtonIfTrue(0, "Use Dick", sharkgirlDickFuck,
                 "Req. to have non-Naga lower body and a dick.", !player.isNaga() && player.hasCock());
             addButtonIfTrue(5, "Dick (Naga)", sharkgirlDickNaga,
@@ -87,15 +88,16 @@ public class SharkGirlScene extends AbstractBoatContent {
         } else {
             if (player.gender == 0) outputText("You lack the required parts to fuck her.");
             else outputText("You're not aroused enough to rape her.");
-            cleanupAfterCombat();
+            addButton(14, "Next", cleanupAfterCombat);
         }
     }
 
     private function oceanSexMenu():void {
         outputText("\n\nWell, you could have fun with her");
+		menu();
+		addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
         if (player.lust >= 33 && player.gender > 0) {
             outputText(", so why not do this?");
-            menu();
             addButtonIfTrue(1, "Fuck Her", sharkgirlOceanDickFuck, "Req. a cock.", player.hasCock());
             addButtonIfTrue(2, "Sixty-nine", sharkgirlOceanSixtyNine, "Req. a vagina.", player.hasVagina());
             addButton(4, "Leave", cleanupAfterCombat);
@@ -103,7 +105,7 @@ public class SharkGirlScene extends AbstractBoatContent {
         } else {
             if (player.gender == 0) outputText(", but you're not in the mood.");
             else outputText(", but you can't figure out how exactly to do that.");
-            cleanupAfterCombat();
+            addButton(14, "Next", cleanupAfterCombat);
         }
     }
 

@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Races.WerespiderRace;
+import classes.Scenes.SceneLib;
 
 	public class WerespiderScene extends BaseContent
 	{
@@ -90,10 +91,17 @@ private function tfIntoWereSpider():void {
 public function wonWithWerespider():void {
 	clearOutput();//"+(wsG()?"his":"her")+"			"+(wsG()?"his":"her")+"
 	//spriteSelect(SpriteDb.s_DarkElf);
+	//outputText("\"<i></i>\"\n\n");
+	if (player.hasPerk(PerkLib.HighStakesTamer)) {
+		menu();
+		addButton(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt);
+		addButton(4, "Next", wonWithWerespider2);
+	}
+	else wonWithWerespider2();
+}
+private function wonWithWerespider2():void {
 	outputText("Seeing her impending defeat, your opponent's body breaks down, shattering into several tiny spiders before they scatter in all directions. Yet, in her retreat, she still dropped some loot for you to take, despite the inconvenience she offered.\n\n");
-	menu();//outputText("\"<i></i>\"\n\n");
-	//addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
-	addButton(4, "Leave", cleanupAfterCombat);
+	cleanupAfterCombat();
 }
 
 	}

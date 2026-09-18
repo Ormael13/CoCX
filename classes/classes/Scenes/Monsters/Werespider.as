@@ -111,6 +111,7 @@ import coc.view.CoCButton;
 			this.imageName = "femalespidermorph";
 			this.long = "You are fighting a werespider. She's completely nude, save for her thigh-high stockings and forearm-length gloves, which upon closer inspection, appear to be actually be part of her body - her exoskeleton.";
 			// this.plural = false;
+			this.magicuser = true;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 60, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
