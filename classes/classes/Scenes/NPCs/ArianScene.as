@@ -4591,7 +4591,7 @@ public function ArianHatching():void {
 	outputText("You nod, taking the shell and cracking it along its length. The scrawnier baby looks up at you, eyes wide and trembling, until you pick them up in both hands, bringing them to your face. You give your newborn baby a smile, and slowly, they stop shaking, and open their mouth, spreading their arms and legs wide as they gurgle happily.\n\n");
 	outputText("\"<i>A little boy and a girl.</i>\" Arian says softly. \"<i>She’s got a narrower snout, and softer scales.</i>\"");
 	if (ArianHermKidsNum > 2) outputText(" You hear the cracking of another egg, and you both wrap your respective babies in cloth. They close their eyes as you lay them down, and you turn back to the "+(ArianHermKidsNum > 3?"two":"one")+" remaining egg"+(ArianHermKidsNum > 3?"s":"")+", repeating the process with Arian until all "+ArianHermKidsNum+" of your new brood are nestled in the crib.\n\n");
-	outputText("As Arian coos over them, you give him/her a kiss on the snout, excusing yourself.\n\n");
+	outputText("As Arian coos over them, you give [arian em] a kiss on the snout, excusing yourself.\n\n");
 	ArianTotalKidsNum += ArianHermKidsNum;
 	ArianSonsNum += 1;
 	ArianDaughtersNum += 1;

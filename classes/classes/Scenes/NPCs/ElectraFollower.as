@@ -213,7 +213,7 @@ public function ElectraRecruitingSure():void {
 	}
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
 		outputText("Etna flies over from her current location to meet you both.\n\n");
-		outputText("\"<i>Hey if it isn't thunder girl! ain't seen you around ever since you decided to make the other side of the mountains your territory. Geeze you scared a lot of the minotaurs down there back to mine, not that I'm complaining. It's just a wild guess but you're here, so... did [name] tame you?</i>\"\n\n");
+		outputText("\"<i>Hey if it isn't thunder girl! Ain't seen you around ever since you decided to make the other side of the mountains your territory. Geeze you scared a lot of the minotaurs down there back to mine, not that I'm complaining. It's just a wild guess but you're here, so... did [name] tame you?</i>\"\n\n");
 		outputText("Electra responds with clear annoyance.\n\n");
 		outputText("\"<i>Nothing about taming here Etna, I'm not some wild beast you can hold on a leash. [name] just happened to be on my path when I needed "+player.mf("him","her")+" the most, willing to help of "+player.mf("his","her")+" own volition.</i>\"\n\n");
 	}

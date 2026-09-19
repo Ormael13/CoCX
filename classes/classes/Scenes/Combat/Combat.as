@@ -21891,5 +21891,4 @@ private function touSpeStrScale(stat:int):Number {
 		ui.favImpl(bd, skillId);
 	}
 }
-
 }

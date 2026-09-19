@@ -329,7 +329,11 @@ public function repeatEncounterBattlefieldTalkSelf():void {
 	clearOutput();
 	outputText("You ask the Drider-Giant what she thinks of you. She tilts her head, folding her legs underneath her. \"<i>Well...You’re fairly small, but strong. I like that. You’re unafraid to fight for what you believe in, and you have no fear of demons or corruption.</i>\" She looks down and away. \"<i>You’re a stand-up person, [name], and don’t forget it.</i>\"\n\n");
 	outputText("You thank Tyrantia for her kind words, and take your leave.\n\n");
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkFightingStyle():void {
 	clearOutput();
@@ -352,15 +356,24 @@ public function repeatEncounterBattlefieldTalkFightingStyle():void {
 }
 public function repeatEncounterBattlefieldTalkKiha():void {
 	clearOutput();
-	outputText("<i>“Oh, you wanted to know about her?”</i> Tyrantia shrugs. <i>“We interacted a few times while we were both labrats. Some of the sickos working there had a perversion revolving around their ‘pets’ getting along. So...Yeah, we’ve done some things to each other. None of it was voluntary, but…”</i> She winces. <i>“Honestly, a part of me was genuinely happy when she made her escape...But she also didn’t come back. Can’t really blame her though.”</i> Tyrantia rolls her shoulders. <i>“She’s one hell of a fighter, too. That axe of hers may make it easy to counterattack if she misses, but if her strike lands...say goodbye to whatever limb got hit.”</i>\"\n\n");
+	outputText("<i>“Oh, you wanted to know about her?”</i> Tyrantia shrugs. <i>“We interacted a few times while we were both labrats. Some of the sickos working there had a perversion revolving around their ‘pets’ getting along. So...Yeah, we’ve done some things to each other. None of it was voluntary, but…”</i> She winces. <i>“Honestly, a part of me was genuinely happy when she made her escape...But she also didn’t come back. Can’t really blame her though.”</i> ");
+	outputText("Tyrantia rolls her shoulders. <i>“She’s one hell of a fighter, too. That axe of hers may make it easy to counterattack if she misses, but if her strike lands...say goodbye to whatever limb got hit.”</i>\"\n\n");
 	//affection gains (0)
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkDiva():void {
 	clearOutput();
 	outputText("\"<i>“I’d heard about the “Drama Queen” prototype for the Demon’s airforce. Never really thought she’d be so…prissy.”</i> Tyrantia shrugs. <i>“I mean, me and the other prototype…We’re fighters, so you’d expect us to kick some ass and escape…but she acts like an actor in a really bad traveling play.”</i> She chuckles. <i>“Other than that, she’s alright, but the blood-drinking kinda weirds me out.”</i>\"\n\n");
 	//affection gains (0)
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkHer():void {
 	clearOutput();
@@ -455,7 +468,11 @@ public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsYeah():void {
 	outputText("\"<i>I knew you’d get it,</i>\" she says, relieved. \"<i>I’m sorry. Here I am, blathering on, when you’ve lost people too.</i>\"You shake your head, waving it off, and the two of you begin to exchange stories of your adventures. This cheers her up a little, but you can tell her mind is elsewhere. You turn to leave, and she stands as well, wrapping her warm, floofy arms around you.\n\n");
 	outputText("\"<i>[name]...Come back sometime, okay? Battlefield seems a bit more bearable when your tiny ass comes around.</i>\" Her eyes watch you leave. \"<i>I L-</i>\" She cuts herself off. \"<i>I left an imp skull back at the rock! Fuck!</i>\" She rushes off into the battlefield.\n\n");
 	tyraniaAffection(5);
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNo():void {
 	outputText("\"<i>The fuck do you mean ‘no’?</i>\" Tyrantia seems taken aback. \"<i>You have people at home, back through the portal you guard. You should understand perfectly. What, were you one of those shut-ins who couldn’t stand others or something?!</i>\"\n\n");
@@ -488,7 +505,11 @@ public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNo():void {
 public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNoNo():void {
 	outputText("You gently explain that you have to go back to the portal. Tyrantia cries into her makeshift pillow, but ultimately lets you go. You hear her bitter tears as you head back to your camp.\n\n");
 	tyraniaAffection(5);
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNoYes():void {
 	outputText("You lie down beside Tyrantia’s upper half, and she takes your hands in hers. \"<i>Thank you,</i>\"she whispers, kissing you on the lips. Her fangs are out of the way, and you kiss back, a gentle, slow thing. You tell her that you’d never leave her alone like this. This gets a smile from the spider-girl, and she hums a gentle tune as she drifts off to sleep.\n\n");
@@ -502,7 +523,11 @@ public function repeatEncounterBattlefieldTalkHerNoHerm():void {
 	outputText("You grin, cracking a joke about how she still waves her Dick around, and she gives you a laugh, her eyes glistening. \"<i>Okay, ya got me there.</i>\" She rubs the shaft with one finger, the hair on her arms standing up. \"<i>Demons and imps run more often if you run at them screaming ‘I’m gonna shove m’dick down your throat!’, then if you threaten to kill them. Fucking Crazy, the lot of them!</i>\"\n\n");
 	outputText("She laughs, but you notice that the laughter doesn’t quite reach her eyes. You idly chat with your Drider comrade for a while, and when you leave, she seems a bit happier than before.\n\n");
 	tyraniaAffection(5);
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield():void {
 	clearOutput();
@@ -510,26 +535,42 @@ public function repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield():void {
 	if (TyraniaPostFinalKissScene) outputText("\"<i>Things have slowed down a lot lately…Apparently keeping me busy was their goal.</i>\" She shudders at the thought. \"<i>Now they’re not constantly coming at me, I have…too much time to think.</i>\"\n\n");
 	else outputText("Tyrantia rolls her shoulders. \"<i>I don’t even know why the demons come here. There’s stuff to salvage, sure, but nothing worth sending people to die.</i>\" She taps her back legs against the ground. \"<i>At least it keeps me busy, eh?</i>\"\n\n");
 	//affection gains
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkHerDifferentParts():void {
 	clearOutput();
 	outputText("You ask about her non-spider parts, and Tyrantia sighs, her horse-ears folding. \"<i>Look, it’s not something I like to discuss. Suffice to say, Demons happened. I trust you not to fuck me when I’m not with it, but…</i>\" She looks down, glaring at the ground, and whispers, so low you can barely make it out. \"<i>I can’t…</i>\"\n\n");
 	outputText("You apologize to your Drider friend, patting her leg sympathetically. You tell her that if she isn’t comfortable with it, you won’t pry. You give her leg a hug before heading back to camp.\n\n");
 	tyraniaAffection(5);
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkHerGoblin():void {
 	clearOutput();
 	outputText("<i>“Oh, Flitzy? She’s one of the Salon Bitch’s many daughters. Found her wandering around the mountains. ‘Taur tried to rape her, she didn’t want it, and I...Well, you know what I do.”</i> Tyrantia looks mildly embarrassed. <i>“Saved her ass, and we’ve kinda become friends. Gobbos don’t usually care about...Anything besides getting knocked up, but whatever, y’know?”</i> You get the feeling she was going to say something else, but you decide to leave it alone. You thank her for the time, and head back to camp.\n\n");
 	tyraniaAffection(5);
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function repeatEncounterBattlefieldTalkHerIzumi():void {
 	clearOutput();
 	outputText("<i> “Oh, her? Yeah, she’s a blast! Go up to the mountains sometimes to get eggs if I feel in the mood, and ran into her beating the shit out of a Taur. We hit it off, and she’s the best kind of mate to party with.”</i> She shrugs her massive shoulders. <i>“Sometimes you need a friend to beat the crap out of you, or to lean on, y’know? And there aren’t many people I can lean on.”</i> She smiles. <i>“Some more than others.”</i> She brings a single finger down, touching the tip of your nose. <i>“Boop.”</i>\n\n");
 	tyraniaAffection(5);
-	endEncounter();
+	if (isLover()) {
+		advanceMinutes(15);
+		doNext(repeatEncounterBattlefieldTalkHer);
+	}
+	else endEncounter();
 }
 public function talkHerKids():void {
 	clearOutput();

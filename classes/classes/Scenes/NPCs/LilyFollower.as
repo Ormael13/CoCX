@@ -171,7 +171,11 @@ use namespace CoC;
 				lilyAffection(5);
 				LilyTalked = 2;
 			}
-			cleanupAfterCombat();
+			if (LilyFollowerState) {
+				advanceMinutes(15);
+				doNext(LilyTalk);
+			}
+			else cleanupAfterCombat();
 		}
 		public function LilyTalkDriders():void {
 			clearOutput();
@@ -181,7 +185,11 @@ use namespace CoC;
 				lilyAffection(5);
 				LilyTalked = 3;
 			}
-			cleanupAfterCombat();
+			if (LilyFollowerState) {
+				advanceMinutes(15);
+				doNext(LilyTalk);
+			}
+			else cleanupAfterCombat();
 		}
 		public function LilyTalkDriderSociety():void {
 			clearOutput();
@@ -193,7 +201,11 @@ use namespace CoC;
 				lilyAffection(5);
 				LilyTalked = 4;
 			}
-			cleanupAfterCombat();
+			if (LilyFollowerState) {
+				advanceMinutes(15);
+				doNext(LilyTalk);
+			}
+			else cleanupAfterCombat();
 		}
 		public function LilyTalkDriderMatingRituals():void {
 			clearOutput();
@@ -201,7 +213,11 @@ use namespace CoC;
 			outputText("\"<i>Well...We Driders don’t typically mate for life, like most races of Mareth did...Well...Before the demons. Typically, mating pairs or groups are formed based on agreements, or later on, when a decent town is founded, based on increasing the offspring’s potential. This could lead to one female having multiple partners, if her egg-laying is up to speed, or vice-versa, to spread a particularly skilled or strong male’s…</i>\"\n\n");
 			outputText("She blushes, looking away. \"<i>Skills...Around. Of course, like any other race, plenty of us disregarded those rules if there was someone who really caught our eye.</i>\" She leans forward, then realizes what she’s done. \"<i>B-But that’s fairly rare!</i>\"\n\n");
 			lilyAffection(5);
-			cleanupAfterCombat();
+			if (LilyFollowerState) {
+				advanceMinutes(15);
+				doNext(LilyTalk);
+			}
+			else cleanupAfterCombat();
 		}
 		public function LilyTalkDriderPods():void {
 			clearOutput();
@@ -211,7 +227,11 @@ use namespace CoC;
 			outputText("This makes sense to you, and you thank your kinky drider for clarifying.\n\n");
 			outputText("\"<i>Oh, it’s no problem.</i>\" She gives you a little smirk. \"<i>Besides, there’s only a few reasons you’d be asking about such a topic, after all.</i>\" She gives you a knowing smile, running her finger from her hip down to her moist muff. She catches you looking, and her smile grows, showing her fangs. \"<i>Interested in making some, I assume?</i>\"\n\n");
 			lilyAffection(5);
-			cleanupAfterCombat();
+			if (LilyFollowerState) {
+				advanceMinutes(15);
+				doNext(LilyTalk);
+			}
+			else cleanupAfterCombat();
 		}
 
 		public function LilySubComeCamp():void {

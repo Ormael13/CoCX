@@ -351,13 +351,21 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>\"...Thank you, [name]. If she’s as corrupt as you say...then perhaps it’s best I keep my distance for now...But knowing she’s alive brings joy to my heart. Thank you.\"</i> You excuse yourself, extracting yourself from Belisa’s embrace and heading back to camp. You can feel her eyes on your back as you walk away.\n\n");
 		BelisaToldTyrantia = true;
 		BelisaAffection(10);
-		endEncounter();
+		if (BelisaInCamp) {
+			advanceMinutes(15);
+			doNext(BelisaTalk);
+		}
+		else endEncounter();
 	}
 	public function BelisaTalkYouEnd():void {
 		clearOutput();
 		outputText("You tell Belisa that you didn’t catch her name, and that her speed, strength and corruption makes her a dangerous foe, even for you. She nods in understanding, but there’s a clear look of disappointment on her face. <i>\"Thank you for sharing your experiences with me.\"</i> You politely excuse yourself, heading back to camp.\n\n");
 		BelisaAffection(5);
-		endEncounter();
+		if (BelisaInCamp) {
+			advanceMinutes(15);
+			doNext(BelisaTalk);
+		}
+		else endEncounter();
 	}
 
 	public function BelisaTalkHome():void {
@@ -456,7 +464,11 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	public function BelisaTalkHerNohermLeave():void {
 		clearOutput();
 		outputText("You apologize to the Drider-girl, and she nods, acknowledging your apology. You turn and walk away, but you hear her crying as you leave, little <i>\"Tk-tk-tk\"</i> noises occasionally coming with the sobs.\n\n");
-		endEncounter();
+		if (BelisaInCamp) {
+			advanceMinutes(15);
+			doNext(BelisaTalk);
+		}
+		else endEncounter();
 	}
 	public function BelisaTalkHerSkittish():void {
 		clearOutput();
@@ -466,7 +478,11 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>“I mean…Really, [name]. My best defense is people like that not knowing where I am…so it’s kind of obvious…Right?”</i> You sigh, telling her that she’s made her point. <i>“Look…If I’ve learned anything on my own out here, it’s that I can’t really trust that the normal-looking person I see in the distance won’t try and turn me into some kind of fuck-toy…No matter how lonely that really is.”</i>\n\n");
 		outputText("It seems you’ve touched a nerve. You apologize for your words, and Belisa smirks a little, putting a hand over your mouth. <i>“It’s okay, [name]. Honestly, it was a little funny.”</i>\n\n");
 		outputText("You head back to camp, a little embarrassed about that rather boneheaded question.\n\n");
-		endEncounter();
+		if (BelisaInCamp) {
+			advanceMinutes(15);
+			doNext(BelisaTalk);
+		}
+		else endEncounter();
 	}
 	public function BelisaTalkInjuries():void {
 		clearOutput();

@@ -52,19 +52,24 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.TamedMonster14)) cTMC += 1;
 			if (player.hasStatusEffect(StatusEffects.TamedMonster15)) cTMC += 1;
 			if (player.hasStatusEffect(StatusEffects.TamedMonster16)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster51)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster52)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster53)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster54)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster55)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster56)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster57)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster58)) cTMC += 1;
-			if (player.hasStatusEffect(StatusEffects.TamedMonster59)) cTMC += 1;
 			return cTMC;
+		}
+		private function currentTamedMonstersCount2():Number {
+			var cTMC2:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster51)) cTMC2 += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster52)) cTMC2 += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster53)) cTMC2 += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster54)) cTMC2 += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster55)) cTMC2 += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster56)) cTMC2 += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster57)) cTMC2 += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster58)) cTMC2 += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster59)) cTMC2 += 1;
+			return cTMC2;
 		}
 		public function currentTamedMonstersIncludingGroupsCount():Number {
 			var cTMIGC:Number = currentTamedMonstersCount();
+			if (currentTamedMonstersCount2() > 0) cTMIGC += currentTamedMonstersCount2();
 			if (player.statusEffectv4(StatusEffects.TamedMonster01) > 0) cTMIGC += player.statusEffectv4(StatusEffects.TamedMonster01);
 			if (player.statusEffectv4(StatusEffects.TamedMonster02) > 0) cTMIGC += player.statusEffectv4(StatusEffects.TamedMonster02);
 			if (player.statusEffectv4(StatusEffects.TamedMonster03) > 0) cTMIGC += player.statusEffectv4(StatusEffects.TamedMonster03);
@@ -91,11 +96,15 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.CloudNumber9)) cTC += 1;
 			if (player.hasPerk(PerkLib.ThereIs10TypesOfTamedMonsters)) cTC += 1;
 			if (player.hasPerk(PerkLib.UpToEleven)) cTC += 1;
-			if (player.hasPerk(PerkLib.MoreApes)) cTC += 2;
-			if (player.hasPerk(PerkLib.EvenMoreApes)) cTC += 2;
-			if (player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom)) cTC += 2;
-			if (player.hasPerk(PerkLib.ThatsEnoughApes)) cTC += 3;
 			return cTC;
+		}
+		private function currentTamingCap2():Number {
+			var cTC2:Number = 0;
+			if (player.hasPerk(PerkLib.MoreApes)) cTC2 += 2;
+			if (player.hasPerk(PerkLib.EvenMoreApes)) cTC2 += 2;
+			if (player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom)) cTC2 += 2;
+			if (player.hasPerk(PerkLib.ThatsEnoughApes)) cTC2 += 3;
+			return cTC2;
 		}
 		private function currentGroupSizeCap():Number {
 			var cGC:Number = 2;
@@ -410,7 +419,7 @@ public class CampMakeWinions extends BaseContent
 				addButton(10, "Next", accessTamedWinionsMainMenu, page - 2);
 				addButton(11, "Prev", accessTamedWinionsMainMenu, page - 1);
 			}
-			//addButtonIfTrue(12, "Move", curry(moveTamedMonsters, 1), "You do not have Apes Together Strong perk.", player.hasPerk(PerkLib.ApesTogetherStrong), "Move your tamed monsters from main roster to one for monsters intended to group with other monsters.");
+			addButtonIfTrue(12, "Move", curry(moveTamedMonsters, 1), "You do not have Apes Together Strong perk.", player.hasPerk(PerkLib.ApesTogetherStrong), "Move your tamed monsters from main roster to reserve roster. (for monsters intended to group with other monsters)");
 			addButtonIfTrue(13, "Group", curry(groupUpTamedMonsters, 1), "You do not have Apes Together Strong perk.", player.hasPerk(PerkLib.ApesTogetherStrong), "Group your tamed monsters.");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
@@ -422,7 +431,7 @@ public class CampMakeWinions extends BaseContent
 		public function tamingAttempt2(page:int = 1):void {
 			menu();
 			addButton(10, "Don't Tame", cleanupAfterCombat);
-			addButtonIfTrue(11, "Tame", tamingAttemptYes, "Taming this monster would exceed the limit of monsters you can currently control. If you want to tame it, release another tamed monster first.", (currentTamedMonstersCount() < currentTamingCap()));
+			addButtonIfTrue(11, "Tame", tamingAttemptYes, "Taming this monster would exceed the limit of monsters you can currently control. If you want to tame it, release another tamed monster first.", ((currentTamedMonstersCount() + currentTamedMonstersCount2()) < (currentTamingCap() + currentTamingCap2())));
 			if (page == 1) {
 				//0 - taming ring slot
 				addButtonIfTrue(1, "Release 01", curry(tamingAttemptRelease, 1), "You do not have any tamed monster No.1", player.hasStatusEffect(StatusEffects.TamedMonster01), "Release Monster No.1");
@@ -497,7 +506,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster02, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster03) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster03) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_03_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster03, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster03a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -506,7 +515,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster03, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster04) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster04) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_04_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster04, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster04a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -515,7 +524,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster04, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster05) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster05) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_05_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster05, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster05a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -524,7 +533,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster05, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster06) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster06) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_06_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster06, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster06a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -533,7 +542,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster06, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster07) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster07) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_07_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster07, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster07a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -542,7 +551,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster07, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster08) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster08) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_08_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster08, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster08a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -551,7 +560,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster08, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster09) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster09) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_09_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster09, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster09a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -560,7 +569,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster09, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster10) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster10) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_10_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster10, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster10a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -569,7 +578,7 @@ public class CampMakeWinions extends BaseContent
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster10, 3, 1);
 					onlyOneTamingAtTime = true;
 				}
-				if (!player.hasStatusEffect(StatusEffects.TamedMonster11) && !onlyOneTamingAtTime) {
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster11) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
 					flags[kFLAGS.TAMED_11_NAME] = monster.short;
 					player.createStatusEffect(StatusEffects.TamedMonster11, monster.weaponAttack, 0, 0, 0);
 					player.createStatusEffect(StatusEffects.TamedMonster11a, monster.strStat.core.value, monster.touStat.core.value, monster.speStat.core.value, 0);
@@ -652,32 +661,280 @@ public class CampMakeWinions extends BaseContent
 			menu();
 			if (page == 1) {
 				//0 for ring of taming monster
-				addButtonIfTrue(1, "-1-",  curry(groupUpTamedMonsters3, 1, 1, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_01_NAME]), "You do not have Monster No.1 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster01) && player.statusEffectv4(StatusEffects.TamedMonster01) == 0), "Move monster from slot 1.");
-				addButtonIfTrue(2, "-2-",  curry(groupUpTamedMonsters3, 1, 2, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_02_NAME]), "You do not have Monster No.2 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster02) && player.statusEffectv4(StatusEffects.TamedMonster02) == 0), "Move monster from slot 2.");
-				addButtonIfTrue(3, "-3-",  curry(groupUpTamedMonsters3, 1, 3, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_03_NAME]), "You do not have Monster No.3 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster03) && player.statusEffectv4(StatusEffects.TamedMonster03) == 0), "Move monster from slot 3.");
-				addButtonIfTrue(4, "-4-",  curry(groupUpTamedMonsters3, 1, 4, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_04_NAME]), "You do not have Monster No.4 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster04) && player.statusEffectv4(StatusEffects.TamedMonster04) == 0), "Move monster from slot 4.");
-				addButtonIfTrue(5, "-5-",  curry(groupUpTamedMonsters3, 1, 5, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_05_NAME]), "You do not have Monster No.5 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster05) && player.statusEffectv4(StatusEffects.TamedMonster05) == 0), "Move monster from slot 5.");
-				addButtonIfTrue(6, "-6-",  curry(groupUpTamedMonsters3, 1, 6, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_06_NAME]), "You do not have Monster No.6 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster06) && player.statusEffectv4(StatusEffects.TamedMonster06) == 0), "Move monster from slot 6.");
-				addButtonIfTrue(7, "-7-",  curry(groupUpTamedMonsters3, 1, 7, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_07_NAME]), "You do not have Monster No.7 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster07) && player.statusEffectv4(StatusEffects.TamedMonster07) == 0), "Move monster from slot 7.");
-				addButtonIfTrue(8, "-8-",  curry(groupUpTamedMonsters3, 1, 8, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_08_NAME]), "You do not have Monster No.8 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster08) && player.statusEffectv4(StatusEffects.TamedMonster08) == 0), "Move monster from slot 8.");
-				addButtonIfTrue(9, "-9-",  curry(groupUpTamedMonsters3, 1, 9, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_09_NAME]), "You do not have Monster No.9 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster09) && player.statusEffectv4(StatusEffects.TamedMonster09) == 0), "Move monster from slot 9.");
+				addButtonIfTrue(1, "-1-", curry(moveTamedMonsters2, 1, 01), "You do not have Monster No.1 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster01) && player.statusEffectv4(StatusEffects.TamedMonster01) == 0), "Move monster from slot 1.");
+				addButtonIfTrue(2, "-2-", curry(moveTamedMonsters2, 1, 02), "You do not have Monster No.2 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster02) && player.statusEffectv4(StatusEffects.TamedMonster02) == 0), "Move monster from slot 2.");
+				addButtonIfTrue(3, "-3-", curry(moveTamedMonsters2, 1, 03), "You do not have Monster No.3 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster03) && player.statusEffectv4(StatusEffects.TamedMonster03) == 0), "Move monster from slot 3.");
+				addButtonIfTrue(4, "-4-", curry(moveTamedMonsters2, 1, 04), "You do not have Monster No.4 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster04) && player.statusEffectv4(StatusEffects.TamedMonster04) == 0), "Move monster from slot 4.");
+				addButtonIfTrue(5, "-5-", curry(moveTamedMonsters2, 1, 05), "You do not have Monster No.5 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster05) && player.statusEffectv4(StatusEffects.TamedMonster05) == 0), "Move monster from slot 5.");
+				addButtonIfTrue(6, "-6-", curry(moveTamedMonsters2, 1, 06), "You do not have Monster No.6 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster06) && player.statusEffectv4(StatusEffects.TamedMonster06) == 0), "Move monster from slot 6.");
+				addButtonIfTrue(7, "-7-", curry(moveTamedMonsters2, 1, 07), "You do not have Monster No.7 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster07) && player.statusEffectv4(StatusEffects.TamedMonster07) == 0), "Move monster from slot 7.");
+				addButtonIfTrue(8, "-8-", curry(moveTamedMonsters2, 1, 08), "You do not have Monster No.8 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster08) && player.statusEffectv4(StatusEffects.TamedMonster08) == 0), "Move monster from slot 8.");
+				addButtonIfTrue(9, "-9-", curry(moveTamedMonsters2, 1, 09), "You do not have Monster No.9 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster09) && player.statusEffectv4(StatusEffects.TamedMonster09) == 0), "Move monster from slot 9.");
 				addButton(13, "Next", moveTamedMonsters, page + 1);
 			}
 			if (page == 2) {
-				addButtonIfTrue(0, "-10-",  curry(groupUpTamedMonsters3, 1, 10, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_10_NAME]), "You do not have Monster No.9 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster10) && player.statusEffectv4(StatusEffects.TamedMonster10) == 0), "Move monster from slot 10.");
-				addButtonIfTrue(1, "-11-",  curry(groupUpTamedMonsters3, 1, 11, flags[kFLAGS.TAMED_01_NAME], flags[kFLAGS.TAMED_11_NAME]), "You do not have Monster No.9 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster11) && player.statusEffectv4(StatusEffects.TamedMonster11) == 0), "Move monster from slot 11.");
+				addButtonIfTrue(0, "-10-", curry(moveTamedMonsters2, 1, 10), "You do not have Monster No.10 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster10) && player.statusEffectv4(StatusEffects.TamedMonster10) == 0), "Move monster from slot 10.");
+				addButtonIfTrue(1, "-11-", curry(moveTamedMonsters2, 1, 11), "You do not have Monster No.11 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster11) && player.statusEffectv4(StatusEffects.TamedMonster11) == 0), "Move monster from slot 11.");
+				//addButtonIfTrue(2, "-12-", curry(moveTamedMonsters2, 1, 12), "You do not have Monster No.12 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster12) && player.statusEffectv4(StatusEffects.TamedMonster12) == 0), "Move monster from slot 12.");
+				//addButtonIfTrue(3, "-13-", curry(moveTamedMonsters2, 1, 13), "You do not have Monster No.13 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster13) && player.statusEffectv4(StatusEffects.TamedMonster13) == 0), "Move monster from slot 13.");
+				//addButtonIfTrue(4, "-14-", curry(moveTamedMonsters2, 1, 14), "You do not have Monster No.14 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster14) && player.statusEffectv4(StatusEffects.TamedMonster14) == 0), "Move monster from slot 14.");
+				//addButtonIfTrue(5, "-15-", curry(moveTamedMonsters2, 1, 15), "You do not have Monster No.15 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster15) && player.statusEffectv4(StatusEffects.TamedMonster15) == 0), "Move monster from slot 15.");
+				//addButtonIfTrue(6, "-16-", curry(moveTamedMonsters2, 1, 16), "You do not have Monster No.16 tamed or it's not single monster in that slot", (player.hasStatusEffect(StatusEffects.TamedMonster16) && player.statusEffectv4(StatusEffects.TamedMonster16) == 0), "Move monster from slot 16.");
 				addButton(13, "Prev", moveTamedMonsters, page - 1);
 			}
+			addButton(14, "Back", accessTamedWinionsMainMenu, 1);
 		}
-		public function moveTamedMonsters2(tameMonA:Number, page:Number):void {
+		public function moveTamedMonsters2(page:Number, tameMonA:Number):void {//strona, z którego slotu
 			menu();
+			if (tameMonA == 00) {
+				//0 for ring of taming monster
+			}
+			if (tameMonA == 01) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 1, flags[kFLAGS.TAMED_01_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 1, flags[kFLAGS.TAMED_01_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 1, flags[kFLAGS.TAMED_01_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 1, flags[kFLAGS.TAMED_01_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 1, flags[kFLAGS.TAMED_01_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 1, flags[kFLAGS.TAMED_01_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 1, flags[kFLAGS.TAMED_01_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 1, flags[kFLAGS.TAMED_01_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 1, flags[kFLAGS.TAMED_01_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 02) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 2, flags[kFLAGS.TAMED_02_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 2, flags[kFLAGS.TAMED_02_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 2, flags[kFLAGS.TAMED_02_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 2, flags[kFLAGS.TAMED_02_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 2, flags[kFLAGS.TAMED_02_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 2, flags[kFLAGS.TAMED_02_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 2, flags[kFLAGS.TAMED_02_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 2, flags[kFLAGS.TAMED_02_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 2, flags[kFLAGS.TAMED_02_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 03) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 3, flags[kFLAGS.TAMED_03_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 3, flags[kFLAGS.TAMED_03_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 3, flags[kFLAGS.TAMED_03_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 3, flags[kFLAGS.TAMED_03_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 3, flags[kFLAGS.TAMED_03_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 3, flags[kFLAGS.TAMED_03_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 3, flags[kFLAGS.TAMED_03_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 3, flags[kFLAGS.TAMED_03_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 3, flags[kFLAGS.TAMED_03_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 04) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 4, flags[kFLAGS.TAMED_04_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 4, flags[kFLAGS.TAMED_04_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 4, flags[kFLAGS.TAMED_04_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 4, flags[kFLAGS.TAMED_04_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 4, flags[kFLAGS.TAMED_04_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 4, flags[kFLAGS.TAMED_04_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 4, flags[kFLAGS.TAMED_04_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 4, flags[kFLAGS.TAMED_04_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 4, flags[kFLAGS.TAMED_04_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 05) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 5, flags[kFLAGS.TAMED_05_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 5, flags[kFLAGS.TAMED_05_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 5, flags[kFLAGS.TAMED_05_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 5, flags[kFLAGS.TAMED_05_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 5, flags[kFLAGS.TAMED_05_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 5, flags[kFLAGS.TAMED_05_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 5, flags[kFLAGS.TAMED_05_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 5, flags[kFLAGS.TAMED_05_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 5, flags[kFLAGS.TAMED_05_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 06) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 6, flags[kFLAGS.TAMED_06_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 6, flags[kFLAGS.TAMED_06_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 6, flags[kFLAGS.TAMED_06_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 6, flags[kFLAGS.TAMED_06_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 6, flags[kFLAGS.TAMED_06_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 6, flags[kFLAGS.TAMED_06_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 6, flags[kFLAGS.TAMED_06_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 6, flags[kFLAGS.TAMED_06_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 6, flags[kFLAGS.TAMED_06_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 07) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 7, flags[kFLAGS.TAMED_07_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 7, flags[kFLAGS.TAMED_07_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 7, flags[kFLAGS.TAMED_07_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 7, flags[kFLAGS.TAMED_07_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 7, flags[kFLAGS.TAMED_07_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 7, flags[kFLAGS.TAMED_07_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 7, flags[kFLAGS.TAMED_07_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 7, flags[kFLAGS.TAMED_07_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 7, flags[kFLAGS.TAMED_07_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 08) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 8, flags[kFLAGS.TAMED_08_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 8, flags[kFLAGS.TAMED_08_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 8, flags[kFLAGS.TAMED_08_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 8, flags[kFLAGS.TAMED_08_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 8, flags[kFLAGS.TAMED_08_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 8, flags[kFLAGS.TAMED_08_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 8, flags[kFLAGS.TAMED_08_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 8, flags[kFLAGS.TAMED_08_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 8, flags[kFLAGS.TAMED_08_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 09) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 1, 1, 9, flags[kFLAGS.TAMED_09_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 1, 2, 9, flags[kFLAGS.TAMED_09_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 1, 3, 9, flags[kFLAGS.TAMED_09_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 1, 4, 9, flags[kFLAGS.TAMED_09_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 1, 5, 9, flags[kFLAGS.TAMED_09_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 1, 6, 9, flags[kFLAGS.TAMED_09_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 1, 7, 9, flags[kFLAGS.TAMED_09_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 1, 8, 9, flags[kFLAGS.TAMED_09_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 1, 9, 9, flags[kFLAGS.TAMED_09_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 10) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 2, 1, 10, flags[kFLAGS.TAMED_10_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 2, 2, 10, flags[kFLAGS.TAMED_10_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 2, 3, 10, flags[kFLAGS.TAMED_10_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 2, 4, 10, flags[kFLAGS.TAMED_10_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 2, 5, 10, flags[kFLAGS.TAMED_10_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 2, 6, 10, flags[kFLAGS.TAMED_10_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 2, 7, 10, flags[kFLAGS.TAMED_10_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 2, 8, 10, flags[kFLAGS.TAMED_10_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 2, 9, 10, flags[kFLAGS.TAMED_10_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 11) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 2, 1, 11, flags[kFLAGS.TAMED_11_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 2, 2, 11, flags[kFLAGS.TAMED_11_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 2, 3, 11, flags[kFLAGS.TAMED_11_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 2, 4, 11, flags[kFLAGS.TAMED_11_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 2, 5, 11, flags[kFLAGS.TAMED_11_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 2, 6, 11, flags[kFLAGS.TAMED_11_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 2, 7, 11, flags[kFLAGS.TAMED_11_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 2, 8, 11, flags[kFLAGS.TAMED_11_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 2, 9, 11, flags[kFLAGS.TAMED_11_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 12) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 2, 1, 12, flags[kFLAGS.TAMED_12_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 2, 2, 12, flags[kFLAGS.TAMED_12_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 2, 3, 12, flags[kFLAGS.TAMED_12_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 2, 4, 12, flags[kFLAGS.TAMED_12_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 2, 5, 12, flags[kFLAGS.TAMED_12_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 2, 6, 12, flags[kFLAGS.TAMED_12_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 2, 7, 12, flags[kFLAGS.TAMED_12_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 2, 8, 12, flags[kFLAGS.TAMED_12_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 2, 9, 12, flags[kFLAGS.TAMED_12_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}/*
+			if (tameMonA == 13) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 2, 1, 13, flags[kFLAGS.TAMED_13_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 2, 2, 13, flags[kFLAGS.TAMED_13_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 2, 3, 13, flags[kFLAGS.TAMED_13_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 2, 4, 13, flags[kFLAGS.TAMED_13_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 2, 5, 13, flags[kFLAGS.TAMED_13_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 2, 6, 13, flags[kFLAGS.TAMED_13_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 2, 7, 13, flags[kFLAGS.TAMED_13_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 2, 8, 13, flags[kFLAGS.TAMED_13_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 2, 9, 13, flags[kFLAGS.TAMED_13_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}
+			if (tameMonA == 14) {
+				addButton(1, "-A1-", curry(moveTamedMonsters3, 2, 1, 14, flags[kFLAGS.TAMED_14_NAME])).hint("Move monster to slot A1.");
+				addButton(2, "-A2-", curry(moveTamedMonsters3, 2, 2, 14, flags[kFLAGS.TAMED_14_NAME])).hint("Move monster to slot A2.");
+				addButtonIfTrue(3, "-A3-",  curry(moveTamedMonsters3, 2, 3, 14, flags[kFLAGS.TAMED_14_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A3.");
+				addButtonIfTrue(4, "-A4-",  curry(moveTamedMonsters3, 2, 4, 14, flags[kFLAGS.TAMED_14_NAME]), "Req. Even More Apes perk.", player.hasPerk(PerkLib.EvenMoreApes), "Move monster to slot A4.");
+				addButtonIfTrue(5, "-A5-",  curry(moveTamedMonsters3, 2, 5, 14, flags[kFLAGS.TAMED_14_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A5.");
+				addButtonIfTrue(6, "-A6-",  curry(moveTamedMonsters3, 2, 6, 14, flags[kFLAGS.TAMED_14_NAME]), "Req. Where are you getting all these Apes from? perk.", player.hasPerk(PerkLib.WhereAreYouGettingAllTheseApesFrom), "Move monster to slot A6.");
+				addButtonIfTrue(7, "-A7-",  curry(moveTamedMonsters3, 2, 7, 14, flags[kFLAGS.TAMED_14_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A7.");
+				addButtonIfTrue(8, "-A8-",  curry(moveTamedMonsters3, 2, 8, 14, flags[kFLAGS.TAMED_14_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A8.");
+				addButtonIfTrue(9, "-A9-",  curry(moveTamedMonsters3, 2, 9, 14, flags[kFLAGS.TAMED_14_NAME]), "Req. That's enough Apes! perk.", player.hasPerk(PerkLib.ThatsEnoughApes), "Move monster to slot A9.");
+			}*/
+			if (tameMonA == 15) {
+				
+			}
+			if (tameMonA == 16) {
+				
+			}
 			addButton(14, "Back", curry(moveTamedMonsters, page));
 		}
-		public function moveTamedMonsters3():void {
-			
+		public function moveTamedMonsters3(page:Number, tameMon1:Number, tameMon2:Number, tameMon3:String):void {//strona, do którego slotu, z którego slotu (numer i nazwa)
+			if (tameMon1 == 1) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster51)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 1, tameMon2, tameMon3);
+			}
+			if (tameMon1 == 2) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster52)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 2, tameMon2, tameMon3);
+			}
+			if (tameMon1 == 3) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster53)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 3, tameMon2, tameMon3);
+			}
+			if (tameMon1 == 4) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster54)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 4, tameMon2, tameMon3);
+			}
+			if (tameMon1 == 5) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster55)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 5, tameMon2, tameMon3);
+			}
+			if (tameMon1 == 6) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster56)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 6, tameMon2, tameMon3);
+			}
+			if (tameMon1 == 7) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster57)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 7, tameMon2, tameMon3);
+			}
+			if (tameMon1 == 8) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster58)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 8, tameMon2, tameMon3);
+			}
+			if (tameMon1 == 9) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster59)) moveTamedMonstersFail(page);
+				else moveTamedMonstersSuccess(1, 9, tameMon2, tameMon3);
+			}
 		}
-		public function moveTamedMonstersSuccess():void {
-			
+		public function moveTamedMonstersSuccess(page:Number, tameMonA:Number, tameMonB:Number, tameMonC:String):void {
+			clearOutput();
+			outputText("You succeed to move monster to selected reserve roster slot.");
+			if (tameMonA == 1) {
+				flags[kFLAGS.TAMED_A1_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster51, 0, 0, 0, 0);
+			}
+			if (tameMonA == 2) {
+				flags[kFLAGS.TAMED_A2_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster52, 0, 0, 0, 0);
+			}
+			if (tameMonA == 3) {
+				flags[kFLAGS.TAMED_A3_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster53, 0, 0, 0, 0);
+			}
+			if (tameMonA == 4) {
+				flags[kFLAGS.TAMED_A4_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster54, 0, 0, 0, 0);
+			}
+			if (tameMonA == 5) {
+				flags[kFLAGS.TAMED_A5_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster55, 0, 0, 0, 0);
+			}
+			if (tameMonA == 6) {
+				flags[kFLAGS.TAMED_A6_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster56, 0, 0, 0, 0);
+			}
+			if (tameMonA == 7) {
+				flags[kFLAGS.TAMED_A7_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster57, 0, 0, 0, 0);
+			}
+			if (tameMonA == 8) {
+				flags[kFLAGS.TAMED_A8_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster58, 0, 0, 0, 0);
+			}
+			if (tameMonA == 9) {
+				flags[kFLAGS.TAMED_A9_NAME] = tameMonC;
+				player.createStatusEffect(StatusEffects.TamedMonster59, 0, 0, 0, 0);
+			}
+			clearingTamedMonsterSlot(tameMonB);
+			doNext(moveTamedMonsters, page);
+		}
+		public function moveTamedMonstersFail(page:Number):void {
+			clearOutput();
+			outputText("You failed to move monster to selected reserve roster slot due to been already occupied by some monster.");
+			doNext(moveTamedMonsters, page);
 		}
 		public function groupUpTamedMonsters(page:int = 1):void {
 			clearOutput();

@@ -372,7 +372,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 13 wisdom lvl-up perk: Apes Together Strongest. Req. Apes Together Stronger (Ex), That's enough Apes! perks and 305+ wisdom. Effect: You could now group tamed monsters in groups of six of the same type. Together they would be 450% stronger and you can only control max 6 groups of tamed monsters.\n");
 			outputText("-New tier 9 wisdom lvl-up perk: There is 10 types of tamed monsters. Req. Cloud Number 9 perk and 250+ wisdom. Effect: There is 10 types of tamed monsters: those that bend and those that don't.\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Up to eleven. Req. There is 10 types of tamed monsters perk and 275+ wisdom. Effect: Tamed monsters slots now goes up to eleven.\n");
-			outputText("-\n");
+			outputText("-Made some of drider triplets talk options not taking whole hour and not always kikc back to main camp menu instead of jsut respective drider talk main menu.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
