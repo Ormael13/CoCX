@@ -71,6 +71,7 @@ public class SharkGirlScene extends AbstractBoatContent {
         }
         menu();
 		addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
+		addButton(14, "Leave", cleanupAfterCombat);
         if (player.lust >= 33 && player.gender > 0) {
             outputText("Do you have your way with her or leave?");
             addButtonIfTrue(0, "Use Dick", sharkgirlDickFuck,
@@ -83,29 +84,26 @@ public class SharkGirlScene extends AbstractBoatContent {
             addButtonIfTrue(6, "PussyOral(N)", sharkgirlLesboNaga, "Req. to be a Naga and have a vagina.",
                 player.isNaga() && player.hasVagina());
             addButtonIfTrue(2, "Dildo Rape", sharkGirlGetsDildoed, "Req. a vagina and Deluxe Dildo.", player.hasVagina() && player.hasKeyItem("Deluxe Dildo") >= 0);
-            addButton(4, "Leave", cleanupAfterCombat);
             SceneLib.uniqueSexScene.pcUSSPreChecksV2(sharkWinChoices);
         } else {
             if (player.gender == 0) outputText("You lack the required parts to fuck her.");
             else outputText("You're not aroused enough to rape her.");
-            addButton(14, "Next", cleanupAfterCombat);
         }
     }
 
     private function oceanSexMenu():void {
         outputText("\n\nWell, you could have fun with her");
 		menu();
-		addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
+		addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+		addButton(14, "Next", cleanupAfterCombat);
         if (player.lust >= 33 && player.gender > 0) {
             outputText(", so why not do this?");
             addButtonIfTrue(1, "Fuck Her", sharkgirlOceanDickFuck, "Req. a cock.", player.hasCock());
             addButtonIfTrue(2, "Sixty-nine", sharkgirlOceanSixtyNine, "Req. a vagina.", player.hasVagina());
-            addButton(4, "Leave", cleanupAfterCombat);
             SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanSexMenu);
         } else {
             if (player.gender == 0) outputText(", but you're not in the mood.");
             else outputText(", but you can't figure out how exactly to do that.");
-            addButton(14, "Next", cleanupAfterCombat);
         }
     }
 

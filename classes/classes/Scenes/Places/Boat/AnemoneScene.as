@@ -65,32 +65,30 @@ public class AnemoneScene extends BaseContent {
         if (monster.HP < 1) outputText("The anemone's knees buckle and she collapses, planting her hands behind her with a splash.  You stand over her, victorious.\n\n");
         //win by lust:
         else outputText("The anemone slumps down and begins masturbating, stroking her cock furiously.  You think you can detect something like desperation in her opaque eyes.  It doesn't look like she'll trouble you anymore.\n\n");
-        if (player.lust >= 33) {
-            outputText("You could always have your way with her.  If you do, which parts do you use to do the deed?");
-            sexMenu();
-        } else {
-            outputText("You're not aroused enough to fuck her.");
-            cleanupAfterCombat();
-        }
+        outputText("You could always have your way with her.  If you do, which parts do you use to do the deed?");
+        sexMenu();
     }
 
     public function sexMenu(defeat:Boolean = true):void {
         menu();
-        addButtonIfTrue(0, "Your Cock", rapeAnemoneWithDick, "Req. a cock.", player.hasCock());
-        addButtonIfTrue(1, "Your Vagina", rapeAnemoneWithPussy, "Req. a vagina.", player.hasVagina());
-        addButton(2, "Your Ass", victoryButtholeRape);
-        addButton(14, "Leave", cleanupAfterCombat);
-        if (defeat) {
-            addButtonIfTrue(3, "Her Butt", herButtRouter, "Req. a cock fitting 48 area OR a vagina with a long clit.",
-                player.cockThatFits(48) >= 0 || player.hasVagina() && player.clitLength >= 4);
-            LustyMaidensArmor.addTitfuckButton(4);
-            addButtonIfTrue(5, "LayEggs(Bee)", anemoneGetsLayedByBeePositor, "Req. a bee ovipositor.", player.canOvipositBee());
-            addButtonIfTrue(6, "LayEggs(Dri)", spiderOvipositAnAnemone, "Req. a drider ovipositor.", player.canOvipositSpider());
-            SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
-        } else {
-            addButtonDisabled(3, "Her Butt", "Only available after defeating her!");
-            addButtonDisabled(4, "Lay Eggs", "Only available after defeating her!");
-        }
+		addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+		addButton(14, "Leave", cleanupAfterCombat);
+		if (player.lust >= 33) {
+			addButtonIfTrue(0, "Your Cock", rapeAnemoneWithDick, "Req. a cock.", player.hasCock());
+			addButtonIfTrue(1, "Your Vagina", rapeAnemoneWithPussy, "Req. a vagina.", player.hasVagina());
+			addButton(2, "Your Ass", victoryButtholeRape);
+			if (defeat) {
+				addButtonIfTrue(3, "Her Butt", herButtRouter, "Req. a cock fitting 48 area OR a vagina with a long clit.",
+					player.cockThatFits(48) >= 0 || player.hasVagina() && player.clitLength >= 4);
+				LustyMaidensArmor.addTitfuckButton(4);
+				addButtonIfTrue(5, "LayEggs(Bee)", anemoneGetsLayedByBeePositor, "Req. a bee ovipositor.", player.canOvipositBee());
+				addButtonIfTrue(6, "LayEggs(Dri)", spiderOvipositAnAnemone, "Req. a drider ovipositor.", player.canOvipositSpider());
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
+			} else {
+				addButtonDisabled(3, "Her Butt", "Only available after defeating her!");
+				addButtonDisabled(4, "Lay Eggs", "Only available after defeating her!");
+			}
+		}
     }
 
     public function herButtRouter():void {
