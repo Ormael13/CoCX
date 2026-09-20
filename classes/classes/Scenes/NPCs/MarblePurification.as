@@ -178,7 +178,6 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nYou thank him for his help, tell him that Marble will also appreciate it, and then calmly head back to camp. Behind you, Rathazul begins busying himself with the strange equipment he does his work with.");
 	 	flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 3;
 	 	flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] = 24;
-
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -223,7 +222,7 @@ public class MarblePurification extends NPCAwareContent{
 		//Marble will be out of camp for 5 days, returning at dawn of the sixth day
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 4;
 		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] = 240;
-		flags[kFLAGS.SLEEP_WITH] = "";
+		if (flags[kFLAGS.SLEEP_WITH] == "Marble") flags[kFLAGS.SLEEP_WITH] = "";
 		doNext(camp.returnToCampUseOneHour);
 	}
 

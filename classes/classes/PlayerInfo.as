@@ -13,6 +13,7 @@ import classes.Scenes.NPCs.ArianScene;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CharybdisFollower;
 import classes.Scenes.NPCs.DriderTown;
+import classes.Scenes.NPCs.ElectraFollower;
 import classes.Scenes.NPCs.EtnaDaughterScene;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
@@ -1174,10 +1175,8 @@ public class PlayerInfo extends BaseContent {
 		if (SceneLib.arianScene.arianFollower()) {
 			if (SceneLib.arianScene.pregnancy.isPregnant) pregnancies += "<b>Arian</b>\n";
 			if (player.hasStatusEffect(StatusEffects.ArianEggTimer)) pregnancies += "<b>Arian (Eggs)</b>\n";
+			if (flags[kFLAGS.ARIAN_EGG_COUNTER] > 0 && flags[kFLAGS.ARIAN_VAGINA] > 0) pregnancies += "<b>Arian hours to lay eggs: </b>" + (24-flags[kFLAGS.ARIAN_EGG_COUNTER]) + "\n";
 		}	
-	
-		if (SceneLib.arianScene.arianFollower() && flags[kFLAGS.ARIAN_EGG_COUNTER] < 24 && flags[kFLAGS.ARIAN_VAGINA] > 0)
-			pregnancies += "<b>Arian days to lay eggs: </b>" + (24-flags[kFLAGS.ARIAN_EGG_COUNTER]) + "\n";
 
 		if (DriderTown.BelisaPregnancy > 0)
 			pregnancies += "<b>Belisa</b>\n";
@@ -1348,6 +1347,15 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0)
 			childStats += "<b>Children With Edryn:</b> " + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n";
+
+		if (ElectraFollower.ElectraDaughtersNum > 0)
+            childStats += "<b>Electra Offsprings (Females):</b> " + ElectraFollower.ElectraDaughtersNum + "\n";
+		if (ElectraFollower.ElectraSonsNum > 0)
+            childStats += "<b>Electra Offsprings (Males):</b> " + ElectraFollower.ElectraSonsNum + "\n";
+		if (ElectraFollower.ElectraHermKidsNum > 0)
+            childStats += "<b>Electra Offsprings (Herms):</b> " + ElectraFollower.ElectraHermKidsNum + "\n";
+		if (ElectraFollower.ElectraTotalKidsNum > 0)
+            childStats += "<b>Total Children With Electra:</b> " + ElectraFollower.ElectraTotalKidsNum + "\n";	
 
 		if (flags[kFLAGS.EMBER_CHILDREN_MALES] > 0)
 			childStats += "<b>Ember Offspring (Males):</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n";

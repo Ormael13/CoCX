@@ -235,7 +235,7 @@ public function BelisaEggLaying():void {
 	outputText("\"<i>It’s okay, sis. Just push. Lean on me.</i>\" The much larger Drider folds her legs as Belisa begins to let out a shrill wail.\n\n");
 	if (LilyFollower.LilyFollowerState) outputText("The middle sister comes over as fast as she can, positioning herself on the other side of the trough, holding her hands out. Belisa takes Lily’s hands, and the siblings lock eyes.\n\n");
 	outputText("As you make your way over, you hear a sloshing sound, and Belisa pants for air as she pulls up her robe, revealing her sopping wet cunt, which shivers rapidly. With a groan, a single white orb widens her quim slightly as it exits, landing softly in the trough. You get to Belisa, and she locks eyes with you, sighing slightly in relief as you take her other side, you and Tyrantia both supporting Belisa as her legs shake.\n\n");
-	outputText("Belisa lays "+(eggsB*2)+" eggs, and when she’s done, your Drider-lover slides to the ground. Tyrantia takes the trough, bringing it inside, and you wrap your arms around Belisa, whispering soothing words into her ears.\n\n");
+	outputText("Belisa lays "+eggsB+" eggs, and when she’s done, your Drider-lover slides to the ground. Tyrantia takes the trough, bringing it inside, and you wrap your arms around Belisa, whispering soothing words into her ears.\n\n");
 	BelisaPregnancy = 0;
 	if (BelisaKidsEggsHatching1 > 0) {
 		BelisaKidsEggs2 = eggsB;
@@ -286,7 +286,7 @@ public function LilyEggLayingPC():void {
 	else if (TyrantiaFollower.isLover()) outputText("\"<i>Good timing, [name]!</i>\" The giantess says. \"<i>Help me out, wouldya?</i>\" Lily leans on her larger sister, and groans, eyes opening and closing rapidly \"<i>It’s okay, sis. Hold in there.</i>\"\n\n");
 	outputText("Lily moans, her hips shaking, and as you get closer, you can tell she’s going through contractions. She closes her eyes, gasping as her pussy gapes, revealing a slick, white orb. She moans, her lips closing, and the orb vanishing.\n\n");
 	outputText("\"<i>...[name]…Can you…touch?</i>\" She points down to her cunt, and you nod, getting underneath her spider-half. You begin to pleasure her clit, massaging her pussy lips with your finger. Her pained moans subside, replaced with pleasure, and you’re rewarded with a soft <i>plop</i>, as her first egg lands gently in the net, ejected alongside some sticky femcum.\n\n");
-	outputText("Once the first egg is out, the rest follow quickly. One after another, the pale orbs fall from your Drider-lover’s cunt. "+(eggsL*2)+" in total. Once the last one leaves, Lily’s legs begin to shake, and you’re barely able to get out from underneath her before she falls. You make sure Lily’s labored breathing slows, then bring your unhatched offspring to a nursery nook. You leave a kiss on your broodmother’s cheek, before heading back to camp.\n\n");
+	outputText("Once the first egg is out, the rest follow quickly. One after another, the pale orbs fall from your Drider-lover’s cunt. "+eggsL+" in total. Once the last one leaves, Lily’s legs begin to shake, and you’re barely able to get out from underneath her before she falls. You make sure Lily’s labored breathing slows, then bring your unhatched offspring to a nursery nook. You leave a kiss on your broodmother’s cheek, before heading back to camp.\n\n");
 	LilyKidsPCPregnancy = 0;
 	if (LilyKidsPCEggsHatching1 > 0) {
 		LilyKidsPCEggs2 = eggsL;

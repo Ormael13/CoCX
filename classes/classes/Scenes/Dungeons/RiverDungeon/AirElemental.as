@@ -248,6 +248,7 @@ public class AirElemental extends Monster
 				this.additionalXP = 450;
 			}
 			this.a = "the ";
+			this.flyer = true;
 			this.plural = false;
 			this.lustVuln = 0.01;
 			this.createBreastRow(0, 1);

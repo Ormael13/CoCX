@@ -144,7 +144,7 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 			var score:Number = Math.min(player.cumQ()/100,5);
 			score += player.virilityQ() * 200;
 			outputText("Arian checking virility score " + score);
-			if((player.cumQ() > (score >= rand(100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
+			if((player.cumQ() > (score >= rand(100))) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 				preg = true;
 			}
 			if (preg) {

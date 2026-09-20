@@ -321,13 +321,13 @@ public class GooGirlScene extends AbstractLakeContent
 			//override everything if the conditions are met
 			var latexGoo_canThink:Boolean = flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0 && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2; //not checking your items, needed for the dialogue
 			var latexGoo_hasItems:Boolean = (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG)); //not checking your items, needed for the dialogue
-			if (latexGoo_canThink && latexGoo_hasItems && player.cor < 50) {
+			if (latexGoo_canThink && latexGoo_hasItems && player.cor < 0) {
 				SceneLib.latexGirl.pureGooRecruitmentStart();
 				return;
 			}
 			clearOutput();
 			//latexy hint - pure
-			if (latexGoo_canThink && !latexGoo_hasItems && player.cor < 50)
+			if (latexGoo_canThink && !latexGoo_hasItems && player.cor < 0)
 				sceneHunter.print("Something unusual can happen if you fight one of those with a black egg and a bottle of Suc. Milk in your inventory.");
 			outputText("The excitement of your scuffle proves too much for the goo-girl to keep up with, and she collapses into the slime of her lower torso, her skin wiggling as she struggles to maintain cohesion. Her expression is one of disappointment, and she looks at you with big, hopeful eyes, reaching out a hand, as if to offer an apology for her over-exuberance.\n\n");
 
@@ -364,7 +364,7 @@ public class GooGirlScene extends AbstractLakeContent
 				else addButtonDisabled(10, "???", "Requires wearing a specific 'gooey' armor and being NOT pregnant (even with anal pregnancy).");
 				//TF
 				//corrupt chances
-				if (latexGoo_canThink && flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] > 0 && player.cor >= 50) {
+				if (latexGoo_canThink && flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] > 0 && player.cor >= 0) {
 					//Recruitment:
 					//Notice After Victory:
 					if (flags[kFLAGS.TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT] == 0) {
