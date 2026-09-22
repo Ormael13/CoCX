@@ -1265,7 +1265,7 @@ public class Combat extends BaseContent {
 			favbd(bd,"Elemental Aspects");
         }
 		if (player.shieldName == "Ancient Conduit") bd = buttons.add("A.Conduit", AncientConduitMenu);
-		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", comtamed.tamedMonstersMenu);
+		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", curry(comtamed.tamedMonstersMenu, 1));
 		if (player.hasPerk(PerkLib.JobHaruspex) && player.perkv2(PerkLib.JobHaruspex) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
 			if (monster.isFlying() && (!player.hasPerk(PerkLib.BoneyBow) && player.perkv1(PerkLib.BoneyBow) == 0) && (!player.hasPerk(PerkLib.BoneyWand) && player.perkv1(PerkLib.BoneyWand) == 0)
@@ -21651,6 +21651,14 @@ private function ghostRealStrengthTamedMonster(no:Number):Number {
 	if (no == 6) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster06a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(6));
 	if (no == 7) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster07a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(7));
 	if (no == 8) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster08a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(8));
+	if (no == 9) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster09a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(9));
+	if (no == 10) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster10a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(10));
+	if (no == 11) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster11a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(11));
+	if (no == 12) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster12a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(12));
+	if (no == 13) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster13a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(13));
+	if (no == 14) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster14a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(14));
+	if (no == 15) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster15a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(15));
+	if (no == 16) ghostRealStrTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster16a)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(16));
 	return ghostRealStrTamedMonster;
 }
 
@@ -21735,6 +21743,14 @@ private function ghostRealIntelligenceTamedMonster(no:Number):Number {
 	if (no == 6) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster06b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(6));
 	if (no == 7) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster07b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(7));
 	if (no == 8) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster08b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(8));
+	if (no == 9) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster09b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(9));
+	if (no == 10) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster10b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(10));
+	if (no == 11) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster11b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(11));
+	if (no == 12) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster12b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(12));
+	if (no == 13) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster13b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(13));
+	if (no == 14) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster14b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(14));
+	if (no == 15) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster15b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(15));
+	if (no == 16) ghostRealIntTamedMonster += Math.round(player.statusEffectv1(StatusEffects.TamedMonster16b)*SceneLib.campMakeWinions.monsterBaseStatsMultiplier(16));
 	return ghostRealIntTamedMonster;
 }
 

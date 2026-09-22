@@ -497,6 +497,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster01b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster01, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster01, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster01a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster02) && !onlyOneTamingAtTime) {
@@ -506,6 +507,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster02b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster02, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster02, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster02a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster03) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -515,6 +517,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster03b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster03, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster03, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster03a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster04) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -524,6 +527,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster04b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster04, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster04, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster04a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster05) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -533,6 +537,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster05b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster05, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster05, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster05a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster06) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -542,6 +547,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster06b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster06, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster06, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster06a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster07) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -551,6 +557,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster07b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster07, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster07, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster07a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster08) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -560,6 +567,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster08b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster08, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster08, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster08a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster09) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -569,6 +577,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster09b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster09, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster09, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster09a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster10) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -578,6 +587,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster10b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster10, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster10, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster10a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster11) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -587,6 +597,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster11b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster11, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster11, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster11a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster12) && !onlyOneTamingAtTime && (currentTamedMonstersCount() < currentTamingCap())) {
@@ -596,6 +607,7 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster12b, monster.intStat.core.value, monster.wisStat.core.value, monster.libStat.core.value, 0);
 					if (monster.magicuser) player.addStatusValue(StatusEffects.TamedMonster12, 2, 1);
 					if (monster.flyer) player.addStatusValue(StatusEffects.TamedMonster12, 3, 1);
+					if (monster.meleemultiatks > 1) player.addStatusValue(StatusEffects.TamedMonster12a, 4, monster.meleemultiatks);
 					onlyOneTamingAtTime = true;
 				}
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster51) && !onlyOneTamingAtTime) {

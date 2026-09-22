@@ -183,6 +183,7 @@ import flash.utils.getQualifiedClassName;
 		public var magicuser:Boolean = false;
 		public var soulforceuser:Boolean = false;
 		public var psychicuser:Boolean = false;
+		public var meleemultiatks:Number = 1;
 		public var imageName:String = "";
 
 		//Lust vulnerability

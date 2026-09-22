@@ -132,8 +132,7 @@ use namespace CoC;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			player.removeStatusEffect(StatusEffects.WildMalikore);
-			cleanupAfterCombat();
+			SceneLib.bashemathScene.malicoreDefeated();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -154,6 +153,8 @@ use namespace CoC;
 			this.a = "the ";
 			this.short = "malikore";
 			this.long = "";
+			this.flyer = true;
+			this.meleemultiatks = 6;
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,75,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("G"));
