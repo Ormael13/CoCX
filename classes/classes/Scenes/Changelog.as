@@ -373,6 +373,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 9 wisdom lvl-up perk: There is 10 types of tamed monsters. Req. Cloud Number 9 perk and 250+ wisdom. Effect: There is 10 types of tamed monsters: those that bend and those that don't.\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Up to eleven. Req. There is 10 types of tamed monsters perk and 275+ wisdom. Effect: Tamed monsters slots now goes up to eleven.\n");
 			outputText("-Made some of drider triplets talk options not taking whole hour and not always kick back to main camp menu instead of just respective drider talk main menu.\n");
+			outputText("-New tier 11 wisdom lvl-up perk: Dirty Dozen. Req. Up to eleven perk and 300+ wisdom. Effect: Now you can make dirty dozen from your tamed monsters.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -388,7 +389,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New tier 11 wisdom lvl-up perk: Dirty Dozen. Req. Up to eleven perk and 300+ wisdom. Effect: .
 			outputText("-\n");//New tier 12 wisdom lvl-up perk: Friday 13th. Req. Dirty Dozen perk and 325+ wisdom. Effect: .
 			outputText("-\n");//New tier 13 wisdom lvl-up perk: Lucky 14. Req. Friday 13th perk and 350+ wisdom. Effect: .
 			outputText("-\n");//New tier 14 wisdom lvl-up perk: . Req. Lucky 14 perk and 375+ wisdom. Effect: .

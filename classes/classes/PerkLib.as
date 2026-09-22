@@ -1230,6 +1230,18 @@ public class PerkLib
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
 		*/
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",
 				"Reduces lust gain by 15%.",
@@ -7991,6 +8003,9 @@ public class PerkLib
                     .requirePerk(PerfectStrike);
             ElementalTouch.requireLevel(66)
                     .requirePerk(SharedPower);
+            DirtyDozen.requireLevel(66)
+                    .requirePerk(UpToEleven)
+                    .requireWis(300);
             LegendaryWisdom.requireWis(15)
                     .requirePerk(EpicWisdom)
                     .requireLevel(66);

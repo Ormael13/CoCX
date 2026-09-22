@@ -2711,10 +2711,10 @@ public static const WILL_O_THE_WISP:int                                   			= 2
 public static const IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED:int                   = 2702;
 public static const MICHIKO_FOLLOWER:int                                   			= 2703;
 public static const MICHIKO_TALK_MARRIAGE:int                                   	= 2704;
-public static const MICHIKO_02705:int                                   			= 2705;	//Not Yet Used Flag
-public static const MICHIKO_02706:int                                   			= 2706;	//Not Yet Used Flag
-public static const MICHIKO_02707:int                                   			= 2707;	//Not Yet Used Flag
-public static const MICHIKO_02708:int                                   			= 2708;	//Not Yet Used Flag
+public static const TAMED_13_NAME:int                                   			= 2705;
+public static const TAMED_14_NAME:int                                   			= 2706;
+public static const TAMED_15_NAME:int                                   			= 2707;
+public static const TAMED_16_NAME:int                                   			= 2708;
 public static const MARRIAGE_FLAG:int                                   			= 2709;
 public static const CHRISTMAS_TREE_LEVEL:int                                   		= 2710;
 public static const CHRISTMAS_TREE_GROWTH_COUNTER:int                               = 2711;
@@ -3040,4 +3040,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	STATBAR_ANIMATIONS // moved to settings
 ];
 	}
-}
+}

@@ -1163,10 +1163,10 @@ public class UniqueSexScenes extends BaseContent
 			outputText("[monster He] whimpers something, but your attention has already shifted to the other important parts of your new toy.  You caress [monster his] balls next, your finger tracing out the pattern of a cursed mark on each.  [Themonster] groans with need as the dark magic fuels them, your power making [monster his] orbs swell outward and churning with seed.  In half a minute, [monster his] virility has doubled from your vile spellwork.  You growl lustfully, aroused beyond mortal measure at the sight, the smell, the echoes of your captive's emotional torment.\n\n");
 			outputText("[Themonster] tries to shove you off, but a succubus seeking a meal can't be pushed off of her meat.  Still, you press a finger ");
 			if (monster.hasCock()) {
-				if (monster.hasBalls() && rand(2) == 0) outputText("[between [monster his] testes]");
-				else outputText("[on the base of [monster his] shaft]");
+				if (monster.hasBalls() && rand(2) == 0) outputText("between [monster his] testes");
+				else outputText("on the base of [monster his] shaft");
 			}
-			else outputText("[in the center of [monster his] taint]");
+			else outputText("in the center of [monster his] taint");
 			outputText(" and send a pulse of agonizing pleasure, making it clear that any further resistance is unacceptable.  [monster He] whimpers and moans, but stops struggling, and you reward your toy by sliding your hungry fuckhole from the base of [monster his] to the tip.  You then spread your legs wide, showing off your drooling cunt as it slides forward and backward along [monster his] tip once.\n\n");
 			outputText("Then, in a swift motion, [monster he]'s balls-deep in your muff, and you both moan loudly.  No matter how many cocks you take, it's always too sweet for words.  You live for these kinds of moments, feeling your desperate new fuckstick twitching and begging for release inside your pussy.\n\n");
 			outputText("<b>And it's never enough.</b>\n\n");
