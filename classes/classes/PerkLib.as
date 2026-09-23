@@ -1193,8 +1193,8 @@ public class PerkLib
 				"Now you can make dirty dozen from your tamed monsters.",
 				"You've chosen the 'Dirty Dozen' perk. Now you can make dirty dozen from your tamed monsters.");
 		public static const Friday13th:PerkType = mk("Friday 13th", "Friday 13th",
-				".",
-				"You've chosen the 'Friday 13th' perk. .");
+				"Now you can have thirteen monster with a fancy hockey mask.",
+				"You've chosen the 'Friday 13th' perk. Now you can have thirteen monster with a fancy hockey mask.");
 		public static const Lucky14:PerkType = mk("Lucky 14", "Lucky 14",
 				".",
 				"You've chosen the 'Lucky 14' perk. .");
@@ -8014,6 +8014,9 @@ public class PerkLib
                     .requirePerk(Backlash);
             GreaterSharedPower.requireLevel(72)
                     .requirePerk(ElementalTouch);
+            Friday13th.requireLevel(72)
+                    .requirePerk(DirtyDozen)
+                    .requireWis(325);
             StrongerElementalBondEx.requirePerk(StrongerElementalBond)
 					.requireOrPerks(ElementalContractRank13, DaoOfTheElements, 4)
                     .requireWis(325)
