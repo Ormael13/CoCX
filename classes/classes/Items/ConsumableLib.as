@@ -555,6 +555,19 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_TOU]
 						]
 				);
+		public const DELFEARS: Consumable = mk("DElfEars", "DElfEars", "a Dark Fae ear shaped plant", 6, "A plant that looks like a pointed Dark Fae ear. Upon further inspection, the plant is very delicate and seems to radiate some sort of dark magical energy.", curry(m.elfears, 1), ItemConstants.U_TF)
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						DEFAULT_ESSENCE_DROP_TABLE(AE_DARK_ELF, true),
+						[
+							[1, AR_SPE],
+							[1, AR_WIS],
+						],
+						concatUnique(
+								DarkElfRace.DarkElfHairColors,
+								DarkElfRace.DarkElfSkinColors
+						)
+				);
 		public const DESERTB: Consumable = mk("DesertB", "Desert Berry", "a desert berry", 20, "This small orange berry is light in your hands.  It may have gotten its name from been founded usually in desert regions.  You're certain it is no mere fruit.", m.desertBerry, ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -604,7 +617,7 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_LIB]
 						]
 				);
-		public const ELFEARS: Consumable = mk("ElfEars", "ElfEars", "a Fae ear shaped plant", 6, "A plant that looks like a pointed Fae ear. Upon further inspection, the plant is very delicate and seems to radiate some sort of magical energy.", m.elfears, ItemConstants.U_TF)
+		public const ELFEARS: Consumable = mk("ElfEars", "ElfEars", "a Fae ear shaped plant", 6, "A plant that looks like a pointed Fae ear. Upon further inspection, the plant is very delicate and seems to radiate some sort of magical energy.", curry(m.elfears, 0), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						DEFAULT_ESSENCE_DROP_TABLE(AE_ELF, true),

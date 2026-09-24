@@ -5365,7 +5365,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         if (player.vaginas.length == 1 && changes < changeLimit && rand(3) == 0) {
-            if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
+            if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
                 temp = player.vaginas.length;
                 while (temp > 0) {
                     temp--;
@@ -5385,7 +5385,7 @@ public final class Mutations extends MutationsHelper {
                 player.vaginas[0].vaginalLooseness++;
                 changes++;
             }
-            if (transformations.VaginaNaga().isPossible() && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) {
+            if (player.vaginaType() != VaginaClass.NAGA && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) {
                 transformations.VaginaNaga().applyEffect();
                 changes++;
             }
@@ -10287,7 +10287,7 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
-    public function elfears(player:Player):void {
+    public function elfears(type:Number, player:Player):void {
         //0 == light elf
         //1 == dark elf
         player.slimeFeed();

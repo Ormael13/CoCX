@@ -3628,4 +3628,4 @@ public class CampMakeWinions extends BaseContent
 			player.addPerkValue(PerkLib.BoneGiants, 1, +bonesUsedToMakeLargeSkeleton());
 		}
 	}
-}
+}

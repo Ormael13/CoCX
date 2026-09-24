@@ -374,7 +374,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 10 wisdom lvl-up perk: Up to eleven. Req. There is 10 types of tamed monsters perk and 275+ wisdom. Effect: Tamed monsters slots now goes up to eleven.\n");
 			outputText("-Made some of drider triplets talk options not taking whole hour and not always kick back to main camp menu instead of just respective drider talk main menu.\n");
 			outputText("-New tier 11 wisdom lvl-up perk: Dirty Dozen. Req. Up to eleven perk and 300+ wisdom. Effect: Now you can make dirty dozen from your tamed monsters.\n");
-			outputText("-New tier 12 wisdom lvl-up perk: Friday 13th. Req. Dirty Dozen perk and 325+ wisdom. Effect: Now you can have thirteen monster with a fancy hockey mask.\n");
+			outputText("-New tier 12 wisdom lvl-up perk: Friday 13th. Req. Dirty Dozen perk and 325+ wisdom. Effect: Now you can have thirteenth monster with a fancy hockey mask.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

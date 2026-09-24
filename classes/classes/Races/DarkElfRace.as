@@ -80,9 +80,9 @@ public class DarkElfRace extends Race {
 				})
                 .buffs({
                     "tou.mult": -0.10,
-                    "spe.mult": +0.85,
-                    "int.mult": +0.50,
-                    "wis.mult": +0.85,
+                    "spe.mult": +0.90,
+                    "int.mult": +0.40,
+                    "wis.mult": +0.90,
                     "maxmana_mult": +0.3,
                     "sens": +45
                 })

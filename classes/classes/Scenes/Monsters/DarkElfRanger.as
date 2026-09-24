@@ -64,8 +64,9 @@ public class DarkElfRanger extends DarkElfs
 			this.level = 47;
 			this.gems = rand(10) + 20;
 			this.drop = new WeightedDrop().
-					add(weaponsrange.BOWLIGH,1).
-					add(consumables.ELFEARS,4);
+					add(useables.EBONBLO,1/20).
+					add(weaponsrange.BOWLIGH,1)/*.
+					add(consumables.ELFEARS,4)*/;
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: DarkElfBowShooting, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON]},

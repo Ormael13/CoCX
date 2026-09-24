@@ -65,6 +65,7 @@ package classes.Scenes.Monsters
 			this.long = "You're currently fighting corrupted basic flesh golems. They're seven feet tall with flesh covered by white armor fragments, which still leaving genitalia, with pretty sizable cocks, or breasts exposed. Despite not possesing visible eyes on her elongated head, they're using pair of weapons to attack enemies.";
 			this.flyer = true;
 			this.magicuser = true;
+			this.meleemultiatks = 2;
 			this.createCock(12,2,CockTypesEnum.DEMON);
 			this.balls = 0;
 			this.ballSize = 0;

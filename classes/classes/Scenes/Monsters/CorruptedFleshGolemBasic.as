@@ -62,6 +62,7 @@ package classes.Scenes.Monsters
 			this.long = "You're currently fighting a corrupted basic flesh golem. She's seven feet tall, her flesh covered sporadically by fragments of what must have once been a decorative set of armor. They seem to have been broken in places, but the shards of armor still provide decent protection. Several large holes in the armor were clearly made intentionally, exposing a throbbing cock and firm breasts. The golem keeps its head aligned with you, large, gaping mouth open constantly. She clutches a pair of swords in her meaty fists.";
 			this.flyer = true;
 			this.magicuser = true;
+			this.meleemultiatks = 2;
 			this.createCock(12,2,CockTypesEnum.DEMON);
 			this.balls = 0;
 			this.ballSize = 0;

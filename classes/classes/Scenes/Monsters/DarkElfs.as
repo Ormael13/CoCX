@@ -160,8 +160,8 @@ public class DarkElfs extends Monster
 			this.lust = 50;
 			this.drop = new WeightedDrop()
 					.add(useables.EBONBLO,2)
-					.add(weaponsrange.BOWLIGH,3)
-					.add(consumables.ELFEARS,5);
+					.add(weaponsrange.BOWLIGH,3)/*
+					.add(consumables.ELFEARS,5)*/;
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: DarkElfBowShooting, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON]},

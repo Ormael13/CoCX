@@ -6,6 +6,7 @@ package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.SceneLib;
 	import classes.CoC;
 	
 	public class FleshGolemScene extends BaseContent
@@ -92,7 +93,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			menu();
 			outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
-			//addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & ", player.hasPerk(PerkLib.));
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 	}

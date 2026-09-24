@@ -81,9 +81,9 @@ public class ElfRace extends Race {
                 .buffs({
                     "str.mult": -0.10,
                     "tou.mult": -0.15,
-                    "spe.mult": +0.80,
-                    "int.mult": +0.80,
-                    "wis.mult": +0.60,
+                    "spe.mult": +0.90,
+                    "int.mult": +0.90,
+                    "wis.mult": +0.40,
                     "maxmana_mult": +0.2,
                     "sens": +30
                 })
@@ -94,9 +94,9 @@ public class ElfRace extends Race {
                 .buffs({
                     "str.mult": -0.20,
                     "tou.mult": -0.30,
-                    "spe.mult": +1.60,
-                    "int.mult": +1.60,
-                    "wis.mult": +1.20,
+                    "spe.mult": +1.70,
+                    "int.mult": +1.70,
+                    "wis.mult": +1.00,
                     "maxmana_mult": +0.4,
                     "sens": +60
                 })
