@@ -52,7 +52,6 @@ public class Settings extends Utils implements SaveableState {
 		lvlUpFast = 0;
 		mutationsSpoiler = 0;
 		daysPerYear = 0;
-
 		backgroundStyle = 0;
 		buttonIconsDisabled = 0;
 		charviewArmorHidden = 0;
@@ -86,7 +85,6 @@ public class Settings extends Utils implements SaveableState {
 				lvlUpFast,
 				mutationsSpoiler,
 				daysPerYear,
-
 				backgroundStyle,
 				buttonIconsDisabled,
 				charviewArmorHidden,
@@ -117,7 +115,6 @@ public class Settings extends Utils implements SaveableState {
 		lvlUpFast = flags[kFLAGS.LVL_UP_FAST];
 		mutationsSpoiler = flags[kFLAGS.MUTATIONS_SPOILERS];
 		daysPerYear = flags[kFLAGS.DAYS_PER_YEAR];
-
 		backgroundStyle = flags[kFLAGS.BACKGROUND_STYLE];
 		buttonIconsDisabled = flags[kFLAGS.BUTTON_ICONS_DISABLED];
 		charviewArmorHidden = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
@@ -156,7 +153,6 @@ public class Settings extends Utils implements SaveableState {
 		lvlUpFast = valueOr(options[i++], 0);
 		mutationsSpoiler = valueOr(options[i++], 0);
 		daysPerYear = valueOr(options[i++], 0);
-
 		backgroundStyle = valueOr(options[i++], 0);
 		buttonIconsDisabled = valueOr(options[i++], 0);
 		charviewArmorHidden = valueOr(options[i++], 0);

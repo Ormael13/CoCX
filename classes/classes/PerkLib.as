@@ -1196,8 +1196,8 @@ public class PerkLib
 				"Now you can have thirteenth monster with a fancy hockey mask.",
 				"You've chosen the 'Friday 13th' perk. Now you can have thirteenth monster with a fancy hockey mask.");
 		public static const Lucky14:PerkType = mk("Lucky 14", "Lucky 14",
-				".",
-				"You've chosen the 'Lucky 14' perk. .");
+				"Most lucky tamed monster of Champion's Company.",
+				"You've chosen the 'Lucky 14' perk. Most lucky tamed monster of Champion's Company.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -1215,6 +1215,24 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -8027,6 +8045,9 @@ public class PerkLib
                     .requirePerk(FlurryOfBlows);
             EclipticInfusion.requireLevel(78)
                     .requirePerk(GreaterSharedPower);
+            Lucky14.requireLevel(78)
+                    .requirePerk(Friday13th)
+                    .requireWis(350);
             ApesTogetherStrongest.requireLevel(78)
                     .requirePerks(ApesTogetherStrongerEx, ThatsEnoughApes)
                     .requireWis(355);
