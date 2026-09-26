@@ -2187,6 +2187,7 @@ import classes.Scenes.Combat.CombatAbility;
 
 			function setTimescale(val:int):void {
 				settings.daysPerYear = val;
+				flags[kFLAGS.DAYS_PER_YEAR] = val;
 				chooseGameModes();
 			}
 		}

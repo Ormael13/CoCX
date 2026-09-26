@@ -376,8 +376,8 @@ public class Changelog extends BaseContent
 			outputText("-New tier 11 wisdom lvl-up perk: Dirty Dozen. Req. Up to eleven perk and 300+ wisdom. Effect: Now you can make dirty dozen from your tamed monsters.\n");
 			outputText("-New tier 12 wisdom lvl-up perk: Friday 13th. Req. Dirty Dozen perk and 325+ wisdom. Effect: Now you can have thirteenth monster with a fancy hockey mask.\n");
 			outputText("-New tier 13 wisdom lvl-up perk: Lucky 14. Req. Friday 13th perk and 350+ wisdom. Effect: Most lucky tamed monster of Champion's Company.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-All dark elf enemies would drop light crossbows instead of light bows.\n");
+			outputText("-New TF item (by Ormael): Dark Fae ear shaped plant - droped by dark elf enemies. Using it would turn PC into dark elf. Dark Elf / Dark High Elf racial bonuses (11+/17+): -10/20% to tou multi, +90/170% to spe/wis multi, +40/100% to int multi, +45/90 to sens, +30/60% to max mana multi.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

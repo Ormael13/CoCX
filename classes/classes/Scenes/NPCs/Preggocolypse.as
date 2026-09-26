@@ -1,7 +1,7 @@
 
 /*
 This is a temporary file, used to store scenes for the wave of preggable NPCs that should be introduced. Once these scenes are implemented, this file can be deleted. 
-Scenes are for the following NPCs: Arian, Nadia, Electra, Samirah, Sidonie, Luna and Diva. 
+Scenes are for the following NPCs: Arian, Electra, Samirah, Sidonie and Diva
 -Announcement scenes are for a day or so after conception
 ARIAN SCENES
 */

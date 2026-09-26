@@ -1625,8 +1625,8 @@ private function alvinaProposal():void {
 private function alvinaWedding():void {
 	//skip one month
 	if (!recalling) {
-		if (settings.daysPerYear <= 0 || settings.daysPerYear == 365) model.time.days += 30;
-		else model.time.days += settings.daysPerYear / 12;
+		if (flags[kFLAGS.DAYS_PER_YEAR] <= 0 || flags[kFLAGS.DAYS_PER_YEAR] == 365) model.time.days += 30;
+		else model.time.days += flags[kFLAGS.DAYS_PER_YEAR] / 12;
 	}
 	clearOutput();
 	outputText("It’s been one long month of preparations involving a fair share of actions good and bad you will not name. Alvina being a demon it made sense such an event could not be held in any holy place and as such, she contacted a priest of the church of the fetish for the job.\n"

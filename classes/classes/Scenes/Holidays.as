@@ -24,7 +24,7 @@ import classes.internals.Utils;
 public class Holidays extends BaseContent {
     //Checker functions
     public static function checkDays():Boolean {
-        return CoC.instance.model.time.useRealDate() || CoC.instance.settings.daysPerYear == 365;
+        return CoC.instance.model.time.useRealDate() || flags[kFLAGS.DAYS_PER_YEAR] == 365;
     }
     public static function isAprilFools():Boolean {
         return flags[kFLAGS.ITS_EVERY_DAY] || date.month == 3 && (!checkDays() || date.date == 1);
@@ -4232,3 +4232,4 @@ public class Holidays extends BaseContent {
     }
 }
 }
+

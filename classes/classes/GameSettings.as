@@ -42,12 +42,9 @@ public class GameSettings extends BaseContent {
 		return settings.charviewEnabled > 0;
 	}
 
-	private var daysPerYear_temp:int; //used for storing the flag value without exiting the menu (to avoid issues while cycling through 'real' date.
-
 	public function settingsScreenMain(justOpened:Boolean = false):void {
 		CoC.instance.saves.savePermObject(false);
-		if (justOpened) daysPerYear_temp = settings.daysPerYear;
-		else model.time.changeDPY(daysPerYear_temp);
+		model.time.changeDPY(flags[kFLAGS.DAYS_PER_YEAR]);
         mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
 		clearOutput();
@@ -68,7 +65,6 @@ public class GameSettings extends BaseContent {
 	// GAMEPLAY
 	//------------
 	public function settingsScreenGameSettings():void {
-
 		clearOutput();
 		displayHeader("Gameplay Settings");
 		if (settings.autoLevel >= 1) {
@@ -81,13 +77,13 @@ public class GameSettings extends BaseContent {
 		outputText("The following flags are applied to the save - you <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change them. If you load a save, they will be set to the saved values.");
 		outputText("\n\n");
 		if (player) {
-			if (daysPerYear_temp == 0) {
+			if (flags[kFLAGS.DAYS_PER_YEAR] == 0) {
 				outputText("Timescale: [font-green]<b>REAL</b>[/font]\n In-game date (used for holiday events) uses real date from your computer.");
-				if (settings.daysPerYear > 0) outputText("\n[font-dred]<b>WARNING: your current in-game date will be erased after you exit this menu.</b>[/font]");
+				if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n[font-dred]<b>WARNING: your current in-game date will be erased after you exit this menu.</b>[/font]");
 			} else {
-				outputText("Timescale: [font-blue]<b>DAYS ("+daysPerYear_temp+" in-game days per year)</b>[/font]\n In-game date is calculated from the days spent in Mareth.");
+				outputText("Timescale: [font-blue]<b>DAYS ("+flags[kFLAGS.DAYS_PER_YEAR]+" in-game days per year)</b>[/font]\n In-game date is calculated from the days spent in Mareth.");
 			}
-			outputText("\nDay of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
+			outputText("\nDay of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (flags[kFLAGS.DAYS_PER_YEAR] == 0 || flags[kFLAGS.DAYS_PER_YEAR] == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
 			outputText("\n\n");
 			player.displayFinalGameDifficulty();
 			outputText("\n\n");
@@ -239,13 +235,22 @@ public class GameSettings extends BaseContent {
 		}
 		addButton(13, "Auto level", toggleSetting, "autoLevel", settingsScreenGameSettings).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		addButton(14, "Back", settingsScreenMain);
-
-		//===========================
-		function timescaleCycle():void {
-			var cycle:Array = [0, 60, 120, 180, 240, 365];
-			daysPerYear_temp = cycle[(cycle.indexOf(daysPerYear_temp) + 1) % cycle.length];
-			settingsScreenGameSettings();
-		}
+	}
+	public function timescaleCycle():void {
+		clearOutput();
+		outputText("Choose in-game timescale.");
+		menu();
+		addButton(2, "REAL", timescaleCycle2, 0);
+		addButton(5, "DAYS-60", timescaleCycle2, 60);
+		addButton(6, "DAYS-120", timescaleCycle2, 120);
+		addButton(7, "DAYS-180", timescaleCycle2, 180);
+		addButton(8, "DAYS-240", timescaleCycle2, 240);
+		addButton(9, "DAYS-365", timescaleCycle2, 365);
+	}
+	public function timescaleCycle2(dpy:Number):void {
+		settings.daysPerYear = dpy;
+		flags[kFLAGS.DAYS_PER_YEAR] = dpy;
+		settingsScreenGameSettings();
 	}
 	private function exportGameDataJs():void {
 		new GamedataExporter().exportGameData();

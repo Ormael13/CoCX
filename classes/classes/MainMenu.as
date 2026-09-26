@@ -17,7 +17,6 @@ public class MainMenu extends BaseContent {
 	//MainMenu - kicks player out to the main menu
 	public function mainMenu():void {
         CoC.instance.stage.focus = (mainView as MainView).mainText;
-
 		mainView.hideComboBox();
         CoC.instance.mainViewManager.registerShiftKeys();
         mainView.eventTestInput.x = -10207.5;
@@ -32,7 +31,6 @@ public class MainMenu extends BaseContent {
         mainView.hideAllMenuButtons();
 		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
-
 		mainView.newGameButton.toolTipText      = "Start a new game.";
 		mainView.dataButton.toolTipHeader       = "New Game";
 		mainView.dataButton.toolTipText         = "Save or load your files.";

@@ -19,26 +19,26 @@ public class DarkElfs extends Monster
 			var Acc:Number = 0;
 			Acc += (this.spe - player.spe);
 			if (Acc < 0) Acc = 0;
-			outputText("The black skinned elf aims her bow at you, drawing several arrows and starts shooting.\n\n");
+			outputText("The black skinned elf aims her crossbow at you, drawing several bolts and starts shooting.\n\n");
 			PoisonedBowShoot();
 			if (rand(100) < (90 + Acc)) PoisonedBowShoot();
-			else outputText("An arrow missed you.\n\n");
+			else outputText("A bolt missed you.\n\n");
 			if (rand(100) < (80 + Acc)) PoisonedBowShoot();
-			else outputText("An arrow missed you.\n\n");
+			else outputText("A bolt missed you.\n\n");
 			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 1) {
 				if (rand(100) < (70 + Acc)) PoisonedBowShoot();
-				else outputText("An arrow missed you.\n\n");
+				else outputText("A bolt missed you.\n\n");
 			}
 			//if (rand(100) < (60 + Acc)) PoisonedBowShoot();//Dark Elf Ranger
-			//else outputText("An arrow missed you.\n\n");
+			//else outputText("A bolt missed you.\n\n");
 			//if (rand(100) < (50 + Acc)) PoisonedBowShoot();//Dark Elf Sniper
-			//else outputText("An arrow missed you.\n\n");
+			//else outputText("A bolt missed you.\n\n");
 		}
 		
 		public function PoisonedBowShoot():void
 		{
 			if (CombatAbilities.EAspectAir.isActive()) {
-				outputText("An arrow hits the wind wall dealing no damage to you.\n\n");
+				outputText("A bolt hits the wind wall dealing no damage to you.\n\n");
 				CombatAbilities.EAspectAir.advance(true);
 			}
 			else {
@@ -51,7 +51,7 @@ public class DarkElfs extends Monster
 				else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
 				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
 				damage = Math.round(damage);
-				outputText("An arrow hits you for ");
+				outputText("A bolt hits you for ");
 				player.takePhysDamage(damage, true);
 				outputText(" damage. It was poisoned! You feel your strength failing you!\n\n");
 				player.addCombatBuff('spe', -6, "Poisoned Arrow", "PoisonedArrow");
@@ -67,11 +67,11 @@ public class DarkElfs extends Monster
 		public function WingClip():void
 		{
 			if (CombatAbilities.EAspectAir.isActive()) {
-				outputText("An arrow hits wind wall dealing no damage to you.\n\n");
+				outputText("A bolt hits wind wall dealing no damage to you.\n\n");
 				CombatAbilities.EAspectAir.advance(true);
 			}
 			else {
-				outputText("The dark elf smirks wickedly before shooting an arrow straight into your "+(player.hasPerk(PerkLib.Icerunner)?"legs":"wing")+". You fall, unable to fly, and crash into the ground. ");
+				outputText("The dark elf smirks wickedly before shooting a bolt straight into your "+(player.hasPerk(PerkLib.Icerunner)?"legs":"wing")+". You fall, unable to fly, and crash into the ground. ");
 				player.removeStatusEffect(StatusEffects.Flying);
 				var damage:Number = eBaseSpeedDamage() * 6 + eBaseStrengthDamage() * 3;
 				if (damage < 15) damage = 15;
@@ -153,15 +153,15 @@ public class DarkElfs extends Monster
 			this.hairLength = 13;
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
-			this.weaponRangeName = "elven bow";
+			this.weaponRangeName = "elven crossbow";
 			this.weaponRangeVerb= "shoot";
 			this.armorName = "elven armor";
 			this.lustVuln = .7;
 			this.lust = 50;
 			this.drop = new WeightedDrop()
 					.add(useables.EBONBLO,2)
-					.add(weaponsrange.BOWLIGH,3)/*
-					.add(consumables.ELFEARS,5)*/;
+					.add(weaponsrange.LCROSBW,3)
+					.add(consumables.DELFEARS,5);
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: DarkElfBowShooting, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON]},

@@ -10763,28 +10763,28 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) critPMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
 				if (player.sens >= 500) critPMultiplier += 4.75;
-				else critPMultiplier += 0.1 * Math.round((player.sens - 25) / 5);
+				else critPMultiplier += 0.1 * Math.round((player.sens - 25) / 10);
 			}
 		}
 		if (player.eyesOfTheHunterExpertBoost()) {
 			if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.sens >= 75) critPMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
 				if (player.sens >= 500) critPMultiplier += 4.75;
-				else critPMultiplier += 0.1 * Math.round((player.sens - 25) / 5);
+				else critPMultiplier += 0.1 * Math.round((player.sens - 25) / 10);
 			}
 		}
 		if (player.eyesOfTheHunterMasterBoost()) {
 			if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 100) critPMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
 				if (player.sens >= 500) critPMultiplier += 4.75;
-				else critPMultiplier += 0.1 * Math.round((player.sens - 25) / 5);
+				else critPMultiplier += 0.1 * Math.round((player.sens - 25) / 10);
 			}
 		}
 		if (player.eyesOfTheHunterGrandMasterBoost()) {
 			if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.sens >= 125) critPMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
 				if (player.sens >= 500) critPMultiplier += 4.75;
-				else critPMultiplier += 0.1 * Math.round((player.sens - 25) / 5);
+				else critPMultiplier += 0.1 * Math.round((player.sens - 25) / 10);
 			}
 		}
         if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critPMultiplier += 0.25;
@@ -10807,28 +10807,28 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) critMMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
 				if (player.sens >= 500) critMMultiplier += 4.75;
-				else critMMultiplier += 0.1 * Math.round((player.sens - 25) / 5);
+				else critMMultiplier += 0.1 * Math.round((player.sens - 25) / 10);
 			}
 		}
 		if (player.eyesOfTheHunterExpertBoost()) {
 			if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.sens >= 75) critMMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
 				if (player.sens >= 500) critMMultiplier += 4.75;
-				else critMMultiplier += 0.1 * Math.round((player.sens - 25) / 5);
+				else critMMultiplier += 0.1 * Math.round((player.sens - 25) / 10);
 			}
 		}
 		if (player.eyesOfTheHunterMasterBoost()) {
 			if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 100) critMMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
 				if (player.sens >= 500) critMMultiplier += 4.75;
-				else critMMultiplier += 0.1 * Math.round((player.sens - 25) / 5);
+				else critMMultiplier += 0.1 * Math.round((player.sens - 25) / 10);
 			}
 		}
 		if (player.eyesOfTheHunterGrandMasterBoost()) {
 			if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.sens >= 125) critMMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
 				if (player.sens >= 500) critMMultiplier += 4.75;
-				else critMMultiplier += 0.1 * Math.round((player.sens - 25) / 5);
+				else critMMultiplier += 0.1 * Math.round((player.sens - 25) / 10);
 			}
 		}
 		critMChance *= critMMultiplier;

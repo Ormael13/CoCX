@@ -36,7 +36,7 @@ import classes.internals.*;
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
 			this.weaponAttack = 5;
-			this.weaponRangeName = "elven bow";
+			this.weaponRangeName = "elven crossbow";
 			this.weaponRangeVerb= "shoot";
 			this.weaponRangeAttack = 35;
 			this.armorName = "elven black armor";
@@ -47,10 +47,10 @@ import classes.internals.*;
 			this.lust = 50;
 			this.level = 48;
 			this.gems = rand(10) + 20;
-			this.drop = new WeightedDrop().
-					add(useables.EBONBLO,1/20).
-					add(weaponsrange.BOWLIGH,1)/*.
-					add(consumables.ELFEARS,4)*/;
+			this.drop = new WeightedDrop()
+					.add(useables.EBONBLO,1/20)
+					.add(weaponsrange.LCROSBW,1)
+					.add(consumables.DELFEARS,4);
 			checkMonster();
 		}
 	}

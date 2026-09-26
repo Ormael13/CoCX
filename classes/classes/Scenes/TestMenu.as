@@ -59,7 +59,6 @@ public class TestMenu extends BaseContent
 		outputText("\n\nCorruption: " + player.cor + "");
 		outputText("\n\nSoul drain perk v1: " + player.perkv1(PerkLib.SoulDrain) + "");
 		outputText("\n\nAnthill Expansion: " + flags[kFLAGS.ANTHILL_EXPANSION] + "");
-		outputText("\n\nDays per Year: " + flags[kFLAGS.DAYS_PER_YEAR] + "");
 		var bd:ButtonDataList = new ButtonDataList();
 		bd.add("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
 		bd.add("P/G/XP", PerksGemsEXP, "Adding/Removing perk points and adding gems/exp.");
