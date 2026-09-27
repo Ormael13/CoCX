@@ -1182,24 +1182,45 @@ public final class Mutations extends MutationsHelper {
 		player.demonicenergy += 50;
 		if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) player.removeStatusEffect(StatusEffects.ArigeanInfected);
 		if (player.hasPerk(PerkLib.WendigoCurse)) player.removePerk(PerkLib.WendigoCurse);
-        outputText("The demon may have banged you badly but this is not enough… you somehow still feel very horny and need to achieve release again right away. Desperate to achieve orgasm yet again you begin fiercely masturbating ");
-		if (player.hasCock()) outputText("your cock dripping bead after dead of pre but never fully gushing out "+(player.hasVagina()?"while ":"")+"");
-		if (player.hasVagina()) outputText("your pussy gushes around you pistoning finger yet you fail to reach your peak");
-		outputText(". You will not be denied you need to cum… you want to shoot everything out!\n\n");
-		outputText("You keep masturbating your brain away as your skin flush to a new "+player.skinColor1+"ish hue. You’re so close yet so far. You moan in delight as a pair of fleshy wings pushes out of your back ");
-		if (player.tailType == Tail.NONE) {
-			outputText("while a long sinuous tail grows out of your ass like a erect cock out of its sheath");
-			if (!player.isGenderless()) {
-				outputText(" to ");
-				if (player.hasCock()) outputText("wrap itself around your dick assisting your hand");
-				else outputText("plunge itself into your pussy next to your finger the heart shaped bulge at the end pulsing pleasantly inside");
-			}
+        outputText("That demon may have gotten you off, but it just wasn't enough. Somehow, you're STILL hornier than you've ever been - <i>you NEED to get off again.</i> Desperate, you begin ");
+		if (player.hasCock()) outputText("jerking your cock, drop after drop of pre leaking out "+(player.hasVagina()?"fingering yourself, fluids dripping from your snatch":"")+"");
+		else if (player.hasVagina()) outputText("fingering yourself, fluids dripping from your snatch");
+		else outputText("fingering yourself, lube dripping from your ass");
+		outputText(", but it just… won't… CUM!\n\n");
+		outputText("You keep pleasuring yourself, your need melting all other thoughts.  Your skin tingles, flushing to a new "+player.skinColor1+" hue; your eyes burn as well, but you ignore it and keep going.  You give a masochistic, pleasured whine as ");
+		if (player.wings.type == Wings.BAT_LIKE_TINY || player.wings.type == Wings.BAT_LIKE_LARGE) outputText("your demon wings flutter in delight");
+		else {
+			if (player.wings.type == Wings.NONE) outputText("a pair of fleshy wings pushes out from your back");
+			else if (player.wings.type == Wings.BAT_LIKE_TINY) outputText("your small demon wings grow to full size");
+			else outputText("your wings shiver and reshape into something more demonic");
 		}
-		else outputText("your tail tingling with pleasure in sympathy as it is overcome by changing the sensitive tip changing shape to match its new form");
-		outputText(". Your pleasure climbs up higher and higher and your vision turns white like cum as two large horns burst out of your skull as if growing straight out of your pleasure-addled brain.\n\n");
-		outputText("You seem to have struck a bottleneck unable to achieve release as your pleasure keep reaching intolerable heights but finally the dam breaks allowing you to release everything out. When you come down from your orgasm you finally realize what just happened. You didn’t just came you came your soul out now your no defrent from the demons who fucked you into this state. ");
-		outputText("You quickly adapt to the change however and take what's left of your soul from the ground eating it right away. It seems you’ve become a demon, there's no going back to having a soul now but that doesn’t mean your quest has to end there far from it, you’re going to turn this shity land into your playground and get back at it for everything that's been done to you. ");
-		outputText("The champion you is no more but you’ve got plenty of grievances with the place to address still and you will only rest until it's all under your demonic foot.\n\n");
+		outputText(". A whimpering moan escapes you as");
+		if (player.tailType == Tail.NONE) outputText("a new tail sprouts from your [ass], bearing a demonic spade on the end");
+		else {
+			if (player.tailType == Tail.DEMONIC) outputText("your demonic tail writhes, the spade lightly slapping your [ass]");
+			else outputText("your tail swipes back and forth before writhing, prehensile and demonic");
+		}
+		outputText(". You vaguely notice the " + player.skin.color2 + " shade of the demonic appendages before your vision turns white, two demonic horns pressing out of your skull as if fueled by the pleasure and need.\n\n");
+		outputText("Your body <i>still</i> feels stuck, like something's right between your ");
+		if (player.hasCock()) outputText("aching-hard dick");
+		else if (player.hasVagina()) outputText("drooling cunt");
+		else outputText("wet asshole");
+		outputText(" and your orgasm - you're so close, yet so far, and it's driving you MAD! <i>Nothing else matters - you NEED to cum, and NOTHING can ever be allowed to stop you again!</i> That thought seems to be what finally breaks the dam - and the orgasm leaves you <i><b>screaming</b></i> as the bliss of release finally hits you!");
+		outputText(" You cum <i>far</i> more fluids than normal, and every twitch of your needy ");
+		if (player.hasCock()) outputText(""+(player.hasVagina()?"shaft and slit":"cock")+"");
+		else if (player.hasVagina()) outputText("cunt");
+		else outputText("ass");
+		outputText(" just hits you with <i>another</i> mini-orgasm. You've <i>never</i> cum so hard, and you <i>LOVE it!</i>\n\nAs the orgasm finally winds down, you shiver happily - your whole <i>life</i> has been distilled into that one orgasm, and you barely even <i>care.</i> ");
+		outputText("You then realize that you can smell more than just cum - you smell something <i>else</i> past it all, something <i>delicious</i> and <i>powerful.</i> Your hand reaches down automatically and fumbles for the source, but you can't quite find it blind.  Rolling onto your side, you see the purple ooze in the center of your own cum - an ooze that shimmers and pulls together into a little crystalline shape.\n\n");
+		outputText("You realize what you're seeing - that's your soul, after it melted out your ");
+		if (player.hasCock()) outputText("prick");
+		else if (player.hasVagina()) outputText("muff");
+		else outputText("ass");
+		outputText(" during that <i>delightful</i> orgasm.  You're a demon now too - and now that you're here, you can't help but feel like it's an <i>improvement.</i> Why did you even <i>bother</i> holding onto your purity? Why did you <i>try</i> to fight this lust, this corruption?  With how good you feel, you kind of wish you'd done this sooner!  Your hand picks up the little jewel of power - they call it lethicite, from what you recall - and you feel your ");
+		if (player.tongue.type == Tongue.DEMONIC) outputText("demon tongue");
+		else outputText("elongated, newly-demonic tongue");
+		outputText(" reach for it automatically.  With some effort, you pull back, deciding to at least get back to camp before you chow it down.\n\n");
+		outputText("After all, just because you're a demon now doesn't mean you're not a <i>champion.</i> You just need to adjust your goals. Your defeat was really just a temporary setback - taking over this world sounds good. After the amount of bullshit it's put you through up until now, payback sounds like the best idea… after finding some additional souls to eat, of course.\n\n");
 		transformations.SkinPatternDemonicPleasureRune.applyEffect(false);
 		terminalCorruption2(player);
 		outputText("\n\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
@@ -19025,4 +19046,4 @@ public final class Mutations extends MutationsHelper {
     }
 }
 
-}
+}

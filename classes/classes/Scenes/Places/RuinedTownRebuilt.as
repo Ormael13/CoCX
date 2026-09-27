@@ -302,7 +302,7 @@ public function amilyRebuildNotNow():void {
 	clearOutput();
 	outputText("You tell Amily that you will help, but you need time since you’re pretty busy right now. She nods, giving you a hug, but the look on her face is pure disappointment. She walks away, to her usual spot at camp.\n\n"); 
 	RebuildState = 1;//Make a button in Amily talk to start the thing
-	doNext(camp.returnToCamp);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function amilyGoAway():void {
@@ -1550,4 +1550,4 @@ public function AmilyAfterSex():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 }
-}
+}

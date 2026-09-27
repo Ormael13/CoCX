@@ -86,6 +86,23 @@ public var pregnancy:PregnancyStore;
 		Saves.registerSaveableState(this);
 	}
 
+	private function ElectraPregChance():void {
+		//Get out if already pregged.
+		if (pregnancy.isPregnant) return;
+		var preg:Boolean = false;
+		//1% chance per 100mLs of cum, max 15%
+		var score:Number = Math.min(player.cumQ()/100,5);
+		score += player.virilityQ() * 200;
+		outputText("Electra checking virility score " + score);
+		if((player.cumQ() > (score >= rand(100))) || player.hasPerk(PerkLib.PilgrimsBounty)) {
+			preg = true;
+		}
+		if (preg) {
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ELECTRA);
+			sceneHunter.print("\n<b>Electra is pregnant!</b>");
+		}
+	}
+
 public function firstEnc():void {
 	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
@@ -424,7 +441,7 @@ public function ElectraSeXYesM():void {
 	outputText("\"<i>Good morning, I was wondering when you would wake up. Thank you so much for helping me get rid of that energy...It's hard to deal with sometimes.</i>\"");
 	outputText(" She slowly slides off your cock with a satisfied smile. ");
 	player.sexReward("vaginalFluids","Dick");
-	if (flags[kFLAGS.ELECTRA_AFFECTION] >= 100 && flags[kFLAGS.ELECTRA_FOLLOWER] == 2) ElectraPregChance();
+	if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1) ElectraPregChance();
 	afterYes();
 }
 public function ElectraSeXYesF():void {
@@ -563,23 +580,6 @@ public function ElectraSeXNo():void {
 	cleanupAfterCombat();
 }
 
-private function ElectraPregChance():void {
-	//Get out if already pregged.
-	if (pregnancy.isPregnant) return;
-	var preg:Boolean = false;
-	//1% chance per 100mLs of cum, max 15%
-	var score:Number = Math.min(player.cumQ()/100,5);
-	score += player.virilityQ() * 200;
-	outputText("Electra checking virility score " + score);
-	if((player.cumQ() > (score >= rand(100))) || player.hasPerk(PerkLib.PilgrimsBounty)) {
-		preg = true;
-	}
-	if (preg) {
-		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ELECTRA);
-		sceneHunter.print("\n<b>Electra is pregnant!</b>");
-	}
-}
-
 //----------Electra Preg Stuff---------------
 
 private function ElectraPregProgression():Boolean {
@@ -602,11 +602,7 @@ private function ElectraPregProgression():Boolean {
 			return true;
 		case 2:
 			outputText("\nElectra isn’t showing yet, but you can feel a slight crackle in the air when you get closer to her. She’s eating more, but her fur is all standing up.\n\n"); 
-			if (ElectraTotalKidsNum != 0) {
-				outputText("You notice her heading into the charging hut and she gives you a wave, blushing slightly. \"<i>Feel free to join me</i>\". She enters, winking. You decide to keep moving for now, as tempting as that offer is.\n\n"); 
-				doNext(playerMenu);
-			}
-			else if (ElectraTotalKidsNum == 0) {
+			if (ElectraTotalKidsNum == 0) {
 				//first time
 				outputText("The poor imp has been replaced by another. You see her talking to Ralthazul, who seems to have an idea. As you get closer, you can hear their discussion.\n\n");
 				outputText("\"<i>-been studying how the flow of electricity works, and I may be able to provide you a more…humane way to…release, as it were.</i>\" Electra seems interested, and Ralthazul continues. \"<i>Electricity, in its natural state, flows into the earth. I may be able to make something to allow you to discharge without the need for a…partner.</i>\"\n\n");
@@ -626,6 +622,10 @@ private function ElectraPregProgression():Boolean {
 				addButton (1, "MouthWash", ElectraCleanBJ);
 				addButton (2, "JustAClean", ElectraCleanNoSex);
 				addButton (3, "Nah", ElectraCleanYourself);
+			}
+			else {
+				outputText("You notice her heading into the charging hut and she gives you a wave, blushing slightly. \"<i>Feel free to join me</i>\". She enters, winking. You decide to keep moving for now, as tempting as that offer is.\n\n"); 
+				doNext(playerMenu);
 			}
 			return true;
 		case 3:

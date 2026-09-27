@@ -461,7 +461,8 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			sceneHunter.selectLossMenu([
 					[0, "SheRidesYou", spiderMorphFemaleRidesACawk, "Req. a cock with area smaller than " + monster.vaginalCapacity(), player.findCock(1, -1, monster.vaginalCapacity()) >= 0],
 					[1, "WebRape", femaleSpiderMorphTooBigWebRape, "Req. a cock with area larger than " + monster.vaginalCapacity(), player.findCock(1, -1, monster.vaginalCapacity()) >= 0],
-					[2, "69", defeatFemale, "Req. a vagina.", player.hasVagina()]
+					[2, "69", defeatFemale, "Req. a vagina.", player.hasVagina()],
+					[3, "Leave", cleanupAfterCombat]
 				],
 				CoC.instance.inCombat ?
 					"You've almost lost. The spider-girl seems horny, but reasonable, maybe you could make the upcoming rape pleasuring for both of you? Don't expect her going too light on you though...\n\n" :
