@@ -107,7 +107,7 @@ public class TestMenu extends BaseContent
 		bd.add("Test5", MightyOrNot5, "Testing NaN");
 		bd.add("Test6", MightyOrNot6, "It's Tengliu not Teiling.");
 		bd.add("Test7", MightyOrNot7, "Combat Slaves Operational.");
-		bd.add("Test8", NotAnAizen, "If you really not wanna go to Ignam agian for this testing use this.").disableIf(player.hasStatusEffect(StatusEffects.ChainOfFate));
+		bd.add("Test8", NotAnAizen, "If you really not wanna go to Ignam again for this testing use this.").disableIf(player.hasStatusEffect(StatusEffects.ChainOfFate));
 		bd.add("Test9", NotHollowed, "Cheatish curing Demi-hollow state.");
 		bd.add("Test10", NotHollowed2, "Cheatish curing Exanimation II or IV due to bug with evangeline curing those stages.");
 		bd.add("Test11", ConvertYourMaskFragments, "Convert Your Mask Fragments. One at the time!");

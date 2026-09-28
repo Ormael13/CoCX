@@ -13095,7 +13095,8 @@ public class Combat extends BaseContent {
         }
 		//Winter's Grasp
         if (player.hasPerk(PerkLib.WintersGrasp) && !flags[kFLAGS.DISABLE_AURAS]) {
-			if (!monster.hasPerk(PerkLib.IceNature)) {
+			if (monster.hasPerk(PerkLib.IceNature)) outputText("Your opponent seems not to be affected by the cold of your aura of frost. Probably because [monster he] is immune to the cold's effects.");
+			else {
 				var damageWG:Number = scalingBonusIntelligence();
 				//Determine if critical hit!
 				var critWG:Boolean = false;
@@ -13106,7 +13107,7 @@ public class Combat extends BaseContent {
 					critWG = true;
 					damageWG *= 1.75;
 				}
-				damageWG = magic.calcGlacialModImpl(damage, false);
+				damageWG = magic.calcGlacialModImpl(damageWG, false);
 				magic.maintainGlacialModImpl();
 				damageWG *= iceDamageBoostedByDao();
 				damageWG = Math.round(damageWG);
@@ -13116,8 +13117,6 @@ public class Combat extends BaseContent {
 				outputText(" damage!");
 				if (critWG) outputText(" <b>*Critical Hit!*</b>");
 				outputText("\n\n");
-            } else {
-                outputText("Your opponent seems not to be affected by the cold of your aura of frost. Probably because [monster he] is immune to the cold's effects.");
             }
         }
         //Unicorn and Bicorn aura

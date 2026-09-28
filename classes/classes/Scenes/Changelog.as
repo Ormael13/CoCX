@@ -378,7 +378,8 @@ public class Changelog extends BaseContent
 			outputText("-New tier 13 wisdom lvl-up perk: Lucky 14. Req. Friday 13th perk and 350+ wisdom. Effect: Most lucky tamed monster of Champion's Company.\n");
 			outputText("-All dark elf enemies would drop light crossbows instead of light bows.\n");
 			outputText("-New TF item (by Ormael): Dark Fae ear shaped plant - droped by dark elf enemies. Using it would turn PC into dark elf. Dark Elf / Dark High Elf racial bonuses (11+/17+): -10/20% to tou multi, +90/170% to spe/wis multi, +40/100% to int multi, +45/90 to sens, +30/60% to max mana multi.\n");
-			outputText("-I heard you all loves terminal corruption scenes so we put more snakes on the pl... errr milk bad end can trigger terminal corruption if pc is not soulless and have 90+ cor instead of just giving good ol bad end. Also PC's getting restoring way more fatigue then in vanilla so req. for this variant of use of cock milker would look for having above 90% of overmax fatigue.\n");
+			outputText("-I heard you all loves terminal corruption scenes so we put more snakes on the pl... errr milk bad end can trigger terminal corruption if pc is not soulless and have 90+ cor instead of just giving good ol bad end. Also PC's getting restoring way more fatigue then in vanilla so req. for this variant of use of cock milker would look for having above 90% of overmax fatigue. ");
+			outputText("All milking scenes no longer use flat amount of fatigue but percent values. Maximum weekly payout cap for donating fluids at farm was increased 100x and extra increase form using easy mode flag 2x.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

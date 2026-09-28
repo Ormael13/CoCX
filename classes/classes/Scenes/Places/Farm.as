@@ -455,7 +455,7 @@ public function workFarm():void {
 		player.trainStat("str", 1, player.trainStatCap("str",50));
 		player.trainStat("tou", 1, player.trainStatCap("tou",50));
 		player.gems += 5;
-		fatigue(20);
+		fatigue(Math.round(player.maxOverFatigue()*0.2));
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
@@ -467,7 +467,7 @@ public function workFarm():void {
 	if (player.tou100 <= 25 || rand(2) == 0) dynStats("tou", 1);
 	player.trainStat("spe", 1, player.trainStatCap("spe",25));
 	player.trainStat("tou", 1, player.trainStatCap("tou",25));
-	fatigue(20);
+	fatigue(Math.round(player.maxOverFatigue()*0.2));
 	//(75% chance normal pepper, 25% chance \"<i>rare</i>\" pepper)
 	var itype:ItemType;
 	if(rand(4) <= 2) itype = consumables.CANINEP;
@@ -976,9 +976,7 @@ public function cockPumping():void {
 		outputText("You squirm against your restraints, openly moaning and twitching your hips, trying to enhance the sensations further.  All you feel is hot wet warmth surrounding and caressing you, stroking you to new heights of pleasure.  Gods above and below, you could lose yourself to this!  You don't want to be released, or to orgasm, or even for the machine to slow down.  You only want MORE!   The heat in your groin gets increasingly worse as your pre-cum starts dripping, turning into a steady flow.  Noisy slurping noises greet your ears as the machinery sucks your pre-seed down the tubes.  The machine immediately backs off a notch, keeping you on the edge of release, much to your simultaneous delight and frustration.\n\n");
 	}
 	//Ver2
-	else {
-		outputText("You moan with lust, pushed beyond the limits of sensation to a mixture of heaven and hell.   Thankfully the harness holds your body still as you writhe inside the straps, utterly restrained but instinctively trying to thrust into the source of your good feelings.  The milking devices suck and stroke with feverish intensity, making you bigger and harder than you've ever been before.  You can practically feel the pre-cum dripping from your urethras, and you can definitely hear it being sucked down the tubes.  You feel release building, but the machinery somehow senses it, and backs off, keeping you on the edge of orgasm for as long as possible.\n\n");
-	}
+	else outputText("You moan with lust, pushed beyond the limits of sensation to a mixture of heaven and hell.   Thankfully the harness holds your body still as you writhe inside the straps, utterly restrained but instinctively trying to thrust into the source of your good feelings.  The milking devices suck and stroke with feverish intensity, making you bigger and harder than you've ever been before.  You can practically feel the pre-cum dripping from your urethras, and you can definitely hear it being sucked down the tubes.  You feel release building, but the machinery somehow senses it, and backs off, keeping you on the edge of orgasm for as long as possible.\n\n");
 	//(OPTIONAL ANAL PROBE)
 	if(player.hasKeyItem("Cock Milker: Anal Attachment") >= 0) {
 		if(player.cockTotal() == 1) outputText("A sudden splash of wetness hits your backside, instantly soaking your [skin.type] with slippery lubricants.  You feel something narrow touch against your " + assholeDescript() + ", workings its way past the clenching muscles and into your body.  The violation would bother you more if it didn't seem to amplify the feelings radiating down your shaft, but then it starts to change.  You feel it swelling up inside, somehow inflating.  It stretches you wide, pressing against the knot of your prostate, milking out a thick flow of cum.   It pushes tighter and tighter, making you drip and drizzle in a steady flow before deflating, allowing your abused body to relax.  You sigh, but are kept rock hard by the feverish milking of your dick.\n\nEventually the probe inflates again, squeezing out another drizzle of thick spooge, the hose on your [cock] noisily sucking it down.  You're kept like that for quite a while – never feeling a true orgasm, but forced to expel cum over and over by always increasing waves of pressure in your ass.  You babble incoherently, pleasure-drunk, not even noticing a green light on the far side of the wall come on.  One thing you do notice is that the cock-tube isn't slowing down its ministrations.  You're finally allowed to cum!\n\n");
@@ -1040,13 +1038,13 @@ public function cockPumping():void {
 	if(cumQ < 10) {
 		if(player.cockTotal() == 1) outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out tiny squirts of spunk.  Wriggling cilia convulse around you, licking your [cockhead] as it flares wide, filling with blood and dripping out a little cum.  You moan and scream with delight, babbling happily as you watch your insignificant amount of cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to an end, and your cock starts to soften inside its squishy prison.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n");
 		else outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out tiny squirts of spunk.  Wriggling cilia convulse around you, licking your [cockhead]s as they flare wide, filling with blood and dripping out a little cum.  You moan and scream with delight, babbling happily as you watch your insignificant amount of cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to an end, and your cocks start to soften inside their squishy prisons.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n");
-		fatigue(5);
+		fatigue(Math.round(player.maxOverFatigue()*0.05));
 	}
 	//Light Scene – output less than 100 mLs
 	else if(cumQ < 100) {
 		if(player.cockTotal() == 1) outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out thick spurts of spunk.  Wriggling cilia convulse around you, licking your [cockhead] as it flares wide, filling with blood and pouring out cum.  You moan and scream with delight, babbling happily as you watch your cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to an end, and your cock starts to soften inside its squishy prison.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n");
 		else outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out thick spurts of spunk.  Wriggling cilia convulse around you, licking your [cockhead]s as they flare wide, filling with blood and pouring out cum.  You moan and scream with delight, babbling happily as you watch your cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to an end, and your cocks start to soften inside their squishy prisons.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n");
-		fatigue(10);
+		fatigue(Math.round(player.maxOverFatigue()*0.1));
 	}
 	//Medium Scene – output less than 250 mLs
 	else if(cumQ < 333) {
@@ -1065,13 +1063,13 @@ public function cockPumping():void {
 			else outputText("sensitive [cocks] are");
 			outputText(" finally relieved of their pent up seed.  The machine suckles noisily, visibly turning some of the tubes in the wall solid white as the cock-pump's motors work hard to keep up with your impressive output.  Eventually it does come to an end.  Your jets of jism taper off and your dicks start to go soft inside the squirming machinery.  In response you feel it slip off you, retracting into the wall as the harness gently drops you back to the ground.\n\n");
 		}
-		fatigue(15);
+		fatigue(Math.round(player.maxOverFatigue()*0.15));
 	}
 	//Heavy Scene – output less than 500 mLs
 	else if(cumQ < 1000) {
 		if(player.cockTotal() == 1) outputText("The force of your orgasm is intense, wracking your body with the effort of it as you push a thick blast of seed into the cum-receptacle you're feebly humping against.   Dribbles of seed leak out around the edges of the cock-milker, overflowing the receptacle slightly as you push wave after wave into the machine.  The wet internal nubs keep up their stimulation and combined with the hours of edging, your orgasm just drags on and on, filling the machinery to capacity.  In time, your body is drained of its remaining goo, and slowly lowered to the ground, still twitching weakly as the milker detaches and retracts back into the wall.\n\n");
 		else outputText("The force of your orgasm is intense, wracking your body with the effort of it as you push a thick blast of seed into the cum-receptacle you're feebly humping against.   Dribbles of seed leak out around the edges of the cock-milkers, overflowing the receptacles slightly as you push wave after wave into the machine.  The wet internal nubs keep up their stimulation and combined with the hours of edging, your orgasm just drags on and on, filling the machinery to capacity.  In time, your body is drained of its remaining goo, and slowly lowered to the ground, still twitching weakly as the milkers detach and retract back into the wall.\n\n");
-		fatigue(20);
+		fatigue(Math.round(player.maxOverFatigue()*0.2));
 	}
 	//Massive Scene – else
 	else {
@@ -1083,29 +1081,26 @@ public function cockPumping():void {
 			outputText("An eruption of jism boils out, splattering with loud wet noises into the tube.  You can feel the pressure build up, pressing back against your [cocks] as the machinery fails to keep up with the gushes of white fluid erupting inside it.  Your eyes cross from the pleasure and you start drooling all over yourself, not even noticing that you're about to blast the milkers off your members.  The machinery grinds as it struggles to keep up, blaring out alarms.  You don't even notice, instead focusing on the feeling of depositing sticky globs inside the milker-tubes, pushing them halfway off your [cocks].\n\n");
 			outputText("Hurried footsteps enter the barn, and a pair of firm hands grab onto your bouncing [cocks], pulling the milkers back against your groin and splattering spunk around the seal from the added pressure.  The machine-suction totally cuts off, but you don't even care.  You just keep cumming, pumping the thick white cream down the tubes by the force of your orgasm alone.   Eventually your incredible orgasm winds down, and the hands release you, allowing the tubes to pop off.  They slowly retracts to the wall as your harness is lowered, dropping your exhausted body in a wet heap on the ground.  When you regain your senses, your mysterious helper is gone.\n\n");
 		}
-		//(+40 fatigue)
-		fatigue(40);
+		fatigue(Math.round(player.maxOverFatigue()*0.4));
 	}
 	//EPILOGUE
 	outputText("There's a ");
 	if(player.cumQ() < 20) outputText("barely noticeable ");
 	else outputText("thick ");
 	outputText("trail of your cum along the floor where the hose dragged itself back into the wall, though the machinery has closed back up and is now chugging noisily, clearly doing something.  A loud 'ding' chimes and a panel displays ");
-
 	//Set temp to liter amount produced.
 	var payout:Number = 0;
-	var cap:Number = 500;
-	//Ez mode cap is 10x
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 10;
+	var cap:Number = 50000;
+	//Ez mode cap is 20x
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 20;
 	if(debug) {
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
-		cap = 99999;
+		cap = 10000000;
 	}
 	//Get rid of extra digits
 	cumQ = int(cumQ);
 	if(cumQ > 100) outputText(cumQ/1000 + " Ls.  ");
 	else outputText(cumQ + " mLs.  ");
-	
 	//Calculate payout
 	if(cumQ > 100) {
 		payout = 2 + int(cumQ/200)*2;
@@ -1142,9 +1137,7 @@ public function cockPumping():void {
 		outputText("ou see a few sparkling gems in your trail of cum on the floor. You reach down and pick up all " + gems + " of them</b>, and then you are");
 		player.gems += gems;
 	}
-	else {
-		outputText("\n\nYou go");
-	}
+	else outputText("\n\nYou go");
 	outputText(" on your way, whistling happily and feeling like taking a nap.");
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
@@ -1268,6 +1261,13 @@ private function milkerBadEnd1():void {
 		outputText(" like yours, why worry about anything else for the moment?");
 		dynStats("lib", 20, "sen", 10, "lus", 80, "cor", 100);
 		CoC.instance.mutations.terminalCorruption2(player);
+		CoC.instance.transformations.SkinPatternDemonicPleasureRune.applyEffect(false);
+		player.updateRacialParagon(Races.DEMON);
+		player.npcsThatLeaveSoullessPC();
+		if (player.level < 25) inventory.takeItem(CoC.instance.consumables.LETH0TE, camp.returnToCampUseOneHour);
+		else if (player.level < 50) inventory.takeItem(CoC.instance.consumables.LETH1TE, camp.returnToCampUseOneHour);
+		else if (player.level < 75) inventory.takeItem(CoC.instance.consumables.LETH2TE, camp.returnToCampUseOneHour);
+		else inventory.takeItem(CoC.instance.consumables.LETH3TE, camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("  You barely take notice of her as another explosive orgasm goes off, your enormously swollen penis");
@@ -1305,4 +1305,3 @@ private function centaurToysHoooooo():void {
 }
 }
 }
-
