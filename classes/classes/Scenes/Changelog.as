@@ -380,7 +380,7 @@ public class Changelog extends BaseContent
 			outputText("-New TF item (by Ormael): Dark Fae ear shaped plant - droped by dark elf enemies. Using it would turn PC into dark elf. Dark Elf / Dark High Elf racial bonuses (11+/17+): -10/20% to tou multi, +90/170% to spe/wis multi, +40/100% to int multi, +45/90 to sens, +30/60% to max mana multi.\n");
 			outputText("-I heard you all loves terminal corruption scenes so we put more snakes on the pl... errr milk bad end can trigger terminal corruption if pc is not soulless and have 90+ cor instead of just giving good ol bad end. Also PC's getting restoring way more fatigue then in vanilla so req. for this variant of use of cock milker would look for having above 90% of overmax fatigue. ");
 			outputText("All milking scenes no longer use flat amount of fatigue but percent values. Maximum weekly payout cap for donating fluids at farm was increased 100x and extra increase form using easy mode flag 2x.\n");
-			outputText("-\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Corruption: the final frontier... of taming. Req. High Stakes Tamer perk and 50+ wisdom. Effect: Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -1198,6 +1198,9 @@ public class PerkLib
 		public static const Lucky14:PerkType = mk("Lucky 14", "Lucky 14",
 				"Most lucky tamed monster of Champion's Company.",
 				"You've chosen the 'Lucky 14' perk. Most lucky tamed monster of Champion's Company.");
+		public static const CorruptionTheFinalFrontierOfTaming:PerkType = mk("Corruption: the final frontier... of taming", "Corruption: the final frontier... of taming",
+				"Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.",
+				"You've chosen the 'Corruption: the final frontier... of taming' perk. Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -1215,9 +1218,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7603,6 +7603,8 @@ public class PerkLib
             JobTamer.requireWis(10);
             HighStakesTamer.requirePerk(JobTamer)
                     .requireWis(25);
+            CorruptionTheFinalFrontierOfTaming.requirePerk(HighStakesTamer)
+                    .requireWis(50);
             TheHopelessHandler.requirePerk(JobTamer)
                     .requireWis(25);
             NoLimits.requireLevel(3)

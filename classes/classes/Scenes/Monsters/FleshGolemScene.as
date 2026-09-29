@@ -93,7 +93,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			menu();
 			outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
-			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 	}

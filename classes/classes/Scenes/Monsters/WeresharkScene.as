@@ -158,7 +158,7 @@ public function wonWithWereshark():void {
 	clearOutput();
 	//spriteSelect(SpriteDb.s_DarkElf);
 	//outputText("\"<i></i>\"\n\n");
-	if (player.hasPerk(PerkLib.HighStakesTamer)) {
+	if (player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming)) {
 		menu();
 		addButton(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt);
 		addButton(4, "Next", wonWithWereshark2);

@@ -18,15 +18,15 @@ public class DryadScene extends BaseContent {
 
     public function winagainstdryad():void {
         clearOutput();
-        outputText("The dryad creaks like old wood as she collapses to the ground, too [if (monster.HP <= 0)injured|aroused] to continue fighting. ");
+        outputText("The dryad creaks like old wood as she collapses to the ground, too " + (monster.HP <= monster.minHP() ? "injured":"aroused") + " to continue fighting. ");
         menu();
-        if (player.hasCock() && player.lust >= 33) {
+        if (player.lust >= 33) {
             outputText("\n\nWhile gazing on her prone figure carnal desire wells up inside you.   Do you have your way with her? ");
             addButtonIfTrue(0, "Fuck Her", fuckHer, "Req. a cock.", player.hasCock());
             addButtonIfTrue(1, "Make Lick", makeLick, "Req. a vagina.", player.hasVagina());
         }
 		else outputText("You're not aroused enough to rape her!");
-        addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+        addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
 		addButton(4, "Leave", cleanupAfterCombat);
     }
 

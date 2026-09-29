@@ -83,7 +83,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
     }
 
     public function intro():void {
-        if (player.cor <= 33 - player.corruptionTolerance) { //disgusted reaction
+        if (player.cor <= -33 - player.corruptionTolerance) { //disgusted reaction
             //Get plant-cum dripped on you if not fast and unlucky!
 			outputText("Disgusted by this perversion of nature, you turn ");
             if (player.spe < 60 && rand(player.spe + 50) < 50) {
@@ -97,7 +97,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
             menu();
             addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
             addButton(4, "Leave", explorer.done);
-        } else if (player.cor <= 66 - player.corruptionTolerance) { //intrigued reaction
+        } else if (player.cor <= 33 - player.corruptionTolerance) { //intrigued reaction
             outputText("  You explore the glade with equal parts caution and curiosity.  ");
             switch (rand(3)) {
                 case  0: //flowers...
