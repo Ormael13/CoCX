@@ -290,19 +290,18 @@ public class FetishZealotScene extends AbstractLakeContent
 			if (monster.HP < 1) outputText("The "+cname()+" collapses from his wounds, too hurt to continue controlling his powers.");
 			//Defeated by lust
 			else outputText("The "+cname()+" quivers for a moment before collapsing, his desires becoming too great for even him to control.");
+			menu();
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?");
-				menu();
 				addButton(0, "Yes", zealotWinRape);
 				LustyMaidensArmor.addTitfuckButton(1);
 				addButtonIfTrue(2, "Mindbreak", mindbreakMaleCultist, "You don't know how and why... yet?", Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB, "Toy with the cultist's brain.");
-				addButton(14, "Leave", cleanupAfterCombat);
+				
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(zealotDefeated);
 			}
-			else {
-				outputText("\n\nYou can't think of anything to do with him.");
-				cleanupAfterCombat();
-			}
+			else outputText("\n\nYou can't think of anything to do with him.");
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 

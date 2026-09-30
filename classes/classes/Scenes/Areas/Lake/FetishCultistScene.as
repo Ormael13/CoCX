@@ -526,21 +526,19 @@ public class FetishCultistScene extends AbstractLakeContent
 		public function cultistDefeated():void{
 			if (monster.HP < 1) outputText("Hurt too much to continue controlling her powers, the "+cname()+" collapses helplessly.");
 			else outputText("Overwhelmed by her lusts, the "+cname()+" loses the ability to control herself and collapses.");
+			menu();
 			if (player.lust >= 33) {
 				outputText("\n\nDo you want to take advantage of her vulnerable state to sate your lusts?");
-				menu();
 				addButtonIfTrue(0, "Yes", playerRapesCultist, "Not genderless!", player.gender > 0);
 				addButtonIfTrue(2, "B.Feed", fetishCultistHasAMilkFetish,"Req. 'Feeder' perk",
 					player.hasStatusEffect(StatusEffects.Feeder),"Empty your heavy jugs.");
 				addButtonIfTrue(3, "Mindbreak", mindbreakFemaleCultist, "You don't know how and why... yet?", Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB, "Toy with the "+cname()+"'s brain.");
 				addButton(4, "Convert Elf", SceneLib.woodElves.CaptureCultist).hint("Take the slut to the Sacred Tree to become a new sister!").disableIf(!player.isWoodElf(), "Wood elves only!");
-				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(cultistDefeated);
 			}
-			else {
-				outputText("\n\nYou're not aroused enough to rape her.");
-				cleanupAfterCombat();
-			}
+			else outputText("\n\nYou're not aroused enough to rape her.");
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		public function playerRapesCultist():void

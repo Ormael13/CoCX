@@ -191,6 +191,7 @@ public class FetishZealot extends Monster
 			this.a = "the ";
 			this.imageName = "fetishzealot";
 			// this.plural = false;
+			this.magicuser = true;
 			this.createCock(7,1.5);
 			createBreastRow(0);
 			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
