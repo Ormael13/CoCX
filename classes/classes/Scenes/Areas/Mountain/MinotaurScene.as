@@ -31,8 +31,6 @@ public function minoVictoryRapeChoices():void {
 	}
 	//menu
 	menu();
-	addButton(9, "Kill", killMinotaur);
-	addButton(14, "Leave", cleanupAfterCombat);
 	if (player.lust >= 33) {
 		var cockFits:Boolean = player.cockThatFits(monster.analCapacity()) >= 0;
 		var cockNotFitsMsg:String = "Req. a cock with area smaller than " + monster.analCapacity();
@@ -54,43 +52,20 @@ public function minoVictoryRapeChoices():void {
 		addButtonIfTrue(4, "UrethraFuck", minoUrethralPen,
 			"Requires a dick thinner than 4 inches, but longer than 2 feet.", urethral);
 		addButtonIfTrue(5, "MinoMutual", minoMutual, cockNotFitsMsg, cockFits, "Fuck his ass with a lot of gentle foreplay.", "Minotaur Mutual");
+		addButtonIfTrue(6, "Nurse", minotaurDrinksMilkNewsAtEleven, "Req. 'Feeder' perk.", player.hasPerk(PerkLib.Feeder));
+		addButton(7, "Exotic", exoticRouter).hint("Non standard sex scene.");
 		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict) || player.fiendishMetabolismNFER())
-			addButton(6, "CumAddict", addictRouter).hint("Cum addiction options!");
-		else
-			addButtonDisabled(6, "???", "Req. being more <i>familiar</i> with minotaur cum. Maybe you could lose to the minotaurs a couple of times and let them stuff you properly with their spunk?");
-		addButtonIfTrue(7, "Tentacles", tentaRouter,
-			"Requires a tentacle cock at least 15-inch long and any other dick.",
-			player.countCocksWithType(CockTypesEnum.TENTACLE, 15, -1, "length") > 0 && player.cocks.length > 1, "Tentacle options");
-		addButtonIfTrue(8, "Vine in Butt", alrauneVineInButtScene, "Req. to be an Alraune", player.isAlraune());
-		addButtonIfTrue(10, "Nurse", minotaurDrinksMilkNewsAtEleven, "Req. 'Feeder' perk.", player.hasPerk(PerkLib.Feeder));
-		//9 - Kill
-		addButton(11, "Oviposition", oviRouter).disableIf(!player.canOviposit(), "Req. an ovipositor.");
-		addButton(12, "SateYourself", slimeSateYourself).disableIf(!player.isGoo(), "Requires goo body.");
+			addButton(8, "CumAddict", addictRouter).hint("Cum addiction options!");
+		else addButtonDisabled(8, "???", "Req. being more <i>familiar</i> with minotaur cum. Maybe you could lose to the minotaurs a couple of times and let them stuff you properly with their spunk?");
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(minoVictoryRapeChoices); //13
 	}
-	if (player.isRaceCached(Races.CERBERUS)) {
-		addButton(0, "Use Cock", cerberusRapesMinotaur).hint("Teach this minotaur who's boss in these hills.");
-		addButton(14, "Ignore", ignoreMinotaur);
-	}
-}
-
-
-private function oviRouter():void {
-	menu();
-	addButtonIfTrue(0, "Ovi (Bee)", layBeeEggsInCowbutt, "Req. a bee ovipositor and any genitals.", player.canOvipositBee() && player.gender > 0);
-	addButtonIfTrue(1, "Ovi (Spider)", layEggsInAMinotaurSpiderLike, "Req. a spider ovipositor.", player.canOvipositSpider());
-	addButton(4, "Back", minoVictoryRapeChoices);
-}
-
-private function tentaRouter():void {
-	menu();
-	addButtonIfTrue(1, "TentacleDick", tentacleDick,
-		"Requires a tentacle cock at least 15-inch long and any other dick.",
-		player.countCocksWithType(CockTypesEnum.TENTACLE, 15, -1, "length") > 0 && player.cocks.length > 1);
-	addButtonIfTrue(2, "TentaMadness", tentaMadness,
-		"Requires at least 2 tentacle dicks longer than 15 inches.",
-		player.countCocksWithType(CockTypesEnum.TENTACLE, 15, -1, "length") > 1);
-	addButton(4, "Back", minoVictoryRapeChoices);
+	addButton(9, "Kill", killMinotaur);
+	//9
+	//10
+	if (player.isRaceCached(Races.CERBERUS)) addButton(11, "Use Cock", cerberusRapesMinotaur).hint("Teach this minotaur who's boss in these hills.");
+	addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
+	if (player.isRaceCached(Races.CERBERUS)) addButton(14, "Ignore", ignoreMinotaur);
+	else addButton(14, "Leave", cleanupAfterCombat);
 }
 
 private function addictRouter():void {
@@ -101,7 +76,21 @@ private function addictRouter():void {
 		player.biggestTitSize() >= 5 && !player.isNaga());
 	addButtonIfTrue(2, "ProstateMilk", AddictNagaOnMinotaur, "Req. naga lower body", player.isNaga());
 	addButton(4, "Back", minoVictoryRapeChoices);
+}
 
+private function exoticRouter():void {
+	menu();
+	addButtonIfTrue(0, "Vine in Butt", alrauneVineInButtScene, "Req. to be an Alraune", player.isAlraune());
+	addButtonIfTrue(1, "SateYourself", slimeSateYourself, "Requires goo body.", player.isGoo());
+	addButtonIfTrue(2, "Ovi (Bee)", layBeeEggsInCowbutt, "Req. a bee ovipositor and any genitals.", player.canOvipositBee() && player.gender > 0);
+	addButtonIfTrue(3, "Ovi (Spider)", layEggsInAMinotaurSpiderLike, "Req. a spider ovipositor.", player.canOvipositSpider());
+	addButtonIfTrue(4, "TentacleDick", tentacleDick,
+		"Requires a tentacle cock at least 15-inch long and any other dick.",
+		player.countCocksWithType(CockTypesEnum.TENTACLE, 15, -1, "length") > 0 && player.cocks.length > 1);
+	addButtonIfTrue(5, "TentaMadness", tentaMadness,
+		"Requires at least 2 tentacle dicks longer than 15 inches.",
+		player.countCocksWithType(CockTypesEnum.TENTACLE, 15, -1, "length") > 1);
+	addButton(14, "Back", minoVictoryRapeChoices);
 }
 
 private function ignoreMinotaur():void {

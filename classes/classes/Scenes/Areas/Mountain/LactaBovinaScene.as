@@ -36,6 +36,7 @@ public function lactaBovinaVictoryRapeChoices():void {
 		"Req. to have a cock.",
 		player.hasCock());
 	addButton(10, "Convert Elf", SceneLib.woodElves.CaptureCowgirl).hint("Take the milky slut to the Sacred Tree to become a new sister!").disableIf(!player.isWoodElf(), "Wood elves only!");
+	addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
 	addButton(14, "Leave", lactaBovinaVictoryLeave);
 }
 public function lactaBovinaVictoryLickIt():void {

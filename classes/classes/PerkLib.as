@@ -1201,6 +1201,12 @@ public class PerkLib
 		public static const CorruptionTheFinalFrontierOfTaming:PerkType = mk("Corruption: the final frontier... of taming", "Corruption: the final frontier... of taming",
 				"Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.",
 				"You've chosen the 'Corruption: the final frontier... of taming' perk. Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.");
+		public static const YodhHeh:PerkType = mk("Yodh Heh", "Yodh Heh",
+				"Ten and Five monsters makes it Fifteen monsters. Now they can demi-divine level of power.",
+				"You've chosen the 'Yodh Heh' perk. Ten and Five monsters makes it Fifteen monsters. Now they can demi-divine level of power.");
+		public static const SweetSixteen:PerkType = mk("Sweet Sixteen", "Sweet Sixteen",
+				"Now you can make coming-of-age ceremony for your tamed monsters.",
+				"You've chosen the 'Sweet Sixteen' perk. Now you can make coming-of-age ceremony for your tamed monsters.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -1218,12 +1224,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -8065,16 +8065,19 @@ public class PerkLib
                     .requireWis(400)
                     .requireLevel(90)
 					.requirePerk(JobElementalConjurer);
+			//Tier 16 Wisdom perks
             MythicalWisdom.requireWis(20)
                     .requirePerk(LegendaryWisdom)
                     .requireLevel(96);
 			//Tier 17 Wisdom perks
+            //Tier 19 Wisdom perks
             StrongestElementalBond.requirePerk(StrongerElementalBondSu)
 					.requireOrPerks(ElementalContractRank20, DaoOfTheElements, 5)
                     .requireWis(500)
-                    .requireLevel(90)
+                    .requireLevel(114)
 					.requirePerk(JobElementalConjurer);
 			//Tier 22 Wisdom perks
+            //Tier 23 Wisdom perks
             StrongestElementalBondEx.requirePerk(StrongestElementalBond)
 					.requireOrPerks(ElementalContractRank24, DaoOfTheElements, 6)
                     .requireWis(600)
