@@ -1202,8 +1202,8 @@ public class PerkLib
 				"Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.",
 				"You've chosen the 'Corruption: the final frontier... of taming' perk. Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.");
 		public static const YodhHeh:PerkType = mk("Yodh Heh", "Yodh Heh",
-				"Ten and Five monsters makes it Fifteen monsters. Now they can demi-divine level of power.",
-				"You've chosen the 'Yodh Heh' perk. Ten and Five monsters makes it Fifteen monsters. Now they can demi-divine level of power.");
+				"Ten and Five monsters makes it Fifteen monsters. Now they can try to reach demi-divine level of power.",
+				"You've chosen the 'Yodh Heh' perk. Ten and Five monsters makes it Fifteen monsters. Now they can try to reach demi-divine level of power.");
 		public static const SweetSixteen:PerkType = mk("Sweet Sixteen", "Sweet Sixteen",
 				"Now you can make coming-of-age ceremony for your tamed monsters.",
 				"You've chosen the 'Sweet Sixteen' perk. Now you can make coming-of-age ceremony for your tamed monsters.");
@@ -8056,6 +8056,9 @@ public class PerkLib
             //Tier 14 Wisdom perks
             ElementalMajesty.requireLevel(84)
                     .requirePerk(EclipticInfusion);
+            YodhHeh.requireLevel(84)
+                    .requirePerk(Lucky14)
+                    .requireWis(375);
             //Tier 15 Wisdom perks
 			UnlockSpirit4thStage.requirePerk(UnlockSpirit3rdStage)
                     .requireWis(335)

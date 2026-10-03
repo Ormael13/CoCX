@@ -381,7 +381,7 @@ public class Changelog extends BaseContent
 			outputText("-I heard you all loves terminal corruption scenes so we put more snakes on the pl... errr milk bad end can trigger terminal corruption if pc is not soulless and have 90+ cor instead of just giving good ol bad end. Also PC's getting restoring way more fatigue then in vanilla so req. for this variant of use of cock milker would look for having above 90% of overmax fatigue. ");
 			outputText("All milking scenes no longer use flat amount of fatigue but percent values. Maximum weekly payout cap for donating fluids at farm was increased 100x and extra increase form using easy mode flag 2x.\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Corruption: the final frontier... of taming. Req. High Stakes Tamer perk and 50+ wisdom. Effect: Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.\n");
-			outputText("-\n");
+			outputText("-New tier 14 wisdom lvl-up perk: Yodh Heh. Req. Lucky 14 perk and 375+ wisdom. Effect: Ten and Five monsters makes it Fifteen monsters. Now they can try to reach demi-divine level of power.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -413,6 +413,24 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
 			outputText("-\n");
 			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
@@ -490,20 +508,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -528,12 +534,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
