@@ -364,6 +364,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function CockAutomata(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockAutomata(cock, length, thickness); }
 	public const CockAnyAutomata:Transformation = CockArigean(-1).registerTf(AS_COCK, AE_AUTOMATA);
     public function CockBarometz(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockBarometz(cock, length, thickness); }
+	public const CockAnyBarometz:Transformation = CockBarometz(-1).registerTf(AS_COCK, AE_BAROMETZ);
     public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation 	{ return cocks.GrowKnot(cock, crit, mod, div); }
     public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation 	{ return cocks.CockChangeType(type, grow, oneByOne); }
 

@@ -930,7 +930,7 @@ public class CockTransformations extends MutationsHelper {
 					player.cocks[cock].cockType = CockTypesEnum.RHINO;
 
 					transformations.UnlockCocks();
-					//Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.RHINO));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.RHINO));
 				},
 				// is present
 				function ():Boolean {
@@ -964,7 +964,7 @@ public class CockTransformations extends MutationsHelper {
 					player.cocks[cock].cockType = CockTypesEnum.ECHIDNA;
 
 					transformations.UnlockCocks();
-					//Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ECHIDNA));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ECHIDNA));
 				},
 				// is present
 				function ():Boolean {
@@ -1200,13 +1200,13 @@ public class CockTransformations extends MutationsHelper {
 					var cock:int = cockIndex(index, CockTypesEnum.USHI_ONI);
 
 					if (player.cocks.length > cock){
-						desc += "[pg]<b>HOW THE HELL, IT DOES NOT EXIST YET</b>[pg]" +
+						desc += "Your [cock "+(cock+1)+"] suddenly becomes rock hard out of nowhere. You " + player.clothedOrNakedLower("pull it out from your [armor], watching", "watch") + " as it begins to shift and change. It becomes pink in color, and you feel a pinch at the head as it splits to become starfish-shaped." +
 								"<b> You now have a Ushi Oni cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "[pg]<b>HOW THE HELL, IT DOES NOT EXIST YET</b>[pg]" +
-								"<b> You now have a Ushi Oni cock!</b>";
+						desc += "it becomes pink in color, and you feel a pinch at the head as it splits to become starfish-shaped." +
+								" <b> You now have a Ushi Oni cock!</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -1381,6 +1381,7 @@ public class CockTransformations extends MutationsHelper {
 					player.createCock(11, 1.5, CockTypesEnum.TENTACLE);
 
 					transformations.UnlockCocks();
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.BAROMETZ));
 				},
 				// is present
 				function ():Boolean {

@@ -258,7 +258,7 @@ package classes.GeneticMemories {
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockAvian(cockIndex);
 			}
-		});/*
+		});
 
 		public static const RHINO:int = _partid++;
 		EnumValue.add(Memories, RHINO, "RHINO", {
@@ -280,7 +280,7 @@ package classes.GeneticMemories {
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockEchidna(cockIndex);
 			}
-		});*/
+		});
 
 		public static const WOLF:int = _partid++;
 		EnumValue.add(Memories, WOLF, "WOLF", {
@@ -389,6 +389,17 @@ package classes.GeneticMemories {
 			title: "Myconid",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockShroom(cockIndex);
+			}
+		});
+
+		public static const BAROMETZ:int = _partid++;
+		EnumValue.add(Memories, BAROMETZ, "BAROMETZ", {
+			id: "Barometz cock",
+			name: "Barometz cock",
+			cost: 1000,
+			title: "Barometz",
+			transformation: function(cockIndex:int): Transformation {
+				return CoC.instance.transformations.CockBarometz(cockIndex);
 			}
 		});
 

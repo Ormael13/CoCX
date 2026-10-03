@@ -17,7 +17,7 @@ public class Eyes extends BodyPart {
 	public static const HUMAN: int = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {
 		name:"human",
-		appearanceDesc: ""
+		appearanceDesc: "You have [eyecolor] eyes."
 	});
 	public static const SPIDER: int = 1;
 	EnumValue.add(Types, SPIDER, "SPIDER", {

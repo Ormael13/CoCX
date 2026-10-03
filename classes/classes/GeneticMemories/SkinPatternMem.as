@@ -225,7 +225,7 @@ package classes.GeneticMemories {
 			id: "Barometz Runic Pattern",
 			name: "Runic Tattoos",
 			cost: 100,
-			title: "Anubis",
+			title: "Barometz",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.SkinPatternRunic
 			}

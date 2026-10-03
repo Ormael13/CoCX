@@ -239,15 +239,18 @@ public function BelisaEggLaying():void {
 	BelisaPregnancy = 0;
 	if (BelisaKidsEggsHatching1 > 0) {
 		BelisaKidsEggs2 = eggsB;
-		BelisaKidsEggsHatching2 = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) BelisaKidsEggsHatching2 = 24;
+		else BelisaKidsEggsHatching2 = 120;
 	}
 	else if (BelisaKidsEggsHatching > 0) {
 		BelisaKidsEggs1 = eggsB;
-		BelisaKidsEggsHatching1 = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) BelisaKidsEggsHatching1 = 24;
+		else BelisaKidsEggsHatching1 = 120;
 	}
 	else {
 		BelisaKidsEggs = eggsB;
-		BelisaKidsEggsHatching = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) BelisaKidsEggsHatching = 24;
+		else BelisaKidsEggsHatching = 120;
 	}
 	doNext(playerMenu);
 	advanceMinutes(15);
@@ -290,15 +293,18 @@ public function LilyEggLayingPC():void {
 	LilyKidsPCPregnancy = 0;
 	if (LilyKidsPCEggsHatching1 > 0) {
 		LilyKidsPCEggs2 = eggsL;
-		LilyKidsPCEggsHatching2 = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) LilyKidsPCEggsHatching2 = 24;
+		else LilyKidsPCEggsHatching2 = 120;
 	}
 	else if (LilyKidsPCEggsHatching > 0) {
 		LilyKidsPCEggs1 = eggsL;
-		LilyKidsPCEggsHatching1 = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) LilyKidsPCEggsHatching1 = 24;
+		else LilyKidsPCEggsHatching1 = 120;
 	}
 	else {
 		LilyKidsPCEggs = eggsL;
-		LilyKidsPCEggsHatching = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) LilyKidsPCEggsHatching = 24;
+		else LilyKidsPCEggsHatching = 120;
 	}
 	doNext(playerMenu);
 	advanceMinutes(5);
@@ -348,15 +354,18 @@ public function TyrantiaEggLaying():void {
 	TyrantiaPregnancy = 0;
 	if (TyrantiaKidsEggsHatching1 > 0) {
 		TyrantiaKidsEggs2 = (3 + rand(2));
-		TyrantiaKidsEggsHatching2 = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) TyrantiaKidsEggsHatching2 = 24;
+		else TyrantiaKidsEggsHatching2 = 120;
 	}
 	else if (TyrantiaKidsEggsHatching > 0) {
 		TyrantiaKidsEggs1 = (3 + rand(2));
-		TyrantiaKidsEggsHatching1 = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) TyrantiaKidsEggsHatching1 = 24;
+		else TyrantiaKidsEggsHatching1 = 120;
 	}
 	else {
 		TyrantiaKidsEggs = (3 + rand(2));
-		TyrantiaKidsEggsHatching = 120;
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) TyrantiaKidsEggsHatching = 24;
+		else TyrantiaKidsEggsHatching = 120;
 	}
 	doNext(playerMenu);
 	advanceMinutes(15);

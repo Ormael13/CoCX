@@ -382,6 +382,18 @@ public class Changelog extends BaseContent
 			outputText("All milking scenes no longer use flat amount of fatigue but percent values. Maximum weekly payout cap for donating fluids at farm was increased 100x and extra increase form using easy mode flag 2x.\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Corruption: the final frontier... of taming. Req. High Stakes Tamer perk and 50+ wisdom. Effect: Your mastery over taming grow strong enough to dominate even truly corrupted and highly intelligent creatures that would normally resist control.\n");
 			outputText("-New tier 14 wisdom lvl-up perk: Yodh Heh. Req. Lucky 14 perk and 375+ wisdom. Effect: Ten and Five monsters makes it Fifteen monsters. Now they can try to reach demi-divine level of power.\n");
+			outputText("-Beauty is in the eye of the beholder - they say. Some also say they want to know what their casual mundane human eyes color is so... well now they can see few shorts words to just tell the eyes color. Also there is numerical size of hips and butt listed on stats page under Body section. ");
+			outputText("Cuz why not if someone likes their PC like a calculation sheet: donw to single point scientific accurate description it's fine they got more various numbers to desc their belowed MC, right? So they can then ask: The numbers, Mason, what do they mean?!\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New tier 15 wisdom lvl-up perk: . Req. Yodh Heh perk and 400+ wisdom. Effect: .
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -392,7 +404,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New tier 14 wisdom lvl-up perk: . Req. Lucky 14 perk and 375+ wisdom. Effect: .
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Together Strong (Ave) - max 9 tamed monsters in group and 900% and max 9 groups
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
+			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
+			outputText("-\n");
+			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
 			outputText("-\n");
 			outputText("-\n");//New tier ? wisdom lvl-up perk: ???. Req. ??? perk and ???+ wisdom. Effect: 
 			outputText("-\n");//New tier ? sensitivity lvl-up perk: Domain Kineses. Req. ?Quasi Domain Kineses? perk and ???+ sensitivity. Effect: ??? aura effects like psychic aura dealing specific elemetal damage ^^ ???
@@ -406,27 +427,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Player gained damage reduction based on sum of toughness core and trained stat values. Each point increase it by +1 starting from 1/2 when sum of core and trained values is above 1.
 			outputText("-\n");//Gained by cultivating 'Hall of the Mirrors' cultivation manual
 			outputText("-\n");
-			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Together Strong (Ave) - max 9 tamed monsters in group and 900% and max 9 groups
 			outputText("-\n");//New tier 18 sensitivity lvl-up perk: . Req. Vitakinesis (Ex) perk and 465+ sensitivity. Effect: 
-			outputText("-\n");
-			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
-			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
-			outputText("-\n");
-			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -31,8 +31,8 @@ import classes.internals.*;
 			var damage:Number = eBaseIntelligenceDamage() * 2;
 			player.takeMagicDamage(damage, true);
 			player.createStatusEffect(StatusEffects.Fear, 3, 0, 0, 0);
-			player.addCurse("int.mult", 1,6);
-			player.addCurse("wis.mult", 1,6);
+			player.addCurse("int.mult", 6, 1);
+			player.addCurse("wis.mult", 6, 1);
 		}
 		
 		public function WendigoClaw():void {

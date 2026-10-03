@@ -118,6 +118,7 @@ public class TestMenu extends BaseContent
 		bd.add("Test16", MightyOrNot12, "Fixing Skeleton Giants counter.");
 		bd.add("Test17", MightyOrNot13, "Testing Banshee TF");
 		bd.add("HCF", MightyOrNot14, "Correcting Hollow PC souleater kill counts.");
+		bd.add("Test18", MightyOrNot15, "Adjusting Spooder Triplets Eggs incubation timer.");
 		submenu(bd, playerMenu, 0, false);
 	}
 
@@ -153,6 +154,21 @@ public class TestMenu extends BaseContent
 		bd.add("Neko Items", giveNekoItems, "All new neko items from Nekobake Inn doc");
 		bd.add("DantianPhylactery", dantianPhylacteryTest, "Getting or losing Dantian Phylactery.");
 		submenu(bd, SoulforceCheats, 0, false);
+	}
+	
+	public function MightyOrNot15():void {
+		if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG] > 0) {
+			if (DriderTown.BelisaKidsEggsHatching > 4) DriderTown.BelisaKidsEggsHatching = Math.round(DriderTown.BelisaKidsEggsHatching / 5);
+			if (DriderTown.BelisaKidsEggsHatching1 > 4) DriderTown.BelisaKidsEggsHatching1 = Math.round(DriderTown.BelisaKidsEggsHatching1 / 5);
+			if (DriderTown.BelisaKidsEggsHatching2 > 4) DriderTown.BelisaKidsEggsHatching2 = Math.round(DriderTown.BelisaKidsEggsHatching2 / 5);
+			if (DriderTown.LilyKidsPCEggsHatching > 4) DriderTown.LilyKidsPCEggsHatching = Math.round(DriderTown.LilyKidsPCEggsHatching / 5);
+			if (DriderTown.LilyKidsPCEggsHatching1 > 4) DriderTown.LilyKidsPCEggsHatching1 = Math.round(DriderTown.LilyKidsPCEggsHatching1 / 5);
+			if (DriderTown.LilyKidsPCEggsHatching2 > 4) DriderTown.LilyKidsPCEggsHatching2 = Math.round(DriderTown.LilyKidsPCEggsHatching2 / 5);
+			if (DriderTown.TyrantiaKidsEggsHatching > 4) DriderTown.TyrantiaKidsEggsHatching = Math.round(DriderTown.BelisaKidsEggsHatching / 5);
+			if (DriderTown.TyrantiaKidsEggsHatching1 > 4) DriderTown.TyrantiaKidsEggsHatching1 = Math.round(DriderTown.TyrantiaKidsEggsHatching1 / 5);
+			if (DriderTown.TyrantiaKidsEggsHatching2 > 4) DriderTown.TyrantiaKidsEggsHatching2 = Math.round(DriderTown.TyrantiaKidsEggsHatching2 / 5);
+		}
+		doNext(SoulforceCheats);
 	}
 	
 	public function MightyOrNot14():void {

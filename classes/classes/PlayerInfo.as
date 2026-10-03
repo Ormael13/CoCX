@@ -115,6 +115,8 @@ public class PlayerInfo extends BaseContent {
 		bodyStats += "<b>Tone:</b> " + player.tone + " / " + player.maxToneCap() + "\n";
 		bodyStats += "<b>Thickness:</b> " + player.thickness + " / " + player.maxThicknessCap() + "\n";
 		bodyStats += "<b>Feminity:</b> " + player.femininity + " / 100\n";
+		bodyStats += "<b>Hips:</b> " + player.hips.type + " / 20\n";
+		bodyStats += "<b>Butt:</b> " + player.butt.type + " / 20\n";
 		bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
 		bodyStats += "<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n";
 		bodyStats += "<b>Fertility (Base) Rating:</b> " + Math.round(player.fertility) + "\n";
