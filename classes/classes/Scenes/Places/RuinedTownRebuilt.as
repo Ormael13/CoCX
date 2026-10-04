@@ -1194,6 +1194,7 @@ public function BuildHouse():void {
 	}
 }
 public function BuildHouseYes():void {
+	clearOutput();
 	outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.\n\n");
 	outputText("You point at a patch of land, telling your kids that you’re using it for housing, and your kids nod. You help them till the ground, cut notches into the wood, and raise the central pillar. As you work, nearly a dozen are already working on the walls, pounding stakes into the ground to act as grounding points for the house and cutting lumber into precise pieces for the walls.\n\n");
 	outputText("To your surprise, more of your kids come in, toting buckets of water and clay. Between each piece of lumber, they slather the top with the clay, sealing the holes between the wood.\n\n");
@@ -1221,6 +1222,7 @@ public function BuildWall():void {
 	}
 }
 public function BuildWallYes():void {
+	clearOutput();
 	CampStatsAndResources.WoodResc -= 80;
 	CampStatsAndResources.NailsResc -= 50;
 	outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.\n\n");
@@ -1250,6 +1252,7 @@ public function BuildShop():void {
 	}
 }
 public function BuildShopYes():void {
+	clearOutput();
 	CampStatsAndResources.WoodResc -= 100;
 	CampStatsAndResources.NailsResc -= 100;
 	CampStatsAndResources.StonesResc -= 50;
@@ -1274,6 +1277,7 @@ public function BuildTrainGrounds():void {
 	}
 }
 public function BuildTrainGroundsYes():void {
+	clearOutput();
 	CampStatsAndResources.WoodResc -= 200;
 	CampStatsAndResources.NailsResc -= 150;
 	CampStatsAndResources.StonesResc -= 50;
@@ -1298,6 +1302,7 @@ public function BuildSmith():void {
     }
 }
 public function BuildSmithYes():void {
+	clearOutput();
 	CampStatsAndResources.WoodResc -= 100;
 	CampStatsAndResources.NailsResc -= 200;
 	CampStatsAndResources.StonesResc -= 300;
@@ -1326,6 +1331,7 @@ public function BuildLogging():void {
     }
 }
 public function BuildLoggingYes():void {
+	clearOutput();
 	CampStatsAndResources.WoodResc -= 250;
 	CampStatsAndResources.NailsResc -= 200;
 	CampStatsAndResources.StonesResc -= 100;
@@ -1351,6 +1357,7 @@ public function BuildWell():void {
 	}
 }
 public function BuildWellYes():void {
+	clearOutput();
 	CampStatsAndResources.WoodResc -= 20;
 	CampStatsAndResources.NailsResc -= 20;
 	CampStatsAndResources.StonesResc -= 100;

@@ -689,7 +689,16 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_WIS]
 						]
 				);
-		public const FCARROT: Consumable = mk("FCarrot", "FlaredCarrot", "a Flared Carrot", 6, "A staple food loved both by bunny and horse morph. May have transformative properties when eaten raw.", curry(m.neonPinkEgg, false, 1));
+		public const FCARROT: Consumable = mk("FCarrot", "FlaredCarrot", "a Flared Carrot", 6, "A staple food loved both by bunny and horse morph. May have transformative properties when eaten raw.", curry(m.neonPinkEgg, false, 1))
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						DEFAULT_ESSENCE_DROP_TABLE(AE_LAQUINE),
+						[
+							[1, AR_STR],
+							[1, AR_SPE],
+							[1, AR_LIB]
+						]
+				);
 		public const FOXBERY: Consumable = mk("FoxBery", "Fox Berry", "a fox berry", 6, "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.", curry(m.foxTF, false), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -1073,7 +1082,15 @@ public final class ConsumableLib extends AlchemyLib
 				);
 		public const PROTPLS: Consumable = mk("ProtPls", "ProtPls", "a bottle of protoplasm", 6, "The opaque, incorporeal substance flows like a liquid inside its container. It makes you feel... uncomfortable, as you observe it and maybe it observe you back...", curry(m.ectoplasm, 1), ItemConstants.U_TF);
 		public const PURHONY:BeeHoney		  = new BeeHoney(true, false);
-		public const RDRROOT: Consumable = mk("RdRRoot", "R.R.Root", "a red river root", 14, "A long, odd shaped root. It smells spicy but surprisingly tasty. Eating it would supposedly alter your body in unknown ways.", m.redRiverRoot, ItemConstants.U_TF);
+		public const RDRROOT: Consumable = mk("RdRRoot", "R.R.Root", "a red river root", 14, "A long, odd shaped root. It smells spicy but surprisingly tasty. Eating it would supposedly alter your body in unknown ways.", m.redRiverRoot, ItemConstants.U_TF)
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						DEFAULT_ESSENCE_DROP_TABLE(AE_RED_PANDA),
+						[
+							[1, AR_SPE],
+							[1, AR_WIS]
+						]
+				);
 		public const REDVIAL:VampireBlood 	  = new VampireBlood();
 		public const REPTLUM: Consumable = mk("Reptlum", "Reptilum", "a vial of Reptilum", 6, "This is a rounded bottle with a small label that reads, \"<i>Reptilum</i>\".  It is likely this potion is tied to reptiles in some way.", m.reptilum, ItemConstants.U_TF)
 				.refineableInto(
@@ -1210,7 +1227,16 @@ public final class ConsumableLib extends AlchemyLib
 						]
 				);
 		public const STRFLOW: Consumable = mk("StrFlow", "StrangeFlower", "a strange flower", 20, "This weird flower has two pistils instead of one. You feel a strange connection to it.", m.strangeFlower, ItemConstants.U_TF);
-		public const TGOGODD: Consumable = mk("TGOGoss", "TGOnnaGoss", "a Thick Green Onna Gossamer", 6, "Those strands of green gossamer are rougher than those of driders. It looks edible, but the smell of musk and milk makes you a little dizzy.", curry(m.thickGossamer, 0), ItemConstants.U_TF);
+		public const TGOGODD: Consumable = mk("TGOGoss", "TGOnnaGoss", "a Thick Green Onna Gossamer", 6, "Those strands of green gossamer are rougher than those of driders. It looks edible, but the smell of musk and milk makes you a little dizzy.", curry(m.thickGossamer, 0), ItemConstants.U_TF)
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						DEFAULT_ESSENCE_DROP_TABLE(AE_USHI_ONI),
+						[
+							[1, AR_STR],
+							[1, AR_TOU],
+							[1, AR_LIB]
+						]
+				);
 		public const TRAPOIL: Consumable = mk("TrapOil", "TrapOil", "a vial of trap oil", 6, "A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous.", m.trapOil, ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,

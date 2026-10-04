@@ -846,8 +846,12 @@ public class AlchemyLib extends BaseContent {
 		name : "Chameleon"
 	});
 	public static const AE_DARK_ELF:int             = EnumValue.add(Essences, 250, "DARK_ELF", {
-		short: "Elf",
-		name : "Elf"
+		short: "DElf",
+		name : "Dark Elf"
+	});
+	public static const AE_LAQUINE:int             = EnumValue.add(Essences, 251, "LAQUINE", {
+		short: "Laquine",
+		name : "Laquine"
 	});
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {
 		var result:Array = [

@@ -976,7 +976,7 @@ public class SkinTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "Your skin itches as a glowing green tattoo etches themselves across your arm and belly. The scribblings seem to assist with your mana flow and are definitely magical in nature. <b>Your skin is now marked with a raunic patterns.</b>";
+				desc += "Your skin itches as a glowing green tattoo etches themselves across your arm and belly. The scribblings seem to assist with your mana flow and are definitely magical in nature. <b>Your skin is now marked with a runic patterns.</b>";
 				player.skin.base.pattern = Skin.PATTERN_RUNIC;
 
 				if (doOutput) outputText(desc);
