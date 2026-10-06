@@ -8063,6 +8063,9 @@ public class PerkLib
 			UnlockSpirit4thStage.requirePerk(UnlockSpirit3rdStage)
                     .requireWis(335)
                     .requireLevel(90);
+            SweetSixteen.requireLevel(90)
+                    .requirePerk(YodhHeh)
+                    .requireWis(400);
             StrongerElementalBondSu.requirePerk(StrongerElementalBondEx)
 					.requireOrPerks(ElementalContractRank16, DaoOfTheElements, 4)
                     .requireWis(400)
