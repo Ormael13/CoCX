@@ -2753,10 +2753,10 @@ public static const ZENJI_PERSPECTIVE_ON_PLAYER:int                             
 public static const ZENJI_PROGRESS:int                                   			= 2744;
 public static const ZENJI_DESTROYING_CORRUPTED_GLADES:int                           = 2745;
 public static const ZENJI_KIDS:int                                   				= 2746;
-public static const UNKNOWN_FLAG_NUMBER_02747:int                                   = 2747;
-public static const UNKNOWN_FLAG_NUMBER_02748:int                                   = 2748;
-public static const UNKNOWN_FLAG_NUMBER_02749:int                                   = 2749;
-public static const UNKNOWN_FLAG_NUMBER_02750:int                                   = 2750;
+public static const TAMED_17_NAME:int                                   			= 2747;
+public static const TAMED_18_NAME:int                                   			= 2748;
+public static const TAMED_19_NAME:int                                   			= 2749;
+public static const TAMED_20_NAME:int                                   			= 2750;
 public static const IN_COMBAT_VITAKINESIS_USED:int                                  = 2751;
 public static const TYRANT_STATE_COMBAT_MODE:int                                    = 2752;
 public static const ASURA_FORM_COMBAT_MODE:int                                   	= 2753;
@@ -3040,4 +3040,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	STATBAR_ANIMATIONS // moved to settings
 ];
 	}
-}
+}

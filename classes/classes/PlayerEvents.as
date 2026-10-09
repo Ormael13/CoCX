@@ -2598,6 +2598,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext = player.gainOrLosePerk(PerkLib.VegetalAffinity, player.isAnyRaceCached(Races.PLANT, Races.ALRAUNE, Races.YGGDRASIL, Races.WOODELF, Races.BAROMETZ), "With your connection to the natural flora growing stronger you gained an affinity with plantlife.", "With your connection to the natural world growing weaker you lose your affinity with plantlife.") || needNext;
 			//Photosynthesis
 			needNext = player.gainOrLosePerk(PerkLib.Photosynthesis, player.isRaceCached(Races.PLANT, 2) || player.isAnyRaceCached(Races.ALRAUNE, Races.YGGDRASIL, Races.BAROMETZ), "Basking in the morning sun you feel positively brimming with energy. It seems that like a plant you acquired the ability to photosynthesise light, gaining strength when bathed by sunshine.", "You no longer feel so strong while in the sunlight it would seem you are no longer enough of a plant to photosynthesize.") || needNext;
+			if (player.hasStatusEffect(StatusEffects.Photosynthesis) && !player.hasPerk(PerkLib.Photosynthesis)) {
+				if (player.statStore.hasBuff('Photosynthesis')) player.statStore.removeBuffs('Photosynthesis');
+				player.removeStatusEffect(StatusEffects.Photosynthesis);
+			}
 			//Druidic Focus
 			needNext = player.gainOrLosePerk(PerkLib.DruidicFocus, player.isRaceCached(Races.BAROMETZ), "You hear the whispers in the wind, the churning water, the sleepy voice of the earth, the patient but wise voices of the trees who have been here for decades and will outlive the lifespan of most mortals. Nature speaks to you and can speak back to it. Just like a Barometz you have become deeply attuned to the natural world.", "You no longer feel the voices of the spirits of nature like you used to. Probably because your connection has weakened.") || needNext;
 			//Lacta bovine immunities

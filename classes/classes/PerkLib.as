@@ -1207,10 +1207,28 @@ public class PerkLib
 		public static const SweetSixteen:PerkType = mk("Sweet Sixteen", "Sweet Sixteen",
 				"Now you can make coming-of-age ceremony for your tamed monsters.",
 				"You've chosen the 'Sweet Sixteen' perk. Now you can make coming-of-age ceremony for your tamed monsters.");
+		public static const HaikuPoemsWriter:PerkType = mk("Haiku Poems Writer", "Haiku Poems Writer",
+				"Seventeen monster unexpectedly have talent for Haiku poetry.",
+				"You've chosen the 'Haiku Poems Writer' perk. Seventeen monster unexpectedly have talent for Haiku poetry.");
+		public static const EighteenLevelsOfHell:PerkType = mk("Eighteen Levels of Hell", "Eighteen Levels of Hell",
+				"Finaly you can capture enough monsters to put as jailer on all eighteen Diyu levels.",
+				"You've chosen the 'Eighteen Levels of Hell' perk. Finaly you can capture enough monsters to put as jailer on all eighteen Diyu levels.");
+		public static const Angel19th:PerkType = mk("19th Angel", "19th Angel",
+				"Those nineteen monsters (or angels) can guard even hell.",
+				"You've chosen the '19th Angel' perk. Those nineteen monsters (or angels) can guard even hell.");
+		public static const D20DiceRoller:PerkType = mk("D20 Dice Roller", "D20 Dice Roller",
+				"Your 20th monster won't do anything before rolling d20 dice.",
+				"You've chosen the 'D20 Dice Roller' perk. Your 20th monster won't do anything before rolling d20 dice.");
 		
-		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
+		public static const ElementsOfMarethBasic3:PerkType = mk("Elements of Mareth: 3", "Elements of Mareth: 3",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
-				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of the traditional four.");
+				"You've chosen the 'Elements of Mareth: 3' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of the traditional four.");
+		public static const ElementsOfMarethBasic2:PerkType = mk("Elements of Mareth: 2", "Elements of Mareth: 2",
+				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
+				"You've chosen the 'Elements of Mareth: 2' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of the traditional four.");
+		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: 1", "Elements of Mareth: 1",
+				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
+				"You've chosen the 'Elements of Mareth: 1' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of the traditional four.");
 		/*
 		public static const :PerkType = mk("", "",
 				".",
@@ -1224,15 +1242,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");

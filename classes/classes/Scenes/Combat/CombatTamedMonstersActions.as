@@ -50,6 +50,10 @@ import classes.StatusEffects;
 			if (player.hasStatusEffect(StatusEffects.TamedMonster14)) outputText("<b>Tamed Monster No.14 HP:</b> "+(100-player.statusEffectv2(StatusEffects.TamedMonster14))+"%");
 			if (player.hasStatusEffect(StatusEffects.TamedMonster15)) outputText("<b>Tamed Monster No.15 HP:</b> "+(100-player.statusEffectv2(StatusEffects.TamedMonster15))+"%");
 			if (player.hasStatusEffect(StatusEffects.TamedMonster16)) outputText("<b>Tamed Monster No.16 HP:</b> "+(100-player.statusEffectv2(StatusEffects.TamedMonster16))+"%");
+			if (player.hasStatusEffect(StatusEffects.TamedMonster17)) outputText("<b>Tamed Monster No.17 HP:</b> "+(100-player.statusEffectv2(StatusEffects.TamedMonster17))+"%");
+			if (player.hasStatusEffect(StatusEffects.TamedMonster18)) outputText("<b>Tamed Monster No.18 HP:</b> "+(100-player.statusEffectv2(StatusEffects.TamedMonster18))+"%");
+			if (player.hasStatusEffect(StatusEffects.TamedMonster19)) outputText("<b>Tamed Monster No.19 HP:</b> "+(100-player.statusEffectv2(StatusEffects.TamedMonster19))+"%");
+			if (player.hasStatusEffect(StatusEffects.TamedMonster20)) outputText("<b>Tamed Monster No.20 HP:</b> "+(100-player.statusEffectv2(StatusEffects.TamedMonster20))+"%");
 			if (page == 1) {
 				//0 - taming ring
 				if (player.hasStatusEffect(StatusEffects.TamedMonster01)) addButton(1, "No.1", tamedMonstersActionMenu, 1, 1).hint("Use tamed monster No.1");
@@ -110,8 +114,18 @@ import classes.StatusEffects;
 					if (player.hasStatusEffect(StatusEffects.TamedMonster14)) addButton(4, "No.14", tamedMonstersActionMenu, 14, 2).hint("Use tamed monster No.14");
 					else addButtonDisabled(4, "No.14", "You do not have Monster No.14 tamed.");
 				}
-				//5
-				//6
+				if (player.hasPerk(PerkLib.YodhHeh)) {
+					if (player.hasStatusEffect(StatusEffects.TamedMonster15)) addButton(5, "No.15", tamedMonstersActionMenu, 15, 2).hint("Use tamed monster No.15");
+					else addButtonDisabled(5, "No.15", "You do not have Monster No.15 tamed.");
+				}
+				if (player.hasPerk(PerkLib.SweetSixteen)) {
+					if (player.hasStatusEffect(StatusEffects.TamedMonster16)) addButton(6, "No.16", tamedMonstersActionMenu, 16, 2).hint("Use tamed monster No.16");
+					else addButtonDisabled(6, "No.16", "You do not have Monster No.16 tamed.");
+				}
+				//7
+				//8
+				//9
+				//10
 				addButton(10, "Next", tamedMonstersMenu, page + 1);
 				addButton(11, "Prev", tamedMonstersMenu, page - 1);
 			}
@@ -135,6 +149,10 @@ import classes.StatusEffects;
 			else if (player.hasStatusEffect(StatusEffects.TamedMonster14)) tamedMonsterAttackMelee(14);
 			else if (player.hasStatusEffect(StatusEffects.TamedMonster15)) tamedMonsterAttackMelee(15);
 			else if (player.hasStatusEffect(StatusEffects.TamedMonster16)) tamedMonsterAttackMelee(16);
+			else if (player.hasStatusEffect(StatusEffects.TamedMonster17)) tamedMonsterAttackMelee(17);
+			else if (player.hasStatusEffect(StatusEffects.TamedMonster18)) tamedMonsterAttackMelee(18);
+			else if (player.hasStatusEffect(StatusEffects.TamedMonster19)) tamedMonsterAttackMelee(19);
+			else if (player.hasStatusEffect(StatusEffects.TamedMonster20)) tamedMonsterAttackMelee(20);
 		}
 		
 		public function tamedMonstersActionMenu(no:Number, page:Number):void {
@@ -249,6 +267,34 @@ import classes.StatusEffects;
 				else addButton(0, "Attack", curry(tamedMonsterAttackMelee, 16)).hint("Command tamed monster No.16 to attack.");
 				addButtonIfTrue(1, "M.Bolt", curry(tamedMonsterAttackMagic, 16), "Your tamed monster can’t spellcast.", player.statusEffectv2(StatusEffects.TamedMonster16)>0, "Command tamed monster No.16 to cast magic bolt.");
 				if (flags[kFLAGS.TAMED_MONSTER_PROTECTING] > 0) addButtonIfTrue(4, "Protect", curry(tamedMonsterProtect, 16), "Tamed monster No.16 has not yet fully recovered.", player.statusEffectv2(StatusEffects.TamedMonster16)>0, "Command tamed monster No.16 to protect you.");
+				else addButtonDisabled(4, "Protect", "You already commanded one of the tamed monsters to protect you.");
+			}
+			if (no == 17) {
+				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "Attack", curry(tamedMonsterAttackMelee, 17), "Your tamed monster can’t attack flying enemies.", player.statusEffectv3(StatusEffects.TamedMonster17)>0, "Command tamed monster No.17 to attack.");
+				else addButton(0, "Attack", curry(tamedMonsterAttackMelee, 17)).hint("Command tamed monster No.17 to attack.");
+				addButtonIfTrue(1, "M.Bolt", curry(tamedMonsterAttackMagic, 17), "Your tamed monster can’t spellcast.", player.statusEffectv2(StatusEffects.TamedMonster17)>0, "Command tamed monster No.17 to cast magic bolt.");
+				if (flags[kFLAGS.TAMED_MONSTER_PROTECTING] > 0) addButtonIfTrue(4, "Protect", curry(tamedMonsterProtect, 17), "Tamed monster No.17 has not yet fully recovered.", player.statusEffectv2(StatusEffects.TamedMonster17)>0, "Command tamed monster No.17 to protect you.");
+				else addButtonDisabled(4, "Protect", "You already commanded one of the tamed monsters to protect you.");
+			}
+			if (no == 18) {
+				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "Attack", curry(tamedMonsterAttackMelee, 18), "Your tamed monster can’t attack flying enemies.", player.statusEffectv3(StatusEffects.TamedMonster18)>0, "Command tamed monster No.18 to attack.");
+				else addButton(0, "Attack", curry(tamedMonsterAttackMelee, 18)).hint("Command tamed monster No.18 to attack.");
+				addButtonIfTrue(1, "M.Bolt", curry(tamedMonsterAttackMagic, 18), "Your tamed monster can’t spellcast.", player.statusEffectv2(StatusEffects.TamedMonster18)>0, "Command tamed monster No.18 to cast magic bolt.");
+				if (flags[kFLAGS.TAMED_MONSTER_PROTECTING] > 0) addButtonIfTrue(4, "Protect", curry(tamedMonsterProtect, 18), "Tamed monster No.18 has not yet fully recovered.", player.statusEffectv2(StatusEffects.TamedMonster18)>0, "Command tamed monster No.18 to protect you.");
+				else addButtonDisabled(4, "Protect", "You already commanded one of the tamed monsters to protect you.");
+			}
+			if (no == 19) {
+				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "Attack", curry(tamedMonsterAttackMelee, 19), "Your tamed monster can’t attack flying enemies.", player.statusEffectv3(StatusEffects.TamedMonster19)>0, "Command tamed monster No.19 to attack.");
+				else addButton(0, "Attack", curry(tamedMonsterAttackMelee, 19)).hint("Command tamed monster No.19 to attack.");
+				addButtonIfTrue(1, "M.Bolt", curry(tamedMonsterAttackMagic, 19), "Your tamed monster can’t spellcast.", player.statusEffectv2(StatusEffects.TamedMonster19)>0, "Command tamed monster No.19 to cast magic bolt.");
+				if (flags[kFLAGS.TAMED_MONSTER_PROTECTING] > 0) addButtonIfTrue(4, "Protect", curry(tamedMonsterProtect, 19), "Tamed monster No.19 has not yet fully recovered.", player.statusEffectv2(StatusEffects.TamedMonster19)>0, "Command tamed monster No.19 to protect you.");
+				else addButtonDisabled(4, "Protect", "You already commanded one of the tamed monsters to protect you.");
+			}
+			if (no == 20) {
+				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "Attack", curry(tamedMonsterAttackMelee, 20), "Your tamed monster can’t attack flying enemies.", player.statusEffectv3(StatusEffects.TamedMonster20)>0, "Command tamed monster No.20 to attack.");
+				else addButton(0, "Attack", curry(tamedMonsterAttackMelee, 20)).hint("Command tamed monster No.20 to attack.");
+				addButtonIfTrue(1, "M.Bolt", curry(tamedMonsterAttackMagic, 20), "Your tamed monster can’t spellcast.", player.statusEffectv2(StatusEffects.TamedMonster20)>0, "Command tamed monster No.20 to cast magic bolt.");
+				if (flags[kFLAGS.TAMED_MONSTER_PROTECTING] > 0) addButtonIfTrue(4, "Protect", curry(tamedMonsterProtect, 20), "Tamed monster No.20 has not yet fully recovered.", player.statusEffectv2(StatusEffects.TamedMonster20)>0, "Command tamed monster No.20 to protect you.");
 				else addButtonDisabled(4, "Protect", "You already commanded one of the tamed monsters to protect you.");
 			}
 			addButton(14, "Back", tamedMonstersMenu, page);
@@ -399,6 +445,38 @@ import classes.StatusEffects;
 					repeat *= player.statusEffectv4(StatusEffects.TamedMonster16a);
 				}
 			}
+			if (no == 17) {
+				weapon += player.statusEffectv1(StatusEffects.TamedMonster17);
+				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(17);
+				if (player.statusEffectv4(StatusEffects.TamedMonster17a) > 0) {
+					if (repeat < 1) repeat = 1;
+					repeat *= player.statusEffectv4(StatusEffects.TamedMonster17a);
+				}
+			}
+			if (no == 18) {
+				weapon += player.statusEffectv1(StatusEffects.TamedMonster18);
+				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(18);
+				if (player.statusEffectv4(StatusEffects.TamedMonster18a) > 0) {
+					if (repeat < 1) repeat = 1;
+					repeat *= player.statusEffectv4(StatusEffects.TamedMonster18a);
+				}
+			}
+			if (no == 19) {
+				weapon += player.statusEffectv1(StatusEffects.TamedMonster19);
+				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(19);
+				if (player.statusEffectv4(StatusEffects.TamedMonster19a) > 0) {
+					if (repeat < 1) repeat = 1;
+					repeat *= player.statusEffectv4(StatusEffects.TamedMonster19a);
+				}
+			}
+			if (no == 20) {
+				weapon += player.statusEffectv1(StatusEffects.TamedMonster20);
+				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(20);
+				if (player.statusEffectv4(StatusEffects.TamedMonster20a) > 0) {
+					if (repeat < 1) repeat = 1;
+					repeat *= player.statusEffectv4(StatusEffects.TamedMonster20a);
+				}
+			}
 			if (weapon < 51) dmg *= (1 + (weapon * 0.01));
 			else if (weapon >= 51 && weapon < 101) dmg *= (1.5 + ((weapon - 50) * 0.015));
 			else if (weapon >= 101 && weapon < 151) dmg *= (2.25 + ((weapon - 100) * 0.02));
@@ -429,6 +507,10 @@ import classes.StatusEffects;
 			if (no == 14) outputText(""+flags[kFLAGS.TAMED_14_NAME]+"");
 			if (no == 15) outputText(""+flags[kFLAGS.TAMED_15_NAME]+"");
 			if (no == 16) outputText(""+flags[kFLAGS.TAMED_16_NAME]+"");
+			if (no == 17) outputText(""+flags[kFLAGS.TAMED_17_NAME]+"");
+			if (no == 18) outputText(""+flags[kFLAGS.TAMED_18_NAME]+"");
+			if (no == 19) outputText(""+flags[kFLAGS.TAMED_19_NAME]+"");
+			if (no == 20) outputText(""+flags[kFLAGS.TAMED_20_NAME]+"");
 			outputText(" attacks [themonster]. ");
 			doMinionPhysDamage(dmg, true, true);
 			while (repeat-->0) doMinionPhysDamage(dmg, true, true);
@@ -492,6 +574,10 @@ import classes.StatusEffects;
 			if (no == 14) dmg += SceneLib.combat.scalingBonusIntelligenceTamedMonster(14);
 			if (no == 15) dmg += SceneLib.combat.scalingBonusIntelligenceTamedMonster(15);
 			if (no == 16) dmg += SceneLib.combat.scalingBonusIntelligenceTamedMonster(16);
+			if (no == 17) dmg += SceneLib.combat.scalingBonusIntelligenceTamedMonster(17);
+			if (no == 18) dmg += SceneLib.combat.scalingBonusIntelligenceTamedMonster(18);
+			if (no == 19) dmg += SceneLib.combat.scalingBonusIntelligenceTamedMonster(19);
+			if (no == 20) dmg += SceneLib.combat.scalingBonusIntelligenceTamedMonster(20);
 			if (weapon < 51) dmg *= (1 + (weapon * 0.01));
 			else if (weapon >= 51 && weapon < 101) dmg *= (1.5 + ((weapon - 50) * 0.015));
 			else if (weapon >= 101 && weapon < 151) dmg *= (2.25 + ((weapon - 100) * 0.02));
@@ -522,6 +608,10 @@ import classes.StatusEffects;
 			if (no == 14) outputText(""+flags[kFLAGS.TAMED_14_NAME]+"");
 			if (no == 15) outputText(""+flags[kFLAGS.TAMED_15_NAME]+"");
 			if (no == 16) outputText(""+flags[kFLAGS.TAMED_16_NAME]+"");
+			if (no == 17) outputText(""+flags[kFLAGS.TAMED_17_NAME]+"");
+			if (no == 18) outputText(""+flags[kFLAGS.TAMED_18_NAME]+"");
+			if (no == 19) outputText(""+flags[kFLAGS.TAMED_19_NAME]+"");
+			if (no == 20) outputText(""+flags[kFLAGS.TAMED_20_NAME]+"");
 			outputText(" shoot a magic bolt toward [themonster]. ");
 			doMinionMagDamage(dmg, true, true);
 			while (repeat-->0) doMinionMagDamage(dmg, true, true);
@@ -547,6 +637,10 @@ import classes.StatusEffects;
 			if (no == 14) outputText(""+flags[kFLAGS.TAMED_14_NAME]+"");
 			if (no == 15) outputText(""+flags[kFLAGS.TAMED_15_NAME]+"");
 			if (no == 16) outputText(""+flags[kFLAGS.TAMED_16_NAME]+"");
+			if (no == 17) outputText(""+flags[kFLAGS.TAMED_17_NAME]+"");
+			if (no == 18) outputText(""+flags[kFLAGS.TAMED_18_NAME]+"");
+			if (no == 19) outputText(""+flags[kFLAGS.TAMED_19_NAME]+"");
+			if (no == 20) outputText(""+flags[kFLAGS.TAMED_20_NAME]+"");
 			outputText(" to protect you from next enemy attack.");
 			flags[kFLAGS.TAMED_MONSTER_PROTECTING] = no;
 			menu();
