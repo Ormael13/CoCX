@@ -93,6 +93,11 @@ public class AbstractSoulSkill extends CombatAbility {
 		if (leech > Math.round(player.maxHP() * leechCap)) leech = Math.round(player.maxHP() * leechCap);
 	    pc.HPChange(leech, false, false);
 	}
+	
+	protected function checkWayOfTheClosestFist():Boolean {
+		if ((player.cor > 0 && monster.cor < 0) || (player.cor < 0 && monster.cor > 0)) return true;
+		return false;
+	}
 
 	protected function monsterDodgeSkill(skillName:String, display:Boolean = true, hitModifier:int = 0):Boolean {
 		if (((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe, hitModifier))) && !monster.monsterIsStunned()) {

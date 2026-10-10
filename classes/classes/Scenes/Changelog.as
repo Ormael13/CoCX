@@ -386,6 +386,7 @@ public class Changelog extends BaseContent
 			outputText("Cuz why not if someone likes their PC like a calculation sheet: down to single point scientific accurate description, it's fine they got more various numbers to desc their belowed MC, right? So they can then ask: The numbers, Mason, what do they mean?!\n");
 			outputText("-New tier 15 wisdom lvl-up perk: Sweet Sixteen. Req. Yodh Heh perk and 400+ wisdom. Effect: Now you can make coming-of-age ceremony for your tamed monsters.\n");
 			outputText("-New tier 16 wisdom lvl-up perk: Haiku Poems Writer. Req. Sweet Sixteen perk and 425+ wisdom. Effect: Seventeen monster unexpectedly have talent for Haiku poetry.\n");
+			outputText("-New tier 12 wisdom lvl-up perk: Way of the Closest Fist. Req. Recovery mantra perk. Effect: Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -404,8 +405,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New tier 17 wisdom lvl-up perk: Eighteen Levels of Hell. Req. Haiku Poems Writer perk and 450+ wisdom. Effect: Finaly you can capture enough monsters to put as jailer on all eighteen Diyu levels.
 			outputText("-\n");
 			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Together Strong (Ave) - max 9 tamed monsters in group and 900% and max 9 groups
 			outputText("-\n");

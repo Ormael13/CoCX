@@ -128,6 +128,7 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill implements Saveab
 				damage *= 2;
 			}
 		}
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
 		damage *= combat.darknessDamageBoostedByDao();
 		return Math.round(damage);
 	}

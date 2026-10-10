@@ -3040,4 +3040,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	STATBAR_ANIMATIONS // moved to settings
 ];
 	}
-}
+}

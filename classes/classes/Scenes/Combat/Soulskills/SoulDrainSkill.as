@@ -59,20 +59,18 @@ public class SoulDrainSkill extends AbstractSoulSkill {
 	public function calcDamage(monster:Monster, casting:Boolean = false):Number {
 		var damage:Number = scalingBonusWisdom() + scalingBonusIntelligence();
 		if (damage < 10) damage = 10;
-
 		//soulskill mod effect
 		var damageMult:Number = 1;
 		damageMult += (spellMod() - 1);
 		damageMult += (soulskillMagicalMod() - 1);
 		damage *= damageMult;
-		
 		damage = calcEclypseMod(damage, casting);
-
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.UndeadMetabolismIM) >= 2) damage *= player.perkv1(IMutationsLib.UndeadMetabolismIM);
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
 		if (player.armor == armors.DEATHPGA) damage *= 1.5;
 		return Math.round(damage * combat.darknessDamageBoostedByDao());
 	}
@@ -92,12 +90,11 @@ public class SoulDrainSkill extends AbstractSoulSkill {
     override public function doEffect(display:Boolean = true):void {
 		if (display) outputText("You reach out with your magic and attempt to tear a part of your opponent soul. [monster his] scream in pain and horror as you attack [monster his] very essence!  ");
 		combat.darkRitualCheckDamage();
-
 		var damage:Number = calcDamage(monster, true);
-
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {

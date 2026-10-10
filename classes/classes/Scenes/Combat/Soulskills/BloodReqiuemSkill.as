@@ -38,22 +38,18 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 	public function calcDamage(monster:Monster):Number {
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
 		var damageFloor:Number = 10;
-
 		if (damage < damageFloor) damage = damageFloor;
 		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
-
 		if (sfInfusion) {
 			//soulskill mod effect
 			damage *= soulskillPhysicalMod();
 		}
-
 		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
 		damage *= combat.bloodDamageBoostedByDao();
-
 		return Math.round(damage);
-
 	}
 
     override public function doEffect(display:Boolean = true):void {
@@ -66,13 +62,13 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
-		
 		if (display) outputText("[Themonster] takes ");
 		doPlayerPhysDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");

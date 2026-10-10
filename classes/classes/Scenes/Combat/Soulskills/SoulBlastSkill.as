@@ -38,13 +38,11 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 		damage += scalingBonusIntelligence() * 6;
 		damage += scalingBonusWisdom() * 6;
 		if (damage < 10) damage = 10;
-		
 		//soulskill mod effect
 		var damageMult:Number = 1;
 		damageMult += (spellMod() - 1);
 		damageMult += (soulskillMagicalMod() - 1);
 		damage *= damageMult;
-
 		//other bonuses
 		if (monster) {
 			if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
@@ -52,21 +50,21 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 		}
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
 		return Math.round(damage);
 	}
 
     override public function doEffect(display:Boolean = true):void {
 		var damage:Number = calcDamage(monster);
-
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
-
 		if (display) outputText("You wave the sign of the gate, tiger and serpent as you unlock all of your soulforce for an attack. [Themonster] can’t figure out what you are doing until a small sphere of energy explodes at the end of your fist in a massive beam of condensed soulforce. ");
 		doPlayerMagDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");

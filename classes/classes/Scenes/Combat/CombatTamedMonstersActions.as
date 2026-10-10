@@ -122,8 +122,14 @@ import classes.StatusEffects;
 					if (player.hasStatusEffect(StatusEffects.TamedMonster16)) addButton(6, "No.16", tamedMonstersActionMenu, 16, 2).hint("Use tamed monster No.16");
 					else addButtonDisabled(6, "No.16", "You do not have Monster No.16 tamed.");
 				}
-				//7
-				//8
+				if (player.hasPerk(PerkLib.HaikuPoemsWriter)) {
+					if (player.hasStatusEffect(StatusEffects.TamedMonster17)) addButton(7, "No.17", tamedMonstersActionMenu, 17, 2).hint("Use tamed monster No.17");
+					else addButtonDisabled(7, "No.17", "You do not have Monster No.17 tamed.");
+				}
+				if (player.hasPerk(PerkLib.EighteenLevelsOfHell)) {
+					if (player.hasStatusEffect(StatusEffects.TamedMonster18)) addButton(8, "No.18", tamedMonstersActionMenu, 18, 2).hint("Use tamed monster No.18");
+					else addButtonDisabled(8, "No.18", "You do not have Monster No.18 tamed.");
+				}
 				//9
 				//10
 				addButton(10, "Next", tamedMonstersMenu, page + 1);

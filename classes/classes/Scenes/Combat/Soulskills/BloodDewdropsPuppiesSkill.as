@@ -38,6 +38,7 @@ public class BloodDewdropsPuppiesSkill extends AbstractBloodSoulSkill {
 		if (monster && monster.plural) damage *= 10;
 		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
 		damage *= combat.bloodDamageBoostedByDao();
 		return Math.round(damage);
 	}
@@ -48,6 +49,7 @@ public class BloodDewdropsPuppiesSkill extends AbstractBloodSoulSkill {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {

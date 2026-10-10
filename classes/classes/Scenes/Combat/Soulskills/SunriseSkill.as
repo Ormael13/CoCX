@@ -48,20 +48,16 @@ public class SunriseSkill extends AbstractSoulSkill {
 	public function calcDamage(monster:Monster):Number {
 		var damage:Number = scalingBonusWisdom() * 6;
 		if (damage < 10) damage = 10;
-
 		//soulskill mod effect
 		damage *= soulskillMagicalMod();
-
 		//group enemies bonus
 		if (monster && monster.plural) damage *= 5;
-
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
-
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
 		return Math.round(damage);
-
 	}
 
     override public function doEffect(display:Boolean = true):void {
@@ -73,19 +69,17 @@ public class SunriseSkill extends AbstractSoulSkill {
 			outputText("\"<i>Sunrise</i>\" The word comes out, calm yet firm, in a majestic tone. Your miniature sun is launched from your finger, engulfing the [themonster] with your power. ");
 		}
 		if (monsterDodgeSkill("miniature sun", display)) return;
-
 		var damage:Number = calcDamage(monster);
-
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
-
 		//final touches
 		doPlayerPlasmaDamage(damage, true, display);
 		if (display) outputText(" damage! ");

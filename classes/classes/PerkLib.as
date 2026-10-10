@@ -1219,6 +1219,9 @@ public class PerkLib
 		public static const D20DiceRoller:PerkType = mk("D20 Dice Roller", "D20 Dice Roller",
 				"Your 20th monster won't do anything before rolling d20 dice.",
 				"You've chosen the 'D20 Dice Roller' perk. Your 20th monster won't do anything before rolling d20 dice.");
+		public static const WayOfTheClosestFist:PerkType = mk("Way of the Closest Fist", "Way of the Closest Fist",
+				"Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%.",
+				"You've chosen the 'Way of the Closest Fist' perk. Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%.");
 		
 		public static const ElementsOfMarethBasic3:PerkType = mk("Elements of Mareth: 3", "Elements of Mareth: 3",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -1242,9 +1245,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -8063,6 +8063,8 @@ public class PerkLib
                     .requirePerks(ApesTogetherStrongerEx, ThatsEnoughApes)
                     .requireWis(355);
             //Tier 14 Wisdom perks
+            WayOfTheClosestFist.requireLevel(84)
+                    .requirePerk(RecoveryMantra);
             ElementalMajesty.requireLevel(84)
                     .requirePerk(EclipticInfusion);
             YodhHeh.requireLevel(84)
@@ -8088,6 +8090,9 @@ public class PerkLib
                     .requirePerk(LegendaryWisdom)
                     .requireLevel(96);
 			//Tier 17 Wisdom perks
+            //EighteenLevelsOfHell.requireLevel(102)
+            //        .requirePerk(HaikuPoemsWriter)
+            //        .requireWis(450);
             //Tier 19 Wisdom perks
             StrongestElementalBond.requirePerk(StrongerElementalBondSu)
 					.requireOrPerks(ElementalContractRank20, DaoOfTheElements, 5)
