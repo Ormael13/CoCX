@@ -60,14 +60,15 @@ public class IceFistSkill extends AbstractSoulSkill {
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		return Math.round(damage);
-
 	}
 
     override public function doEffect(display:Boolean = true):void {
 		var damage:Number = calcDamage(monster);
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) critChance += 10;
 		critChance += combat.combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
@@ -77,6 +78,7 @@ public class IceFistSkill extends AbstractSoulSkill {
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		if (display) outputText("The air around your fist seems to lose all heat as you dash at [themonster]. You place your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
 		combat.checkForElementalEnchantmentAndDoDamageMain(damage, true, true, crit, false, 4);
+		combat.checkWayOfTheClosestFist2(4);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		//stun
 		if (monster.hasPerk(PerkLib.Resolute)) {

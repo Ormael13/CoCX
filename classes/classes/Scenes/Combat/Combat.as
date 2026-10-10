@@ -3968,6 +3968,8 @@ public class Combat extends BaseContent {
 	public function checkForElementalEnchantmentAndDoDamageMain(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true, crit:Boolean = false, IsFeralCombat:Boolean = false, INeedOnlyOneFistOrKick:Number = 0):void{
 		if (((player.weapon.isSwordType() && (player.weapon.isMedium() || player.weapon.isDualMedium())) || player.weapon.isStaffType() || player.weapon.isMonkWeapon() || player.weapon.isGauntletType()) && player.hasStatusEffect(StatusEffects.MartialTraining) && !IsFeralCombat) damage *= (1 + daoModifier(player.statusEffectv2(StatusEffects.MartialTraining)));
 		if (player.hasPerk(PerkLib.ToxicRomance) && monster.monsterIsAcidBurned() && player.weapon.isWhipType()) damage *= 1.35;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist() && (player.weapon.isMonkWeapon() || isUnarmedCombatButDealFireDamage() || isUnarmedCombatButDealIceDamage() || isUnarmedCombatButDealLightningDamage() || isUnarmedCombatButDealDarknessDamage() ||
+			player.isUnarmedCombat() || IsFeralCombat || player.hasAetherTwinsTier1() || player.hasAetherTwinsTier2() || INeedOnlyOneFistOrKick == 1 || INeedOnlyOneFistOrKick == 2 || INeedOnlyOneFistOrKick == 3 || INeedOnlyOneFistOrKick == 4)) damage *= 2;
 		if (isFireTypeWeaponMain() && !isPlasmaTypeWeaponMain()) {
 			if (player.flameBladeActiveMain()) damage += scalingBonusLibido() * 0.2;
 			if (player.weapon == weapons.VGRAVEH) damage *= 1.25;
@@ -4355,6 +4357,7 @@ public class Combat extends BaseContent {
 	public function checkForElementalEnchantmentAndDoDamageOff(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true, crit:Boolean = false):void{
 		if (((player.weaponOff.isSwordType() && (player.weaponOff.isMedium() || player.weaponOff.isDualMedium())) || player.weaponOff.isStaffType() || player.weaponOff.isMonkWeapon()) && player.hasStatusEffect(StatusEffects.MartialTraining)) damage *= (1 + daoModifier(player.statusEffectv2(StatusEffects.MartialTraining)));
 		if (player.hasPerk(PerkLib.ToxicRomance) && monster.monsterIsAcidBurned() && player.weaponOff.isWhipType()) damage *= 1.35;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist() && player.weaponOff.isMonkWeapon()) damage *= 2;
 		if (isFireTypeWeaponOff() && !isPlasmaTypeWeaponOff()) {
 			if (player.flameBladeActiveOff()) damage += scalingBonusLibido() * 0.2;
 			if (player.weaponOff == weapons.VGRAVEH) damage *= 1.25;
@@ -6890,6 +6893,7 @@ public class Combat extends BaseContent {
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
+			if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 			critChance *= combatMagicalCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
@@ -7939,6 +7943,8 @@ public class Combat extends BaseContent {
                 // I think I should just change the mechanic completely and intuite based on the comment
                 // The intention of anemone check seems to be: allows first melee attack and skip the rest of the proc if check passes
                 // Flavor text migrate to preMeleeSkip(), attack skip executed in postMeleeDmgSkip later here
+				if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist() && (player.weapon.isMonkWeapon() || isUnarmedCombatButDealFireDamage() || isUnarmedCombatButDealIceDamage() || isUnarmedCombatButDealLightningDamage() || isUnarmedCombatButDealDarknessDamage() ||
+					player.isUnarmedCombat() || IsFeralCombat || player.hasAetherTwinsTier1() || player.hasAetherTwinsTier2() || checkWayOfTheClosestFist2())) critChance += 10;
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
                 hitCounter++;
@@ -8017,6 +8023,7 @@ public class Combat extends BaseContent {
                             //Determine if critical tease!
                             var crit1:Boolean = false;
                             var critChance1:int = 5;
+							if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance1 += 10;
                             critChance1 += teases.combatTeaseCritical();
                             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
                             if (rand(100) < critChance1) {
@@ -8540,6 +8547,7 @@ public class Combat extends BaseContent {
                 // I think I should just change the mechanic completely and intuite based on the comment
                 // The intention of anemone check seems to be: allows first melee attack and skip the rest of the proc if check passes
                 // Flavor text migrate to preMeleeSkip(), attack skip executed in postMeleeDmgSkip later here
+                if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist() && player.weaponOff.isMonkWeapon()) critChance += 10;
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
                 hitCounter++;
@@ -9866,6 +9874,7 @@ public class Combat extends BaseContent {
             var critChance:int = enwa_critChance;
             var critDamage:Number = 1.75;
 
+			if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 			critDamage += bonusCriticalDamageFromMissingHP();
             if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) critDamage *= impaleMultiplier();
 
@@ -9995,6 +10004,7 @@ public class Combat extends BaseContent {
                     //Determine if critical tease!
                     var crit1:Boolean = false;
                     var critChance1:int = enwa_lustCritChance;
+					if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance1 += 10;
                     if (rand(100) < critChance1) {
                         crit1 = true;
                         damage *= 1.75;
@@ -10090,6 +10100,7 @@ public class Combat extends BaseContent {
         //Determine if critical hit!
         var crit1:Boolean = false;
         var critChance1:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance1 += 10;
         critChance1 *= combatMagicalCritical();
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
         if (rand(100) < critChance1) {
@@ -10150,6 +10161,7 @@ public class Combat extends BaseContent {
         //Determine if critical tease!
         var crit2:Boolean = false;
         var critChance2:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance2 += 10;
         critChance2 += teases.combatTeaseCritical();
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance2 = 0;
         if (rand(100) < critChance2) {
@@ -17347,6 +17359,7 @@ public function CancerGrab():void {
 			var crit:Boolean = false;
 			var critChance:int = 5;
 			var critMulti:Number = 1.75;
+			if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 			critChance *= combatPhysicalCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
@@ -18120,6 +18133,7 @@ public function Guillotine():void {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		var critMulti:Number = 1.75;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
@@ -18181,6 +18195,7 @@ public function ScyllaSqueeze():void {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		var critMulti:Number = 1.75;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
@@ -18353,6 +18368,7 @@ public function TongueSqueeze():void {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		var critMulti:Number = 1.75;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
@@ -19180,6 +19196,7 @@ public function clawsRendDamage():void {
     var crit:Boolean = false;
     var critChance:int;
     critChance = combatPhysicalCritical();
+	if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
     if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
     if (rand(100) < critChance) {
         crit = true;
@@ -20629,6 +20646,7 @@ public function asurasXFingersOfDestruction(fingercount:String):void {
     damage *= (1 + FoDMulti);
     var crit:Boolean = false;
     var critChance:int = 65;
+	if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
     critChance *= combatPhysicalCritical();
     if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
     if (rand(100) < critChance) {
@@ -21887,6 +21905,14 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 
+	public function checkWayOfTheClosestFist():Boolean {
+		if ((player.cor > 0 && monster.cor < 0) || (player.cor < 0 && monster.cor > 0)) return true;
+		return false;
+	}
+	public function checkWayOfTheClosestFist2(INeedOnlyOneFistOrKick:Number = 0):Boolean {
+		if (INeedOnlyOneFistOrKick > 0) return true;
+		else return false;
+	}
 	public function isOutsideDuringDaytime():Boolean {
 		return isOutside() && !isNightTime;
 	}

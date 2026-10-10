@@ -68,7 +68,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 			if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		}
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		return Math.round(damage);
 	}
 
@@ -80,7 +80,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 		}
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) critChance += 10;
 		critChance += combat.combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
@@ -90,6 +90,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 		monster.createStatusEffect(StatusEffects.PunishingKick, calcDuration(), 0, 0, 0);
 		if (display) outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. [Themonster] is knocked off balance by the ferocious blow! ");
 		combat.checkForElementalEnchantmentAndDoDamageMain(damage, true, true, crit, false, 1);
+		combat.checkWayOfTheClosestFist2(1);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		endTurnBySpecialHit(damage, display);
 		

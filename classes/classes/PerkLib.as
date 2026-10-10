@@ -1220,8 +1220,8 @@ public class PerkLib
 				"Your 20th monster won't do anything before rolling d20 dice.",
 				"You've chosen the 'D20 Dice Roller' perk. Your 20th monster won't do anything before rolling d20 dice.");
 		public static const WayOfTheClosestFist:PerkType = mk("Way of the Closest Fist", "Way of the Closest Fist",
-				"Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%.",
-				"You've chosen the 'Way of the Closest Fist' perk. Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%.");
+				"Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%. This bonus only apply to unarmed strikes, soulforce ability and attack made with monk weapons.",
+				"You've chosen the 'Way of the Closest Fist' perk. Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%. This bonus only apply to unarmed strikes, soulforce ability and attack made with monk weapons.");
 		
 		public static const ElementsOfMarethBasic3:PerkType = mk("Elements of Mareth: 3", "Elements of Mareth: 3",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -8090,9 +8090,9 @@ public class PerkLib
                     .requirePerk(LegendaryWisdom)
                     .requireLevel(96);
 			//Tier 17 Wisdom perks
-            //EighteenLevelsOfHell.requireLevel(102)
-            //        .requirePerk(HaikuPoemsWriter)
-            //        .requireWis(450);
+            EighteenLevelsOfHell.requireLevel(102)
+                    .requirePerk(HaikuPoemsWriter)
+                    .requireWis(450);
             //Tier 19 Wisdom perks
             StrongestElementalBond.requirePerk(StrongerElementalBondSu)
 					.requireOrPerks(ElementalContractRank20, DaoOfTheElements, 5)

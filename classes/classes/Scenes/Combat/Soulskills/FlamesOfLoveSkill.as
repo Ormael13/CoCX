@@ -127,6 +127,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 				damage *= 2;
 			}
 		}
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		damage *= combat.fireDamageBoostedByDao();
 		return Math.round(damage);
 	}

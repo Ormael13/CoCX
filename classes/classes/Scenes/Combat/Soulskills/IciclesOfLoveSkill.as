@@ -128,6 +128,7 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 				damage *= 2;
 			}
 		}
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		damage *= combat.iceDamageBoostedByDao();
 		return Math.round(damage);
 	}

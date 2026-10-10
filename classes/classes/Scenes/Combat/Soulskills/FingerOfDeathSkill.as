@@ -57,20 +57,18 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
 	public function calcDamage(monster:Monster, casting:Boolean = false):Number {
 		var damage:Number = (scalingBonusWisdom() + scalingBonusIntelligence()) * 2;
 		if (damage < 20) damage = 20;
-
 		//soulskill mod effect
 		var damageMult:Number = 1;
 		damageMult += (spellMod() - 1);
 		damageMult += (soulskillMagicalMod() - 1);
 		damage *= damageMult;
-		
 		damage = calcEclypseMod(damage, casting);
-
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
 		if (player.armor == armors.DEATHPGA) damage *= 1.5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		return Math.round(damage * combat.darknessDamageBoostedByDao());
 		
 	}
@@ -80,12 +78,11 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
 		if (display) outputText("You point a finger at your opponent condemning [monster his] soul as you call on to the power of death to claim a part of [monster him] early!"
 			+ " A ghastly claw appears and pierces through [themonster] body tearing [monster his] soul apart.  ");
 		combat.darkRitualCheckDamage();
-
 		var damage:Number = calcDamage(monster, true);
-
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
@@ -93,11 +90,9 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
 			damage *= 1.75;
 		}
 		if (display) outputText(" ");
-
 		doPlayerDarknessDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		monster.statStore.addBuffObject({str:-10*(monster.str/100),tou:-10*(monster.tou/100)}, "Finger of death",{text:"Finger of death"});
-
 		checkAchievementDamage(damage);
 		if (display) outputText("\n\n");
 		if (player.hasPerk(PerkLib.BrutalSpells) && monster.armorMDef > 0) {

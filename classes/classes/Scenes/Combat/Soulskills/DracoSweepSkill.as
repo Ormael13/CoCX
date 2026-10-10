@@ -59,6 +59,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 		if (player.armor.name == "some taur paladin armor" || player.armor.name == "some taur blackguard armor") damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		return Math.round(damage);
 	}
 
@@ -74,6 +75,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 		}
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) critChance += 10;
 		if (player.weapon.isSwordType() || player.weaponOff.isSwordType()) critChance += 10;
 		if (player.weapon.isDuelingType() || player.weaponOff.isDuelingType()) critChance += 20;
 		critChance += combat.combatPhysicalCritical();
