@@ -385,7 +385,7 @@ public class Changelog extends BaseContent
 			outputText("-Beauty is in the eye of the beholder - they say. Some also say they want to know what their casual mundane human eyes color is so... well now they can see few shorts words to just tell the eyes color. Also there is numerical size of hips and butt listed on stats page under Body section. ");
 			outputText("Cuz why not if someone likes their PC like a calculation sheet: down to single point scientific accurate description, it's fine they got more various numbers to desc their belowed MC, right? So they can then ask: The numbers, Mason, what do they mean?!\n");
 			outputText("-New tier 15 wisdom lvl-up perk: Sweet Sixteen. Req. Yodh Heh perk and 400+ wisdom. Effect: Now you can make coming-of-age ceremony for your tamed monsters.\n");
-			outputText("-\n");
+			outputText("-New tier 16 wisdom lvl-up perk: Haiku Poems Writer. Req. Sweet Sixteen perk and 425+ wisdom. Effect: Seventeen monster unexpectedly have talent for Haiku poetry.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

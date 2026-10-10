@@ -8081,6 +8081,9 @@ public class PerkLib
                     .requireLevel(90)
 					.requirePerk(JobElementalConjurer);
 			//Tier 16 Wisdom perks
+            HaikuPoemsWriter.requireLevel(96)
+                    .requirePerk(SweetSixteen)
+                    .requireWis(425);
             MythicalWisdom.requireWis(20)
                     .requirePerk(LegendaryWisdom)
                     .requireLevel(96);
