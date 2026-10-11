@@ -70,7 +70,7 @@ public class SoulDrainSkill extends AbstractSoulSkill {
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.UndeadMetabolismIM) >= 2) damage *= player.perkv1(IMutationsLib.UndeadMetabolismIM);
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		if (player.armor == armors.DEATHPGA) damage *= 1.5;
 		return Math.round(damage * combat.darknessDamageBoostedByDao());
 	}
@@ -94,7 +94,7 @@ public class SoulDrainSkill extends AbstractSoulSkill {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {

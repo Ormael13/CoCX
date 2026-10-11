@@ -129,7 +129,7 @@ public class StormOfSisterhoodSkill extends AbstractSoulSkill implements Saveabl
 				damage *= 2;
 			}
 		}
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		damage *= combat.lightningDamageBoostedByDao();
 		return Math.round(damage);
 	}

@@ -49,6 +49,7 @@ public class Incels extends Monster {
         this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);
+		this.createPerk(PerkLib.OverMaxLust, 50, 0, 0, 0);
         this.createPerk(PerkLib.MonsterRegeneration, 10, 0, 0, 0); //HP regen
         checkMonster();
     }
@@ -64,6 +65,9 @@ public class Incels extends Monster {
         damageMultBase += 1;
 		damageMult = damageMultBase;
         lust = 0;
+		var base:Number = perkv1(PerkLib.OverMaxLust);
+		addPerkValue(PerkLib.DieHardHP, 1, base);
+		if (lustVuln > 0.09) lustVuln -= 0.1;
     }
     private function restoreLustTick():void {
         damageMult = damageMultBase + (Math.round(lust/1000) * 0.01);

@@ -13044,7 +13044,6 @@ public class Combat extends BaseContent {
                     if (!monster.plural) outputText("The effects of your perfumed scent are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body. ");
                     else outputText("The effects of your perfumed scent are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body. ");
             }
-
             var lustANDmg:Number = calcHerbalismPower()/2;
             lustANDmg = teases.teaseAuraLustDamageBonus(monster, lustANDmg);
             if (player.hasPerk(PerkLib.RacialParagon)) lustANDmg *= RacialParagonAbilityBoost();
@@ -13067,7 +13066,6 @@ public class Combat extends BaseContent {
                     if (!monster.plural) outputText("The effects of your perfume are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body. ");
                     else outputText("The effects of your perfume are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body. ");
             }
-
             var power:Number = player.statusEffectv1(StatusEffects.ArousalPotion);
             power = teases.teaseAuraLustDamageBonus(monster, power);
             power *= monster.lustVuln;
@@ -13173,7 +13171,7 @@ public class Combat extends BaseContent {
             }
         }
         //Bicorn
-        if ((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 || Forgefather.lethiciteEaten) && !flags[kFLAGS.DISABLE_AURAS]) {
+        if (((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0) || Forgefather.lethiciteEaten) && !flags[kFLAGS.DISABLE_AURAS]) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
             lustDmg = teases.teaseAuraLustDamageBonus(monster, lustDmg);
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 1) lustDmg *= ((player.playerCorruption() / 50 / 100)+1);
@@ -18910,7 +18908,7 @@ public function spiderBiteAttack():void {
         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		if (player.perkv1(IMutationsLib.MyconidSporeIM) >= 1) lustDmg *= (1 + (player.perkv1(IMutationsLib.MyconidSporeIM) * 0.25));
-        monster.teased(Math.round(monster.lustVuln * lustDmg), true);
+        monster.teased(Math.round(monster.lustVuln * lustDmg));
         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);

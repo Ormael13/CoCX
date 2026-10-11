@@ -50,7 +50,7 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 		}
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		return Math.round(damage);
 	}
 
@@ -58,7 +58,7 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 		var damage:Number = calcDamage(monster);
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) critChance += 10;
 		critChance *= combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {

@@ -64,7 +64,7 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		if (player.hasPerk(PerkLib.Heroism) && monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.ExanimationI)) damage *= combat.hollowSkillsAndSoulskillsBoost();
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) damage *= 2;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) damage *= 2;
 		damage *= combat.fireDamageBoostedByDao();
 		return Math.round(damage);
 	}
@@ -73,7 +73,7 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		var damage:Number = calcDamage(monster);
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && checkWayOfTheClosestFist()) critChance += 10;
+		if (player.hasPerk(PerkLib.WayOfTheClosestFist) && combat.checkWayOfTheClosestFist()) critChance += 10;
 		critChance += combat.combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
@@ -83,6 +83,7 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
 		if (display) outputText("Setting your fist ablaze, you rush at [themonster] and scorch [monster him] with your searing flames. ");
 		combat.checkForElementalEnchantmentAndDoDamageMain(damage, true, true, crit, false, 3);
+		combat.checkWayOfTheClosestFist2(3);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		endTurnBySpecialHit(damage, display);
     }
