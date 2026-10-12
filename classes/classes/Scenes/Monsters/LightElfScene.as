@@ -8,6 +8,7 @@ package classes.Scenes.Monsters
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
     import classes.display.SpriteDb;
+	import classes.Scenes.SceneLib;
 
 public class LightElfScene extends BaseContent
 	{
@@ -62,6 +63,12 @@ public class LightElfScene extends BaseContent
 		public function wonWithLightElf():void {
 			clearOutput();
 		//	spriteSelect(SpriteDb.);
+			menu();
+			addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
+			addButton(4, "Next", wonWithLightElf2);
+		}
+		
+		public function wonWithLightElf2():void {
 			outputText("You manage to force the light skinned bitch on her back, so she falls to the ground defeated, yet smirking. Just as you are about to grab her, she throws a smoke bomb on the ground and uses the screen to cover her escape. Blast! She’s fast, there is no way you will catch her now.\n\n");
 			cleanupAfterCombat();
 		}

@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Caves
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class CaveWyrmScene extends BaseContent
 	{
@@ -35,12 +36,14 @@ public function winningOverCaveWyrm():void {
             sceneHunter.print("Maybe cavewyrm dick will solve the issue?");
 			addButton(1, "Fuck Her", winningOverCaveWyrmDMelting);
 		}
-	} else {
+	}
+	else {
 		outputText("You approach the defeated lizard girl intending to punish her for her assault but the drop of precum fuming on the ground like acid next to her cunt tells you that it's a VERY bad idea. Who knows what your ");
 		if (player.hasVagina()) outputText("pussy "); //not sure why I bothered keeping this.
 		outputText(" might end up like if any of these fluids gets in contact with them. Deciding against it you smash the " + (flags[kFLAGS.HERM_CAVE_WYRM] > 0 ?"herm":"female") + " unconscious instead and get your spoils. The locals will better use her then you would.");
 		addButton(0, "Leave", cleanupAfterCombat);
 	}
+	addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer & High Stakes Tamer", player.hasPerk(PerkLib.HighStakesTamer));
 }	
 public function winningOverCaveWyrmDMelting():void {
 	clearOutput();
