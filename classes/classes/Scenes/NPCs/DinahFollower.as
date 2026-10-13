@@ -334,6 +334,8 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (item == 51) catChimeraBuy5(armors.HBARMOR);
 			if (item == 52) catChimeraBuy5(undergarments.HBSHIRT);
 			if (item == 53) catChimeraBuy5(undergarments.HBSHORT);
+			if (item == 54) catChimeraBuy5(jewelries.RINGOTAM);
+			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();

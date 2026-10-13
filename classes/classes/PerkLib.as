@@ -1222,6 +1222,9 @@ public class PerkLib
 		public static const WayOfTheClosestFist:PerkType = mk("Way of the Closest Fist", "Way of the Closest Fist",
 				"Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%. This bonus only apply to unarmed strikes, soulforce ability and attack made with monk weapons.",
 				"You've chosen the 'Way of the Closest Fist' perk. Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%. This bonus only apply to unarmed strikes, soulforce ability and attack made with monk weapons.");
+		public static const PetPlay:PerkType = mk("Pet Play", "Pet Play",
+				"You may convince even humanoids such as elves to become your tamed pets.",
+				"You've chosen the 'Pet Play' perk. You may convince even humanoids such as elves to become your tamed pets.");
 		
 		public static const ElementsOfMarethBasic3:PerkType = mk("Elements of Mareth: 3", "Elements of Mareth: 3",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -1245,9 +1248,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7614,6 +7614,8 @@ public class PerkLib
                     .requireWis(25);
             CorruptionTheFinalFrontierOfTaming.requirePerk(HighStakesTamer)
                     .requireWis(50);
+            PetPlay.requirePerk(CorruptionTheFinalFrontierOfTaming)
+                    .requireWis(75);
             TheHopelessHandler.requirePerk(JobTamer)
                     .requireWis(25);
             NoLimits.requireLevel(3)

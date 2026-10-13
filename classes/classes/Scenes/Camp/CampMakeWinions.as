@@ -170,6 +170,7 @@ public class CampMakeWinions extends BaseContent
 			var mBSM:Number = 1;
 			if (player.hasPerk(PerkLib.StrongerTamedMosters)) mBSM += 1;
 			if (player.hasPerk(PerkLib.StrongerTamedMostersEx)) mBSM += (0.1 * player.level);
+			if (player.hasPerk(PerkLib.JobTamer) && player.hasStatusEffect(StatusEffects.RingOfTaming)) mBSM += player.statusEffectv1(StatusEffects.RingOfTaming);
 			var mGBSM:Number = 1.5;
 			if (player.hasPerk(PerkLib.ApesTogetherStronger)) mBSM += 0.5;
 			if (player.hasPerk(PerkLib.ApesTogetherStrongerEx)) mBSM += 0.5;

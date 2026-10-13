@@ -92,6 +92,7 @@ import classes.PerkLib;
 		//public const RINGWIS:Bullseye = new RingWisdom();
 
 		public const STARBAND:Jewelry = new StarfireBand();
+		public const RINGOTAM:Jewelry = new RingOfTaming();
 		//Normal ring
 		public const DIAMRNG:Jewelry = new Jewelry("DiamRng", "Diam Ring", "gold and diamond ring", "a shining gold and diamond ring", 0, 0, 1000, "This shining ring is made of gold and topped with diamond. Truly expensive.");
 		public const GOLDRNG:Jewelry = new Jewelry("GoldRng", "Gold Ring", "gold ring", "a shining gold ring", 0, 0, 400, "This shining ring is made of gold.");

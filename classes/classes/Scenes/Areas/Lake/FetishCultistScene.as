@@ -537,7 +537,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(cultistDefeated);
 			}
 			else outputText("\n\nYou're not aroused enough to rape her.");
-			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer, Corruption: the final frontier... of taming & Pet Play", player.hasPerk(PerkLib.PetPlay));
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 

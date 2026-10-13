@@ -64,7 +64,7 @@ public class LightElfScene extends BaseContent
 			clearOutput();
 		//	spriteSelect(SpriteDb.);
 			menu();
-			addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer & Corruption: the final frontier... of taming", player.hasPerk(PerkLib.CorruptionTheFinalFrontierOfTaming));
+			addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer, High Stakes Tamer, Corruption: the final frontier... of taming & Pet Play", player.hasPerk(PerkLib.PetPlay));
 			addButton(4, "Next", wonWithLightElf2);
 		}
 		
