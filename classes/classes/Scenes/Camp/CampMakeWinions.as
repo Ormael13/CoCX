@@ -170,7 +170,7 @@ public class CampMakeWinions extends BaseContent
 			var mBSM:Number = 1;
 			if (player.hasPerk(PerkLib.StrongerTamedMosters)) mBSM += 1;
 			if (player.hasPerk(PerkLib.StrongerTamedMostersEx)) mBSM += (0.1 * player.level);
-			if (player.hasPerk(PerkLib.JobTamer) && player.hasStatusEffect(StatusEffects.RingOfTaming)) mBSM += player.statusEffectv1(StatusEffects.RingOfTaming);
+			if (player.hasPerk(PerkLib.JobTamer) && player.hasStatusEffect(StatusEffects.RingOfTamingCount)) mBSM += player.statusEffectv1(StatusEffects.RingOfTamingCount);
 			var mGBSM:Number = 1.5;
 			if (player.hasPerk(PerkLib.ApesTogetherStronger)) mBSM += 0.5;
 			if (player.hasPerk(PerkLib.ApesTogetherStrongerEx)) mBSM += 0.5;
@@ -1818,12 +1818,12 @@ public class CampMakeWinions extends BaseContent
 			}
 		}
 		public function equipRingOfTaming():void {
-			if (player.hasStatusEffect(StatusEffects.RingOfTaming)) player.addStatusValue(StatusEffects.RingOfTaming, 1, 1);
-			else player.createStatusEffect(StatusEffects.RingOfTaming, 1, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.RingOfTamingCount)) player.addStatusValue(StatusEffects.RingOfTamingCount, 1, 1);
+			else player.createStatusEffect(StatusEffects.RingOfTamingCount, 1, 0, 0, 0);
 		}
 		public function unequipRingOfTaming():void {
-			if (player.statusEffectv1(StatusEffects.RingOfTaming) > 1) player.addStatusValue(StatusEffects.RingOfTaming, 1, -1);
-			else player.removeStatusEffect(StatusEffects.RingOfTaming);
+			if (player.statusEffectv1(StatusEffects.RingOfTamingCount) > 1) player.addStatusValue(StatusEffects.RingOfTamingCount, 1, -1);
+			else player.removeStatusEffect(StatusEffects.RingOfTamingCount);
 		}
 
 		//----------

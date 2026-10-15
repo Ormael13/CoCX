@@ -285,6 +285,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BonusACapacity:StatusEffectType                 = mk("Bonus aCapacity");
 		public static const BonusEffectsNecroSet:StatusEffectType           = mk("Bonus Effects: Necro Set");
 		public static const BonusEffectsSkullSet:StatusEffectType           = mk("Bonus Effects: Skull Set");
+		public static const BonusEffectsTamerSet:StatusEffectType      		= mk("Bonus Effects: Tamer Set");
 		public static const BonusEffectsTreeOfLifeSet:StatusEffectType      = mk("Bonus Effects: Tree of Life Set");
 		public static const BonusEffectsUndefeatedKingSet:StatusEffectType  = mk("Bonus Effects: Undefeated King Set");
 		public static const BonusVCapacity:StatusEffectType                 = mk("Bonus vCapacity");
@@ -641,7 +642,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const RathazulArmor:StatusEffectType                  = mk("RathazulArmor");
 		public static const RepeatSuccubi:StatusEffectType                  = mk("repeatSuccubi");
 		public static const ResourceNode1:StatusEffectType                  = mk("Resource Node 1");
-		public static const RingOfTaming:StatusEffectType                 	= mk("Ring of Taming");
+		public static const RingOfTamingCount:StatusEffectType              = mk("Ring of Taming (count)");
 		public static const RiverDungeonA:StatusEffectType          		= mk("River Dungeon A");
 		public static const RiverDungeonFloorRewards:StatusEffectType       = mk("River Dungeon Floor Rewards");
 		public static const Rut:StatusEffectType                            = RutEffect.TYPE;
@@ -1628,4 +1629,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

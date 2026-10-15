@@ -123,6 +123,21 @@ public function equipTreeOfLifeItemsSet():void {
 public function unequipTreeOfLifeItemsSet():void {
 	var count:int = equippedTreeOfLifeSetItems();
 	if (count == 1) player.removeStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet);
+}
+
+public function equippedTamerSetItems():int {
+	var eTSI:int = 0;
+	if (player.jewelry1 == jewelries.RINGOTAM || player.jewelry2 == jewelries.RINGOTAM || player.jewelry3 == jewelries.RINGOTAM || player.jewelry4 == jewelries.RINGOTAM) eTSI++;
+	if (player.jewelry1 == jewelries.RINGOTAM) eTSI++;
+	return eTSI;
+}
+public function equipTamerItemsSet():void {
+	var count:int = equippedTamerSetItems();
+	if (count == 2) player.createStatusEffect(StatusEffects.BonusEffectsTamerSet, 0, 0, 0, 0);
+}
+public function unequipTamerItemsSet():void {
+	var count:int = equippedTamerSetItems();
+	if (count == 1) player.removeStatusEffect(StatusEffects.BonusEffectsTamerSet);
 }/*
 
 public function equippedUndefeatedKingSetItems():int {

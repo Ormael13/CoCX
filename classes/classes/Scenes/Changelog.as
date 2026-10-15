@@ -389,7 +389,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 12 wisdom lvl-up perk: Way of the Closest Fist. Req. Recovery mantra perk. Effect: Damage against opponents of the opposite alignment is doubled and base critical strike against them is increased by 10%. This bonus only apply to unarmed strikes, soulforce ability and attack made with monk weapons.\n");
 			outputText("-New tier 17 wisdom lvl-up perk: Eighteen Levels of Hell. Req. Haiku Poems Writer perk and 450+ wisdom. Effect: Finaly you can capture enough monsters to put as jailer on all eighteen Diyu levels.\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Pet Play. Req. Corruption: the final frontier... of taming perk and 75+ wisdom. Effect: You may convince even humanoids such as elves to become your tamed pets.\n");
-			outputText("-\n");
+			outputText("-New ring (by Ormael): Ring of Taming - buyable at Dinah Rulette. Cost 1,600 gems. +1 taming slot for non-Tamers/+100% base dmg of tamed monsters for Tamers.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
