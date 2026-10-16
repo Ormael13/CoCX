@@ -390,8 +390,8 @@ public class Changelog extends BaseContent
 			outputText("-New tier 17 wisdom lvl-up perk: Eighteen Levels of Hell. Req. Haiku Poems Writer perk and 450+ wisdom. Effect: Finaly you can capture enough monsters to put as jailer on all eighteen Diyu levels.\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Pet Play. Req. Corruption: the final frontier... of taming perk and 75+ wisdom. Effect: You may convince even humanoids such as elves to become your tamed pets.\n");
 			outputText("-New ring (by Ormael): Ring of Taming - buyable at Dinah Rulette. Cost 1,600 gems. +1 taming slot for non-Tamers/+100% base dmg of tamed monsters for Tamers.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New ring (by Ormael): Ring of Animal-Morph Influence - buyable at Dinah Rulette. Cost 1,600 gems. +100% wis in taming checks vs animal-morph/beasts and once per fight use of Fear against them.\n");
+			outputText("-Having equipped two Tamer rings (Taming / Animal-Morph Influence) would give PC set items bonuses: +100% wis in taming checks effect and Fear works against all enemies, additional +100% base dmg for tamed monsters.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -1158,6 +1158,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EzekielCurse:StatusEffectType              = mkCombat("Ezekiel Curse");
 		public static const FalseWeapon:StatusEffectType               = mkCombat("False Weapon");
 		public static const Fascinated:StatusEffectType                = mkCombat("Fascinated");
+		public static const FearRing:StatusEffectType                  = mkCombat("Fear (ring)");
 		public static const FieryRage:StatusEffectType                 = mkCombat("Fiery Rage");
 		public static const FirePunchBurnDoT:StatusEffectType          = mkCombat("Fire Punch Burn DoT");
 		public static const FirstAttack:StatusEffectType               = mkCombat("FirstAttack");

@@ -128,7 +128,7 @@ public function unequipTreeOfLifeItemsSet():void {
 public function equippedTamerSetItems():int {
 	var eTSI:int = 0;
 	if (player.jewelry1 == jewelries.RINGOTAM || player.jewelry2 == jewelries.RINGOTAM || player.jewelry3 == jewelries.RINGOTAM || player.jewelry4 == jewelries.RINGOTAM) eTSI++;
-	if (player.jewelry1 == jewelries.RINGOTAM) eTSI++;
+	if (player.jewelry1 == jewelries.RINGOAMI || player.jewelry2 == jewelries.RINGOAMI || player.jewelry3 == jewelries.RINGOAMI || player.jewelry4 == jewelries.RINGOAMI) eTSI++;
 	return eTSI;
 }
 public function equipTamerItemsSet():void {

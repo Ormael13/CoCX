@@ -146,6 +146,8 @@ public class CampMakeWinions extends BaseContent
 		private function playerWisdomCheck():Number {
 			var pWc:Number = 0;
 			pWc += player.wis;
+			if ((player.jewelry1 == jewelries.RINGOAMI || player.jewelry2 == jewelries.RINGOAMI || player.jewelry3 == jewelries.RINGOAMI || player.jewelry4 == jewelries.RINGOAMI) &&
+				(player.hasStatusEffect(StatusEffects.BonusEffectsTamerSet) || monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType))) pWc += player.wis;
 			if (player.hasPerk(PerkLib.BeastKnowledge)) pWc += player.wis*1.5;
 			if (retrycount > 0) pWc += rand(player.wis);
 			if (retrycount > 1) pWc += rand(player.wis);
@@ -171,6 +173,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.StrongerTamedMosters)) mBSM += 1;
 			if (player.hasPerk(PerkLib.StrongerTamedMostersEx)) mBSM += (0.1 * player.level);
 			if (player.hasPerk(PerkLib.JobTamer) && player.hasStatusEffect(StatusEffects.RingOfTamingCount)) mBSM += player.statusEffectv1(StatusEffects.RingOfTamingCount);
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsTamerSet)) mBSM += 1;
 			var mGBSM:Number = 1.5;
 			if (player.hasPerk(PerkLib.ApesTogetherStronger)) mBSM += 0.5;
 			if (player.hasPerk(PerkLib.ApesTogetherStrongerEx)) mBSM += 0.5;

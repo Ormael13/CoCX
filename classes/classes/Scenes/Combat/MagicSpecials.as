@@ -1410,6 +1410,13 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Ice Prison", iceprisonSpell);
 			favbd(bd, "Ice Prison");
 		}
+		if ((player.jewelry1 == jewelries.RINGOAMI || player.jewelry2 == jewelries.RINGOAMI || player.jewelry3 == jewelries.RINGOAMI || player.jewelry4 == jewelries.RINGOAMI) &&
+				(player.hasStatusEffect(StatusEffects.BonusEffectsTamerSet) || monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType))) {
+			bd = buttons.add("Fear", ringOfAMIFear);
+			if (player.hasStatusEffect(StatusEffects.FearRing)) {
+				bd.disable("You already used this special in this fight.\n\n");
+			favbd(bd, "Fear");
+		}
 	}
 	
 	public function magicAbilitiesGoBrrr():Number {
@@ -8323,6 +8330,14 @@ public class MagicSpecials extends BaseCombatContent {
 		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		combat.heroBaneProc(damage);
+		enemyAI();
+	}
+	
+	public function ringOfAMIFear():void {
+		clearOutput();
+		outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill [themonster]'s mind with visions of [monster his] worst nightmares.\n\n");
+		player.createStatusEffect(StatusEffects.FearRing,0,0,0,0);
+		monster.createStatusEffect(StatusEffects.Fear,3,0,0,0);
 		enemyAI();
 	}
 }
