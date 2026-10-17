@@ -1415,6 +1415,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Fear", ringOfAMIFear);
 			if (player.hasStatusEffect(StatusEffects.FearRing)) {
 				bd.disable("You already used this special in this fight.\n\n");
+			}
 			favbd(bd, "Fear");
 		}
 	}

@@ -186,10 +186,15 @@ public class PlayerInfo extends BaseContent {
 		if (camp.getCampPopulation() > 0) {
 			campStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
 			campStats += "<i>Camp Aboveground Population:</i> " + (camp.getCampPopulation() - camp.getCampUndergroundPopulation()) + "\n";
+			if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
+				campStats += "<b>Tifa's hive population:</b> " + (SceneLib.tifaHive.BeesHatched + 1) + "\n";
+				campStats += "<i>Queen: 1 (Tifa)</i>\n";
+				campStats += "<i>Hive bees population: " + SceneLib.tifaHive.BeesHatched + "</i>\n";
+			}
 			campStats += "<i>Camp Underground Population:</i> " + camp.getCampUndergroundPopulation() + "\n";
 			if (flags[kFLAGS.ANT_WAIFU] > 0) {
 				campStats += "<b>Ant Colony population:</b> "+(1 + flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT])+"\n";
-				campStats += "<i>Queen: 1</i>\n";
+				campStats += "<i>Queen: 1 (Phylla)</i>\n";
 				if (flags[kFLAGS.ANT_KIDS] > 0) campStats += "<i>Ant Children: " + flags[kFLAGS.ANT_KIDS] + " (Current) / " + (250 * (1 + flags[kFLAGS.ANTHILL_EXPANSION])) + " (Sustain limit)</i>\n";
 				if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0) campStats += "<i>Drider Children: " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + " (Current) / " + (50 * (1 + flags[kFLAGS.ANTHILL_EXPANSION])) + " (Sustain limit)</i>\n";
 			}
@@ -1001,6 +1006,9 @@ public class PlayerInfo extends BaseContent {
 			else interpersonStats += getNPCLevel("Ted", 15, 1, 2, 6, flags[kFLAGS.TED_LVL_UP]);
 		}
 
+		if (flags[kFLAGS.TIFA_FOLLOWER] > 5)
+			interpersonStats += "<b>Tifa Affection:</b> " + Math.round(flags[kFLAGS.TIFA_AFFECTION]) + "%\n";
+
 		if (SceneLib.valeria.valeriaFluidsEnabled()) {
             interpersonStats += "<b>Valeria's Fluid:</b> " + flags[kFLAGS.VALERIA_FLUIDS] + "%\n"
 		}
@@ -1078,14 +1086,7 @@ public class PlayerInfo extends BaseContent {
 		if (evangelineStats != "")
 			outputText("\n<b><u>Evangeline Stats</u></b>\n" + evangelineStats);
 		// End Evangeline Stats
-
-		var tifaStats:String = "";
-		if (flags[kFLAGS.TIFA_FOLLOWER] > 5)
-			tifaStats += "<b>Tifa Affection:</b> " + Math.round(flags[kFLAGS.TIFA_AFFECTION]) + "%\n";
-		if (SceneLib.tifaHive.HiveComplete)
-			tifaStats += "<b>Tifa's hive population':</b> " + SceneLib.tifaHive.BeesHatched + "\n";
-		if (tifaStats != "")
-			outputText("\n<b><u>Tifa Stats</u></b>\n" + tifaStats);
+		
 		// Begin RyuBi Stats
 		var ryubiStats:String = "";
 		if (ryubiStats != "")

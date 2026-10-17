@@ -91,11 +91,8 @@ public class Eyes extends BodyPart {
 		name:"elf",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
-
 			desc += " Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.";
-
 			if (creature.hasPerk(PerkLib.BlessingOfTheAncestorTree)) desc += " Despite their otherwordly beauty, the misty hollow at the center of your eyes denounce the absence of a soul, which now resides with the forest.";
-
 			return desc;
 		},
 		Darkvision: true

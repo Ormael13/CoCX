@@ -621,11 +621,11 @@ public class PerkLib
 				"Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.",
 				"You've chosen the 'Subzero Lustful Fury' perk, decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.");
 		public static const NaturalRecovery:PerkType = mk("Natural recovery", "Natural recovery",
-				"Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.",
-				"You've chosen the 'Natural recovery' perk. Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.");
+				"Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Agile tag), shield or melee weapon.",
+				"You've chosen the 'Natural recovery' perk. Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Agile tag), shield or melee weapon.");
 		public static const MageslayingBeast:PerkType = mk("Mageslaying beast", "Mageslaying beast",
-				"Gain spell resistance based on core speed so long as you are naked up to 40%.",
-				"You've chosen the 'Mageslaying beast' perk. Gain spell resistance based on core speed so long as you are naked up to 40%.");
+				"Gain spell resistance based on core speed up to 40% as long you are naked.",
+				"You've chosen the 'Mageslaying beast' perk. Gain spell resistance based on core speed up to 40% as long you are naked.");
 		public static const WoundFocus:PerkType = mk("Wound focus", "Wound focus",
 				"Any bleeding you cause gains a 20% periodic damage increase.",
 				"You've chosen the 'Wound focus' perk. Any bleeding you cause gains a 20% periodic damage increase.");

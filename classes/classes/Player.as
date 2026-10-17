@@ -1044,7 +1044,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ChiReflowAttack)) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;*/
 			//Other bonuses
 			if (hasPerk(PerkLib.ToughHide) && haveNaturalArmor()) armorMDef += (1 * newGamePlusMod);
-			if (hasPerk(PerkLib.MageslayingBeast) && (isNaked() || armor.hasTag(ItemConstants.A_REVEALING))) {
+			if (hasPerk(PerkLib.MageslayingBeast) && (isNaked() || armor.hasTag(ItemConstants.A_AGILE))) {
 				if (speStat.core.value >= 100) armorMDef += 40;
 				else armorMDef += Math.round((speStat.core.value/100)*40);
 			}

@@ -15282,7 +15282,7 @@ public class Combat extends BaseContent {
 				if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) healingPercent += 2;
 				healingPercent += 2;
 			}
-            if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && (player.isNaked() || player.armor.hasTag(ItemConstants.A_REVEALING))) healingPercent += 2;
+            if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && (player.isNaked() || player.armor.hasTag(ItemConstants.A_AGILE))) healingPercent += 2;
             if (player.hasPerk(PerkLib.Sanctuary)) healingPercent += 1;
             if (player.shield == shields.SANCTYL) healingPercent += ((player.corruptionTolerance - player.playerCorruption()) / (player.playerCorruption2() + player.corruptionTolerance)) * 4;
             if (player.shield == shields.SANCTYD) healingPercent += (player.playerCorruption() / (player.playerCorruption2() + player.corruptionTolerance)) * 4;
