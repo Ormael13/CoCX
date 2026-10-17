@@ -10313,11 +10313,16 @@ public final class Mutations extends MutationsHelper {
         //1 == dark elf
         player.slimeFeed();
         clearOutput();
+        var choice:int;
         var changes:Number = 0;
         var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
+		//Temporary storage
+		var temp:Number = 0;
+		var temp2:Number = 0;
+		var temp3:Number = 0;
         outputText("You really should’ve brought this to someone who knew about it first!  Your stomach grumbles, and you feel a short momentaneous pain in your head.  As you swallow you feel your body start to change into something else.");
         //Stats
         if (player.str > 40 && rand(3) == 0 && changes < changeLimit) {
@@ -10357,25 +10362,107 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && rand(3) == 0 && player.femininity != 50) outputText(player.modFem(50, 3));
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Sexual
-        if (player.cockTotal() > 0 && player.biggestCockArea() > 6 && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Your " + player.cockDescript(0) + " begins to tingle as it shrinks to a smaller size.");
-            player.cocks[0].cockLength *= 2 / 3;
-            player.cocks[0].cockThickness *= 2 / 3;
-            dynStats("sen", -2, "lus", -10);
-            changes++;
-        }
-        if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
-            var grown:uint = 1 + rand(3);
-            if (player.breastRows.length > 0) {
-                if (player.breastRows[0].breastRating < 4 && rand(3) == 0) grown++;
+		if (type == 0) {
+			//cock
+			if (player.cockTotal() > 0 && player.biggestCockArea() > 6 && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]Your " + player.cockDescript(0) + " begins to tingle as it shrinks to a smaller size.");
+				player.cocks[0].cockLength *= 2 / 3;
+				player.cocks[0].cockThickness *= 2 / 3;
+				dynStats("sen", -2, "lus", -10);
+				changes++;
+			}
+			//breasts
+			if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
+				var grown:uint = 1 + rand(3);
+				if (player.breastRows.length > 0) {
+					if (player.breastRows[0].breastRating < 4 && rand(3) == 0) grown++;
+				}
+				outputText("[pg]");
+				player.growTits(grown, player.breastRows.length, true, 3);
+				if (player.breastRows.length == 0) {
+					transformations.CreateBreastRow(2).applyEffect();
+					outputText("\n");
+				}
+			}
+		}
+		if (type == 1) {
+			//cock
+            if (player.cocks.length == 1) {
+                temp2 = player.growCock(0, rand(4) + 3);
+                choice = 0;
+                dynStats("lus", 10, "scale", false);
+                player.addCurse("sen", 1, 1);
             }
-            outputText("[pg]");
-            player.growTits(grown, player.breastRows.length, true, 3);
-            if (player.breastRows.length == 0) {
-                transformations.CreateBreastRow(2).applyEffect();
-                outputText("\n");
+            else {
+                //Find smallest cock
+                //Temp2 = smallness size
+                //choice = current smallest
+                temp3 = player.cocks.length;
+                choice = 0;
+                while (temp3 > 0) {
+                    temp3--;
+                    //If current cock is smaller than saved, switch values.
+                    if (player.cocks[choice].cockLength > player.cocks[temp3].cockLength) {
+                        temp2 = player.cocks[temp3].cockLength;
+                        choice = temp3;
+                    }
+                }
+                //Grow smallest cock!
+                //temp2 changes to growth amount
+                temp2 = player.growCock(choice, rand(4) + 3);
+                dynStats("lus", 10, "scale", false);
+                player.addCurse("sen", 1, 1);
+                if (player.cocks[choice].cockThickness <= 2) player.thickenCock(choice, 1);
             }
-        }
+            if (temp2 > 2) outputText("[pg]Your " + cockDescript(choice) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
+            if (temp2 > 1 && temp2 <= 2) outputText("[pg]Aching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(choice) + " from the pleasure of the growth.");
+            if (temp2 <= 1) outputText("[pg]A slight pressure builds and releases as your " + cockDescript(choice) + " pushes a bit further out of your crotch.");
+			//breasts
+			if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 2) {
+				//Single row
+				if (player.breastRows.length == 1) {
+					//Shrink if bigger than B cups
+					if (player.breastRows[0].breastRating >= 1) {
+						temp = 1;
+						player.breastRows[0].breastRating--;
+						//Shrink again if huuuuge
+						if (player.breastRows[0].breastRating > 8) {
+							temp++;
+							player.breastRows[0].breastRating--;
+						}
+						//Talk about shrinkage
+						if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + player.breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.");
+						if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
+						changes++;
+					}
+				}
+				//multiple
+				else {
+					//temp2 = amount changed
+					//temp3 = counter
+					temp = 0;
+					temp2 = 0;
+					temp3 = 0;
+					if (player.biggestTitSize() >= 1) outputText("\n");
+					while (temp3 < player.breastRows.length) {
+						if (player.breastRows[temp3].breastRating >= 1) {
+							player.breastRows[temp3].breastRating--;
+							temp2++;
+							outputText("\n");
+							//If this isn't the first change...
+							if (temp2 > 1) outputText("...and y");
+							else outputText("Y");
+							outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+						}
+						temp3++;
+					}
+					if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
+					if (temp2 == 3) outputText("\nWithout the extra weight, you feel more agile.");
+					if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
+					if (temp2 > 0) changes++;
+				}
+			}
+		}
         //Physical
         if (player.faceType != Face.ELF && changes < changeLimit && rand(3) == 0) {
             if (player.faceType == Face.HUMAN) {
@@ -10425,6 +10512,17 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
+        //eyes color change
+        if (!InCollection(player.eyes.colour, ElfRace.ElfEyesColors) && changes < changeLimit && type == 0 && rand(2) == 0) {
+            transformations.EyesChangeColor(ElfRace.ElfEyesColors).applyEffect(false);
+            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now "+player.eyes.colour+".");
+            changes++;
+        }
+        if (!InCollection(player.eyes.colour, DarkElfRace.DarkElfEyesColors) && changes < changeLimit && type == 1 && rand(2) == 0) {
+            transformations.EyesChangeColor(DarkElfRace.DarkElfEyesColors).applyEffect(false);
+            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now "+player.eyes.colour+".");
+            changes++;
+        }
         if (changes < changeLimit && !player.hasPerk(PerkLib.ElvenSense) && player.ears.type == Ears.ELVEN && player.eyes.type == Eyes.ELF) {
             outputText("[pg]Your acute hearing warns you of imminent danger and you dodge as a branch falls from a nearby tree missing your head by mere inches. You realise your newly sharpened senses granted you increased agility and precision.  <b>You gained the ability Elven Senses.</b>[pg]");
             outputText("<b>(Gained Perk: Elven Sense</b>)");
@@ -10454,7 +10552,8 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.lowerBody == LowerBody.ELF && player.arms.type == Arms.ELF && player.hasPlainSkinOnly() && player.skinAdj != "flawless" && changes < changeLimit && rand(3) == 0) {
             var color:String;
-            color            = randomChoice(ElfRace.ElfSkinColors);
+            if (type == 0) color = randomChoice(ElfRace.ElfSkinColors);
+            if (type == 1) color = randomChoice(DarkElfRace.DarkElfSkinColors);
             player.skinColor = color;
             outputText("[pg]Your skin begins to change again, impurities, scars and bruises disappearing entirely as your skin color changes to a " + player.skinColor + " tone. You examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
             outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinColor + " skin is now flawless just like that of the elves.</b>");
@@ -10471,10 +10570,38 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair Color
-        if (!InCollection(player.hairColor, ElfRace.ElfHairColors) && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.hairColor, ElfRace.ElfHairColors) && changes < changeLimit && type == 0 && rand(3) == 0) {
             player.hairColor = randomChoice(ElfRace.ElfHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
         }
+        if (!InCollection(player.hairColor, DarkElfRace.DarkElfHairColors) && changes < changeLimit && type == 1 && rand(3) == 0) {
+            player.hairColor = randomChoice(DarkElfRace.DarkElfHairColors);
+            outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
+        }
+		if (type == 0) {
+			if (player.hips.type >= 4 && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]Your gait shifts inward, your [hips] narrowing significantly. They remain quite thick, but they're not as absurdly wide as before.");
+				player.hips.type--;
+				changes++;
+			}
+			if (player.butt.type >= 4 && changes < changeLimit && rand(3) == 0) {
+				changes++;
+				player.butt.type--;
+				outputText("[pg]A feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+			}
+		}
+		if (type == 1) {
+			if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]Your gait shifts slightly to accommodate your widening [hips]. The change is subtle, but they're definitely broader.");
+				player.hips.type++;
+				changes++;
+			}
+			if (player.butt.type < 10 && changes < changeLimit && rand(3) == 0) {
+				player.butt.type++;
+				changes++;
+				outputText("[pg]A slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a [butt].");
+			}
+		}
         //wings tf for high elfs xD
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }

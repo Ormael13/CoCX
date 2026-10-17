@@ -294,7 +294,8 @@ public final class ArmorLib extends ItemConstants
 					'spellcost': -0.60,
 					'teasedmg': 15
 				})
-				.withPerk(PerkLib.WalpurgisIzaliaRobe,0,0,0,0) as Armor;
+				.withPerk(PerkLib.WalpurgisIzaliaRobe,0,0,0,0)
+				.withTag(A_REVEALING) as Armor;
 		public const WKIMONO:Armor = new Armor("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light")
 				.withBuffs({
 					'spellcost': -0.20,

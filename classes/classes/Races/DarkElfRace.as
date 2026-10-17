@@ -64,6 +64,14 @@ public class DarkElfRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.hasVagina && body.biggestTitSize < 3
 						}, +1)
+				.customRequirement("",'curvy hips',
+						function (body:BodyData):Boolean {
+							return body.player.hips.type > 9
+						}, +1)
+				.customRequirement("",'jiggly butt',
+						function (body:BodyData):Boolean {
+							return body.player.butt.type > 9
+						}, +1)
 				.customRequirement("","not a wood elf",
 						function (body:BodyData):Boolean {
 							return !body.player.hasPerk(PerkLib.BlessingOfTheAncestorTree)

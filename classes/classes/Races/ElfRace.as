@@ -64,6 +64,14 @@ public class ElfRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.hasVagina && body.biggestTitSize >= 6
 						}, +1)
+				.customRequirement("",'slender hips',
+						function (body:BodyData):Boolean {
+							return body.player.hips.type < 4
+						}, +1)
+				.customRequirement("",'tight butt',
+						function (body:BodyData):Boolean {
+							return body.player.butt.type < 4
+						}, +1)
 				.customRequirement("","not a wood elf",
 						function (body:BodyData):Boolean {
 							return !body.player.hasPerk(PerkLib.BlessingOfTheAncestorTree)

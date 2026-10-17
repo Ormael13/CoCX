@@ -75,6 +75,7 @@ public class IMutationsLib
 		public static const EclipticMindIM:IMutationPerkType = new EclipticMindMutation();
 		public static const EctoplasmicEssenceIM:IMutationPerkType = new EctoplasmicEssenceMutation();
 		public static const EggSackIM:IMutationPerkType = new EggSackMutation();
+		public static const ElvenSharpEyesIM:IMutationPerkType = new ElvenSharpEyesMutation();
 		public static const ElvishPeripheralNervSysIM:IMutationPerkType = new ElvishPeripheralNervSysMutation();
 		public static const EquineMuscleIM:IMutationPerkType = new EquineMuscleMutation();
 		public static const EyeOfTheTigerIM:IMutationPerkType = new EyeOfTheTigerMutation();
