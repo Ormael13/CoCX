@@ -115,7 +115,7 @@ public class WinterWolf extends Monster
 			this.bonusLust = 552;
 			this.lust = 10;
 			this.lustVuln = 0.4;
-			this.level = 102
+			this.level = 102;
 			this.additionalXP = 8000;
 			this.gems = 200 + rand(50);
 			this.drop = new WeightedDrop()

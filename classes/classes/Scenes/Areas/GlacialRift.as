@@ -33,6 +33,7 @@ use namespace CoC;
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
 		public var wendigoScene:WendigoScene = new WendigoScene();
+		public var frostWyrmScene:FrostWyrmScene = new FrostWyrmScene();
 		
 		public const areaLevel:int = 75;
 		public function isDiscovered():Boolean {
@@ -195,6 +196,11 @@ use namespace CoC;
 				label : "Ice Elemental",
 				kind  : 'monster',
 				call: outerGlacialRiftIceElemental
+			}, {
+				name: "frostWyrm",
+				label : "Frost Wyrm",
+				kind  : 'monster',
+				call: encounterFrostWyrm
 			}, {
 				//Valeria
 				name: "valeria",
@@ -411,6 +417,15 @@ use namespace CoC;
 				GlacialRiftConditions();
 				startCombat(new Yeti());
 			}
+		}
+		
+		public function encounterFrostWyrm():void {
+			clearOutput();
+			outputText("As you explore the rift the ground suddenly begins to quake. You lose your footing, falling on your back as the ice breaks, a gigantic woman easily the size of a building surging out and flying straight toward you. It has innocent wide yellow eyes with vertical slits underlined by a pair of small patches of black scales and a human face with two scaled ears. Its mouth is ornate with two fangs and a happy expression that would look quite cute if she wasn't so huge! On each side of her fluffy hair are two horns reminding you of a ram or sheep while below her neck she has a collar of warm white fur just above a chest that easily outsizes J cup. ");
+			outputText("Her two arms are openly extended towards you, covered with fur, with huge oversized claws that look like they can tear through solid stone. Beneath her waist is a long serpentine tail which surges from the ground behind her from which she leaped out. The black underbelly and scales are barely visible underneath the fluffy coat of white fur that covers it.\n\n");
+			outputText("\"<i>"+player.mf("BOY","GIRL")+"FRIEEEEEEND!!!!</i>\" the thing yells with a dopey voice and expression as it attempts to grab you, barely missing you before digging back head first into the ice causing tremors as she moves underground.\n\n");
+			GlacialRiftConditions();
+			startCombat(new FrostWyrm());
 		}
 		
 		public function GlacialRiftConditions():void {
