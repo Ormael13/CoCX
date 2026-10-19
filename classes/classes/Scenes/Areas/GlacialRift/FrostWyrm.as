@@ -118,7 +118,7 @@ public class FrostWyrm extends Monster
 				var choice:Number = rand(3);
 				if (choice == 0) {
 					if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) FrostWyrmDig();
-					else FrostWyrmIceBreath()();
+					else FrostWyrmIceBreath();
 				}
 				if (choice > 0) FrostWyrmIceBreath();
 			}
@@ -153,7 +153,7 @@ public class FrostWyrm extends Monster
 			createBreastRow(Appearance.breastCupInverse("J"));
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = 16*12;
+			this.tallness = 55*12;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.FROSTWYRM;
@@ -181,7 +181,7 @@ public class FrostWyrm extends Monster
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyColossalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}

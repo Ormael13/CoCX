@@ -15,24 +15,24 @@ public class Dryad extends Monster {
 
     //Melee special
     public function slash():void {
-        outputText("The dryad reaches for you with claw-like wooden hands!  As soon as she is close, she slashes with her claws ");
+        outputText("[Themonster] reaches for you with claw-like wooden hands! As soon as she is close, she slashes with her claws ");
         if (player.getEvasionRoll()) {
             outputText("and you deftly avoid her claws!");
         } else {
             outputText("and tears into your flesh! ");
-            player.takePhysDamage(str + weaponAttack + rand(40), true);
+            player.takePhysDamage(str + weaponAttack + rand(weaponAttack), true);
         }
     }
 
     //lust special
     public function pollen():void {
-        outputText("The dryad runs her hands through her leafy hair and spins around.   \n\n Yellow and pink sparkles of pollen gently float through the air in your direction. ");
+        outputText("[Themonster] runs her hands through her leafy hair and spins around.\n\nYellow and pink sparkles of pollen gently float through the air in your direction. ");
         if (player.getEvasionRoll()) {
             outputText("You cover your mouth and nose and avoid breathing in most of the pollen!");
         } else {
             outputText("You take a deep breath of the pollen!\n ");
             outputText("Your mind becomes a haze as a hot wave of arousal washes over you.");
-            player.takeLustDamage(player.lib / 10 + player.sens / 10 + 10, true);
+            player.takeLustDamage((eBaseLibidoDamage() + player.lib + player.sens) / 10, true);
         }
     }
 
@@ -46,9 +46,9 @@ public class Dryad extends Monster {
 
     function Dryad() {
         this.a = "the ";
-        this.short = "Corrupted Dryad";
+        this.short = "corrupted dryad";
         this.imageName = "dryad";
-        this.long = "The dryad before you is brimming with corruption, her hair is composed of dark brown leaves. Her skin looks to be made of corrupted wood, especially her fingers which are shaped like sharp claws. Her clothing is nothing more than leaves and straw put into a gown. Her eyes are a deep and hungry dark red. Her bark-like skin seeps a thick pink substance.  ";
+        this.long = "The dryad before you is brimming with corruption, her hair is composed of dark brown leaves. Her skin looks to be made of corrupted wood, especially her fingers which are shaped like sharp claws. Her clothing is nothing more than leaves and straw put into a gown. Her eyes are a deep and hungry dark red. Her bark-like skin seeps a thick pink substance.";
         this.magicuser = true;
 		this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_NORMAL);
         this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);

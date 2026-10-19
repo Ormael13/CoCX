@@ -54,7 +54,7 @@ public class Changelog extends BaseContent
 			outputText("Barometz - lvl 50. Encountered in Deepwoods. Earth Elemental - lvl 16/26/106. Encountered in Outer Desert / Inner Desert / Tunnels (it temporaly traveled from bedrock region and req. lvl 88+ to encounter). Water Elemental - lvl 18/86/106. Encountered when using Lake Boat/Sea Boat. Wind Elemental - lvl 16/26/56/86. Encountered in Outer Desert / Inner Desert / Mountains / High Mountains. ");
 			outputText("Fire Elemental - lvl 76/106. Encountered in Ashlands / Outer Vulcanic Crag. Ice Elemental - lvl 70/100. Encountered in Tundra / Outer Glacial Rift. Lightning Elemental - lvl 100. Encountered in Cliffs. Lightning Elemental - lvl 90. Encountered in Lightless Reach. ");
 			outputText("Kasha - lvl 87. Encountered in Outer Vulcanic Crag. Hollow - lvl 19 / 31. Encountered in Outer Desert / Plains at night. Ushi Oni/Onna - lvl 54 / 55. Encountered in Bog. Wraith - lvl 22 / 43. ");
-			outputText("Encountered in Inner Forest / Deepwoods / Blight Ridge at night. Frost Wyrm - lvl 100. Encountered in Glacial Rift (Outer).");
+			outputText("Encountered in Inner Forest / Deepwoods / Blight Ridge at night. Frost Wyrm - lvl 100. Encountered in Glacial Rift (Outer). Elder Dryad - lvl 52. Encountered in Deepwoods.");
 			outputText("\n");
 			outputText("-New bodyparts: Troll Arms, Troll lower body, Troll Tusks, Troll Ears, Troll Tail (from Troll Fig); Glacial Troll Arms, Glacial Troll lower body, Glacial Troll Tusks, Glacial Troll Ears, Glacial Troll Tail (from Icy Fig); Bandaged Head(horn), Mummy Arms, Mummy Legs (from mumification event); Myconid Cap, Myconid Hair, Myconid Arms, Myconid Skirt/Pants Legs, Myconid Bra and neck (rearbody), ");
 			outputText("Myconid Pussy, Myconid Cock (from shroomification event); Huge Sextuple Yggdrasil Wings, Yggdrasil Arms, Yggdrasil Eyes, Huge Octuple Yggdrasil Wings (from transforming with World Tree help); Werespider eyes, Werespider arms, Werespider Legs, Werepspider fangs (from transforming after been bitten by werespider); Barometz Legs, Barometz Ears, Barometz Tail, Ram Horns, Verdant Ram Horns, Runic Patterns, ");
@@ -232,7 +232,7 @@ public class Changelog extends BaseContent
 			outputText("-When below lvl 32 Rocksteady selling Pure Peaches for Hollowfied PC's.\n");
 			outputText("-Necro set when completed increase all large sized skeletons control by 1. Each piece of Necro set would add now 3 to each normal sized skeletons caps.\n");
 			outputText("-Skeleton Giant ignore enemy DR. Bone Ballista Skelies deal increased damage to enemy groups or large enemies. Gigachad Skeletal Mages can have selected elemental damage they deal out of combat between any not complex element or pure magic damage.\n");
-			outputText("-New Sprites: Alvina, Kirin (by Liadri).\n");
+			outputText("-New Sprites: Alvina, Kirin, Frost Wyrm (by Liadri).\n");
 			//outputText("-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: \n");
 			outputText("-New event perk: Wild Drake. Gained by having any dragon race score at tier 1+. Effects: You can use dragon breath specials slight sooner (All dragon breaths (excluding the most recent used) cooldowns are reduced by 1 increment).\n");
 			outputText("-New event perk: Dragon Black Ice Breath. Gained by using Red Spider Lily item when having tier 1+ Krampus race score. Effects: Allows access to a dragon black ice breath attack.\n");

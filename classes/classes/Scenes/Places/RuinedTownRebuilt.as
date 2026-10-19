@@ -1364,8 +1364,15 @@ public function BuildWellYes():void {
 	outputText("You ask your kids if the old town’s well is still functional. Amily gives you a pained look, and she shakes her head. <i>“The old well partly collapsed, but the hole’s still there.”</i> She blinks. <i>“It shouldn’t take too much to fix, considering how many of us there are.”</i>\n\n");
 	outputText("You nod, and Amily leads you to the old well, and you clear the rubble from around the old structure. Upon inspection, there are a few places where the well’s stones have come loose lower down, and two of your children dive down to patch them up. Meanwhile, you start laying the groundwork for rebuilding the aboveground portion of the well, including a rope-pull and wooden cover for the well.\n\n");
 	outputText("The construction takes a mere hour, and when it’s finished, Amily pulls the first bucket of water up from the well. She gives it a serious look, and your children look on, the mood darkening. <i>“[Name], come here.</i>” You stride towards your lover, worried…Amily swings the bucket, sending the entire bucket of water into your face. Now dripping wet, you splutter as Amily howls with laughter, letting the bucket fall back down into the well. Some of your children giggle at the sight, and as Amily straightens back up, she wipes a tear out of her eyes.\n\n");
-	outputText("<i>“I’m sorry, [Name], I couldn’t resist.</i>” She doesn’t look that sorry, but you know the best way to get her back. You open your [arms], telling Amily that it’s quite alright. She realizes, too late, what you’re up to as you wrap her in a bear hug. You rub your soaking wet front into her, and Amily gives you a giggle, pushing you off. Now both soaking wet, your kids laugh at their parents.\n\n");
-	outputText("You leave, heading back to the portal. While water from the well still clings to your [clothing], you don’t mind too much. A small price to pay for a job…well done.\n\n");
+	outputText("<i>“I’m sorry, [Name], I couldn’t resist.</i>” She doesn’t look that sorry, but you know the best way to get her back. You open your [arms], telling Amily that it’s quite alright. She realizes, too late, what you’re up to as you wrap her in a bear hug. You rub your soaking wet front into her, and Amily gives you a giggle, pushing you off. Now both soaking wet, your kids laugh at their parents.\n\nYou leave, heading back to the portal. While water from the well still clings to your ");
+	if (player.isNaked()) outputText("naked body");
+	else if (player.armorName == "nothing") {
+		if (player.upperGarmentName != "nothing" && player.lowerGarmentName != "nothing") outputText("[uppergarment] and [lowergarment]");
+		else if (player.upperGarmentName != "nothing") outputText("[uppergarment]");
+		else if (player.lowerGarmentName != "nothing") outputText("[lowergarment]");
+	}
+	else outputText("[armor]");
+	outputText(", you don’t mind too much. A small price to pay for a job…well done.\n\n");
 	Intown = false;
 	WellBuilt = true;
 	doNext(camp.returnToCampUseOneHour);

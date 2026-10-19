@@ -180,7 +180,7 @@ use namespace CoC;
 								&& player.hasCock()
 								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16;
 						}
-					}, corruptedGlade.encounter, {
+					}, corruptedGlade.encounter1, {
 						name: "trip",
 						label:"Root",
 						kind: 'trap',
@@ -410,7 +410,7 @@ use namespace CoC;
 						kind  : 'monster',
 						call  : tentacleBeastEncounterFn,
 						chance: 0.80
-					}, corruptedGlade.encounter, {
+					}, corruptedGlade.encounter1, {
 						name  : "beegirl",
 						label : "Bee-girl",
 						kind  : 'monster',
@@ -767,7 +767,7 @@ use namespace CoC;
 				call  : camp.cabinProgress.gatherWoods,
 				when  : camp.cabinProgress.canGatherWoods,
 				chance: 4
-			}, corruptedGlade.encounter, {
+			}, corruptedGlade.encounter2, {
 				name: "tentabeast",
 				label: "Tentacle Beast",
 				kind: "monster",

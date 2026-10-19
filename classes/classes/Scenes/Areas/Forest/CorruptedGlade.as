@@ -45,7 +45,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
     private function gladeChance():Number {
         return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/200;
     }
-    public var encounter:GroupEncounter = Encounters.group({
+    public var encounter1:GroupEncounter = Encounters.group({
         name: "satyr",
         label: "Trapped Satyr",
         kind: "event",
@@ -57,7 +57,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         name: "dryad",
         label: "Dryad",
         kind: "monster",
-        call: curry(scene, true),
+        call: curry(scene, true, false),
         when  : gladeWhen,
         chance: gladeChance,
         mods: [0.25]
@@ -65,18 +65,42 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         name: "glade",
         label: "Corr. Glade",
         kind: "place",
-        call: curry(scene,false),
+        call: curry(scene, false, false),
+        when  : gladeWhen,
+        chance: gladeChance
+    });
+    public var encounter2:GroupEncounter = Encounters.group({
+        name: "satyr",
+        label: "Trapped Satyr",
+        kind: "event",
+        call: trappedSatyr.findTrapped,
+        when  : gladeWhen,
+        chance: gladeChance,
+        mods: [0.25]
+    }, {
+        name: "elderdryad",
+        label: "Elder Dryad",
+        kind: "monster",
+        call: curry(scene, true, true),
+        when  : gladeWhen,
+        chance: gladeChance,
+        mods: [0.25]
+    }, {
+        name: "glade",
+        label: "Corr. Glade",
+        kind: "place",
+        call: curry(scene, false, false),
         when  : gladeWhen,
         chance: gladeChance
     });
     
-    private function scene(dryad:Boolean):void {
+    private function scene(dryad:Boolean, elder:Boolean):void {
         clearOutput();
         spriteSelect(SpriteDb.s_corruptedGlade);
-        outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.\n\n");
+        outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life. Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.\n\n");
         if (dryad) {
-            outputText("While walking through the  glade you notice a rustling in the bushes.   Do you investigate?\n\n")
-            doYesNo(this.dryad.fightagainstdryad, intro);
+            outputText("While walking through the  glade you notice a rustling in the bushes. Do you investigate?\n\n")
+            doYesNo(curry(this.dryad.fightagainstdryad, elder), intro);
         } else {
             intro();
         }

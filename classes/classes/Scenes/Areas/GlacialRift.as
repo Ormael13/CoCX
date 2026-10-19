@@ -426,6 +426,7 @@ use namespace CoC;
 			outputText("\"<i>"+player.mf("BOY","GIRL")+"FRIEEEEEEND!!!!</i>\" the thing yells with a dopey voice and expression as it attempts to grab you, barely missing you before digging back head first into the ice causing tremors as she moves underground.\n\n");
 			GlacialRiftConditions();
 			startCombat(new FrostWyrm());
+			spriteSelect(SpriteDb.s_frost_wyrm);
 		}
 		
 		public function GlacialRiftConditions():void {
