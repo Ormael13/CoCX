@@ -356,7 +356,7 @@ public class Changelog extends BaseContent
 			outputText("-New ring (by Ormael): Ring of Taming - buyable at Dinah Rulette. Cost 1,600 gems. +1 taming slot for non-Tamers/+100% base dmg of tamed monsters for Tamers.\n");
 			outputText("-New ring (by Ormael): Ring of Animal-Morph Influence - buyable at Dinah Rulette. Cost 1,600 gems. +100% wis in taming checks vs animal-morph/beasts and once per fight use of Fear against them.\n");
 			outputText("-Having equipped two Tamer rings (Taming / Animal-Morph Influence) would give PC set items bonuses: +100% wis in taming checks effect and Fear works against all enemies, additional +100% base dmg for tamed monsters.\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Elven sharp eyes. Req. having free eyes mutation slot, any elf race. Effects: Increase Ranged Critical damage by 20%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

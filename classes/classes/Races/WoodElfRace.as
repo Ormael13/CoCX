@@ -69,6 +69,7 @@ public class WoodElfRace extends Race{
 		
 		addBloodline(PerkLib.ElfsDescendant,PerkLib.BloodlineElf);
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM, +3);
+		addMutation(IMutationsLib.ElvenSharpEyesIM, +3);
 		
 		buildTier(22, "wood elf little sister")
 				.namesTauric("wood elf little sister", "wood elf-taur little sister")

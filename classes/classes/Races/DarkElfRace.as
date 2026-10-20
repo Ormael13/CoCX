@@ -80,6 +80,7 @@ public class DarkElfRace extends Race {
 		
 		addBloodline(PerkLib.ElfsDescendant, PerkLib.BloodlineElf);
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM);
+		addMutation(IMutationsLib.ElvenSharpEyesIM);
 		
 		buildTier(11, "dark elf")
                 .namesTauric("dark elf", "dark elf-taur")

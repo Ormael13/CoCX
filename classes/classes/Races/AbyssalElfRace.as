@@ -40,10 +40,18 @@ public class AbyssalElfRace extends Race {
         addScores()
                 .gillType(Gills.FISH, +1)
 				.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
+				.hasPerk(PerkLib.FlawlessBody, +1)
+				.hasPerk(PerkLib.ElvenSense, +1)
+				.hasPerk(PerkLib.NaturalSpellcasting, +1)
 				.hasPerk(PerkLib.DantianPhylactery, +1, -10)
-				.hasPerk(PerkLib.GOBXChemical, -1000);
+				.hasPerk(PerkLib.GOBXChemical, -1000);//5+1
 
-        buildTier(11, "abyssal elf")
+        addBloodline(PerkLib.ElfsDescendant, PerkLib.BloodlineElf);
+		addMutation(IMutationsLib.ElvishPeripheralNervSysIM);
+		addMutation(IMutationsLib.ElvenSharpEyesIM);
+		
+		buildTier(11, "abyssal elf")
+                .requirePerk(PerkLib.DantianPhylactery)
                 .buffs({
                         "str.mult": +0.00,
                         "tou.mult": +0.00,

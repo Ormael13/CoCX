@@ -74,6 +74,7 @@ public class AbyssalSharkRace extends Race {
 				.hasPerk(PerkLib.DantianPhylactery, +1, -10)
 				.hasPerk(PerkLib.GOBXChemical, -1000);//23+1
 		
+		addBloodline(PerkLib.SharksDescendant, PerkLib.BloodlineShark);
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
 		buildTier(10, "abyssal shark-morph")

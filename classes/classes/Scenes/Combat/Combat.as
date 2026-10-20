@@ -7685,6 +7685,7 @@ public class Combat extends BaseContent {
     private function calculateCritDamageRange():Number{
         var critDamage:Number = 2;
         if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critDamage += 2;
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 1) critDamage += (0.2 * player.perkv1(IMutationsLib.ElvenSharpEyesIM));
 		if (player.weaponRangePerk == "Throwing") {
 			if (player.hasPerk(PerkLib.AnatomyExpert)) critDamage += 0.5;
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDamage += 0.2;

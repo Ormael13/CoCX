@@ -19,13 +19,11 @@ public class ElvenSharpEyesMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-			var pAcc:int = 5;
-            pTier = (pTier == -1)? currentTier(this, player): pTier;
-			if (pTier >= 3) pAcc += 5;
-			if (pTier >= 4) pAcc += 10;
-			if (pTier >= 1){
-				descS += "60 lvl's. Reduces accuracy penalty by 10% for each successive attack during a multiattack. You can now also see in darkness - Dark Vision.";
-            }
+			pTier = (pTier == -1)? currentTier(this, player): pTier;
+			if (pTier >= 1) descS += "Increase Ranged Critical damage by "+(pTier*2)+"0%";
+            if (pTier >= 2) descS += ". Improved attack damage by "+(pTier*25)+"% against opponents afflicted by a status";
+            if (pTier >= 3) descS += ". Elven traditional ability are "+((pTier-2)*25)+"% more effective";
+            if (pTier >= 4) descS += " and have their cooldowns lowered by one round";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -38,9 +36,7 @@ public class ElvenSharpEyesMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireEyesMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.racialScore(Races.HUMAN) > 16;
-                    }, "Human race (17+)");
+                    .requireAnyRace(Races.ELF, Races.DARK_ELF, Races.WOODELF, Races.ABYSSAL_ELF);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -54,28 +50,16 @@ public class ElvenSharpEyesMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) {
-				pBuffs['spe.mult'] = 0.15;
-                pBuffs['sens'] = 15;
-			}
-            if (pTier == 2) {
-				pBuffs['spe.mult'] = 0.45;
-                pBuffs['sens'] = 45;
-			}
-            if (pTier == 3) {
-				pBuffs['spe.mult'] = 1.5;
-                pBuffs['sens'] = 150;
-			}
-            if (pTier == 4) {
-				pBuffs['spe.mult'] = 4.5;
-                pBuffs['sens'] = 450;
-			}
+            if (pTier == 1) pBuffs['spe.mult'] = 0.05;
+			if (pTier == 2) pBuffs['spe.mult'] = 0.1;
+			if (pTier == 3) pBuffs['spe.mult'] = 0.15;
+            if (pTier == 4) pBuffs['spe.mult'] = 0.2;
             return pBuffs;
         }
 
         public function ElvenSharpEyesMutation() 
 		{
-			super(MNAME, SLOT_NONE, 1);//SLOT_EYES
+			super(MNAME, SLOT_EYES, 1);
         }
 
     }

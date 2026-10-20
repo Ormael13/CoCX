@@ -50,7 +50,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requirePeripheralNervSysMutationSlot()
                     .requirePerk(PerkLib.ElvenSense)
-                    .requireAnyRace(Races.ELF, Races.WOODELF, Races.DARK_ELF);
+                    .requireAnyRace(Races.ELF, Races.DARK_ELF, Races.WOODELF, Races.ABYSSAL_ELF);
                 }
                 else{
                     var pLvl:int = pTier * 30;
