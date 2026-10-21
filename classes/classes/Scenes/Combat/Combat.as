@@ -11080,6 +11080,7 @@ public class Combat extends BaseContent {
 		if (player.headJewelry === headjewelries.DRABLOH && monster.hasPerk(PerkLib.EnemyDragonType)) damage *= 1.2;
 		damage *= EyesOfTheHunterDamageBonus();
 		doCamouflageAndRuinousBloodDamageMultiplier(damage, subtype);
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
         damage *= doDamageReduction();
 		if (monster.tou > 1000) damage *= 1/(1 + Math.round((monster.tou-500)/1000));
 		if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
@@ -11164,6 +11165,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		doCamouflageAndRuinousBloodDamageMultiplier(damage, subtype);
 		if (player.perkv1(IMutationsLib.MyconidCollectiveConsciousnessIM) >= 4) damage *= 1.25;
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
         damage *= doDamageReduction();
 		if (monster.tou > 1000) damage *= 1/(1 + Math.round((monster.tou-500)/1000));
 		if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
@@ -11257,6 +11259,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -11458,6 +11461,7 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.SoulCoreIM) == 3 && player.fatigue100 < 50) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.SoulCoreIM) == 4 && player.mana100 < 75) damage *= 2;
 		if (player.perkv1(IMutationsLib.MyconidSporeIM) == 4 && player.hasStatusEffect(StatusEffects.SporeCloud)) damage *= (1 + (0.1 * player.statusEffectv1(StatusEffects.SporeCloud)));
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -11594,6 +11598,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 4 && player.hasStatusEffect(StatusEffects.Lustzerking)) damage *= 1.5;
 		if (player.hasMutation(IMutationsLib.HellcatParathyroidGlandsIM) && (player.inHeat || player.inRut)) damage *= (1 + (0.5 * player.perkv1(IMutationsLib.HellcatParathyroidGlandsIM)));
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -11684,6 +11689,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -11779,6 +11785,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -11862,6 +11869,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
 		if (player.hasMutation(IMutationsLib.HellcatParathyroidGlandsIM) && (player.inHeat || player.inRut)) damage *= (1 + (0.5 * player.perkv1(IMutationsLib.HellcatParathyroidGlandsIM)));
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -11934,6 +11942,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -12016,6 +12025,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -12088,6 +12098,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -12160,6 +12171,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
@@ -12233,6 +12245,7 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 2 && monster.monsterIsHavingStatusEffect()) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.ElvenSharpEyesIM)));
 		if (player.hasPerk(PerkLib.HeraldOfDeath) && monster.hp100 < 50) damage *= 2;
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);

@@ -59,7 +59,7 @@ public class ElvenSharpEyesMutation extends IMutationPerkType
 
         public function ElvenSharpEyesMutation() 
 		{
-			super(MNAME, SLOT_EYES, 1);
+			super(MNAME, SLOT_EYES, 2);
         }
 
     }

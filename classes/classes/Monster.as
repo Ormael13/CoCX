@@ -2343,6 +2343,12 @@ import flash.utils.getQualifiedClassName;
 			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
 			return false;
 		}
+	
+		public function monsterIsHavingStatusEffect():Boolean {
+			if (monsterIsBleeding() || monsterIsPoisoned() || monsterIsLustPoisoned() || monsterIsBurned() || monsterIsFrostbiten() || monsterIsElectrocuted()
+			 || monsterIsHavingNecrosis() || monsterIsAcidBurned()) return true;
+			else return false;
+		}
 
 		/**
 		 * Stop overrding this shit go to performCombatAbility()
