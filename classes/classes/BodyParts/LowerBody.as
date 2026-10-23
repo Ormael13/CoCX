@@ -1241,11 +1241,11 @@ public class LowerBody extends SaveableBodyPart {
 	}
 	
 	public function canUseKick():Boolean {
-		return Types[type].canTaur || false;
+		return Types[type].canKick || false;
 	}
 
 	public function canTaur():Boolean {
-		return Types[type].canKick || false;
+		return Types[type].canTaur || false;
 	}
 
 	public function isDrider():Boolean {

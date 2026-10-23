@@ -10313,7 +10313,6 @@ public final class Mutations extends MutationsHelper {
         //1 == dark elf
         player.slimeFeed();
         clearOutput();
-        var choice:int;
         var changes:Number = 0;
         var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
@@ -10387,36 +10386,38 @@ public final class Mutations extends MutationsHelper {
 		}
 		if (type == 1) {
 			//cock
-            if (player.cocks.length == 1) {
-                temp2 = player.growCock(0, rand(4) + 3);
-                choice = 0;
-                dynStats("lus", 10, "scale", false);
-                player.addCurse("sen", 1, 1);
-            }
-            else {
-                //Find smallest cock
-                //Temp2 = smallness size
-                //choice = current smallest
-                temp3 = player.cocks.length;
-                choice = 0;
-                while (temp3 > 0) {
-                    temp3--;
-                    //If current cock is smaller than saved, switch values.
-                    if (player.cocks[choice].cockLength > player.cocks[temp3].cockLength) {
-                        temp2 = player.cocks[temp3].cockLength;
-                        choice = temp3;
-                    }
-                }
-                //Grow smallest cock!
-                //temp2 changes to growth amount
-                temp2 = player.growCock(choice, rand(4) + 3);
-                dynStats("lus", 10, "scale", false);
-                player.addCurse("sen", 1, 1);
-                if (player.cocks[choice].cockThickness <= 2) player.thickenCock(choice, 1);
-            }
-            if (temp2 > 2) outputText("[pg]Your " + cockDescript(choice) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
-            if (temp2 > 1 && temp2 <= 2) outputText("[pg]Aching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(choice) + " from the pleasure of the growth.");
-            if (temp2 <= 1) outputText("[pg]A slight pressure builds and releases as your " + cockDescript(choice) + " pushes a bit further out of your crotch.");
+			if (player.cocks.length > 0) {
+				if (player.cocks.length == 1) {
+					temp2 = player.growCock(0, rand(4) + 3);
+					temp = 0;
+					dynStats("lus", 10, "scale", false);
+					player.addCurse("sen", 1, 1);
+				}
+				else {
+					//Find smallest cock
+					//Temp2 = smallness size
+					//temp = current smallest
+					temp3 = player.cocks.length;
+					temp  = 0;
+					while (temp3 > 0) {
+						temp3--;
+						//If current cock is smaller than saved, switch values.
+						if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
+							temp2 = player.cocks[temp3].cockLength;
+							temp  = temp3;
+						}
+					}
+					//Grow smallest cock!
+					//temp2 changes to growth amount
+					temp2 = player.growCock(temp, rand(4) + 1);
+					dynStats("lus", 10, "scale", false);
+					player.addCurse("sen", 1, 1);
+					if (player.cocks[temp].cockThickness <= 2) player.thickenCock(temp, 1);
+				}
+				if (temp2 > 2) outputText("[pg]Your " + cockDescript(temp) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
+				if (temp2 > 1 && temp2 <= 2) outputText("[pg]Aching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(temp) + " from the pleasure of the growth.");
+				if (temp2 <= 1) outputText("[pg]A slight pressure builds and releases as your " + cockDescript(temp) + " pushes a bit further out of your crotch.");
+			}
 			//breasts
 			if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 2) {
 				//Single row

@@ -1998,7 +1998,7 @@ public class TestMenu extends BaseContent
 			addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Alicornium.");
 			addButton(6, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
 			addButton(7, "AbyssalSTooth", AddAbyssalSharkTooth).hint("Add 1 Abyssal Shark Tooth.");
-			//addButton(8, "", ).hint("Add 1 .");
+			addButton(8, "DarkElfTF", AddDarkFaeEarShapedPlant).hint("Add 1 Dark Fae ear shaped plant.");
 			addButton(9, "Lethicite", AddLethicite);
 			addButton(10, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			addButton(11, "E.Ichor", AddEIchor).hint("Add 1 E.Ichor.");
@@ -2513,6 +2513,10 @@ public class TestMenu extends BaseContent
 	public function AddAbyssalSharkTooth():void {
 		outputText("\n\n<b>(Gained 1 Abyssal Shark Tooth!)</b>\n\n");
 		inventory.takeItem(consumables.ASTOOTH, curry(NonEquipmentMenu, 1));
+	}
+	public function AddDarkFaeEarShapedPlant():void {
+		outputText("\n\n<b>(Gained 1 Dark Fae ear shaped plant!)</b>\n\n");
+		inventory.takeItem(consumables.DELFEARS, curry(NonEquipmentMenu, 1));
 	}
 	public function AddAlicornium():void {
 		outputText("\n\n<b>(Gained 1 Alicornium!)</b>\n\n");
