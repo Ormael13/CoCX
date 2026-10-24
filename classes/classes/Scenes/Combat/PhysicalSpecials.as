@@ -1649,13 +1649,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+			critChance += 10;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critChance += (2.5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+		}
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") buffMultiplier += 1;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+				buffMultiplier += 1;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) buffMultiplier += (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+			}
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
 			else damage *= (1.75 + buffMultiplier);
 		}
@@ -1837,14 +1843,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var critChance:int = 5;
 		var critMulti:Number = 1.75;//coś innego tu wpisać jako perk pozwalający na wyższy mnożnik krytyków
 		critChance += combat.combatPhysicalCritical();
-		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+			critChance += 10;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critChance += (2.5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+		}
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
 			if (player.perkv1(IMutationsLib.CaveWyrmAcidIM) >= 4 && player.nitrobladeActiveMain()) buffMultiplier += 1;
-			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") buffMultiplier += 1;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+				buffMultiplier += 1;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) buffMultiplier += (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+			}
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
 			else damage *= (critMulti + buffMultiplier);
 		}
@@ -2114,13 +2126,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var critMulti:Number = 1.75;//coś innego tu wpisać jako perk pozwalający na wyższy mnożnik krytyków
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") {
+			critChance += 10;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critChance += (2.5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+		}
 		critChance *= 2;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			var buffMultiplier:Number = 0;
-			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") buffMultiplier += 1;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+				buffMultiplier += 1;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) buffMultiplier += (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+			}
 			damage *= critMulti+buffMultiplier;
 		}
 		damage = Math.round(damage);
@@ -7712,16 +7730,23 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var critChance:int = 5;
 			critChance *= combatPhysicalCritical();
 			if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critChance += 10;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+				critChance += 10;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critChance += (2.5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+			}
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
 				var buffMultiplier:Number = 0;
-				if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") buffMultiplier += 1;
+				if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+					buffMultiplier += 1;
+					if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) buffMultiplier += (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+				}
 				damage *= 1.75+buffMultiplier;
 			}
 			if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 			if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) damage *= (1 + (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2)));
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) damage = combat.elementalArrowDamageMod(damage);
 			//Section for item damage modifiers
 			if (weaponRangePerk == "Bow"){
@@ -7786,7 +7811,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (combat.monsterDefeatCheck()) {
 			return;
 		}
-		player.createStatusEffect(StatusEffects.CooldownPinDown,8,0,0,0);
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 4) player.createStatusEffect(StatusEffects.CooldownPinDown,7,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownPinDown,8,0,0,0);
 		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
 		else monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		enemyAI();
@@ -7824,12 +7850,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+			critChance += 10;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critChance += (2.5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+		}
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			var buffMultiplier:Number = 0;
-			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") buffMultiplier += 1;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+				buffMultiplier += 1;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) buffMultiplier += (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+			}
 			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
@@ -8025,12 +8057,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+			critChance += 10;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critChance += (2.5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+		}
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			var buffMultiplier:Number = 0;
-			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") buffMultiplier += 1;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+				buffMultiplier += 1;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) buffMultiplier += (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+			}
 			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
@@ -8064,12 +8102,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critChance += 20;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+			critChance += 20;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critChance += (5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+		}
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			var buffMultiplier:Number = 0;
-			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") buffMultiplier += 2;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+				buffMultiplier += 2;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) buffMultiplier += (0.5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+			}
 			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);

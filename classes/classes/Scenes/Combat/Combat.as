@@ -3652,6 +3652,7 @@ public class Combat extends BaseContent {
 					if (player.hasStatusEffect(StatusEffects.GreenCovenant)) {
 						if (player.perkv1(IMutationsLib.PlantChlorophyllIM) >= 2 && (player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.YGGDRASIL) || player.isRaceCached(Races.ALRAUNE) || player.isRaceCached(Races.BAROMETZ))) lustDMG *= ((1 + player.plantChlorophyllBoost()) * 2);
 						else lustDMG *= 2;
+						if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) lustDMG *= (1 + (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2)));
 					}
 					if (player.armor == armors.ELFDRES && player.isElf()) lustDMG *= 2;
 					if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDMG *= 2;
@@ -7674,7 +7675,10 @@ public class Combat extends BaseContent {
         else {
             critChance *= combatPhysicalCritical();
             if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 20;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") {
+				critChance += 20;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critChance += (5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+			}
 			if (player.weaponRangePerk == "Throwing") {
 				if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
 				if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
@@ -7684,7 +7688,10 @@ public class Combat extends BaseContent {
     }
     private function calculateCritDamageRange():Number{
         var critDamage:Number = 2;
-        if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critDamage += 2;
+        if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") {
+			critDamage += 2;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) critDamage += (0.5 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
+		}
 		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 1) critDamage += (0.2 * player.perkv1(IMutationsLib.ElvenSharpEyesIM));
 		if (player.weaponRangePerk == "Throwing") {
 			if (player.hasPerk(PerkLib.AnatomyExpert)) critDamage += 0.5;
@@ -12772,7 +12779,9 @@ public class Combat extends BaseContent {
         }
 		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) {
 			outputText("<b>Your connection to corrupted flora makes you increasingly lustful.</b> ");
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			var perCent:Number = 0.05;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) perCent *= (1 + (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2)));
+			player.takeLustDamage(Math.round(player.maxLust() * perCent), true);
 			outputText("\n\n");
 		}
 		if (player.hasStatusEffect(StatusEffects.LustTransferance)) player.takeLustDamage(player.statusEffectv1(StatusEffects.LustTransferance) + 4, true);
@@ -15235,6 +15244,7 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) {
 			if (player.perkv1(IMutationsLib.PlantChlorophyllIM) >= 2 && (player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.YGGDRASIL) || player.isRaceCached(Races.ALRAUNE) || player.isRaceCached(Races.BAROMETZ))) dmg *= ((1 + player.plantChlorophyllBoost()) * 2);
 			else dmg *= 2;
+			if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) dmg *= (1 + (0.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2)));
 		}
 		//Determine if critical tease!
 		var critChanceAV:int = 5;
@@ -15312,6 +15322,7 @@ public class Combat extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) {
 				if (player.perkv1(IMutationsLib.PlantChlorophyllIM) >= 2 && (player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.YGGDRASIL) || player.isRaceCached(Races.ALRAUNE) || player.isRaceCached(Races.BAROMETZ))) healingPercent += ((1 + player.plantChlorophyllBoost()) * 25);
 				else healingPercent += 25;
+				if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) healingPercent += (6.25 * (player.perkv1(IMutationsLib.ElvenSharpEyesIM) - 2));
 			}
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) negativeHPRegen += 1;
             if ((player.hasPerk(PerkLib.Diehard) || player.hasPerk(PerkLib.GreaterDiehardEx)) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen += 1;

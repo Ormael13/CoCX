@@ -359,6 +359,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Elven sharp eyes. Req. having free eyes mutation slot, any elf race. Effects: Increase Ranged Critical damage by 20%.\n");
 			outputText("-New mutation perk: Elven sharp eyes (Primitive). Req. Elven sharp eyes and lvl 30+. Effects: Increase Ranged Critical damage by 40%. Improved attack damage by 50% against opponents afflicted by a status.\n");
 			outputText("-New event perk: Apes Together Strong (Ave). Gained by use of the Pocket Watch when req. are meet. Effects: You could now group tamed monsters in groups of fourteen of the same type. Together they would be 900% stronger and you can control max 9 group of tamed monsters.\n");
+			outputText("-New consumable (by Ormael): Hypersensitivity Draft - Made by Lumi by enhancing Sensitivity Draft. Costs 90 gems and increase sensitivity by 100 on use. Would give 2x longer lasting Lusty Tongue effect then sensitivity draft.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -374,10 +375,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
-			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
 			outputText("-\n");
-			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier ? wisdom lvl-up perk: ???. Req. ??? perk and ???+ wisdom. Effect: 
 			outputText("-\n");//New tier ? sensitivity lvl-up perk: Domain Kineses. Req. ?Quasi Domain Kineses? perk and ???+ sensitivity. Effect: ??? aura effects like psychic aura dealing specific elemetal damage ^^ ???
@@ -393,10 +393,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New tier 18 sensitivity lvl-up perk: . Req. Vitakinesis (Ex) perk and 465+ sensitivity. Effect: 
 			outputText("-\n");
+			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
+			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accessible by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to 3rd floor ");
@@ -3954,7 +3954,7 @@ public class Changelog extends BaseContent
 			outputText("-New head jewelry/accessory/misc (by Ormael): Ezekiel's Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. Negate up to 4 racial perk points negative effects.\n");
 			outputText("-New necklace (by Ormael): Ezekiel's Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. Negate up to 5 racial perk points negative effects.\n");
 			outputText("-New M. Specials for Gazer race: Chaos beams, Dominating Gaze. First is attacking enemy with use of eye stalks dealing random effects by ech of them (and then 12 turns long cooldown). Second is power stun for 2 turns (none of enemies can resist it but not expect that some that can resist or even... turn the table could appear ingame).\n");
-			outputText("-New TF Items: Eye Dops & Magic Eye Drops. First can be found in cave areas and second is enhanced by Lumi verison of eye drops or drops from one of Ebon Labyrinth bosses. Cost 50 gems and would change user into Cyclop/Gazer.\n");
+			outputText("-New TF Items: Eye Dops & Magic Eye Drops. First can be found in cave areas and second is enhanced by Lumi version of eye drops or drops from one of Ebon Labyrinth bosses. Cost 50 gems and would change user into Cyclop/Gazer.\n");
 			outputText("-Cyclop // Gazer race bonus stats for reaching (6/12+)//(7/14/21+) pts in score: +45/90% to str racial multi, +45/90% to tou racial multi // +30/55/80% to tou racial multi, -55/65/75% to spe racial multi, +80/130/180% to int racial multi, +50/90/130% to lib racial multi (Gazer and Eye Tyrant stages req. to have 6/10 eye stalk tentacles)\n");
 			outputText("-Bit of increased secondary stat bars gains for monsters at milestones to keep them protected from nuking by PC.\n");
 			outputText("-With too large diff in levels damage reduction will return 1 point of dmg instead of 0. With some effects form items or perks that will still give chance to get few points of dmg even if PC is vastly underleveled compared to enemy.\n");

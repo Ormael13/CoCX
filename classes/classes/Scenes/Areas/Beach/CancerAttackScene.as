@@ -57,7 +57,7 @@ public class CancerAttackScene extends BaseContent
 				outputText("As you explore the beach you begin to feel the sand rumble under your feet… just what the hell is going on?\n\n" +
 						"You indeed are answered shortly afterward as a huge pincers surge out of the sand before you and try to grab you. ");
 				if (player.spe < 150) {
-					outputText("wich it does manage to. You begin to struggle as the rest of the creature’s body moves out of the sand and you are lifted up into the air along with the pincer. " +
+					outputText("Wich it does manage to. You begin to struggle as the rest of the creature’s body moves out of the sand and you are lifted up into the air along with the pincer. " +
 							"At the other end of the pincer that tried to hold you is the massive chitinous body of a crab, still partially covered in sand, " +
 							"a smaller form atop it with the physiognomy of a young human from the waist up. " +
 							"[monster He] looks at you with a gaze devoid of emotion and flatly declares.\n\n" +

@@ -132,6 +132,7 @@ public class Lumi extends BaseContent {
 	public function lumiEnhance1(justCheck:Boolean = false):Boolean {
         var improvables:Array = [
             [consumables.NUMBROX,consumables.NUMBCND],
+            [consumables.SENSDRF,consumables.HSENSDRF],
             [consumables.GOB_ALE,consumables.GRE_BER],
             [consumables.REDVIAL,consumables.VAMPBLD],
             [consumables.C_VEMOM,consumables.P_VEMOM],

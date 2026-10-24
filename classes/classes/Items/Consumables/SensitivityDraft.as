@@ -14,7 +14,7 @@ import classes.StatusEffects;
 		public function SensitivityDraft()
 		{
 			super("SensDrf","SensDraft", "a bottle of sensitivity draft", ITEM_VALUE, "This carefully labelled potion is a 'Sensitivity Draft', and if the diagrams are any indication, it will make your body more sensitive.");
-			refineableInto([], [], [[1, AlchemyLib.AR_SENS_DEC]]);
+			refineableInto([], [], [[1, AlchemyLib.AR_SENS_INC]]);
 		}
 		
 		override public function useItem():Boolean

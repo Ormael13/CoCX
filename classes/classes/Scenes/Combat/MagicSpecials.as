@@ -4633,7 +4633,8 @@ public class MagicSpecials extends BaseCombatContent {
 	public function greenCovenant():void {
 		outputText("You direct your desire to the nearby plants causing them to surge and wrap around you as a tendril gently wraps itself around your left leg, embracing your form like a lover, before "+(player.hasVagina()?"plunging within your welcoming elven nether lips. A second one ":"it ")+"");
 		outputText("finds the hole to your pucker plugging it perfectly as embery sap flows directly from the plants into your core. Now one with the nearby corrupted vegetation you overflow with magical might as the plants literally pump their power directly into you.\n");
-		player.createStatusEffect(StatusEffects.CooldownGreenCovenant, 12, 0, 0, 0);
+		if (player.perkv1(IMutationsLib.ElvenSharpEyesIM) >= 4) player.createStatusEffect(StatusEffects.CooldownGreenCovenant, 11, 0, 0, 0);
+		else player.createStatusEffect(StatusEffects.CooldownGreenCovenant, 12, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.GreenCovenant, 0, 0, 0, 0);
 		enemyAI();
 	}

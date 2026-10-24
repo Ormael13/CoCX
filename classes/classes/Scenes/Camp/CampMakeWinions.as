@@ -494,8 +494,8 @@ public class CampMakeWinions extends BaseContent
 				addButton(10, "Next", accessTamedWinionsMainMenu, page - 2);
 				addButton(11, "Prev", accessTamedWinionsMainMenu, page - 1);
 			}
-			addButtonIfTrue(12, "Move", curry(moveTamedMonsters, 1), "You do not have Apes Together Strong perk.", player.hasPerk(PerkLib.ApesTogetherStrong), "Move your tamed monsters from main roster to reserve roster. (for monsters intended to group with other monsters)");
-			addButtonIfTrue(13, "Group", curry(groupUpTamedMonsters, 1), "You do not have Apes Together Strong perk.", player.hasPerk(PerkLib.ApesTogetherStrong), "Group your tamed monsters.");
+			addButtonIfTrue(12, "Move", curry(moveTamedMonsters, 1), "You do not have Apes Together Strong OR Apest Togehter Strong (Ave) perk.", (player.hasPerk(PerkLib.ApesTogetherStrong) || player.hasPerk(PerkLib.ApesTogetherStrongAve)), "Move your tamed monsters from main roster to reserve roster. (for monsters intended to group with other monsters)");
+			addButtonIfTrue(13, "Group", curry(groupUpTamedMonsters, 1), "You do not have Apes Together Strong OR Apest Togehter Strong (Ave) perk.", (player.hasPerk(PerkLib.ApesTogetherStrong) || player.hasPerk(PerkLib.ApesTogetherStrongAve)), "Group your tamed monsters.");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		public function tamingAttempt():void {

@@ -296,7 +296,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const C__MINT:Consumable       = new Mint();
 		public const CERUL_P:Consumable       = new CeruleanPotion();
 		public const COAL___:Consumable       = new Coal();
-		public const CFISHS: Consumable  = mk("CFishS.", "Cold Fish S.", "a bowl of cold fish soup", 20, "A soup made with fishes from the glacial rift. It is served cold to preserve the flavor and supposed calming effect which act as a lustkiller.", m.coldFishSoup);
+		public const CFISHS: Consumable = mk("CFishS.", "Cold Fish S.", "a bowl of cold fish soup", 20, "A soup made with fishes from the glacial rift. It is served cold to preserve the flavor and supposed calming effect which act as a lustkiller.", m.coldFishSoup);
 	//	public const DAO_DEW: Consumable = mk("Dao Dew", "Dao Dew", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.daoDew);
 		public const DEBIMBO:DeBimbo          = new DeBimbo();
 		public const EXTSERM:HairExtensionSerum = new HairExtensionSerum();
@@ -306,6 +306,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const HAPILL_: Consumable = mk("HAPill", "Huge Angry Pill", "a huge angry pill", 700, "A huge pill that's guaranteed to makes you more angry.", m.hugeangrypill);
 		public const HM_FRAG:HollowMaskFrag	  = new HollowMaskFrag();
 		public const HRBCNT:Consumable        = new HerbalContraceptive();
+		public const HSENSDRF:Consumable      = new HyperSensitivityDraft();
 		public const INCOINS: Consumable = mk("IncOIns", "IncenOfIns", "an incense of Insight", 15, "These sticks, when burned, are rumored to fill an area with an incense that allows for deep meditation and granting greater insight.", m.incenseOfInsight);
 		public const ICICLE_:Consumable       = new IceShard();
 		public const KITGIFT:KitsuneGift	  = new KitsuneGift();

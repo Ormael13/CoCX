@@ -3299,7 +3299,13 @@ use namespace CoC;
 			var remainingHit:Array = [];
 			//all dmg reduction effect(s)
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.EnergyDrain)) damage *= 0.75;
-			if (hasStatusEffect(StatusEffects.GreenCovenant)) damage *= 0.25;
+			if (hasStatusEffect(StatusEffects.GreenCovenant)) {
+				if (perkv1(IMutationsLib.ElvenSharpEyesIM) >= 3) {
+					if (perkv1(IMutationsLib.ElvenSharpEyesIM) >= 4) damage *= 0.175;
+					else damage *= 0.1875;
+				}
+				else damage *= 0.25;
+			}
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.BloodShower)) damage *= 0.2;
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.CorpseExplosion)) damage *= (1 - (0.01 * CoC.instance.monster.statusEffectv1(StatusEffects.CorpseExplosion)));
 			if (hasPerk(PerkLib.Comradery) && companionsInPCParty()) {
