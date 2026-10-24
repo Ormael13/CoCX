@@ -1225,6 +1225,9 @@ public class PerkLib
 		public static const PetPlay:PerkType = mk("Pet Play", "Pet Play",
 				"You may convince even humanoids such as elves to become your tamed pets.",
 				"You've chosen the 'Pet Play' perk. You may convince even humanoids such as elves to become your tamed pets.");
+		public static const ApesTogetherStrongAve:PerkType = mk("Apes Together Strong (Ave)", "Apes Together Strong (Ave)",
+				"You could now group tamed monsters in groups of fourteen of the same type. Together they would be 900% stronger and you can control max 9 group of tamed monsters.",
+				"You've chosen the 'Apes Together Strong (Ave)' perk. You could now group tamed monsters in groups of fourteen of the same type. Together they would be 900% stronger and you can control max 9 group of tamed monsters.");
 		
 		public static const ElementsOfMarethBasic3:PerkType = mk("Elements of Mareth: 3", "Elements of Mareth: 3",
 				"You can now summon and command ???, ??? and ??? elementals. Also increase elementals command limit by 1.",
@@ -1248,9 +1251,6 @@ public class PerkLib
 		public static const DeadlyFluids:PerkType = mk("Deadly fluids", "Deadly fluids",
 				".",
 				"You've chosen the 'Deadly fluids' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7644,6 +7644,7 @@ public class PerkLib
                     .requirePerk(JobTamer)
                     .requireWis(50);
             ApesTogetherStrong.requireLevel(6)
+                    .requireNotThosePerks(ApesTogetherStrongAve)
                     .requirePerk(Beast02)
                     .requireWis(55);
             WorkingTogether.requireLevel(6)
@@ -7653,7 +7654,7 @@ public class PerkLib
                     .requirePerk(HighStakesTamer)
                     .requireWis(55);
             MoreApes.requireLevel(6)
-                    .requirePerk(ApesTogetherStrong)
+                    .requireAnyPerk(ApesTogetherStrong, ApesTogetherStrongAve)
                     .requireWis(60);
 			InsightfulResourcesI.requireLevel(6)
                     .requireWis(50)

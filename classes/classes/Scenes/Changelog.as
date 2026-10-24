@@ -358,6 +358,7 @@ public class Changelog extends BaseContent
 			outputText("-Having equipped two Tamer rings (Taming / Animal-Morph Influence) would give PC set items bonuses: +100% wis in taming checks effect and Fear works against all enemies, additional +100% base dmg for tamed monsters.\n");
 			outputText("-New mutation perk: Elven sharp eyes. Req. having free eyes mutation slot, any elf race. Effects: Increase Ranged Critical damage by 20%.\n");
 			outputText("-New mutation perk: Elven sharp eyes (Primitive). Req. Elven sharp eyes and lvl 30+. Effects: Increase Ranged Critical damage by 40%. Improved attack damage by 50% against opponents afflicted by a status.\n");
+			outputText("-New event perk: Apes Together Strong (Ave). Gained by use of the Pocket Watch when req. are meet. Effects: You could now group tamed monsters in groups of fourteen of the same type. Together they would be 900% stronger and you can control max 9 group of tamed monsters.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -371,7 +372,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//merging Apes Together Strong to Apes Together Strongest perks -> Apes Together Strong (Ave) - max 9 tamed monsters in group and 900% and max 9 groups
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
