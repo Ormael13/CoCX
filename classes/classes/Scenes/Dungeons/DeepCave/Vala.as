@@ -117,24 +117,24 @@ public class Vala extends Monster
 			this.bodyColor = "fair";
 			this.hairColor = "purple";
 			this.hairLength = 22;
-			initStrTouSpeInte(77, 92, 95, 90);
-			initWisLibSensCor(90, 75, 55, -100);
+			initStrTouSpeInte(177, 192, 195, 90);
+			initWisLibSensCor(90, 175, 155, -100);
 			this.weaponName = "fists";
 			this.weaponVerb="caresses";
 			this.weaponAttack = 1;
 			this.armorName = "skin";
 			this.armorDef = 1;
 			this.armorMDef = 1;
-			var lustVuln:Number = .5;
+			var lustVuln:Number = .125;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) lustVuln += .25;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) lustVuln += .5;
 			var lust:Number = 30 + game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] * 10;
-			if(lust > 80) lust = 80;
+			if(lust > 380) lust = 380;
 			this.bonusHP = 800;
-			this.bonusLust = 166;
+			this.bonusLust = 376;
 			this.lust = lust;
 			this.lustVuln = lustVuln;
-			this.level = 36;
+			this.level = 46;
 			this.gems = 1;
 			this.additionalXP = 150;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) this.XP = 25;
@@ -144,9 +144,10 @@ public class Vala extends Monster
 			this.special3 = special3;
 			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) this.drop = new WeightedDrop(consumables.NUMBROX);
 			else this.drop = NO_DROP;
-			this.wings.type = Wings.BEE_LARGE;
+			this.wings.type = Wings.FAIRY;
 			this.wings.desc = "shimmering";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

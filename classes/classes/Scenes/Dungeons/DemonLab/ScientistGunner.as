@@ -13,25 +13,28 @@ public class ScientistGunner extends IncubusScientist
 	{
 		super();
 		this.short = "Scientist Gunner";
-        initStrTouSpeInte(152, 105, 135, 305);
-        initWisLibSensCor(110, 195, 120, 100);
-        this.weaponAttack = 116;
-		this.armorDef = 38;
-		this.armorMDef = 23;
-        this.bonusHP = 600;
-        this.bonusLust = 368;
-		this.level = 53;
+        initStrTouSpeInte(304, 210, 270, 515);
+        initWisLibSensCor(210, 395, 220, 100);
+        this.weaponAttack = 196;
+		this.armorDef = 58;
+		this.armorMDef = 33;
+        this.bonusHP = 800;
+        this.bonusLust = 683;
+		this.level = 68;
         this.additionalXP = 300;
         this.gems = rand(30) + 200;
+		this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
+        this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
         this.createPerk(PerkLib.OverMaxHP, 53, 0, 0, 0);
 	}
 
     private function serum():void {
         outputText("The demon scientist reaches into his lab coat, pulling out a hypodermic needle.\n"
             + "“<i>The side effects are nasty...but I need the power now.</i>” He sticks himself, and he inhales sharply. He doesn’t look any different, but as he cocks his weapon, you notice the vein pulsing on his forehead. He’s way faster now!");
-        buff("Serum").addStats({"spe": 250, "str": -75, "int": -75});
+        buff("Serum").addStats({"spe": 500, "str": -150, "int": -150});
         createPerk(PerkLib.Evade, 0, 0, 0, 0);
         createPerk(PerkLib.ImprovedEvade, 0, 0, 0, 0);
+        createPerk(PerkLib.GreaterEvade, 0, 0, 0, 0);
         createPerk(PerkLib.GreaterEvade, 0, 0, 0, 0);
     }
 	

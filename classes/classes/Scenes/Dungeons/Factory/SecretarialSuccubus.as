@@ -46,19 +46,19 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.bodyColor = "blue";
 			this.hairColor = "blond";
 			this.hairLength = 13;
-			initStrTouSpeInte(60, 52, 89, 35);
-			initWisLibSensCor(35, 85, 70, 100);
+			initStrTouSpeInte(110, 82, 129, 45);
+			initWisLibSensCor(45, 105, 90, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="slap";
-			this.weaponAttack = 12;
+			this.weaponAttack = 18;
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 8;
-			this.armorMDef = 2;
-			this.bonusHP = 220;
-			this.bonusLust = 171;
+			this.armorDef = 12;
+			this.armorMDef = 3;
+			this.bonusHP = 280;
+			this.bonusLust = 216;
 			this.lust = 30;
-			this.level = 16;
+			this.level = 21;
 			this.gems = rand(25) + 20;
 			this.additionalXP = 75;
 			this.drop = new WeightedDrop(consumables.LACTAID, 1);
@@ -72,6 +72,7 @@ public class SecretarialSuccubus extends AbstractSuccubus
 				{ call: whipAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]}
 			];
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, 16, 0, 0, 0);
 			checkMonster();

@@ -211,6 +211,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				else addButton(1, "???", visitTemptress).hint("You see mysterious looking devil sitting at the table.");//Evelynn
 			}
 			else if (EvelynnTavernTalks) addButtonDisabled(1, "Temptress", "'Temptress' isn't currently at her usual spot at table in the inn.");
+			addButtonDisabled(2, "???", "'???' isn't currently at her usual spot at table in the inn.");
+			//addButtonDisabled(2, "Rebel", "'Rebel' isn't currently at her usual spot at table in the inn.");
 			addButton(14, "Back", curry(enteringInn,false));
 		}
 		private function workHoursMadam():Boolean {

@@ -45,18 +45,18 @@ public class LabGuard extends Monster {
         this.bodyColor = "red";
         this.hairColor = "black";
         this.hairLength = 15;
-        initStrTouSpeInte(170, 290, 280, 40);
-        initWisLibSensCor(40, 150, 80, 100);
+        initStrTouSpeInte(340, 580, 560, 60);
+        initWisLibSensCor(60, 350, 180, 100);
         this.weaponName = "claws";
         this.weaponVerb = "weapons";
-        this.weaponAttack = 89;
+        this.weaponAttack = 128;
         this.armorName = "demonic skin";
-        this.armorDef = 85;
-        this.armorMDef = 60;
-        this.bonusHP = 1700;
-        this.bonusLust = 287;
+        this.armorDef = 135;
+        this.armorMDef = 90;
+        this.bonusHP = 2700;
+        this.bonusLust = 602;
         this.lust = 20;
-        this.level = 57;
+        this.level = 72;
         this.gems = rand(60) + 200;
         this.randomDropChance = 0.1;
         this.randomDropParams = {
@@ -71,6 +71,7 @@ public class LabGuard extends Monster {
         this.tailType = Tail.DEMONIC;
         this.horns.type = Horns.DEMON;
         this.horns.count = 2;
+		this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
         this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
         this.createPerk(PerkLib.OverMaxHP, 57, 0, 0, 0);
