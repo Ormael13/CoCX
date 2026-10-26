@@ -12,6 +12,7 @@ import classes.PerkLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
+import classes.GlobalFlags.kFLAGS;
 
 import coc.view.ButtonData;
 
@@ -66,8 +67,8 @@ public class Incels extends Monster {
         damageMultBase += 1;
 		damageMult = damageMultBase;
         lust = 0;
-		this.libStat.core.value += 50;
-		this.bonusLust += 50;
+		this.libStat.core.value += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+		this.bonusLust += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 		var base:Number = perkv1(PerkLib.OverMaxLust);
 		addPerkValue(PerkLib.DieHardHP, 1, base);
 		if (lustVuln > 0.09) lustVuln -= 0.1;

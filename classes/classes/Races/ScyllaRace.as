@@ -51,7 +51,7 @@ public class ScyllaRace extends Race {
 				.armType(Arms.KRAKEN, +1)
 				.customRequirement("skin","slippery skin",
 						function (body:BodyData): Boolean {
-							return body.player.hasPlainSkinOnly() && body.skinBaseAdj == "slippery"
+							return body.player.hasRubberSkin() && body.skinBaseAdj == "slippery"
 						}, +1)
 				.skinColor1("ghostly pale", +1)
 				.rearType(RearBody.KRAKEN, +1)

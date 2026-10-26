@@ -90,13 +90,16 @@ public class SkinTransformations extends MutationsHelper {
 					default:
 						desc += "Your [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is slippery!</b>";
 				}
+				desc += "[pg]You suddenly start sweating abundantly. As much as you try to dry your skin using a cloth it remains slimy and slippery to the touch as if constantly wet! Your skin is now slippery like the one of a sea creature!";
+				desc += "[pg]Meanwhile your body is hit by a quake of sensation as your body shift into something more fitting for underwater swimming, your flesh becoming rubbery like the flesh of octopus and squid. <b>You now have rubber like skin same as a scylla or a kraken.</b>";
 
 				if (doOutput) outputText(desc);
-				player.skin.setBaseOnly({ type: Skin.PLAIN, adj: "slippery" });
+				player.skin.setBaseOnly({ type: Skin.AQUA_RUBBER_LIKE, adj: "slippery" });
+				Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.AQUA_RUBBER_LIKE));
 			},
 			// is present
 			function (): Boolean {
-				return player.skinType === Skin.PLAIN && player.skin.coverage == Skin.COVERAGE_NONE && player.skinAdj === "slippery";
+				return player.skinType === Skin.AQUA_RUBBER_LIKE && player.skin.coverage == Skin.COVERAGE_NONE && player.skinAdj === "slippery";
 			}
 	);
 

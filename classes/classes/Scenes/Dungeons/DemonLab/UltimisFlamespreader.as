@@ -148,26 +148,26 @@ public class UltimisFlamespreader extends Monster {
         this.bodyColor = "red";
         this.hairColor = "black";
         this.hairLength = 16;
-        initStrTouSpeInte(950, 1200, 1000, 420);
-        initWisLibSensCor(200, 1600, 500, 20);
+        initStrTouSpeInte(970, 1220, 1020, 470);
+        initWisLibSensCor(230, 1670, 535, 20);
         this.weaponName = "tail";
         this.weaponVerb = "swipe";
-        this.weaponAttack = 300;
+        this.weaponAttack = 400;
         this.armorName = "scales";
-        this.armorDef = 150;
-        this.armorMDef = 100;
+        this.armorDef = 300;
+        this.armorMDef = 200;
         this.wings.type = Wings.DRACONIC_HUGE;
-        this.bonusHP = 50000;
-        this.bonusLust = 8000;
+        this.bonusHP = 75000;
+        this.bonusLust = 2300;
         this.lustVuln = 0.8;
-        this.level = 85;
+        this.level = 95;
         this.gems = rand(50) + 75;
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(jewelries.POWRRNG, 1);
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 		this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
-        this.createPerk(PerkLib.EnemyColossalType, 0, 0, 0, 0);
+        this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
         checkMonster();
     }
 }

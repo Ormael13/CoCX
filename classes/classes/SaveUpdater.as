@@ -2922,6 +2922,12 @@ public class SaveUpdater extends NPCAwareContent {
 					Garden.PotionsBagSlot10Cap = 80;
 				}
 			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.598) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.598;
+				if (flags[kFLAGS.DEFEATED_ZETAZ] == 2) reward(4, 20, 2);
+				if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED]) reward(6, 30, 3);
+				if (flags[kFLAGS.LETHICE_DEFEATED]) reward(8, 40, 6);
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;
 			}
