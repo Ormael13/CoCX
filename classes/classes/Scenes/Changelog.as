@@ -361,7 +361,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Apes Together Strong (Ave). Gained by use of the Pocket Watch when req. are meet. Effects: You could now group tamed monsters in groups of fourteen of the same type. Together they would be 900% stronger and you can control max 9 group of tamed monsters.\n");
 			outputText("-New consumable (by Ormael): Hypersensitivity Draft - Made by Lumi by enhancing Sensitivity Draft. Costs 90 gems and increase sensitivity by 100 on use. Would give 2x longer lasting Lusty Tongue effect then sensitivity draft.\n");
 			outputText("-Main story dungeons clean super perks reward was changed to give more past 1st one (Factory). Each next in line giving 1 more super perk point. Monsters in those dungeons also all get elite type enemy tags (if they not had already boss type enemy tag) and all of them got increase in level and stats.\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Elven sharp eyes (Evolved). Req. Elven sharp eyes (Primitive) and lvl 60+. Effects: Increase Ranged Critical damage by 60%. Improved attack damage by 75% against opponents afflicted by a status. Elven traditional ability are 25% more effective.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
