@@ -307,7 +307,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_BIOLUMINESCENCE: int = 18;
 	EnumValue.add(PatternTypes, PATTERN_BIOLUMINESCENCE, "PATTERN_BIOLUMINESCENCE", {
 		name:"bioluminescence tattoo",
-		appearanceDesc: "You have strange ushi-oni tattoos on your belly, chest, breasts, shoulders and even face; some are like a black sheen plate, while others are just fur.",
+		appearanceDesc: "Small glowing dots draw a trail all over the length of your body. They shine beautifully in both the deepest waters and the night giving you a somewhat ominous presence.",
 		base:true
 	});
 	//19

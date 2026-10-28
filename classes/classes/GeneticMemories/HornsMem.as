@@ -339,6 +339,17 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const KRAKEN:int = _partid++;
+	  EnumValue.add(Memories, KRAKEN, "KRAKEN", {
+		  id: "Kraken Hood",
+		  name: "Kraken Fleshy Hood",
+		  cost: 100,
+		  title: "Kraken Fleshy Hood",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsKraken;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

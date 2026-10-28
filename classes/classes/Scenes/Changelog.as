@@ -360,8 +360,8 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Elven sharp eyes (Primitive). Req. Elven sharp eyes and lvl 30+. Effects: Increase Ranged Critical damage by 40%. Improved attack damage by 50% against opponents afflicted by a status.\n");
 			outputText("-New event perk: Apes Together Strong (Ave). Gained by use of the Pocket Watch when req. are meet. Effects: You could now group tamed monsters in groups of fourteen of the same type. Together they would be 900% stronger and you can control max 9 group of tamed monsters.\n");
 			outputText("-New consumable (by Ormael): Hypersensitivity Draft - Made by Lumi by enhancing Sensitivity Draft. Costs 90 gems and increase sensitivity by 100 on use. Would give 2x longer lasting Lusty Tongue effect then sensitivity draft.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Main story dungeons clean super perks reward was changed to give more past 1st one (Factory). Each next in line giving 1 more super perk point. Monsters in those dungeons also all get elite type enemy tags (if they not had already boss type enemy tag) and all of them got increase in level and stats.\n");
+			outputText("-New mutation perk: Elven sharp eyes (Evolved). Req. Elven sharp eyes (Primitive) and lvl 60+. Effects: Increase Ranged Critical damage by 60%. Improved attack damage by 75% against opponents afflicted by a status. Elven traditional ability are 25% more effective.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -415,7 +415,8 @@ public class Changelog extends BaseContent
 			outputText("some errors in checks for all the minions (or potential ones) that may blocked access to minions tab in camp, common succubus post fight scenes giving demon dick permanently (now they only trigger temporal change), Protein Shake not longer confused if it increase or decrease thickness, Aether Sin Twin not triggering bleed when used in correct form during shield bash, Sidone ");
 			outputText("help for woodcutting decreasing gained amount of wood in most cases, large gauntlets using and gaining medium size mastery effects, Fire Snail saliva not giving fire snail eyes, cave wyrm tongue desc been draconic not cave wyrm, some of purity scaling weapons scaling on corruption and two feminity/masculinity scaling weapons scaling on wrong values, Blade Grass missing tf effects ");
 			outputText("for face or ears, kirin horns tf effect super hard to trigger from kirin tf item, Ebony Destroyer missing wrath weapon tag, Neisa interactable when she's training, Cold Affinity lost while been Wendigo, missing 2 more feral combat claws attacks for Wendigo, Mindbreakers mind meld usable on unique NPC's, ");
-			outputText("ignoring effects of perks like Natural Herbalism when crafting potions causing overfill storage bags, Couatl Oil not giving yellow scales color, Endless Hunger or Exanimation I perks would enable hunger/satiety bar showing on UI without need to turn on Hunger on");
+			outputText("ignoring effects of perks like Natural Herbalism when crafting potions causing overfill storage bags, Couatl Oil not giving yellow scales color, Endless Hunger or Exanimation I perks would enable hunger/satiety bar showing on UI without need to turn on Hunger ");
+			outputText("on, scylla/kraken tf wrong tf effects and wrong bioluminescence skin pattern desc");
 			outputText("");
 			outputText("\n\n");
 			/*ostatni punkt changelogu

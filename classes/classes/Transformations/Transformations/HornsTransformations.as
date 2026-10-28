@@ -451,6 +451,7 @@ public class HornsTransformations extends MutationsHelper {
 				player.horns.count = 4 + rand(12);
 				player.horns.type = Horns.KRAKEN;
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.KRAKEN));
 			},
 			// is present
 			function (): Boolean {

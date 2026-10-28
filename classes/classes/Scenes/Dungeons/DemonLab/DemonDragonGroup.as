@@ -43,27 +43,27 @@ public class DemonDragonGroup extends Monster {
         this.horns.count = 2;
         this.tailType = Tail.DRACONIC;
         this.wings.type = Wings.DRACONIC_LARGE;
-        initStrTouSpeInte(375, 290, 220, 112);
-        initWisLibSensCor(100, 445, 105, 100);
+        initStrTouSpeInte(750, 580, 440, 224);
+        initWisLibSensCor(200, 645, 205, 100);
         this.weaponName = "spears and claws";
         this.weaponVerb = "slash";
-        this.weaponAttack = 312;
+        this.weaponAttack = 612;
         this.armorName = "scales";
-        this.armorDef = 156;
-        this.armorMDef = 99;
-        this.bonusHP = 2400;
-        this.bonusLust = 610;
+        this.armorDef = 306;
+        this.armorMDef = 199;
+        this.bonusHP = 4000;
+        this.bonusLust = 925;
         this.lust = 50;
         this.lustVuln = 0.44;
-        this.level = 60;
+        this.level = 75;
         this.gems = rand(50) + 75;
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETH1TE, 3).add(consumables.LETH2TE, 2).add(jewelries.POWRRNG, 1);
-        this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-        this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+		this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
         this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
-		this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
+        this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+        this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
         if (inDungeon) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
         checkMonster();
     }
@@ -87,11 +87,11 @@ public class DemonDragonGroup extends Monster {
         } else {
             outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You dive to one side, but as you do, another jet of burning flames wash over you, sending you staggering back. All five dragons unleash their burning breath in sequence. ");
         }
-        player.takeFireDamage(damage, true);
-        player.takeFireDamage(damage, true);
-        player.takeFireDamage(damage, true);
-        player.takeFireDamage(damage, true);
         player.takeFireDamage(damage * 1.2, true);
+        player.takeFireDamage(damage * 1.2, true);
+        player.takeFireDamage(damage * 1.2, true);
+        player.takeFireDamage(damage * 1.2, true);
+        player.takeFireDamage(damage * 2.1, true);
     }
 
     public function DragonDemonHaremTease():void {

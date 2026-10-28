@@ -12,6 +12,7 @@ import classes.PerkLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
+import classes.GlobalFlags.kFLAGS;
 
 import coc.view.ButtonData;
 
@@ -31,25 +32,26 @@ public class Incels extends Monster {
         this.hips.type = Hips.RATING_AMPLE + 2;
         this.butt.type = Butt.RATING_LARGE;
         this.hairLength = 2;
-        initStrTouSpeInte(275, 400, 390, 30);
-        initWisLibSensCor(40, 195, 220, 100);
+        initStrTouSpeInte(550, 800, 780, 50);
+        initWisLibSensCor(60, 300, 415, 100);
         this.weaponName = "black claws";
         this.weaponVerb = "slash";
-        this.weaponAttack = 100;
+        this.weaponAttack = 200;
         this.armorName = "skin";
-        this.armorDef = 81;
-        this.armorMDef = 59;
+        this.armorDef = 121;
+        this.armorMDef = 89;
         this.bonusHP = 2000;
-        this.bonusLust = 467;
+        this.bonusLust = 782;
         this.lust = 50;
         this.lustVuln = 1;
-        this.level = 52;
+        this.level = 67;
         this.gems = rand(50) + 75;
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETH1TE, 3).add(consumables.LETH2TE, 2).add(jewelries.POWRRNG, 1);
-        this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);
 		this.createPerk(PerkLib.OverMaxLust, 50, 0, 0, 0);
+		this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
+        this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.MonsterRegeneration, 10, 0, 0, 0); //HP regen
         checkMonster();
     }
@@ -65,6 +67,8 @@ public class Incels extends Monster {
         damageMultBase += 1;
 		damageMult = damageMultBase;
         lust = 0;
+		this.libStat.core.value += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+		this.bonusLust += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 		var base:Number = perkv1(PerkLib.OverMaxLust);
 		addPerkValue(PerkLib.DieHardHP, 1, base);
 		if (lustVuln > 0.09) lustVuln -= 0.1;

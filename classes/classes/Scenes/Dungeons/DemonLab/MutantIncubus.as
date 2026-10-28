@@ -46,18 +46,18 @@ public class MutantIncubus extends Monster {
         this.bodyColor = "red";
         this.hairColor = "black";
         this.hairLength = 15;
-        initStrTouSpeInte(290, 170, 220, 140);
-        initWisLibSensCor(140, 350, 80, 100);
+        initStrTouSpeInte(580, 340, 440, 190);
+        initWisLibSensCor(190, 550, 180, 100);
         this.weaponName = "claws";
         this.weaponVerb = "stab";
-        this.weaponAttack = 40;
+        this.weaponAttack = 70;
         this.armorName = "demonic skin";
-        this.armorDef = 185;
-        this.armorMDef = 160;
-        this.bonusHP = 400;
-        this.bonusLust = 485;
+        this.armorDef = 315;
+        this.armorMDef = 260;
+        this.bonusHP = 600;
+        this.bonusLust = 800;
         this.lust = 20;
-        this.level = 55;
+        this.level = 70;
         this.gems = rand(60) + 220;
         this.randomDropChance = 0.1;
         this.randomDropParams = {
@@ -72,6 +72,7 @@ public class MutantIncubus extends Monster {
         this.tailType = Tail.DEMONIC;
         this.horns.type = Horns.DEMON;
         this.horns.count = 2;
+		this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
         this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
         this.createPerk(PerkLib.OverMaxHP, 55, 0, 0, 0);
         checkMonster();

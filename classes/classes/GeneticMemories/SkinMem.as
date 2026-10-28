@@ -191,6 +191,18 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const AQUA_RUBBER_LIKE:int = _partid++;
+	  EnumValue.add(Memories, AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", {
+		  id: "Aqua Rubber Skin",
+		  name: "Aqua Rubber skin",
+		  cost: 100,
+		  title: "Aqua Rubber",
+		  availableCoverages: [Skin.COVERAGE_COMPLETE],
+		  transformationCoverage: function(coverage: int): Transformation {
+              return CoC.instance.transformations.SkinSlippery;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

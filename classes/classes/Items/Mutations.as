@@ -14916,24 +14916,14 @@ public final class Mutations extends MutationsHelper {
             transformations.HornsKraken.applyEffect();
             changes++;
         }
-
         //Skin
-        //Skin
-        if ((!player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE) && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            transformations.SkinPlain.applyEffect();
-            changes++;
-        }
-        //Skin part 2
-        if (player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(3) == 0) {
-            outputText("You suddenly start sweating abundantly.  ");
-            outputText("As much as you try to dry your skin using a cloth it remains slimy and slippery to the touch as if constantly wet! Your skin is now slippery like the one of a sea creature!");
-            outputText("[pg]Meanwhile your body is hit by a quake of sensation as your body shift into something more fitting for underwater swimming, your flesh becoming rubbery like the flesh of octopus and squid. <b>You now have rubber like skin same as a scylla or a kraken.</b>");
-            player.skin.setBaseOnly({type: Skin.AQUA_RUBBER_LIKE, adj: "slippery"});
+        if (!player.skin.hasRubberSkin() && rand(3) == 0 && changes < changeLimit) {
+            if (player.hasPlainSkinOnly()) transformations.SkinSlippery.applyEffect();
+			else transformations.SkinPlain.applyEffect();
             changes++;
         }
         //SkinColor
-        if (player.skinColor != "ghostly white" && player.skinType == Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(3) == 0) {
+        if (player.skinColor != "ghostly white" && player.skin.hasRubberSkin() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.RearBodyKraken.applyEffect();
             changes++;
@@ -14944,28 +14934,24 @@ public final class Mutations extends MutationsHelper {
 			transformations.SkinPatternBioluminescence.applyEffect();
 			changes++;
 		}
-
         //Face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.FaceHuman.applyEffect();
             changes++;
         }
-
         //Ears
         if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsElfin.applyEffect();
             changes++;
         }
-
         //Arms
         if (player.arms.type != Arms.KRAKEN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsKraken.applyEffect();
             changes++;
         }
-
         //Eyes Color
         if ((transformations.EyesKrakenColors.isPossible() || transformations.EyesKraken.isPossible()) && changes < changeLimit) {
             if (transformations.EyesKrakenColors.isPossible()) {
@@ -14978,7 +14964,6 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-
         //Ink spray attack
         if (player.lowerBody == LowerBody.KRAKEN && !player.hasPerk(PerkLib.InkSpray)) {
             if (type == 0) {
@@ -14999,7 +14984,6 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.InkSpray, 0, 0, 0, 0);
             changes++;
         }
-
         //Legs
         if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.KRAKEN) {
             if (changes < changeLimit && rand(3) == 0) {
@@ -15021,7 +15005,6 @@ public final class Mutations extends MutationsHelper {
 				changes++;
 			}
         }
-
         //FAILSAFE CHANGE
         if (changes == 0) {
 			var abyssalinkcolor:String = "";

@@ -178,7 +178,7 @@ public class Questlog extends BaseContent
 			addButton(14, "Back", playerMenu);
 		}
 
-        public function reward(perkPoints:int = 0, statPoints:int = 0, bonusReward:Boolean = false):void {
+        public function reward(perkPoints:int = 0, statPoints:int = 0, bonusReward:int = 0):void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth has been noticed.\n\n");
 			outputText("<b>Gained");
@@ -186,9 +186,9 @@ public class Questlog extends BaseContent
             if (perkPoints > 0 && statPoints > 0) outputText(" and");
             if (statPoints > 0) outputText(" " + statPoints + " stat point" + (statPoints > 1 ? "s" : ""));
             outputText((perkPoints == 0 && statPoints == 0) ? " nothing.</b>" : ".</b>");
-			if (bonusReward) {
-				outputText("\n\n<b>Additional reward for progressing the main storyline - 1 super perk point</b>");
-				player.superPerkPoints++;
+			if (bonusReward > 0) {
+				outputText("\n\n<b>Additional reward for progressing the main storyline - " + bonusReward + " super perk point" + (bonusReward > 0 ? "s" : "") + "</b>");
+				player.superPerkPoints += bonusReward;
 			}
             player.perkPoints += perkPoints;
             player.statPoints += statPoints;
@@ -199,21 +199,21 @@ public class Questlog extends BaseContent
 
 		public function takeRewardForFactory():void {
 			flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 2;
-            reward(2, 10, true);
+            reward(2, 10, 1);
 		}
 		public function takeRewardForDeepCave():void {
 			clearOutput();
 			flags[kFLAGS.DEFEATED_ZETAZ] = 2;
-            reward(4, 20, true);
+            reward(4, 20, 2);
 		}
 		public function takeRewardForDemonLaboratory():void {
 			clearOutput();
 			flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] = 2;
-            reward(6, 30, true);
+            reward(6, 30, 3);
 		}
 		public function takeRewardForStronghold():void {
 			flags[kFLAGS.LETHICE_DEFEATED] = 2;
-            reward(8, 40, true);
+            reward(8, 40, 1);
 		}
 		public function takeRewardForSandCave():void {
 			flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] = 2;
