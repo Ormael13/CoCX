@@ -3803,6 +3803,7 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 12) temp3 += 1.2;
 				if (temp3 > 0) healingPercent *= temp3;
 				if (hasPerk(PerkLib.EnemyTrueDemon)) healingPercent *= 2;
+				if (player.hasPerk(PerkLib.SoulFlame) && monsterIsBurned()) healingPercent = 0;
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (hasPerk(PerkLib.Lifeline)) temp2 += (6 * level * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.ImprovedLifeline)) temp2 += (8 * level * (1 + newGamePlusMod()));
@@ -5463,4 +5464,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

@@ -2393,6 +2393,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext = player.gainOrLosePerk(PerkLib.WintersGrasp, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.ColdAffinity)), "", "") || needNext;
 			needNext = player.gainOrLosePerk(PerkLib.Icestorm, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.ColdAffinity)), "", "") || needNext;
 			needNext = player.gainOrLosePerk(PerkLib.GlacialBlockade, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.ColdAffinity)), "", "") || needNext;
+			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
+			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
+			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
+			//needNext = player.gainOrLosePerk(PerkLib.BurningSpirits, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.WispCaptain) && player.hasPerk(PerkLib.FireAffinity)), "", "") || needNext;
+			needNext = player.gainOrLosePerk(PerkLib.SoulFlame, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.FireAffinity)), "", "") || needNext;
+			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.FireAffinity)), "", "") || needNext;
 			if (player.racialScore(Races.SATYR) >= 15 && !player.hasPerk(PerkLib.PanLabyrinth)) {
 				outputText("\nAs you become more satyr like your ability for music seems to have improved further. Whistling out to yourself you notice the ambient animals behaving strangely. It would seem your song acquired the ability to confuse and daze foes. <b>You gained the Pan Labyrinth ability!</b>\n");
 				player.createPerk(PerkLib.PanLabyrinth, 0, 0, 0, 0);

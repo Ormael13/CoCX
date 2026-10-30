@@ -5039,6 +5039,20 @@ public class PerkLib
 				"Unarmed strikes, straddle and grapple smear some of your mucus on your opponent weakening their strength, speed, tease resistance and arousing it each time.");
 		public static const ToxicRomance:PerkType = mk("Toxic Romance", "Toxic Romance",
 				"Grapples/Tease attacks/Whip attack/Throws receive 35% increase in damage to foes affected by Acid dot.");
+		public static const BurningSpirits:PerkType = mk("Burning spirits", "Burning spirits",
+				"Will-o'-the-wisp deal an additional fire attack that scales with pc wisdom.");
+		public static const SoulFlame:PerkType = mk("Soul flame", "Soul flame",
+				"Foe suffering from fire dot will be unable to regenerate and fire attacks against foes affected by fire dot will receive a 100% bonus to damage.");
+		public static const WeAreTheFlame:PerkType = mk("We are the flame", "We are the flamee",
+				".");
+		public static const StaticCharge:PerkType = mk("Static charge", "Static charge",
+				".");
+		public static const LightningReflexes:PerkType = mk("Lightning Reflexes", "Lightning Reflexes",
+				".");
+		public static const LightningStorm:PerkType = mk("Lightning Storm", "Lightning Storm",
+				".");
+		public static const CausticEssence:PerkType = mk("Caustic essence", "Caustic essence",
+				".");
 		public static const TransformationAcclimation:PerkType = mk("Transformation Acclimation", "Transformation Acclimation",
 				"Increases the likelihood of undergoing a transformation even if you have transformation resistance.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",

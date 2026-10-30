@@ -11578,6 +11578,7 @@ public class Combat extends BaseContent {
         if (player.weapon === weapons.R_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
 		if (player.hasStatusEffect(StatusEffects.FinalCandle)) damage *= 3;
+		if (player.hasPerk(PerkLib.SoulFlame) && monster.monsterIsBurned()) damage *= 2;
         damage = fireTypeDamageBonus(damage);
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;

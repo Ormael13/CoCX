@@ -19,7 +19,7 @@ public class WillOfTheWispSkill extends AbstractGeneral {
     }
 
 	override public function describeEffectVs(target:Monster):String {
-		return "Deals ~" + numberFormat(calcDamage(target)) + " magical damage.";
+		return "Deals ~" + numberFormat(calcDamage(target)) + " magical damage" + (player.hasPerk(PerkLib.BurningSpirits)?" and X fire damage":"") + ".";
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -78,6 +78,13 @@ public class WillOfTheWispSkill extends AbstractGeneral {
 		if (display) {
 			if (crit) outputText(" <b>Critical! </b>");
 			outputText("\n\n");
+		}
+		if (player.hasPerk(PerkLib.BurningSpirits)) {
+			doMinionFireDamage(damage, true, display);
+			if (display) {
+				if (crit) outputText(" <b>Critical! </b>");
+				outputText("\n\n");
+			}
 		}
     }
 }
