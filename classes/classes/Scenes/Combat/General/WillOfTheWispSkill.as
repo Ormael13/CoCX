@@ -19,17 +19,26 @@ public class WillOfTheWispSkill extends AbstractGeneral {
     }
 
 	override public function describeEffectVs(target:Monster):String {
-		return "Deals ~" + numberFormat(calcDamage(target)) + " magical damage" + (player.hasPerk(PerkLib.BurningSpirits)?" and X fire damage":"") + ".";
+		return "Deals ~" + numberFormat(calcDamage(target)) + " magical damage" + (player.hasPerk(PerkLib.BurningSpirits)?" and ~" + numberFormat(calcDamageBS(target)) + " fire damage":"") + ".";
 	}
 
 	public function calcDamage(monster:Monster):Number {
 		var willothewispDamage:Number = 10;
         willothewispDamage += (scalingBonusIntelligence() + scalingBonusWisdom()) * 0.4;
         willothewispDamage *= spellMod();
-        if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) willothewispDamage *= combat.historyTacticianBonus();
-
-        var willothewispamplification:Number = 1;
-        if (player.weapon == weapons.SCECOMM) willothewispamplification += 0.5;
+        willothewispDamage *= calcDamageWispApm();
+		return Math.round(willothewispDamage);
+	}
+	public function calcDamageBS(monster:Monster):Number {
+		var willothewispDamageBS:Number = 10;
+        willothewispDamageBS += scalingBonusIntelligence() * 0.5;
+        willothewispDamageBS *= soulskillMod();
+		willothewispDamageBS *= calcDamageWispApm();
+		return Math.round(willothewispDamageBS);
+	}
+	private function calcDamageWispApm():Number {
+		var willothewispamplification:Number = 1;
+		if (player.weapon == weapons.SCECOMM) willothewispamplification += 0.5;
         if (player.armor == armors.ARCHNECC) willothewispamplification += 0.25;
         if (player.upperGarment == undergarments.ARCHNECB) willothewispamplification += 0.2;
         if (player.lowerGarment == undergarments.ARCHNECP) willothewispamplification += 0.2;
@@ -53,14 +62,12 @@ public class WillOfTheWispSkill extends AbstractGeneral {
 		if (player.hasPerk(PerkLib.IDontHaveMinionsIGotFamily)) willothewispamplification *= 0.5;
 		if (player.hasPerk(PerkLib.IDontHave2FastMinionsIGot2FuriousFamily)) willothewispamplification *= 0.5;
 		if (player.hasPerk(PerkLib.IDontHaveMinionsIGotFamilyMarethDrift)) willothewispamplification *= 0.5;
-        willothewispDamage *= willothewispamplification;
-
-		return Math.round(willothewispDamage);
+        if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) willothewispamplification *= combat.historyTacticianBonus();
+		return willothewispamplification;
 	}
 
     override public function doEffect(display:Boolean = true):void {
     	var damage:Number = calcDamage(monster);
-
 		//Determine if critical hit!
         var crit:Boolean = false;
         var critChance:int = 5;
@@ -70,9 +77,7 @@ public class WillOfTheWispSkill extends AbstractGeneral {
             crit = true;
             damage *= 1.75;
         }
-
 		damage = Math.round(damage);
-
 		if (display) outputText("\n\nYour will-o'-the-wisp hits [themonster]! ");
 		doMinionMagDamage(damage, true, display);
 		if (display) {
@@ -80,7 +85,8 @@ public class WillOfTheWispSkill extends AbstractGeneral {
 			outputText("\n\n");
 		}
 		if (player.hasPerk(PerkLib.BurningSpirits)) {
-			doMinionFireDamage(damage, true, display);
+			var damageBS:Number = calcDamageBS(monster);
+			doMinionFireDamage(damageBS, true, display);
 			if (display) {
 				if (crit) outputText(" <b>Critical! </b>");
 				outputText("\n\n");

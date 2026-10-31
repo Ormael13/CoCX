@@ -5040,13 +5040,13 @@ public class PerkLib
 		public static const ToxicRomance:PerkType = mk("Toxic Romance", "Toxic Romance",
 				"Grapples/Tease attacks/Whip attack/Throws receive 35% increase in damage to foes affected by Acid dot.");
 		public static const BurningSpirits:PerkType = mk("Burning spirits", "Burning spirits",
-				"Will-o'-the-wisp deal an additional fire attack that scales with pc wisdom.");
+				"Will-o'-the-wisp deal an additional fire attack that scales with player wisdom and soulskill power.");
 		public static const SoulFlame:PerkType = mk("Soul flame", "Soul flame",
 				"Foe suffering from fire dot will be unable to regenerate and fire attacks against foes affected by fire dot will receive a 100% bonus to damage.");
 		public static const WeAreTheFlame:PerkType = mk("We are the flame", "We are the flamee",
 				".");
 		public static const StaticCharge:PerkType = mk("Static charge", "Static charge",
-				".");
+				"When you receives damage the offending foe takes lighting damage that scales with your max hp and speed.");
 		public static const LightningReflexes:PerkType = mk("Lightning Reflexes", "Lightning Reflexes",
 				".");
 		public static const LightningStorm:PerkType = mk("Lightning Storm", "Lightning Storm",

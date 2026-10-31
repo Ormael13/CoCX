@@ -2396,7 +2396,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
 			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
 			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
-			//needNext = player.gainOrLosePerk(PerkLib.BurningSpirits, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.WispCaptain) && player.hasPerk(PerkLib.FireAffinity)), "", "") || needNext;
+			needNext = player.gainOrLosePerk(PerkLib.BurningSpirits, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.WispCaptain) && player.hasPerk(PerkLib.FireAffinity)), "", "") || needNext;
 			needNext = player.gainOrLosePerk(PerkLib.SoulFlame, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.FireAffinity)), "", "") || needNext;
 			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.FireAffinity)), "", "") || needNext;
 			if (player.racialScore(Races.SATYR) >= 15 && !player.hasPerk(PerkLib.PanLabyrinth)) {

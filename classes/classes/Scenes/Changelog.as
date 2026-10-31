@@ -363,7 +363,7 @@ public class Changelog extends BaseContent
 			outputText("-Main story dungeons clean super perks reward was changed to give more past 1st one (Factory). Each next in line giving 1 more super perk point. Monsters in those dungeons also all get elite type enemy tags (if they not had already boss type enemy tag) and all of them got increase in level and stats.\n");
 			outputText("-New mutation perk: Elven sharp eyes (Evolved). Req. Elven sharp eyes (Primitive) and lvl 60+. Effects: Increase Ranged Critical damage by 60%. Improved attack damage by 75% against opponents afflicted by a status. Elven traditional ability are 25% more effective.\n");
 			outputText("-New mutation perk: Elven sharp eyes (Final Form). Req. Elven sharp eyes (Evolved) and lvl 90+. Effects: Increase Ranged Critical damage by 80%. Improved attack damage by 100% against opponents afflicted by a status. Elven traditional ability are 50% more effective and have their cooldowns lowered by one round.\n");
-			//outputText("-New event perk: Burning spirits. Gained by having Exanimation IV, Wisp Captain and Fire Affinity perks. Effects: Will-o'-the-wisp deal an additional fire attack that scales with pc wisdom.\n");
+			outputText("-New event perk: Burning spirits. Gained by having Exanimation IV, Wisp Captain and Fire Affinity perks. Effects: Will-o'-the-wisp deal an additional fire attack that scales with player wisdom and soulskill power.\n");
 			outputText("-New event perk: Soul flame. Gained by having Exanimation IV and Fire Affinity perks. Effects: Foe suffering from fire dot will be unable to regenerate and fire attacks against foes affected by fire dot will receive a 100% bonus to damage.\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -374,7 +374,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// - 
+			outputText("-\n");//Static charge - 
 			outputText("-\n");// - 
 			outputText("-\n");// - 
 			outputText("-\n");// - 
