@@ -117,13 +117,17 @@ public class CombatAbilities {
 	public static const ConsumingDarkness:ConsumingDarknessSpell = new ConsumingDarknessSpell();
 	public static const CurseOfDesire:CurseOfDesireSpell         = new CurseOfDesireSpell();
 	public static const CurseOfWeeping:CurseOfWeepingSpell       = new CurseOfWeepingSpell();
+	public static const Fellblast:FellblastSpell       			 = new FellblastSpell();
+	public static const SeedsOfDemise:SeedsOfDemiseSpell      	 = new SeedsOfDemiseSpell();
 	
 	public static const ALL_HEX_SPELLS:/*CombatAbility*/Array    = [
 		Lifetap,
 		LifeSiphon,
 		ConsumingDarkness,
 		CurseOfDesire,
-		CurseOfWeeping
+		CurseOfWeeping,
+		Fellblast,
+		SeedsOfDemise
 	];
 	
 	public static const Aegis:AegisSpell                         = new AegisSpell();

@@ -2393,7 +2393,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext = player.gainOrLosePerk(PerkLib.WintersGrasp, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.ColdAffinity)), "", "") || needNext;
 			needNext = player.gainOrLosePerk(PerkLib.Icestorm, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.ColdAffinity)), "", "") || needNext;
 			needNext = player.gainOrLosePerk(PerkLib.GlacialBlockade, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.ColdAffinity)), "", "") || needNext;
-			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
+			needNext = player.gainOrLosePerk(PerkLib.StaticCharge, (player.tou >= 100 && player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
 			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
 			//needNext = player.gainOrLosePerk(PerkLib., (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.LightningAffinity)), "", "") || needNext;
 			needNext = player.gainOrLosePerk(PerkLib.BurningSpirits, (player.hasPerk(PerkLib.ExanimationIV) && player.hasPerk(PerkLib.WispCaptain) && player.hasPerk(PerkLib.FireAffinity)), "", "") || needNext;
