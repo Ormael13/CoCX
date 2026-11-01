@@ -58,6 +58,7 @@ public class HorseRace extends Race {
 				.buffs({
 					"spe.mult": +0.70,
 					"tou.mult": +0.35,
+					"maxhp_mult": +0.007,
 					"maxhp_base": +70
 				})
 				.end();

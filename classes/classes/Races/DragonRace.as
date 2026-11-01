@@ -100,7 +100,6 @@ public class DragonRace extends Race {
 				.namesMaleFemaleMorphTaur("dragon-man","dragon-girl",
 						"dragon","dragon-taur")
 				.buffs({
-					"maxhp_mult": +0.10,
 					"str.mult": +0.50,
 					"tou.mult": +0.50,
 					"spe.mult": +0.50,
@@ -108,6 +107,8 @@ public class DragonRace extends Race {
 					"wis.mult": +0.40,
 					"lib.mult": +0.30,
 					"sens": +20,
+					"maxhp_mult": +0.10,
+					"maxhp_base": +1000,
 					"def": +1,
 					"mdef": +1
 				})
@@ -117,9 +118,6 @@ public class DragonRace extends Race {
 				.namesMaleFemaleMorphTaur("elder dragon-man","elder dragon-girl",
 						"elder dragon","elder dragon-taur")
 				.buffs({
-					"maxfatigue_base": +100,
-					"maxlust_base": +25,
-					"maxhp_mult": +0.20,
 					"str.mult": +0.80,
 					"tou.mult": +0.80,
 					"spe.mult": +0.80,
@@ -127,6 +125,10 @@ public class DragonRace extends Race {
 					"wis.mult": +0.70,
 					"lib.mult": +0.40,
 					"sens": +30,
+					"maxfatigue_base": +100,
+					"maxlust_base": +25,
+					"maxhp_mult": +0.20,
+					"maxhp_base": +2000,
 					"def": +4,
 					"mdef": +4
 				})
@@ -136,9 +138,6 @@ public class DragonRace extends Race {
 				.namesMaleFemaleMorphTaur("ancient dragon-man","ancient dragon-girl",
 						"ancient dragon","ancient dragon-taur")
 				.buffs({
-					"maxfatigue_base": +200,
-					"maxlust_base": +50,
-					"maxhp_mult": +0.30,
 					"str.mult": +1.00,
 					"tou.mult": +1.00,
 					"spe.mult": +1.00,
@@ -146,6 +145,10 @@ public class DragonRace extends Race {
 					"wis.mult": +0.80,
 					"lib.mult": +0.60,
 					"sens": +40,
+					"maxfatigue_base": +200,
+					"maxlust_base": +50,
+					"maxhp_mult": +0.30,
+					"maxhp_base": +3000,
 					"def": +10,
 					"mdef": +10
 				})

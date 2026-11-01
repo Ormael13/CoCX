@@ -365,10 +365,10 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Elven sharp eyes (Final Form). Req. Elven sharp eyes (Evolved) and lvl 90+. Effects: Increase Ranged Critical damage by 80%. Improved attack damage by 100% against opponents afflicted by a status. Elven traditional ability are 50% more effective and have their cooldowns lowered by one round.\n");
 			outputText("-New event perk: Burning spirits. Gained by having Exanimation IV, Wisp Captain and Fire Affinity perks. Effects: Will-o'-the-wisp deal an additional fire attack that scales with player wisdom and soulskill power.\n");
 			outputText("-New event perk: Soul flame. Gained by having Exanimation IV and Fire Affinity perks. Effects: Foe suffering from fire dot will be unable to regenerate and fire attacks against foes affected by fire dot will receive a 100% bonus to damage.\n");
-			outputText("-\n");
+			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Fire Affinity perks. Effects: 
 			outputText("-New event perk: Static charge. Gained by having Exanimation IV, Lightning Affinity perks and 100+ toughness. Effects: When you receives damage the offending foe takes lighting damage that scales with your max hp and speed.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Lightning Affinity perks. Effects: 
+			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Lightning Affinity perks. Effects: 
 			//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
 			outputText("-New black spell: Fellblast. It can be learned by using black book after picking Hex Knowledge perk. Effect: Deal shadowflame damage multiplied by x2 for each ongoing Hex/Magic Debuff active on the target.\n");
 			outputText("-New black spell: Seeds of Demise. It can be learned by using black book after picking Hex Knowledge perk. Effect: Plant a latent curse in the victim after 3 rounds the curse flare causing half of all damage taken by the target since this hex was applied to be applied again.\n");
@@ -376,9 +376,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Fire Affinity perks. Effects: 
-			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Lightning Affinity perks. Effects: 
-			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Lightning Affinity perks. Effects: 
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier ? wisdom lvl-up perk: ???. Req. ??? perk and ???+ wisdom. Effect: 
 			outputText("-\n");//New tier ? sensitivity lvl-up perk: Domain Kineses. Req. ?Quasi Domain Kineses? perk and ???+ sensitivity. Effect: ??? aura effects like psychic aura dealing specific elemetal damage ^^ ???

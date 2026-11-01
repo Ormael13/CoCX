@@ -74,6 +74,7 @@ public class SeedsOfDemiseSpell extends AbstractHexSpell {
 	}
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number {
 		var baseDamage:Number = monster.statusEffectv2(StatusEffects.SeedsOfDemise);
+		baseDamage = Math.round(baseDamage * 0.5);
 		return adjustSpellDamage(baseDamage, DamageType.DARKNESS, CAT_SPELL_HEX, monster, true, casting);
 	}
 	

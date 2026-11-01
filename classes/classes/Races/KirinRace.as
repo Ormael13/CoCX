@@ -79,6 +79,7 @@ public class KirinRace extends Race {
 					"tou.mult": +0.45,
 					"spe.mult": +1.50,
 					"lib.mult": +1.50,
+					"maxhp_mult": +0.01,
 					"maxhp_base": +100
 				})
 				.end();
@@ -89,6 +90,7 @@ public class KirinRace extends Race {
 					"tou.mult": +0.80,
 					"spe.mult": +2.00,
 					"lib.mult": +2.00,
+					"maxhp_mult": +0.025,
 					"maxhp_base": +250
 				})
 				.end();

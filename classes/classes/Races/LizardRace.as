@@ -81,9 +81,10 @@ public class LizardRace extends Race {
 		buildTier(10, "lizan")
 				.namesTauric("lizan", "lizan-taur")
 				.buffs({
-					"maxhp_mult": +0.05,
 					"tou.mult": +1.00,
 					"int.mult": +0.50,
+					"maxhp_mult": +0.05,
+					"maxhp_base": +500,
 					"maxfatigue_base": +100
 				})
 				.end();
@@ -91,9 +92,10 @@ public class LizardRace extends Race {
 		buildTier(18, "elder lizan")
 				.namesTauric("elder lizan", "elder lizan-taur")
 				.buffs({
-					"maxhp_mult": +0.10,
 					"tou.mult": +2.00,
 					"int.mult": +0.70,
+					"maxhp_mult": +0.10,
+					"maxhp_base": +1000,
 					"maxfatigue_base": +200
 				})
 				.end();
@@ -101,9 +103,10 @@ public class LizardRace extends Race {
 		buildTier(26, "ancient lizan")
 				.namesTauric("ancient lizan", "ancient lizan-taur")
 				.buffs({
-					"maxhp_mult": +0.20,
 					"tou.mult": +3.10,
 					"int.mult": +0.80,
+					"maxhp_mult": +0.20,
+					"maxhp_base": +2000,
 					"maxfatigue_base": +400
 				})
 				.end();

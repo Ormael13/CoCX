@@ -65,6 +65,7 @@ public class RhinoRace extends Race {
 		buildTier(8, "rhino")
 				.namesMaleFemaleMorphTaur("rhino-man","rhino-girl","rhino-morph","rhino-morph")
 				.buffs({
+					"maxhp_mult": +0.01,
 					"str.mult": +0.90,
 					"tou.mult": +0.90,
 					"int.mult": -0.20,
@@ -80,6 +81,7 @@ public class RhinoRace extends Race {
 				.requireArmType(Arms.STONE_RHINO)
 				.requireLegType(LowerBody.STONE_HOOFED_NO_FUR)
 				.buffs({
+					"maxhp_mult": +0.04,
 					"str.mult": +1.35,
 					"tou.mult": +1.35,
 					"int.mult": -0.30,
@@ -93,6 +95,7 @@ public class RhinoRace extends Race {
 		buildTier(20, "petrokheros")
 				.requirePreviousTier()
 				.buffs({
+					"maxhp_mult": +0.06,
 					"str.mult": +1.80,
 					"tou.mult": +1.80,
 					"int.mult": -0.40,

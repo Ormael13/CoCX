@@ -299,7 +299,8 @@ public class StatUtils {
 		'maxfatigue_base',
 		'maxmana_base',
 		'maxsf_base',
-		'def'
+		'def',
+		'mdef'
 	];
 }
 }

@@ -72,6 +72,7 @@ public class GorgonRace extends Race {
 					"str.mult": +0.50,
 					"tou.mult": +0.45,
 					"spe.mult": +0.70,
+					"maxhp_mult": +0.005,
 					"maxhp_base": +50
 				})
 				.end();
@@ -81,6 +82,7 @@ public class GorgonRace extends Race {
 					"str.mult": +0.80,
 					"tou.mult": +0.65,
 					"spe.mult": +1.10,
+					"maxhp_mult": +0.01,
 					"maxhp_base": +100
 				})
 				.end();

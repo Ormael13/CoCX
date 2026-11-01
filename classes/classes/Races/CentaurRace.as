@@ -69,6 +69,7 @@ public class CentaurRace extends Race {
 				.buffs({
 					"tou.mult": +0.40,
 					"spe.mult": +0.80,
+					"maxhp_mult": +0.01,
 					"maxhp_base": +100
 				})
 				.end();
@@ -77,6 +78,7 @@ public class CentaurRace extends Race {
 				.buffs({
 					"tou.mult": +0.80,
 					"spe.mult": +1.60,
+					"maxhp_mult": +0.025,
 					"maxhp_base": +250
 				})
 				.end();
@@ -88,6 +90,7 @@ public class CentaurRace extends Race {
 					"spe.mult": +1.75,
 					"lib.mult": +0.80,
 					"sens": +75,
+					"maxhp_mult": +0.035,
 					"maxhp_base": +350
 				})
 				.end();
@@ -99,6 +102,7 @@ public class CentaurRace extends Race {
 					"spe.mult": +1.85,
 					"lib.mult": +1.00,
 					"sens": +75,
+					"maxhp_mult": +0.05,
 					"maxhp_base": +500
 				})
 				.end();
