@@ -370,8 +370,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New black spell: Fellblast. It can be learned by using black book after picking Hex Knowledge perk. Effect: Deal shadowflame damage multiplied by x2 for each ongoing Hex/Magic Debuff active on the target.\n");
+			outputText("-New black spell: Seeds of Demise. It can be learned by using black book after picking Hex Knowledge perk. Effect: Plant a latent curse in the victim after 3 rounds the curse flare causing half of all damage taken by the target since this hex was applied to be applied again.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

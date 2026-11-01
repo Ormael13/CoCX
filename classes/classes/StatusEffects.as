@@ -1286,6 +1286,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Sealed:StatusEffectType                    = mkCombat("Sealed");
 		public static const Sealed2:StatusEffectType                   = mkCombat("Sealed2");
 		public static const SecondWindRegen:StatusEffectType           = mkCombat("Second Wind Regen");
+		public static const SeedsOfDemise:StatusEffectType  		   = mkCombat("Seeds of Demise");
 		public static const ShadowTeleport:StatusEffectType			   = mkCombat("Shadow Teleport");
 		public static const SharkBiteBleed:StatusEffectType            = mkCombat("Shark Bite Bleed");
 		public static const SheilaOil:StatusEffectType                 = mkCombat("Sheila Oil");
