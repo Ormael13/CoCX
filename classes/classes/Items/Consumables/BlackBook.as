@@ -83,6 +83,10 @@ public class BlackBook extends Consumable {
 			else EngineCore.addButtonDisabled(10, "C.Desi", "You not have have enough int or already know this spell.");
 			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) EngineCore.addButton(11, "C.Weep", blackSpellbook1, 22).hint("Learn Curse of Weeping spell.");
 			else EngineCore.addButtonDisabled(11, "C.Weep", "You not have have enough int or already know this spell.");
+			if (player.inte >= 200 && !player.hasStatusEffect(StatusEffects.KnowsFellblast)) EngineCore.addButton(12, "Fellblast", blackSpellbook1, 23).hint("Learn Fellblast spell.");
+			else EngineCore.addButtonDisabled(12, "Fellblast", "You not have have enough int or already know this spell.");
+			if (player.inte >= 210 && !player.hasStatusEffect(StatusEffects.KnowsSeedsOfDemise)) EngineCore.addButton(13, "SeedDemi", blackSpellbook1, 24).hint("Learn Seeds of Demise spell.");
+			else EngineCore.addButtonDisabled(13, "SeedDemi", "You not have have enough int or already know this spell.");
 		}
 	}
 	public function blackSpellbook0():void {
@@ -193,6 +197,14 @@ public class BlackBook extends Consumable {
 				case 22:
 					outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Weeping.</b>");
 					player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
+					break;
+				case 23:
+					outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Fellblast.</b>");
+					player.createStatusEffect(StatusEffects.KnowsFellblast, 0, 0, 0, 0);
+					break;
+				case 24:
+					outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Seeds of Demise.</b>");
+					player.createStatusEffect(StatusEffects.KnowsSeedsOfDemise, 0, 0, 0, 0);
 					break;
 			}
 		}

@@ -363,14 +363,15 @@ public class Changelog extends BaseContent
 			outputText("-Main story dungeons clean super perks reward was changed to give more past 1st one (Factory). Each next in line giving 1 more super perk point. Monsters in those dungeons also all get elite type enemy tags (if they not had already boss type enemy tag) and all of them got increase in level and stats.\n");
 			outputText("-New mutation perk: Elven sharp eyes (Evolved). Req. Elven sharp eyes (Primitive) and lvl 60+. Effects: Increase Ranged Critical damage by 60%. Improved attack damage by 75% against opponents afflicted by a status. Elven traditional ability are 25% more effective.\n");
 			outputText("-New mutation perk: Elven sharp eyes (Final Form). Req. Elven sharp eyes (Evolved) and lvl 90+. Effects: Increase Ranged Critical damage by 80%. Improved attack damage by 100% against opponents afflicted by a status. Elven traditional ability are 50% more effective and have their cooldowns lowered by one round.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New event perk: Burning spirits. Gained by having Exanimation IV, Wisp Captain and Fire Affinity perks. Effects: Will-o'-the-wisp deal an additional fire attack that scales with player wisdom and soulskill power.\n");
+			outputText("-New event perk: Soul flame. Gained by having Exanimation IV and Fire Affinity perks. Effects: Foe suffering from fire dot will be unable to regenerate and fire attacks against foes affected by fire dot will receive a 100% bonus to damage.\n");
+			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Fire Affinity perks. Effects: 
+			outputText("-New event perk: Static charge. Gained by having Exanimation IV, Lightning Affinity perks and 100+ toughness. Effects: When you receives damage the offending foe takes lighting damage that scales with your max hp and speed.\n");
+			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Lightning Affinity perks. Effects: 
+			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Lightning Affinity perks. Effects: 
+			//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
+			outputText("-New black spell: Fellblast. It can be learned by using black book after picking Hex Knowledge perk. Effect: Deal shadowflame damage multiplied by x2 for each ongoing Hex/Magic Debuff active on the target.\n");
+			outputText("-New black spell: Seeds of Demise. It can be learned by using black book after picking Hex Knowledge perk. Effect: Plant a latent curse in the victim after 3 rounds the curse flare causing half of all damage taken by the target since this hex was applied to be applied again.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -393,10 +394,19 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New tier 18 sensitivity lvl-up perk: . Req. Vitakinesis (Ex) perk and 465+ sensitivity. Effect: 
 			outputText("-\n");
-			outputText("-\n");//-New event perk: . Gained by having Exanimation IV and Acid Affinity perks. Effects: 
+			outputText("-\n");
 			outputText("-\n");//?Wild Drake (Ex) / Wild Dragon? - event perk req. any dragon race rank 2+ possesed - lower by 1 increment cd on pc dragon breath specials
 			outputText("-\n");
 			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accessible by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to 3rd floor ");
@@ -471,14 +481,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -500,9 +504,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

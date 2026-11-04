@@ -115,8 +115,9 @@ public class UnicornRace extends Race{
 					"tou.mult": +0.55,
 					"spe.mult": +0.90,
 					"int.mult": +1.25,
-					"maxsf_mult": +0.10,
+					"maxhp_mult": +0.025,
 					"maxhp_base": +250,
+					"maxsf_mult": +0.10,
 					"maxfatigue_base": +20
 				})
 				.withExtraBonuses(
@@ -133,8 +134,9 @@ public class UnicornRace extends Race{
 					"tou.mult": +0.90,
 					"spe.mult": +1.15,
 					"int.mult": +1.40,
-					"maxsf_mult": +0.10,
+					"maxhp_mult": +0.025,
 					"maxhp_base": +250,
+					"maxsf_mult": +0.10,
 					"maxfatigue_base": +20
 				})
 				.withExtraBonuses(

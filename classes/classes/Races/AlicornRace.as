@@ -123,6 +123,7 @@ public class AlicornRace extends Race {
 					"tou.mult": +0.55,
 					"spe.mult": +1.20,
 					"int.mult": +0.95,
+					"maxhp_mult": +0.025,
 					"maxhp_base": +250,
 					"maxfatigue_base": +50,
 					"maxsf_mult": +0.2
@@ -141,6 +142,7 @@ public class AlicornRace extends Race {
 					"tou.mult": +0.70,
 					"spe.mult": +1.50,
 					"int.mult": +1.25,
+					"maxhp_mult": +0.025,
 					"maxhp_base": +250,
 					"maxfatigue_base": +50,
 					"maxsf_mult": +0.2

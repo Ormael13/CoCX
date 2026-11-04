@@ -66,7 +66,8 @@ public class HollowRace extends Race {
 				.hasPerk(PerkLib.ExanimationII, +6)
 				.hasPerk(PerkLib.ExanimationIII, +6)
 				.hasPerk(PerkLib.ExanimationIV, +12)
-				//.hasPerk(PerkLib.ExanimationV, +12)
+				.hasPerk(PerkLib.ExanimationV, +12)
+				.hasPerk(PerkLib.ExanimationVI, +12)
 				.hasPerk(PerkLib.GOBXChemical, -1000);
 		
 		addMutation(IMutationsLib.LivingWeaponIM);
@@ -112,6 +113,28 @@ public class HollowRace extends Race {
 					"int.mult": +5.20,
 					"wis.mult": +9.20,
 					"sens": +540
+				})
+				.end();
+		
+		buildTier(64, "Mortarch")
+				.requirePerk(PerkLib.ExanimationV)
+				.buffs({
+					"str.mult": +6.30,
+					"tou.mult": +11.40,
+					"int.mult": +6.30,
+					"wis.mult": +11.40,
+					"sens": +660		
+				})
+				.end();
+		
+		buildTier(76, "Mori")
+				.requirePerk(PerkLib.ExanimationVI)
+				.buffs({
+					"str.mult": +7.40,
+					"tou.mult": +13.60,
+					"int.mult": +7.40,
+					"wis.mult": +13.60,
+					"sens": +780		
 				})
 				.end();
 	}

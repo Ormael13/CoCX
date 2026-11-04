@@ -90,6 +90,7 @@ public class ScyllaRace extends Race {
 					"str.mult": +0.65,
 					"tou.mult": +0.20,
 					"int.mult": +0.20,
+					"maxhp_mult": +0.005,
 					"maxhp_base": +50
 				})
 				.end();
@@ -99,6 +100,7 @@ public class ScyllaRace extends Race {
 					"str.mult": +1.20,
 					"tou.mult": +0.30,
 					"int.mult": +0.30,
+					"maxhp_mult": +0.015,
 					"maxhp_base": +150
 				})
 				.end();
@@ -108,6 +110,7 @@ public class ScyllaRace extends Race {
 					"str.mult": +1.70,
 					"tou.mult": +0.50,
 					"int.mult": +0.50,
+					"maxhp_mult": +0.03,
 					"maxhp_base": +300
 				})
 				.end();
@@ -117,6 +120,7 @@ public class ScyllaRace extends Race {
 					"str.mult": +2.20,
 					"tou.mult": +0.70,
 					"int.mult": +0.70,
+					"maxhp_mult": +0.06,
 					"maxhp_base": +600
 				})
 				.end();

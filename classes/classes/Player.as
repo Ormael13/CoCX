@@ -3165,6 +3165,11 @@ use namespace CoC;
 				return damage;
 			}
 		}
+		public function effectsTriggeredFromTakingDamage():void {
+			if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
+			if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
+			if (hasPerk(PerkLib.StaticCharge)) lightningFromStaticCharge();
+		}
 		public function hydraBloodSplash():void {
 			var d1Bdcc:Number = 1;
 			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) d1Bdcc *= 2;
@@ -3198,6 +3203,12 @@ use namespace CoC;
 				}
 				else CoC.instance.monster.createStatusEffect(StatusEffects.CorpseExplosion, wRBS2, 0, 0, 0);
 			}
+		}
+		public function lightningFromStaticCharge():void {
+			var lFSC:Number = 0.1;
+			lFSC *= maxHP();
+			lFSC += (SceneLib.combat.scalingBonusSpeed() * 0.5);
+			SceneLib.combat.doPlayerLightningDamage(lFSC, true, true);
 		}
 		public function toughnessDamageMultiplier():Number {
 			var dmmc:Number = 0;
@@ -3374,8 +3385,7 @@ use namespace CoC;
 									physTeaseDmg = true;
 									CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage() * CoC.instance.monster.lustVuln);
 								}
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
+								effectsTriggeredFromTakingDamage();
 							}
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							// Bookmark
@@ -3393,10 +3403,7 @@ use namespace CoC;
 							}
 							break;
 						case 4: // magical
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3412,10 +3419,7 @@ use namespace CoC;
 							}
 							break;
 						case 5: // fire
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3432,10 +3436,7 @@ use namespace CoC;
 							}
 							break;
 						case 6: // ice
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3451,10 +3452,7 @@ use namespace CoC;
 							}
 							break;
 						case 7: // lightning
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3470,10 +3468,7 @@ use namespace CoC;
 							}
 							break;
 						case 8: // darkness
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3489,10 +3484,7 @@ use namespace CoC;
 							}
 							break;
 						case 9: // poison
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3508,10 +3500,7 @@ use namespace CoC;
 							}
 							break;
 						case 10: // wind
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3527,10 +3516,7 @@ use namespace CoC;
 							}
 							break;
 						case 11: // water
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3546,10 +3532,7 @@ use namespace CoC;
 							}
 							break;
 						case 12: // earth
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3565,10 +3548,7 @@ use namespace CoC;
 							}
 							break;
 						case 13: // acid
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
@@ -3584,10 +3564,7 @@ use namespace CoC;
 							}
 							break;
 						case 14: // psychic
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 						//	if (damagePercentMRes() > 1){
 						//		armorMod = 1 / damagePercentMRes();
@@ -3603,10 +3580,7 @@ use namespace CoC;
 							}
 							break;
 						case 15: // true
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							for(i =0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
@@ -3618,10 +3592,7 @@ use namespace CoC;
 							}
 							break;
 						default:
-							if (damage > 0) {
-								if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
-								if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-							}
+							if (damage > 0) effectsTriggeredFromTakingDamage();
 							if (hasPerk(PerkLib.Ethereal) && armor == game.armors.FUNERSH && hp100 < 10) takeLustDamage(10 + effectiveSensitivity() / 10, true);
 							if (damagePercentArmor() > 1){
 								armorMod = 1 / damagePercentArmor();

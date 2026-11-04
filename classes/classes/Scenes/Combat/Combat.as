@@ -11119,6 +11119,7 @@ public class Combat extends BaseContent {
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
@@ -11204,6 +11205,7 @@ public class Combat extends BaseContent {
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
@@ -11310,6 +11312,7 @@ public class Combat extends BaseContent {
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
@@ -11505,6 +11508,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
@@ -11578,6 +11582,7 @@ public class Combat extends BaseContent {
         if (player.weapon === weapons.R_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
 		if (player.hasStatusEffect(StatusEffects.FinalCandle)) damage *= 3;
+		if (player.hasPerk(PerkLib.SoulFlame) && monster.monsterIsBurned()) damage *= 2;
         damage = fireTypeDamageBonus(damage);
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
@@ -11642,6 +11647,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "fire");
         //Interrupt gigaflare if necessary.
@@ -11733,6 +11739,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "cold");
         //Interrupt gigaflare if necessary.
@@ -11829,6 +11836,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "lightning");
         //Interrupt gigaflare if necessary.
@@ -11913,6 +11921,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "dark");
         //Interrupt gigaflare if necessary.
@@ -11986,6 +11995,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "poison");
         //Interrupt gigaflare if necessary.
@@ -12069,6 +12079,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "wind");
         //Interrupt gigaflare if necessary.
@@ -12142,6 +12153,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "water");
         //Interrupt gigaflare if necessary.
@@ -12215,6 +12227,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "earth");
         //Interrupt gigaflare if necessary.
@@ -12289,6 +12302,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+			if (monster.hasStatusEffect(StatusEffects.SeedsOfDemise)) monster.addStatusValue(StatusEffects.SeedsOfDemise, 2, damage);
         }
         if (display) CommasForDigits(damage, false, "", "acid");
         //Interrupt gigaflare if necessary.

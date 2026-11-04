@@ -74,60 +74,64 @@ public class KrampusRace extends Race {
 
         buildTier(12, "krampus hatchling")
                 .buffs({
-					"maxhp_mult": +0.05,
-					"maxlust_base": +100,
 					"str.mult": +0.90,
 					"tou.mult": +0.60,
 					"spe.mult": +0.10,
 					"int.mult": +0.10,
 					"wis.mult": +0.10,
 					"lib.mult": +0.60,
-					"sens": +60
+					"sens": +60,
+					"maxhp_mult": +0.05,
+					"maxhp_base": +500,
+					"maxlust_base": +100
                     })
                 .end();
 
         buildTier(18, "krampus")
 				.requirePerk(PerkLib.Phylactery)
                 .buffs({
-					"maxhp_mult": +0.10,
-					"maxlust_base": +200,
 					"str.mult": +1.40,
 					"tou.mult": +1.00,
 					"spe.mult": +0.10,
 					"int.mult": +0.10,
 					"wis.mult": +0.10,
 					"lib.mult": +0.70,
-					"sens": +70
+					"sens": +70,
+					"maxhp_mult": +0.10,
+					"maxhp_base": +1000,
+					"maxlust_base": +200
                     })
                 .end();
 
         buildTier(24, "elder krampus")
 				.requirePreviousTier()
                 .buffs({
-					"maxhp_mult": +0.15,
-					"maxlust_base": +300,
 					"str.mult": +1.90,
 					"tou.mult": +1.40,
 					"spe.mult": +0.10,
 					"int.mult": +0.10,
 					"wis.mult": +0.10,
 					"lib.mult": +0.80,
-					"sens": +80
+					"sens": +80,
+					"maxhp_mult": +0.15,
+					"maxhp_base": +1500,
+					"maxlust_base": +300
                     })
                 .end();
 
         buildTier(32, "ancient krampus")
 				.requirePreviousTier()
                 .buffs({
-					"maxhp_mult": +0.20,
-					"maxlust_base": +400,
 					"str.mult": +2.40,
 					"tou.mult": +1.80,
 					"spe.mult": +0.10,
 					"int.mult": +0.10,
 					"wis.mult": +0.10,
 					"lib.mult": +0.90,
-					"sens": +90
+					"sens": +90,
+					"maxhp_mult": +0.20,
+					"maxhp_base": +2000,
+					"maxlust_base": +400
                     })
                 .end();
     }

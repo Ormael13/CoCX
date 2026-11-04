@@ -88,7 +88,6 @@ public class YgddrasilRace extends Race {
 		
 		buildTier(16, "ygddrasil")
 				.buffs({
-					"maxhp_mult": +0.15,
 					"str.mult": +0.30,
 					"tou.mult": +1.70,
 					"spe.mult": -0.60,
@@ -96,6 +95,8 @@ public class YgddrasilRace extends Race {
 					"wis.mult": +1.70,
 					"lib.mult": -0.60,
 					"sens": +40,
+					"maxhp_mult": +0.15,
+					"maxhp_base": +1500,
 					"def": +10,
 					"mdef": +10
 				})
@@ -103,7 +104,6 @@ public class YgddrasilRace extends Race {
 		
 		buildTier(24, "elder ygddrasil")
 				.buffs({
-					"maxhp_mult": +0.30,
 					"str.mult": +0.50,
 					"tou.mult": +2.80,
 					"spe.mult": -1.00,
@@ -111,6 +111,8 @@ public class YgddrasilRace extends Race {
 					"wis.mult": +2.80,
 					"lib.mult": -1.00,
 					"sens": +100,
+					"maxhp_mult": +0.30,
+					"maxhp_base": +3000,
 					"def": +20,
 					"mdef": +20
 				})
@@ -118,7 +120,6 @@ public class YgddrasilRace extends Race {
 		
 		buildTier(32, "ancient ygddrasil")
 				.buffs({
-					"maxhp_mult": +0.45,
 					"str.mult": +0.70,
 					"tou.mult": +3.90,
 					"spe.mult": -1.40,
@@ -126,6 +127,8 @@ public class YgddrasilRace extends Race {
 					"wis.mult": +3.90,
 					"lib.mult": -1.40,
 					"sens": +160,
+					"maxhp_mult": +0.45,
+					"maxhp_base": +4500,
 					"def": +30,
 					"mdef": +30
 				})

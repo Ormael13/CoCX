@@ -75,6 +75,7 @@ public class ManticoreRace extends Race {
 					"int.mult": +0.70,
 					"lib.mult": +0.90,
 					"sens": +45,
+					"maxhp_mult": +0.0075,
 					"maxhp_base": +75
 				})
 				.end()
@@ -89,6 +90,7 @@ public class ManticoreRace extends Race {
 					"int.mult": +0.90,
 					"lib.mult": +1.40,
 					"sens": +60,
+					"maxhp_mult": +0.015,
 					"maxhp_base": +150
 				})
 				.end()
