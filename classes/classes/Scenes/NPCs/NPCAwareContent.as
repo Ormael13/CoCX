@@ -175,6 +175,9 @@ import classes.Scenes.SceneLib;
 		{
 			return SceneLib.joyScene;
 		}
+		protected function get joleneScene():JoleneScene {
+    		return SceneLib.joleneScene;
+		}
 		protected function get monk():Number {
 			return JojoScene.monk;
 		}

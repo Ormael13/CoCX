@@ -50,7 +50,11 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 				flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO]++;
 			}
 			if (pregnancy.isPregnant) {
-				if (joyScene.joyPregnancyUpdate()) return true;
+				if (flags[kFLAGS.JOLENE_FOLLOWER] > 0) {
+					if (SceneLib.joleneScene.jolenePregnancyUpdate()) return true;
+				} else if (joyScene.joyPregnancyUpdate()) {
+					return true;
+				}
 			}
 			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] > 1)
 				flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER]--;
@@ -1634,7 +1638,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			addButton(7, "Cruel Anal", corruptJojoAnalCruel)
 				.disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(12, "Whisper", whisperJojobait)
-				.disableIf(player.hasPerk(PerkLib.Whispered), "You need to submit to some jaguar-like demon for it.")
+				.disableIf(!player.hasPerk(PerkLib.Whispered), "You need to submit to some jaguar-like demon for it.")
 				.disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(3, "Gentle Vaginal", corruptJojoVaginalGentle)
 				.disableIf(!player.hasVagina(), "Req. a vagina!");

@@ -297,6 +297,7 @@ public class Camp extends NPCAwareContent{
 				marblePurification.BLUHBLUH();
 				return;
 			}
+			
             /* Marble flipouts are disabled because they made no sense
 			if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) {
 				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance) {
@@ -341,10 +342,17 @@ public class Camp extends NPCAwareContent{
 			joyScene.wakeUpWithJoyPostFuck();
 			return;
 		}
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 5 && flags[kFLAGS.JOY_NIGHT_FUCK] == 1) {
+			SceneLib.joleneScene.wakeUpWithJolenePostFuck();
+			return;
+		}
         if (flags[kFLAGS.JOJO_BIMBO_STATE] == 4 && flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] == 0) { //post-debimbo conversation
             jojoScene.afterDebimboTalk();
             return;
         }
+
+
+
 		if (flags[kFLAGS.EMBER_MORNING] > 0 && ((flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0 && model.time.hours >= flags[kFLAGS.BENOIT_CLOCK_ALARM]) || (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && model.time.hours >= 6))) {
 			hideMenus();
 			emberScene.postEmberSleep();
@@ -553,8 +561,8 @@ public class Camp extends NPCAwareContent{
 				return;
 			}
 		}
-		//Jojo treeflips!
-		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
+//Jojo treeflips!
+		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3 && flags[kFLAGS.JOJO_BIMBO_STATE] != 5) {
 			holliScene.JojoTransformAndRollOut();
 			hideMenus();
 			return;
@@ -662,6 +670,11 @@ public class Camp extends NPCAwareContent{
 		//Joy gives birth!
 		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
 			joyScene.joyGivesBirth();
+			return;
+		}
+		//Jolene gives birth!
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 5 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
+			SceneLib.joleneScene.joleneGivesBirth();
 			return;
 		}
 		//Rathazul freaks out about jojo
@@ -1924,7 +1937,7 @@ public class Camp extends NPCAwareContent{
 				}
 				buttons.add("Sophie", sophieFollowerScene.followerSophieMainScreen).hint("Check up on Sophie the harpy.");
 			}
-			//Pure Jojo
+		//Pure Jojo
 			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {
 					outputText("Joy's tent is set up in a quiet corner of the [camp], close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. ");
@@ -1932,6 +1945,13 @@ public class Camp extends NPCAwareContent{
 					else outputText("Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.");
 					outputText("\n\n");
 					buttons.add("Joy", joyScene.approachCampJoy).hint("Go find Joy around the edges of your [camp] and meditate with her or have sex with her.");
+				} else if (flags[kFLAGS.JOJO_BIMBO_STATE] == 5) {
+					// ---> JOLENE BRANCH <---
+					outputText("Jolene's tent is set up in a quiet corner of the [camp], close to a boulder. Inside the tent, you can see a chest neatly holding her belongings and books next to her bedroll. ");
+					if (flags[kFLAGS.JOJO_LITTERS] > 0 && model.time.hours >= 16 && model.time.hours < 19) outputText("You spot the little mice you had with Jolene playing about close to her tent.");
+					else outputText("Jolene herself is likely meditating or patrolling around the [camp]'s perimeter.");
+					outputText("\n\n");
+					buttons.add("Jolene", SceneLib.joleneScene.approachCampJolene).hint("Go find Jolene around the edges of your [camp] and meditate or spend time with her.");
 				} else if (SceneLib.alvinaFollower.JojoDevilPurification == 1 && !player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
 					outputText("Jojo is waiting in the forrest, bring him a pure artifact and he will cleanse you of your taint.");
 				} else {
@@ -1939,7 +1959,7 @@ public class Camp extends NPCAwareContent{
 					if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
 					if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n");
 					else outputText(", though the mouse is probably hanging around the [camp]'s perimeter.\n\n");
-					buttons.add("Jojo", jojoScene.jojoCamp2).hint("Go find Jojo around the edges of your [camp] and meditate with him or talk about watch duty.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps1) > 0, "Annoyed.");//wpisać blokowanie mishapów jak opcja wyłączenia jej jest aktywna
+					buttons.add("Jojo", jojoScene.jojoCamp2).hint("Go find Jojo around the edges of your [camp] and meditate with him or talk about watch duty.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps1) > 0, "Annoyed.");
 				}
 			}
 			//Celess
@@ -4103,6 +4123,12 @@ public class Camp extends NPCAwareContent{
 			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
 				joyScene.hornyJoyIsPregnant();
 				return;
+							} else if (flags[kFLAGS.JOJO_BIMBO_STATE] == 5 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
+				SceneLib.joleneScene.hornyJoleneIsPregnant();
+				return;
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Jolene" && flags[kFLAGS.JOJO_BIMBO_STATE] == 5) {
+				outputText("You curl up next to Jolene in her tent, planning to sleep for " + num2Text(timeQ) + " hours.\n");
+
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 				//Night Time Snuggle Alerts!*
 				//(1)

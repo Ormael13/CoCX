@@ -189,6 +189,8 @@ public class SceneLib {
 
     public static var joyScene:JoyScene = new JoyScene();
 
+    public static var joleneScene:JoleneScene = new JoleneScene();
+
     public static var kindraFollower:KindraFollower = new KindraFollower();
 
     public static var konstantin:Konstantin = new Konstantin();

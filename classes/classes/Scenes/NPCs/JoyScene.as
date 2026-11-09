@@ -1169,23 +1169,53 @@ import classes.lists.Gender;
 			}
 		}
 
-        private function giveJoyADebimbo():void {
-            clearOutput();
+       private function giveJoyADebimbo():void {
+			clearOutput();
 			player.consumeItem(consumables.DEBIMBO, 1);
-            outputText("\"<i>That <b>should</b> do.</i>\" You hide the Ralthazul’s elixir behind your back.");
-            outputText("\n\n\"<i>Like, what’s up, [name]? Why are you so gloomy?</i>\" Joy asks, bouncing over happily. \"<i>Are we, like, gonna have some fun?</i>\"");
-            outputText("\n\nYou tell your lovely mouse bimbo that maybe some other time... but you have a gift for her. Joy gasps, trying to look around your back. \"<i>Like, a gift? For me?! That’s so sweeeeet! I LOVE getting prezzies!</i>\" She hops up and down, her breasts bouncing with her. \"<i>So... what is it? Huh?</i>\"");
-            outputText("\n\nYou pull the elixir from behind your back, and present it to your bimbo with a flourish.");
-            outputText("\n\n\"<i>Oh... You wanna get me all nice and tipsy so we can have some fun, hu-uh?</i>\" Joy bats her eyelashes, and you barely stop yourself from rolling your eyes. \"<i>Lucky for you, I’m in the mood, " + player.mf("sweetie","cutie") + ".</i>\" You pass her the drink, and Joy uncorks it, downing it in two swift gulps. Immediately, Joy staggers, coughing. The bottle falls to the ground, shattering, and you rush in, taking Joy’s hand as she pitches over, nearly falling.");
-            outputText("\n\n\"<i>W-wow, I didn’t think it’d be th-that... Fierce...</i>\" Joy’s smooth feminine face begins to angle out, and as she looks down, she screams in horror, her breasts being sucked back into her body at a rapid pace. Thrown off-balance, Joy leans on you, her voice deepening slightly as a new, fresh mousey prick shoots out from between... his? legs.");
-            outputText("\n\nJoy stops screaming, blinking her eyes... and Jojo leans over, holding his temples with both hands. You’re still holding him upright, and for the first time in a while, as he looks at you, you can see the intelligence that Jojo had staring back at you. He blinks, seemingly stunned, and then he throws himself backwards in shock. You let go. Seemingly, Jojo is back.");
-            outputText("\n\n\"<i>Gah! [name]! What are you-? Why were you holding me? What’s going...</i>?!\" His eyes widen, and he holds his temples. \"<i>What... what happened to me? Why are my beads around my waist, and what-</i>?!\" He seems to remember something, and he blushes bright red, looking at you with a look of shock. \"<i>I must meditate. I’m sorry!</i>\" Jojo rushes to his section of camp, to his bedroll, and covers himself from head to toe. Not wanting to disturb the clearly distraught mouse-monk, you sit by the fire.");
-            jojoScene.pregnancy.knockUp(); //clear the pregnancy
-            flags[kFLAGS.JOJO_BIMBO_STATE] = 4; //after bimbo
-            flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] = 0; //waiting for talk with jojo
-            dynStats("cor", -3); //worth it
-            doNext(camp.returnToCampUseOneHour);
-        }
+			outputText("\"<i>That <b>should</b> do.</i>\" You hide Rathazul’s elixir behind your back.");
+			outputText("\n\n\"<i>Like, what’s up, [name]? Why are you so gloomy?</i>\" Joy asks, bouncing over happily. \"<i>Are we, like, gonna have some fun?</i>\"");
+			outputText("\n\nYou tell your lovely mouse bimbo that maybe some other time... but you have a gift for her. Joy gasps, trying to look around your back. \"<i>Like, a gift? For me?! That’s so sweeeeet! I LOVE getting prezzies!</i>\" She hops up and down, her breasts bouncing with her. \"<i>So... what is it? Huh?</i>\"");
+			outputText("\n\nYou pull the elixir from behind your back, and present it to your bimbo with a flourish.");
+			outputText("\n\n\"<i>Oh... You wanna get me all nice and tipsy so we can have some fun, hu-uh?</i>\" Joy bats her eyelashes, and you barely stop yourself from rolling your eyes. \"<i>Lucky for you, I’m in the mood, " + player.mf("sweetie", "cutie") + ".</i>\" You pass her the drink, and Joy uncorks it, downing it in two swift gulps. Immediately, Joy staggers, coughing. The bottle falls to the ground, shattering, and you rush in, taking Joy’s hand as she pitches over, nearly falling.");
+			
+			// Shrink her bust by 1 cup (minimum C-cup) and ensure she has a cock
+			if (flags[kFLAGS.JOY_BREAST_SIZE] > BreastCup.C) flags[kFLAGS.JOY_BREAST_SIZE]--;
+			if (flags[kFLAGS.JOY_COCK_SIZE] < 5.5) flags[kFLAGS.JOY_COCK_SIZE] = 5.5;
+			else if (flags[kFLAGS.JOY_COCK_SIZE] < 8.5) flags[kFLAGS.JOY_COCK_SIZE]++;
+			
+			var breastDesc:String = Appearance.breastCup(flags[kFLAGS.JOY_BREAST_SIZE]);
+			var cockDesc:String = joyCockDescript();
+			
+			outputText("\n\n\"<i>W-wow, I didn’t think it’d be th-that... Fierce...</i>\" Joy’s overly puffy lips thin out just a fraction into a more refined, natural pout, and as she looks down, she gasps as her breasts shrink slightly, losing a bit of their cartoonishly overinflated heft to settle into a firmer, perky pair of " + breastDesc + "s. Thrown off-balance, Joy leans on you, her voice losing its airy, vacant giggle and settling into a smooth, melodic alto as a fresh, throbbing " + cockDesc + " shoots out from above her glistening mousey slit.");
+			outputText("\n\nJoy stops gasping, blinking her eyes... and leans over, holding her temples with both hands. You’re still holding her upright, and for the first time in a while, as she looks at you, you can see the sharp intelligence that Jojo had staring back at you from behind long, feminine lashes. She blinks, seemingly stunned by the sudden clarity flooding her mind.");
+			doNext(giveJoyADebimboPart2);
+		}
+
+		private function giveJoyADebimboPart2():void {
+			clearOutput();
+			var breastDesc:String = Appearance.breastCup(flags[kFLAGS.JOY_BREAST_SIZE]);
+			var cockDesc:String = joyCockDescript();
+			
+			outputText("For a long moment, the mouse-morph simply breathes, her eyes darting down to take inventory of herself—the open robe, the prayer beads slung low around her flared hips, the swell of her " + breastDesc + " breasts, the damp warmth of her femininity, and the heavy, twitching weight of her " + cockDesc + ".");
+			outputText("\n\nYou brace yourself for a panicked scream, or for your old friend to bolt into the woods in mortified shame. Instead, a slow, remarkably composed breath leaves her lips. She reaches up, her nimble fingers experimentally brushing a lock of platinum-blonde hair behind her round ear before resting against the curve of her own breast.");
+			outputText("\n\n\"<i>By the gods... my mind is finally quiet,</i>\" she murmurs, marveling at the clear, warm timbre of her own voice. \"<i>It feels as though I have been waking from a fever dream of pink fog and sugar.</i>\"");
+			outputText("\n\nShe looks up at you, her cheeks flushing a soft, rosy pink as the full weight of her memories—both as the stoic monk and the shameless bimbo—settle into place. Yet, rather than recoiling, her expression softens into one of profound relief and lingering affection.");
+			outputText("\n\n\"<i>I remember everything, [name]. The monastery, the thief, the liqueur... and everything we did while I was 'Joy',</i>\" she confesses, her tail giving an involuntary, affectionate curl around your wrist before she consciously stills it. \"<i>Jojo would have been horrified by what I’ve become. He spent his whole life terrified of his own desires, hiding behind vows of austerity because he was too afraid to admit how much he cared for you—how much he craved your touch.</i>\"");
+			outputText("\n\nShe steps back, testing her balance on her curvy frame, and smoothing her torn robes over her hips with a newfound grace that blends her monastic poise with an undeniable, sultry confidence. Her hand brushes over the bulge of her " + cockDesc + " and the slick heat beneath it, a small, genuine smile gracing her lips.");
+			outputText("\n\n\"<i>Perhaps the liqueur was a curse at first,</i>\" she muses softly, \"<i>but your elixir didn't erase who I became—it merely gave me back my soul. I have no desire to return to the frightened, repressed male I once was, nor am I that mindless creature anymore.</i>\"");
+			outputText("\n\nShe meets your gaze, her blue eyes bright with both sharp intellect and unabashed warmth. \"<i>Jojo is gone, and 'Joy' was merely a mask. I think... I think you may call me Jolene now. Give me a little time to adjust my robes and meditate on this new harmony of mind and body. Afterward, my friend... my lover... I would very much like to explore what this new life holds for us.</i>\"");
+			outputText("\n\nWith a graceful bow that still offers a tantalizing glimpse of her cleavage, Jolene turns and walks calmly back toward her tent, her hips swaying with a deliberate, self-assured rhythm.");
+
+
+			if (player.hasStatusEffect(StatusEffects.JojoNightWatch)) player.removeStatusEffect(StatusEffects.JojoNightWatch);
+			
+			// Deactivate Jojo and Joy, and activate Jolene!
+			flags[kFLAGS.JOJO_BIMBO_STATE] = 5; // 5 = Deactivated (No longer Joy, and bypasses male Jojo's state 4)
+			flags[kFLAGS.JOLENE_FOLLOWER] = 1;  // Activate Jolene!
+			
+			dynStats("cor", -3); // worth it
+			doNext(camp.returnToCampUseOneHour);
+		}
 
 		//Scholar's Tea
 		private function giveJoyAScholarsTea():void {

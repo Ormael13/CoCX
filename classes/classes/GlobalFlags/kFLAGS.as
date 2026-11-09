@@ -2256,6 +2256,7 @@ public static const JOY_PREGNANCY_INCUBATION:int                                
 public static const JOY_TWINS_BIRTHED:int                                           = 2248; //Twins birthed by Joy.
 public static const JOY_NIGHT_FUCK:int                                              = 2249;
 public static const JOY_TAKES_BABIES_AWAY_COUNTER:int                               = 2250; //Starts at 72 if you have at least 3 litters with Joy.
+public static const JOLENE_FOLLOWER:int												= 4001;
 public static const BLACK_COCK_MET_ANITA:int                                        = 2251;
 public static const BLACK_COCK_MET_ANDY:int                                         = 2252;
 public static const BLACK_COCK_MET_HARRY:int                                        = 2253;
