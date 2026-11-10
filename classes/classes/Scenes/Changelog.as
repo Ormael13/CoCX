@@ -365,7 +365,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Elven sharp eyes (Final Form). Req. Elven sharp eyes (Evolved) and lvl 90+. Effects: Increase Ranged Critical damage by 80%. Improved attack damage by 100% against opponents afflicted by a status. Elven traditional ability are 50% more effective and have their cooldowns lowered by one round.\n");
 			outputText("-New event perk: Burning spirits. Gained by having Exanimation IV, Wisp Captain and Fire Affinity perks. Effects: Will-o'-the-wisp deal an additional fire attack that scales with player wisdom and soulskill power.\n");
 			outputText("-New event perk: Soul flame. Gained by having Exanimation IV and Fire Affinity perks. Effects: Foe suffering from fire dot will be unable to regenerate and fire attacks against foes affected by fire dot will receive a 100% bonus to damage.\n");
-			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Fire Affinity perks. Effects: 
+			outputText("-New event perk: We are the flame. Gained by having Exanimation IV, Intermediate Leadership and Fire Affinity perks. Effects: Companions/henchmen deal an additional flame damage attack that scales with pc lvl and all attacks dealt to foes with a fire dot have a 125% bonus to damage dealt.\n");
 			outputText("-New event perk: Static charge. Gained by having Exanimation IV, Lightning Affinity perks and 100+ toughness. Effects: When you receives damage the offending foe takes lighting damage that scales with your max hp and speed.\n");
 			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Lightning Affinity perks. Effects: 
 			outputText("-\n");//New event perk: . Gained by having Exanimation IV and Lightning Affinity perks. Effects: 

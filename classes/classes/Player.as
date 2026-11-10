@@ -3168,7 +3168,7 @@ use namespace CoC;
 		public function effectsTriggeredFromTakingDamage():void {
 			if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 			if (perkv1(IMutationsLib.WyrmCursedBloodIM) >= 1) wyrmRuinousBlood();
-			if (hasPerk(PerkLib.StaticCharge)) lightningFromStaticCharge();
+			if (hasPerk(PerkLib.StaticCharge)) SceneLib.combat.lightningFromStaticCharge();
 		}
 		public function hydraBloodSplash():void {
 			var d1Bdcc:Number = 1;
@@ -3203,12 +3203,6 @@ use namespace CoC;
 				}
 				else CoC.instance.monster.createStatusEffect(StatusEffects.CorpseExplosion, wRBS2, 0, 0, 0);
 			}
-		}
-		public function lightningFromStaticCharge():void {
-			var lFSC:Number = 0.1;
-			lFSC *= maxHP();
-			lFSC += (SceneLib.combat.scalingBonusSpeed() * 0.5);
-			SceneLib.combat.doPlayerLightningDamage(lFSC, true, true);
 		}
 		public function toughnessDamageMultiplier():Number {
 			var dmmc:Number = 0;
@@ -9409,4 +9403,4 @@ use namespace CoC;
 		}
 		
 	}
-}
+}

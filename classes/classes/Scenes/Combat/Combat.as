@@ -11053,7 +11053,8 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
-        if (player.hasPerk(PerkLib.Sadist)) {
+        if (player.hasPerk(PerkLib.WeAreTheFlame) && monster.monsterIsBurned()) damage *= 2.25;
+		if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 3;
             if (player.armor == armors.SCANSC) {
                 damage *= 3;
@@ -11148,7 +11149,8 @@ public class Combat extends BaseContent {
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
+        if (player.hasPerk(PerkLib.WeAreTheFlame) && monster.monsterIsBurned()) damage *= 2.25;
+		if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 3;
             if (player.armor == armors.SCANSC) {
                 damage *= 3;
@@ -11225,6 +11227,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
 		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) damage *= 0.5;
+		if (player.hasPerk(PerkLib.WeAreTheFlame) && monster.monsterIsBurned()) damage *= 2.25;
 		if (tinkerDeconstruct()) damage *= 1.5;
         if (player.hasStatusEffect(StatusEffects.Minimise)) damage *= 0.01;
 		if (player.hasStatusEffect(StatusEffects.AutomataOverdrive)) damage *= 2;
@@ -11427,6 +11430,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
 		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) damage *= 0.5;
+		if (player.hasPerk(PerkLib.WeAreTheFlame) && monster.monsterIsBurned()) damage *= 2.25;
 		if (tinkerDeconstruct()) damage *= 1.5;
 		if (player.hasStatusEffect(StatusEffects.AutomataOverdrive)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AmphibiousEgglayerIM) >= 2 && (!player.isPregnant() && player.eggs() < 10)) damage *= (1 + (0.5 * (player.perkv1(IMutationsLib.AmphibiousEgglayerIM) - 1)));
@@ -11526,6 +11530,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
 		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) damage *= 0.5;
+		if (player.hasPerk(PerkLib.WeAreTheFlame) && monster.monsterIsBurned()) damage *= 2.25;
 		if (tinkerDeconstruct()) damage *= 1.5;
 		if (player.hasStatusEffect(StatusEffects.AutomataOverdrive)) damage *= 2;
         if (player.hasPerk(PerkLib.Sadist)) {
@@ -21544,6 +21549,13 @@ public function hollowSkillsAndSoulskillsBoost():Number {
 	}
 	return hollowed;
 }
+public function lightningFromStaticCharge():void {
+	var lFSC:Number = 0.1;
+	lFSC *= player.maxHP();
+	lFSC += scalingBonusSpeed() * 0.5;
+	lFSC = Math.round(lFSC);
+	doPlayerLightningDamage(lFSC, true, true);
+}
 public function boomingVoiceBoost():Number {
 	var booming:Number = 1.25;
 	if (player.hasPerk(PerkLib.ThunderingEchoes)) booming += 0.25;
@@ -21969,4 +21981,4 @@ private function touSpeStrScale(stat:int):Number {
 		ui.favImpl(bd, skillId);
 	}
 }
-}
+}

@@ -5044,7 +5044,7 @@ public class PerkLib
 		public static const SoulFlame:PerkType = mk("Soul flame", "Soul flame",
 				"Foe suffering from fire dot will be unable to regenerate and fire attacks against foes affected by fire dot will receive a 100% bonus to damage.");
 		public static const WeAreTheFlame:PerkType = mk("We are the flame", "We are the flamee",
-				".");
+				"Companions/henchmen deal an additional flame damage attack that scales with pc lvl and all attacks dealt to foes with a fire dot have a 125% bonus to damage dealt.");
 		public static const StaticCharge:PerkType = mk("Static charge", "Static charge",
 				"When you receives damage the offending foe takes lighting damage that scales with your max hp and speed.");
 		public static const LightningReflexes:PerkType = mk("Lightning Reflexes", "Lightning Reflexes",
