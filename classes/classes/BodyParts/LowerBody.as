@@ -49,6 +49,8 @@ public class LowerBody extends SaveableBodyPart {
 	 * - hasTalons: part has talons and enables talon actions
 	 * - hasClaws: part enables claw actions
 	 * - canKick: part enable kick action
+	 * 
+	 * - scalesOnTaur: part has scales in taur form
 	 *
 	 * - draconic: part counts as "dragon or variant"
 	 * - feline: part counts as "cat or variant"
@@ -151,6 +153,7 @@ public class LowerBody extends SaveableBodyPart {
 		name: "demonic claws",
 		feet: "demonic foot-claws",
 		appearanceDesc: "Your {legCount} lithe legs are capped with flexible clawed feet. Sharp black nails grow where once you had toe-nails, giving you fantastic grip.",
+		scalesOnTaur: true,
 		canTaur: true
 	});
 
@@ -1127,7 +1130,7 @@ public class LowerBody extends SaveableBodyPart {
 			case BodyMaterial.FUR:
 				return Types[this.type].fur;
 			case BodyMaterial.SCALES:
-				return Types[this.type].scales;
+				return Types[this.type].scales || (isTaur() && Types[this.type].scalesOnTaur);
 			case BodyMaterial.CHITIN:
 				return Types[this.type].chitin;
 			case BodyMaterial.FEATHERS:

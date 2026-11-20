@@ -64,11 +64,6 @@ public class HairDye extends Consumable
 					}
 					
 					var present:Boolean = player.hasBodyMaterial(type);
-					// Workaround for demonic taur lowerbodies using reptaur (scales) lower Body.
-					// Remove me, if we have separate sprites for demon taurs!
-					if (player.legCount == 4 && type == BodyMaterial.SCALES && player.lowerBody == LowerBody.DEMONIC_CLAWS)
-						present = true;
-					// /Workaround
 					if (present) {
 						outputText("\nYou have " + player.bodyMaterialColor(type) + " " + name + ". ");
 					} else {
